@@ -1,32 +1,32 @@
 ---
-title: Start a New React Project
+title: নতুন প্রোজেক্ট শুরু করুন
 ---
 
 <Intro>
 
-If you want to build a new app or a new website fully with React, we recommend picking one of the React-powered frameworks popular in the community. Frameworks provide features that most apps and sites eventually need, including routing, data fetching, and generating HTML.
+আপনি যদি React দিয়ে কোন অ্যাপ বা ওয়েবসাইট বানাতে চান তাহলে, React কমিউনিটি ব্যাবহার করে এমন যেকোনো একটি জনপ্রিয় ফ্রেমওয়ার্ক ব্যাবহার করতে আমরা আপনাকে উৎসাহিত করব। এই ফ্রেমওয়ার্ক গুল আপনাকে গুরুত্বপূর্ণ কিছু feature দিবে, যেমনঃ Routing, Data fetching এবং HTML generate করা, যা মোটামুটি সব ধরনের অ্যাপ অথবা ওয়েবসাইটের দরকার হয়।
 
 </Intro>
 
 <Note>
 
-**You need to install [Node.js](https://nodejs.org/en/) for local development.** You can *also* choose to use Node.js in production, but you don't have to. Many React frameworks support export to a static HTML/CSS/JS folder.
+**লোকাল ডেভেলপমেন্টের জন্যে আপনার অবশ্যই [Node.js](https://nodejs.org/en/) ইন্সটল থাকতে হবে।** আপনি চাইলে আপনার production সার্ভারে Node ইন্সটল করতে পারেন কিন্তু এটা আবশ্যক নয় কারণ অনেক React ফ্রেমওয়ার্ক আপনার অ্যাপ বা ওয়েবসাইট এর স্ট্যাটিক HTML/CSS/JS তৈরি করে দেয়।
 
 </Note>
 
-## Production-grade React frameworks {/*production-grade-react-frameworks*/}
+## জনপ্রিয় React ফ্রেমওয়ার্ক গুলো {/*production-grade-react-frameworks*/}
 
 ### Next.js {/*nextjs*/}
 
-**[Next.js](https://nextjs.org/) is a full-stack React framework.** It's versatile and lets you create React apps of any size--from a mostly static blog to a complex dynamic application. To create a new Next.js project, run in your terminal:
+**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কম্যান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করার জন্যে আপনাকে নিম্নক্ত কম্যান্ড টি ব্যাবহার করতে হবে।
 
 <TerminalBlock>
 npx create-next-app
 </TerminalBlock>
 
-If you're new to Next.js, check out the [Next.js tutorial.](https://nextjs.org/learn/foundations/about-nextjs)
+আপনি যদি Next.j এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/deployment) to any Node.js or serverless hosting, or to your own server. [Fully static Next.js apps](https://nextjs.org/docs/advanced-features/static-html-export) can be deployed to any static hosting.
+[Vercel](https://vercel.com/) Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়.
 
 ### Remix {/*remix*/}
 
