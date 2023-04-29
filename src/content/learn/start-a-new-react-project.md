@@ -10,7 +10,7 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 <Note>
 
-**লোকাল ডেভেলপমেন্টের জন্যে আপনার অবশ্যই [Node.js](https://nodejs.org/en/) ইন্সটল থাকতে হবে।** আপনি চাইলে আপনার production সার্ভারে Node ইন্সটল করতে পারেন কিন্তু এটা আবশ্যক নয় কারণ অনেক React ফ্রেমওয়ার্ক আপনার অ্যাপ বা ওয়েবসাইট এর স্ট্যাটিক HTML/CSS/JS তৈরি করে দেয়।
+**লোকাল ডেভেলপমেন্টের জন্যে আপনার অবশ্যই [Node.js](https://nodejs.org/en/) ইন্সটল থাকতে হবে।** আপনি চাইলে আপনার production সার্ভারে Node.js ইন্সটল করতে পারেন কিন্তু এটা আবশ্যক নয় কারণ অনেক React ফ্রেমওয়ার্ক আপনার অ্যাপ বা ওয়েবসাইট এর স্ট্যাটিক HTML/CSS/JS তৈরি করে দেয়।
 
 </Note>
 
@@ -18,13 +18,13 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 ### Next.js {/*nextjs*/}
 
-**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কম্যান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করার জন্যে আপনাকে নিম্নক্ত কম্যান্ড টি ব্যাবহার করতে হবে।
+**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কম্যান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
 
 <TerminalBlock>
 npx create-next-app
 </TerminalBlock>
 
-আপনি যদি Next.j এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
+আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
 [Vercel](https://vercel.com/) Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়.
 
