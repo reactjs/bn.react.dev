@@ -1,25 +1,25 @@
 ---
-title: Editor Setup
+title: এডিটর সেটাপ
 ---
 
 <Intro>
 
-A properly configured editor can make code clearer to read and faster to write. It can even help you catch bugs as you write them! If this is your first time setting up an editor or you're looking to tune up your current editor, we have a few recommendations.
+সঠিকভাবে কনফিগার করা এডিটর আপনার কোড পড়ায় এবং লেখায় সাহায্য করতে পারে। এমনকি আপনাকে লিখার সাথে সাথে ভুলত্রুটি ধরায়ও সাহায্য করতে পারে! আপনি যদি প্রথমবারের মত এডিটর সেটাপ করেন অথবা আপনার বর্তমান এডিটরকে আরও সমৃদ্ধ করে তুলতে চান, তাহলে আমাদের কিছু রিকমেন্ডেশন রয়েছে।
 
 </Intro>
 
 <YouWillLearn>
 
-* What the most popular editors are
-* How to format your code automatically
+* সবচেয়ে জনপ্রিয় এডিটরগুলো কি কি
+* কিভাবে আপনার কোড স্বয়ংক্রিয়ভাবেই ফরম্যাট করবেন
 
 </YouWillLearn>
 
-## Your editor {/*your-editor*/}
+## আপনার এডিটর {/*your-editor*/}
 
-[VS Code](https://code.visualstudio.com/) is one of the most popular editors in use today. It has a large marketplace of extensions and integrates well with popular services like GitHub. Most of the features listed below can be added to VS Code as extensions as well, making it highly configurable!
+[VS Code](https://code.visualstudio.com/) বর্তমানে ব্যবহৃত সবচেয়ে জনপ্রিয় এডিটরগুলোর মধ্যে একটি। এর মধ্যে বিশাল এক্সটেনশন মার্কেটপ্লেস রয়েছে এবং এটি সহজেই GitHub এর মত জনপ্রিয় সার্ভিসগুলোর সাথে সংযুক্ত হতে পারে। নিম্নোক্ত অধিকাংশ জিনিসই VS Code এ এক্সটেনশন হিসেবে যুক্ত করা যায়, যা একে আরও বেশি কনফিগার করতে সহায়তা করে।
 
-Other popular text editors used in the React community include:
+React কমিউনিটিতে ব্যবহৃত অন্য জনপ্রিয় এডিটরগুলোঃ
 
 * [WebStorm](https://www.jetbrains.com/webstorm/) is an integrated development environment designed specifically for JavaScript.
 * [Sublime Text](https://www.sublimetext.com/) has support for JSX and TypeScript, [syntax highlighting](https://stackoverflow.com/a/70960574/458193) and autocomplete built in.
