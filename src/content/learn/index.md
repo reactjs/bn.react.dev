@@ -10,12 +10,12 @@ React ডকুমেন্টেশনে স্বাগতম! এই পৃ�
 
 <YouWillLearn>
 
-- How to create and nest components
-- How to add markup and styles
-- How to display data
-- How to render conditions and lists
-- How to respond to events and update the screen
-- How to share data between components
+- কিভাবে কম্পোনেন্টস create এবং nest করবেন 
+- কিভাবে markup এবং styles সংযুক্ত করবেন 
+- কিভাবে ডাটা display করবেন
+- কিভাবে conditions এবং lists গুলো render করবেন
+- কিভাবে event গুলো respond করবেন এবং সেই অনুযায়ী screen update করবেন
+- কিভাবে ডাটা, কম্পোনেন্টস এর মধ্যে share করবেন
 
 </YouWillLearn>
 
