@@ -29,16 +29,16 @@ title: রেন্ডার এবং কমিট
   <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## ধাপ ১: একটি রেন্ডার ট্রিগার করা {/*step-1-trigger-a-render*/}
 
-There are two reasons for a component to render:
+একটি কম্পোনেন্ট রেন্ডার হবার দুটি কারণ রয়েছে:
 
-1. It's the component's **initial render.**
-2. The component's (or one of its ancestors') **state has been updated.**
+1. এটি কম্পোনেন্টের **প্রাথমিক রেন্ডার।**
+2. কম্পোনেন্টের (বা এর একটি প্যারেন্ট কম্পোনেন্টের) **স্টেট আপডেট করা হয়েছে।**
 
-### Initial render {/*initial-render*/}
+### প্রাথমিক রেন্ডার {/*initial-render*/}
 
-When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
+ফ্রেমওয়ার্ক এবং স্যান্ডবক্স কখনো কখনো এই কোড লুকিয়ে রাখে। তবে অ্যাপ শুরু হওয়ার সময় প্রাথমিক রেন্ডার ট্রিগার হয়। টার্গেট DOM নোড দিয়ে createRoot কল করে তারপর কম্পোনেন্ট দিয়ে তার render মেথড কল করে এই কাজটি করা হয়:
 
 <Sandpack>
 
@@ -63,11 +63,11 @@ export default function Image() {
 
 </Sandpack>
 
-Try commenting out the `root.render()` call and see the component disappear!
+`root.render()` কমেন্ট আউট করলে দেখবেন কম্পোনেন্টটি আর দেখা যাচ্ছে না।
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### স্টেট আপডেট হওয়ার সময় রি-রেন্ডার: {/*re-renders-when-state-updates*/}
 
-Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+কম্পোনেন্টের প্রাথমিক রেন্ডারের পরে আপনি [set ফাংশন](/reference/react/useState#setstate) দ্বারা কম্পোনেন্টের স্টেট আপডেট করে আরও রেন্ডার ট্রিগার করতে পারবেন। কম্পোনেন্টের স্টেট আপডেট হলে React একটি রেন্ডার স্বয়ংক্রিয়ভাবে কিউ করে রাখে। (রেস্তোরাঁয় গেস্টের প্রথম অর্ডারের পরে চা, ডেজার্ট এবং অন্যান্য ধরনের জিনিস অর্ডার দেওয়ার মতো কল্পনা করতে পারেন।)
 
 <IllustrationBlock sequential>
   <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
