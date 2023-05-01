@@ -1,27 +1,27 @@
 ---
-title: Render and Commit
+title: রেন্ডার এবং কমিট
 ---
 
 <Intro>
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+আপনার কম্পোনেন্টগুলো স্ক্রিনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
+* React এর ভাষায় রেন্ডারিং বলতে কি বুঝায়
+* কখন এবং কিভাবে React একটি কম্পোনেন্ট রেন্ডার করে
+* একটি কম্পোনেন্ট ব্রাউজারে প্রদর্শিত হওয়ার আগে কি কি ধাপ অনুসরণ করে
+* রেন্ডারিং এ কেন সবসময় DOM আপডেট হয় না
 
 </YouWillLearn>
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+ধরুন আপনার কম্পোনেন্টগুলো রান্নাঘরের বাবুর্চি, বিভিন্ন উপকরন থেকে সুস্বাদু খাবার রান্না করছে। এই উদাহরণে React হল ওয়েটার যেহেতু গ্রাহকদের থেকে তাদের অর্ডারগুলো গ্রহন করে এবং তাদের তা পরিবেশন করে। UI থেকে অনুরোধ গ্রহন করা এবং তা পরিবেশন করার এই প্রক্রিয়াটির তিনটি পদক্ষেপ রয়েছে।
 
-1. **Triggering** a render (delivering the guest's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. **ট্রিগারিং** : একটি রেন্ডার ট্রিগার করা (গ্রাহকের অর্ডার রান্নাঘরে প্রেরণ করা)
+2. **রেন্ডারিং** : কম্পোনেন্ট রেন্ডার করা (রান্নাঘরে অর্ডার তৈরি করা)
+3. **কমিটিং** : DOM এ কমিট করা (অর্ডারট টেবিলে পরিবেশন করা)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
