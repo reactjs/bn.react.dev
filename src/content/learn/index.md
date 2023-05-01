@@ -4,7 +4,7 @@ title: Quick Start
 
 <Intro>
 
-Welcome to the React documentation! This page will give you an introduction to the 80% of React concepts that you will use on a daily basis.
+রিএক্ট ডকুমেন্টেশনে স্বাগতম! এই পৃষ্ঠাটি আপনাকে ৮০% ভূমিকা দেবে রিএক্ট এর, যা আপনি প্রতিদিন ব্যবহার করবেন।
 
 </Intro>
 
