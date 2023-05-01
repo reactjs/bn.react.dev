@@ -4,15 +4,15 @@ title: Thinking in React
 
 <Intro>
 
-React can change how you think about the designs you look at and the apps you build. When you build a user interface with React, you will first break it apart into pieces called *components*. Then, you will describe the different visual states for each of your components. Finally, you will connect your components together so that the data flows through them. In this tutorial, we’ll guide you through the thought process of building a searchable product data table with React.
+React আপনার দেখা ডিজাইন এবং তৈরী করা অ্যাপসগুলি সম্বন্ধে আপনার চিন্তাভাবনা পরিবর্তন করতে পারে। React দিয়ে আপনি যখন একটি ইউজার ইন্টারফেস তৈরি করবেন, প্রথমে আপনি এটি কম্পোনেন্ট নামে বিভিন্ন অংশে ভাগ করে ফেলবেন। তারপর, আপনি আপনার প্রতিটি কম্পোনেন্টের জন্য বিভিন্ন দৃশ্যমান state বর্ণনা করবেন। সবশেষে, আপনি আপনার কম্পোনেন্টগুলি এমনভাবে সংযুক্ত করবেন যাতে তাদের মাঝে ডেটা প্রবাহিত হয়। এই টিউটোরিয়ালে, আমরা রিয়্যাক্ট দিয়ে একটি অনুসন্ধানযোগ্য পণ্যের ডেটা টেবিল তৈরীর চিন্তা প্রক্রিয়া কেমন হবে সে বিষয়ে ধারণা করাতে আপনাকে সহায়তা করব।
 
 </Intro>
 
-## Start with the mockup {/*start-with-the-mockup*/}
+## মকাপ দিয়ে শুরু করুন {/*start-with-the-mockup*/}
 
-Imagine that you already have a JSON API and a mockup from a designer.
+ধরে নিন, আপনার কাছে ইতোমধ্যে একজন ডিজাইনারের কাছ থেকে পাওয়া মকাপ আছে এবং একটি JSON API ও আছে। 
 
-The JSON API returns some data that looks like this:
+JSON API যে তথ্য রিটার্ন করে সেটা কিছুটা এমন দেখতেঃ
 
 ```json
 [
@@ -25,45 +25,45 @@ The JSON API returns some data that looks like this:
 ]
 ```
 
-The mockup looks like this:
+মকাপটা দেখতে এমনঃ
 
 <img src="/images/docs/s_thinking-in-react_ui.png" width="300" style={{margin: '0 auto'}} />
 
-To implement a UI in React, you will usually follow the same five steps.
+React এ একটি UI ইমপ্লিমেন্ট করতে আপনাকে সাধারণত নিম্নের ৫টি ধাপ অনুসরণ করতে হবে।
 
-## Step 1: Break the UI into a component hierarchy {/*step-1-break-the-ui-into-a-component-hierarchy*/}
+## ধাপ ১ঃ UI কে একটি কম্পোনেন্ট hierarchy তে বিন্যস্ত করুন {/*step-1-break-the-ui-into-a-component-hierarchy*/}
 
-Start by drawing boxes around every component and subcomponent in the mockup and naming them. If you work with a designer, they may have already named these components in their design tool. Ask them!
+মকাপে সবগুলো কম্পোনেন্ট এবং সাবকম্পোনেন্ট এর চারিদিকে বক্স আঁকার মাধ্যমে শুরু করেন। সেগুলোর নামকরণ করুন। যদি আপনি একজন ডিজাইনারের সাথে কাজ করে থাকেন, দেখা যেতে পারে উনি ইতোমধ্যে তার ডিজাইনে এই কম্পোনেন্টগুলোর নামকরণ করে রেখেছেন। উনার কাছ থেকে জেনে নিন।
 
-Depending on your background, you can think about splitting up a design into components in different ways:
+একটি ডিজাইনের কম্পোনেন্ট গুলোকে বিভিন্ন ভাবে আপনি ভাগ করতে পারেন। কীভাবে করবেন সেটা নির্ভর করবে আপনার কাজের ক্ষেত্রের উপর।
 
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
+* **Programming**--একটি নতুন function বা object তৈরী করবেন কি না এই সিদ্ধান্তটি যেভাবে নিতেন, ঠিক একই পদ্ধতিতে সিদ্ধান্ত নিন। এমন একটি পদ্ধতি হচ্ছে [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), যা অনুসারে, একটা কম্পোনেন্ট আদর্শত কেবল একটি কাজই করবে। যদি সেটা বড় হয়ে যায় তাহলে ছোট ছোট সাবকম্পোনেন্ট এ ভাগ করে ফেলতে হবে। 
+* **CSS**--আপনি class selector কীসের জন্য তৈরী করতেন সেটা বিবেচনায় রাখুন (যদিও কম্পোনেন্ট আরেকটু কম granular)।
+* **Design**--চিন্তা করুন আপনি আপনার ডিজাইনের layer গুলো কীভাবে করতেন।
 
-If your JSON is well-structured, you'll often find that it naturally maps to the component structure of your UI. That's because UI and data models often have the same information architecture--that is, the same shape. Separate your UI into components, where each component matches one piece of your data model.
+যদি আপনার JSON গোছানো থাকে, আপনি দেখবেন বেশির ভাগ সময় এটা স্বাভাবিকতই আপনার UI এর কম্পোনেন্ট এর গঠন বিন্যাসের সাথে মিলে যাবে। এর কারণ UI এবং ডেটা মডেলগুলো সাধারণত একই information architecture ব্যবহার করে, অর্থাৎ একই আকারে বিন্যস্ত হয়। আপনার UI কে এমন ভাবে কম্পোনেন্ট এ ভাগ করুন যেন প্রতিটি কম্পোনেন্ট আপনার ডেটা মডেলের একটি অংশের সাথে মিলে যায়। 
 
-There are five components on this screen:
+এখানে ৫টি কম্পোনেন্ট রয়েছেঃ
 
 <FullWidth>
 
 <CodeDiagram flip>
 
-<img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
+<img src="/images/docs/s_thinking-in-react_ui_outline.png" width="600" style={{margin: '0 auto'}} />
 
-1. `FilterableProductTable` (grey) contains the entire app.
-2. `SearchBar` (blue) receives the user input.
-3. `ProductTable` (lavender) displays and filters the list according to the user input.
-4. `ProductCategoryRow` (green) displays a heading for each category.
-5. `ProductRow`	(yellow) displays a row for each product.
+1. `FilterableProductTable` (grey) পুরো অ্যাপটিকে ধারণ করে।
+2. `SearchBar` (blue) ইউজারের ইনপুট নেয়।
+3. `ProductTable` (lavender) ফিল্টারগুলো দেখায় এবং ইউজারের ইনপুটের হিসেবে তালিকা দেখায়।
+4. `ProductCategoryRow` (green) প্রতিটি ক্যাটাগরির জন্য একটি শিরোনাম দেখায়।
+5. `ProductRow`	(yellow) প্রতিটি পণের জন্য একটি সারি দেখায়।
 
 </CodeDiagram>
 
 </FullWidth>
 
-If you look at `ProductTable` (lavender), you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and you could go either way. For this example, it is a part of `ProductTable` because it appears inside the `ProductTable`'s list. However, if this header grows to be complex (e.g., if you add sorting), you can move it into its own `ProductTableHeader` component.
+আপনি যদি `ProductTable` (lavender) খেয়াল করেন, আপনি দেখবেন যে টেবিল হেডারে (যার মধ্যে "Name" এবং "Price" লেবেলগুলো রয়েছে) নিজেই নিজের কম্পোনেন্ট না। এটা আপনার পছন্দ অনুযায়ী সিদ্ধান্তের বিষয়। আপনি যেকোন দিকে যেতে পারেন। এই উদাহরণে, এটা `ProductTable` এর অংশ কারণ এটা `ProductTable`এর তালিকার মধ্যে দেখা যায়। কিন্তু, এই হেডার যদি জটিল আকার ধারণ করে (উদাহরণস্বরূপ, আপনি যদি সর্টিং যুক্ত করতে চান), আপনি এটাকে এর নিজের `ProductTableHeader` কম্পোনেন্টে নিয়ে যেতে পারেন।
 
-Now that you've identified the components in the mockup, arrange them into a hierarchy. Components that appear within another component in the mockup should appear as a child in the hierarchy:
+এখন যেহেতু আপনি মকাপে কম্পোনেন্টগুলো চিনে ফেলেছেন, সেগুলোকে একটা hierarchy তে সাজিয়ে ফেলুন। মকাপে যেই কম্পোনেন্টগুলো অন্য একটি কম্পোনেন্ট এর মধ্যে রয়েছে সেগুলো hierarchy তে child component হিসেবে দেখানো উচিত।
 
 * `FilterableProductTable`
     * `SearchBar`
