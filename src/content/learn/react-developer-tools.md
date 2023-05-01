@@ -16,18 +16,18 @@ title: React ডেভেলপার টুলস
 
 ## ব্রাউজার এক্সটেনশন {/*browser-extension*/}
 
-The easiest way to debug websites built with React is to install the React Developer Tools browser extension. It is available for several popular browsers:
+React দিয়ে তৈরি ওয়েবসাইট ডিবাগ করার সবচেয়ে সহজ উপায় হল React Developer Tools ব্রাউজার এক্সটেনশন ইনস্টল করা। এই ব্রাউজার এক্সটেনশনটি কয়েকটি জনপ্রিয় ব্রাউজারে পাওয়া যাচ্ছে।
 
-* [Install for **Chrome**](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-* [Install for **Firefox**](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
-* [Install for **Edge**](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
+* [**গুগল ক্রোম** এর জন্য ইন্সটল করুন](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+* [**মজিলা ফায়ারফক্স** এর জন্য ইন্সটল করুন](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
+* [**মাইক্রোসফট এজ** এর জন্য ইন্সটল করুন](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
 
-Now, if you visit a website **built with React,** you will see the _Components_ and _Profiler_ panels.
+এখন, আপনি যদি **React দিয়ে তৈরি** ওয়েবসাইটে যান তাহলে, আপনি _Components_ এবং _Profiler_ প্যানেল ব্রাউজার ডেভেলপার টুলস এ দেখতে পাবেন।
 
 ![React Developer Tools extension](/images/docs/react-devtools-extension.png)
 
-### Safari and other browsers {/*safari-and-other-browsers*/}
-For other browsers (for example, Safari), install the [`react-devtools`](https://www.npmjs.com/package/react-devtools) npm package:
+### সাফারি এবং অন্যান্য ব্রাউজার {/*safari-and-other-browsers*/}
+অন্যান্য ব্রাউজার (যেমনঃ সাফারি) এর জন্য ইন্সটল করুন [`react-devtools`](https://www.npmjs.com/package/react-devtools) npm প্যাকেজঃ
 ```bash
 # Yarn
 yarn global add react-devtools
@@ -36,19 +36,19 @@ yarn global add react-devtools
 npm install -g react-devtools
 ```
 
-Next open the developer tools from the terminal:
+তারপর Terminal থেকে ডেভেলপার টুলসটি ওপেন করুনঃ
 ```bash
 react-devtools
 ```
 
-Then connect your website by adding the following `<script>` tag to the beginning of your website's `<head>`:
+তারপর আপনার ওয়েবসাইটের সাথে সংযোগ স্থাপনের জন্য নিচের `<script>` ট্যাগ টি আপনার ওয়েবসাইটের শুরুতে `<head>` ট্যাগ এর ভিতরে যুক্ত করুনঃ
 ```html {3}
 <html>
   <head>
     <script src="http://localhost:8097"></script>
 ```
 
-Reload your website in the browser now to view it in developer tools.
+এখন React ডেভেলপার টুলসটি, ব্রাউজার ডেভেলপার টুলস এ দেখার জন্য ব্রাউজারে আপনার ওয়েবসাইটি Reload করুন।
 
 ![React Developer Tools standalone](/images/docs/react-devtools-standalone.png)
 
