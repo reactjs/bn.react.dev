@@ -4,7 +4,7 @@ title: রেন্ডার এবং কমিট
 
 <Intro>
 
-আপনার কম্পোনেন্টগুলো স্ক্রিনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
+আপনার কম্পোনেন্টগুলো স্ক্রীনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
 
 </Intro>
 
@@ -75,16 +75,16 @@ export default function Image() {
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
-## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+## ধাপ ২: React আপনার কম্পোনেন্ট রেন্ডার করে {/*step-2-react-renders-your-components*/}
 
-After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
+রেন্ডার ট্রিগার করার পরে স্ক্রীনে কী প্রদর্শন করতে হবে তা বের করতে React আপনার কম্পোনেন্টগুলো কল করে। আপনার কম্পোনেন্টগুলো React দ্বারা এই কল করাই হল "রেন্ডারিং"।
 
-* **On initial render,** React will call the root component.
-* **For subsequent renders,** React will call the function component whose state update triggered the render.
+* **প্রাথমিক রেন্ডারে,** React আপনার root কম্পোনেন্ট কল করবে।
+* **পরবর্তী রেন্ডার এ,** React সেই কম্পোনেন্টটি কল করবে যার স্টেট আপডেটে রেন্ডার ট্রিগার হয়েছে।
 
-This process is recursive: if the updated component returns some other component, React will render _that_ component next, and if that component also returns something, it will render _that_ component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+এই প্রক্রিয়াটি রিকার্সিভ: আপডেট করা কম্পোনেন্ট যদি অন্য কোনও কম্পোনেন্ট রিটার্ন করে, তবে React পরবর্তীতে সেই কম্পোনেন্টটি রেন্ডার করবে এবং যদি সেই কম্পোনেন্টটি আবার কোন কম্পোনেন্ট রিটার্ন করে, তবে ঐ কম্পোনেন্টটিও রেন্ডার করবে, রেন্ডারিং এভাবে চলতে থাকবে যতক্ষণ পর্যন্ত সব নেস্টেড কম্পোনেন্ট রেন্ডার না হয়। এরপরেই React স্ক্রীনে কি দেখাতে হবে তা স্পষ্টভাবে জানতে পারবে।
 
-In the following example, React will call `Gallery()` and  `Image()` several times:
+নিচের উদাহরণে রিয়েক্ট কয়েকবার `Gallery()` এবং `Image()` কল করবে:
 
 <Sandpack>
 
@@ -124,25 +124,25 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags. 
-* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+* **প্রাথমিক রেন্ডারের সময়,** React `<section>`, `<h1>`, এবং তিনটি `<img>` ট্যাগের জন্য [DOM নোডগুলো তৈরি করবে](https://developer.mozilla.org/docs/Web/API/Document/createElement)। 
+* **রি-রেন্ডারের সময়,** React পূর্ববর্তী রেন্ডার আর বর্তমান রেন্ডারের মধ্যবর্তী পরিবর্তন ক্যালকুলেট করবে। কিন্তু কমিট ধাপের আগ পর্যন্ত React এই তথ্য দিয়ে কিছুই করবে না।
 
 <Pitfall>
 
-Rendering must always be a [pure calculation](/learn/keeping-components-pure):
+রেন্ডারিং-এ সবসময় [pure ক্যালকুলেশন](/learn/keeping-components-pure) হতে হবে:
 
-* **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
-* **It minds its own business.** It should not change any objects or variables that existed before rendering. (One order should not change anyone else's order.)
+* **একই ইনপুট , একই আউটপুট।** যদি একটি কম্পোনেন্টে একই ইনপুট দেওয়া হয় তাহলে ঐ কম্পোনেন্টটি সর্বদা একই JSX রিটার্ন করবে। (যদি কেউ টমেটো সালাদ অর্ডার করে, তখন যেন পেঁয়াজের সালাদ না পায়!)
+* **এটি নিজে নিজের কাজ করে।** এটি রেন্ডারিং এর আগে বিদ্যমান কোনো অবজেক্ট বা ভেরিয়েবল পরিবর্তন করে না। (রেস্তোরাঁয় যেরকম একজনের অর্ডারে অন্য কারো অর্ডার পরিবর্তন হয় না।)
 
-Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in "Strict Mode", React calls each component's function twice, which can help surface mistakes caused by impure functions.
+অন্যথায়, যখন আপনার কোডবেস বড় হবে তখন বিভ্রান্তিকর বাগ এবং অপ্রত্যাশিত আচরণ পেতে পারেন। "Strict Mode"-এ React প্রতিটি কম্পোনেন্ট দুবার করে কল করে যা impure ফাংশন দ্বারা উদ্ভূত বাগ বের করতে সাহায্য করে।
 
 </Pitfall>
 
 <DeepDive>
 
-#### Optimizing performance {/*optimizing-performance*/}
+#### পারফরম্যান্স অপ্টিমাইজ করা {/*optimizing-performance*/}
 
-The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
+যদি আপডেটেড কম্পোনেন্ট DOM-tree এর অনেক উপরে থাকে তাহলে React এর ডিফল্ট রেন্ডারিং এর সময় আপডেটেড কম্পোনেন্টের ভেতরের সব কম্পোনেন্ট রেন্ডার হওয়ার ব্যাপারটি optimal নয়। যদি আপনি কোন পারফরম্যান্স সমস্যার সম্মুখীন হন, তবে তা সমাধানের কয়েকটি উপায় [পারফরম্যান্স](https://reactjs.org/docs/optimizing-performance.html) সেকশনে বর্ণনা করা হয়েছে। **Don't optimize prematurely!**
 
 </DeepDive>
 
