@@ -62,7 +62,6 @@ img { margin: 0 10px 10px 0; height: 90px; }
 ২. আপনার ফাংশন কম্পোনেন্ট কে এই নতুন ফাইল থেকে **এক্সপোর্ট** করুন। ([ডিফল্ট](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) অথবা [নেমড](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) এক্সপোর্ট ব্যবহার করে)
 ৩. কম্পোনেন্ট টা ব্যবহার করার জন্য পূর্বের ফাইল থেকে এটি **ইম্পোর্ট** করুন। (যথাযত ইম্পোর্ট টেকনিক, [ডিফল্ট](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) অথবা [নেমড](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module), ব্যাবহার করে)
 
-
 এখানে `Profile` এবং `Gallery` দুটি কম্পোনেন্ট কে `App.js` থেকে নতুন ফাইল `Gallery.js` এ নিয়ে আসা হয়েছে। এখন আপনি `Gallery.js` ফাইল থেকে `App.js` ফাইলে `Gallery` কে ইম্পোর্ট করতে পারবেনঃ
 
 <Sandpack>
@@ -105,7 +104,6 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-
 খেয়াল করুন এই উদাহরণটি এখন দুটি কম্পোনেন্ট ফাইলে ভাগ করা হয়েছেঃ
 
 - `Gallery.js`:
@@ -116,11 +114,9 @@ img { margin: 0 10px 10px 0; height: 90px; }
      - `Gallery` কম্পোনেন্টটি **ডিফল্ট ইম্পোর্ট** হিসেবে `Gallery.js` থেকে ইম্পোর্ট করা হয়েছে।
      - রুট `App` কম্পোনেন্টটি **ডিফল্ট এক্সপোর্ট** হিসেবে এক্সপোর্ট করা হয়েছে।
 
-
 <Note>
 
 হয়তো আপনি এমন ইম্পোর্ট দেখেছেন যেখানে `.js` ফাইল এক্সটেনশন ব্যবহার করা হয় নি যেমনঃ
-
 
 ```js 
 import Gallery from './Gallery';
