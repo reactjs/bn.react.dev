@@ -49,7 +49,7 @@ React এ একটি UI ইমপ্লিমেন্ট করতে আপ�
 
 <CodeDiagram flip>
 
-<img src="/images/docs/s_thinking-in-react_ui_outline.png" width="600" style={{margin: '0 auto'}} />
+<img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
 
 1. `FilterableProductTable` (grey) পুরো অ্যাপটিকে ধারণ করে।
 2. `SearchBar` (blue) ইউজারের ইনপুট নেয়।
@@ -71,13 +71,18 @@ React এ একটি UI ইমপ্লিমেন্ট করতে আপ�
         * `ProductCategoryRow`
         * `ProductRow`
 
-## Step 2: Build a static version in React {/*step-2-build-a-static-version-in-react*/}
+## ধাপ ২ঃ React এ একটি স্ট্যাটিক ভার্সন তৈরী করুন {/*step-2-build-a-static-version-in-react*/}
 
 Now that you have your component hierarchy, it's time to implement your app. The most straightforward approach is to build a version that renders the UI from your data model without adding any interactivity... yet! It's often easier to build the static version first and add interactivity later. Building a static version requires a lot of typing and no thinking, but adding interactivity requires a lot of thinking and not a lot of typing.
+এখন যেহেতু আপনার কাছে কম্পোনেন্ট hierarchy আছে, এখন সময় অ্যাপ ইমপ্লিমেন্ট করার। সবচেয়ে সোজাসাপ্টা পথ হল এমন একটা ভার্সন তৈরী করা যেটা নতুন কোন interactivity যুক্ত না করে আপনার ডেটা মডেল থেকে UI তৈরী করতে পারে...কেবল মাত্র শুরুর জন্য! বেশিরভাগ সময়ে প্রথমে একটি স্ট্যাটিক ভার্সন তৈরী করা এবং পরে এর সাথে interactivity যুক্ত করা সহজ হয়। স্ট্যাটিক ভার্সন তৈরী করতে প্রচুর কোড লেখবার দরকার পড়ে এবং চিন্তা করতে হয় কম। অন্যদিকে interactivity যুক্ত করার জন্য চিন্তা করতে হয় অনেক এবং এত বেশি লেখার দরকার পড়ে না।     
 
 To build a static version of your app that renders your data model, you'll want to build [components](/learn/your-first-component) that reuse other components and pass data using [props.](/learn/passing-props-to-a-component) Props are a way of passing data from parent to child. (If you're familiar with the concept of [state](/learn/state-a-components-memory), don't use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.)
 
+প্রথমে বানাতে হবে আপনার অ্যাপের একটা স্ট্যাটিক ভার্সন যা আপনার ডেটা মডেল প্রদর্শন করতে পারে। এজন্য আপনি এমন [components](/learn/your-first-component) বানাতে চাইবেন যা অন্যান্য কম্পোনেন্ট ব্যবহার করবে এবং ন [props](/learn/passing-props-to-a-component) ব্যবহার করে ডেটা আদান প্রদান করবে। Parent থেকে child এ ডেটা পাঠাতে props ব্যবহার করা হয়। (যদি আপনার [state](/learn/state-a-components-memory)এর বিষয়ে জানাশোনা থাকে, এই স্ট্যাটিক ভার্সন বানাতে গিয়ে state এর কথা একদমই মাথায় আনবেন না। State শুধুমাত্র interactivityর জন্য অর্থাৎ সেই ডেটা যা সময়ের সাথে সাথে বদলায়। যেহেতু এইটা আপনার অ্যাপের একটি স্ট্যাটিক ভার্সন, আপনার state এর প্রয়োজন নেই।)
+
+
 You can either build "top down" by starting with building the components higher up in the hierarchy (like `FilterableProductTable`) or "bottom up" by working from components lower down (like `ProductRow`). In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up.
+আপনি "top down" পন্থায় যেতে পারেন, যেখানে hierarchy উপর থেকে নিচের দিকে কম্পোনেন্টগুলো আপনি বানাতে থাকবেন (যেমন `FilterableProductTable`) অথবা "bottom up" পদ্ধতি ব্যবহার করতে পারেন যেক্ষেত্রে  আগে নিচের দিকের কম্পোনেন্টগুলো বানাতে হবে এবং পর্যায়ক্রমে উপরের দিকে যাবেন (যেমন `ProductRow`)।  সরল একটা অ্যাপের ক্ষেত্রে top-down করাই সাধারণত সহজতর হয়, একটু জটিল বড় প্রজেক্টের ক্ষেত্রে bottom-up করা সুবিধাজনক হয়।
 
 <Sandpack>
 
@@ -196,12 +201,15 @@ td {
 </Sandpack>
 
 (If this code looks intimidating, go through the [Quick Start](/learn/) first!)
+(এই কোডটি বেশি জটিল মনে হলে, [Quick Start](/learn/) আগে দেখে নিন!)
 
 After building your components, you'll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. This is called _one-way data flow_ because the data flows down from the top-level component to the ones at the bottom of the tree.
+কম্পোনেন্ট বানানো হয়ে গেলে, আপনার কাছে একটি লাইব্রেরি থাকবে যেখানে এমন কম্পোনেন্ট থাকবে যা আপনার ডেটা মডেলকে প্রদর্শন করে এবং যা পুনরায় ব্যবহারযোগ্য। যেহেতু এটি একটি স্ট্যাটিক অ্যাপ, সুতরাং কম্পোনেন্টগুলি কেবল JSX রিটার্ন করবে। আপনার hierarchyর একদম শীর্ষে থাকা কম্পোনেন্ট (`FilterableProductTable`) আপনার ডেটা মডলকে prop হিসেবে গ্রহণ করবে। একে বলা হয় _one-way data flow_ কারণ এক্ষেত্রে tree-তে উপরের দিকে থাকা কম্পোনেন্টগুলো থেকে নিচের দিকে থাকা কম্পোনেন্টের দিকে ডেটা প্রবাহিত হয়।
 
 <Pitfall>
 
 At this point, you should not be using any state values. That’s for the next step!
+এ পর্যন্ত আপনার কোন state value ব্যবহার করা উচিত হবে না। সেটা পরবর্তী ধাপের জন্য!
 
 </Pitfall>
 
