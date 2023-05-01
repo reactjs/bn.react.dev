@@ -52,10 +52,10 @@ react-devtools
 
 ![React Developer Tools standalone](/images/docs/react-devtools-standalone.png)
 
-## Mobile (React Native) {/*mobile-react-native*/}
-React Developer Tools can be used to inspect apps built with [React Native](https://reactnative.dev/) as well.
+## মোবাইল (React Native) {/*mobile-react-native*/}
+[React Native](https://reactnative.dev/) দিয়ে তৈরি অ্যাপস গুলো inspect করার জন্যেও আপনি React ডেভেলপার টুলস ব্যবহার করতে পারেন।
 
-The easiest way to use React Developer Tools is to install it globally:
+সবচেয়ে সহজ উপায় হলো React ডেভেলপার টুলস টি আপনার সিস্টেমে globally ইন্সটল করাঃ
 ```bash
 # Yarn
 yarn global add react-devtools
@@ -64,13 +64,13 @@ yarn global add react-devtools
 npm install -g react-devtools
 ```
 
-Next open the developer tools from the terminal.
+তারপর Terminal থেকে ডেভেলপার টুলসটি ওপেন করুনঃ 
 ```bash
 react-devtools
 ```
 
-It should connect to any local React Native app that's running.
+তারপর এটি আপনার যেকোনো চলমান local React Native অ্যাপ এর সাথে কাজ করবে। 
 
-> Try reloading the app if developer tools doesn't connect after a few seconds.
+> যদি ডেভেলপার টুলসটি আপনার অ্যাপ এর সাথে কয়েক সেকেন্ডের মধ্যে কানেক্ট না হলে আপনার অ্যাপ টি Reload করুন। 
 
-[Learn more about debugging React Native.](https://reactnative.dev/docs/debugging)
+[React Native দিয়ে তৈরি অ্যাপ এর ডিবাগিং করা সম্পর্কে আরো জানুন।](https://reactnative.dev/docs/debugging)
