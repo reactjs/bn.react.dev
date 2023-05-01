@@ -1,26 +1,26 @@
 ---
-title: Importing and Exporting Components
+title: কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা
 ---
 
 <Intro>
 
-The magic of components lies in their reusability: you can create components that are composed of other components. But as you nest more and more components, it often makes sense to start splitting them into different files. This lets you keep your files easy to scan and reuse components in more places.
+কম্পোনেন্ট ব্যাবহারের যাদু রয়েছে এদের পুনঃব্যবহারযোগ্যতার মধ্যেঃ আপনি এমন কম্পোনেন্ট তৈরি করতে পারেন যা অন্যান্য কম্পোনেন্ট এর সমন্বয়ে গঠিত। কিন্তু আপনি যখন কম্পোনেন্ট এর ভিতর কম্পোনেন্ট নেস্ট করা শুরু করবেন, তখন সেগুলিকে নিজস্ব ফাইল এ বিভক্ত করা ই শ্রেয়। এতে করে আপনার ফাইল গুলোকে সহজে স্ক্যান এবং অন্যান্য স্থানে পুনঃব্যবহার করতে পারবেন। 
 
 </Intro>
 
 <YouWillLearn>
 
-* What a root component file is
-* How to import and export a component
-* When to use default and named imports and exports
-* How to import and export multiple components from one file
-* How to split components into multiple files
+* রুট কম্পোনেন্ট ফাইল কি
+* কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট কিভাবে করবেন
+* ডিফল্ট এবং নেমড ইম্পোর্ট এবং এক্সপোর্ট কখন ব্যাবহার করবেন
+* একটি ফাইল থেকে একাধিক কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট কিভাবে করবেন
+* কম্পোনেন্ট কে একাধিক ফাইলে কিভাবে ভাগ করবেন
 
 </YouWillLearn>
 
-## The root component file {/*the-root-component-file*/}
+## রুট কম্পোনেন্ট ফাইল {/*the-root-component-file*/}
 
-In [Your First Component](/learn/your-first-component), you made a `Profile` component and a `Gallery` component that renders it:
+[আপনার প্রথম কম্পোনেন্ট](/learn/your-first-component) এ আপনি একটি `Profile` কম্পোনেন্ট, এবং এটি রেন্ডার করে এমন একটি `Gallery` কম্পোনেন্ট তৈরি করেছেনঃ
 
 <Sandpack>
 
@@ -52,7 +52,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-These currently live in a **root component file,** named `App.js` in this example. In [Create React App](https://create-react-app.dev/), your app lives in `src/App.js`. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+এই উদাহরণ টি বর্তমানে রয়েছে **রুট কম্পোনেন্ট ফাইলে**, যার নাম `App.js`। [Create React App](https://create-react-app.dev/) এ আপনার অ্যাপ্লিকেশন টি `src/App.js` ফাইলে থাকে। যদিও আপনার সেটআপ এর উপর নির্ভর করে আপনার রুট কম্পোনেন্ট অন্য ফাইলেও থাকতে পারে। যদি আপনি ফাইল ভিত্তিক রাউটিং সহ কোন ফ্রেমওয়ার্ক ব্যবহার করেন, যেমন Next.js, তাহলে প্রতিটি পৃষ্ঠার জন্য আপনার রুট কম্পোনেন্ট ভিন্ন হবে।
 
 ## Exporting and importing a component {/*exporting-and-importing-a-component*/}
 
