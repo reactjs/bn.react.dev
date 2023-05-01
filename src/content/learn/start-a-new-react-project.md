@@ -14,11 +14,11 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 </Note>
 
-## কিছু জনপ্রিয় React ফ্রেমওয়ার্কের তালিকা {/*production-grade-react-frameworks*/}
+## Production grade React ফ্রেমওয়ার্কের তালিকা {/*production-grade-react-frameworks*/}
 
 ### Next.js {/*nextjs*/}
 
-**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
+**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক।** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
 
 <TerminalBlock>
 npx create-next-app
@@ -30,15 +30,15 @@ npx create-next-app
 
 ### Remix {/*remix*/}
 
-**[Remix](https://remix.run/) is a full-stack React framework with nested routing.** It lets you break your app into nested parts that can load data in parallel and refresh in response to the user actions. To create a new Remix project, run:
+**[Remix](https://remix.run/) হল nested routing সহ একটি full-stack React ফ্রেমওয়ার্ক।** এটি আপনার অ্যাপকে ছোট ছোট অংশে ভাগ করে যাতে সেগুলোকে পারালাল ভাবে ডাটা লোড করতে পারে। এটি ইউজার এর কাজের এর উপর ভিত্তি করে সেই ছোট ছোট অংশ গুলোকে রিফ্রেশ করতেও সাহায্য করে। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Remix প্রোজেক্ট তৈরি করতে পারবেন।
 
 <TerminalBlock>
 npx create-remix
 </TerminalBlock>
 
-If you're new to Remix, check out the Remix [blog tutorial](https://remix.run/docs/en/main/tutorials/blog) (short) and [app tutorial](https://remix.run/docs/en/main/tutorials/jokes) (long).
+আপনি যদি Remix এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল Remix [blog tutorial](https://remix.run/docs/en/main/tutorials/blog) (short) এবং [app tutorial](https://remix.run/docs/en/main/tutorials/jokes) (long) দেখতে পারেন।
 
-Remix is maintained by [Shopify](https://www.shopify.com/). When you create a Remix project, you need to [pick your deployment target](https://remix.run/docs/en/main/guides/deployment). You can deploy a Remix app to any Node.js or serverless hosting by using or writing an [adapter](https://remix.run/docs/en/main/other-api/adapter).
+[Shopify](https://www.shopify.com/) Remix এর রক্ষণাবেক্ষণের কাজ করে থাকে। Remix প্রোজেক্ট তৈরি করার সময় আপনাকে আপনার [deployment target](https://remix.run/docs/en/main/guides/deployment) করে নিতে হবে। একটি [adapter](https://remix.run/docs/en/main/other-api/adapter) লিখে আপনি আপনার Remix অ্যাপ যেকোনো Node.js বা serverless হোস্টিং ব্যাবহার করে deploy করতে পারবেন।
 
 ### Gatsby {/*gatsby*/}
 
