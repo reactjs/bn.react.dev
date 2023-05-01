@@ -4,7 +4,7 @@ title: রেন্ডার এবং কমিট
 
 <Intro>
 
-আপনার কম্পোনেন্টগুলো স্ক্রীনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
+কম্পোনেন্টগুলো স্ক্রীনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
 
 </Intro>
 
@@ -17,11 +17,11 @@ title: রেন্ডার এবং কমিট
 
 </YouWillLearn>
 
-ধরুন আপনার কম্পোনেন্টগুলো রান্নাঘরের বাবুর্চি, বিভিন্ন উপকরন থেকে সুস্বাদু খাবার রান্না করছে। এই উদাহরণে React হল ওয়েটার যেহেতু গ্রাহকদের থেকে তাদের অর্ডারগুলো গ্রহন করে এবং তাদের তা পরিবেশন করে। UI থেকে অনুরোধ গ্রহন করা এবং তা পরিবেশন করার এই প্রক্রিয়াটির তিনটি পদক্ষেপ রয়েছে।
+ধরুন কম্পোনেন্টগুলো রান্নাঘরের বাবুর্চি যারা বিভিন্ন উপকরন থেকে সুস্বাদু খাবার রান্না করছে। এই উদাহরণে React যেহেতু গ্রাহকদের থেকে তাদের অর্ডারগুলো গ্রহন করে এবং তা পরিবেশন করে, React-কে আমরা ওয়েটার হিসেবে চিন্তা করতে পারি। UI থেকে অনুরোধ গ্রহন করা এবং তা পরিবেশন করার এই প্রক্রিয়াটির তিনটি পদক্ষেপ রয়েছে।
 
 1. **ট্রিগারিং** : একটি রেন্ডার ট্রিগার করা (গ্রাহকের অর্ডার রান্নাঘরে প্রেরণ করা)
 2. **রেন্ডারিং** : কম্পোনেন্ট রেন্ডার করা (রান্নাঘরে অর্ডার তৈরি করা)
-3. **কমিটিং** : DOM এ কমিট করা (অর্ডারট টেবিলে পরিবেশন করা)
+3. **কমিটিং** : DOM এ কমিট করা (অর্ডার টেবিলে পরিবেশন করা)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
@@ -38,7 +38,7 @@ title: রেন্ডার এবং কমিট
 
 ### প্রাথমিক রেন্ডার {/*initial-render*/}
 
-ফ্রেমওয়ার্ক এবং স্যান্ডবক্স কখনো কখনো এই কোড লুকিয়ে রাখে। তবে অ্যাপ শুরু হওয়ার সময় প্রাথমিক রেন্ডার ট্রিগার হয়। টার্গেট DOM নোড দিয়ে createRoot কল করে তারপর কম্পোনেন্ট দিয়ে তার render মেথড কল করে এই কাজটি করা হয়:
+ অ্যাপ শুরু হওয়ার সময় প্রাথমিক রেন্ডার ট্রিগার হয়। টার্গেট DOM নোড দিয়ে createRoot কল করে তারপর কম্পোনেন্ট দিয়ে তার render মেথড কল করে এই কাজটি করা হয়। ফ্রেমওয়ার্ক এবং স্যান্ডবক্স কখনো কখনো এই কোডটি লুকিয়ে রাখে।
 
 <Sandpack>
 
@@ -75,16 +75,16 @@ export default function Image() {
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
-## ধাপ ২: React আপনার কম্পোনেন্ট রেন্ডার করে {/*step-2-react-renders-your-components*/}
+## ধাপ ২: React কম্পোনেন্ট রেন্ডার করে {/*step-2-react-renders-your-components*/}
 
-রেন্ডার ট্রিগার করার পরে স্ক্রীনে কী প্রদর্শন করতে হবে তা বের করতে React আপনার কম্পোনেন্টগুলো কল করে। আপনার কম্পোনেন্টগুলো React দ্বারা এই কল করাই হল "রেন্ডারিং"।
+রেন্ডার ট্রিগার করার পরে স্ক্রীনে কী প্রদর্শন করতে হবে তা বের করতে React কম্পোনেন্টগুলো কল করে। কম্পোনেন্টগুলো React দ্বারা এই কল করাই হল "রেন্ডারিং"।
 
-* **প্রাথমিক রেন্ডারে,** React আপনার root কম্পোনেন্ট কল করবে।
+* **প্রাথমিক রেন্ডারে,** React root কম্পোনেন্ট কল করবে।
 * **পরবর্তী রেন্ডার এ,** React সেই কম্পোনেন্টটি কল করবে যার স্টেট আপডেটে রেন্ডার ট্রিগার হয়েছে।
 
-এই প্রক্রিয়াটি রিকার্সিভ: আপডেট করা কম্পোনেন্ট যদি অন্য কোনও কম্পোনেন্ট রিটার্ন করে, তবে React পরবর্তীতে সেই কম্পোনেন্টটি রেন্ডার করবে এবং যদি সেই কম্পোনেন্টটি আবার কোন কম্পোনেন্ট রিটার্ন করে, তবে ঐ কম্পোনেন্টটিও রেন্ডার করবে, রেন্ডারিং এভাবে চলতে থাকবে যতক্ষণ পর্যন্ত সব নেস্টেড কম্পোনেন্ট রেন্ডার না হয়। এরপরেই React স্ক্রীনে কি দেখাতে হবে তা স্পষ্টভাবে জানতে পারবে।
+এই প্রক্রিয়াটি রিকার্সিভ: আপডেট করা কম্পোনেন্ট যদি অন্য কোনও কম্পোনেন্ট রিটার্ন করে, তবে React পরবর্তীতে সেই কম্পোনেন্টটি রেন্ডার করবে এবং যদি সেই কম্পোনেন্টটি আবার কোন কম্পোনেন্ট রিটার্ন করে, তবে ঐ কম্পোনেন্টটিও রেন্ডার করবে। রেন্ডারিং এভাবে চলতে থাকবে যতক্ষণ পর্যন্ত সব নেস্টেড কম্পোনেন্ট রেন্ডার না হয়। এরপরেই React স্ক্রীনে কি দেখাতে হবে তা স্পষ্টভাবে জানতে পারে।
 
-নিচের উদাহরণে রিয়েক্ট কয়েকবার `Gallery()` এবং `Image()` কল করবে:
+নিচের উদাহরণে React কয়েকবার `Gallery()` এবং `Image()` কল করবে:
 
 <Sandpack>
 
@@ -146,14 +146,14 @@ img { margin: 0 10px 10px 0; }
 
 </DeepDive>
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## ধাপ ৩: React DOM-এ পরিবর্তন কমিট করে {/*step-3-react-commits-changes-to-the-dom*/}
 
-After rendering (calling) your components, React will modify the DOM. 
+কম্পোনেন্টগুলো রেন্ডার(কল) করার পর React DOM-কে পরিবর্তন করবে।
 
-* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen. 
-* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+* **প্রাথমিক রেন্ডারের জন্য,** [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API ব্যবহার করে React সমস্ত DOM নোডগুলো স্ক্রীনে দেখাবে। 
+* **রি-রেন্ডারের জন্য,** DOM-কে সাম্প্রতিক রেন্ডারিং আউটপুটের সাথে মেলানোর জন্য React রেন্ডারিং-ধাপে ক্যালকুলেট করা পরিবর্তনগুলো ন্যূনতম দরকারি অপারেশনে সম্পন্ন করবে।
 
-**React only changes the DOM nodes if there's a difference between renders.** For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the `<input>`, updating its `value`, but the text doesn't disappear when the component re-renders:
+**React শুধুমাত্র পাশাপাশি দুটি রেন্ডারের মধ্যে পার্থক্য থাকলেই DOM নোডগুলো উপডেট করে।** উদাহরণস্বরূপ, এখানে একটি কম্পোনেন্ট দেওয়া হলো যা প্রতি সেকেন্ডে নতুন props নিয়ে রি-রেন্ডার হয়। লক্ষ্য করুন কীভাবে `<input>` এ কিছু টেক্সট লিখে তার `value` পরিবর্তন করলেও রি-রেন্ডারে তা হারিয়ে যায় না:
 
 <Sandpack>
 
@@ -193,21 +193,21 @@ export default function App() {
 
 </Sandpack>
 
-This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+কারণ এই শেষ ধাপে, React শুধু নতুন `time`-এর সাথে `<h1>` এর কনটেন্ট আপডেট করে। React দেখে যে  JSX-এ `<input>` এর অবস্থান অপরিবর্তিত আছে, তাই React `<input>` - বা এর `value` কোনটাই স্পর্শ করে না!
+## উপসংহার: ব্রাউজার পেইন্ট {/*epilogue-browser-paint*/}
 
-After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
+রেন্ডারিং সম্পন্ন করে React DOM আপডেট করার পর ব্রাউজার স্ক্রীন পুনরায় পেইন্ট করে। যদিও এই প্রক্রিয়াটি "ব্রাউজার রেন্ডারিং" নামে পরিচিত, আমরা ডক জুড়ে বিভ্রান্তি এড়াতে এটিকে "পেইন্টিং" হিসাবেই উল্লেখ করব৷
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Any screen update in a React app happens in three steps:
-  1. Trigger
-  2. Render
-  3. Commit
-* You can use Strict Mode to find mistakes in your components
-* React does not touch the DOM if the rendering result is the same as last time
+* একটি React অ্যাপে যেকোনো স্ক্রীন আপডেট তিনটি ধাপে ঘটে:
+  1. ট্রিগার
+  2. রেন্ডার
+  3. কমিট
+* কম্পোনেন্টের ভুল-ত্রুটি খুঁজে বের করতে "Strict Mode" ব্যাবহার করতে পারেন
+* রেন্ডারিং-এর ফলাফল আগেরবারের মত একই হলে React DOM-কে স্পর্শ করে না
 
 </Recap>
 
