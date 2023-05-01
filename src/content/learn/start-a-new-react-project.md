@@ -4,7 +4,7 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 <Intro>
 
-আপনি যদি React দিয়ে কোন অ্যাপ বা ওয়েবসাইট বানাতে চান তাহলে, React কমিউনিটি ব্যাবহার করে এমন যেকোনো একটি জনপ্রিয় ফ্রেমওয়ার্ক ব্যাবহার করতে আমরা আপনাকে উৎসাহিত করব। এই ফ্রেমওয়ার্ক গুল আপনাকে গুরুত্বপূর্ণ কিছু feature দিবে, যেমনঃ Routing, Data fetching এবং HTML generate করা, যা মোটামুটি সব ধরনের অ্যাপ অথবা ওয়েবসাইটের দরকার হয়।
+আপনি যদি React দিয়ে কোন অ্যাপ বা ওয়েবসাইট বানাতে চান তাহলে, React কমিউনিটি ব্যাবহার করে এমন যেকোনো একটি জনপ্রিয় ফ্রেমওয়ার্ক ব্যাবহার করতে আমরা আপনাকে উৎসাহিত করব। এই ফ্রেমওয়ার্ক গুলো আপনাকে গুরুত্বপূর্ণ কিছু feature দিবে, যেমনঃ Routing, Data fetching এবং HTML generate করা, যা মোটামুটি সব ধরণের অ্যাপ অথবা ওয়েবসাইটের দরকার হয়।
 
 </Intro>
 
@@ -14,11 +14,11 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 </Note>
 
-## জনপ্রিয় React ফ্রেমওয়ার্ক গুলো {/*production-grade-react-frameworks*/}
+## কিছু জনপ্রিয় React ফ্রেমওয়ার্কের তালিকা {/*production-grade-react-frameworks*/}
 
 ### Next.js {/*nextjs*/}
 
-**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কম্যান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
+**[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক.** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
 
 <TerminalBlock>
 npx create-next-app
@@ -26,7 +26,7 @@ npx create-next-app
 
 আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
-[Vercel](https://vercel.com/) Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়.
+[Vercel](https://vercel.com/) Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়।
 
 ### Remix {/*remix*/}
 
