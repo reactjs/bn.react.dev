@@ -202,7 +202,7 @@ body {
 
 ## টিউটোরিয়ালের জন্য সেটআপ {/*setup-for-the-tutorial*/}
 
-নীচের লাইভ কোড এডিটরে, CodeSandbox ওয়েবসাইট ব্যবহার করে সম্পাদকটিকে একটি নতুন ট্যাবে খুলতে উপরের-ডানদিকের কোণায় **Fork**-এ ক্লিক করুন। কোডস্যান্ডবক্স আপনাকে আপনার ব্রাউজারে কোড লিখতে দেয় এবং আপনার তৈরি করা অ্যাপটি কীভাবে দেখবে তার preview দেখতে দেয়। নতুন ট্যাবে এই টিউটোরিয়ালের জন্য একটি খালি বর্গক্ষেত্র এবং starter code প্রদর্শন করা উচিত।
+নীচের লাইভ কোড এডিটরে, CodeSandbox ওয়েবসাইট ব্যবহার করে সম্পাদকটিকে একটি নতুন ট্যাবে খুলতে উপরের-ডানদিকের কোণায় **Fork**-এ ক্লিক করুন। CodeSandbox আপনাকে আপনার Browser-এ কোড লিখতে দেয় এবং আপনার তৈরি করা অ্যাপটি কীভাবে দেখাবে তার preview দেখতে দেয়। নতুন ট্যাবে এই টিউটোরিয়ালের জন্য একটি খালি বর্গক্ষেত্র এবং starter code প্রদর্শন করা উচিত।
 
 <Sandpack>
 
@@ -261,15 +261,15 @@ body {
 
 <Note>
 
-You can also follow this tutorial using your local development environment. To do this, you need to:
+আপনি এই টিউটোরিয়ালটি নিজের local development environment ব্যবহার করে ও follow করতে পারেন। এর জন্য আপনাকে নিচের steps-গুলো follow করতে হবে:
 
-1. Install [Node.js](https://nodejs.org/en/)
-2. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
-3. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-4. Install the dependencies with `npm install`
-5. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+1. [Node.js](https://nodejs.org/en/) install করুন
+2. আপনি আগের খোলা CodeSandbox ট্যাবে, মেনু খুলতে উপরের-বাম কোণায় বোতাম টিপুন, এবং তারপর locally file-গুলোর archive download করতে **File > Export to ZIP** choose করুন 
+3. Download করা zip archive টি কে unzip করুন, তারপর একটি terminal open করুন এবং আপনার unzip করা ফোল্ডারটি তে `cd` করুন 
+4. সব Dependency-গুলোকে ইনস্টল করতে run করুন `npm install`
+5. Local development server শুরু করতে run করুন `npm start` এবং borwser-এ চলমান code দেখতে prompt-গুলো follow করুন
 
-If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
+আপনি আটকে গেলে, এটি আপনাকে থামাতে দেবেন না! পরিবর্তে online follow করুন এবং পরে আবার একটি local setup চেষ্টা করুন।
 
 </Note>
 
