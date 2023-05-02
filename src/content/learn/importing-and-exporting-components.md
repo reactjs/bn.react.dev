@@ -136,7 +136,7 @@ React এ `'./Gallery.js'` অথবা `'./Gallery'` দুটিই কাজ 
 
 যেভাবে আপনি কম্পোনেন্ট এক্সপোর্ট করবেন তার উপর নির্ভর করে আপনাকে কম্পোনেন্টটি ইম্পোর্ট করতে হবে। আপনি যদি একটি ডিফল্ট এক্সপোর্ট কে ইম্পোর্ট করার জন্য নেমড এক্সপোর্ট এর মত করে কোড লিখেন তাহলে আপনি একটি এরর পাবেন। এই চার্ট আপনাকে সহজে সাহায্য করতে পারবেঃ
 
-| Syntax           | এক্সপোর্ট স্টেটমেন্ট                           | ইম্পোর্ট স্টেটমেন্ট                          |
+| সিনট্যাক্স           | এক্সপোর্ট স্টেটমেন্ট                           | ইম্পোর্ট স্টেটমেন্ট                          |
 | -----------      | -----------                                | -----------                               |
 | ডিফল্ট  | `export default function Button() {}` | `import Button from './Button.js';`     |
 | নেমড    | `export function Button() {}`         | `import { Button } from './Button.js';` |
@@ -147,17 +147,17 @@ React এ `'./Gallery.js'` অথবা `'./Gallery'` দুটিই কাজ 
 
 </DeepDive>
 
-## Exporting and importing multiple components from the same file {/*exporting-and-importing-multiple-components-from-the-same-file*/}
+## একটি ফাইল থেকে একাধিক কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা {/*exporting-and-importing-multiple-components-from-the-same-file*/}
 
-What if you want to show just one `Profile` instead of a gallery? You can export the `Profile` component, too. But `Gallery.js` already has a *default* export, and you can't have _two_ default exports. You could create a new file with a default export, or you could add a *named* export for `Profile`. **A file can only have one default export, but it can have numerous named exports!**
+ধরুন আপনি গ্যালারির পরিবর্তে একটিমাত্র `Profile` দেখাতে চাচ্ছেন। তাহলে আপনি `Profile` কম্পোনেন্ট টাও এক্সপোর্ট করতে পারবেন। কিন্তু `Gallery.js` ফাইলে ইতিমধ্যে একটি *ডিফল্ট* এক্সপোর্ট আছে এবং একটি ফাইল এ _দুইটি_ ডিফল্ট এক্সপোর্ট থাকতে পারে না। আপনি একটি নতুন ফাইল তৈরি করে সেটি থেকে ডিফল্ট এক্সপোর্ট করতে পারেন অথবা `Profile` এর জন্য একটি *নেমড* এক্সপোর্ট যোগ করতে পারেন। **একটি ফাইলে শুধুমাত্র একটি ডিফল্ট এক্সপোর্ট থাকতে পারে কিন্তু নেমড এক্সপোর্ট একাধিক থাকতে পারে!**
 
 <Note>
 
-To reduce the potential confusion between default and named exports, some teams choose to only stick to one style (default or named), or avoid mixing them in a single file. Do what works best for you!
+ডিফল্ট এবং নেমড এক্সপোর্ট এর মধ্যে বিভ্রান্তি এড়ানোর জন্য কিছু দল শুধুমাত্র একটি স্টাইল (ডিফল্ট বা নেমড) ব্যবহার করতে পছন্দ করে এবং একটি ফাইলে একাধিক স্টাইলের ব্যাবহার এড়িয়ে চলে। আপনার কাজের জন্য যেটি ভালো মনে হয় সেটি ব্যাবহার করুন।
 
 </Note>
 
-First, **export** `Profile` from `Gallery.js` using a named export (no `default` keyword):
+প্রথমত নেমড এক্সপোর্ট ব্যবহার করে `Gallery.js` থেকে `Profile` **এক্সপোর্ট** করুন (কোন `default` কীওয়ার্ড নেই):
 
 ```js
 export function Profile() {
@@ -165,13 +165,13 @@ export function Profile() {
 }
 ```
 
-Then, **import** `Profile` from `Gallery.js` to `App.js` using a named import (with the curly braces):
+এরপর নেমড ইম্পোর্ট ব্যাবহার করে `App.js` থেকে `Gallery.js` এর `Profile` কম্পোনেন্ট **ইম্পোর্ট** করুন (দ্বিতীয় বন্ধনী সহ):
 
 ```js
 import { Profile } from './Gallery.js';
 ```
 
-Finally, **render** `<Profile />` from the `App` component:
+সবশেষে `App` কম্পোনেন্ট থেকে `<Profile />` **রেন্ডার** করুন:
 
 ```js
 export default function App() {
@@ -179,7 +179,7 @@ export default function App() {
 }
 ```
 
-Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `<Profile />` to `<Gallery />` and back in this example:
+এখন `Gallery.js` এ দুটি এক্সপোর্ট আছে: একটি ডিফল্ট `Gallery` এক্সপোর্ট এবং একটি নেমড `Profile` এক্সপোর্ট। `App.js` উভয়ই ইম্পোর্ট করে। এই উদাহরণে `<Profile />` কে `<Gallery />` তে পরিবর্তন করে দেখুনঃ
 
 <Sandpack>
 
@@ -222,24 +222,24 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Now you're using a mix of default and named exports:
+এখানে আপনি ডিফল্ট এবং নেমড এক্সপোর্ট এর মিশ্রণ ব্যবহার করছেনঃ
 
 * `Gallery.js`:
-  - Exports the `Profile` component as a **named export called `Profile`.**
-  - Exports the `Gallery` component as a **default export.**
+  - `Profile` কম্পোনেন্ট কে **নেমড এক্সপোর্ট হিসেবে `Profile` নামে এক্সপোর্ট** করে।
+  - `Gallery` কম্পোনেন্ট কে **ডিফল্ট এক্সপোর্ট হিসেবে** এক্সপোর্ট করে।
 * `App.js`:
-  - Imports `Profile` as a **named import called `Profile`** from `Gallery.js`.
-  - Imports `Gallery` as a **default import** from `Gallery.js`.
-  - Exports the root `App` component as a **default export.**
+  - `Profile` কে **নেমড ইম্পোর্ট হিসেবে `Profile` নামে** `Gallery.js` থেকে ইম্পোর্ট করে।
+  - `Gallery` কে **ডিফল্ট ইম্পোর্ট হিসেবে** `Gallery.js` থেকে ইম্পোর্ট করে।
+  - রুট `App` কম্পোনেন্ট কে **ডিফল্ট এক্সপোর্ট হিসেবে** এক্সপোর্ট করে।
 
 <Recap>
 
-On this page you learned:
+এই পৃষ্ঠায় আপনি শিখলেনঃ
 
-* What a root component file is
-* How to import and export a component
-* When and how to use default and named imports and exports
-* How to export multiple components from the same file
+* রুট কম্পোনেন্ট ফাইল কি
+* কিভাবে কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা হয়
+* কখন এবং কিভাবে ডিফল্ট এবং নেমড ইম্পোর্ট এবং এক্সপোর্ট ব্যবহার করা হয়
+* একই ফাইল থেকে একাধিক কম্পোনেন্ট এক্সপোর্ট করার পদ্ধতি
 
 </Recap>
 
@@ -247,22 +247,22 @@ On this page you learned:
 
 <Challenges>
 
-#### Split the components further {/*split-the-components-further*/}
+#### কম্পোনেন্টকে আরো ভাগ করুন {/*split-the-components-further*/}
 
-Currently, `Gallery.js` exports both `Profile` and `Gallery`, which is a bit confusing.
+বর্তমানে `Gallery.js` ফাইল থেকে `Profile` এবং `Gallery` উভয়ই এক্সপোর্ট করা হয়েছে, যা কিছুটা বিভ্রান্তিকর।
 
-Move the `Profile` component to its own `Profile.js`, and then change the `App` component to render both `<Profile />` and `<Gallery />` one after another.
+`Profile` কম্পোনেন্ট কে এর নিজস্ব `Profile.js` ফাইলে সরিয়ে নিন, এবং `App` কম্পোনেন্ট কে পরিবর্তন করে `<Profile />` এবং `<Gallery />` উভয়ই একটির পর অন্যটি রেন্ডার করুন।
 
-You may use either a default or a named export for `Profile`, but make sure that you use the corresponding import syntax in both `App.js` and `Gallery.js`! You can refer to the table from the deep dive above:
+`Profile` কম্পোনেন্টটির জন্য আপনার ইচ্ছামত ডিফল্ট অথবা নেমড এক্সপোর্ট ব্যবহার করতে পারেন, কিন্তু নিশ্চিত হউন যে আপনি `App.js` এবং `Gallery.js` উভয় ফাইলেই সঠিক ইম্পোর্ট সিনট্যাক্স ব্যবহার করছেন। আপনি ডিপ ডাইভ থেকে নিচের টেবিলটি দেখতে পারেনঃ
 
-| Syntax           | Export statement                           | Import statement                          |
+| সিনট্যাক্স           | এক্সপোর্ট স্টেটমেন্ট                           | ইম্পোর্ট স্টেটমেন্ট                          |
 | -----------      | -----------                                | -----------                               |
-| Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
-| Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
+| ডিফল্ট  | `export default function Button() {}` | `import Button from './Button.js';`     |
+| নেমড    | `export function Button() {}`         | `import { Button } from './Button.js';` |
 
 <Hint>
 
-Don't forget to import your components where they are called. Doesn't `Gallery` use `Profile`, too?
+আপনার কম্পোনেন্ট টি যেখানে ব্যবহার করা হয়েছে সেখানে সেটি ইম্পোর্ট করতে ভুলবেন না। `Gallery` ও তো `Profile` কে ব্যবহার করছে, তাই না? 
 
 </Hint>
 
@@ -313,11 +313,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-After you get it working with one kind of exports, make it work with the other kind.
+এক প্রকারের এক্সপোর্ট সঠিকভাবে কাজ করার পর অন্য প্রকারের এক্সপোর্ট ব্যাবহার করে কাজ করার চেষ্টা করুন।
 
 <Solution>
 
-This is the solution with named exports:
+নেমড এক্সপোর্ট ব্যাবহার করে সমাধানঃ 
 
 <Sandpack>
 
@@ -367,7 +367,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-This is the solution with default exports:
+ডিফল্ট এক্সপোর্ট ব্যাবহার করে সমাধানঃ 
 
 <Sandpack>
 
