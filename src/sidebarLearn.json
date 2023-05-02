@@ -1,5 +1,5 @@
 {
-  "title": "Learn React",
+  "title": "React শিখুন",
   "path": "/learn",
   "routes": [
     {
@@ -21,11 +21,11 @@
       ]
     },
     {
-      "title": "Installation",
+      "title": "ইনস্টলেশন",
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Start a New React Project",
+          "title": "একটি নতুন React প্রোজেক্ট শুরু করুন",
           "path": "/learn/start-a-new-react-project"
         },
         {
