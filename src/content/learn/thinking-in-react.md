@@ -205,35 +205,35 @@ td {
 
 </Pitfall>
 
-## Step 3: Find the minimal but complete representation of UI state {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
+##  ধাপ ৩ঃ UI state এর ন্যুনতম অথচ সম্পূর্ণ একটা অবস্থা খুঁজে বের করা {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
 
-To make the UI interactive, you need to let users change your underlying data model. You will use *state* for this.
+UI interactive করার জন্য আপনাকে ব্যবহারকারীদেরকে ভিতরের ডেটা মডেল পরিবর্তনের সুযোগ দিতে হবে। এর জন্য আপনি *state* ব্যবহার করবেন। 
 
-Think of state as the minimal set of changing data that your app needs to remember. The most important principle for structuring state is to keep it [DRY (Don't Repeat Yourself).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) Figure out the absolute minimal representation of the state your application needs and compute everything else on-demand. For example, if you're building a shopping list, you can store the items as an array in state. If you want to also display the number of items in the list, don't store the number of items as another state value--instead, read the length of your array.
+ধরে নেন state হইল সেই ক্ষুদ্রতম ডেটার সেট যেটার পরিবর্তন আপনার অ্যাপের মনে রাখা প্রয়োজন। State এর গঠনকাঠামো এর ক্ষেত্রে সবচেয়ে জরুরী মূলমন্ত্র হল একে [DRY (Don't Repeat Yourself)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) রাখতে হবে। আপনার অ্যাপ্লিকেশনের একদম ন্যুনতম যে representation দরকার সেটা খুঁজে বের করুন এবং বাকি সব কিছু যখন দরকার সে অনুযায়ী compute করুন। উদাহরণস্বরূপ, আপনি যদি একটা বাজারের তালিকা করেন সেক্ষেত্রে পণ্যগুলো state এর মধ্যে array হিসেবে  রাখতে পারেন। যদি আপনাকে পণ্যের সংখ্যা প্রদর্শন করার দরকার পড়ে, তাহলে সেটা আরেকটা state হিসেবে না রেখে বরং array এর length হিসেব করে বের করুন।
 
-Now think of all of the pieces of data in this example application:
+এখন এই অ্যাপ্লিকেশনের উদাহরণে প্রতিটা তথ্য নিয়ে একটু ভাবুনঃ 
 
-1. The original list of products
-2. The search text the user has entered
-3. The value of the checkbox
-4. The filtered list of products
+1. পণ্যের আসল তালিকা
+2. ব্যবহারকারী পণ্য খুঁজার জন্য যা লিখবে অর্থাৎ সার্চ টেক্সট
+3. চেকবক্সের ভ্যালু
+4. পণ্যের বাছাই করা তালিকা
 
-Which of these are state? Identify the ones that are not:
+এগুলোর মধ্যে কোনগুলো state? যেগুলো state না সেগুলো আগে চিহ্নিত করুনঃ
 
-* Does it **remain unchanged** over time? If so, it isn't state.
-* Is it **passed in from a parent** via props? If so, it isn't state.
-* **Can you compute it** based on existing state or props in your component? If so, it *definitely* isn't state!
+* এটা কি সময়ের সাথে **অপরিবর্তিত থাকে**? যদি থাকে, তাহলে এটা state না।
+* এটা কি props এর মাধ্যমে **parent থেকে পাঠানো হয়**? যদি উত্তর হ্যাঁ হয়, তাহলে এটা state না।
+* এখনকার state এবং props ব্যবহার করে আপনি কি এটা **compute করতে পারেন**? সেক্ষেত্রে, এটা *কোনভাবেই* state না!
 
-What's left is probably state.
+এর পরে যা যা থাকে, তা সম্ভবত state। 
 
-Let's go through them one by one again:
+আমরা একে একে আরেকবার বুঝে নেইঃ
 
-1. The original list of products is **passed in as props, so it's not state.** 
-2. The search text seems to be state since it changes over time and can't be computed from anything.
-3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
-4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+1. পণ্যের আসল তালিকা  **props হিসেবে চলে আসে, সুতরাং এটা state না।** 
+2. খুঁজার জন্য ব্যবহারকারী যে ইনপুট দিবেন সেটা state হবার কথা, কারণ এটা সময়ের সাথে সাথে বদলে যাবে এবং কোন কিছু থেকে এটা compute করা সম্ভব না।
+3. চেকবক্সের ভ্যালুটাও একটা state কারণ এটা সময়ের সাথে সাথে বদলাবে এবং কোনভাবে compute করা সম্ভব না।
+4. পণ্যের বাছাই করা তালিকা **state না** কারণ চেকবক্সের ভ্যাল এবং পণ্যের তালিকা থেকে সার্চ টেক্সটের বাছাই এর মাধ্যমে **compute করা সম্ভব**।  
 
-This means only the search text and the value of the checkbox are state! Nicely done!
+অর্থাৎ, শুধুমাত্র সার্চ টেক্সট এবং চেকবক্সের ভ্যালু এই দুইটাই state! কী সুন্দরমত হয়ে গেল!
 
 <DeepDive>
 
