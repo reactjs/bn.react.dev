@@ -4,7 +4,7 @@ title: React ডেভেলপার টুলস
 
 <Intro>
 
- React এর [components](/learn/your-first-component), edit [props](/learn/passing-props-to-a-component) এবং [state](/learn/state-a-components-memory), এবং পারফরমেন্স সমস্যা শনাক্ত করার জন্য ব্যবহার করুন React ডেভেলপার টুলস।
+ React এর [components](/learn/your-first-component) ইন্সপেক্ট, [props](/learn/passing-props-to-a-component) এবং [state](/learn/state-a-components-memory) এডিট, এবং পারফরমেন্স সমস্যা শনাক্ত করার জন্য React ডেভেলপার টুলস ব্যবহার করুন।
 
 </Intro>
 
@@ -16,13 +16,13 @@ title: React ডেভেলপার টুলস
 
 ## ব্রাউজার এক্সটেনশন {/*browser-extension*/}
 
-React দিয়ে তৈরি ওয়েবসাইট ডিবাগ করার সবচেয়ে সহজ উপায় হল React Developer Tools ব্রাউজার এক্সটেনশন ইনস্টল করা। এই ব্রাউজার এক্সটেনশনটি কয়েকটি জনপ্রিয় ব্রাউজারে পাওয়া যাচ্ছে।
+React দিয়ে তৈরি ওয়েবসাইট ডিবাগ করার সবচেয়ে সহজ উপায় হল React ডেভেলপার টুলস ব্রাউজার এক্সটেনশন ইনস্টল করা। এই ব্রাউজার এক্সটেনশনটি কয়েকটি জনপ্রিয় ব্রাউজারে পাওয়া যাচ্ছে।
 
 * [**গুগল ক্রোম** এর জন্য ইন্সটল করুন](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
 * [**মজিলা ফায়ারফক্স** এর জন্য ইন্সটল করুন](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
 * [**মাইক্রোসফট এজ** এর জন্য ইন্সটল করুন](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
 
-এখন, আপনি যদি **React দিয়ে তৈরি** ওয়েবসাইটে যান তাহলে, আপনি _Components_ এবং _Profiler_ প্যানেল ব্রাউজার ডেভেলপার টুলস এ দেখতে পাবেন।
+এখন, আপনি যদি **React দিয়ে তৈরি** একটি ওয়েবসাইটে যান তাহলে, আপনি _Components_ এবং _Profiler_ প্যানেল ব্রাউজার ডেভেলপার টুলস এ দেখতে পাবেন।
 
 ![React Developer Tools extension](/images/docs/react-devtools-extension.png)
 
@@ -71,6 +71,6 @@ react-devtools
 
 তারপর এটি আপনার যেকোনো চলমান local React Native অ্যাপ এর সাথে কাজ করবে। 
 
-> যদি ডেভেলপার টুলসটি আপনার অ্যাপ এর সাথে কয়েক সেকেন্ডের মধ্যে কানেক্ট না হলে আপনার অ্যাপ টি Reload করুন। 
+> যদি ডেভেলপার টুলসটি আপনার অ্যাপ এর সাথে কয়েক সেকেন্ডের মধ্যে কানেক্ট না হয় তাহলে আপনার অ্যাপটি Reload করুন।
 
 [React Native দিয়ে তৈরি অ্যাপ এর ডিবাগিং করা সম্পর্কে আরো জানুন।](https://reactnative.dev/docs/debugging)
