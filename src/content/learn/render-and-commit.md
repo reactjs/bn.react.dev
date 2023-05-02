@@ -1,27 +1,27 @@
 ---
-title: Render and Commit
+title: রেন্ডার এবং কমিট
 ---
 
 <Intro>
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+কম্পোনেন্টগুলো স্ক্রীনে প্রদর্শিত হওয়ার আগে React দ্বারা তা রেন্ডার হয়। এই রেন্ডার প্রক্রিয়ার ধাপগুলি বোঝার মাধ্যমে আপনি আপনার কোড কিভাবে আচরণ করে এবং কিভাবে তা আরো কার্যকর করা যায় তা বুঝতে পারবেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
+* React এর ভাষায় রেন্ডারিং বলতে কি বুঝায়
+* কখন এবং কিভাবে React একটি কম্পোনেন্ট রেন্ডার করে
+* একটি কম্পোনেন্ট ব্রাউজারে প্রদর্শিত হওয়ার আগে কি কি ধাপ অনুসরণ করে
+* রেন্ডারিং এ কেন সবসময় DOM আপডেট হয় না
 
 </YouWillLearn>
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+ধরুন কম্পোনেন্টগুলো রান্নাঘরের বাবুর্চি যারা বিভিন্ন উপকরন থেকে সুস্বাদু খাবার রান্না করছে। এই উদাহরণে React যেহেতু গ্রাহকদের থেকে তাদের অর্ডারগুলো গ্রহণ করে এবং তা পরিবেশন করে, React-কে আমরা ওয়েটার হিসেবে চিন্তা করতে পারি। UI থেকে অনুরোধ গ্রহণ করা এবং তা পরিবেশন করার এই প্রক্রিয়াটির তিনটি পদক্ষেপ রয়েছে।
 
-1. **Triggering** a render (delivering the guest's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. **ট্রিগারিংঃ** একটি রেন্ডার ট্রিগার করা (গ্রাহকের অর্ডার রান্নাঘরে প্রেরণ করা)
+2. **রেন্ডারিংঃ** কম্পোনেন্ট রেন্ডার করা (রান্নাঘরে অর্ডার তৈরি করা)
+3. **কমিটিংঃ** DOM এ কমিট করা (অর্ডার টেবিলে পরিবেশন করা)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
@@ -29,16 +29,16 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
   <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## ধাপ ১ঃ একটি রেন্ডার ট্রিগার করা {/*step-1-trigger-a-render*/}
 
-There are two reasons for a component to render:
+একটি কম্পোনেন্ট রেন্ডার হবার দুটি কারণ রয়েছেঃ
 
-1. It's the component's **initial render.**
-2. The component's (or one of its ancestors') **state has been updated.**
+1. এটি কম্পোনেন্টের **প্রাথমিক রেন্ডার।**
+2. কম্পোনেন্টের (বা এর একটি প্যারেন্ট কম্পোনেন্টের) **স্টেট আপডেট করা হয়েছে।**
 
-### Initial render {/*initial-render*/}
+### প্রাথমিক রেন্ডার {/*initial-render*/}
 
-When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
+অ্যাপ শুরু হওয়ার সময় প্রাথমিক রেন্ডার ট্রিগার হয়। টার্গেট DOM নোড দিয়ে createRoot কল করে তারপর কম্পোনেন্ট দিয়ে তার render মেথড কল করে এই কাজটি করা হয়। ফ্রেমওয়ার্ক এবং স্যান্ডবক্স কখনো কখনো এই কোডটি লুকিয়ে রাখে।
 
 <Sandpack>
 
@@ -63,11 +63,11 @@ export default function Image() {
 
 </Sandpack>
 
-Try commenting out the `root.render()` call and see the component disappear!
+`root.render()` কমেন্ট আউট করলে দেখবেন কম্পোনেন্টটি আর দেখা যাচ্ছে না।
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### স্টেট আপডেট হওয়ার সময় রি-রেন্ডারঃ {/*re-renders-when-state-updates*/}
 
-Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+কম্পোনেন্টের প্রাথমিক রেন্ডারের পরে আপনি [set ফাংশন](/reference/react/useState#setstate) দ্বারা কম্পোনেন্টের স্টেট আপডেট করে আরও রেন্ডার ট্রিগার করতে পারবেন। কম্পোনেন্টের স্টেট আপডেট হলে React একটি রেন্ডার স্বয়ংক্রিয়ভাবে কিউ করে রাখে। (রেস্তোরাঁয় গেস্টের প্রথম অর্ডারের পরে চা, ডেজার্ট এবং অন্যান্য ধরণের জিনিস অর্ডার দেওয়ার মতো কল্পনা করতে পারেন।)
 
 <IllustrationBlock sequential>
   <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
@@ -75,16 +75,16 @@ Once the component has been initially rendered, you can trigger further renders 
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
-## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+## ধাপ ২ঃ React কম্পোনেন্ট রেন্ডার করে {/*step-2-react-renders-your-components*/}
 
-After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
+রেন্ডার ট্রিগার করার পরে স্ক্রীনে কী প্রদর্শন করতে হবে তা বের করতে React কম্পোনেন্টগুলো কল করে। কম্পোনেন্টগুলো React দ্বারা এই কল করাই হল "রেন্ডারিং"।
 
-* **On initial render,** React will call the root component.
-* **For subsequent renders,** React will call the function component whose state update triggered the render.
+* **প্রাথমিক রেন্ডারে,** React root কম্পোনেন্ট কল করবে।
+* **পরবর্তী রেন্ডার এ,** React সেই কম্পোনেন্টটি কল করবে যার স্টেট আপডেটে রেন্ডার ট্রিগার হয়েছে।
 
-This process is recursive: if the updated component returns some other component, React will render _that_ component next, and if that component also returns something, it will render _that_ component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+এই প্রক্রিয়াটি রিকার্সিভঃ আপডেট করা কম্পোনেন্ট যদি অন্য কোনও কম্পোনেন্ট রিটার্ন করে, তবে React পরবর্তীতে সেই কম্পোনেন্টটি রেন্ডার করবে এবং যদি সেই কম্পোনেন্টটি আবার কোন কম্পোনেন্ট রিটার্ন করে, তবে ঐ কম্পোনেন্টটিও রেন্ডার করবে। রেন্ডারিং এভাবে চলতে থাকবে যতক্ষণ পর্যন্ত সব নেস্টেড কম্পোনেন্ট রেন্ডার না হয়। এরপরেই React স্ক্রীনে কি দেখাতে হবে তা স্পষ্টভাবে জানতে পারে।
 
-In the following example, React will call `Gallery()` and  `Image()` several times:
+নিচের উদাহরণে React কয়েকবার `Gallery()` এবং `Image()` কল করবেঃ
 
 <Sandpack>
 
@@ -124,36 +124,36 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags. 
-* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+* **প্রাথমিক রেন্ডারের সময়,** React `<section>`, `<h1>`, এবং তিনটি `<img>` ট্যাগের জন্য [DOM নোডগুলো তৈরি করবে](https://developer.mozilla.org/docs/Web/API/Document/createElement)। 
+* **রি-রেন্ডারের সময়,** React পূর্ববর্তী রেন্ডার আর বর্তমান রেন্ডারের মধ্যবর্তী পরিবর্তন ক্যালকুলেট করবে। কিন্তু কমিট ধাপের আগ পর্যন্ত React এই তথ্য দিয়ে কিছুই করবে না।
 
 <Pitfall>
 
-Rendering must always be a [pure calculation](/learn/keeping-components-pure):
+রেন্ডারিং-এ সবসময় [pure ক্যালকুলেশন](/learn/keeping-components-pure) হতে হবেঃ
 
-* **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
-* **It minds its own business.** It should not change any objects or variables that existed before rendering. (One order should not change anyone else's order.)
+* **একই ইনপুট , একই আউটপুট।** যদি একটি কম্পোনেন্টে একই ইনপুট দেওয়া হয় তাহলে ঐ কম্পোনেন্টটি সর্বদা একই JSX রিটার্ন করবে। (যদি কেউ টমেটো সালাদ অর্ডার করে, তখন যেন পেঁয়াজের সালাদ না পায়!)
+* **এটি নিজে নিজের কাজ করে।** এটি রেন্ডারিং এর আগে বিদ্যমান কোনো অবজেক্ট বা ভেরিয়েবল পরিবর্তন করে না। (রেস্তোরাঁয় যেরকম একজনের অর্ডারে অন্য কারো অর্ডার পরিবর্তন হয় না।)
 
-Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in "Strict Mode", React calls each component's function twice, which can help surface mistakes caused by impure functions.
+অন্যথায়, যখন আপনার কোডবেস বড় হবে তখন বিভ্রান্তিকর বাগ এবং অপ্রত্যাশিত আচরণ পেতে পারেন। "Strict Mode"-এ React প্রতিটি কম্পোনেন্ট দুবার করে কল করে যা impure ফাংশন দ্বারা উদ্ভূত বাগ বের করতে সাহায্য করে।
 
 </Pitfall>
 
 <DeepDive>
 
-#### Optimizing performance {/*optimizing-performance*/}
+#### পারফরম্যান্স অপ্টিমাইজ করা {/*optimizing-performance*/}
 
-The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
+যদি আপডেটেড কম্পোনেন্ট DOM-tree এর অনেক উপরে থাকে তাহলে React এর ডিফল্ট রেন্ডারিং এর সময় আপডেটেড কম্পোনেন্টের ভেতরের সব কম্পোনেন্ট রেন্ডার হওয়ার ব্যাপারটি optimal নয়। যদি আপনি কোন পারফরম্যান্স সমস্যার সম্মুখীন হন, তবে তা সমাধানের কয়েকটি উপায় [পারফরম্যান্স](https://reactjs.org/docs/optimizing-performance.html) সেকশনে বর্ণনা করা হয়েছে। **Don't optimize prematurely!**
 
 </DeepDive>
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## ধাপ ৩ঃ React DOM-এ পরিবর্তন কমিট করে {/*step-3-react-commits-changes-to-the-dom*/}
 
-After rendering (calling) your components, React will modify the DOM. 
+কম্পোনেন্টগুলো রেন্ডার(কল) করার পর React DOM-কে পরিবর্তন করবে।
 
-* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen. 
-* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+* **প্রাথমিক রেন্ডারের জন্য,** [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API ব্যবহার করে React সমস্ত DOM নোডগুলো স্ক্রীনে দেখাবে। 
+* **রি-রেন্ডারের জন্য,** DOM-কে সাম্প্রতিক রেন্ডারিং আউটপুটের সাথে মেলানোর জন্য React রেন্ডারিং-ধাপে ক্যালকুলেট করা পরিবর্তনগুলো ন্যূনতম দরকারি অপারেশনে সম্পন্ন করবে।
 
-**React only changes the DOM nodes if there's a difference between renders.** For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the `<input>`, updating its `value`, but the text doesn't disappear when the component re-renders:
+**React শুধুমাত্র পাশাপাশি দুটি রেন্ডারের মধ্যে পার্থক্য থাকলেই DOM নোডগুলো উপডেট করে।** উদাহরণস্বরূপ, এখানে একটি কম্পোনেন্ট দেওয়া হলো যা প্রতি সেকেন্ডে নতুন props নিয়ে রি-রেন্ডার হয়। লক্ষ্য করুন কীভাবে `<input>` এ কিছু টেক্সট লিখে তার `value` পরিবর্তন করলেও রি-রেন্ডারে তা হারিয়ে যায় নাঃ
 
 <Sandpack>
 
@@ -193,21 +193,21 @@ export default function App() {
 
 </Sandpack>
 
-This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+কারণ এই শেষ ধাপে, React শুধু নতুন `time`-এর সাথে `<h1>` এর কনটেন্ট আপডেট করে। React দেখে যে  JSX-এ `<input>` এর অবস্থান অপরিবর্তিত আছে, তাই React `<input>` - বা এর `value` কোনটাই স্পর্শ করে না!
+## উপসংহারঃ ব্রাউজার পেইন্ট {/*epilogue-browser-paint*/}
 
-After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
+রেন্ডারিং সম্পন্ন করে React DOM আপডেট করার পর ব্রাউজার স্ক্রীন পুনরায় পেইন্ট করে। যদিও এই প্রক্রিয়াটি "ব্রাউজার রেন্ডারিং" নামে পরিচিত, আমরা ডক জুড়ে বিভ্রান্তি এড়াতে এটিকে "পেইন্টিং" হিসাবেই উল্লেখ করব৷
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Any screen update in a React app happens in three steps:
-  1. Trigger
-  2. Render
-  3. Commit
-* You can use Strict Mode to find mistakes in your components
-* React does not touch the DOM if the rendering result is the same as last time
+* একটি React অ্যাপে যেকোনো স্ক্রীন আপডেট তিনটি ধাপে ঘটেঃ
+  1. ট্রিগার
+  2. রেন্ডার
+  3. কমিট
+* কম্পোনেন্টের ভুল-ত্রুটি খুঁজে বের করতে "Strict Mode" ব্যাবহার করতে পারেন
+* রেন্ডারিং-এর ফলাফল আগেরবারের মত একই হলে React DOM-কে স্পর্শ করে না
 
 </Recap>
 
