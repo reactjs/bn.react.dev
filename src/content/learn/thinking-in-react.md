@@ -195,12 +195,15 @@ td {
 
 </Sandpack>
 
+
 (এই কোডটি বেশি জটিল মনে হলে, [Quick Start](/learn/) আগে দেখে নিন!)
 
-কম্পোনেন্ট বানানো হয়ে গেলে, আপনার কাছে একটি লাইব্রেরি থাকবে যেখানে এমন কম্পোনেন্ট থাকবে যা আপনার ডেটা মডেলকে প্রদর্শন করে এবং যা পুনরায় ব্যবহারযোগ্য। যেহেতু এটি একটি স্ট্যাটিক অ্যাপ, সুতরাং কম্পোনেন্টগুলি কেবল JSX রিটার্ন করবে। আপনার hierarchy-র একদম শীর্ষে থাকা কম্পোনেন্ট (`FilterableProductTable`) আপনার ডেটা মডলকে prop হিসেবে গ্রহণ করবে। একে বলা হয় _one-way data flow_ কারণ এক্ষেত্রে tree-তে উপরের দিকে থাকা কম্পোনেন্টগুলো থেকে নিচের দিকে থাকা কম্পোনেন্টের দিকে ডেটা প্রবাহিত হয়।
+After building your components, you'll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. This is called _one-way data flow_ because the data flows down from the top-level component to the ones at the bottom of the tree.
+কম্পোনেন্ট বানানো হয়ে গেলে, আপনার কাছে একটি লাইব্রেরি থাকবে যেখানে এমন কম্পোনেন্ট থাকবে যা আপনার ডেটা মডেলকে প্রদর্শন করে এবং যা পুনরায় ব্যবহারযোগ্য। যেহেতু এটি একটি স্ট্যাটিক অ্যাপ, সুতরাং কম্পোনেন্টগুলি কেবল JSX রিটার্ন করবে। আপনার hierarchyর একদম শীর্ষে থাকা কম্পোনেন্ট (`FilterableProductTable`) আপনার ডেটা মডলকে prop হিসেবে গ্রহণ করবে। একে বলা হয় _one-way data flow_ কারণ এক্ষেত্রে tree-তে উপরের দিকে থাকা কম্পোনেন্টগুলো থেকে নিচের দিকে থাকা কম্পোনেন্টের দিকে ডেটা প্রবাহিত হয়।
 
 <Pitfall>
 
+At this point, you should not be using any state values. That’s for the next step!
 এ পর্যন্ত আপনার কোন state value ব্যবহার করা উচিত হবে না। সেটা পরবর্তী ধাপের জন্য!
 
 </Pitfall>
