@@ -1,31 +1,31 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'টিউটোরিয়াল: টিক-ট্যাক-টো'
 ---
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+এই টিউটোরিয়ালের সময় আপনি একটি ছোট টিক-ট্যাক-টো গেম তৈরি করবেন। এই টিউটোরিয়ালটি কোন পূর্বের  React জ্ঞান অনুমান করে না। টিউটোরিয়ালে আপনি যে কৌশলগুলি শিখবেন তা যেকোন React অ্যাপ তৈরির জন্য অপরিহার্য, এবং এটি সম্পূর্ণরূপে বোঝা আপনাকে React সম্পর্কে গভীর ধারণা দেবে।
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+এই টিউটোরিয়ালটি এমন লোকদের জন্য ডিজাইন করা হয়েছে যারা **ব্যবহারিক কাজ করে শিখতে** পছন্দ করেন এবং দ্রুত কিছু তৈরি করার চেষ্টা করতে চান। আপনি যদি প্রতিটি ধারণা ধাপে ধাপে শিখতে পছন্দ করেন, তাহলে [Describing the UI.](/learn/describing-the-ui) দিয়ে শুরু করুন।
 
 </Note>
 
-The tutorial is divided into several sections:
+টিউটোরিয়ালটি কয়েকটি বিভাগে বিভক্ত:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [টিউটোরিয়ালের জন্য সেটআপ](#setup-for-the-tutorial) আপনাকে টিউটোরিয়ালটি অনুসরণ করার জন্য **একটি শুরুর ধাপ** দেবে।
+- [সংক্ষিপ্ত বিবরণ](#overview) আপনাকে React-এর **মৌলিক বিষয়গুলি** যথা: components, props এবং state সম্পর্কে শেখাবে|
+- [গেমটি সম্পূর্ণ করা](#completing-the-game) আপনাকে React Development-এর **সবচেয়ে সাধারণ কৌশলগুলি** শেখাবে।
+- [সময়ে ভ্রমন্ করা](#adding-time-travel) আপনাকে React-এর অনন্য শক্তিসমূহ সম্পর্কে **গভীর দৃষ্টি** দেবে ।
 
-### What are you building? {/*what-are-you-building*/}
+### আপনি কি বানাবেন? {/*what-are-you-building*/}
 
-In this tutorial, you'll build an interactive tic-tac-toe game with React.
+এই টিউটোরিয়ালে, আপনি React-এর সাহায্যে একটি ইন্টারেক্টিভ টিক-ট্যাক-টো গেম তৈরি করবেন।
 
-You can see what it will look like when you're finished here:
+গেমটির অন্তিম রূপ আপনি এখানে দেখতে পাচ্ছেন:
 
 <Sandpack>
 
@@ -194,15 +194,15 @@ body {
 
 </Sandpack>
 
-If the code doesn't make sense to you yet, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+যদি কোডটি এখনও আপনার কাছে বোধগম্য না হয়, বা আপনি যদি কোডের syntax সাথে অপরিচিত হন তবে চিন্তা করবেন না! এই টিউটোরিয়ালের লক্ষ্য হল আপনাকে React এবং এর syntax বুঝতে সাহায্য করা।
 
-We recommend that you check out the tic-tac-toe game above before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+আমরা সুপারিশ করছি যে আপনি টিউটোরিয়ালটি শুরু করার আগে উপরের টিক-ট্যাক-টো গেমটি দেখুন। আপনি যে বৈশিষ্ট্যগুলি লক্ষ্য করবেন তাদের মধ্যে একটি হল গেমের বোর্ডের ডানদিকে একটি সংখ্যাযুক্ত তালিকা রয়েছে। এই তালিকাটি আপনাকে গেমটিতে ঘটে যাওয়া সমস্ত পদক্ষেপের একটি ইতিহাস দেয় এবং গেমটি অগ্রসর হওয়ার সাথে সাথে এটি update হয়।
 
-Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+আপনার একবার টিকে-টাক-টো গেমটি খেলা হয় গেলে আপনি পরবর্তী পর্যায়ে স্ক্রল করুন । আপনি এই টিউটোরিয়াল একটি সহজ টেমপ্লেট দিয়ে শুরু করবেন। আমাদের পরবর্তী পদক্ষেপ হল আপনাকে সেট আপ করা যাতে আপনি গেমটি তৈরি করা শুরু করতে পারেন।
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## টিউটোরিয়ালের জন্য সেটআপ {/*setup-for-the-tutorial*/}
 
-In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
+নীচের লাইভ কোড এডিটরে, CodeSandbox ওয়েবসাইট ব্যবহার করে সম্পাদকটিকে একটি নতুন ট্যাবে খুলতে উপরের-ডানদিকের কোণায় **Fork**-এ ক্লিক করুন। কোডস্যান্ডবক্স আপনাকে আপনার ব্রাউজারে কোড লিখতে দেয় এবং আপনার তৈরি করা অ্যাপটি কীভাবে দেখবে তার preview দেখতে দেয়। নতুন ট্যাবে এই টিউটোরিয়ালের জন্য একটি খালি বর্গক্ষেত্র এবং starter code প্রদর্শন করা উচিত।
 
 <Sandpack>
 
@@ -264,10 +264,10 @@ body {
 You can also follow this tutorial using your local development environment. To do this, you need to:
 
 1. Install [Node.js](https://nodejs.org/en/)
-1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
-1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-1. Install the dependencies with `npm install`
-1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+2. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
+3. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
+4. Install the dependencies with `npm install`
+5. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
 
 If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
 
