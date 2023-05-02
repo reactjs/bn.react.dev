@@ -1,19 +1,19 @@
 ---
-title: State as a Snapshot
+title: State একটি স্ন্যাপশট হিসাবে
 ---
 
 <Intro>
 
-State variables might look like regular JavaScript variables that you can read and write to. However, state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render.
+State ভেরিয়েবলকে সাধারণ জাভাস্ক্রিপ্ট ভেরিয়েবলের মতো রিড এবং রাইট করতে পারলেও এটি আসলে একটি স্ন্যাপশটের মতো আচরণ করে। State ভেরিয়েবল সেট করলে তার পূর্ববর্তী মান পরিবর্তন না হলেও একটি রেন্ডার ট্রিগার হয়।
 
 </Intro>
 
 <YouWillLearn>
 
-* How setting state triggers re-renders
-* When and how state updates
-* Why state does not update immediately after you set it
-* How event handlers access a "snapshot" of the state
+* State সেট করলে কিভাবে রেন্ডার ট্রিগার হয়
+* কখন এবং কিভাবে State আপডেট হয়
+* সেট করার সাথেসাথেই কেন State আপডেট হয় না
+* Event handler কিভাবে একটি স্ন্যাপশট এক্সেস করে
 
 </YouWillLearn>
 
