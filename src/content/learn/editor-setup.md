@@ -29,14 +29,14 @@ React কমিউনিটিতে ব্যবহৃত অন্য জন�
 
 কিছু এডিটরে এই বৈশিষ্ট্যগুলো ইতিমধ্যে সংযুক্ত করা থাকে, কিন্তু অন্যগুলোতে এক্সটেনশন যুক্ত করার প্রয়োজন পড়তে পারে। নিশ্চিত হওয়ার জন্য আপনার পছন্দের এডিটর কি সাপোর্ট সরবরাহ করে তা দেখে নিন!
 
-### Linting {/*linting*/}
+### লিন্টিং {/*linting*/}
 
-Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript. 
+কোড লিন্টার আপনি কোড লিখার সাথে সাথে আপনাকে বিভিন্ন সমস্যা ধরতে এবং তা তাড়াতাড়ি সমাধান করতে সাহায্য করে। [ESLint](https://eslint.org/) জাভাস্ক্রিপ্টের একটি জনপ্রিয়, ওপেন-সোর্স লিন্টার। 
 
-* [Install ESLint with the recommended configuration for React](https://www.npmjs.com/package/eslint-config-react-app) (be sure you have [Node installed!](https://nodejs.org/en/download/current/))
-* [Integrate ESLint in VSCode with the official extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+* [React এর জন্য প্রস্তাবিত কনফিগারেশন সহ ESLint ইন্সটল করুন](https://www.npmjs.com/package/eslint-config-react-app) (নিশ্চিত করুন আপনার [Node ইন্সটল করা রয়েছে!](https://nodejs.org/en/download/current/))
+* [অফিশিয়াল এক্সটেনশনের সাহায্যে VSCode এ ESLint সংযুক্ত করুন](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-**Make sure that you've enabled all the [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) rules for your project.** They are essential and catch the most severe bugs early. The recommended [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) preset already includes them.
+**নিশ্চিত করুন আপনি [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) এর সকল রুলগুলো আপনার প্রজেক্টের জন্য enable করেছেন।** এগুলো অপরিহার্য এবং গুরুতর বাগ গুলো তাড়াতাড়ি ধরতে পারে। প্রস্তাবিত [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) প্রিসেট এ এগুলো ইতিমধ্যে সংযুক্ত থাকে।
 
 ### ফরম্যাটিং {/*formatting*/}
 
@@ -51,7 +51,7 @@ Code linters find problems in your code as you write, helping you fix them early
 
 #### সেইভে ফরম্যাট করা {/*formatting-on-save*/}
 
-আদর্শভাবে, প্রতি সেইভেই আপনার কোডকে আপনার ফরম্যাট করা উচিত। VS Code এ এর সেটিং রয়েছে!
+আদর্শভাবে, প্রতি সেইভেই আপনার কোডকে ফরম্যাট করা উচিত। VS Code এ এর সেটিং রয়েছে!
 
 1. VS Code এ, `CTRL/CMD + SHIFT + P` প্রেস করুন।
 2. "settings" টাইপ করুন
