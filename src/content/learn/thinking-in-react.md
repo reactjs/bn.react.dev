@@ -237,22 +237,22 @@ This means only the search text and the value of the checkbox are state! Nicely 
 
 <DeepDive>
 
-#### Props vs State {/*props-vs-state*/}
+#### Props বনাম State {/*props-vs-state*/}
 
-There are two types of "model" data in React: props and state. The two are very different:
+React-এ দু'ধরণের "model" ডেটা রয়েছেঃ props এবং state। এই দুইটা খুবই আলাদাঃ
 
-* [**Props** are like arguments you pass](/learn/passing-props-to-a-component) to a function. They let a parent component pass data to a child component and customize its appearance. For example, a `Form` can pass a `color` prop to a `Button`.
-* [**State** is like a component’s memory.](/learn/state-a-components-memory) It lets a component keep track of some information and change it in response to interactions. For example, a `Button` might keep track of `isHovered` state.
+* [**Props** হচ্ছে একটা ফাংশনে আপনার pass করা argument এর মত।](/learn/passing-props-to-a-component) এরা একটা parent কম্পোনেন্ট থেকে child কম্পোনেন্টে এ ডেটা পাঠানোর এবং কাস্টমাইজ করার সুযোগ দেয়। উদাহরণস্বরূপ,  একটা `Form`, একটা `Button` এ `color` prop পাঠাতে পারে।
+* [**State** হচ্ছে কম্পোনেন্টের স্মৃতির মত।](/learn/state-a-components-memory) এটা একটা কম্পোনেন্টকে কোন একটা তথ্যের হালচাল হিসেব রাখার সুযোগ দেয় এবং ব্যবহারকারীর interaction অনুসারে বদলাতে দেয়। উদাহরণস্বরূপ, `Button`, `isHovered` state এর track রাখতে পারে।
 
-Props and state are different, but they work together. A parent component will often keep some information in state (so that it can change it), and *pass it down* to child components as their props. It's okay if the difference still feels fuzzy on the first read. It takes a bit of practice for it to really stick!
+Props এবং state আলাদা বটে, তবে এরা একই সাথে কাজ করে। একটা parent কম্পোনেন্ট বেশিরভাগ সময়ই কিছু তথ্য state এ রাখবে (যাতে সে এটা বদলাতে পারে), এবং prop হিসেবে child কম্পোনেন্টে *pass down* করবে। শুরুর দিকে যদি এই পার্থক্যটা একটু ঝামেলার মনে হয় সেটা খুব স্বাভাবিক। এটা মাথার মধ্যে গেঁথে যেতে বেশ চর্চ্চার দরকার পড়ে।
 
 </DeepDive>
 
-## Step 4: Identify where your state should live {/*step-4-identify-where-your-state-should-live*/}
+## ধাপ ৪ঃ আপনার state কোথায় থাকা উচিত সেটা চিহ্নিত করুন। {/*step-4-identify-where-your-state-should-live*/}
 
-After identifying your app’s minimal state data, you need to identify which component is responsible for changing this state, or *owns* the state. Remember: React uses one-way data flow, passing data down the component hierarchy from parent to child component. It may not be immediately clear which component should own what state. This can be challenging if you’re new to this concept, but you can figure it out by following these steps!
+আপনার অ্যাপের ন্যূনতম state ডেটা চিহ্নিত করার পর, আপনাকে বের করতে হবে এর state পরিবর্তন কোন কম্পোনেন্টের দায়িত্ব, বা কে এই state এর *মালিকানা রাখে*। মনে রাখবেনঃ React একমুখী তথ্য প্রবাহ ব্যবহার করে, অর্থাৎ hierarchy-তে parent থেকে child কম্পোনেন্টের দিকে data pass হয়। কোন কম্পোনেন্টে state থাকা উচিত এইটা হয়ত প্রথমেই পরিষ্কার হবে না। আপনি যদি এই ধারণার সাথে নতুন নতুন পরিচিত হয়ে থাকেন, এটা একটু কঠিন লাগতে পারে, তবে নিচের ধাপগুলার মাধ্যমে আপনি আপনার উত্তর পেয়ে যাবেন।
 
-For each piece of state in your application:
+আপনার অ্যাপ্লিকেশনের প্রতিটা অংশের state-এর জন্যঃ
 
 1. Identify *every* component that renders something based on that state.
 2. Find their closest common parent component--a component above them all in the hierarchy.
