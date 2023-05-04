@@ -4,15 +4,15 @@ title: Thinking in React
 
 <Intro>
 
-React can change how you think about the designs you look at and the apps you build. When you build a user interface with React, you will first break it apart into pieces called *components*. Then, you will describe the different visual states for each of your components. Finally, you will connect your components together so that the data flows through them. In this tutorial, we’ll guide you through the thought process of building a searchable product data table with React.
+React আপনার দেখা ডিজাইন এবং তৈরী করা অ্যাপগুলি সম্বন্ধে আপনার চিন্তাভাবনা পরিবর্তন করতে পারে। React দিয়ে আপনি যখন একটি ইউজার ইন্টারফেস তৈরি করবেন, প্রথমে আপনি এটি কম্পোনেন্ট নামে বিভিন্ন অংশে ভাগ করে ফেলবেন। তারপর, আপনি আপনার প্রতিটি কম্পোনেন্টের জন্য বিভিন্ন দৃশ্যমান state বর্ণনা করবেন। সবশেষে, আপনি আপনার কম্পোনেন্টগুলি এমনভাবে সংযুক্ত করবেন যাতে তাদের মাঝে ডেটা প্রবাহিত হয়। এই টিউটোরিয়ালে, আমরা React দিয়ে একটি সার্চেবল প্রোডাক্টের ডেটা টেবিল তৈরীর চিন্তা প্রক্রিয়া কেমন হবে সে বিষয়ে ধারণা করাতে আপনাকে সহায়তা করব।
 
 </Intro>
 
-## Start with the mockup {/*start-with-the-mockup*/}
+## মকাপ দিয়ে শুরু করুন {/*start-with-the-mockup*/}
 
-Imagine that you already have a JSON API and a mockup from a designer.
+ধরে নিন, আপনার কাছে ইতোমধ্যে একজন ডিজাইনারের কাছ থেকে পাওয়া মকাপ আছে এবং একটি JSON API ও আছে। 
 
-The JSON API returns some data that looks like this:
+JSON API যে তথ্য রিটার্ন করে সেটা কিছুটা এমন দেখতেঃ
 
 ```json
 [
@@ -25,25 +25,25 @@ The JSON API returns some data that looks like this:
 ]
 ```
 
-The mockup looks like this:
+মকাপটা দেখতে এমনঃ
 
 <img src="/images/docs/s_thinking-in-react_ui.png" width="300" style={{margin: '0 auto'}} />
 
-To implement a UI in React, you will usually follow the same five steps.
+React এ একটি UI ইমপ্লিমেন্ট করতে আপনাকে সাধারণত নিম্নের ৫টি ধাপ অনুসরণ করতে হবে।
 
-## Step 1: Break the UI into a component hierarchy {/*step-1-break-the-ui-into-a-component-hierarchy*/}
+## ধাপ ১ঃ UI কে একটি কম্পোনেন্ট hierarchy তে বিন্যস্ত করুন {/*step-1-break-the-ui-into-a-component-hierarchy*/}
 
-Start by drawing boxes around every component and subcomponent in the mockup and naming them. If you work with a designer, they may have already named these components in their design tool. Ask them!
+মকাপে সবগুলো কম্পোনেন্ট এবং সাবকম্পোনেন্ট এর চারিদিকে বক্স আঁকার মাধ্যমে শুরু করেন। সেগুলোর নামকরণ করুন। যদি আপনি একজন ডিজাইনারের সাথে কাজ করে থাকেন, দেখা যেতে পারে উনি ইতোমধ্যে তার ডিজাইনে এই কম্পোনেন্টগুলোর নামকরণ করে রেখেছেন। উনার কাছ থেকে জেনে নিন।
 
-Depending on your background, you can think about splitting up a design into components in different ways:
+একটি ডিজাইনের কম্পোনেন্ট গুলোকে আপনি বিভিন্ন ভাবে ভাগ করতে পারেন। কীভাবে করবেন সেটা নির্ভর করবে আপনার কাজের ক্ষেত্রের উপর।
 
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
+* **Programming**--একটি নতুন function বা object তৈরী করবেন কি না এই সিদ্ধান্তটি যেভাবে নিতেন, ঠিক একই পদ্ধতিতে সিদ্ধান্ত নিন। এমন একটি পদ্ধতি হচ্ছে [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), যা অনুসারে, একটা কম্পোনেন্ট আদর্শত কেবল একটি কাজই করবে। যদি সেটা বড় হয়ে যায় তাহলে ছোট ছোট সাবকম্পোনেন্ট এ ভাগ করে ফেলতে হবে। 
+* **CSS**--আপনি class selector কীসের জন্য তৈরী করতেন সেটা বিবেচনায় রাখুন (যদিও কম্পোনেন্ট আরেকটু কম granular)।
+* **Design**--চিন্তা করুন আপনি আপনার ডিজাইনের layer গুলো কীভাবে বিন্যস্ত করতেন।
 
-If your JSON is well-structured, you'll often find that it naturally maps to the component structure of your UI. That's because UI and data models often have the same information architecture--that is, the same shape. Separate your UI into components, where each component matches one piece of your data model.
+যদি আপনার JSON গোছানো থাকে, আপনি দেখবেন বেশির ভাগ সময় এটা স্বাভাবিকতই আপনার UI এর কম্পোনেন্ট এর গঠন বিন্যাসের সাথে মিলে যাবে। এর কারণ UI এবং ডেটা মডেলগুলো সাধারণত একই information architecture ব্যবহার করে, অর্থাৎ একই আকারে বিন্যস্ত হয়। আপনার UI কে এমন ভাবে কম্পোনেন্ট এ ভাগ করুন যেন প্রতিটি কম্পোনেন্ট আপনার ডেটা মডেলের একটি অংশের সাথে মিলে যায়। 
 
-There are five components on this screen:
+এই স্ক্রিনে ৫টি কম্পোনেন্ট রয়েছেঃ
 
 <FullWidth>
 
@@ -51,19 +51,19 @@ There are five components on this screen:
 
 <img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
 
-1. `FilterableProductTable` (grey) contains the entire app.
-2. `SearchBar` (blue) receives the user input.
-3. `ProductTable` (lavender) displays and filters the list according to the user input.
-4. `ProductCategoryRow` (green) displays a heading for each category.
-5. `ProductRow`	(yellow) displays a row for each product.
+1. `FilterableProductTable` (grey) পুরো অ্যাপটিকে ধারণ করে।
+2. `SearchBar` (blue) ইউজারের ইনপুট নেয়।
+3. `ProductTable` (lavender) ফিল্টারগুলো দেখায় এবং ইউজারের ইনপুটের হিসেবে তালিকা দেখায়।
+4. `ProductCategoryRow` (green) প্রতিটি ক্যাটাগরির জন্য একটি শিরোনাম দেখায়।
+5. `ProductRow`	(yellow) প্রতিটি পণ্যের জন্য একটি সারি দেখায়।
 
 </CodeDiagram>
 
 </FullWidth>
 
-If you look at `ProductTable` (lavender), you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and you could go either way. For this example, it is a part of `ProductTable` because it appears inside the `ProductTable`'s list. However, if this header grows to be complex (e.g., if you add sorting), you can move it into its own `ProductTableHeader` component.
+আপনি যদি `ProductTable` (lavender) খেয়াল করেন, আপনি দেখবেন যে টেবিল হেডারে (যার মধ্যে "Name" এবং "Price" লেবেলগুলো রয়েছে) নিজেই নিজের কম্পোনেন্ট না। এটা আপনার পছন্দ অনুযায়ী সিদ্ধান্তের বিষয়। আপনি যেকোন দিকে যেতে পারেন। এই উদাহরণে, এটা `ProductTable` এর অংশ কারণ এটা `ProductTable`এর তালিকার মধ্যে দেখা যায়। কিন্তু, এই হেডার যদি জটিল আকার ধারণ করে (উদাহরণস্বরূপ, আপনি যদি সর্টিং যুক্ত করতে চান), আপনি এটাকে এর নিজের `ProductTableHeader` কম্পোনেন্টে নিয়ে যেতে পারেন।
 
-Now that you've identified the components in the mockup, arrange them into a hierarchy. Components that appear within another component in the mockup should appear as a child in the hierarchy:
+এখন যেহেতু আপনি মকাপে কম্পোনেন্টগুলো চিনে ফেলেছেন, সেগুলোকে একটা hierarchy তে সাজিয়ে ফেলুন। মকাপে যেই কম্পোনেন্টগুলো অন্য একটি কম্পোনেন্ট এর মধ্যে রয়েছে সেগুলো hierarchy তে child component হিসেবে দেখানো উচিত।
 
 * `FilterableProductTable`
     * `SearchBar`
@@ -71,13 +71,13 @@ Now that you've identified the components in the mockup, arrange them into a hie
         * `ProductCategoryRow`
         * `ProductRow`
 
-## Step 2: Build a static version in React {/*step-2-build-a-static-version-in-react*/}
+## ধাপ ২ঃ React এ একটি স্ট্যাটিক ভার্সন তৈরী করুন {/*step-2-build-a-static-version-in-react*/}
 
-Now that you have your component hierarchy, it's time to implement your app. The most straightforward approach is to build a version that renders the UI from your data model without adding any interactivity... yet! It's often easier to build the static version first and add interactivity later. Building a static version requires a lot of typing and no thinking, but adding interactivity requires a lot of thinking and not a lot of typing.
+এখন যেহেতু আপনার কাছে কম্পোনেন্ট hierarchy আছে, এখন সময় অ্যাপ ইমপ্লিমেন্ট করার। সবচেয়ে সোজাসাপ্টা পথ হল এমন একটা ভার্সন তৈরী করা যেটা নতুন কোন interactivity যুক্ত না করে আপনার ডেটা মডেল থেকে UI তৈরী করতে পারে...প্রাথমিকভাবে! বেশিরভাগ সময়ে প্রথমে একটি স্ট্যাটিক ভার্সন তৈরী করা এবং পরে এর সাথে interactivity যুক্ত করা সহজ হয়। স্ট্যাটিক ভার্সন তৈরী করতে প্রচুর কোড লেখবার দরকার পড়ে এবং চিন্তা করতে হয় কম। অন্যদিকে interactivity যুক্ত করার জন্য চিন্তা করতে হয় অনেক এবং এত বেশি লেখার দরকার পড়ে না।     
 
-To build a static version of your app that renders your data model, you'll want to build [components](/learn/your-first-component) that reuse other components and pass data using [props.](/learn/passing-props-to-a-component) Props are a way of passing data from parent to child. (If you're familiar with the concept of [state](/learn/state-a-components-memory), don't use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.)
+প্রথমে বানাতে হবে আপনার অ্যাপের একটা স্ট্যাটিক ভার্সন যা আপনার ডেটা মডেল প্রদর্শন করতে পারে। এজন্য আপনি এমন [components](/learn/your-first-component) বানাতে চাইবেন যা অন্যান্য কম্পোনেন্ট ব্যবহার করবে এবং [props](/learn/passing-props-to-a-component) ব্যবহার করে ডেটা আদান প্রদান করবে। Parent থেকে child এ ডেটা পাঠাতে props ব্যবহার করা হয়। (যদি আপনার [state](/learn/state-a-components-memory)এর বিষয়ে জানাশোনা থাকে, এই স্ট্যাটিক ভার্সন বানাতে গিয়ে state এর কথা একদমই মাথায় আনবেন না। State শুধুমাত্র interactivity-র জন্য অর্থাৎ সেই ডেটা যা সময়ের সাথে সাথে বদলায়। যেহেতু এইটা আপনার অ্যাপের একটি স্ট্যাটিক ভার্সন, আপনার state এর প্রয়োজন নেই।)
 
-You can either build "top down" by starting with building the components higher up in the hierarchy (like `FilterableProductTable`) or "bottom up" by working from components lower down (like `ProductRow`). In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up.
+আপনি "top down" পন্থায় যেতে পারেন, যেখানে hierarchy-তে উপর থেকে নিচের দিকে কম্পোনেন্টগুলো আপনি বানাতে থাকবেন (যেমন `FilterableProductTable`) অথবা "bottom up" পদ্ধতি ব্যবহার করতে পারেন যেক্ষেত্রে  আগে নিচের দিকের কম্পোনেন্টগুলো আগে বানাতে হবে এবং পর্যায়ক্রমে উপরের দিকে যাবেন (যেমন `ProductRow`)।  সরল একটা অ্যাপের ক্ষেত্রে top-down করাই সাধারণত সহজতর হয়, একটু জটিল বড় কাজের ক্ষেত্রে bottom-up করা সুবিধাজনক হয়।
 
 <Sandpack>
 
@@ -195,45 +195,45 @@ td {
 
 </Sandpack>
 
-(If this code looks intimidating, go through the [Quick Start](/learn/) first!)
+(এই কোডটি বেশি জটিল মনে হলে, [Quick Start](/learn/) আগে দেখে নিন!)
 
-After building your components, you'll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. This is called _one-way data flow_ because the data flows down from the top-level component to the ones at the bottom of the tree.
+কম্পোনেন্ট বানানো হয়ে গেলে, আপনার কাছে একটি লাইব্রেরি থাকবে যেখানে এমন কম্পোনেন্ট থাকবে যা আপনার ডেটা মডেলকে প্রদর্শন করে এবং যা পুনরায় ব্যবহারযোগ্য। যেহেতু এটি একটি স্ট্যাটিক অ্যাপ, সুতরাং কম্পোনেন্টগুলি কেবল JSX রিটার্ন করবে। আপনার hierarchy-র একদম শীর্ষে থাকা কম্পোনেন্ট (`FilterableProductTable`) আপনার ডেটা মডলকে prop হিসেবে গ্রহণ করবে। একে বলা হয় _one-way data flow_ কারণ এক্ষেত্রে tree-তে উপরের দিকে থাকা কম্পোনেন্টগুলো থেকে নিচের দিকে থাকা কম্পোনেন্টের দিকে ডেটা প্রবাহিত হয়।
 
 <Pitfall>
 
-At this point, you should not be using any state values. That’s for the next step!
+এ পর্যন্ত আপনার কোন state value ব্যবহার করা উচিত হবে না। সেটা পরবর্তী ধাপের জন্য!
 
 </Pitfall>
 
-## Step 3: Find the minimal but complete representation of UI state {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
+##  ধাপ ৩ঃ UI state এর ন্যূনতম অথচ সম্পূর্ণ একটা অবস্থা খুঁজে বের করা {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
 
-To make the UI interactive, you need to let users change your underlying data model. You will use *state* for this.
+UI interactive করার জন্য আপনাকে ব্যবহারকারীদেরকে ভিতরের ডেটা মডেল পরিবর্তনের সুযোগ দিতে হবে। এর জন্য আপনি *state* ব্যবহার করবেন। 
 
-Think of state as the minimal set of changing data that your app needs to remember. The most important principle for structuring state is to keep it [DRY (Don't Repeat Yourself).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) Figure out the absolute minimal representation of the state your application needs and compute everything else on-demand. For example, if you're building a shopping list, you can store the items as an array in state. If you want to also display the number of items in the list, don't store the number of items as another state value--instead, read the length of your array.
+ধরে নেন state হইল সেই ক্ষুদ্রতম ডেটার সেট যেটার পরিবর্তন আপনার অ্যাপের মনে রাখা প্রয়োজন। State এর গঠনকাঠামো এর ক্ষেত্রে সবচেয়ে জরুরী মূলমন্ত্র হল একে [DRY (Don't Repeat Yourself)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) রাখতে হবে। আপনার অ্যাপ্লিকেশনের একদম ন্যুনতম যে representation দরকার সেটা খুঁজে বের করুন এবং বাকি সব কিছু যখন দরকার সে অনুযায়ী compute করুন। উদাহরণস্বরূপ, আপনি যদি একটা বাজারের তালিকা করেন সেক্ষেত্রে পণ্যগুলো state এর মধ্যে array হিসেবে  রাখতে পারেন। যদি আপনাকে পণ্যের সংখ্যা প্রদর্শন করার দরকার পড়ে, তাহলে সেটা আরেকটা state হিসেবে না রেখে বরং array এর length হিসেব করে বের করুন।
 
-Now think of all of the pieces of data in this example application:
+এখন এই অ্যাপ্লিকেশনের উদাহরণে প্রতিটা তথ্য নিয়ে একটু ভাবুনঃ 
 
-1. The original list of products
-2. The search text the user has entered
-3. The value of the checkbox
-4. The filtered list of products
+1. পণ্যের আসল তালিকা
+2. ব্যবহারকারী পণ্য খুঁজার জন্য যা লিখবে অর্থাৎ সার্চ টেক্সট
+3. চেকবক্সের ভ্যালু
+4. পণ্যের বাছাই করা তালিকা
 
-Which of these are state? Identify the ones that are not:
+এগুলোর মধ্যে কোনগুলো state? যেগুলো state না সেগুলো আগে চিহ্নিত করুনঃ
 
-* Does it **remain unchanged** over time? If so, it isn't state.
-* Is it **passed in from a parent** via props? If so, it isn't state.
-* **Can you compute it** based on existing state or props in your component? If so, it *definitely* isn't state!
+* এটা কি সময়ের সাথে **অপরিবর্তিত থাকে**? যদি থাকে, তাহলে এটা state না।
+* এটা কি props এর মাধ্যমে **parent থেকে পাঠানো হয়**? যদি উত্তর হ্যাঁ হয়, তাহলে এটা state না।
+* এখনকার state এবং props ব্যবহার করে আপনি কি এটা **compute করতে পারেন**? সেক্ষেত্রে, এটা *কোনভাবেই* state না!
 
-What's left is probably state.
+এর পরে যা যা থাকে, তা সম্ভবত state। 
 
-Let's go through them one by one again:
+আমরা একে একে আরেকবার বুঝে নেইঃ
 
-1. The original list of products is **passed in as props, so it's not state.** 
-2. The search text seems to be state since it changes over time and can't be computed from anything.
-3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
-4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+1. পণ্যের আসল তালিকা  **props হিসেবে চলে আসে, সুতরাং এটা state না।** 
+2. খুঁজার জন্য ব্যবহারকারী যে ইনপুট দিবেন সেটা state হবার কথা, কারণ এটা সময়ের সাথে সাথে বদলে যাবে এবং কোন কিছু থেকে এটা compute করা সম্ভব না।
+3. চেকবক্সের ভ্যালুটাও একটা state কারণ এটা সময়ের সাথে সাথে বদলাবে এবং কোনভাবে compute করা সম্ভব না।
+4. পণ্য বাছাই করা তালিকাটি **state না** কারণ চেকবক্সের ভ্যালু এবং পণ্যের তালিকা থেকে সার্চ টেক্সট বাছাই করার মাধ্যমে তা **compute করা সম্ভব**। 
 
-This means only the search text and the value of the checkbox are state! Nicely done!
+অর্থাৎ, শুধুমাত্র সার্চ টেক্সট এবং চেকবক্সের ভ্যালু এই দুইটাই state! কী সুন্দরমত হয়ে গেল!
 
 <DeepDive>
 
