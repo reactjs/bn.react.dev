@@ -4,13 +4,13 @@ title: Add React to an Existing Project
 
 <Intro>
 
-If you want to add some interactivity to your existing project, you don't have to rewrite it in React. Add React to your existing stack, and render interactive React components anywhere.
+আপনি যদি আপনার Existing প্রজেক্ট কিছু ইন্টারেক্টিভিটি যুক্ত করতে চান তবে আপনাকে তা React-এ নতুনভাবে লেখার প্রয়োজন নেই। আপনার Existing স্ট্যাকে React যোগ করুন এবং যে কোনো জায়গায় ইন্টারেক্টিভ React কম্পোনেন্ট  রেন্ডার করুন।
 
 </Intro>
 
 <Note>
 
-**You need to install [Node.js](https://nodejs.org/en/) for local development.** Although you can [try React](/learn/installation#try-react) online or with a simple HTML page, realistically most JavaScript tooling you'll want to use for development requires Node.js.
+**Local  ডেভেলপমেন্ট  জন্য আপনাকে [Node.js](https://nodejs.org/en/) ইনস্টল করতে হবে।** যদিও আপনি একটি সহজ HTML পৃষ্ঠায় বা অনলাইনে [try React](/learn/installation#try-react) করতে পারেন, কিন্তু বাস্তবতানুযায়ী বেশিরভাগ জাভাস্ক্রিপ্ট টুলিং আপনি যেটিই ডেভেলপমেন্ট জন্য ব্যবহার করতে চান তার জন্য Node.js এর প্রয়োজন।
 
 </Note>
 
