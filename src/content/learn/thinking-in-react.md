@@ -460,9 +460,9 @@ function SearchBar({ filterText, inStockOnly }) {
 However, you haven't added any code to respond to the user actions like typing yet. This will be your final step.
 
 
-## Step 5: Add inverse data flow {/*step-5-add-inverse-data-flow*/}
+## ধাপ ৫ঃ inverse data flow যুক্ত করুন {/*step-5-add-inverse-data-flow*/}
 
-Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`. 
+এখন hierarchy-তে props এবং state এর তথ্য সঠিকভাবে নিচের দিকে প্রবাহিত হওয়ায় আপনার অ্যাপ ঠিকঠাক দেখা যাচ্ছে। কিন্তু ব্যবহারকারীর দেওয়া তথ্যের ভিত্তিতে state পরিবর্তন করতে আপনাকে উল্টোটিকে তথ্য প্রবাহের ব্যবস্থা রাখতে হবেঃ hierarchy-র গভীরে থাকা কম্পোনেন্টগুলো দিয়ে `FilterableProductTable` এ থাকা state পরিবর্তন করবে হবে।   
 
 React makes this data flow explicit, but it requires a little more typing than two-way data binding. If you try to type or check the box in the example above, you'll see that React ignores your input. This is intentional. By writing `<input value={filterText} />`, you've set the `value` prop of the `input` to always be equal to the `filterText` state passed in from `FilterableProductTable`. Since `filterText` state is never set, the input never changes.
 
@@ -482,7 +482,7 @@ function FilterableProductTable({ products }) {
         onInStockOnlyChange={setInStockOnly} />
 ```
 
-Inside the `SearchBar`, you will add the `onChange` event handlers and set the parent state from them:
+`SearchBar` এর মধ্যে আপনি `onChange` event handlers যুক্ত করবেন এবং তাদের থেকে parent state ঠিক করবেন।
 
 ```js {5}
 <input 
@@ -492,7 +492,7 @@ Inside the `SearchBar`, you will add the `onChange` event handlers and set the p
   onChange={(e) => onFilterTextChange(e.target.value)} />
 ```
 
-Now the application fully works!
+এখন আপ্লিকেশনটা পুরোপুরি চলছে।
 
 <Sandpack>
 
@@ -642,8 +642,8 @@ td {
 
 </Sandpack>
 
-You can learn all about handling events and updating state in the [Adding Interactivity](/learn/adding-interactivity) section.
+আপনি event handling এবং state আপডেটের খুঁটিনাটি  [Interactivity সংযুক্তি](/learn/adding-interactivity) সেকশন থেকে শিখে নিতে পারবেন।
 
-## Where to go from here {/*where-to-go-from-here*/}
+## এখান থেকে কোথায় যাবেন? {/*where-to-go-from-here*/}
 
-This was a very brief introduction to how to think about building components and applications with React. You can [start a React project](/learn/installation) right now or [dive deeper on all the syntax](/learn/describing-the-ui) used in this tutorial.
+এটা ছিল React দিয়ে কীভাবে কম্পোনেন্ট এবং অ্যাপ্লিকেশন তৈরির বিষয়ে চিন্তা করতে হয় তার একটা সংক্ষেপিত পরিচিতি।  আপনি এখুনি [একটি React প্রজেক্ট শুরু করতে পারেন](/learn/installation) অথবা  এই টিউটোরিয়ালে ব্যবহৃত সকল [syntax নিয়ে গভীরভাবে জানতে পারেন।](/learn/describing-the-ui) 
