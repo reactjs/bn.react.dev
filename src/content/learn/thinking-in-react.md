@@ -254,26 +254,26 @@ Props এবং state আলাদা বটে, তবে এরা একই �
 
 আপনার অ্যাপ্লিকেশনের প্রতিটা অংশের state-এর জন্যঃ
 
-1. Identify *every* component that renders something based on that state.
-2. Find their closest common parent component--a component above them all in the hierarchy.
-3. Decide where the state should live:
-    1. Often, you can put the state directly into their common parent.
-    2. You can also put the state into some component above their common parent.
-    3. If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common parent component.
+1. সেই *প্রতিটি* কম্পোনেন্ট চিহ্নিত করুন যা ওই state এর উপর নির্ভর করে কিছু রেন্ডার করে। 
+2. তাদের সবচেয়ে কাছের সেই কম্পোনেন্ট খুঁজে বের করুন যা তাদের উভয়েরই parent -- একটি কম্পোনেন্ট যা hierarchy তে তাদের সবার উপরে। 
+3. state কোথায় থাকা উচিত সেটা সিদ্ধান্ত নিনঃ
+    1. বেশিরভাগ সময়ে, আপনি তাদের সাধারণ parent এ state রেখে দিতে পারবেন। 
+    2. আপনি তাদের সাধারণ parent এর উপরের কোন কম্পোনেন্টেও state রাখতে পারেন।
+    3. আপনি যদি এমন কোন কম্পোনেন্ট খুঁজে না পান যেখানে state রাখা যুক্তিযুক্ত হবে, তাহলে নতুন একটা কম্পোনেন্ট তৈরি করুন শুধুমাত্র তাদের state রাখবার জন্য এবং hierarchy-তে তাদের সাধারণ parent এর উপরে কোথাও যুক্ত করে দিন। 
 
-In the previous step, you found two pieces of state in this application: the search input text, and the value of the checkbox. In this example, they always appear together, so it makes sense to put them into the same place.
+এর আগের ধাপে অ্যাপ্লিকেশনে আপনি state হবার মত দুটি বিষয় পেয়েছিলেনঃ সার্চের জন্য ইনপুট টেক্সট এবং চেকবক্সের ভ্যালু। এই উদাহরণে, তারা সব সময়ে একই সাথে আসে, তাই তাদেরকে একই জায়গায় রাখাটা যুক্তিযুক্ত হবে।  
 
-Now let's run through our strategy for them:
+এখন তাদের জন্য আমাদের পরিকল্পনা ঝালাই করে নিই। 
 
-1. **Identify components that use state:**
-    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
-    * `SearchBar` needs to display that state (search text and checkbox value).
-1. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
-2. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+1. **state ব্যবহার করে এমন কম্পোনেন্টগুলো চিহ্নিত করুন**
+    * `ProductTable`কে ওই state(সার্চ টেক্সট এবং চেকবক্স) ব্যবহার করে পণ্যের তালিকা বাছাই করতে হবে। 
+    * `SearchBar` কে ওই state(সার্চ টেক্সট এবং চেকবক্স) দেখাতে হবে। 
+1. **তাদের সাধারণ parent খুঁজে বের করুন** প্রথম যেই কম্পোনেন্ট এদের দুজনেরই parent তা হল `FilterableProductTable`।
+2. **State কোথায় থাকবে সেটা সিদ্ধান্ত নিন**: আমরা বাছাই করা text এবং checked state ভ্যালুগুলো  `FilterableProductTable` -তে রাখব। 
 
-So the state values will live in `FilterableProductTable`. 
+সুতরাং state ভ্যালুগুলো থাকবে `FilterableProductTable` এর মধ্যে।
 
-Add state to the component with the [`useState()` Hook.](/reference/react/useState) Hooks are special functions that let you "hook into" React. Add two state variables at the top of `FilterableProductTable` and specify their initial state:
+কম্পোনেন্টে [`useState()` Hook.](/reference/react/useState) ব্যবহার করে state যুক্ত করুন। Hook হচ্ছে বিশেষ ফাংশন যা আপনাকে Reac† এর "মায়ায় হারাতে" বাধ্য করবে। `FilterableProductTable` এর একদম উপরে দুটো state variable যুক্ত করুন এবং তাদের প্রাথমিক state ঠিক করে দিন। 
 
 ```js
 function FilterableProductTable({ products }) {
@@ -437,15 +437,15 @@ td {
 
 </Sandpack>
 
-Notice that editing the form doesn't work yet. There is a console error in the sandbox above explaining why:
+খেয়াল করুন form এর পরিবর্তন এখনো কাজ করে না। উপড়ে স্যান্ডবক্সে আমরা একটা কনসোল এরর দেখতে পাচ্ছি যেটা কারণটা ব্যাখ্যা করে। 
 
 <ConsoleBlock level="error">
 
-You provided a \`value\` prop to a form field without an \`onChange\` handler. This will render a read-only field.
+আপনি \`onChange\` handler নেই এমন একটা ফিল্ডে  \`value\`  prop পাঠিয়েছেন। এটা কেবলমাত্র একটি read-only ফিল্ড রেন্ডার করবে। 
 
 </ConsoleBlock>
 
-In the sandbox above, `ProductTable` and `SearchBar` read the `filterText` and `inStockOnly` props to render the table, the input, and the checkbox. For example, here is how `SearchBar` populates the input value:
+উপরের স্যান্ডবক্সে, টেবিল, ইনপুট এবং চেকবক্স দেখানোর জন্য `ProductTable`এবং `SearchBar` যথাক্রমে `filterText` এবং  `inStockOnly` prop গুলো নজরে রাখে। উদাহরণস্বরূপ, নিচে দেখতে পাবেন কীভাবে `SearchBar` ইনপুটের ভ্যালুগুলোকে সামনে নিয়ে আসে। 
 
 ```js {1,6}
 function SearchBar({ filterText, inStockOnly }) {
@@ -457,7 +457,7 @@ function SearchBar({ filterText, inStockOnly }) {
         placeholder="Search..."/>
 ```
 
-However, you haven't added any code to respond to the user actions like typing yet. This will be your final step.
+কিন্তু আপনি এখনো ব্যবহারকারীর কোন কাজ যেমন টাইপিং এর ফলাফল দেখানোর জন্য কোড লিখেননি। এটা হবে আপনার সর্বশেষ ধাপ।  
 
 
 ## ধাপ ৫ঃ inverse data flow যুক্ত করুন {/*step-5-add-inverse-data-flow*/}
