@@ -26,7 +26,7 @@ npx create-next-app
 
 আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
-[Vercel](https://vercel.com/) Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়।
+Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে [Vercel](https://vercel.com/)। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়।
 
 ### Remix {/*remix*/}
 
@@ -38,7 +38,7 @@ npx create-remix
 
 আপনি যদি Remix এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল Remix [blog tutorial](https://remix.run/docs/en/main/tutorials/blog) (short) এবং [app tutorial](https://remix.run/docs/en/main/tutorials/jokes) (long) দেখতে পারেন।
 
-[Shopify](https://www.shopify.com/), Remix এর রক্ষণাবেক্ষণের কাজ করে থাকে। Remix প্রোজেক্ট তৈরি করার সময় আপনাকে আপনার [deployment target](https://remix.run/docs/en/main/guides/deployment) করে নিতে হবে। একটি [adapter](https://remix.run/docs/en/main/other-api/adapter) লিখে আপনি আপনার Remix অ্যাপ যেকোনো Node.js বা serverless হোস্টিং ব্যাবহার করে deploy করতে পারবেন।
+Remix এর রক্ষণাবেক্ষণের কাজ করে থাকে [Shopify](https://www.shopify.com/)। Remix প্রোজেক্ট তৈরি করার সময় আপনাকে আপনার [deployment target](https://remix.run/docs/en/main/guides/deployment) করে নিতে হবে। একটি [adapter](https://remix.run/docs/en/main/other-api/adapter) লিখে আপনি আপনার Remix অ্যাপ যেকোনো Node.js বা serverless হোস্টিং ব্যাবহার করে deploy করতে পারবেন।
 
 ### Gatsby {/*gatsby*/}
 
@@ -50,7 +50,7 @@ npx create-gatsby
 
 আপনি যদি Gatsby এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Gatsby tutorial](https://www.gatsbyjs.com/docs/tutorial/) দেখতে পারেন।
 
-[Netlify](https://www.netlify.com/), Gatsby এর রক্ষণাবেক্ষণের কাজ করে থাকে। আপনি যেকোন স্ট্যাটিক হোস্টিংয়ে একটি সম্পূর্ণ স্ট্যাটিক Gatsby সাইট deploy করতে পারবেন। আপনি যদি শুধুমাত্র সার্ভারের বৈশিষ্ট্যগুলি ব্যবহার করার বিকল্প বেছে নেন, তাহলে নিশ্চিত করুন যে আপনার হোস্টিংয়ে Gatsby এর জন্য সার্ভারের বৈশিষ্ট্যগুলি আছে।
+Gatsby এর রক্ষণাবেক্ষণের কাজ করে থাকে [Netlify](https://www.netlify.com/)। আপনি যেকোন স্ট্যাটিক হোস্টিংয়ে একটি সম্পূর্ণ স্ট্যাটিক Gatsby সাইট deploy করতে পারবেন। আপনি যদি শুধুমাত্র সার্ভারের বৈশিষ্ট্যগুলি ব্যবহার করার বিকল্প বেছে নেন, তাহলে নিশ্চিত করুন যে আপনার হোস্টিংয়ে Gatsby এর জন্য সার্ভারের বৈশিষ্ট্যগুলি আছে।
 
 ### Expo (নেটিভ অ্যাপের জন্য) {/*expo*/}
 
@@ -63,7 +63,7 @@ npx create-expo-app
 
 আপনি যদি Expo এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Expo tutorial](https://www.gatsbyjs.com/docs/tutorial/) দেখতে পারেন।
 
-[Expo (the company)](https://expo.dev/about) Expo এর রক্ষণাবেক্ষণের কাজ করে থাকে। Expo দিয়ে বিনামূল্যে অ্যাপ তৈরি করতে পারবেন, এবং কোন সীমাবদ্ধতা ছাড়াই আপনি সেগুলিকে Google এবং Apple অ্যাপ স্টোরগুলিতে জমা দিতে পারবেন৷ Expo এছাড়াও অপ্ট-ইন ক্লাউড সার্ভিস প্রদান করে থাকে৷
+Expo এর রক্ষণাবেক্ষণের কাজ করে থাকে [Expo (the company)](https://expo.dev/about)। Expo দিয়ে বিনামূল্যে অ্যাপ তৈরি করতে পারবেন, এবং কোন সীমাবদ্ধতা ছাড়াই আপনি সেগুলিকে Google এবং Apple অ্যাপ স্টোরগুলিতে জমা দিতে পারবেন৷ Expo এছাড়াও অপ্ট-ইন ক্লাউড সার্ভিস প্রদান করে থাকে৷
 
 <DeepDive>
 
