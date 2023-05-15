@@ -4,32 +4,32 @@ title: Escape Hatches
 
 <Intro>
 
-Some of your components may need to control and synchronize with systems outside of React. For example, you might need to focus an input using the browser API, play and pause a video player implemented without React, or connect and listen to messages from a remote server. In this chapter, you'll learn the escape hatches that let you "step outside" React and connect to external systems. Most of your application logic and data flow should not rely on these features.
+আপনার কিছু কম্পোনেন্টের সম্ভবত React এর বাইরের সিস্টেমগুলির সাথে নিয়ন্ত্রণ এবং সিঙ্ক্রোনাইজ করার প্রয়োজন হতে পারে। উদাহরণস্বরূপ, আপনার ব্রাউজার API ব্যবহার করে একটি ইনপুটে ফোকাস করা লাগতে পারে, React ব্যবহার না করে বানানো একটি ভিডিও প্লেয়ার চালু এবং বন্ধ করতে হতে পারে, অথবা একটি রিমোট সার্ভারের সাথে সংযুক্ত হয়ে message listen করতে হতে পারে। এই অধ্যায়ে, আপনি শিখবেন যে escape hatch আপনাকে React থেকে "বাইরে পদক্ষেপ" নিতে এবং বাইরের সিস্টেমগুলির সাথে সংযোগ করতে দেয়। আপনার অ্যাপ্লিকেশনের অধিকাংশ যুক্তি এবং ডাটা ফ্লো এই ফিচারগুলির উপর নির্ভর করা উচিত নয়।
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to "remember" information without re-rendering](/learn/referencing-values-with-refs)
-* [How to access DOM elements managed by React](/learn/manipulating-the-dom-with-refs)
-* [How to synchronize components with external systems](/learn/synchronizing-with-effects)
-* [How to remove unnecessary Effects from your components](/learn/you-might-not-need-an-effect)
-* [How an Effect's lifecycle is different from a component's](/learn/lifecycle-of-reactive-effects)
-* [How to prevent some values from re-triggering Effects](/learn/separating-events-from-effects)
-* [How to make your Effect re-run less often](/learn/removing-effect-dependencies)
-* [How to share logic between components](/learn/reusing-logic-with-custom-hooks)
+* [কীভাবে re-render না করে তথ্য "মনে রাখবেন"](/learn/referencing-values-with-refs)
+* [কীভাবে React এর পরিচালিত DOM এলিমেন্টে ঢুকবেন](/learn/manipulating-the-dom-with-refs)
+* [কীভাবে বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করবেন](/learn/synchronizing-with-effects)
+* [কীভাবে কম্পোনেন্ট থেকে অপ্রয়োজনীয় Effect সরিয়ে ফেলবেন](/learn/you-might-not-need-an-effect)
+* [কীভাবে একটি Effect এর লাইফ সাইকেল একটি কম্পোনেন্টের লাইফ সাইকেল থেকে ভিন্ন](/learn/lifecycle-of-reactive-effects)
+* [কীভাবে কিছু ভ্যালুকে Effects re-triggering করা থেকে বিরত রাখবেন](/learn/separating-events-from-effects)
+* [কীভাবে আপনার Effect গুলোর re-run এর সংখ্যা কমাবেন](/learn/removing-effect-dependencies)
+* [কীভাবে একাধিক কম্পোনেন্টের মধ্যে লজিক ভাগাভাগি করে নেবেন](/learn/reusing-logic-with-custom-hooks)
 
 </YouWillLearn>
 
-## Referencing values with refs {/*referencing-values-with-refs*/}
+## ref এর সাহায্যে value referencing {/*referencing-values-with-refs*/}
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*:
+আপনি যখন একটি কম্পোনেন্টের কিছু তথ্য 'remember' করার চাহিদা অনুভব করেন, কিন্তু আপনি চান না যে ওই তথ্য [নতুন রেন্ডার চালু করুক](/learn/render-and-commit), তখন আপনি *ref* ব্যবহার করতে পারেন:
 
 ```js
 const ref = useRef(0);
 ```
 
-Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not! You can access the current value of that ref through the `ref.current` property.
+state এর মতো, re-render এর ফাঁকে ফাঁকে React ref গুলোকে সংরক্ষণ করে। তবে, state সেট করলে একটি কম্পোনেন্ট re-render হয়। একটি ref পরিবর্তন করলে তা হয় না! আপনি `ref.current` প্রপার্টির মাধ্যমে ওই ref এর বর্তমান মান অ্যাক্সেস করতে পারেন।
 
 <Sandpack>
 
@@ -54,17 +54,17 @@ export default function Counter() {
 
 </Sandpack>
 
-A ref is like a secret pocket of your component that React doesn't track. For example, you can use refs to store [timeout IDs](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM elements](https://developer.mozilla.org/en-US/docs/Web/API/Element), and other objects that don't impact the component's rendering output.
+ref হল আপনার কম্পোনেন্টের এমন একটি গোপন পকেট যেটি React ট্র্যাক করে না। উদাহরণস্বরূপ, আপনি [timeout IDs](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#return_value), [DOM এলিমেন্ট](https://developer.mozilla.org/en-US/docs/Web/API/Element), এবং অন্যান্য অবজেক্ট সংরক্ষণ করার জন্য ref ব্যবহার করতে পারেন, যা কম্পোনেন্টের রেন্ডারিং আউটপুটে প্রভাব ফেলে না।
 
 <LearnMore path="/learn/referencing-values-with-refs">
 
-Read **[Referencing Values with Refs](/learn/referencing-values-with-refs)** to learn how to use refs to remember information.
+তথ্য মনে রাখার খাতিরে ref ব্যবহার করা শিখতে পড়ুন **[Referencing Values with Refs](/learn/referencing-values-with-refs)**।
 
 </LearnMore>
 
-## Manipulating the DOM with refs {/*manipulating-the-dom-with-refs*/}
+## ref ব্যবহার করে DOM এর পরিবর্তন {/*manipulating-the-dom-with-refs*/}
 
-React automatically updates the DOM to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React—for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a ref to the DOM node. For example, clicking the button will focus the input using a ref:
+React স্বয়ংক্রিয়ভাবে আপনার রেন্ডার আউটপুটের সাথে মিলিয়ে DOM আপডেট করে, তাই আপনার কম্পোনেন্টগুলোর প্রায়শই এটি পরিবর্তন করার দরকার হয় না। তবে, মাঝে মাঝে আপনার DOM এলিমেন্টগুলোতে অ্যাক্সেস প্রয়োজন হতে পারে যা React দ্বারা পরিচালিত—উদাহরণস্বরূপ, একটি নোডে ফোকাস করা, এটিতে স্ক্রল করা, অথবা এর আকার এবং অবস্থান মাপা। React এ এরকম কিছু করার জন্য কোনো বিল্ট-ইন উপায় নেই, তাই আপনার DOM নোডের জন্য একটি ref প্রয়োজন হবে। উদাহরণস্বরূপ, বাটনটি ক্লিক করলে একটি ref ব্যবহার করে ইনপুটে ফোকাস হবে:
 
 <Sandpack>
 
@@ -93,15 +93,15 @@ export default function Form() {
 
 <LearnMore path="/learn/manipulating-the-dom-with-refs">
 
-Read **[Manipulating the DOM with Refs](/learn/manipulating-the-dom-with-refs)** to learn how to access DOM elements managed by React.
+React পরিচালিত DOM এলিমেন্টে অ্যাক্সেস নেওয়া শিখতে পড়ুন **[Manipulating the DOM with Refs](/learn/manipulating-the-dom-with-refs)**।
 
 </LearnMore>
 
-## Synchronizing with Effects {/*synchronizing-with-effects*/}
+## Effect এর সাথে সিঙ্ক্রোনাইজেসন {/*synchronizing-with-effects*/}
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. Unlike event handlers, which let you handle particular events, *Effects* let you run some code after rendering. Use them to synchronize your component with a system outside of React.
+কিছু কম্পোনেন্টের বাইরের সিস্টেমগুলোর সাথে সিঙ্ক্রোনাইজ করার প্রয়োজন হতে পারে। উদাহরণস্বরূপ, হতে পারে আপনি React state এর উপর ভিত্তি করে একটি non-React কম্পোনেন্ট নিয়ন্ত্রণ করতে চান, অথবা চান একটি সার্ভার সংযোগ সেট আপ করতে, অথবা একটি কম্পোনেন্ট স্ক্রিনে প্রদর্শিত হলে একটি এনালিটিক্স লগ পাঠাতে চাইতে পারেন। যেখানে event handler আপনাকে নির্দিষ্ট event পরিচালনা করতে দেয়, Effects রেন্ডারিং এর পরে কিছু কোড চালাতে দেয়। আপনার কম্পোনেন্টকে React এর বাইরের একটি সিস্টেমের সাথে সিঙ্ক্রোনাইজ করার জন্য Effects ব্যবহার করুন।
 
-Press Play/Pause a few times and see how the video player stays synchronized to the `isPlaying` prop value:
+কয়েকবার Play/Pause এ চাপ দিন এবং খেয়াল করুন কীভাবে ভিডিও প্লেয়ার `isPlaying` prop এর সাথে সিঙ্ক্রোনাইজড  থাকছে।
 
 <Sandpack>
 
