@@ -76,11 +76,11 @@ export default function MyApp() {
 
 এই `export default` কীওয়ার্ডস নির্দিষ্ট করে দেয় যে কোনটি ফাইলের প্রধান কম্পোনেন্ট। আপনি যদি জাভাস্ক্রিপ্ট সিনট্যাক্সের কিছু অংশের সাথে পরিচিত না হন, [MDN](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) এবং [javascript.info](https://javascript.info/import-export) এর মধ্যে চমৎকার রেফারেন্স আছে পরিচিত হবার।
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## JSX দিয়ে মার্কআপ লেখা {/*writing-markup-with-jsx*/}
 
-The markup syntax you've seen above is called *JSX*. It is optional, but most React projects use JSX for its convenience. All of the [tools we recommend for local development](/learn/installation) support JSX out of the box.
+আপনি উপরে যে মার্কআপ সিনট্যাক্সটি দেখেছেন তাকে বলা হয় *JSX*। এটি ঐচ্ছিক, তবে বেশিরভাগ React প্রজেক্ট গুলিতে সুবিধার জন্য JSX ব্যবহার করা হয়। [লোকাল ডেভেলপমেন্টের জন্য আমরা যে সমস্ত টুলের পরামর্শ দিই](/learn/installation) সেগুলির সবকটিই JSX সমর্থন করে।
 
-JSX is stricter than HTML. You have to close tags like `<br />`. Your component also can't return multiple JSX tags. You have to wrap them into a shared parent, like a `<div>...</div>` or an empty `<>...</>` wrapper:
+JSX HTML এর চেয়ে বেশি স্ট্রিক্ট। আপনাকে `<br />` এর মত ট্যাগ বন্ধ করতে হবে। আপনার কম্পোনেন্ট একাধিক JSX ট্যাগ রিটার্ন করতে পারবে না। সেগুলিকে একটি parent div এর মধ্যে মোড়াতে হবে, যেমন একটি `<div>...</div>` বা একটি খালি `<>...</>` মোড়ক:
 
 ```js {3,6}
 function AboutPage() {
@@ -93,7 +93,7 @@ function AboutPage() {
 }
 ```
 
-If you have a lot of HTML to port to JSX, you can use an [online converter.](https://transform.tools/html-to-jsx)
+JSX এ পোর্ট করার জন্য আপনার যদি অনেকগুলো HTML থাকে, আপনি একটি [অনলাইন কনভার্টার](https://transform.tools/html-to-jsx) ব্যবহার করতে পারেন।
 
 ## Adding styles {/*adding-styles*/}
 
