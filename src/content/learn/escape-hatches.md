@@ -145,7 +145,8 @@ video { width: 250px; }
 
 </Sandpack>
 
-Many Effects also "clean up" after themselves. For example, an Effect that sets up a connection to a chat server should return a *cleanup function* that tells React how to disconnect your component from that server:
+
+অনেক Effects নিজেদের "clean up" নিজেরাই করে নেয়। উদাহরণস্বরূপ, একটি চ্যাট সার্ভারের সাথে সংযোগ স্থাপন করা Effect এর উচিত একটি *cleanup function* ফেরত দেওয়া যা React কে বলে দিবে আপনার কম্পোনেন্টকে সেই সার্ভার থেকে সংযোগ বিচ্ছিন্ন করতে।
 
 <Sandpack>
 
@@ -184,6 +185,7 @@ input { display: block; margin-bottom: 20px; }
 </Sandpack>
 
 In development, React will immediately run and clean up your Effect one extra time. This is why you see `"✅ Connecting..."` printed twice. This ensures that you don't forget to implement the cleanup function.
+ডেভেলপমেন্টে, React আপনার Effect টি তাৎক্ষণিকভাবে চালাবে এবং একবার অতিরিক্ত পরিষ্কার করবে। এই কারণেই আপনি "✅ Connecting..."  দুবার। এটি নিশ্চিত করে যে আপনি cleanup function বাস্তবায়ন করতে ভুলবেন না।
 
 <LearnMore path="/learn/synchronizing-with-effects">
 
@@ -448,7 +450,7 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-This is not ideal. You want to re-connect to the chat only if the `roomId` has changed. Switching the `theme` shouldn't re-connect to the chat! Move the code reading `theme` out of your Effect into an *Effect Event*:
+এটি আদর্শ নয়। আপনি কেবলমাত্র `roomId` পরিবর্তিত হলে চ্যাটে পুনরায় সংযোগ করতে চান। `theme` পরিবর্তন করা হলেই চ্যাটে পুনরায় সংযোগ করা উচিত নয়! আপনার Effect থেকে theme read করার কোডটি একটি *Effect Event* এ সরিয়ে নিন:
 
 <Sandpack>
 
