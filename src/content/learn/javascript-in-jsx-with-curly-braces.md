@@ -17,11 +17,9 @@ JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering 
 
 </YouWillLearn>
 
-## quotes সাথে strings পাসিং {/*passing-strings-with-quotes*/}
-## Passing strings with quotes {/*passing-strings-with-quotes*/}
+## quotes এর সাথে strings পাসিং {/*passing-strings-with-quotes*/}
 
-আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, আপনি এটিকে single বা double quotes রাখেন:
-When you want to pass a string attribute to JSX, you put it in single or double quotes:
+আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, আপনাকে এটি single বা double quotes রাখতে হবে:
 
 <Sandpack>
 
