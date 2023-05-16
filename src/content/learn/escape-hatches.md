@@ -184,16 +184,15 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-In development, React will immediately run and clean up your Effect one extra time. This is why you see `"✅ Connecting..."` printed twice. This ensures that you don't forget to implement the cleanup function.
-ডেভেলপমেন্টে, React আপনার Effect টি তাৎক্ষণিকভাবে চালাবে এবং একবার অতিরিক্ত পরিষ্কার করবে। এই কারণেই আপনি "✅ Connecting..."  দুবার। এটি নিশ্চিত করে যে আপনি cleanup function বাস্তবায়ন করতে ভুলবেন না।
+ডেভেলপমেন্টে, React আপনার Effect টি তাৎক্ষণিকভাবে চালাবে এবং একবার অতিরিক্ত clean up করবে। এই কারণেই আপনি "✅ Connecting..."  দুবার দেখবেন। এটি নিশ্চিত করে যে আপনি cleanup function বাস্তবায়ন করতে ভুলছেন না।
 
 <LearnMore path="/learn/synchronizing-with-effects">
 
-Read **[Synchronizing with Effects](/learn/synchronizing-with-effects)** to learn how to synchronize components with external systems.
+বাইরের সিস্টেমগুলির সাথে কম্পোনেন্টগুলি সিঙ্ক্রোনাইজ করা শিখতে **[Effects এর সাথে সিঙ্ক্রোনাইজেশন](/learn/synchronizing-with-effects)** পড়ুন।
 
 </LearnMore>
 
-## You Might Not Need An Effect {/*you-might-not-need-an-effect*/}
+## আপনার Effect এর প্রয়োজন নাও পড়তে পারে {/*you-might-not-need-an-effect*/}
 
 Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
 
@@ -202,6 +201,9 @@ There are two common cases in which you don't need Effects:
 - **You don't need Effects to handle user events.**
 
 For example, you don't need an Effect to adjust some state based on other state:
+
+Effect হল React এর জগত থেকে একটি escape hatch। এটি আপনাকে "React এর বাইরে পদক্ষেপ" নিতে দেয় এবং সাথে আপনার কম্পোনেন্টগুলিকে কিছু বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতেও দেয়। যদি কোনো বাইরের সিস্টেম জড়িত না থাকে (উদাহরণস্বরূপ, আপনি যদি কিছু props অথবা state পরিবর্তন হলে একটি কম্পোনেন্টের state আপডেট করতে চান), তব
+
 
 ```js {5-9}
 function Form() {
