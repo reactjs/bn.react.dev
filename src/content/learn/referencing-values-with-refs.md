@@ -172,7 +172,7 @@ export default function Stopwatch() {
 
 ## ref এবং state এর মধ্যকার পার্থক্য {/*differences-between-refs-and-state*/}
 
-হয়তো আপনি মনে করছেন ref, state এর তুলনায় কম "কঠোর" - উদাহরণস্বরূপ, আপনি এগুলোকে পরিবর্তন করতে পারেন যেখানে state-এর ক্ষেত্রে সর্বদা state সেটিং ফাংশন ব্যবহার করার প্রয়োজন। কিন্তু বেশিরভাগ ক্ষেত্রে, আপনি state-ই ব্যবহার করতে চাইবেন। Ref গুলো একটি "escape hatch" যা আপনার খুব একটা প্রয়োজন হবে না। এখানে state এবং ref এর তুলনা কিভাবে হয় তা দেখুন:
+হয়তো আপনি মনে করছেন ref, state এর তুলনায় কম "কঠোর" - উদাহরণস্বরূপ, আপনি এগুলোকে পরিবর্তন করতে পারেন যেখানে state-এর ক্ষেত্রে সর্বদা state সেটিং ফাংশন ব্যবহার করার প্রয়োজন। কিন্তু বেশিরভাগ ক্ষেত্রে, আপনি state-ই ব্যবহার করতে চাইবেন। Ref গুলো একটি "escape hatch" যা আপনার খুব একটা প্রয়োজন হবে না। এখানে state এবং ref এর তুলনা কিভাবে হয় তা দেখুনঃ
 
 | refs                                                                                  | state                                                                                                                     |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -238,7 +238,7 @@ export default function Counter() {
 
 #### useRef ভিতরে ভিতরে কীভাবে কাজ করে? {/*how-does-use-ref-work-inside*/}
 
-Although both `useState` and `useRef` are provided by React, in principle `useRef` could be implemented _on top of_ `useState`. You can imagine that inside of React, `useRef` is implemented like this:
+যদিও `useState` এবং `useRef` উভয়ই React দেয়, মূলত `useRef`,  `useState` এর _উপরে_ ব্যবহার করা যেতে পারে। আপনি কল্পনা করতে পারেন যে React এর মধ্যে, `useRef` এর বাস্তবায়ন এরকমঃ
 
 ```js
 // Inside of React
@@ -248,30 +248,30 @@ function useRef(initialValue) {
 }
 ```
 
-During the first render, `useRef` returns `{ current: initialValue }`. This object is stored by React, so during the next render the same object will be returned. Note how the state setter is unused in this example. It is unnecessary because `useRef` always needs to return the same object!
+প্রথম রেন্ডারের সময় `useRef` রিটার্ন করে `{ current: initialValue }`। এই অবজেক্টটি React সংরক্ষণ করে, সুতরাং পরবর্তী রেন্ডারের সময় একই অবজেক্টটি return করে। লক্ষ্য করুন যে এই উদাহরণে state setter ব্যবহার করা হয়নি। এটি অপ্রয়োজনীয় কারণ `useRef` এর সর্বদা একই অবজেক্ট ফিরিয়ে দেওয়া প্রয়োজন!
 
-React provides a built-in version of `useRef` because it is common enough in practice. But you can think of it as a regular state variable without a setter. If you're familiar with object-oriented programming, refs might remind you of instance fields--but instead of `this.something` you write `somethingRef.current`.
+React একটি built-in `useRef` দেয় কারণ সাধারণত এর ব্যবহার বেশ ভালই হয়। কিন্তু আপনি এটিকে একটি সাধারণ state ভেরিয়েবল হিসাবে চিন্তা করতে পারেন যার কোনও সেটার নেই। যদি আপনি object-oriented programming এর সাথে পরিচিত হন, তাহলে ref আপনাকে instance fields এর কথা মনে করিয়ে দিতে পারে -- কিন্তু `this.something` এর পরিবর্তে আপনি এক্ষেত্রে `somethingRef.current` লিখছেন।
 
 </DeepDive>
 
-## When to use refs {/*when-to-use-refs*/}
+## কখন ref ব্যবহার করবেন {/*when-to-use-refs*/}
 
-Typically, you will use a ref when your component needs to "step outside" React and communicate with external APIs—often a browser API that won't impact the appearance of the component. Here are a few of these rare situations:
+সাধারণত, আপনি একটি ref ব্যবহার করবেন যখন আপনার component এর React এর বাইরে "পা রাখতে হবে" এবং বাইরের API এর সাথে যোগাযোগ করতে হবে - প্রায়শই এটা হবে একটি ব্রাউজার API যা কম্পোনেন্টের চেহারার উপর প্রভাব ফেলবে না। এখানে কিছু পরিস্থিতির উদাহরণ দেওয়া হচ্ছে যা্র দেখা খুব হঠাতই হয়ত মিলবেঃ
 
-- Storing [timeout IDs](https://developer.mozilla.org/docs/Web/API/setTimeout)
-- Storing and manipulating [DOM elements](https://developer.mozilla.org/docs/Web/API/Element), which we cover on [the next page](/learn/manipulating-the-dom-with-refs)
-- Storing other objects that aren't necessary to calculate the JSX.
+- [timeout IDs](https://developer.mozilla.org/docs/Web/API/setTimeout) store করতে।
+- [DOM elements](https://developer.mozilla.org/docs/Web/API/Element) store করা এবং সেখানে পরিবর্তন আনা, এটা আমরা [পরের পাতায়](/learn/manipulating-the-dom-with-refs) বর্ণনা করেছি।
+- অন্যান্য অব্জেক্ট store করা যা JSX হিসেব করতে প্রয়োজন পড়ে না।
 
-If your component needs to store some value, but it doesn't impact the rendering logic, choose refs.
+যদি আপনার কম্পোনেন্টে কোন মান store করার দরকার পড়ে, এবং এটা রেন্ডার করার হিসেবে কোন প্রভাব না ফেলে তবে ref ব্যবহার করুন।
 
-## Best practices for refs {/*best-practices-for-refs*/}
+## ref ব্যবহারের ক্ষেত্রে যা যা মেনে চলা ভাল {/*best-practices-for-refs*/}
 
-Following these principles will make your components more predictable:
+নিম্নোক্ত মূলনীতিগুলো মাথায় রাখলে আপনার কম্পোনেন্টগুলো আরো বেশি নির্ভরযোগ্য আচরণ করবেঃ
 
-- **Treat refs as an escape hatch.** Refs are useful when you work with external systems or browser APIs. If much of your application logic and data flow relies on refs, you might want to rethink your approach.
-- **Don't read or write `ref.current` during rendering.** If some information is needed during rendering, use [state](/learn/state-a-components-memory) instead. Since React doesn't know when `ref.current` changes, even reading it while rendering makes your component's behavior difficult to predict. (The only exception to this is code like `if (!ref.current) ref.current = new Thing()` which only sets the ref once during the first render.)
+- **ref কে escape hatch হিসেবে ব্যবহার করুন।** যখন আপনি বাইরের কোন সিস্টেম বা ব্রাউজার API ব্যবহার করছেন তখন ref বেশ কাজের। যদি আপনার অ্যাপ্লিকেশনের বেশিরভাগ লজিক এবং ডেটা প্রবার ref এর উপর নির্ভরশীল হয় তবে আপনার উচিত আপনার আগানোর প্রক্রিয়া নিয়ে আবার ভাবা।
+- **রেন্ডারিং এর সময় `ref.current` read বা write করবেন না।** যদি রেন্ডারিং এর সময় কোন তথ্যের প্রয়োজন পড়ে, তখন বরঞ্চ [state](/learn/state-a-components-memory) ব্যবহার করুন। যেহেতু React জানে না কখন `ref.current` বদলায়, রেন্ডারিং এর সময়ে একে এমনকি read করতে গেলেও আপনার কম্পোনেন্টের আচার আচরণ বোঝা কঠিন হয়ে যাবে। ( এর একমাত্র ব্যতিক্রম হবে তখন যখন আপনি `if (!ref.current) ref.current = new Thing()` এভাবে কোড করছেন, যা একদম প্রথম রেন্ডারের সময়ে ref সেট করে। )
 
-Limitations of React state don't apply to refs. For example, state acts like a [snapshot for every render](/learn/state-as-a-snapshot) and [doesn't update synchronously.](/learn/queueing-a-series-of-state-updates) But when you mutate the current value of a ref, it changes immediately:
+React state এর যে সীমাবদ্ধতা তা ref এর নেই। উদাহরণস্বরূপ, state [প্রতিটি রেন্ডারের একটি স্ন্যাপশটের](/learn/state-as-a-snapshot) মত কাজ করে এবং [synchronously আপডেট করে না।](/learn/queueing-a-series-of-state-updates) কিন্তু আপনি যখন একটি ref এর বর্তমান মান পরিবর্তন করেন, তখন তা সাথে সাথে পরিবর্তিত হয়।
 
 ```js
 ref.current = 5;
