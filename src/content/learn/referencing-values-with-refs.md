@@ -278,22 +278,22 @@ ref.current = 5;
 console.log(ref.current); // 5
 ```
 
-This is because **the ref itself is a regular JavaScript object,** and so it behaves like one.
+এর কারণ **ref নিজেই একটি সাধারণ জাভাস্ক্রিপ্ট অব্জেক্ট,** তাই এটা তেমনই আচরণ করে।
 
-You also don't need to worry about [avoiding mutation](/learn/updating-objects-in-state) when you work with a ref. As long as the object you're mutating isn't used for rendering, React doesn't care what you do with the ref or its contents.
+যখন আপনি ref নিয়ে কাজ করবেন আপনাকে  [mutation এড়ানো](/learn/updating-objects-in-state) নিয়েও দুশ্চিন্তা করতে হবে না। যতক্ষণ পর্যন্ত আপনি যেই অব্জেক্ট mutate করছেন সেটা রেন্ডারিং এ ব্যবহৃত হচ্ছে, ততক্ষণ আপনি ref বা এর content নিয়ে কী করছেন তা নিয়ে React পরোয়া করবে না।
 
-## Refs and the DOM {/*refs-and-the-dom*/}
+## Ref এবং DOM {/*refs-and-the-dom*/}
 
-You can point a ref to any value. However, the most common use case for a ref is to access a DOM element. For example, this is handy if you want to focus an input programmatically. When you pass a ref to a `ref` attribute in JSX, like `<div ref={myRef}>`, React will put the corresponding DOM element into `myRef.current`. You can read more about this in [Manipulating the DOM with Refs.](/learn/manipulating-the-dom-with-refs)
+আপনি যে কোনও মানের জন্য একটি ref নির্দেশ করতে পারেন। যদিও, একটি ref ব্যবহার করার সবচেয়ে সাধারণ ক্ষেত্র হল DOM element অ্যাক্সেস করা। উদাহরণস্বরূপ, এটি কাজে লাগে যদি আপনি একটি input কে প্রোগ্রামের মাধ্যমে focus করতে চান। যখন আপনি JSX এ একটি `ref` attribute-এ একটি ref pass করেন, যেমন <div ref={myRef}>, React `myRef.current` এ সংশ্লিষ্ট DOM element রাখবে। আপনি এই বিষয়ে আরও পড়তে পারেন [ref এর সাহায্যে DOM manipulation](/learn/manipulating-the-dom-with-refs) অংশে।
 
 <Recap>
 
-- Refs are an escape hatch to hold onto values that aren't used for rendering. You won't need them often.
-- A ref is a plain JavaScript object with a single property called `current`, which you can read or set.
-- You can ask React to give you a ref by calling the `useRef` Hook.
-- Like state, refs let you retain information between re-renders of a component.
-- Unlike state, setting the ref's `current` value does not trigger a re-render.
-- Don't read or write `ref.current` during rendering. This makes your component hard to predict.
+- Ref একটি escape hatch যা রেন্ডারিং এর জন্য ব্যবহৃত না হওয়া মানগুলি ধরে রাখতে সাহায্য করে। আপনার একে খুব একটা প্রয়োজন পড়বে না।
+- একটি ref হল একটি সাধারণ জাভাস্ক্রিপ্ট অব্জেক্ট যার একটি মাত্র property `current` রয়েছে। এটা আপনি read করতে বা সেট করতে পারেন।
+- আপনি  `useRef` Hook কল করার মাধ্যমে React এর কাছ থেকে একটি ref চাইতে পারেন।
+- State এর মত, ref re-render এর মধ্যবর্তী সময়ে তথ্য সংরক্ষণ করার সুযোগ দেয়।
+- State এর বিপরীতে, ref এর  `current` মান সেট করা হলে re-render ট্রিগার হয় না।
+- রেন্ডারিং এর সময়ে `ref.current` read বা write করবেন না। এতে আপনার কম্পোনেন্টের গতিবিধি বোঝা কঠিন হয়ে যায়।
 
 </Recap>
 
@@ -301,13 +301,13 @@ You can point a ref to any value. However, the most common use case for a ref is
 
 <Challenges>
 
-#### Fix a broken chat input {/*fix-a-broken-chat-input*/}
+#### অকার্যকর একটি চ্যাট ইনপুট ঠিক করুন {/*fix-a-broken-chat-input*/}
 
-Type a message and click "Send". You will notice there is a three second delay before you see the "Sent!" alert. During this delay, you can see an "Undo" button. Click it. This "Undo" button is supposed to stop the "Sent!" message from appearing. It does this by calling [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) for the timeout ID saved during `handleSend`. However, even after "Undo" is clicked, the "Sent!" message still appears. Find why it doesn't work, and fix it.
+একটি বার্তা লিখুন এবং "Send" ক্লিক করুন। আপনি লক্ষ্য করবেন যে "Sent!" এলার্ট দেখার আগে একটি তিন সেকেন্ডের বিলম্ব রয়েছে। এই বিলম্বের সময়, আপনি একটি "Undo" বাটন দেখতে পারবেন। এটি ক্লিক করুন। এই "Undo" বাটনটি "Sent!" এলার্ট সামনে আসতে বাধা দেবার কথা। সে এটা করে `handleSend` এর সময়ে সেইভ হওয়া timeout ID এর জন্য [`clearTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout) কল করার মাধ্যমে। তবে, "Undo" ক্লিক করার পরেও, "Sent!" লেখাটা এখনও সামনে আসছে। কেন এটি কাজ করছে না তা খুঁজে বের করুন এবং ঠিক করুন।
 
 <Hint>
 
-Regular variables like `let timeoutID` don't "survive" between re-renders because every render runs your component (and initializes its variables) from scratch. Should you keep the timeout ID somewhere else?
+`let timeoutID` এর মত সাধারণ ভ্যারিয়েবল re-render এর মধ্যবর্তী সময়ে "বেঁচে থাকতে পারে না, কারণ প্রতিটা রেন্ডার আপনার কম্পোনেন্টকে একদম শুরু থেকে run করে (এবং এর ভ্য্যারিয়েবলগুলো initialize করে)। আপনার কি তাহলে timeout ID অন্য কোথাও রাখা উচিত?" 
 
 </Hint>
 
@@ -360,7 +360,7 @@ export default function Chat() {
 
 <Solution>
 
-Whenever your component re-renders (such as when you set state), all local variables get initialized from scratch. This is why you can't save the timeout ID in a local variable like `timeoutID` and then expect another event handler to "see" it in the future. Instead, store it in a ref, which React will preserve between renders.
+যখনই আপনার কম্পোনেন্ট re-render হয় (যেমন যখন আপনি state set করেন), সকল local ভ্যারিয়েবল একদম শুরু থেকে initialized হয়। এ কারণেই আপনি `timeoutID`এর মত একটা local ভ্যারিয়েবলে timeout ID রেখে এটা আশা করতে পারবেন না যে অন্য একটা event handler এটাকে ভবিষ্যতে "দেখবে"। বরং, একে একটা ref এ রাখেন, যা React রেন্ডার এর মধ্যবর্তী সময়ে সংরক্ষিত রাখবে।
 
 <Sandpack>
 
@@ -412,9 +412,9 @@ export default function Chat() {
 </Solution>
 
 
-#### Fix a component failing to re-render {/*fix-a-component-failing-to-re-render*/}
+#### Re-render করতে পারছে না এমন একটি কম্পোনেন্ট ঠিক করুন {/*fix-a-component-failing-to-re-render*/}
 
-This button is supposed to toggle between showing "On" and "Off". However, it always shows "Off". What is wrong with this code? Fix it.
+এই বাটনটির "On" এবং "Off" এর মধ্যে toggle করার কথা। তবে, এটা সব সময়ই "Off" দেখায়। এই কোডের সমস্যাটা কী? এটা ঠিক করুন।
 
 <Sandpack>
 
@@ -438,7 +438,7 @@ export default function Toggle() {
 
 <Solution>
 
-In this example, the current value of a ref is used to calculate the rendering output: `{isOnRef.current ? 'On' : 'Off'}`. This is a sign that this information should not be in a ref, and should have instead been put in state. To fix it, remove the ref and use state instead:
+এই উদাহরণে, একটি ref এর বর্তমান মান রেন্ডারিং আউটপুট হিসেব করতে ব্যবহৃত হয়েছেঃ `{isOnRef.current ? 'On' : 'Off'}`। এটি একটি ইঙ্গিত যে এই তথ্যটি একটি ref এ থাকা উচিত ছিল না এবং এর পরিবর্তে state-এ রাখা উচিত ছিল। এটি ঠিক করার জন্য, ref টি সরান এবং এর পরিবর্তে state ব্যবহার করুনঃ
 
 <Sandpack>
 
@@ -462,7 +462,7 @@ export default function Toggle() {
 
 </Solution>
 
-#### Fix debouncing {/*fix-debouncing*/}
+#### Debouncing ঠিক করুন {/*fix-debouncing*/}
 
 In this example, all button click handlers are ["debounced".](https://redd.one/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
 
