@@ -121,7 +121,7 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When the "Stop" button is pressed, you need to cancel the existing interval so that it stops updating the `now` state variable. You can do this by calling [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval), but you need to give it the interval ID that was previously returned by the `setInterval` call when the user pressed Start. You need to keep the interval ID somewhere. **Since the interval ID is not used for rendering, you can keep it in a ref:**
+"Stop" বোতাম চাপা হলে, আপনাকে বিদ্যমান interval বাতিল করতে হবে যাতে এটি state ভেরিয়েবল `now` আপডেট করা বন্ধ করে। আপনি এটি [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) কল করে করতে পারেন, কিন্তু আপনাকে এটিকে সেই interval ID দিতে হবে যা ব্যবহারকারী Start চাপলে পূর্বে `setInterval` কল থেকে return পাওয়া গিয়েছিল। আপনাকে interval ID-টি কোথাও রাখতে হবে। **যেহেতু interval ID রেন্ডারিং এর জন্য ব্যবহৃত হয় না, আপনি এটিকে একটি ref এ রাখতে পারেন:**
 
 <Sandpack>
 
@@ -168,20 +168,20 @@ export default function Stopwatch() {
 
 </Sandpack>
 
-When a piece of information is used for rendering, keep it in state. When a piece of information is only needed by event handlers and changing it doesn't require a re-render, using a ref may be more efficient.
+রেন্ডারিং এর জন্য একটি তথ্য ব্যবহার করা হলে, এটি state এ রাখুন। যখন কোন তথ্য কেবলমাত্র event handler-গুলি দ্বারা প্রয়োজন হয় এবং এর পরিবর্তনে পুনরায় রেন্ডার করা প্রয়োজন হয় না, সেক্ষেত্রে ref ব্যবহার করা অধিক কার্যকর হতে পারে।
 
-## Differences between refs and state {/*differences-between-refs-and-state*/}
+## ref এবং state এর মধ্যকার পার্থক্য {/*differences-between-refs-and-state*/}
 
-Perhaps you're thinking refs seem less "strict" than state—you can mutate them instead of always having to use a state setting function, for instance. But in most cases, you'll want to use state. Refs are an "escape hatch" you won't need often. Here's how state and refs compare:
+হয়তো আপনি মনে করছেন ref, state এর তুলনায় কম "কঠোর" - উদাহরণস্বরূপ, আপনি এগুলোকে পরিবর্তন করতে পারেন যেখানে state-এর ক্ষেত্রে সর্বদা state সেটিং ফাংশন ব্যবহার করার প্রয়োজন। কিন্তু বেশিরভাগ ক্ষেত্রে, আপনি state-ই ব্যবহার করতে চাইবেন। Ref গুলো একটি "escape hatch" যা আপনার খুব একটা প্রয়োজন হবে না। এখানে state এবং ref এর তুলনা কিভাবে হয় তা দেখুন:
 
 | refs                                                                                  | state                                                                                                                     |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `useRef(initialValue)` returns `{ current: initialValue }`                            | `useState(initialValue)` returns the current value of a state variable and a state setter function ( `[value, setValue]`) |
-| Doesn't trigger re-render when you change it.                                         | Triggers re-render when you change it.                                                                                    |
-| Mutable—you can modify and update `current`'s value outside of the rendering process. | "Immutable"—you must use the state setting function to modify state variables to queue a re-render.                       |
-| You shouldn't read (or write) the `current` value during rendering. | You can read state at any time. However, each render has its own [snapshot](/learn/state-as-a-snapshot) of state which does not change.
+| `useRef(initialValue)` রিটার্ন করে `{ current: initialValue }`                            | `useState(initialValue)` রিটার্ন করে একটি stat variable এর বর্তমান মান এবং একটি state setter function ( `[value, setValue]`) |
+|  যখন আপনি এর পরিবর্তন করেন, re-render trigger করে না।                                   | এর পরিবর্তন করা হলে re-render trigger করে                                                                                    |
+| পরিবর্তনযোগ্য—রেন্ডারিং প্রক্রিয়ার বাইরে আপনি `current` এর মান পরিবর্তন করে আপডেট করতে পারবেন।| "পরিবর্তনযোগ্য নয়"—একটা re-render, queue এ ঢুকানোর জন্য আপনাকে অবশ্যই state setting function ব্যবহার করে state variable পরিবর্তন করতে হবে।                       |
+| রেন্ডারিং এর সময় `current` এর মান আপনার read বা write করা উচিত নয়। | আপনি যেকোন সময়ে state read করতে পারেন। কিন্তু প্রতি রেন্ডারের নিজের state এর [snapshot](/learn/state-as-a-snapshot) আছে যা বদলায় না।
 
-Here is a counter button that's implemented with state:
+এখানে state ব্যবহার করে বানানো একটি counter বাটন দেখুনঃ
 
 <Sandpack>
 
@@ -205,9 +205,9 @@ export default function Counter() {
 
 </Sandpack>
 
-Because the `count` value is displayed, it makes sense to use a state value for it. When the counter's value is set with `setCount()`, React re-renders the component and the screen updates to reflect the new count.
+যেহেতু `count` এর মানটি দেখানো হয়, এর জন্য একটি state মান ব্যবহার করা যুক্তিযুক্ত। যখন counter-এর মানটি `setCount()` দিয়ে সেট করা হয়, React কম্পোনেন্টটি পুনরায় রেন্ডার করে এবং স্ক্রিন নতুন কাউন্ট দেখানোর জন্য আপডেট হয়।
 
-If you tried to implement this with a ref, React would never re-render the component, so you'd never see the count change! See how clicking this button **does not update its text**:
+যদি আপনি এটি ref দিয়ে বানানোর করার চেষ্টা করতেন, তাহলে React কখনই কম্পোনেন্টটি পুনরায় রেন্ডার করত না, তাই আপনি কখনই কাউন্টের পরিবর্তন দেখতেন না! দেখুন এই বাটনে ক্লিক করলে কীভাবে এর **টেক্সট আপডেট হয় নাঃ**
 
 <Sandpack>
 
@@ -232,11 +232,11 @@ export default function Counter() {
 
 </Sandpack>
 
-This is why reading `ref.current` during render leads to unreliable code. If you need that, use state instead.
+এ কারণেই রেন্ডারের সময় `ref.current` read করলে সেটা কোডের নির্ভরযোগ্যতা কমিয়ে ফেলে। যদি আপনার সেটা করার প্রয়োজন হয়, বরং state ব্যবহার করেন।
 
 <DeepDive>
 
-#### How does useRef work inside? {/*how-does-use-ref-work-inside*/}
+#### useRef ভিতরে ভিতরে কীভাবে কাজ করে? {/*how-does-use-ref-work-inside*/}
 
 Although both `useState` and `useRef` are provided by React, in principle `useRef` could be implemented _on top of_ `useState`. You can imagine that inside of React, `useRef` is implemented like this:
 
