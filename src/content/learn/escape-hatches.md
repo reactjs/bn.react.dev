@@ -194,16 +194,11 @@ input { display: block; margin-bottom: 20px; }
 
 ## আপনার Effect এর প্রয়োজন নাও পড়তে পারে {/*you-might-not-need-an-effect*/}
 
-Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
+Effect হল React এর জগত থেকে একটি escape hatch। এটি আপনাকে "React এর বাইরে পদক্ষেপ" নিতে দেয় এবং সাথে আপনার কম্পোনেন্টগুলিকে কিছু বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতে দেয়। যদি কোনো বাইরের সিস্টেম জড়িত না থাকে (উদাহরণস্বরূপ, আপনি যদি কিছু props অথবা state পরিবর্তন হলে একটি কম্পোনেন্টের state আপডেট করতে চান), আপনার Effect এর প্রয়োজন হবার কথা না। অপ্রয়োজনীয় Effect সরিয়ে ফেললে আপনার কোড সহজে পড়া যাবে, দ্রুত চলবে, এবং ভুল কম হবে। 
 
-There are two common cases in which you don't need Effects:
-- **You don't need Effects to transform data for rendering.**
-- **You don't need Effects to handle user events.**
-
-For example, you don't need an Effect to adjust some state based on other state:
-
-Effect হল React এর জগত থেকে একটি escape hatch। এটি আপনাকে "React এর বাইরে পদক্ষেপ" নিতে দেয় এবং সাথে আপনার কম্পোনেন্টগুলিকে কিছু বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতেও দেয়। যদি কোনো বাইরের সিস্টেম জড়িত না থাকে (উদাহরণস্বরূপ, আপনি যদি কিছু props অথবা state পরিবর্তন হলে একটি কম্পোনেন্টের state আপডেট করতে চান), তব
-
+সাধারণত দুটি ক্ষেত্রে আপনার Effect দরকার হবে নাঃ
+- **রেন্ডারের জন্য ডেটা transform করতে Effect এর দরকার নেই।**
+- **User event দেখাশোনা করার জন্য আপনার Effect এর প্রয়োজন নেই।**
 
 ```js {5-9}
 function Form() {
@@ -219,7 +214,7 @@ function Form() {
 }
 ```
 
-Instead, calculate as much as you can while rendering:
+বরং, রেন্ডার করার সময় যতটা সম্ভব হিসেব করে রাখেনঃ
 
 ```js {4-5}
 function Form() {
@@ -231,19 +226,19 @@ function Form() {
 }
 ```
 
-However, you *do* need Effects to synchronize with external systems. 
+কিন্তু, বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতে আপনার Effect *লাগবেই*।
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
-Read **[You Might Not Need an Effect](/learn/you-might-not-need-an-effect)** to learn how to remove unnecessary Effects.
+অপ্রয়োজনীয় Effect কীভাবে সরাবেন শিখার জন্য পড়ুন **[আপনার Effect এর প্রয়োজন নাও পড়তে পারে](/learn/you-might-not-need-an-effect)**
 
 </LearnMore>
 
-## Lifecycle of reactive effects {/*lifecycle-of-reactive-effects*/}
+## Reactive effects এর জীবনচক্র {/*lifecycle-of-reactive-effects*/}
 
-Effects have a different lifecycle from components. Components may mount, update, or unmount. An Effect can only do two things: to start synchronizing something, and later to stop synchronizing it. This cycle can happen multiple times if your Effect depends on props and state that change over time.
+Effect এর জীবনচক্র কম্পোনেন্টের চেয়ে আলাদা। কম্পোনেন্ট মাউন্ট, আপডেট অথবা আনমাউন্ট করতে পারে। একটি Effect কেবল দুটি কাজ করতে পারে: কিছু সিঙ্ক্রোনাইজ শুরু করা, এবং পরে এটি সিঙ্ক্রোনাইজ বন্ধ করা। আপনার Effect যদি props এবং state এর উপর নির্ভর করে থাকে যা সময়ের সাথে সাথে পরিবর্তিত হয়, তবে এই চক্রটি একাধিকবার ঘটতে পারে।
 
-This Effect depends on the value of the `roomId` prop. Props are *reactive values,* which means they can change on a re-render. Notice that the Effect *re-synchronizes* (and re-connects to the server) if `roomId` changes:
+এই Effect টি `roomId` prop এর মানের উপর নির্ভর করে। Prop হল *reactive value,* যার অর্থ তারা একটি re-render এ পরিবর্তিত হতে পারে। লক্ষ্য করুন যে `roomId` পরিবর্তিত হলে Effect *re-synchronize* করে। (এবং সার্ভারের সাথে পুনরায় সংযোগ স্থাপন করে):
 
 <Sandpack>
 
@@ -306,23 +301,25 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-React provides a linter rule to check that you've specified your Effect's dependencies correctly. If you forget to specify `roomId` in the list of dependencies in the above example, the linter will find that bug automatically.
+React একটি linter rule দেয় যা লক্ষ্য করে যে আপনি আপনার Effect এর ডিপেন্ডেন্সি সঠিকভাবে নির্দিষ্ট করেছেন কিনা। যদি আপনি উপরের উদাহরণে ডিপেন্ডেন্সিগুলির তালিকায় `roomId` উল্লেখ করতে ভুলে যান, তবে linter স্বয়ংক্রিয়ভাবে সেই বাগটি খুঁজে বের করবে।
 
 <LearnMore path="/learn/lifecycle-of-reactive-effects">
 
-Read **[Lifecycle of Reactive Events](/learn/lifecycle-of-reactive-effects)** to learn how an Effect's lifecycle is different from a component's.
+একটা কম্পোনেন্টের জীবনচক্র থেকে একটা Effect এর জীবনচক্র কীভাবে আলাদা শিখার জন্য পড়ুন **[Reactive Events এর জীবনচক্র](/learn/lifecycle-of-reactive-effects)**
 
 </LearnMore>
 
-## Separating events from Effects {/*separating-events-from-effects*/}
+## Events থেকে Effects আলাদা করা {/*separating-events-from-effects*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+এই সেকশনে একটি **গবেষণামূলক API** নিয়ে বিবরণ দেওয়া হয়েছে **যা এখনো React এর কোন স্টেবল ভার্শনে উন্মুক্ত করা হয়নি**।
 
 </Wip>
 
 Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
+
+Event handler-গুলি কেবল পুনরায় চালানো হয় যখন আপনি একই interaction আরেকবার করেন। ইভেন্ট হ্যান্ডলারের তুলনায়, 'Effects' পুনরায় সিঙ্ক্রোনাইজ করে যদি তারা যে কোন মান পড়ে, যেমন props বা state, গত রেন্ডারের সময় তার থেকে ভিন্ন হয়। মাঝে মাঝে, আপনি দুটি আচরণের মিশ্রণটি চান: কিছু মানের উপর প্রতিক্রিয়া হিসেবে পুনরায় রান করা একটি 'Effect' কিন্তু অন্যান্য নয়।
 
 All code inside Effects is *reactive.* It will run again if some reactive value it reads has changed due to a re-render. For example, this Effect will re-connect to the chat if either `roomId` or `theme` have changed:
 
