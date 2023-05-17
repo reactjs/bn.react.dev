@@ -68,20 +68,20 @@ export default function Counter() {
 
 </Sandpack>
 
-The ref points to a number, but, like [state](/learn/state-a-components-memory), you could point to anything: a string, an object, or even a function. Unlike state, ref is a plain JavaScript object with the `current` property that you can read and modify.
+ref একটি সংখ্যা নির্দেশ করে, তবে, [state](/learn/state-a-components-memory) এর মত, আপনি যে কোন কিছুর দিকে নির্দেশ করতে পারেন: একটি স্ট্রিং, একটি অবজেক্ট, বা এমনকি একটি ফাংশন। state এর বিপরীতে, ref একটি সাধারণ জাভাস্ক্রিপ্ট অবজেক্ট যার `current` property রয়েছে, যা আপনি read করতে এবং পরিবর্তন করতে পারেন।
 
-Note that **the component doesn't re-render with every increment.** Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not!
+লক্ষ্য করুন যে **প্রতি increment এর সাথে কম্পোনেন্টটি পুনরায় রেন্ডার হয় না।** state এর মত, রেন্ডারের ফাঁকে ফাঁকে React ref-কে সংরক্ষণ করে। তবে, state সেট করলে একটি কম্পোনেন্ট পুনরায় রেন্ডার হয়। ref এর পরিবর্তনে সেটা হয় না!
 
 ## উদাহরণঃ একটি স্টপওয়াচ যেভাবে বানাবেন {/*example-building-a-stopwatch*/}
 
-You can combine refs and state in a single component. For example, let's make a stopwatch that the user can start or stop by pressing a button. In order to display how much time has passed since the user pressed "Start", you will need to keep track of when the Start button was pressed and what the current time is. **This information is used for rendering, so you'll keep it in state:**
+আপনি একটি কম্পোনেন্টের মধ্যে refs এবং state একসাথে সমন্বয় করতে পারেন। উদাহরণস্বরূপ, চলেন একটি স্টপওয়াচ তৈরি করি যেটি ব্যবহারকারী একটি বাটন চাপের মাধ্যমে শুরু বা বন্ধ করতে পারবে। ব্যবহারকারী "Start" চাপার পরে কতটা সময় পার হয়েছে তা প্রদর্শন করার জন্য, আপনাকে স্টার্ট বোতাম চাপা হয়েছে তার সময় এবং বর্তমান সময় কী তা হিসেব রাখতে হবে। **এই তথ্যটি রেন্ডারিং এর জন্য ব্যবহৃত হয়, তাই আপনি এটি state এ রাখবেন:**
 
 ```js
 const [startTime, setStartTime] = useState(null);
 const [now, setNow] = useState(null);
 ```
 
-When the user presses "Start", you'll use [`setInterval`](https://developer.mozilla.org/docs/Web/API/setInterval) in order to update the time every 10 milliseconds:
+ব্যবহারকারী যখন "Start" চাপবে, আপনি প্রতি 10 মিলিসেকেন্ড পর পর সময় আপডেট করার জন্য [`setInterval`](https://developer.mozilla.org/docs/Web/API/setInterval) ব্যবহার করবেন:
 
 <Sandpack>
 
