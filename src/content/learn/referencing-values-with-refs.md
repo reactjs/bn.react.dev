@@ -4,34 +4,34 @@ title: 'Referencing Values with Refs'
 
 <Intro>
 
-When you want a component to "remember" some information, but you don't want that information to [trigger new renders](/learn/render-and-commit), you can use a *ref*.
+যখন আপনি চান যে একটা কম্পোনেন্ট কোন একটা তথ্য "মনে রাখুক", কিন্তু আপনি চান না যে এই তথ্য নতুন কোন [রেন্ডার চালু করে দিক](/learn/render-and-commit), আপনি একটা *ref* ব্যবহার করতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-- How to add a ref to your component
-- How to update a ref's value
-- How refs are different from state
-- How to use refs safely
+- কীভাবে কম্পোনেন্টে ref যুক্ত করবেন
+- কীভাবে একটি ref এর মান পরিবর্তন করবেন
+- state এর সাথে ref এর তফাৎ কোথায়
+- কীভাবে নিরাপদভাবে ref ব্যবহার করা যায়
 
 </YouWillLearn>
 
-## Adding a ref to your component {/*adding-a-ref-to-your-component*/}
+## আপনার কম্পোনেন্টে ref এর সংযুক্তি {/*adding-a-ref-to-your-component*/}
 
-You can add a ref to your component by importing the `useRef` Hook from React:
+React থেকে `useRef` hook ইম্পোর্ট করার মাধ্যমে আপনার কম্পোনেন্টে একটি ref যুক্ত করতে পারেনঃ
 
 ```js
 import { useRef } from 'react';
 ```
 
-Inside your component, call the `useRef` Hook and pass the initial value that you want to reference as the only argument. For example, here is a ref to the value `0`:
+আপনার কম্পোনেন্টের মধ্যে, `useRef` hook-টি কল করুন এবং এর মধ্যে আপনি যেই প্রাথমিক মান reference হিসেবে দিতে চান সেটা একমাত্র argument হিসেবে পাঠিয়ে দিন। উদাহরণস্বরূপ, এখানে  `0` মানটির একটি ref রয়েছে।
 
 ```js
 const ref = useRef(0);
 ```
 
-`useRef` returns an object like this:
+`useRef` এমন একটি অবজেক্ট রিটার্ন করেঃ
 
 ```js
 { 
@@ -41,9 +41,9 @@ const ref = useRef(0);
 
 <Illustration src="/images/docs/illustrations/i_ref.png" alt="An arrow with 'current' written on it stuffed into a pocket with 'ref' written on it." />
 
-You can access the current value of that ref through the `ref.current` property. This value is intentionally mutable, meaning you can both read and write to it. It's like a secret pocket of your component that React doesn't track. (This is what makes it an "escape hatch" from React's one-way data flow--more on that below!)
+আপনি `ref.current` property-র মাধ্যমে ঐ ref এর বর্তমান মান অ্যাক্সেস করতে পারেন। এই মানটি ইচ্ছাকৃতভাবে পরিবর্তনশীল, অর্থাৎ আপনি এটি read এবং write করতে পারেন। এটি আপনার কম্পোনেন্টের একটি গোপন পকেটের মতো যা React ট্র্যাক করে না। (এই বৈশিষ্ট্যটাই একে React এর একমুখী ডেটা প্রবাহ থেকে একটি "escape hatch" বানায়--নিচে এটি সম্পর্কে আরও তথ্য রয়েছে!)
 
-Here, a button will increment `ref.current` on every click:
+এখানে, একটি বাটন প্রতিটি ক্লিকে `ref.current` এর মান বাড়াবে:
 
 <Sandpack>
 
@@ -72,7 +72,7 @@ The ref points to a number, but, like [state](/learn/state-a-components-memory),
 
 Note that **the component doesn't re-render with every increment.** Like state, refs are retained by React between re-renders. However, setting state re-renders a component. Changing a ref does not!
 
-## Example: building a stopwatch {/*example-building-a-stopwatch*/}
+## উদাহরণঃ একটি স্টপওয়াচ যেভাবে বানাবেন {/*example-building-a-stopwatch*/}
 
 You can combine refs and state in a single component. For example, let's make a stopwatch that the user can start or stop by pressing a button. In order to display how much time has passed since the user pressed "Start", you will need to keep track of when the Start button was pressed and what the current time is. **This information is used for rendering, so you'll keep it in state:**
 
