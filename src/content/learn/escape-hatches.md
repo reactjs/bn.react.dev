@@ -317,11 +317,9 @@ React একটি linter rule দেয় যা লক্ষ্য করে য
 
 </Wip>
 
-Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
+Event handler-গুলি তখনি পুনরায় চালানো হয় যখন আপনি একই interaction আবার করেন। Event handler এর বিপরীতে, Effects পুনরায় সিঙ্ক্রোনাইজ করে যদি তারা এমন কোন মান read করে যা আগের রেন্ডার থেকে আলাদা, যেমন props বা state এর মান। মাঝে মাঝে, আপনি দুটি আচরণের মিশ্রণ চান: এমন একটি Effect যা কিছু মানের Response এ আবার চলে, কিন্তু অন্যান্যগুলোর বিষয়ে re-run করে না। 
 
-Event handler-গুলি কেবল পুনরায় চালানো হয় যখন আপনি একই interaction আরেকবার করেন। ইভেন্ট হ্যান্ডলারের তুলনায়, 'Effects' পুনরায় সিঙ্ক্রোনাইজ করে যদি তারা যে কোন মান পড়ে, যেমন props বা state, গত রেন্ডারের সময় তার থেকে ভিন্ন হয়। মাঝে মাঝে, আপনি দুটি আচরণের মিশ্রণটি চান: কিছু মানের উপর প্রতিক্রিয়া হিসেবে পুনরায় রান করা একটি 'Effect' কিন্তু অন্যান্য নয়।
-
-All code inside Effects is *reactive.* It will run again if some reactive value it reads has changed due to a re-render. For example, this Effect will re-connect to the chat if either `roomId` or `theme` have changed:
+Effect এর মধ্য থাকা সব কোড *reactive.* এটা আবার চলবে যদি এটা re-render এর কারণে পরিবর্তিত কোন মান read করে। উদাহরণস্বরূপ, এই Effect টা চ্যাটের সাথে পুনরায় সংযোগ স্থাপন করবে যদি `roomId` অথবা `theme` এর মান পরিবর্তিত হয়।
 
 <Sandpack>
 
@@ -590,11 +588,11 @@ Read **[Separating Events from Effects](/learn/separating-events-from-effects)**
 
 </LearnMore>
 
-## Removing Effect dependencies {/*removing-effect-dependencies*/}
+## Effect dependencies সরানো {/*removing-effect-dependencies*/}
 
-When you write an Effect, the linter will verify that you've included every reactive value (like props and state) that the Effect reads in the list of your Effect's dependencies. This ensures that your Effect remains synchronized with the latest props and state of your component. Unnecessary dependencies may cause your Effect to run too often, or even create an infinite loop. The way you remove them depends on the case.
+আপনি যখন একটি Effect লিখেন, linter যাচাই করবে যে আপনি Effect এর ডিপেন্ডেন্সিগুলির তালিকায় Effect যে সমস্ত reactive মান (যেমন props এবং state) read করে তার সব অন্তর্ভুক্ত করেছেন কি না। এটি নিশ্চিত করে যে আপনার Effect আপনার কম্পোনেন্টের সর্বশেষ props এবং state এর সাথে সিঙ্ক্রোনাইজেশন বজায় রাখছে। অপ্রয়োজনীয় ডিপেন্ডেন্সিগুলি আপনার Effect অতিরিক্ত বার চালাতে পারে, বা এমনকি একটি কখনো শেষ হবে না এমন লুপ তৈরি করতে পারে। আপনি তাদের কীভাবে সরাবেন তা case এর উপর নির্ভর করে।
 
-For example, this Effect depends on the `options` object which gets re-created every time you edit the input:
+উদাহরণস্বরূপ, এই Effect `options` অবজেক্টের উপর নির্ভর করে যা আপনি প্রতিবার ইনপুট পরিবর্তন করলে  পুনরায় তৈরি হয়:
 
 <Sandpack>
 
@@ -669,7 +667,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-You don't want the chat to re-connect every time you start typing a message in that chat. To fix this problem, move creation of the `options` object inside the Effect so that the Effect only depends on the `roomId` string:
+আপনি চাইবেন না যে প্রতিবার আপনি মেসেজ লিখতে গেলেই চ্যাট পুনরায় সংযোগ স্থাপন করুক। এই সমস্যা সমাধান করতে, `options` অবজেক্টের উৎপত্তি Effect এর মধ্যে নিয়ে যান। এতে Effect কেবল মাত্র `roomId` স্ট্রিং এর উপর নির্ভর করবে।
 
 <Sandpack>
 
@@ -743,19 +741,19 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that you didn't start by editing the dependency list to remove the `options` dependency. That would be wrong. Instead, you changed the surrounding code so that the dependency became *unnecessary.* Think of the dependency list as a list of all the reactive values used by your Effect's code. You don't intentionally choose what to put on that list. The list describes your code. To change the dependency list, change the code.
+লক্ষ্য করুন যে আপনি `options` ডিপেন্ডেন্সিটি সরানোর জন্য আপনি শুরুতে ডিপেন্ডেন্সি তালিকা ঠিক করতে যাননি। এটা করা ভুল হবে। এর পরিবর্তে, আপনি আশপাশের কোড পরিবর্তন করেছেন যাতে ডিপেন্ডেন্সিটি *অপ্রয়োজনীয়* হয়। ধরে নিন যে, ডিপেন্ডেন্সি তালিকা হচ্ছে আপনার Effect এর কোড দ্বারা ব্যবহৃত সমস্ত reactive মানের তালিকা। আপনি সচেতনভাবে ঠিক করেন না যে আপনি ঐ তালিকায় কী রাখবেন। বরং, তালিকাটি আপনার কোডকে ব্যাখ্যা করে। ডিপেন্ডেন্সি তালিকা পরিবর্তন করতে, কোড পরিবর্তন করুন।
 
 <LearnMore path="/learn/removing-effect-dependencies">
 
-Read **[Removing Effect Dependencies](/learn/removing-effect-dependencies)** to learn how to make your Effect re-run less often.
+কী করবেন যেন আপনার Effect কম বার re-run হয়, শেখার জন্য **[Effect ডিপেন্ডেন্সি সরানো](/learn/removing-effect-dependencies)** পড়ুন।
 
 </LearnMore>
 
-## Reusing logic with custom Hooks {/*reusing-logic-with-custom-hooks*/}
+## কাস্টম Hooks এর সাহায্যে লজিকের পুনর্ব্যবহার {/*reusing-logic-with-custom-hooks*/}
 
-React comes with built-in Hooks like `useState`, `useContext`, and `useEffect`. Sometimes, you’ll wish that there was a Hook for some more specific purpose: for example, to fetch data, to keep track of whether the user is online, or to connect to a chat room. To do this, you can create your own Hooks for your application's needs.
+React এ `useState`, `useContext`, and `useEffect` এর মত built-in hooks আছে। মাঝে মাঝে, আপনার মনে হবে যে আরও নির্দিষ্ট কোন উদ্দেশ্যের জন্য একটি Hook থাকত যেমন, ডেটা নিয়ে আসা, ব্যবহারকারী অনলাইনে আছেন কি না তা নজরে রাখা, বা একটি চ্যাট রুমের সাথে সংযোগ করা। এটি করার জন্য, আপনি আপনার অ্যাপ্লিকেশনের প্রয়োজনীয়তা মাথায় রেখে আপনার নিজস্ব Hooks তৈরি করতে পারেন।
 
-In this example, the `usePointerPosition` custom Hook tracks the cursor position, while `useDelayedValue` custom Hook returns a value that's "lagging behind" the value you passed by a certain number of milliseconds. Move the cursor over the sandbox preview area to see a moving trail of dots following the cursor:
+এই উদাহরণে, `usePointerPosition` কাস্টম Hook-টি কার্সরের অবস্থান নজরে রাখে, অন্যদিকে `useDelayedValue` কাস্টম Hook-টি এমন একটু মান return করে যা আপনার pass করা মান থেকে একটি নির্দিষ্ট সংখ্যক মিলিসেকেন্ডের ব্যবধানে "পিছিয়ে আছে"। স্যান্ডবক্সের প্রিভিউ অংশের উপরে কার্সর সরিয়ে খ্যেয়াল করুন যে কার্সরের পিছনে কয়েকটি বিন্দুর একটি পথরেখা দেখা যাচ্ছেঃ
 
 <Sandpack>
 
@@ -836,14 +834,14 @@ body { min-height: 300px; }
 
 </Sandpack>
 
-You can create custom Hooks, compose them together, pass data between them, and reuse them between components. As your app grows, you will write fewer Effects by hand because you'll be able to reuse custom Hooks you already wrote. There are also many excellent custom Hooks maintained by the React community.
+আপনি কাস্টম Hooks তৈরি করতে পারেন, এগুলোকে একত্রিত করতে পারেন, এদের মধ্যে ডাটা pass করতে পারেন, এবং কম্পোনেন্টগুলির মধ্যে এদের পুনরায় ব্যবহার করতে পারেন। আপনার অ্যাপ বড় হবার সাথে সাথে, আপনি নতুন করে Effects কম লিখবেন কারণ আপনি ইতোমধ্যে লিখেছেন এমন কাস্টম Hooks পুনরায় ব্যবহার করতে পারবেন। React কমিউনিটি দেখাশোনা করে এমন বেশ অনেকগুলি ভাল কাস্টম Hook রয়েছে।
 
 <LearnMore path="/learn/reusing-logic-with-custom-hooks">
 
-Read **[Reusing Logic with Custom Hooks](/learn/reusing-logic-with-custom-hooks)** to learn how to share logic between components.
+কম্পোনেন্টের মধ্যে লজিক শেয়ার কীভাবে করতে হয়ে শেখার জন্য পড়ুন  **[কাস্টম Hooks এর সাহায্যে লজিকের পুনর্ব্যবহার](/learn/reusing-logic-with-custom-hooks)**।
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## এর পর কী? {/*whats-next*/}
 
-Head over to [Referencing Values with Refs](/learn/referencing-values-with-refs) to start reading this chapter page by page!
+এই অধ্যায়টি বিস্তারিতভাবে পড়ার জন্য চলে যান [Ref এর সাহায্য value referencing](/learn/referencing-values-with-refs) অংশে।
