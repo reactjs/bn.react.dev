@@ -10,7 +10,7 @@ title: 'টিউটোরিয়াল: টিক-ট্যাক-টো'
 
 <Note>
 
-এই টিউটোরিয়ালটি এমন লোকদের জন্য ডিজাইন করা হয়েছে যারা **ব্যবহারিক কাজ করে শিখতে** পছন্দ করেন এবং দ্রুত কিছু তৈরি করার চেষ্টা করতে চান। আপনি যদি প্রতিটি ধারণা ধাপে ধাপে শিখতে পছন্দ করেন, তাহলে [Describing the UI.](/learn/describing-the-ui) দিয়ে শুরু করুন।
+এই টিউটোরিয়ালটি এমন লোকদের জন্য ডিজাইন করা হয়েছে যারা **কাজ করে শিখতে** পছন্দ করেন এবং দ্রুত কিছু তৈরি করার চেষ্টা করতে চান। আপনি যদি প্রতিটি ধারণা ধাপে ধাপে শিখতে পছন্দ করেন, তাহলে [Describing the UI.](/learn/describing-the-ui) দিয়ে শুরু করুন।
 
 </Note>
 
@@ -275,17 +275,17 @@ body {
 
 ## Overview {/*overview*/}
 
-Now that you're set up, let's get an overview of React!
+আপনার সেটআপ সম্পূর্ণ হয়েছে, চলুন react  সম্পর্কে ধারণা লাভ করি!
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### Starter Code পরিদর্শন {/*inspecting-the-starter-code*/}
 
-In CodeSandbox you'll see three main sections:
+CodeSandbox-এ আপনি তিনটি প্রধান section দেখতে পাবেন:
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` and a folder called `public`
-1. The _code editor_ where you'll see the source code of your selected file
-1. The _browser_ section where you'll see how the code you've written will be displayed
+1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন   
+2. The _code editor_ where you'll see the source code of your selected file
+3. The _browser_ section where you'll see how the code you've written will be displayed
 
 The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
 
