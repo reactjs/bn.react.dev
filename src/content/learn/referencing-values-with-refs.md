@@ -284,7 +284,7 @@ console.log(ref.current); // 5
 
 ## Ref এবং DOM {/*refs-and-the-dom*/}
 
-আপনি যে কোনও মানের জন্য একটি ref নির্দেশ করতে পারেন। যদিও, একটি ref ব্যবহার করার সবচেয়ে সাধারণ ক্ষেত্র হল DOM element অ্যাক্সেস করা। উদাহরণস্বরূপ, এটি কাজে লাগে যদি আপনি একটি input কে প্রোগ্রামের মাধ্যমে focus করতে চান। যখন আপনি JSX এ একটি `ref` attribute-এ একটি ref pass করেন, যেমন <div ref={myRef}>, React `myRef.current` এ সংশ্লিষ্ট DOM element রাখবে। আপনি এই বিষয়ে আরও পড়তে পারেন [ref এর সাহায্যে DOM manipulation](/learn/manipulating-the-dom-with-refs) অংশে।
+আপনি যে কোনও মানের জন্য একটি ref নির্দেশ করতে পারেন। যদিও, একটি ref ব্যবহার করার সবচেয়ে সাধারণ ক্ষেত্র হল DOM element অ্যাক্সেস করা। উদাহরণস্বরূপ, এটি কাজে লাগে যদি আপনি একটি input কে প্রোগ্রামের মাধ্যমে focus করতে চান। যখন আপনি JSX এ একটি `ref` attribute-এ একটি ref pass করেন, যেমন `<div ref={myRef}>`, React `myRef.current` এ সংশ্লিষ্ট DOM element রাখবে। আপনি এই বিষয়ে আরও পড়তে পারেন [ref এর সাহায্যে DOM manipulation](/learn/manipulating-the-dom-with-refs) অংশে।
 
 <Recap>
 
