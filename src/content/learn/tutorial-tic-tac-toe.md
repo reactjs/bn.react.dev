@@ -284,10 +284,11 @@ CodeSandbox-এ আপনি তিনটি প্রধান section দে�
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
 1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন   
-2. The _code editor_ where you'll see the source code of your selected file
-3. The _browser_ section where you'll see how the code you've written will be displayed
+2. _Code Editor_ যেখানে আপনি যে file-টি select করেছেন সেটির source code দেখতে পাবেন 
+3. _Browser_ section যেখানে আপনি যে code-টি লিখেছেন সেটি browser-এ কেমন দেখাবে তা দেখতে পাবেন 
 
-The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
+Files section-এ `App.js` file-টি selected থাকা উচিত | _Code editor_-এ এই ফাইলটির content হলো:
+
 
 ```jsx
 export default function Square() {
@@ -295,11 +296,11 @@ export default function Square() {
 }
 ```
 
-The _browser_ section should be displaying a square with a X in it like this:
+_Browser section_-এ ঠিক এইভাবে আপনি একটি square-এর মধ্যে একটি X দেখতে পাবেন:  
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
-Now let's have a look at the files in the starter code.
+এখন starter code-এ উপস্থিত file-গুলোকে দেখে নেওয়া যাক।     
 
 #### `App.js` {/*appjs*/}
 
