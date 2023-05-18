@@ -1,5 +1,5 @@
 ---
-title: 'Referencing Values with Refs'
+title: 'Ref দিয়ে কোন value এর রেফারেন্স দেওয়া'
 ---
 
 <Intro>
