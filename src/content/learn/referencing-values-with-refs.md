@@ -464,15 +464,15 @@ export default function Toggle() {
 
 #### Debouncing ঠিক করুন {/*fix-debouncing*/}
 
-In this example, all button click handlers are ["debounced".](https://redd.one/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
+এই উদাহরণে, সকল বাটন click handlers-রা ["debounced".](https://redd.one/blog/debounce-vs-throttle) এর অর্থ বুঝার জন্য, একটা বাটনে চাপ দিন। খেয়াল করুন কীভাবে এক সেকেন্ড পর একটা মেসেজ দেখা যায়। আপনি যদি অপেক্ষার সময়ে বাটনে চাপ দিন, তাহলে timer রিসেট হয়ে যায়। সুতরাং আপনি যদি খুব কম সময়ের ব্যবধানে বার বার বাটনে ক্লিক দিতে থাকেন তাহলে আপনি ক্লিক করা বন্ধ করার এক সেকেন্ড *পর* পর্যন্ত মেসেজ দেখবেন না। "কেউ কিছু করা বন্ধ করা" পর্যন্ত কোন কাজ বিলম্ব করার জন্য debouncing সাহায্য কয়রে। 
 
-This example works, but not quite as intended. The buttons are not independent. To see the problem, click one of the buttons, and then immediately click another button. You'd expect that after a delay, you would see both button's messages. But only the last button's message shows up. The first button's message gets lost.
+এই উদাহরণটা কাজ করছে, তবে যেভাবে করা উচিত ঠিক সেভাবে না। বাটনগুলো স্বাধীন না। সমস্যাটা দেখার জন্য, প্রথমে একটি বাটন ক্লিক করুন এবং খুব দ্ররুত আরেকটি বাটন ক্লিক করুন। আপনি আশা করবেন যে, একটু বিলম্বের পর দুটো বাটনের মেসেজই দেখা যাবে। কিন্তু শুধু শেষ বাটনের মেসেজ দেখা যায়। প্রথম বাটনের মেসেজ হারিয়ে যায়।
 
-Why are the buttons interfering with each other? Find and fix the issue.
+বাটনগুলো নিজেদের মধ্যে ঝামেলা করছে কেন? সমস্যাটা খুঁজে বের করুন এবং ঠিক করুন।
 
 <Hint>
 
-The last timeout ID variable is shared between all `DebouncedButton` components. This is why clicking one button resets another button's timeout. Can you store a separate timeout ID for each button?
+শেষ timeout ID variable সকল `DebouncedButton` কম্পোনেন্টের মধ্যে শেয়ার করা আছে। এজন্য একটা বাটন ক্লিক করলে অন্য বাটনের timeout রিসেট হয়ে যায়। আপনি কি প্রতিটি বাটনের জন্য আলাদা timeout ID রাখতে পারবেন?
 
 </Hint>
 
@@ -525,7 +525,7 @@ button { display: block; margin: 10px; }
 
 <Solution>
 
-A variable like `timeoutID` is shared between all components. This is why clicking on the second button resets the first button's pending timeout. To fix this, you can keep timeout in a ref. Each button will get its own ref, so they won't conflict with each other. Notice how clicking two buttons fast will show both messages.
+`timeoutID` এর মত একটি ভ্যারিয়েবল সকল কম্পোনেন্টের মধ্যে শেয়ার করা থাকে। যেই কারণে দ্বিতীয় বাটনে ক্লিক করা হলে প্রথম বাটনের অপেক্ষারত timeout রিসেট হয়ে যায়। এটা ঠিক করার জন্য আপনি timeout একটা ref এ রাখতে পারেন। প্রতিটি বাটন নেজের ref পাবে, সুতরাং তাদের নিজেদের মধ্যে কোন দ্বন্দ্ব তৈরি হবে না। লক্ষ্য করে দেখুন যে দুইটা বাটনই খুব দ্ররুত চাপ দিলে দুটো মেসেজই দেখা যায়।
 
 <Sandpack>
 
@@ -577,11 +577,11 @@ button { display: block; margin: 10px; }
 
 </Solution>
 
-#### Read the latest state {/*read-the-latest-state*/}
+#### সর্বষেশ state read করুন {/*read-the-latest-state*/}
 
-In this example, after you press "Send", there is a small delay before the message is shown. Type "hello", press Send, and then quickly edit the input again. Despite your edits, the alert would still show "hello" (which was the value of state [at the time](/learn/state-as-a-snapshot#state-over-time) the button was clicked).
+এই উদাহরণে, আপনি "Send"-এ চাপ দেবার পরে, মেসেজ দেখাবার আগে ছোট্ট একটু বিলম্ব আছে। "hello" লিখুন, Send এ চাপ দিন, এবং তখন খুব দ্ররুত ইনপুটটা বদলে ফেলুন। আপনি এডিট করার পরও, এলার্টে তখনো "hello" দেখাবে (যেটা state এর মান তখন ছিল [যখন](/learn/state-as-a-snapshot#state-over-time) বাটনটি ক্লিক করা হয়).
 
-Usually, this behavior is what you want in an app. However, there may be occasional cases where you want some asynchronous code to read the *latest* version of some state. Can you think of a way to make the alert show the *current* input text rather than what it was at the time of the click?
+সাধারণত, আপনি একটা অ্যাপে এই আচরণটাই চান। কিন্তু, কখনো কখনো কিছু ক্ষেত্রে আপনি চাইবেন যে কোন একটা state এর *সর্বশেষ* মানটা কোন একটা asynchronous কোড read করতে পারুক। আপনি কি কোন এমন উপায় চিন্তা করতে পারবেন যাতে এলার্টটি ক্লিকের সময়কার ইনপুট টেক্সট না দেখেই *এখনকার* ইনপুট টেক্সট দেখায়?  
 
 <Sandpack>
 
@@ -616,7 +616,7 @@ export default function Chat() {
 
 <Solution>
 
-State works [like a snapshot](/learn/state-as-a-snapshot), so you can't read the latest state from an asynchronous operation like a timeout. However, you can keep the latest input text in a ref. A ref is mutable, so you can read the `current` property at any time. Since the current text is also used for rendering, in this example, you will need *both* a state variable (for rendering), *and* a ref (to read it in the timeout). You will need to update the current ref value manually.
+State [একটা স্ন্যাপশটের মত](/learn/state-as-a-snapshot) কাজ করে, সুতরাং আপনি timeout এর মত একটা asynchronous কাজ থেকে সর্বশেষ state read করতে পারবেন না। কিন্তু আপনি সর্বশেষ ইনপুট টেক্সট একটা ref এ রাখতে পারবেন। একটা ref পরিবর্তনযোগ্য, সুতরাং আপনি `current` property যেকোন সময়ে read করতে পারেন। যেহেতু বর্তমান টেক্সটটা রেন্ডারিং এর কাজেও লাগে, এই উদাহরণে, আপনার একটা state ভ্যারিয়েবল (রেন্ডারিং এর জন্য), *এবং* একটা ref (timeout এর মধ্যে read করার জন্য) *উভয়ই* লাগবে। বর্তমান ref এর মানটা আপনাকে নিজে আপডেট করতে হবে। 
 
 <Sandpack>
 
