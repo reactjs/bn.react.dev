@@ -1,25 +1,25 @@
 ---
-title: "State: A Component's Memory"
+title: "স্টেট: কম্পোনেন্ট এর মেমোরি"
 ---
 
 <Intro>
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" should put a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state*.
+ইন্টারেকশনের ফলে প্রায়ই কম্পোনেন্ট কে প্রায়ই স্ক্রিনে যা আছে তা পরিবর্তন করতে হয়। ফর্মে টাইপ করলে ইনপুট ফিল্ড আপডেট হয়ে যাওয়া উচিত, ইমেজ ক্যারাউজেলে এর "next" এ ক্লিক করলে ডিসপ্লের ইমেজ চেঞ্জ হওয়া উচিত, "buy" এ ক্লিক করলে প্রোডাক্ট শপিং কার্ট এ যাওয়া উচিত। কম্পোনেন্ট এর কিছু জিনিস মনে রাখা উচিত, যেমন: বর্তমান ইনপুট ভেলু, বর্তমান ইমেজ, শপিং কার্ট। রিয়েক্ট এর কম্পোনেন্ট এরকম কম্পোনেন্ট-ভিত্তিক মেমোরি কে *state* বলে।
 
 </Intro>
 
 <YouWillLearn>
 
-* How to add a state variable with the [`useState`](/reference/react/useState) Hook
-* What pair of values the `useState` Hook returns
-* How to add more than one state variable
-* Why state is called local
+* [`useState`](/reference/react/useState) দিয়ে কিভাবে একটি স্টেট ভেরিয়েবল তৈরি করা যায়
+* `useState` হুক কোন দুইটি ভেরিয়েবল রিটার্ন করে 
+* কিভাবে একাধিক স্টেট ভেরিবল তৈরি করতে হয়
+* স্টেট কে কেন লোকাল বলা হয় 
 
 </YouWillLearn>
 
-## When a regular variable isn’t enough {/*when-a-regular-variable-isnt-enough*/}
+## যখন রেগুলার ভেরিয়েবল যথেষ্ট নয় {/*when-a-regular-variable-isnt-enough*/}
 
-Here's a component that renders a sculpture image. Clicking the "Next" button should show the next sculpture by changing the `index` to `1`, then `2`, and so on. However, this **won't work** (you can try it!):
+নিচের কম্পোনেন্টটি একটি ভাস্কর্যের ছবি প্রদর্শন করে। "Next" বাটন এ ক্লিক করলে `index` এর ভেলু `1`, এরপর `2` এবং এভাবে পরিবর্তন হয়ে পরের ভাস্কর্যের ছবি দেখানো উচিত। কিন্তু, এটা **কাজ করবেনা** (আপনি চেষ্টা করে দেখতে পারেন!):
 
 <Sandpack>
 
@@ -166,31 +166,31 @@ The [`useState`](/reference/react/useState) Hook provides those two things:
 1. A **state variable** to retain the data between renders.
 2. A **state setter function** to update the variable and trigger React to render the component again.
 
-## Adding a state variable {/*adding-a-state-variable*/}
+## স্টেট ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
 
-To add a state variable, import `useState` from React at the top of the file:
+স্টেট ভেরিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবে :
 
 ```js
 import { useState } from 'react';
 ```
 
-Then, replace this line:
+এরপর, নিচের লাইন টা পরিবর্তন করে:
 
 ```js
 let index = 0;
 ```
 
-with
+নিচের মতো করে নিন
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-`index` is a state variable and `setIndex` is the setter function.
+`index` একটি স্টেট ভেরিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
 
 > The `[` and `]` syntax here is called [array destructuring](https://javascript.info/destructuring-assignment) and it lets you read values from an array. The array returned by `useState` always has exactly two items.
 
-This is how they work together in `handleClick`:
+এইভাবে তারা `handleClick` এ একসাথে কাজ করে :
 
 ```js
 function handleClick() {
@@ -198,7 +198,7 @@ function handleClick() {
 }
 ```
 
-Now clicking the "Next" button switches the current sculpture:
+এখন "Next" বাটনে ক্লিক করলে বর্তমান ভাস্কর্যটি পরিবর্তন হয়:
 
 <Sandpack>
 
@@ -331,9 +331,9 @@ button {
 
 </Sandpack>
 
-### Meet your first Hook {/*meet-your-first-hook*/}
+### আপনার প্রথম হুকের সাথে পরিচয় {/*meet-your-first-hook*/}
 
-In React, `useState`, as well as any other function starting with "`use`", is called a Hook.
+রিয়েক্ট এ, `useState`, এবং অন্য যেকোনো ফাংশন যার শুরু "`use`" দিয়ে তাদেরকে হুক বলা হয়। 
 
 *Hooks* are special functions that are only available while React is [rendering](/learn/render-and-commit#step-1-trigger-a-render) (which we'll get into in more detail on the next page). They let you "hook into" different React features.
 
@@ -379,9 +379,9 @@ const [index, setIndex] = useState(0);
 3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
 4. And so on!
 
-## Giving a component multiple state variables {/*giving-a-component-multiple-state-variables*/}
+## কম্পোনেন্ট এ একাধিক স্টেট ভেরিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
 
-You can have as many state variables of as many types as you like in one component. This component has two state variables, a number `index` and a boolean `showMore` that's toggled when you click "Show details":
+একটি কম্পোনেন্ট এ আপনি যত খুশি তত ধরনের ষ্টেট ভেরিয়েবল রাখতে পারেন। এই কম্পোনেন্ট এর দুটি স্টেট ভেরিয়েবল আছে, একটি নাম্বার `index` এবং একটি বুলিয়ান `showMore` যা Toggle করা হয় যখন আপনি "Show details" এ ক্লিক করেন :
 
 <Sandpack>
 
