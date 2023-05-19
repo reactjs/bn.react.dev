@@ -4,7 +4,7 @@ title: <Suspense>
 
 <Intro>
 
-`<Suspense>` তার অভ্যন্তরীণ কম্পোনেন্ট লোড না হওয়া পর্যন্ত এর ফলব্যাক প্রদর্শন করে। 
+`<Suspense>` তার children এর লোডিং শেষ না হওয়া পর্যন্ত একটি fallback প্রদর্শন করে। 
 
 
 ```js
@@ -24,23 +24,23 @@ title: <Suspense>
 ### `<Suspense>` {/*suspense*/}
 
 #### প্রপ্স {/*props*/}
-* `children`: প্রকৃত UI, যেটি আপনি রেন্ডার করতে চাইছেন। `children` যদি রেন্ডারিং এর সময় স্থগিত হয়ে যায় তাহলে সাসপেন্স সীমা `fallback` রেন্ডার করবে।
-* `fallback`: প্রকৃত UI টি পুরোপুরি লোড না হওয়া পর্যন্ত এর বিকল্প হিসেবে প্রকৃত UI এর স্থানে ব্যবহৃত হয়। যদিও যেকোনো বৈধ React নোড গৃহীত, প্রকৃতপক্ষে এটি হলো একটি হালকা দৃশ্যমান স্থানধারক, যেমন একটি লোডিং স্পিনার বা কাঠামো। সাসপেন্স স্বয়ংক্রিয় ভাবে `fallback` এ পরিবর্তিত হয়ে যাবে যখন `children` স্থগিত হয়ে যাবে এবং আবার `children` এ ফিরে আসবে যখন ডেটা তৈরি হয়ে যাবে। রেন্ডারিং এর সময় যদি `fallback` স্থগিত হয়ে যায়, এটি তার নিকটতম প্যারেন্ট কম্পোনেন্ট সীমাকে সক্রিয় করবে। 
+* `children`: আপনি যেই প্রকৃত UI রেন্ডার করতে চাইছেন। `children` যদি রেন্ডারিং এর সময় থেমে যায় তাহলে Suspense boundary `fallback` রেন্ডার করবে।
+* `fallback`: এটি হচ্ছে, প্রকৃত UI পুরোপুরি লোড না হলে তার স্থলে রেন্ডার হওয়া একটি বিকল্প UI। যেকোনো বৈধ React নোডই গৃহীত হয়, যদিও কার্যত, একটি ফলব্যাক হলো একটি হালকা placeholder view, যেমন একটি লোডিং স্পিনার বা স্কেলেটন। Suspense স্বয়ংক্রিয় ভাবে `fallback` এ পরিবর্তিত হয়ে যাবে যখন `children` থেমে যাবে এবং আবার `children` এ ফিরে আসবে যখন ডেটা তৈরি হয়ে যাবে। রেন্ডারিং এর সময় যদি `fallback` থেমে যায়, এটি তার নিকটতম parent Suspense boundary সক্রিয় করবে। 
 
 #### সতর্কতা {/*caveats*/}
 
-- React প্রথমবার মাউন্ট হওয়ার আগে স্থগিত হওয়া রেন্ডারগুলির জন্য কোনও অবস্থা সংরক্ষণ করে না। কম্পোনেন্ট লোড হলে, React স্থগিত ট্রি পুনরায় শূন্য থেকে রেন্ডার করার চেষ্টা করবে।
-- যদি সাসপেন্স ট্রির জন্য কন্টেন্ট দেখানো হয়, কিন্তু পরে আবার স্থগিত হয়ে যায়, তবে `fallback` আবার দেখানো হবে যদি এর হালনাগাদের কারণ [`startTransition`](/reference/react/startTransition) বা [`useDeferredValue`](/reference/react/useDeferredValue) দ্বারা সৃষ্টি হয়ে থাকে।  
-- যদি React পুনরায় স্থগিত হওয়ার কারণে আগে দেখানো কন্টেন্ট লুকানোর প্রয়োজন হয়, তবে এটি কন্টেন্ট ট্রির [layout Effects](/reference/react/useLayoutEffect) পরিষ্কার করবে। কন্টেন্ট আবার দেখানোর সময়, রিয়েক্ট আবার layout Effects চালাবে। এটি নিশ্চিত করে যে, DOM layout পরিমাপ করা ইফেক্টগুলো কন্টেন্ট লুকায়িত অবস্থায় এটা করার চেষ্টা করে না। 
-- React এ রয়েছে *Streaming Server Rendering* এবং *Selective Hydration* এর মত অন্তর্নিহিত অপটিমাইজেশন যা সাসপেন্সের সাথে সমন্বিত। আরো জানার জন্য পড়ুন [একটি স্থাপত্য পরিদর্শন](https://github.com/reactwg/react-18/discussions/37) এবং দেখুন [একটি প্রযুক্তিগত আলোচনা](https://www.youtube.com/watch?v=pj5N-Khihgc)
+- React প্রথমবার মাউন্ট হওয়ার আগে থেমে যাওয়া রেন্ডারগুলির জন্য কোনও state সংরক্ষণ করে না। কম্পোনেন্ট লোড হলে, React থেমে যাওয়া ট্রি পুনরায় শূন্য থেকে রেন্ডার করার চেষ্টা করবে।
+- যদি Suspense ট্রির জন্য কন্টেন্ট দেখানো হয়, কিন্তু পরে আবার থেমে যায়, তবে `fallback` আবার দেখানো হবে যদিনা এর হালনাগাদের কারণ [`startTransition`](/reference/react/startTransition) বা [`useDeferredValue`](/reference/react/useDeferredValue) দ্বারা সৃষ্টি হয়ে থাকে।  
+- যদি React পুনরায় থেমে যাওার কারণে আগে দেখানো কন্টেন্ট লুকানোর প্রয়োজন হয়, তবে এটি কন্টেন্ট ট্রির [layout Effects](/reference/react/useLayoutEffect) পরিষ্কার করবে। কন্টেন্ট যখন আবার দেখানোর জন্য প্রস্তুত হয়ে যায়, রিয়েক্ট আবার layout Effects চালাবে। এটি নিশ্চিত করে যে, DOM layout পরিমাপ করা ইফেক্টগুলো কন্টেন্ট লুকায়িত অবস্থায় এটা করার চেষ্টা করে না। 
+- React এ রয়েছে *Streaming Server Rendering* এবং *Selective Hydration* এর মত অন্তর্নিহিত অপটিমাইজেশন যা Suspense এর সাথে সমন্বিত। আরো জানার জন্য পড়ুন [একটি স্থাপত্য পরিদর্শন](https://github.com/reactwg/react-18/discussions/37) এবং দেখুন [একটি প্রযুক্তিগত আলোচনা](https://www.youtube.com/watch?v=pj5N-Khihgc)
 
 ---
 
 ## ব্যবহারবিধি {/*usage*/}
 
-### কন্টেন্ট লোড হওয়ার সময় একটি ফলব্যাক(fallback) দেখানো {/*displaying-a-fallback-while-content-is-loading*/}
+### কন্টেন্ট লোড হওয়ার সময় একটি ফলব্যাক দেখানো {/*displaying-a-fallback-while-content-is-loading*/}
 
-আপনি আপনার অ্যাপ্লিকেশনের যে কোন অংশকে একটি সাসপেন্স সীমা দ্বারা আবদ্ধ করতে পারেনঃ
+আপনি আপনার অ্যাপ্লিকেশনের যে কোন অংশকে একটি Suspense boundary দ্বারা আবদ্ধ করতে পারেনঃ
 
 ```js [[1, 1, "<Loading />"], [2, 2, "<Albums />"]]
 <Suspense fallback={<Loading />}>
@@ -48,9 +48,9 @@ title: <Suspense>
 </Suspense>
 ```
 
-রিয়েক্ট আপনার <CodeStep step={1}>লোডিং ফলব্যাক</CodeStep> দেখাবে যতক্ষণ পর্যন্ত <CodeStep step={2}>অভ্যন্তরীণ কম্পোনেন্ট</CodeStep> এর জন্য প্রয়োজনীয় কোড এবং ডেটা লোড হয়ে যায়।
+<CodeStep step={2}>Children</CodeStep> এর প্রয়োজনীয় সমস্ত কোড এবং ডেটা লোড না হওয়া পর্যন্ত React আপনার <CodeStep step={1}>লোডিং ফলব্যাক</CodeStep> দেখাবে।
 
-নিচের উদাহরণে, `Albums` কম্পোনেন্ট একটি অ্যালবাম তালিকা নিয়ে আসার সময় *স্থগিত* হয়। রেন্ডার করার জন্য প্রস্তুত হওয়া পর্যন্ত, রিয়েক্ট নিকটবর্তী সাসপেন্স সীমা ব্যবহার করে ফলব্যাক হিসেবে আপনার লোডিং কম্পোনেন্ট দেখায়। তারপরে, ডেটা লোড হলে, রিয়েক্ট লোডিং ফলব্যাক লুকিয়ে দেয় এবং ডেটা সহ `Albums` কম্পোনেন্টটি রেন্ডার করে।
+নিচের উদাহরণে, `Albums` কম্পোনেন্ট একটি অ্যালবাম তালিকা নিয়ে আসার সময় *থেমে* যায়। রেন্ডারের জন্য প্রস্তুত হওয়া পর্যন্ত, React নিকটবর্তী Suspense boundary ব্যবহার করে ফলব্যাক হিসেবে আপনার লোডিং কম্পোনেন্ট দেখায়। তারপরে, ডেটা লোড হলে, React লোডিং ফলব্যাক লুকিয়ে দেয় এবং ডেটা সহ `Albums` কম্পোনেন্টটি রেন্ডার করে।
 
 <Sandpack>
 
@@ -250,16 +250,16 @@ async function getAlbums() {
 
 <Note>
 
-**শুধুমাত্র সাসপেন্স-সক্ষম ডেটা উৎসগুলো সাসপেন্স কম্পোনেন্টকে সক্রিয় করতে পারবে।** এদের মধ্যে রয়েছেঃ
+**শুধুমাত্র Suspense-enabled ডেটা উৎসগুলো Suspense কম্পোনেন্টকে সক্রিয় করতে পারবে।** এদের মধ্যে রয়েছেঃ
  
-- সাসপেন্স-সক্ষম ফ্রেমওয়ার্ক দ্বারা ডেটা নিয়ে আসা যেমন, [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/advanced-features/react-18)
-- [`lazy`](/reference/react/lazy) এর সাথে লেইজি-লোডিং কম্পোনেন্ট কোড 
+- Suspense-enabled ফ্রেমওয়ার্ক দ্বারা ডেটা নিয়ে আসা যেমন, [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/advanced-features/react-18)
+- [`lazy`](/reference/react/lazy) এর সাথে Lazy-loading কম্পোনেন্ট কোড 
 
-সাসপেন্সে বুঝতে **পারে না** যখন কোনো ইফেক্ট বা ইভেন্ট হ্যান্ডলারের ভিতরে ডেটা নিয়ে আসা হয় 
+Suspense বুঝতে **পারে না** যখন কোনো Effect বা ইভেন্ট হ্যান্ডলারের ভিতরে ডেটা নিয়ে আসা হয়।
 
-উপরের `Albums` কম্পোনেন্টে আপনি যেভাবে ডেটা লোড করবেন তা আপনার ফ্রেমওয়ার্ক এর উপর নির্ভর করে। আপনি যদি সাস্পেন্স-সক্রিও ফ্রেমওয়ার্ক ব্যাবহার করে থাকেন তাহলে আপনি এর ডেটা নিয়ে আসার ডকুমেন্টেশনে বিস্তারিত তথ্য পাবেন। 
+উপরের `Albums` কম্পোনেন্টে আপনি যেভাবে ডেটা লোড করবেন তা আপনার ফ্রেমওয়ার্ক এর উপর নির্ভর করে। আপনি যদি Suspense-enabled ফ্রেমওয়ার্ক ব্যাবহার করে থাকেন তাহলে আপনি এর ডেটা নিয়ে আসার ডকুমেন্টেশনে বিস্তারিত তথ্য পাবেন। 
 
-মতানুযায়ী নির্ধারিত ফ্রেমওয়ার্ক ছাড়াই সাসপেন্স-সক্ষম ডেটা নিয়ে আসা এখনো সমর্থিত হয়নি। সাসপেন্স-সক্ষম ডেটা উৎস সংযোজনের জন্য প্রয়োজনীয় বিবরণগুলি অস্থিতিশীল এবং অদস্যুত। সাসপেন্স দিয়ে ডেটা উৎসগুলোর সংযোজনের জন্য আধিকারিক API পরবর্তী React সংস্করণে প্রকাশিত হবে। 
+মতানুযায়ী নির্ধারিত ফ্রেমওয়ার্ক ছাড়া Suspense-enabled ডেটা নিয়ে আসা এখনো সমর্থিত নয়। Suspense-enabled ডেটা উৎস সংযোজনের জন্য প্রয়োজনীয় বিবরণগুলি অস্থিতিশীল এবং নথিভুক্ত নয়। Suspense দিয়ে ডেটা উৎসগুলোর সংযোজনের জন্য একটি অফিসিয়াল API পরবর্তী React সংস্করণে প্রকাশিত হবে। 
 
 </Note>
 
@@ -267,7 +267,7 @@ async function getAlbums() {
 
 ### সামগ্রিকভাবে একসঙ্গে কন্টেন্ট প্রকাশ করা {/*revealing-content-together-at-once*/}
 
-স্বাভাবিকভাবে, সাসপেন্সের ভিতরে অবস্থিত সমস্ত ট্রি একটি একক ইউনিট হিসাবে ব্যবহার করা হয়। উদাহরণস্বরূপ, যদিও এই কম্পোনেন্টগুলির মধ্যে *কেবল একটি* ডেটা অপেক্ষা করার জন্য স্থগিত হয়েছে, তবে *সমস্ত* কম্পোনেন্টগুলি একসঙ্গে লোডিং ইন্ডিকেটর দ্বারা প্রতিস্থাপিত হবেঃ
+স্বাভাবিকভাবে, Suspense এর ভিতরে অবস্থিত সমস্ত ট্রি একটি একক ইউনিট হিসাবে বিবেচিত হয়। উদাহরণস্বরূপ, যদিও এই কম্পোনেন্টগুলোর মধ্যে *কেবল একটিই* কিছু ডেটার জন্য অপেক্ষায় থাকে, *সবগুলো* কম্পোনেন্ট একসঙ্গে লোডিং ইন্ডিকেটর দ্বারা প্রতিস্থাপিত হবেঃ
 
 ```js {2-5}
 <Suspense fallback={<Loading />}>
@@ -280,7 +280,7 @@ async function getAlbums() {
 
 তারপরে, সবগুলো প্রদর্শনের জন্য প্রস্তুত হয়ে গেলে, তাদের সবাইকে একসাথে দেখা যাবে। 
 
-নিচের উদাহরণে, `Biography` এবং `Albums` উভয়ই কিছু ডেটা নিয়ে আসে। তবে, তারা একটি একক সাসপেন্স সীমার নীচে দল গ্রুপ করে থাকার জন্য সর্বদা এই কম্পোনেন্টগুলি একই সময়ে "পপ ইন" করে। 
+নিচের উদাহরণে, `Biography` এবং `Albums` উভয়ই কিছু ডেটা নিয়ে আসে। তবে, তারা একটি একক Suspense boundary এর মধ্যে গ্রুপ করে থাকায় সর্বদা এই কম্পোনেন্টগুলি একই সময়ে "পপ ইন" করে। 
 
 <Sandpack>
 
@@ -562,7 +562,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-ডেটা লোড করার জন্যে কম্পোনেন্টগুলি সাসপেন্স সীমার সরাসরি চাইল্ড হতে হবে না। উদাহরণস্বরূপ, আপনি `Biography` এবং `Albums` কে একটি নতুন `Details` কম্পোনেন্টে সরিয়ে নিতে পারেন। এটা আচরণের পরিবর্তন করে না। `Biography` এবং `Albums` একই নিকটতম প্যারেন্ট সাসপেন্স সীমা  সংযোজিত, তাই তাদের প্রদর্শন একসঙ্গে সমন্বিত হয়।
+যে কম্পোনেন্টগুলো ডেটা লোড করে তাদেরকে Suspense boundary এর direct children হতে হবে এমনটি নয়। উদাহরণস্বরূপ, আপনি `Biography` এবং `Albums` কে একটি নতুন `Details` কম্পোনেন্টে সরিয়ে নিতে পারেন। এটা আচরণের পরিবর্তন করে না। `Biography` এবং `Albums` একই নিকটতম parent Suspense boundary সংযোজিত, তাই তাদের প্রদর্শন একসঙ্গে সমন্বিত হয়।
 
 ```js {2,8-11}
 <Suspense fallback={<Loading />}>
@@ -583,9 +583,9 @@ function Details({ artistId }) {
 
 ---
 
-### নেস্টেড কন্টেন্ট প্রকাশ করা যখন এটা লোড হয়ে আসে {/*revealing-nested-content-as-it-loads*/}
+### নেস্টেড কন্টেন্ট লোড হওয়ার সাথে সাথে প্রকাশ করা {/*revealing-nested-content-as-it-loads*/}
 
-যখন একটি কম্পোনেন্ট স্থগিত হয়, তখন নিকটতম প্যারেন্ট সাসপেন্স কম্পোনেন্ট ফলব্যাক প্রদর্শন করে। এটি একাধিক সাসপেন্স কম্পোনেন্ট নেস্ট করে লোডিং ক্রম তৈরি  করে। প্রতিটি সাসপেন্স সীমার ফলব্যাক সময় থাকলে পরবর্তী স্তরের কন্টেন্ট প্রাপ্ত হয়ে পূর্ণ হবে। উদাহরণস্বরূপ, আপনি অ্যালবাম তালিকায় এর নিজস্ব ফলব্যাক দিতে পারেনঃ
+যখন একটি কম্পোনেন্ট থেমে যায়, তখন নিকটতম parent Suspense কম্পোনেন্ট ফলব্যাক প্রদর্শন করে। এর মাধ্যমে আপনি একাধিক Suspense কম্পোনেন্ট দ্বারা একটি লোডিং সিকোয়েন্স তৈরি করতে পারেন। প্রতিটি Suspense boundary এর ফলব্যাক পূর্ণ হবে যদি পরবর্তী স্তরের কন্টেন্ট থাকে। উদাহরণস্বরূপ, আপনি অ্যালবাম তালিকায় এর নিজস্ব ফলব্যাক দিতে পারেনঃ
 
 ```js {3,7}
 <Suspense fallback={<BigSpinner />}>
@@ -598,7 +598,7 @@ function Details({ artistId }) {
 </Suspense>
 ```
 
-এ পরিবর্তনের ফলে `Biography` প্রদর্শনে `Albums` এর লোডের জন্য অপেক্ষা করার প্রয়োজন নেই। 
+এই পরিবর্তনের ফলে `Biography` প্রদর্শনে `Albums` এর লোডের জন্য অপেক্ষা করার প্রয়োজন নেই। 
 
 ক্রমটি হবে এরকমঃ
 
@@ -916,15 +916,17 @@ async function getAlbums() {
 
 </Sandpack>
 
-সাসপেন্স সীমার মাধ্যমে আপনি আপনার UI এর কোন অংশগুলি সর্বদা একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং স্টেটের একটি অনুক্রমিক সিকোয়েন্সে পর্যাপ্ত কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় সাসপেন্স সীমা যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর কোন প্রভাব পড়বে না। 
+Suspense boundary এর মাধ্যমে আপনি আপনার UI এর কোন অংশগুলি সর্বদা একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং স্টেটের একটি অনুক্রমিক সিকোয়েন্সে আরো কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় Suspense boundaries যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর কোন প্রভাব পড়বে না। 
 
-প্রত্যেকটি কম্পোনেন্টের সাথে একটি করে সাসপেন্স সীমা যোগ করবেন না। সাসপেন্স সীমাগুলো লোডিং ক্রমের চেয়ে  ক্ষুদ্র হওয়া উচিৎ নয়, যা আপনি আপনার ব্যবহারকারিকে অভিজ্ঞতা দিতে চান । যদি আপনি একজন ডিজাইনার সঙ্গে কাজ করেন, তবে তাদেরকে জিজ্ঞাসা করুন যে লোডিং স্টেটগুলি কোথায় রাখা উচিত - সম্ভবতই তারা আগেই তা তাদের ডিজাইন ওয়ায়ারফ্রেমগুলিতে অন্তর্ভুক্ত করেছেন।
+প্রত্যেকটি কম্পোনেন্টের সাথে একটি করে Suspense boundary যোগ করবেন না। Suspense boundary গুলো লোডিং ক্রমের চেয়ে ক্ষুদ্র হওয়া উচিৎ নয় যা ব্যহারকারিকে দেখাবেন। যদি আপনি একজন ডিজাইনার সঙ্গে কাজ করেন, তবে তাদেরকে জিজ্ঞাসা করুন যে লোডিং স্টেটগুলি কোথায় রাখা উচিত - সম্ভবতই তারা আগেই তা তাদের ডিজাইন ওয়ায়ারফ্রেমগুলোতে অন্তর্ভুক্ত করেছেন।
 
 ---
 
-### Showing stale content while fresh content is loading {/*showing-stale-content-while-fresh-content-is-loading*/}
+### নতুন কন্টেন লোড হতে হতে পুরাতন কন্টেন্ট দেখানো {/*showing-stale-content-while-fresh-content-is-loading*/}
 
-In this example, the `SearchResults` component suspends while fetching the search results. Type `"a"`, wait for the results, and then edit it to `"ab"`. The results for `"a"` will get replaced by the loading fallback.
+
+এই উদাহরণে `SearchResults` কম্পোনেন্টটি সার্চের ফলাফল নিয়ে আসার সময় থেমে যায়। `"a"` টাইপ করে অপেক্ষা করুন, তারপর এটিকে এডিট করে `"ab"` করুন। `"a"` এর ফলাফলগুলো লোডিং ফলব্যাক দ্বারা প্রতিস্থাপিত হয়ে যাবে।
+
 
 <Sandpack>
 
@@ -1116,7 +1118,8 @@ input { margin: 10px; }
 
 </Sandpack>
 
-A common alternative UI pattern is to *defer* updating the list and to keep showing the previous results until the new results are ready. The [`useDeferredValue`](/reference/react/useDeferredValue) Hook lets you pass a deferred version of the query down: 
+একটি প্রচলিত বিকল্প UI প্যাটার্ন হলো তালিকা হালনাগাদকে *বিলম্বিত করা(defer)* এবং নতুন ফলাফল তৈরি হওয়া পর্যন্ত পূর্ববর্তী ফলাফলগুলো দেখানো।
+[`useDeferredValue`](/reference/react/useDeferredValue) হুকটি আপনাকে query করার একটি deferred ভার্সন পাঠানোর সুবিধা দেয়ঃ
 
 ```js {3,11}
 export default function App() {
@@ -1136,9 +1139,9 @@ export default function App() {
 }
 ```
 
-The `query` will update immediately, so the input will display the new value. However, the `deferredQuery` will keep its previous value until the data has loaded, so `SearchResults` will show the stale results for a bit.
+`query` টি তাৎক্ষণিকভাবে হালনাগাদ হবে, তাই ইনপুটটি নতুন মানটি প্রদর্শন করবে। তবে, `deferredQuery` ডেটা লোড হওয়া অবধি তার পূর্ববর্তী মানটি রেখে দেবে, তাই `SearchResults` কিছুক্ষণের জন্য জীর্ণ ফলাফল দেখাবে।
 
-To make it more obvious to the user, you can add a visual indication when the stale result list is displayed:
+ব্যবহারকারী্র কাছে এটিকে আরও স্পষ্ট করতে, যখন পুরাতন ফলাফল তালিকা প্রদর্শিত হচ্ছে তখন একটি ভিজুয়াল ইন্ডিকেশন যোগ করতে পারেনঃ
 
 ```js {2}
 <div style={{
@@ -1148,7 +1151,7 @@ To make it more obvious to the user, you can add a visual indication when the st
 </div>
 ```
 
-Enter `"a"` in the example below, wait for the results to load, and then edit the input to `"ab"`. Notice how instead of the Suspense fallback, you now see the dimmed stale result list until the new results have loaded:
+নিচের উদাহরণে `"a"` ইনপুট দিন, ফলাফল লোড হওয়ার জন্য অপেক্ষা করুন এবং তারপর ইনপুটটি এডিট করে `"ab"` করুন। লক্ষ্য করুন যে নতুন ফলাফলগুলি লোড না হওয়া পর্যন্ত Suspense fallback এর পরিবর্তে আপনি এখন পুরাতন ফলাফল তালিকাটি কিছুটা অস্পষ্ট ভাবে দেখতে পাচ্ছেনঃ
 
 
 <Sandpack>
@@ -1347,7 +1350,7 @@ input { margin: 10px; }
 
 <Note>
 
-Both deferred values and [transitions](#preventing-already-revealed-content-from-hiding) let you avoid showing Suspense fallback in favor of inline indicators. Transitions mark the whole update as non-urgent so they are typically used by frameworks and router libraries for navigation. Deferred values, on the other hand, are mostly useful in application code where you want to mark a part of UI as non-urgent and let it "lag behind" the rest of the UI.
+Deferred values এবং [transitions](#preventing-already-revealed-content-from-hiding) উভয়ের দ্বারাই আপনি ইনলাইন ইন্ডিকেটর এর পক্ষে Suspense fallback দেখানো থেকে বিরত থাকতে পারেন। Transitions সম্পূর্ণ হালনাগাদটিকে গুরুত্বহীন হিসেবে ধরে নেয় তাই এগুলো সাধারণত ফ্রেমওয়ার্ক এবং রাউটার লাইব্রেরীগুলিতে নেভিগেশনের জন্য ব্যবহৃত হয়। অন্যদিকে, deferred values সাধারণত অ্যাপ্লিকেশন কোডে ব্যবহারকারী ইন্টারফেসের জন্য বেশি উপযোগী যেখানে আপনি UI এর একটি অংশকে গুরুত্বহীন হিসেবে চিহ্নিত করে দিতে পারেন এবং এটিকে অন্যান্য UI এর "lag behind" হিসেবে রেখে দিতে পারেন।
 
 </Note>
 
