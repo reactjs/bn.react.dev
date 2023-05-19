@@ -4,26 +4,27 @@ title: Quick Start
 
 <Intro>
 
-React ডকুমেন্টেশনে স্বাগতম! এই পৃষ্ঠাটি আপনাকে ৮০% ভূমিকা দেবে React এর, যা আপনি প্রতিদিন ব্যবহার করবেন।
+React ডকুমেন্টেশনে আপনাকে স্বাগতম! এই পৃষ্ঠাটি আপনাকে দৈনন্দিন ব্যবহারের জন্য React-এর ৮০% বিষয়গুলোর ধারণা দেবে।
 
 </Intro>
 
 <YouWillLearn>
 
-- How to create and nest components
-- How to add markup and styles
-- How to display data
-- How to render conditions and lists
-- How to respond to events and update the screen
-- How to share data between components
+- কম্পোনেন্টগুলো  কীভাবে তৈরি এবং নেস্ট করবেন
+- মার্কআপ এবং স্টাইল কিভাবে যোগ করবেন
+- তথ্য কিভাবে প্রদর্শন করবেন
+- শর্ত এবং তালিকা কিভাবে রেন্ডার করবেন
+- ইভেন্টগুলোর  উত্তর কিভাবে দেবেন এবং স্ক্রীন আপডেট কিভাবে করবেন
+- কম্পোনেন্টগুলোর মধ্যে তথ্য কিভাবে ভাগ করে দিবেন 
 
 </YouWillLearn>
 
 ## Creating and nesting components {/*components*/}
 
-React apps are made out of *components*. A component is a piece of the UI (user interface) that has its own logic and appearance. A component can be as small as a button, or as large as an entire page.
+একটি React অ্যাপ তৈরি করতে এক বা একাধিক *কম্পোনেন্ট* ব্যবহৃত হয়। কম্পোনেন্ট হচ্ছে ইউজার ইন্টারফেসের একটি অংশ, যার নিজস্ব লজিক এবং বাহ্যিকতা থাকে। একটি কম্পোনেন্ট সাধারণত একটি বাটনের মতো ছোট বা পূর্ণ পৃষ্ঠার মতো বড় হতে পারে।
 
-React components are JavaScript functions that return markup:
+React কম্পোনেন্টগুলো হলো জাভাস্ক্রিপ্ট ফাংশন যা মার্কআপ রিটার্ন করে:
+
 
 ```js
 function MyButton() {
