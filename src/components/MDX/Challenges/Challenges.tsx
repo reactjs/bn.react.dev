@@ -79,8 +79,8 @@ export function Challenges({
   isRecipes,
   noTitle,
   titleText = isRecipes
-   ? 'কিছু উদাহরণ চেষ্টা করে দেখুন' 
-   : 'নিজেকে কিছু চ্যালেঞ্জ করে দেখুন',
+    ? 'কিছু উদাহরণ চেষ্টা করে দেখুন'
+    : 'নিজেকে কিছু চ্যালেঞ্জ করে দেখুন',
   titleId = isRecipes ? 'কিছু উদাহরণ' : 'কিছু চ্যালেঞ্জ',
 }: ChallengesProps) {
   const challenges = parseChallengeContents(children);
