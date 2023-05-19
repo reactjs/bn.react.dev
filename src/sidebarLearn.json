@@ -15,7 +15,7 @@
           "path": "/learn/tutorial-tic-tac-toe"
         },
         {
-          "title": "Thinking in React",
+          "title": "React এর আলোকে চিন্তা করা",
           "path": "/learn/thinking-in-react"
         }
       ]
@@ -161,7 +161,7 @@
       "tags": ["advanced"],
       "routes": [
         {
-          "title": "Referencing Values with Refs",
+          "title": "Ref দিয়ে কোন value এর রেফারেন্স দেওয়া",
           "path": "/learn/referencing-values-with-refs"
         },
         {

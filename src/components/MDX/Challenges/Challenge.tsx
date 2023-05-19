@@ -63,14 +63,14 @@ export function Challenge({
           <div>
             <Button className="mr-2" onClick={toggleHint} active={showHint}>
               <IconHint className="mr-1.5" />{' '}
-              {showHint ? 'Hide hint' : 'Show hint'}
+              {showHint ? 'হিন্ট লুকান' : 'হিন্ট দেখান'}
             </Button>
             <Button
               className="mr-2"
               onClick={toggleSolution}
               active={showSolution}>
               <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
+              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
             </Button>
           </div>
         ) : (
@@ -80,7 +80,7 @@ export function Challenge({
               onClick={toggleSolution}
               active={showSolution}>
               <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
+              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
             </Button>
           )
         )}
@@ -94,7 +94,7 @@ export function Challenge({
             )}
             onClick={handleClickNextChallenge}
             active>
-            Next {isRecipes ? 'Example' : 'Challenge'}
+            পরবর্তী {isRecipes ? 'উদাহরণ' : 'চ্যালেঞ্জ'}
             <IconArrowSmall displayDirection="right" className="block ml-1.5" />
           </Button>
         )}
@@ -104,12 +104,12 @@ export function Challenge({
       {showSolution && (
         <div className="mt-6">
           <h3 className="text-2xl font-bold text-primary dark:text-primary-dark">
-            Solution
+            সমাধান
           </h3>
           {currentChallenge.solution}
           <div className="flex justify-between items-center mt-4">
             <Button onClick={() => setShowSolution(false)}>
-              Close solution
+              সমাধান বন্ধ করুন
             </Button>
             {hasNextChallenge && (
               <Button
@@ -118,7 +118,7 @@ export function Challenge({
                 )}
                 onClick={handleClickNextChallenge}
                 active>
-                Next Challenge
+                পরবর্তী চ্যালেঞ্জ
                 <IconArrowSmall
                   displayDirection="right"
                   className="block ml-1.5"

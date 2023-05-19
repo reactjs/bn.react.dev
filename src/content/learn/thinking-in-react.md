@@ -1,5 +1,5 @@
 ---
-title: Thinking in React
+title: React এর আলোকে চিন্তা করা
 ---
 
 <Intro>
