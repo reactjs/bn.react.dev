@@ -916,9 +916,9 @@ async function getAlbums() {
 
 </Sandpack>
 
-Suspense boundary এর মাধ্যমে আপনি আপনার UI এর কোন অংশগুলি সর্বদা একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং স্টেটের একটি অনুক্রমিক সিকোয়েন্সে আরো কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় Suspense boundaries যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর কোন প্রভাব পড়বে না। 
+Suspense boundary এর মাধ্যমে আপনি আপনার UI এর কোন অংশগুলি সর্বদা একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং state এর একটি অনুক্রমিক সিকোয়েন্সে আরো কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় Suspense boundaries যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর কোন প্রভাব পড়বে না। 
 
-প্রত্যেকটি কম্পোনেন্টের সাথে একটি করে Suspense boundary যোগ করবেন না। Suspense boundary গুলো লোডিং ক্রমের চেয়ে ক্ষুদ্র হওয়া উচিৎ নয় যা ব্যহারকারিকে দেখাবেন। যদি আপনি একজন ডিজাইনার সঙ্গে কাজ করেন, তবে তাদেরকে জিজ্ঞাসা করুন যে লোডিং স্টেটগুলি কোথায় রাখা উচিত - সম্ভবতই তারা আগেই তা তাদের ডিজাইন ওয়ায়ারফ্রেমগুলোতে অন্তর্ভুক্ত করেছেন।
+প্রত্যেকটি কম্পোনেন্টের সাথে একটি করে Suspense boundary যোগ করবেন না। Suspense boundary গুলো লোডিং ক্রমের চেয়ে ক্ষুদ্র হওয়া উচিৎ নয় যা ব্যহারকারিকে দেখাবেন। যদি আপনি একজন ডিজাইনার সঙ্গে কাজ করেন, তবে তাদেরকে জিজ্ঞাসা করুন যে লোডিং state গুলো কোথায় রাখা উচিত - সম্ভবতই তারা আগেই তা তাদের ডিজাইন ওয়ায়ারফ্রেমগুলোতে অন্তর্ভুক্ত করেছেন।
 
 ---
 
@@ -1356,9 +1356,9 @@ Deferred values এবং [transitions](#preventing-already-revealed-content-fro
 
 ---
 
-### Preventing already revealed content from hiding {/*preventing-already-revealed-content-from-hiding*/}
+### প্রকাশ করে ফেলা কন্টেন্টগুল লুকাতে না দেয়া {/*preventing-already-revealed-content-from-hiding*/}
 
-When a component suspends, the closest parent Suspense boundary switches to showing the fallback. This can lead to a jarring user experience if it was already displaying some content. Try pressing this button:
+যখন একটি কম্পোনেন্ট থেমে যায় তখন নিকটতম প্যরেন্ট Suspense boundary এটির পরিবর্তে ফলব্যাক দেখায়। এমন যদি হয় যে এটি আগে থেকেই কিছু কন্টেন্ট দেখাচ্ছিল, তবে এটি ব্যবহারকারীর জন্য একটি অস্বাভাবিক অভিজ্ঞতা সৃষ্টি করতে পারে। এই বাটনটি প্রেস করে দেখুনঃ 
 
 <Sandpack>
 
@@ -1727,9 +1727,9 @@ main {
 
 </Sandpack>
 
-When you pressed the button, the `Router` component rendered `ArtistPage` instead of `IndexPage`. A component inside `ArtistPage` suspended, so the closest Suspense boundary started showing the fallback. The closest Suspense boundary was near the root, so the whole site layout got replaced by `BigSpinner`.
+আপনি যখন বাটনটি প্রেস করেছেন তখন `Router` কম্পোনেন্টটি `IndexPage` এর পরিবর্তে `ArtistPage` কে রেন্ডার করেছে। `ArtistPage` এর ভিতরের একটি কম্পোনেন্ট থেমে গেছে, তাই নিকটতম Suspense boundary ফলব্যাক দেখানো শুরু করেছে। নিকটতম Suspense boundary রুটের কাছাকাছি ছিল, তাই সাইটের সমগ্র লেআউটটি `BigSpinner` দ্বারা প্রতিস্থাপিত হয়ে গেছে।
 
-To prevent this, you can mark the navigation state update as a *transition* with [`startTransition`:](/reference/react/startTransition)
+আপনি যদি চান যে এমনটি না হোক সেক্ষেত্রে আপনি [`startTransition`](/reference/react/startTransition) দ্বারা navigation state update কে *transition* হিসেবে চিহ্নিত করে দিতে পারেনঃ
 
 ```js {5,7}
 function Router() {
@@ -1743,7 +1743,7 @@ function Router() {
   // ...
 ```
 
-This tells React that the state transition is not urgent, and it's better to keep showing the previous page instead of hiding any already revealed content. Now clicking the button "waits" for the `Biography` to load:
+এটা React কে বলে যে state ট্রান্সিশনটি এখনই জরুরী নয়, এবং ইতিমধ্যেই প্রকাশ হয়ে যাওয়া কোনো কন্টেন্ট লুকানোর চেয়ে আগের পেজটি দেখিয়ে রাখাই ভাল। এখন বাটনটি ক্লিক করা হলে এটি `Biography` লোড হওয়ার জন্য "অপেক্ষা" করবেঃ
 
 <Sandpack>
 
@@ -2114,19 +2114,19 @@ main {
 
 </Sandpack>
 
-A transition doesn't wait for *all* content to load. It only waits long enough to avoid hiding already revealed content. For example, the website `Layout` was already revealed, so it would be bad to hide it behind a loading spinner. However, the nested `Suspense` boundary around `Albums` is new, so the transition doesn't wait for it.
+একটি ট্রান্সিশন *সবগুলো* কন্টেন্ট লোড হওয়ার জন্য অপেক্ষা করে না। এটি কেবলমাত্র ইতিমধ্যে প্রকাশিত কন্টেন্ট লুকানো এড়ানোর জন্য যতক্ষণ সময় প্রয়োজন ততক্ষণ অপেক্ষা করে। উদাহরণস্বরূপ, ওয়েবসাইটের `Layout` ইতিমধ্যেই প্রকাশিত হয়ে গেছে, তাই এটিকে লোডিং স্পিনারের পিছনে লুকানো ভাল হবে না। তবে, `Albums` কে ঘিরে নেস্টেড `Suspense` boundary টি নতুন, তাই ট্রান্সিশনটি এর জন্য অপেক্ষা করে না।
 
 <Note>
 
-Suspense-enabled routers are expected to wrap the navigation updates into transitions by default.
+Suspense-enabled রাউটার থেকে এটা আশা করা যায় যে এগুলো স্বাভাবিকভাবেই navigation আপডেটগুলোকে ট্রান্সিশনের মধ্যে রেখে দেবে।
 
 </Note>
 
 ---
 
-### Indicating that a transition is happening {/*indicating-that-a-transition-is-happening*/}
+### ট্রান্সিশন ঘটছে এটি ইন্ডিকেট করা {/*indicating-that-a-transition-is-happening*/}
 
-In the above example, once you click the button, there is no visual indication that a navigation is in progress. To add an indicator, you can replace [`startTransition`](/reference/react/startTransition) with [`useTransition`](/reference/react/useTransition) which gives you a boolean `isPending` value. In the example below, it's used to change the website header styling while a transition is happening:
+উপরের উদাহরনটিতে, আপনি যদি একবার বাটনটিতে ক্লিক করেন দেখবেন কোনো দৃশ্যমান ইন্ডিকেশন নেই যে একটি নেভিগেশনের অগ্রগতি হচ্ছে। একটি ইন্ডিকেটর যোগ করতে আপনি [`startTransition`](/reference/react/startTransition) এর স্থানে [`useTransition`](/reference/react/useTransition) ব্যবহার করতে পারেন যা আপনাকে একটি boolean মান `isPending` দেয়। নিচের উদাহরণে ওয়েবসাইটের হেডার স্টাইল পরিবর্তন করার সময় একটি ট্রান্সিশন ঘটছে তা দেখানোর জন্য এটি ব্যবহার করা হয়েছেঃ
 
 <Sandpack>
 
@@ -2502,27 +2502,31 @@ main {
 
 ---
 
-### Resetting Suspense boundaries on navigation {/*resetting-suspense-boundaries-on-navigation*/}
+### নেভিগেশনে Suspense boundary গুলো রিসেট করা {/*resetting-suspense-boundaries-on-navigation*/}
 
-During a transition, React will avoid hiding already revealed content. However, if you navigate to a route with different parameters, you might want to tell React it is *different* content. You can express this with a `key`:
+
+একটি ট্রান্সিশনের সময় React ইতিমধ্যে প্রকাশিত কন্টেন্ট লুকানো থেকে বিরত থাকবে। তবে, আপনি যদি ভিন্ন কোনো প্যরামিটার বিশিষ্ট রাউটে নেভিগেট করেন, আপনি হয়ত React কে বলতে চান যে এটি *ভিন্ন* কন্টেন্ট। আপনি এটি একটি `key` দিয়ে বুঝাতে পারেনঃ
+
 
 ```js
 <ProfilePage key={queryParams.id} />
 ```
 
-Imagine you're navigating within a user's profile page, and something suspends. If that update is wrapped in a transition, it will not trigger the fallback for already visible content. That's the expected behavior.
+ধরুন, আপনি একজন ব্যবহারকারীর প্রোফাইল পেজের মধ্যেই নেভিগেট করছেন এবং কিছু একটা থেমে গেল। যদি সেই আপডেটটি একটি ট্রান্সিশনের মধ্যে থাকে, তবে এটি ইতিমধ্যেই প্রকাশিত কন্টেন্টের জন্য ফলব্যাককে ট্রিগার করবে না। এরকমটাই প্রত্যাশিত।
 
-However, now imagine you're navigating between two different user profiles. In that case, it makes sense to show the fallback. For example, one user's timeline is *different content* from another user's timeline. By specifying a `key`, you ensure that React treats different users' profiles as different components, and resets the Suspense boundaries during navigation. Suspense-integrated routers should do this automatically.
+যাইহোক, এখন আবার মনে করুন আপনি দুটি ভিন্ন ব্যবহারকারীর প্রোফাইলের মধ্যে নেভিগেট করছেন। এই ক্ষেত্রে ফলব্যাকটি দেখানোটি যুক্তিসই। উদাহরণস্বরূপ, একজন ব্যবহারকারীর টাইমলাই আরেকজন ব্যবহারকারীর টাইমলাইন থেকে *আলাদা কন্টেন্ট*। একটি `key` নির্দিষ্ট করে দেয়ার মাধ্যমে আপনি নিশ্চিত করেন যে, React ভিন্ন ভিন্ন ব্যবহারকারীর প্রোফাইলকে ভিন্ন ভিন্ন কম্পোনেন্ট হিসাবে বিবেচনা করে এবং নেভিগেশনের সময় Suspense boundariy গুলো রিসেট করে। Suspense-integrated রাউটারগুলো এটি স্বয়ংক্রিয়ভাবেই করবে।
 
 ---
 
-### Providing a fallback for server errors and server-only content {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
+### server errors এবং server-only কন্টেন্টের জন্য একটি ফলব্যাক প্রদান করা {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
 
-If you use one of the [streaming server rendering APIs](/reference/react-dom/server) (or a framework that relies on them), React will also use your `<Suspense>` boundaries to handle errors on the server. If a component throws an error on the server, React will not abort the server render. Instead, it will find the closest `<Suspense>` component above it and include its fallback (such as a spinner) into the generated server HTML. The user will see a spinner at first.
 
-On the client, React will attempt to render the same component again. If it errors on the client too, React will throw the error and display the closest [error boundary.](/reference/react/Component#static-getderivedstatefromerror) However, if it does not error on the client, React will not display the error to the user since the content was eventually displayed successfully.
+আপনি যদি [streaming server rendering APIs](/reference/react-dom/server) (অথবা এদের উপর নির্ভরকারী একটি ফ্রেমওয়ার্ক) এর কোনোটি ব্যবহার করেন, React আপনার `<Suspense>` boundary গুলোও ব্যবহার করবে সার্ভার এর এরর গুলো তত্ত্বাবধান করতে। যদি কোনো কম্পোনেন্ট সার্ভারে এরর থ্রো করে, React সার্ভার রেন্ডার বন্ধ করবে না। বরং, এর নিকটতম `<Suspense>` কম্পোনেন্টটি খুঁজে বের করবে এবং তার ফলব্যাক (যেমন একটি স্পিনার), তৈরি করা সার্ভার HTML এর মধ্যে যোগ করবে। ব্যবহারকারী প্রথমে একটি স্পিনার দেখবে।
 
-You can use this to opt out some components from rendering on the server. To do this, throw an error in the server environment and then wrap them in a `<Suspense>` boundary to replace their HTML with fallbacks:
+React ক্লায়েন্টে একই আবার কম্পোনেন্টটি রেন্ডার করার চেষ্টা করবে। যদি ক্লায়েন্টেও এরর হয়, React এররটি থ্রো করবে এবং নিকটতম [error boundary](/reference/react/Component#static-getderivedstatefromerror) টি প্রদর্শন করবে। তবে, যদি ক্লায়েন্টে এরর না হয়, React এরর টি ক্লায়েন্টে দেখাবে না যেহেতু কন্টেন্টটি শেষ পর্যন্ত সফলভাবে প্রদর্শিত হয়েছিল।
+
+সার্ভারে রেন্ডার হওয়া থেকে কিছু কম্পোনেন্ট তুলে নিতে চাইলে আপনি এটি ব্যবহার করতে পারেন। এটি করতে, সার্ভার এনভায়রনমেন্ট এ এরর থ্রো করুন এবং তারপরে তাদের HTML গুলো ফলব্যাক দিয়ে পরিবর্তন করতে তাদের একটি `<Suspense>` বাউন্ডারির মধ্যে রেখে দিনঃ
+
 
 ```js
 <Suspense fallback={<Loading />}>
@@ -2537,17 +2541,20 @@ function Chat() {
 }
 ```
 
-The server HTML will include the loading indicator. It will be replaced by the `Chat` component on the client.
+সার্ভার HTML টির মধ্যেই লোডিং নির্দেশকটি থাকবে। এটি ক্লায়েন্টে `Chat` কম্পোনেন্ট দ্বারা প্রতিস্থাপিত হবে।
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## সমস্যার সমাধান করা {/*troubleshooting*/}
 
-### How do I prevent the UI from being replaced by a fallback during an update? {/*preventing-unwanted-fallbacks*/}
+### কিভাবে আমি একটি আপডেটের সময় ফলব্যাক দ্বারা UI প্রতিস্থাপিত হওয়াকে রোধ করবো? {/*preventing-unwanted-fallbacks*/}
 
-Replacing visible UI with a fallback creates a jarring user experience. This can happen when an update causes a component to suspend, and the nearest Suspense boundary is already showing content to the user.
 
-To prevent this from happening, [mark the update as non-urgent using `startTransition`](#preventing-already-revealed-content-from-hiding). During a transition, React will wait until enough data has loaded to prevent an unwanted fallback from appearing:
+ফলব্যাক দ্বারা দৃশ্যমান UI প্রতিস্থাপন করা হলে ব্যবহারকারীর জন্য এটি অস্বাভাবিক অভিজ্ঞতা তৈরি করে. এটি ঘটতে পারে যখন একটি আপডেট কোনো কম্পোনেন্টকে থামিয়ে দেয় এবং নিকটতম Suspense boundary ইতিমধ্যেই ব্যবহারকারীর জন্য কন্টেন্ট প্রদর্শন করছে।
+
+এটি ঘটানো থেকে বিরত থাকার জন্য [আপডেটটিকে অতি জরুরি নয় হিসেবে চিহ্নিত করুন `startTransition`](#preventing-already-revealed-content-from-hiding)। 
+একটি ট্রান্সিশনের সময়, React একটি অবাঞ্ছিত ফলব্যাক প্রদর্শিত হওয়া থেকে বিরত রাখতে পর্যাপ্ত পরিমাণ ডেটা লোড না হওয়ার পর্যন্ত অপেক্ষা করবেঃ
+
 
 ```js {2-3,5}
 function handleNextPageClick() {
@@ -2558,8 +2565,10 @@ function handleNextPageClick() {
 }
 ```
 
-This will avoid hiding existing content. However, any newly rendered `Suspense` boundaries will still immediately display fallbacks to avoid blocking the UI and let the user see the content as it becomes available.
 
-**React will only prevent unwanted fallbacks during non-urgent updates**. It will not delay a render if it's the result of an urgent update. You must opt in with an API like [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
+এটা বিদ্যমান কন্টেন্ট লুকানো থেকে এড়িয়ে যাবে। তবে, যেকোনো নতুন রেন্ডার করা `Suspense` বাউন্ডারি তাৎক্ষণাৎ ফলব্যাক দেখাবে যাতে UI ব্লক না হয় এবং কন্টেন্ট পাওয়া মাত্র ব্যবহারকারী তা দেখতে পারে।
 
-If your router is integrated with Suspense, it should wrap its updates into [`startTransition`](/reference/react/startTransition) automatically.
+**React শুধুমাত্র অতি জরুরি নয় এমন আপডেট এর সময়ই অস্বাভাবিক ফলব্যাক গুলো প্রতিরোধ করবে**। এটি একটি রেন্ডারকে বিলম্ব করবে না যদি এটি কোনো জরুরী আপডেটের ফলাফল হয়ে থাকে। আপনাকে অবশ্যই [`startTransition`](/reference/react/startTransition) বা [`useDeferredValue`](/reference/react/useDeferredValue) এর মত API ব্যবহার করতে হবে।
+
+
+আপনার রাউটারটি যদি Suspense এর সাথে সংযোজিত থাকে, তাহলে এটি তার আপডেটগুলোকে স্বয়ংক্রিয়ভাবেই [`startTransition`](/reference/react/startTransition) এর মধ্যে রেখে দেবে।
