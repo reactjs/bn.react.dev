@@ -41,9 +41,9 @@ export default function Avatar() {
 
 </Sandpack>
 
-Here, `"https://i.imgur.com/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
+এখানে, `"https://i.imgur.com/7vQD0fPs.jpg"` এবং `"Gregorio Y. Zara"` স্ট্রিং হিসেবে পাস করা হয়েছে ।
 
-But what if you want to dynamically specify the `src` or `alt` text? You could **use a value from JavaScript by replacing `"` and `"` with `{` and `}`**:
+কিন্তু যদি আপনি dynamic ভাবে `src` বা `alt` টেক্সট নির্দিষ্ট করতে চান? আপনি **জাভাস্ক্রিপ্ট থেকে একটি value ব্যবহার করে `"` and `"` কে `{` and `}`** দিয়ে পরিবর্তন করতে পারেন:
 
 <Sandpack>
 
@@ -67,11 +67,11 @@ export default function Avatar() {
 
 </Sandpack>
 
-Notice the difference between `className="avatar"`, which specifies an `"avatar"` CSS class name that makes the image round, and `src={avatar}` that reads the value of the JavaScript variable called `avatar`. That's because curly braces let you work with JavaScript right there in your markup!
+`className="avatar"` এর মধ্যে পার্থক্য লক্ষ্য করুন, যা একটি `"avatar"` CSS ক্লাসের নাম নির্দিষ্ট করে যা ইমেজটিকে গোলাকার করে, এবং `src={avatar}` যেটি `avatar` নামে জাভাস্ক্রিপ্ট ভেরিয়েবলের value পড়ে। কারণ curly braces আপনাকে আপনার মার্কআপে জাভাস্ক্রিপ্টের সাথে কাজ করতে দেয়!
 
-## Using curly braces: A window into the JavaScript world {/*using-curly-braces-a-window-into-the-javascript-world*/}
+## Curly braces ব্যবহার: জাভাস্ক্রিপ্ট জগতের একটি window {/*using-curly-braces-a-window-into-the-javascript-world*/}
 
-JSX is a special way of writing JavaScript. That means it’s possible to use JavaScript inside it—with curly braces `{ }`. The example below first declares a name for the scientist, `name`, then embeds it with curly braces inside the `<h1>`:
+JSX জাভাস্ক্রিপ্ট লেখার একটি বিশেষ উপায়। তার মানে এর ভিতরে জাভাস্ক্রিপ্ট ব্যবহার করা সম্ভব— curly braces `{ }` দিয়ে। নীচের উদাহরণটিতে প্রথমে বিজ্ঞানীর জন্য একটি নাম ঘোষণা করা হয়েছে, নাম, তারপর এটিকে `<h1>` এর ভিতরে curly braces দিয়ে embeds করা হয়েছে:
 
 <Sandpack>
 
