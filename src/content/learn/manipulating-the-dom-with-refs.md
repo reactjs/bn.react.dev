@@ -1,52 +1,52 @@
 ---
-title: 'Manipulating the DOM with Refs'
+title: 'Ref ব্যবহার করে DOM ম্যানিপুলেশন'
 ---
 
 <Intro>
 
-React automatically updates the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React--for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a *ref* to the DOM node.
+React স্বয়ংক্রিয়ভাবে [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) আপডেট করে যেন এটি আপনার রেন্ডার আউটপুটের সাথে মিলে যায়, তাই আপনার components দ্বারা প্রায় সময়ই এটি পরিবর্তন করার প্রয়োজন হবে না। তবে, মাঝে মাঝে আপনার React দ্বারা পরিচালিত DOM elements এর প্রয়োজন হতে পারে--উদাহরণস্বরূপ, একটি node কে focus করতে, scroll করতে, অথবা এর আকার এবং অবস্থান পরিমাপ করতে। React এ এই ধরণের কাজ করার জন্য কোনো বিল্ট-ইন উপায় নেই, তাই আপনার DOM node এর *ref* প্রয়োজন হবে।
 
 </Intro>
 
 <YouWillLearn>
 
-- How to access a DOM node managed by React with the `ref` attribute
-- How the `ref` JSX attribute relates to the `useRef` Hook
-- How to access another component's DOM node
-- In which cases it's safe to modify the DOM managed by React
+- কীভাবে React এর পরিচালিত একটি DOM নোড `ref` এট্রিবিউট ব্যবহার করে অ্যাক্সেস করবেন
+- কীভাবে `ref` JSX এট্রিবিউট `useRef` হুকের সাথে সম্পর্কিত।
+- কীভাবে অন্য একটি কম্পোনেন্টের DOM নোড অ্যাক্সেস করবেন
+- কোন কোন ক্ষেত্রে React এর পরিচালিত একটি DOM নোড পরিবর্তন করা নিরাপদ
 
 </YouWillLearn>
 
-## Getting a ref to the node {/*getting-a-ref-to-the-node*/}
+## একটা নোডকে ref পর্যন্ত নিয়ে যাওয়া {/*getting-a-ref-to-the-node*/}
 
-To access a DOM node managed by React, first, import the `useRef` Hook:
+React এর পরিচালিত একটি DOM নোড অ্যাক্সেস করতে, প্রথমে, `useRef` হুকটি ইমপোর্ট করুনঃ
 
 ```js
 import { useRef } from 'react';
 ```
 
-Then, use it to declare a ref inside your component:
+এর পর, একে ব্যবহার করে আপনার কম্পোনেন্টের মধ্যে একটি ref ডিক্লেয়ার করেনঃ
 
 ```js
 const myRef = useRef(null);
 ```
 
-Finally, pass it to the DOM node as the `ref` attribute:
+সবশেষে, DOM নোডে একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
 
 ```js
 <div ref={myRef}>
 ```
 
-The `useRef` Hook returns an object with a single property called `current`. Initially, `myRef.current` will be `null`. When React creates a DOM node for this `<div>`, React will put a reference to this node into `myRef.current`. You can then access this DOM node from your [event handlers](/learn/responding-to-events) and use the built-in [browser APIs](https://developer.mozilla.org/docs/Web/API/Element) defined on it.
+`useRef` হুক একটি অবজেক্ট রিটার্ন করে যার একটি মাত্র প্রপার্টি থাকে `current` নামে। প্রাথমিকভাবে, `myRef.current` হবে `null`। যখন React এই `<div>` এর জন্য একটি DOM node তৈরি করে, React এই নোডের একটি রেফারেন্স `myRef.current`-এ রাখবে। তারপর আপনি আপনার [event handlers](/learn/responding-to-events) থেকে এই DOM node এ অ্যাক্সেস করতে পারেন এবং এর উপর defined বিল্ট-ইন [browser APIs](https://developer.mozilla.org/docs/Web/API/Element) ব্যবহার করতে পারেন।
 
 ```js
 // You can use any browser APIs, for example:
 myRef.current.scrollIntoView();
 ```
 
-### Example: Focusing a text input {/*example-focusing-a-text-input*/}
+### উদাহরণঃ একটা টেক্সট ইনপুটে ফোকাস করা {/*example-focusing-a-text-input*/}
 
-In this example, clicking the button will focus the input:
+এই উদাহরণে, বাটনে ক্লিক করলে ইনপুট ফোকাস হবেঃ
 
 <Sandpack>
 
@@ -73,18 +73,18 @@ export default function Form() {
 
 </Sandpack>
 
-To implement this:
+এটা করার জন্যঃ
 
-1. Declare `inputRef` with the `useRef` Hook.
-2. Pass it as `<input ref={inputRef}>`. This tells React to **put this `<input>`'s DOM node into `inputRef.current`.**
-3. In the `handleClick` function, read the input DOM node from `inputRef.current` and call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on it with `inputRef.current.focus()`.
-4. Pass the `handleClick` event handler to `<button>` with `onClick`.
+1. `useRef` হুক ব্যবহার করে `inputRef` ডিক্লেয়ার করুন।
+2. `<input ref={inputRef}>` হিসেবে একে পাস করে দিন। এটা React কে বলবে যেন  **এই  `<input>`এর DOM নোড `inputRef.current`এর মধ্যে রাখা হয়।**
+3. `handleClick` ফাংশনে, `inputRef.current` থেকে ইনপুট DOM নোড রিড করুন এবং `inputRef.current.focus()` দিয়ে এর উপর [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) কল করুন।
+4. `handleClick` ইভেন্ট হ্যান্ডলারটি  `onClick` এর সাহায্যে `<button>` এ পাঠিয়ে দিন।
 
-While DOM manipulation is the most common use case for refs, the `useRef` Hook can be used for storing other things outside React, like timer IDs. Similarly to state, refs remain between renders. Refs are like state variables that don't trigger re-renders when you set them. Read about refs in [Referencing Values with Refs.](/learn/referencing-values-with-refs)
+যদিও DOM ম্যানিপুলেশন এর জন্যই refs এর ব্যবহার সবচেয়ে বেশি হয়, `useRef` হুক React এর বাইরে অন্যান্য জিনিস সংরক্ষণ করার জন্য ব্যবহৃত হতে পারে, যেমন টাইমার ID। State এর মতোই, রেন্ডারে মধ্যবর্তী সময়ে ref ঠিকঠাক থাকে। Refs হল state variables এর মত যেগুলি সেট করার সময় re-render ট্রিগার হয় না। রেফস সম্বন্ধে পড়ুন [ref এর সাহায্যে ভ্যালু রেফারেন্সিং](/learn/referencing-values-with-refs) অংশে।
 
-### Example: Scrolling to an element {/*example-scrolling-to-an-element*/}
+### উদাহরণঃ কোন এলিমেন্ট পর্যন্ত স্ক্রল করা {/*example-scrolling-to-an-element*/}
 
-You can have more than a single ref in a component. In this example, there is a carousel of three images. Each button centers an image by calling the browser [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method on the corresponding DOM node:
+আপনি একটি কম্পোনেন্টে একাধিক ref রাখতে পারেন। এই উদাহরণে, তিনটি চিত্রের একটি ক্যারাসেল আছে। প্রতিটি বাটন ব্রাউজারে ওই ছবির সাথে সম্পর্কিত DOM নোডে [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) মেথড কল করে ছবিটিকে মাঝামাঝি আনে।
 
 <Sandpack>
 
