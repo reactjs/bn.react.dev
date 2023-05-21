@@ -40,7 +40,7 @@ const myRef = useRef(null);
 `useRef` হুক একটি অবজেক্ট রিটার্ন করে যার একটি মাত্র প্রপার্টি থাকে `current` নামে। প্রাথমিকভাবে, `myRef.current` হবে `null`। যখন React এই `<div>` এর জন্য একটি DOM node তৈরি করে, React এই নোডের একটি রেফারেন্স `myRef.current`-এ রাখবে। তারপর আপনি আপনার [event handlers](/learn/responding-to-events) থেকে এই DOM node এ অ্যাক্সেস করতে পারেন এবং এর উপর defined বিল্ট-ইন [browser APIs](https://developer.mozilla.org/docs/Web/API/Element) ব্যবহার করতে পারেন।
 
 ```js
-// You can use any browser APIs, for example:
+// আপনি যেকোন ব্রাউজার API ব্যবহার করতে পারেন। উদাহরণস্বরূপঃ
 myRef.current.scrollIntoView();
 ```
 
@@ -193,27 +193,27 @@ li {
 
 <DeepDive>
 
-#### How to manage a list of refs using a ref callback {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
+#### কীভাবে একটি ref callback ব্যবহার করে ref এর একটা তালিকা ম্যানেজ করবেন {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
 
-In the above examples, there is a predefined number of refs. However, sometimes you might need a ref to each item in the list, and you don't know how many you will have. Something like this **wouldn't work**:
+উপরের উদাহরণগুলিতে, ref এর একটি পূর্বনির্ধারিত সংখ্যা রয়েছে। যদিও, মাঝে মাঝে আপনার তালিকার প্রতিটি আইটেমের জন্য একটি ref প্রয়োজন হতে পারে, এবং আপনি জানবেন না আপনার কতগুলো থাকবে। এরকম কিছু **কাজ করবে নাঃ**
 
 ```js
 <ul>
   {items.map((item) => {
-    // Doesn't work!
+    // কাজ করে না!
     const ref = useRef(null);
     return <li ref={ref} />;
   })}
 </ul>
 ```
 
-This is because **Hooks must only be called at the top-level of your component.** You can't call `useRef` in a loop, in a condition, or inside a `map()` call.
+এর কারণ **হুক শুধুমাত্র আপনার কম্পোনেন্টের শীর্ষ-স্তরে ডাকতে হবে।** আপনি একটি লুপে, একটি কন্ডিশনে, বা একটি `map()` কলের ভিতরে `useRef` ডাকতে পারবেন না।
 
-One possible way around this is to get a single ref to their parent element, and then use DOM manipulation methods like [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) to "find" the individual child nodes from it. However, this is brittle and can break if your DOM structure changes.
+একে এডিয়ে যাবার একটি সম্ভাব্য উপায় হল প্যারেন্ট এলিমেন্টে একটা মাত্র ref নিয়ে যাওয়া এবং তারপরে DOM ম্যানিপুলেশন পদ্ধতিগুলি যেমন [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) ব্যবহার করে এটি থেকে individual child node "খুঁজে" বের করা। যদিও, এটি অত্যন্ত নাজুক এবং যদি আপনার DOM কাঠামো পরিবর্তন হয় তবে এটি ভেঙে যেতে পারে।
 
-Another solution is to **pass a function to the `ref` attribute.** This is called a [`ref` callback.](/reference/react-dom/components/common#ref-callback) React will call your ref callback with the DOM node when it's time to set the ref, and with `null` when it's time to clear it. This lets you maintain your own array or a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and access any ref by its index or some kind of ID.
+অন্য একটি সমাধান হলো **`ref` এট্রিবিউটে একটি ফাংশন পাস করা।** এটি [`ref` callback.](/reference/react-dom/components/common#ref-callback) নামে পরিচিত। React যখন রেফ সেট করার সময় হবে তখন এটি আপনার ref callback কে DOM নোড দিয়ে কল করবে, এবং যখন এটি সাফ করার সময় হবে তখন `null` দিয়ে ডাকবে। এটি আপনাকে আপনার নিজের একটি array বা একটি [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) বজায় রাখতে দেয়, এবং এর মাধ্যমে আপনি তার ইনডেক্স বা কোন ধরণের ID দ্বারা যেকোনো ref অ্যাক্সেস করতে পারেন।
 
-This example shows how you can use this approach to scroll to an arbitrary node in a long list:
+এই উদাহরণটি দেখায় যে আপনি এই পদ্ধতিটি কীভাবে ব্যবহার করে একটি দীর্ঘ তালিকায় যেকোনো নোডে স্ক্রল করতে পারেনঃ
 
 <Sandpack>
 
@@ -342,9 +342,9 @@ This lets you read individual DOM nodes from the Map later.
 
 ## Accessing another component's DOM nodes {/*accessing-another-components-dom-nodes*/}
 
-When you put a ref on a built-in component that outputs a browser element like `<input />`, React will set that ref's `current` property to the corresponding DOM node (such as the actual `<input />` in the browser).
+আপনি যখন এমন একটা বিল্ট-ইন কম্পোনেন্টে রেফ বসান যা `<input />` এর মত একটি ব্রাউজার এলিমেন্ট আউটপুট হিসেবে দেয়, React সেই ref এর  `current` হিসেবে প্রপার্টি সম্পর্কিত DOM নোড (যেমন ব্রাউজারের প্রকৃত `<input />`) সেট করে দেবে। 
 
-However, if you try to put a ref on **your own** component, like `<MyInput />`, by default you will get `null`. Here is an example demonstrating it. Notice how clicking the button **does not** focus the input:
+তবে, আপনি যদি **আপনার নিজের** কম্পোনেন্টে একটা ref বসাতে চান, যেমন `<MyInput />`, তাহলে স্বাভাবিকভাবে আপনি `null` পাবেন। এখানে বিষয়টা দেখায় এমন একটি উদাহরণ দেখানো হল। খেয়াল করুন বাটনে ক্লিক করলে ইনপুটে ফোকাস **হয় না।**
 
 <Sandpack>
 
@@ -375,11 +375,11 @@ export default function MyForm() {
 
 </Sandpack>
 
-To help you notice the issue, React also prints an error to the console:
+আপনি যেন ঝামেলাটা খেয়াল করেন, সেজন্য React কনসোলে একটি এরর দেখিয়ে দেয়ঃ
 
 <ConsoleBlock level="error">
 
-Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+সতর্কতাঃ ফাংশন কম্পোনেন্টে ref দেওয়া যায় না। এমন একটি ref এ অ্যাক্সেসের চেষ্টা বিফল হবে। আপনি কি React.forwardRef() ব্যবহার করতে চেয়েছিলেন?
 
 </ConsoleBlock>
 
