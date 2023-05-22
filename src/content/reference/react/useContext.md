@@ -48,12 +48,12 @@ function MyComponent() {
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহারবিধি {/*usage*/}
 
 
-### Passing data deeply into the tree {/*passing-data-deeply-into-the-tree*/}
+### ট্রির গভীরে ডাটা পাস করা {/*passing-data-deeply-into-the-tree*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+[context](/learn/passing-data-deeply-with-context) রিড করা এবং সেখানে সাবস্ক্রাইব করার জন্য `useContext` কে আপনার কম্পোনেন্ট এর একেবারে উপরের স্তরে কল করতে হবে।
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { useContext } from 'react';
@@ -62,10 +62,9 @@ function Button() {
   const theme = useContext(ThemeContext);
   // ... 
 ```
+`useContext` আপনার পাস করা <CodeStep step={1}>context</CodeStep> এর জন্য <CodeStep step={2}>context এর মান</CodeStep> রিটার্ন করে। context এর মান নির্ধারণ করার জন্য, React কম্পোনেন্ট ট্রিতে সার্চ করে এবং এই নির্দিষ্ট context এর জন্য **উপরের দিকে সব থেকে কাছের context provider** কে খুঁজে বের করে।
 
-`useContext` returns the <CodeStep step={2}>context value</CodeStep> for the <CodeStep step={1}>context</CodeStep> you passed. To determine the context value, React searches the component tree and finds **the closest context provider above** for that particular context.
-
-To pass context to a `Button`, wrap it or one of its parent components into the corresponding context provider:
+একটি `Button` এ context পাস করতে, এটিকে বা এর প্যারেন্ট কম্পোনেন্টগুলির একটিকে সংশ্লিষ্ট context provider দিয়ে wrap করতে হবেঃ
 
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
@@ -81,11 +80,11 @@ function Form() {
 }
 ```
 
-It doesn't matter how many layers of components there are between the provider and the `Button`. When a `Button` *anywhere* inside of `Form` calls `useContext(ThemeContext)`, it will receive `"dark"` as the value.
+Provider এবং `Button` এর মধ্যে কম্পোনেন্টগুলির কতগুলি স্তর রয়েছে তা বিবেচ্য নয়। যখন `Form` এর ভিতরে যেকোনো জায়গায় একটি `Button` `useContext(ThemeContext)` কল করে, তখন এটি মান হিসাবে `"dark"` পাবে।
 
 <Pitfall>
 
-`useContext()` always looks for the closest provider *above* the component that calls it. It searches upwards and **does not** consider providers in the component from which you're calling `useContext()`.
+`useContext()` সবসময় একে কল করে এমন কম্পোনেন্টের *উপরের দিকে* নিকটতম provider কে খুঁজে। এটি উপরের দিকে সার্চ করে এবং আপনি যে কম্পোনেন্ট থেকে `useContext()` কল করছেন সেখানকার provider গুলোকে বিবেচনা **করা হয় না**।
 
 </Pitfall>
 
