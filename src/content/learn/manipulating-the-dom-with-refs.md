@@ -383,9 +383,11 @@ export default function MyForm() {
 
 </ConsoleBlock>
 
-This happens because by default React does not let a component access the DOM nodes of other components. Not even for its own children! This is intentional. Refs are an escape hatch that should be used sparingly. Manually manipulating _another_ component's DOM nodes makes your code even more fragile.
+এটি ঘটে কারণ স্বাভাবিকভাবে React কম্পোনেন্টকে অন্যান্য কম্পোনেন্টের DOM নোড অ্যাক্সেস করতে দেয় না। তার নিজের childrenদের জন্যও নয়! এটি ইচ্ছাকৃত। Ref এক ধরণের escape hatch যা খুব কম ব্যবহার করা উচিত। ম্যানুয়ালি _অন্য_ কম্পোনেন্টের DOM নোড পরিবর্তন করা আপনার কোডকে আরও নাজুক বানিয়ে ফেলে।
 
 Instead, components that _want_ to expose their DOM nodes have to **opt in** to that behavior. A component can specify that it "forwards" its ref to one of its children. Here's how `MyInput` can use the `forwardRef` API:
+
+এর পরিবর্তে, যে কম্পোনেন্টগুলি তাদের DOM নোড উন্মুক্ত করতে _চায়_ তাদেরকে এই আচরণ **আয়ত্ব করে** নিতে হবে। একটি কম্পোনেন্ট নির্দিষ্ট করতে পারে যে এটি তার ref তার একটি সন্তানের কাছে "ফরোয়ার্ড" করে। এটা কিভাবে MyInput forwardRef API ব্যবহার করতে পারে তা দেখানো হলো:
 
 ```js
 const MyInput = forwardRef((props, ref) => {
@@ -393,13 +395,13 @@ const MyInput = forwardRef((props, ref) => {
 });
 ```
 
-This is how it works:
+এটা কাজ করে এই ভাবেঃ
 
-1. `<MyInput ref={inputRef} />` tells React to put the corresponding DOM node into `inputRef.current`. However, it's up to the `MyInput` component to opt into that--by default, it doesn't.
-2. The `MyInput` component is declared using `forwardRef`. **This opts it into receiving the `inputRef` from above as the second `ref` argument** which is declared after `props`.
-3. `MyInput` itself passes the `ref` it received to the `<input>` inside of it.
+1. `<MyInput ref={inputRef} />` React কে বলে corresponding DOM নোড `inputRef.current` এর মধ্যে রাখতে। কিন্তু, এই সিদ্ধান্তটা`MyInput` কম্পোনেন্টের উপর নির্ভর করে যে সে এটা করবে কি না--স্বাভাবিকভাবে সে এটা করে না।
+2. `MyInput` কম্পোনেন্টটা `forwardRef` ব্যবহার করে ডিক্লেয়ার করা হয়। **এটা  উপরের `inputRef` কে দ্বিতীয় `ref` আর্গুমেন্ট হিসেবে নেওয়ার সিদ্ধান্ত নেয়,** যা `props` এর পরে ডিক্লেয়ার করা হয়।
+3. `MyInput` যেই `ref` টা পায় সেটা নিজেই এর ভিতরকার `<input>` এ পাস করে দেয়।
 
-Now clicking the button to focus the input works:
+এখন বাটন ক্লিক করে ইনপুট ফোকাস হচ্ছে ঠিকঠাকভাবেঃ
 
 <Sandpack>
 
