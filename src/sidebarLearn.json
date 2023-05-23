@@ -161,11 +161,11 @@
       "tags": ["advanced"],
       "routes": [
         {
-          "title": "Ref দিয়ে কোন value এর রেফারেন্স দেওয়া",
+          "title": "Ref এর সাহায্যে ভ্যালু রেফারেন্সিং",
           "path": "/learn/referencing-values-with-refs"
         },
         {
-          "title": "Manipulating the DOM with Refs",
+          "title": "Ref ব্যবহার করে DOM ম্যানিপুলেশন",
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
