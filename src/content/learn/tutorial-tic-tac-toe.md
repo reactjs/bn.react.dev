@@ -304,7 +304,7 @@ _Browser section_-এ ঠিক এইভাবে আপনি একটি squ
 
 #### `App.js` {/*appjs*/}
 
-The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+`App.js` file-এ উপস্থিত code একটি _component_ তৈরী করে| React-এ component হলো পুনরায় ব্যবহারযোগ্য code যা user  interface-এর একটি অংশকে নির্দেশ করে| আপনার Application-এর UI elements-গুলোকে render, manage, এবং update করতে components ব্যবহার করা হয়| Component-টির মধ্যে কি হচ্ছে বুঝতে component-টির এক এক করে প্রতিটি লাইন দেখে নেওয়া যাক:  
 
 ```js {1}
 export default function Square() {
