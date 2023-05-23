@@ -1,23 +1,24 @@
 ---
-title: "Built-in React Hooks"
+title: "রিয়েক্টের বিল্ট-ইন হুকসমূহ"
 ---
 
 <Intro>
 
-*Hooks* let you use different React features from your components. You can either use the built-in Hooks or combine them to build your own. This page lists all built-in Hooks in React.
+*হুকসমূহ*  আপনাকে আপনার কম্পোনেন্ট থেকে রিয়েক্টের বিভিন্ন ফিচার ব্যবহার করতে দেয়। আপনি বিল্ট-ইন হুকগুলো ব্যবহার করতে পারেন অথবা তাদের সংযোজন করে আপনার নিজস্ব হুক তৈরি করতে পারেন। এই পেজে রিয়েক্টের সব বিল্ট-ইন হুকগুলোর তালিকা করা আছে।
 
 </Intro>
 
 ---
 
-## State Hooks {/*state-hooks*/}
+## স্টেট হুকসমূহ {/*state-hooks*/}
 
-*State* lets a component ["remember" information like user input.](/learn/state-a-components-memory) For example, a form component can use state to store the input value, while an image gallery component can use state to store the selected image index.
+*স্টেট*  হুকগুলো আপনার কম্পোনেন্টের মধ্যে [ব্যবহৃত "তথ্য সংরক্ষণ" করতে দেয়](/learn/state-a-components-memory)। উদাহরণস্বরূপ, একটি ফর্ম কম্পোনেন্ট স্টেট ব্যবহার করে ইনপুট ভ্যালু সংরক্ষণ করতে পারে, আর একটি ইমেজ গ্যালারি কম্পোনেন্ট স্টেট ব্যবহার করে সিলেক্টেড ইমেজ ইনডেক্স সংরক্ষণ করতে পারে।
 
-To add state to a component, use one of these Hooks:
+কম্পোনেন্টে স্টেট যুক্ত করতে আপনি নিচের হুকগুলোর একটি ব্যবহার করতে পারেন:
 
-* [`useState`](/reference/react/useState) declares a state variable that you can update directly.
-* [`useReducer`](/reference/react/useReducer) declares a state variable with the update logic inside a [reducer function.](/learn/extracting-state-logic-into-a-reducer)
+* [`useState`](/reference/react/useState) একটি স্টেট ভ্যারিয়েবল ডিক্লেয়ার করে যা আপনি সরাসরি আপডেট করতে পারেন।
+* [`useReducer`](/reference/react/useReducer) একটি স্টেট ভ্যারিয়েবল ডিক্লেয়ার করে যা একটি [রিডিউসার ফাংশনের](/learn/extracting-state-logic-into-a-reducer) মধ্যে আপডেট করা হয়।
+
 
 ```js
 function ImageGallery() {
@@ -27,11 +28,11 @@ function ImageGallery() {
 
 ---
 
-## Context Hooks {/*context-hooks*/}
+## কনটেক্সট হুকসমূহ {/*context-hooks*/}
 
-*Context* lets a component [receive information from distant parents without passing it as props.](/learn/passing-props-to-a-component) For example, your app's top-level component can pass the current UI theme to all components below, no matter how deep.
-
-* [`useContext`](/reference/react/useContext) reads and subscribes to a context.
+*কনটেক্সট*  হুকগুলো একটি কম্পোনেন্টে [যেকোনো দূরবর্তী প্যারেন্ট কম্পোনেন্ট থেকে প্রপ্‌স হিসেবে না পাঠিয়ে সরাসরি তথ্য পাঠাতে দেয়](/learn/passing-props-to-a-component)। উদাহরণস্বরূপ, আপনার অ্যাপের টপ-লেভেল কম্পোনেন্ট নিচের সকল কম্পোনেন্টের মধ্যে বর্তমান ইউআই থিম পাঠাতে পারে, সেটি যত গভীর হোক না কেন।
+ 
+* [`createContext`](/reference/react/createContext) একটি কনটেক্সট পড়ে এবং সেটিতে সাবস্ক্রাইব করে।
 
 ```js
 function Button() {
@@ -41,13 +42,13 @@ function Button() {
 
 ---
 
-## Ref Hooks {/*ref-hooks*/}
+## রেফ হুকসমূহ {/*ref-hooks*/}
 
-*Refs* let a component [hold some information that isn't used for rendering,](/learn/referencing-values-with-refs) like a DOM node or a timeout ID. Unlike with state, updating a ref does not re-render your component. Refs are an "escape hatch" from the React paradigm. They are useful when you need to work with non-React systems, such as the built-in browser APIs.
+*রেফ*  হুকগুলো একটি কম্পোনেন্টের [তথ্য সংরক্ষণ করতে দেয় যা রেন্ডারিং এর জন্য ব্যবহৃত হয় না,](/learn/referencing-values-with-refs) যেমন একটি ডম নোড বা টাইমআউট আইডি। স্টেট আপডেট করলে যেমন কম্পোনেন্ট রি-রেন্ডার হয়, রেফ আপডেট করলে কিন্তু কম্পোনেন্ট রি-রেন্ডার হয় না। রেফ হুকগুলো হচ্ছে রিয়েক্ট প্যারাডাইম থেকে বের হওয়ার একটি "এস্কেপ হ্যাচ"। এগুলি তখনই ব্যবহার করা যেতে পারে যখন আপনার কোনো নন-রিয়েক্ট সিস্টেম এর সাথে কাজ করতে হয়, যেমন ব্রাউজারের বিল্ট-ইন এপিআই।
 
-* [`useRef`](/reference/react/useRef) declares a ref. You can hold any value in it, but most often it's used to hold a DOM node.
-* [`useImperativeHandle`](/reference/react/useImperativeHandle) lets you customize the ref exposed by your component. This is rarely used.
-
+* [`useRef`](/reference/react/useRef) একটি রেফ ডিক্লেয়ার করে। আপনি এর মধ্যে যেকোনো ভ্যালু রাখতে পারেন, কিন্তু সবচেয়ে বেশি এটি ডম নোড রাখতে ব্যবহৃত হয়।
+* [`useImperativeHandle`](/reference/react/useImperativeHandle) আপনার কম্পোনেন্টের রেফ কাস্টমাইজ করতে দেয়। এটি খুব কমই ব্যবহৃত হয়।
+ 
 ```js
 function Form() {
   const inputRef = useRef(null);
@@ -56,11 +57,11 @@ function Form() {
 
 ---
 
-## Effect Hooks {/*effect-hooks*/}
+## ইফেক্ট হুকসমূহ {/*effect-hooks*/}
 
-*Effects* let a component [connect to and synchronize with external systems.](/learn/synchronizing-with-effects) This includes dealing with network, browser DOM, animations, widgets written using a different UI library, and other non-React code.
+*ইফেক্ট*  হুকগুলো একটি কম্পোনেন্টকে [বাইরের সিস্টেমের সাথে সংযোগ স্থাপন করে এবং সিংক্রোনাইজ করে](/learn/synchronizing-with-effects)। এটি নেটওয়ার্ক, ব্রাউজার ডম, অ্যানিমেশন, বিভিন্ন নন-রিয়েক্ট কোড এবং বাইরের যেকোনো ইউআই লাইব্রেরির সাথে সংযোগ স্থাপন করতে ব্যবহৃত হয়।
 
-* [`useEffect`](/reference/react/useEffect) connects a component to an external system.
+* [`useEffect`](/reference/react/useEffect) একটি কম্পোনেন্টকে বাইরের সিস্টেমের সাথে সংযোগ করে।
 
 ```js
 function ChatRoom({ roomId }) {
@@ -72,23 +73,25 @@ function ChatRoom({ roomId }) {
   // ...
 ```
 
-Effects are an "escape hatch" from the React paradigm. Don't use Effects to orchestrate the data flow of your application. If you're not interacting with an external system, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+ইফেক্ট হুকগুলো রিয়েক্ট প্যারাডাইমের একটি "এস্কেপ হ্যাচ"। আপনার অ্যাপ্লিকেশানের ডেটা ফ্লো সুসমন্বিত করার জন্য ইফেক্ট ব্যবহার করবেন না। যদি আপনি কোনো বাইরের সিস্টেমের সাথে ইন্টারেক্ট না করেন, তাহলে আপনার [কোন ইফেক্টের দরকার নাও হতে পারে।](/learn/you-might-not-need-an-effect)
 
-There are two rarely used variations of `useEffect` with differences in timing:
+`useEffect` এর দুইটি অপেক্ষাকৃত কম ব্যবহৃত ভ্যারিয়েশন আছে যা টাইমিং নিয়ে ভিন্নতা রাখেঃ
 
-* [`useLayoutEffect`](/reference/react/useLayoutEffect) fires before the browser repaints the screen. You can measure layout here.
-* [`useInsertionEffect`](/reference/react/useInsertionEffect) fires before React makes changes to the DOM. Libraries can insert dynamic CSS here.
+* [`useLayoutEffect`](/reference/react/useLayoutEffect) ব্রাউজারের পুনরায় পেইন্ট করার আগে কল হয়। আপনি এখানে লেআউট পরিমাপ পারেন।
+
+* [`useInsertionEffect`](/reference/react/useInsertionEffect) রিয়েক্ট ডমে পরিবর্তন করার আগে কল হয়। লাইব্রেরিগুলি এখানে ডায়নামিক সিএসএস ইনসার্ট করতে পারে।
 
 ---
+## পারফর্মেন্স হুকসমূহ {/*performance-hooks*/}
 
-## Performance Hooks {/*performance-hooks*/}
+রি-রেন্ডারিং অপ্টিমাইজ করার একটি সাধারণ উপায় হল অপ্রয়োজনীয় কাজ এড়িয়ে যাওয়া। যেমন, আপনি রিয়েক্টকে জানিয়ে দিতে পারেন যেন একটি ক্যাশ করা ক্যালকুলেশন ব্যবহার করে অথবা একটি রি-রেন্ডার এড়িয়ে যায় যদি ডেটা পূর্বের রেন্ডার থেকে পরিবর্তিত না হয়ে থাকে।
 
-A common way to optimize re-rendering performance is to skip unnecessary work. For example, you can tell React to reuse a cached calculation or to skip a re-render if the data has not changed since the previous render.
+অপ্রয়োজনীয় ক্যালকুলেশন এবং রি-রেন্ডারিং এড়িয়ে যাওয়ার জন্য, এই হুকগুলোর মধ্যে থেকে একটি ব্যবহার করতে পারেনঃ
 
-To skip calculations and unnecessary re-rendering, use one of these Hooks:
+- [`useMemo`](/reference/react/useMemo) আপনাকে একটি ব্যয়বহুল ক্যালকুলেশন ক্যাশ করে রাখতে দেয়।
 
-- [`useMemo`](/reference/react/useMemo) lets you cache the result of an expensive calculation.
-- [`useCallback`](/reference/react/useCallback) lets you cache a function definition before passing it down to an optimized component.
+- [`useCallback`](/reference/react/useCallback) একটি অপটিমাইজড কম্পোনেন্টে পাঠানোর আগে একটি ফাংশন ডেফিনিশন ক্যাশ করে রাখতে দেয়।
+
 
 ```js
 function TodoList({ todos, tab, theme }) {
@@ -97,25 +100,27 @@ function TodoList({ todos, tab, theme }) {
 }
 ```
 
-Sometimes, you can't skip re-rendering because the screen actually needs to update. In that case, you can improve performance by separating blocking updates that must be synchronous (like typing into an input) from non-blocking updates which don't need to block the user interface (like updating a chart).
+কখনও কখনও, আপনি রি-রেন্ডারিং এড়িয়ে যেতে পারবেন না কারণ স্ক্রীনটিকে আসলেই আপডেট করতে হবে। এই ক্ষেত্রে, আপনি ব্লকিং আপডেটগুলি যা সিংক্রোনাস হতে হবে (যেমন ইনপুটে টাইপ করা) এবং নন-ব্লকিং আপডেটগুলি যা ব্যবহারকারীর ইন্টারফেস ব্লক করতে হয় না (যেমন একটি চার্ট আপডেট করা) আলাদা করে পারফর্মেন্স বাড়িয়ে করতে পারেন।
 
-To prioritize rendering, use one of these Hooks:
+রি-রেন্ডারিং অগ্রাধিকার দেওয়ার জন্য, এই হুকগুলোর মধ্যে থেকে একটি ব্যবহার করতে পারেনঃ
 
-- [`useTransition`](/reference/react/useTransition) lets you mark a state transition as non-blocking and allow other updates to interrupt it.
-- [`useDeferredValue`](/reference/react/useDeferredValue) lets you defer updating a non-critical part of the UI and let other parts update first.
+- [`useTransition`](/reference/react/useTransition) আপনাকে একটি স্টেট ট্রানজিশনকে ব্লক না করে অন্যান্য আপডেটগুলি তার মধ্যে অব্যাহত রাখতে দেয়।
+- [`useDeferredValue`](/reference/react/useDeferredValue) আপনাকে একটি অপ্রয়োজনীয় অংশের ইউআই আপডেট পিছিয়ে দেয় এবং অন্যান্য অংশগুলিকে প্রথমে আপডেট করতে দেয়।
 
----
-
-## Other Hooks {/*other-hooks*/}
-
-These Hooks are mostly useful to library authors and aren't commonly used in the application code.
-
-- [`useDebugValue`](/reference/react/useDebugValue) lets you customize the label React DevTools displays for your custom Hook.
-- [`useId`](/reference/react/useId) lets a component associate a unique ID with itself. Typically used with accessibility APIs.
-- [`useSyncExternalStore`](/reference/react/useSyncExternalStore) lets a component subscribe to an external store.
 
 ---
 
-## Your own Hooks {/*your-own-hooks*/}
+## অন্যান্য হুকসমূহ {/*other-hooks*/}
 
-You can also [define your own custom Hooks](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component) as JavaScript functions.
+এই হুকগুলো মূলত লাইব্রেরি লেখকদের জন্য প্রয়োজনীয় এবং অ্যাপ্লিকেশন কোডে খুব একটা ব্যবহৃত হয় না।
+
+- [`useDebugValue`](/reference/react/useDebugValue) আপনাকে আপনার কাস্টম হুকের জন্য রিয়েক্ট ডেভটুলসের প্রদর্শিত লেবেল কাস্টমাইজ করতে দেয়।
+- [`useId`](/reference/react/useId) একটি কম্পোনেন্টকে একটি ইউনিক আইডি দিয়ে সংযুক্ত করে। এটি সাধারণত অ্যাক্সেসিবিলিটি এপিআই সঙ্গে ব্যবহার করা হয়।
+- [`useSyncExternalStore`](/reference/react/useSyncExternalStore) একটি কম্পোনেন্টকে একটি বাহ্যিক স্টোরে সাবস্ক্রাইব করতে দেয়।
+
+
+---
+
+## আপনার নিজস্ব হুকসমূহ {/*your-own-hooks*/}
+
+আপনি নিজেও জাভাস্ক্রিপ্ট ফাংশন হিসাবে [আপনার নিজস্ব কাস্টম হুক বানাতে পারেন।](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component)
