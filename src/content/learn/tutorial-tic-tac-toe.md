@@ -312,7 +312,7 @@ export default function Square() {
 }
 ```
 
-The first line defines a function called `Square`. The `export` JavaScript keyword makes this function accessible outside of this file. The `default` keyword tells other files using your code that it's the main function in your file.
+প্রথম লাইনটি `Square` নামক function define করছে| JavaScript-এর `export` keyword-টি এই function-টিকে এই file-এর বাইরে অর্থাৎ অন্য file-এ accessible করে| default কীওয়ার্ডটি অন্যান্য ফাইলগুলিকে আপনার কোডে বলে দেয় যে এটি আপনার ফাইলের main function।
 
 ```js {2}
 export default function Square() {
@@ -320,15 +320,15 @@ export default function Square() {
 }
 ```
 
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+দ্বিতীয় লাইনটি একটি button return করে। JavaScript-এর `return` কীওয়ার্ডটি বোঝায় যে এর পরে যা আসবে, তা function caller-এর value হিসাবে return করা হয়। `<button>` হল একটি *JSX element*। JSX element হল JavaScript code এবং HTML tag-গুলির সমন্বয়, যা বর্ণনা করে আপনি প্রদর্শনের জন্য কি দেখাতে চান। `className="square"` হল একটি button property বা *prop*, যা CSS-কে বলে button-টিকে কিভাবে style করতে হবে। `X` হল বাটনের ভিতরে প্রদর্শিত text এবং `</button>` JSX element-টিকে বন্ধ করে, এবং এর থেকে বোঝা যায় যে পরবর্তী কোনো component button-এর ভিতরে রাখা হবে না।
 
 #### `styles.css` {/*stylescss*/}
 
-Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+CodeSandbox-এর _Files_ section-এ চিহ্নিত `styles.css` নামক ফাইলটিতে ক্লিক করুন। এই ফাইলটি আপনার React app-এর জন্য styles বর্ণনা করে। প্রথম দুটি _CSS selectors_ (`*` এবং `body`) আপনার অ্যাপের বড় অংশের স্টাইল বর্ণনা করে, যেখানে যেকোনো component-এ যেখানে যেখানে `className` property-টি সেট করা হয়েছে `square`, সেখানকার style `.square` selector দ্বারা বর্ণনা করা হয়। আপনার কোডে, এটি `App.js` file-এর আপনার Square component-এর button-এর style-এর সাথে মিলে যাবে।
 
 #### `index.js` {/*indexjs*/}
 
-Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+CodeSandbox-এর _Files_ section-এ চিহ্নিত `index.js` নামক ফাইলটিতে ক্লিক করুন। টিউটোরিয়ালের সময়ে আপনি এই ফাইলটি edit করবেন না, কিন্তু এটি আপনার `App.js` ফাইলে তৈরি করা component এবং web browser-এর মধ্যে মধ্যস্থতা করে।
 
 ```jsx
 import { StrictMode } from 'react';
