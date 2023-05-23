@@ -151,20 +151,20 @@ button {
 
 </Sandpack>
 
-The `handleClick` event handler is updating a local variable, `index`. But two things prevent that change from being visible:
+`handleClick` ইভেন্ট হ্যান্ডলারটি লোকাল ভেরিয়েবল `index` কে আপডেট করছে। তবে, দুটি বিষয় এই পরিবর্তন দেখতে বাধা তৈরি করছে।
 
-1. **Local variables don't persist between renders.** When React renders this component a second time, it renders it from scratch—it doesn't consider any changes to the local variables.
-2. **Changes to local variables won't trigger renders.** React doesn't realize it needs to render the component again with the new data.
+1. **লোকাল ভেরিবলগুলো রেন্ডারগুলির মধ্যে স্থায়ী হয় না।** যখন React কোন কম্পোনেন্ট দ্বিতীয়বার রেন্ডার করে, তখন এটি সম্পূর্ণরূপে নতুন করে রেন্ডার করে—এটি লোকাল ভেরিয়েবলগুলিতে কোনও পরিবর্তন বিবেচনা করে না।
+2. **লোকাল ভেরিয়েবলগুলিতে পরিবর্তন রেন্ডারগুলি ট্রিগার করে না।** রিয়েক্ট কম্পোনেন্ট নতুন ডেটা দিয়ে রেন্ডার করার প্রয়োজন বুঝতে পারে না।
 
-To update a component with new data, two things need to happen:
+একটি কম্পোনেন্টকে নতুন ডেটা দিয়ে আপডেট করতে, দুটি বিষয় হতে হবে:
 
-1. **Retain** the data between renders.
-2. **Trigger** React to render the component with new data (re-rendering).
+1. রেন্ডার এর মধ্যে ডাটা **Retain** করা।
+2. রিয়েক্ট কে **Trigger** করা,কম্পোনেন্টকে নতুন ডাটা দিয়ে রেন্ডার করতে। (রি-রেন্ডারিং).
 
-The [`useState`](/reference/react/useState) Hook provides those two things:
+[`useState`](/reference/react/useState) হুক আপনাকে নিচের দুটি জিনিস দেয়:
 
-1. A **state variable** to retain the data between renders.
-2. A **state setter function** to update the variable and trigger React to render the component again.
+1. একটি **স্টেট ভেরিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
+2. একটি **স্টেট setter ফাংশন** যা দিয়ে ভেরিয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
 
 ## স্টেট ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
 
@@ -341,7 +341,7 @@ State is just one of those features, but you will meet the other Hooks later.
 
 <Pitfall>
 
-**Hooks—functions starting with `use`—can only be called at the top level of your components or [your own Hooks.](/learn/reusing-logic-with-custom-hooks)** You can't call Hooks inside conditions, loops, or other nested functions. Hooks are functions, but it's helpful to think of them as unconditional declarations about your component's needs. You "use" React features at the top of your component similar to how you "import" modules at the top of your file.
+**`use` দিয়ে শুরু হয়েছে এমন Hooks—ফাংশনগুলি—শুধুমাত্র আপনার কম্পোনেন্টগুলির শীর্ষ স্তরে বা [আপনার নিজস্ব Hooks-এ](/learn/reusing-logic-with-custom-hooks) কল করা যায়** আপনি কন্ডিশন, লুপ, বা অন্যান্য নেস্টেড ফাংশনের মধ্যে Hooks কল করতে পারবেন না। . Hooks are functions, but it's helpful to think of them as unconditional declarations about your component's needs. You "use" React features at the top of your component similar to how you "import" modules at the top of your file.
 
 </Pitfall>
 
@@ -353,7 +353,7 @@ When you call [`useState`](/reference/react/useState), you are telling React tha
 const [index, setIndex] = useState(0);
 ```
 
-In this case, you want React to remember `index`.
+এই ক্ষেত্রে আপনি চাচ্ছেন রিয়েক্ট `index` টি মনে রাখুক.
 
 <Note>
 
@@ -524,7 +524,7 @@ It is a good idea to have multiple state variables if their state is unrelated, 
 
 <DeepDive>
 
-#### How does React know which state to return? {/*how-does-react-know-which-state-to-return*/}
+#### রিয়েক্ট কিভাবে জানে কোন স্টেট রিটার্ন করতে হবে? {/*how-does-react-know-which-state-to-return*/}
 
 You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
 
@@ -913,7 +913,7 @@ What if you wanted both galleries to keep their states in sync? The right way to
 
 <Challenges>
 
-#### Complete the gallery {/*complete-the-gallery*/}
+#### গ্যালারিটি সম্পূর্ণ করুণ {/*complete-the-gallery*/}
 
 When you press "Next" on the last sculpture, the code crashes. Fix the logic to prevent the crash. You may do this by adding extra logic to event handler or by disabling the button when the action is not possible.
 
@@ -1325,7 +1325,7 @@ h1 { margin-top: 10px; }
 
 </Solution>
 
-#### Fix a crash {/*fix-a-crash*/}
+#### ক্র্যাশ ঠিক করুন {/*fix-a-crash*/}
 
 Here is a small form that is supposed to let the user leave some feedback. When the feedback is submitted, it's supposed to display a thank-you message. However, it crashes with an error message saying "Rendered fewer hooks than expected". Can you spot the mistake and fix it?
 
@@ -1450,13 +1450,13 @@ If your linter is [configured for React](/learn/editor-setup#linting), you shoul
 
 </Solution>
 
-#### Remove unnecessary state {/*remove-unnecessary-state*/}
+#### অপ্রয়োজনীয় স্টেট বাদ দিন {/*remove-unnecessary-state*/}
 
 When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
 
 To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
 
-Can you explain why this state variable was unnecessary?
+আপনি ব্যাখ্যা করতে পারবেন কেন এই স্টেট ভেরিয়েবলটি অপ্রয়োজনীয়?
 
 <Sandpack>
 
@@ -1483,7 +1483,7 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Here is a fixed version that uses a regular `name` variable declared in the function that needs it:
+এখানে একটি ঠিক ভার্সন দেওয়া হলো যা ফাংশনের এর মধ্যে প্রয়োজনীয় রেগুলার `name` ভেরিয়েবল ব্যবহার করে:
 
 <Sandpack>
 
@@ -1506,7 +1506,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-A state variable is only necessary to keep information between re-renders of a component. Within a single event handler, a regular variable will do fine. Don't introduce state variables when a regular variable works well.
+স্টেট ভেরিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভেরিয়েবলই যথেষ্ট। যেখানে রেগুলার ভেরিয়েবল যথেষ্ট সেখানে স্টেট ভেরিবল ব্যবহার করা উচিত না।
 
 </Solution>
 
