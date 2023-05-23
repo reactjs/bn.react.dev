@@ -4,7 +4,7 @@ title: useContext
 
 <Intro>
 
-`useContext` is a React Hook that lets you read and subscribe to [context](/learn/passing-data-deeply-with-context) from your component.
+`useContext` হচ্ছে একটি React হুক যেটা আপনাকে কম্পোনেন্ট থেকে [context](/learn/passing-data-deeply-with-context) পড়তে এবং সাবস্কাইব করতে দিবে।
 
 ```js
 const value = useContext(SomeContext)
@@ -16,11 +16,11 @@ const value = useContext(SomeContext)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useContext(SomeContext)` {/*usecontext*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+[context](/learn/passing-data-deeply-with-context) রিড করা এবং সেখানে সাবস্ক্রাইব করার জন্য `useContext` কে আপনার কম্পোনেন্ট এর একেবারে উপরের স্তরে কল করতে হবে।
 
 ```js
 import { useContext } from 'react';
@@ -30,21 +30,21 @@ function MyComponent() {
   // ...
 ```
 
-[See more examples below.](#usage)
+[নীচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটারস {/*parameters*/}
 
-* `SomeContext`: The context that you've previously created with [`createContext`](/reference/react/createContext). The context itself does not hold the information, it only represents the kind of information you can provide or read from components.
+* `SomeContext`: এটি হচ্ছে সেই context যেটি আপনি আগে [`createContext`](/reference/react/createContext) ব্যবহার করে তৈরি করেছিলেন। context নিজে থেকে তথ্য ধারণ করে না, এটি শুধুমাত্র সেই তথ্যগুলিকেই উপস্থাপন করে যা আপনি দিতে পারেন অথবা কম্পোনেন্ট থেকে রিড করতে পারেন।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-`useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext.Provider` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+যে কম্পোনেন্টে `useContext` কল করা হয় তার জন্য context এর ভ্যালু রিটার্ন করে। যে কম্পোনেন্ট কল করা হয়েছে তার উপরে কম্পোনেন্ট ট্রির সব থেকে কাছের `SomeContext.Provider` দ্বারা নির্ধারিত হয় যা `value` হিসাবে পাঠানো হয়। যদি এমন কোন provider না থাকে, তাহলে তার রিটার্ন করা মান হবে `defaultValue`  যা আপনি context এর জন্য [`createContext`](/reference/react/createContext) এ পাঠিয়েছিলেন। রিটার্ন্ড মান সবসময় আপ টু ডেট হবে। যদি context এ কোন পরিবর্তন হয়, তাহলে context ব্যবহারকৃত কম্পোনেন্টগুলোকে React স্বয়ংক্রিয়ভাবে পুনরায় রেন্ডার করবে।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context.Provider>` **needs to be *above*** the component doing the `useContext()` call.
-* React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
-* If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
+* একটি কম্পোনেন্টের ভিতর `useContext()` কল করা হলে সেই *একই* কম্পোনেন্ট থেকে রিটার্নড হওয়া providers দিয়ে এটি প্রভাবিত হবে না। যে কম্পোনেন্ট থেকে `useContext()` কল করা হয়েছে, সংশ্লিষ্ট `<Context.Provider>` কে সেই কম্পোনেন্টের ***উপরে* থাকতে হবে**
+* provider এর শুরু থেকে যেসব চিলড্রেন একটি নির্দিষ্ট context ব্যবহার করে সেটি যখন ভিন্ন `মান` গ্রহণ করে তখন React সেসব চিলড্রেনকে **স্বয়ংক্রিয়ভাবে পুনরায় রেন্ডার** করে। আগের এবং পরের মান [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) এর মাধ্যমে তুলনা করা হয়। পুনরায় রেন্ডার এড়িয়ে যেতে যেসব চিলড্রেনে [`memo`](/reference/react/memo) ব্যবহার করা হয়, সেখানে context এর নতুন মান পেতে বাধা দেওয়া হয় না।
+* যদি আপনার বিল্ড সিস্টেম আউটপুটে ডুপ্লিকেট মডিউল উৎপাদন করে (যা symlinks দ্বারা তৈরি হয়), তাহলে সেটা আপনার context কে ব্রেক করতে পারে। কোন কিছু যখন context এর মাধ্যমে পাঠানো হয়, সেটি শুধুমাত্র তখনই কাজ করবে যখন আপনার context প্রদান করার জন্য ব্যবহারকৃত `SomeContext` এবং রিড করার জন্য ব্যবহারকৃত `SomeContext` ***হুবহু* একই object** হবে, যা `===` এর মাধ্যমে তুলনা করে নির্ধারিত হয়।
 
 ---
 
