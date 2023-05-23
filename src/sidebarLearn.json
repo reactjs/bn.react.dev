@@ -165,7 +165,7 @@
           "path": "/learn/referencing-values-with-refs"
         },
         {
-          "title": "Ref এর সাহায্যে DOM ম্যানিপুলেশন",
+          "title": "Ref ব্যবহার করে DOM ম্যানিপুলেশন",
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
