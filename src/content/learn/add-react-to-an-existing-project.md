@@ -4,57 +4,62 @@ title: Add React to an Existing Project
 
 <Intro>
 
-If you want to add some interactivity to your existing project, you don't have to rewrite it in React. Add React to your existing stack, and render interactive React components anywhere.
+আপনি যদি আপনার Existing প্রজেক্ট কিছু ইন্টারেক্টিভিটি যুক্ত করতে চান তবে আপনাকে তা React-এ নতুনভাবে লেখার প্রয়োজন নেই। আপনার Existing স্ট্যাকে React যোগ করুন এবং যে কোনো জায়গায় ইন্টারেক্টিভ React কম্পোনেন্ট রেন্ডার করুন।
+
 
 </Intro>
 
 <Note>
 
-**You need to install [Node.js](https://nodejs.org/en/) for local development.** Although you can [try React](/learn/installation#try-react) online or with a simple HTML page, realistically most JavaScript tooling you'll want to use for development requires Node.js.
+**Local ডেভেলপমেন্ট জন্য আপনাকে [Node.js](https://nodejs.org/en/) ইনস্টল করতে হবে।** যদিও আপনি একটি সহজ HTML পৃষ্ঠায় বা অনলাইনে [try React](/learn/installation#try-react) করতে পারেন, কিন্তু বাস্তবতানুযায়ী বেশিরভাগ জাভাস্ক্রিপ্ট টুলিং আপনি যেটিই ডেভেলপমেন্ট জন্য ব্যবহার করতে চান তার জন্য Node.js এর প্রয়োজন।
 
 </Note>
 
-## Using React for an entire subroute of your existing website {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
+## আপনার existing ওয়েবসাইটের একটি সম্পূর্ণ subroute এর জন্য রিয়েক্ট ব্যবহার করা {/*using-react-for-an-entire-subroute-of-your-existing-website*/}
 
-Let's say you have an existing web app at `example.com` built with another server technology (like Rails), and you want to implement all routes starting with `example.com/some-app/` fully with React.
+চলুন ধরা যাক আপনার কিছু ইতিমধ্যে `example.com` নামে existing ওয়েব অ্যাপ রয়েছে এবং এটি একটি অন্য সার্ভার প্রযুক্তি (যেমন Rails) দ্বারা নির্মিত হয়েছে এবং আপনি চান যে `example.com/some-app/` দিয়ে শুরু হওয়া সমস্ত routes পুরোপুরি React দিয়ে ব্যবহার করতে।
 
-Here's how we recommend to set it up:
+এখানে আমরা যে ভাবে এটি সেট আপ করতে পরামর্শ দিচ্ছি :
 
-1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
-2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
-3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+১. **আপনার অ্যাপ এর রিয়েক্ট অংশটি** [রিয়েক্ট-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) এর দিয়ে বিল্ড করুন।
 
-This ensures the React part of your app can [benefit from the best practices](/learn/start-a-new-react-project#can-i-use-react-without-a-framework) baked into those frameworks.
+২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুন: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 
-Many React-based frameworks are full-stack and let your React app take advantage of the server. However, you can use the same approach even if you can't or don't want to run JavaScript on the server. In that case, serve the HTML/CSS/JS export ([`next export` output](https://nextjs.org/docs/advanced-features/static-html-export) for Next.js, default for Gatsby) at `/some-app/` instead.
+৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
+
+এটি নিশ্চিত করে যে আপনার অ্যাপের রিয়েক্ট অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
+
+
+
+অনেক React ভিত্তিক ফ্রেমওয়ার্ক full-stack এবং আপনার React অ্যাপটিকে সার্ভারের সুবিধা নিতে দিন। তবে আপনি যদি সার্ভারে জাভাস্ক্রিপ্ট রান করার সুযোগ না পান অথবা চান না, তবুও একই পদক্ষেপটি নিতে পারেন। সে ক্ষেত্রে, HTML/CSS/JS এক্সপোর্ট করুন (Next.js এর জন্য [`next export` output](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby জন্য ডিফল্ট ) `/some-app/` এর পরিবর্তে।
+
 
 ## Using React for a part of your existing page {/*using-react-for-a-part-of-your-existing-page*/}
 
-Let's say you have an existing page built with another technology (either a server one like Rails, or a client one like Backbone), and you want to render interactive React components somewhere on that page. That's a common way to integrate React--in fact, it's how most React usage looked at Meta for many years!
+আবার ধরা যাক, আপনার একটি বিদ্যমান পেজ আছে যা অন্য টেকনোলজি দিয়ে তৈরি করা হয়েছে (যেমন Rails এর মতো একটি সার্ভার টেকনোলজি বা Backbone এর মতো একটি ক্লায়েন্ট টেকনোলজি), এবং আপনি ঐ পৃষ্ঠায় ইন্টারেক্টিভ রিয়েক্ট কম্পোনেন্টগুলি রেন্ডার করতে চান। এটি রিয়েক্ট সংমিশ্রণ করার একটি সাধারণ উপায় । বাস্তবে, এটি মেটা এর জন্য বহু বছর ধরে রিয়েক্ট ব্যবহারের মধ্যে সবচেয়ে সাধারণ উপায় হিসাবে দেখা হচ্ছে!
 
-You can do this in two steps:
+আপনি এটি দুইটি ধাপে করতে পারেন:
 
-1. **Set up a JavaScript environment** that lets you use the [JSX syntax](/learn/writing-markup-with-jsx), split your code into modules with the [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) / [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) syntax, and use packages (for example, React) from the [npm](https://www.npmjs.com/) package registry.
-2. **Render your React components** where you want to see them on the page.
+১. **আপনাকে [JSX সিনট্যাক্স](/learn/writing-markup-with-jsx) ব্যবহার করার জন্য একটি জাভাস্ক্রিপ্ট এনভায়রনমেন্ট সেট আপ করতে হবে**, [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) / [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) সিনট্যাক্স দিয়ে আপনার কোডকে মডিউলে ভাগ করতে হবে এবং npm (উদাহরণস্বরূপ, React) এর মতো প্যাকেজগুলি [npm] (https://www.npmjs.com/) প্যাকেজ রেজিস্ট্রি থেকে ব্যবহার করতে হবে।
 
-The exact approach depends on your existing page setup, so let's walk through some details.
+২. আপনার রিয়েক্ট কম্পোনেন্টগুলি পেজে যেখানে দেখতে চান সেখানে **রেন্ডার করতে হবে**।
 
-### Step 1: Set up a modular JavaScript environment {/*step-1-set-up-a-modular-javascript-environment*/}
+সঠিক পদক্ষেপটি আপনার বর্তমান পৃষ্ঠা সেটআপের উপর নির্ভর করে, তাই আসুন কিছু বিস্তারিত দেখে নেই।
+### ধাপ ১: একটি মডিউলার জাভাস্ক্রিপ্ট ইনভায়রনমেন্ট সেট আপ করুন" {/*step-1-set-up-a-modular-javascript-environment*/}
 
-A modular JavaScript environment lets you write your React components in individual files, as opposed to writing all of your code in a single file. It also lets you use all the wonderful packages published by other developers on the [npm](https://www.npmjs.com/) registry--including React itself! How you do this depends on your existing setup:
+একটি মডিউলার জাভাস্ক্রিপ্ট ইনভায়রনমেন্ট আপনাকে একটি ফাইলে আপনার সমস্ত কোড লেখার বিপরীতে পৃথক ফাইলগুলিতে আপনার রিয়েক্ট উপাদানগুলি লিখতে দেয়। এটি আপনাকে রিয়েক্ট সহ অন্যান্য ডেভেলপারদের [npm](https://www.npmjs.com/) রেজিস্ট্রির উপর প্রকাশিত সমস্ত আশ্চর্যজনক প্যাকেজগুলি ব্যবহার করতে দেয়। এখন এটি আপনি কিভাবে করতে চান তা আপনার বর্তমান সেটআপ এর উপর নির্ভর করে।
 
-* **If your app is already split into files that use `import` statements,** try to use the setup you already have. Check whether writing `<div />` in your JS code causes a syntax error. If it causes a syntax error, you might need to [transform your JavaScript code with Babel](https://babeljs.io/setup), and enable the [Babel React preset](https://babeljs.io/docs/babel-preset-react) to use JSX.
 
-* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vitejs.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vitejs.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+* **যদি আপনার অ্যাপ ইতিমধ্যে import স্টেটমেন্ট ব্যবহার করে ফাইলে ভাগ করা থাকেন**, তাহলে সেই সেটআপটি ব্যবহার করা চেষ্টা করুন। আপনার জাভাস্ক্রিপ্ট কোডে `<div />` লিখলে কি সিনট্যাক্স ত্রুটি হয় তা চেক করুন। যদি এটি সিনট্যাক্স ত্রুটি দেখায়, তবে আপনাকে [Babel দিয়ে আপনার জাভাস্ক্রিপ্ট কোড রূপান্তর করতে হতে পারে](<(https://babeljs.io/setup)>) এবং JSX ব্যবহার করতে [Babel React preset](https://babeljs.io/docs/babel-preset-react) সক্ষম করতে হতে পারে।
 
-To check whether your setup works, run this command in your project folder:
+* **যদি আপনার অ্যাপে জাভাস্ক্রিপ্ট মডিউল কম্পাইল করার জন্য ইতিমধ্যে কোনও সেটআপ না থাকে**, তবে [Vite](https://vitejs.dev/) দিয়ে সেটআপ করুন। Vite সম্প্রদায় রেল, জ্যাঙ্গো এবং লারাভেল সহ [ব্যাকএন্ড ফ্রেমওয়ার্ক সহ অনেক ইন্টিগ্রেশন](https://github.com/vitejs/awesome-vite#integrations-with-backends) বজায় রাখে। যদি আপনার ব্যাকএন্ড ফ্রেমওয়ার্ক তালিকাভুক্ত না থাকে তবে [এই গাইড](https://vitejs.dev/guide/backend-integration.html) অনুসরণ করে ব্যাকএন্ডের সাথে Vite বিল্ড ইন্টিগ্রেট করতে পারেন।
 
+আপনার সেটআপ কাজ করছে কি না তা চেক করতে, আপনার প্রজেক্ট ফোল্ডারে এই কমান্ডটি চালান:
 <TerminalBlock>
 npm install react react-dom
 </TerminalBlock>
 
-Then add these lines of code at the top of your main JavaScript file (it might be called `index.js` or `main.js`):
-
+তারপর আপনার মূল JavaScript ফাইলের শীর্ষে এই লাইনগুলি যোগ করুন (এটি হতে পারে `index.js` বা `main.js` নামের ফাইল):
 <Sandpack>
 
 ```html index.html hidden
@@ -80,18 +85,18 @@ root.render(<h1>Hello, world</h1>);
 
 </Sandpack>
 
-If the entire content of your page was replaced by a "Hello, world!", everything worked! Keep reading.
+যদি আপনার পৃষ্ঠার সম্পূর্ণ বিষয়বস্তুটি "Hello, world!" দ্বারা প্রতিস্থাপিত হয়ে যায়, তবে সবকিছু কাজ করতেছে! পড়া চালিয়ে যান।
 
 <Note>
 
-Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vitejs.dev/).
+একটি বিদ্যমান প্রজেক্টে একটি মডুলার জাভাস্ক্রিপ্ট পরিবেশকে সংযোজন করা প্রথমবারের মতো ভীতিজনক বোধ হতে পারে। কিন্তু সেটা করা অবশ্যই প্রয়োজনীয় এবং উপকারী!
+আপনি আটকে গেলে, আমাদের [কমিউনিটি রিসোর্স](/community) অথবা [Vite Chat](https://chat.vitejs.dev/) ব্যবহার করে দেখুন।।
 
 </Note>
 
-### Step 2: Render React components anywhere on the page {/*step-2-render-react-components-anywhere-on-the-page*/}
+### ধাপ ২: পৃষ্ঠার যেকোনো জায়গায় রিয়েক্ট কম্পোনেন্ট রেন্ডার করুন। {/*step-2-render-react-components-anywhere-on-the-page*/}
 
-In the previous step, you put this code at the top of your main file:
-
+আগের পদক্ষেপে, আপনি আপনার মূল ফাইলের শীর্ষে এই কোডটি রাখেনঃ
 ```js
 import { createRoot } from 'react-dom/client';
 
@@ -103,19 +108,23 @@ const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
 
-Of course, you don't actually want to clear the existing HTML content!
+অবশ্যই আপনি সত্যিই বিদ্যমান HTML কন্টেন্টটি মুছতে চান না!
 
-Delete this code.
+এই কোডটি মুছে ফেলুন।
 
-Instead, you probably want to render your React components in specific places in your HTML. Open your HTML page (or the server templates that generate it) and add a unique [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute to any tag, for example:
+বরং, আপনি সম্ভবত আপনার রিয়েক্ট কম্পোনেন্টগুলি নির্দিষ্ট জায়গাগুলিতে আপনার HTML এ রেন্ডার করতে চান। এখন আপনার HTML পৃষ্ঠাটি খুলুন
+(অথবা সার্ভার টেমপ্লেটগুলি যা এটি তৈরি করে)
+
+এবং কোনও ট্যাগে একটি অনন্য [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) এট্রিবিউট যুক্ত করুন, যেমন:
 
 ```html
 <!-- ... somewhere in your html ... -->
 <nav id="navigation"></nav>
 <!-- ... more html ... -->
 ```
+এটি আপনাকে [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) ব্যবহার করে ঐ HTML উপাদানটি খুঁজে বের করতে দেয়। এরপর [`createRoot`](/reference/react-dom/client/createRoot) এ তা পাঠাতে হবেন, যাতে আপনি আপনার নিজের রিয়েক্ট কম্পোনেন্টটি রেন্ডার করতে পারেন:
 
-This lets you find that HTML element with [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) and pass it to [`createRoot`](/reference/react-dom/client/createRoot) so that you can render your own React component inside:
+
 
 <Sandpack>
 
@@ -146,10 +155,10 @@ root.render(<NavigationBar />);
 
 </Sandpack>
 
-Notice how the original HTML content from `index.html` is preserved, but your own `NavigationBar` React component now appears inside the `<nav id="navigation">` from your HTML. Read the [`createRoot` usage documentation](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) to learn more about rendering React components inside an existing HTML page.
+দেখতে হলে যে index.html ফাইলের মূল HTML কন্টেন্টটি সংরক্ষিত আছে এবং আপনার নিজের NavigationBar রিয়েক্ট কম্পোনেন্টটি এখন আপনার HTML এর মধ্যে প্রদর্শিত হয় যেটি `<nav id="navigation">` এর ভিতরে অবস্থিত। রিয়েক্ট কম্পোনেন্টগুলি অবশ্যই বিদ্যমান HTML পৃষ্ঠার ভিতরে রেন্ডার করা সম্ভব হবে। বিস্তারিত জানতে, [createRoot ব্যবহারের নথিপত্র](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) পড়ুন।
 
-When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/start-a-new-react-project) right after to get the most out of React.
+যখন আপনি একটি বিদ্যমান প্রকল্পে রিয়েক্ট অনুমোদন করবেন, তখন ছোট ইন্টারঅ্যাকটিভ কম্পোনেন্টগুলি দিয়ে শুরু করা সাধারণ (যেমন বাটন), এবং পরে ধীরে ধীরে বাকী পৃষ্ঠাগুলি রিয়েক্ট দিয়ে তৈরি করা হয়। আপনি যদি ঐ নির্দিষ্ট সীমানা পাশাপাশি অবজ্ঞার পর্যন্ত এসে যান তখন আমরা রিয়েক্টের সর্বাধিক সুবিধা পেতে হলে একটি [রিয়েক্ট ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করার সুপারিশ করি।
 
-## Using React Native in an existing native mobile app {/*using-react-native-in-an-existing-native-mobile-app*/}
+## একটি বিদ্যমান নেটিভ মোবাইল অ্যাপ এ React Native ব্যবহার করা {/*using-react-native-in-an-existing-native-mobile-app*/}
 
-[React Native](https://reactnative.dev/) can also be integrated into existing native apps incrementally. If you have an existing native app for Android (Java or Kotlin) or iOS (Objective-C or Swift), [follow this guide](https://reactnative.dev/docs/integration-with-existing-apps) to add a React Native screen to it.
+[React Native](https://reactnative.dev/) বিদ্যমান নেটিভ অ্যাপগুলির সাথে একত্রিত করা যেতে পারে। আপনার যদি Android (Java বা Kotlin) বা iOS (Objective-C বা Swift) জন্য একটি বিদ্যমান নেটিভ অ্যাপ থাকে, তবে এই গাইডটি অনুসরণ করে সেখানে একটি React Native স্ক্রিন যুক্ত করতে পারেন।
