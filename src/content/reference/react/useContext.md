@@ -174,9 +174,9 @@ function Button({ children }) {
 
 ---
 
-### Updating data passed via context {/*updating-data-passed-via-context*/}
+### context পাস করার মাধ্যমে ডাটা আপডেট করা {/*updating-data-passed-via-context*/}
 
-Often, you'll want the context to change over time. To update context, combine it with [state.](/reference/react/useState) Declare a state variable in the parent component, and pass the current state down as the <CodeStep step={2}>context value</CodeStep> to the provider.
+মাঝে মাঝেই আপনি সময়ের সাথে সাথে context পরিবর্তন করতে চাইবেন। context আপডেট করতে, এটিকে [state](/reference/react/useState) এর সাথে একত্রে ব্যবহার করতে হবে। প্যারেন্ট কম্পোনেন্টে একটি state ভ্যারিয়েবল ডিক্লেয়ার করতে হবে এবং provider এ <CodeStep step={2}>context এর মান</CodeStep> হিসেবে বর্তমান state কে পাস করে দিতে হবে।
 
 ```js {2} [[1, 4, "ThemeContext"], [2, 4, "theme"], [1, 11, "ThemeContext"]]
 function MyPage() {
@@ -194,13 +194,13 @@ function MyPage() {
 }
 ```
 
-Now any `Button` inside of the provider will receive the current `theme` value. If you call `setTheme` to update the `theme` value that you pass to the provider, all `Button` components will re-render with the new `'light'` value.
+এখন provider এর ভিতরে যেকোনো `Button` বর্তমান `theme` এর মান পাবে। আপনি provider এর কাছে যে `theme` এর মানটি পাস করেছেন সেটি আপডেট করতে আপনি `setTheme` কে কল করলে, সব `Button` কম্পোনেন্ট নতুন `'light'` মান এর জন্য পুনরায় রেন্ডার হবে।
 
-<Recipes titleText="Examples of updating context" titleId="examples-basic">
+<Recipes titleText="context আপডেট করার উদাহরণ" titleId="examples-basic">
 
-#### Updating a value via context {/*updating-a-value-via-context*/}
+#### context এর মাধ্যমে মান আপডেট করা {/*updating-a-value-via-context*/}
 
-In this example, the `MyApp` component holds a state variable which is then passed to the `ThemeContext` provider. Checking the "Dark mode" checkbox updates the state. Changing the provided value re-renders all the components using that context.
+এই উদাহরণে, `MyApp` কম্পোনেন্ট একটি state ভ্যারিয়েবল ধারণ করে যা পরবর্তিতে `ThemeContext` provider এ পাস করা হয়। "Dark mode" চেকবক্স চেক করলে state আপডেট হয়। প্রদত্ত মানের পরিবর্তন সেই সব কম্পোনেন্টকে পুনরায় রেন্ডার করে যারা এই context ব্যবহার করেছে।
 
 <Sandpack>
 
@@ -298,13 +298,13 @@ function Button({ children }) {
 
 </Sandpack>
 
-Note that `value="dark"` passes the `"dark"` string, but `value={theme}` passes the value of the JavaScript `theme` variable with [JSX curly braces.](/learn/javascript-in-jsx-with-curly-braces) Curly braces also let you pass context values that aren't strings.
+উল্লেখ্য যে `value="dark"`, `"dark"` কে string হিসাবে পাস করা হচ্ছে, কিন্তু `value={theme}` জাভাস্ক্রিপ্টের `theme` ভ্যারিয়েবলের মান [JSX curly braces](/learn/javascript-in-jsx-with-curly-braces) দিয়ে পাস করা হচ্ছে। স্ট্রিং নয় এমন context এর মানগুলিও curly braces পাস করতে দেয়।
 
 <Solution />
 
-#### Updating an object via context {/*updating-an-object-via-context*/}
+#### context এর মাধ্যমে object আপডেট করা {/*updating-an-object-via-context*/}
 
-In this example, there is a `currentUser` state variable which holds an object. You combine `{ currentUser, setCurrentUser }` into a single object and pass it down through the context inside the `value={}`. This lets any component below, such as `LoginButton`, read both `currentUser` and `setCurrentUser`, and then call `setCurrentUser` when needed.
+এই উদাহরণে, একটি `currentUser` state ভ্যারিয়েবল রয়েছে যা একটি object কে ধারণ করে। আপনি একটি object এর মধ্যে `{ currentUser, setCurrentUser }` কে একত্রিত করুন এবং context এর ভিতর `value={}` এর মাধ্যমে পাস করে দিন। এটি নীচের যেকোন কম্পোনেন্ট যেমন ধরুন `LoginButton` কে, `currentUser` এবং `setCurrentUser` উভয়ই রিড করতে দেয়, এবং যখন প্রয়োজন `setCurrentUser` কে কল করতে দেয়।
 
 <Sandpack>
 
@@ -394,9 +394,9 @@ label {
 
 <Solution />
 
-#### Multiple contexts {/*multiple-contexts*/}
+#### একাধিক context {/*multiple-contexts*/}
 
-In this example, there are two independent contexts. `ThemeContext` provides the current theme, which is a string, while `CurrentUserContext` holds the object representing the current user.
+এই উদাহরণে, দুটি স্বাধীন context আছে। `ThemeContext` বর্তমান থিম প্রদান করে, যা একটি string, যখন `CurrentUserContext` বর্তমান ব্যবহারকারীর প্রতিনিধিত্ব করে এমন object কে ধারণ করে।
 
 <Sandpack>
 
@@ -561,9 +561,9 @@ label {
 
 <Solution />
 
-#### Extracting providers to a component {/*extracting-providers-to-a-component*/}
+#### কম্পোনেন্ট থেকে provider কে পৃথক করা {/*extracting-providers-to-a-component*/}
 
-As your app grows, it is expected that you'll have a "pyramid" of contexts closer to the root of your app. There is nothing wrong with that. However, if you dislike the nesting aesthetically, you can extract the providers into a single component. In this example, `MyProviders` hides the "plumbing" and renders the children passed to it inside the necessary providers. Note that the `theme` and `setTheme` state is needed in `MyApp` itself, so `MyApp` still owns that piece of the state.
+আপনার অ্যাপ গ্রো করার সাথে সাথে আপনার অ্যাপের রুটের কাছাকাছি context গুলোর একটি "পিরামিড" থাকবে বলে আশা করা যাচ্ছে। এটাতে কোন সমস্যা নেই। যাইহোক, আপনি যদি নান্দনিকভাবে নেস্টিং অপছন্দ করেন, তাহলে আপনি একটি কম্পোনেন্টে provider গুলোকে পৃথক করে ফেলতে পারেন। এই উদাহরণে, `MyProviders` "প্লম্বিং" লুকিয়ে রাখে এবং এর ভিতর দিয়ে প্রয়োজনীয় provider দের জন্য পাস করা চিলড্রেন রেন্ডার করে। উল্লেখ্য যে `MyApp` এ `theme` এবং `setTheme` state প্রয়োজন, তাই `MyApp` এখনও state এর এই অংশটুকুর মালিক।
 
 <Sandpack>
 
@@ -736,11 +736,11 @@ label {
 
 <Solution />
 
-#### Scaling up with context and a reducer {/*scaling-up-with-context-and-a-reducer*/}
+#### context এবং reducer এর মাধ্যমে স্কেল করা {/*scaling-up-with-context-and-a-reducer*/}
 
-In larger apps, it is common to combine context with a [reducer](/reference/react/useReducer) to extract the logic related to some state out of components. In this example, all the "wiring" is hidden in the `TasksContext.js`, which contains a reducer and two separate contexts.
+বড় অ্যাপ্লিকেশানগুলিতে, context এর সাথে একটি [reducer](/reference/react/useReducer) কে একত্রিত করে কম্পোনেন্টগুলোর বাইরের কিছু লজিক সম্পর্কিত state কে পৃথক করা খুবই সাধারণ। এই উদাহরণে, সমস্ত "ওয়্যারিং" `TasksContext.js` এ লুকানো আছে, যেটিতে একটি reducer এবং দুটি পৃথক context রয়েছে।
 
-Read a [full walkthrough](/learn/scaling-up-with-reducer-and-context) of this example.
+এই উদাহরণের [সম্পূর্ন ওয়াকথ্রু](/learn/scaling-up-with-reducer-and-context) পড়ুন।
 
 <Sandpack>
 
