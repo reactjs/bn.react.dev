@@ -1,52 +1,52 @@
 ---
-title: 'Manipulating the DOM with Refs'
+title: 'Ref ব্যবহার করে DOM ম্যানিপুলেশন'
 ---
 
 <Intro>
 
-React automatically updates the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) to match your render output, so your components won't often need to manipulate it. However, sometimes you might need access to the DOM elements managed by React--for example, to focus a node, scroll to it, or measure its size and position. There is no built-in way to do those things in React, so you will need a *ref* to the DOM node.
+React স্বয়ংক্রিয়ভাবে [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) আপডেট করে যেন এটি আপনার রেন্ডার আউটপুটের সাথে মিলে যায়, তাই আপনার কম্পোনেন্টের প্রায় সময়ই দরকার হবে না এটা পরিবর্তন করার। তবে, মাঝে মাঝে আপনার React পরিচালিত DOM elements এর প্রয়োজন হতে পারে--উদাহরণস্বরূপ, একটি node কে ফোকাস করতে, স্ক্রল করতে, অথবা এর আকার এবং অবস্থান পরিমাপ করতে। React এ এই ধরণের কাজ করার জন্য কোনো বিল্ট-ইন উপায় নেই, তাই আপনার DOM node এর *ref* প্রয়োজন হবে।
 
 </Intro>
 
 <YouWillLearn>
 
-- How to access a DOM node managed by React with the `ref` attribute
-- How the `ref` JSX attribute relates to the `useRef` Hook
-- How to access another component's DOM node
-- In which cases it's safe to modify the DOM managed by React
+- কীভাবে React এর পরিচালিত একটি DOM নোড `ref` এট্রিবিউট ব্যবহার করে অ্যাক্সেস করবেন
+- কীভাবে `ref` JSX এট্রিবিউট `useRef` হুকের সাথে সম্পর্কিত।
+- কীভাবে অন্য একটি কম্পোনেন্টের DOM নোড অ্যাক্সেস করবেন
+- কোন কোন ক্ষেত্রে React এর পরিচালিত একটি DOM নোড পরিবর্তন করা নিরাপদ
 
 </YouWillLearn>
 
-## Getting a ref to the node {/*getting-a-ref-to-the-node*/}
+## একটা নোডকে ref পর্যন্ত নিয়ে যাওয়া {/*getting-a-ref-to-the-node*/}
 
-To access a DOM node managed by React, first, import the `useRef` Hook:
+React এর পরিচালিত একটি DOM নোড অ্যাক্সেস করতে, প্রথমে, `useRef` হুকটি ইমপোর্ট করুনঃ
 
 ```js
 import { useRef } from 'react';
 ```
 
-Then, use it to declare a ref inside your component:
+এর পর, একে ব্যবহার করে আপনার কম্পোনেন্টের মধ্যে একটি ref ডিক্লেয়ার করেনঃ
 
 ```js
 const myRef = useRef(null);
 ```
 
-Finally, pass it to the DOM node as the `ref` attribute:
+সবশেষে, DOM নোডে একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
 
 ```js
 <div ref={myRef}>
 ```
 
-The `useRef` Hook returns an object with a single property called `current`. Initially, `myRef.current` will be `null`. When React creates a DOM node for this `<div>`, React will put a reference to this node into `myRef.current`. You can then access this DOM node from your [event handlers](/learn/responding-to-events) and use the built-in [browser APIs](https://developer.mozilla.org/docs/Web/API/Element) defined on it.
+`useRef` হুক একটি অবজেক্ট রিটার্ন করে যার একটি মাত্র প্রপার্টি থাকে `current` নামে। প্রাথমিকভাবে, `myRef.current` হবে `null`। যখন React এই `<div>` এর জন্য একটি DOM node তৈরি করে, React এই নোডের একটি রেফারেন্স `myRef.current`-এ রাখবে। তারপর আপনি আপনার [event handlers](/learn/responding-to-events) থেকে এই DOM node এ অ্যাক্সেস করতে পারেন এবং এর উপর ডিফাইন করা বিল্ট-ইন [browser APIs](https://developer.mozilla.org/docs/Web/API/Element) ব্যবহার করতে পারেন।
 
 ```js
-// You can use any browser APIs, for example:
+// আপনি যেকোন ব্রাউজার API ব্যবহার করতে পারেন। উদাহরণস্বরূপঃ
 myRef.current.scrollIntoView();
 ```
 
-### Example: Focusing a text input {/*example-focusing-a-text-input*/}
+### উদাহরণঃ একটা টেক্সট ইনপুটে ফোকাস করা {/*example-focusing-a-text-input*/}
 
-In this example, clicking the button will focus the input:
+এই উদাহরণে, বাটনে ক্লিক করলে ইনপুট ফোকাস হবেঃ
 
 <Sandpack>
 
@@ -73,18 +73,18 @@ export default function Form() {
 
 </Sandpack>
 
-To implement this:
+এটা করার জন্যঃ
 
-1. Declare `inputRef` with the `useRef` Hook.
-2. Pass it as `<input ref={inputRef}>`. This tells React to **put this `<input>`'s DOM node into `inputRef.current`.**
-3. In the `handleClick` function, read the input DOM node from `inputRef.current` and call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on it with `inputRef.current.focus()`.
-4. Pass the `handleClick` event handler to `<button>` with `onClick`.
+1. `useRef` হুক ব্যবহার করে `inputRef` ডিক্লেয়ার করুন।
+2. `<input ref={inputRef}>` হিসেবে একে পাস করে দিন। এটা React কে বলবে যেন  **এই  `<input>`এর DOM নোড `inputRef.current`এর মধ্যে রাখা হয়।**
+3. `handleClick` ফাংশনে, `inputRef.current` থেকে ইনপুট DOM নোড রিড করুন এবং `inputRef.current.focus()` দিয়ে এর উপর [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) কল করুন।
+4. `handleClick` ইভেন্ট হ্যান্ডলারটি  `onClick` এর সাহায্যে `<button>` এ পাঠিয়ে দিন।
 
-While DOM manipulation is the most common use case for refs, the `useRef` Hook can be used for storing other things outside React, like timer IDs. Similarly to state, refs remain between renders. Refs are like state variables that don't trigger re-renders when you set them. Read about refs in [Referencing Values with Refs.](/learn/referencing-values-with-refs)
+যদিও DOM ম্যানিপুলেশন এর জন্যই refs এর ব্যবহার সবচেয়ে বেশি হয়, `useRef` হুক React এর বাইরে অন্যান্য জিনিস সংরক্ষণ করার জন্য ব্যবহৃত হতে পারে, যেমন টাইমার ID। State এর মতোই, রেন্ডারে মধ্যবর্তী সময়ে ref ঠিকঠাক থাকে। Refs হল state variables এর মত যেগুলি সেট করার সময় re-render ট্রিগার হয় না। ref সম্বন্ধে পড়ুন [ref এর সাহায্যে ভ্যালু রেফারেন্সিং](/learn/referencing-values-with-refs) অংশে।
 
-### Example: Scrolling to an element {/*example-scrolling-to-an-element*/}
+### উদাহরণঃ কোন এলিমেন্ট পর্যন্ত স্ক্রল করা {/*example-scrolling-to-an-element*/}
 
-You can have more than a single ref in a component. In this example, there is a carousel of three images. Each button centers an image by calling the browser [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method on the corresponding DOM node:
+আপনি একটি কম্পোনেন্টে একাধিক ref রাখতে পারেন। এই উদাহরণে, তিনটি চিত্রের একটি ক্যারাসেল আছে। প্রতিটি বাটন ব্রাউজারে ওই ছবির সাথে সম্পর্কিত DOM নোডে [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) মেথড কল করে ছবিটিকে মাঝামাঝি আনে।
 
 <Sandpack>
 
@@ -193,27 +193,27 @@ li {
 
 <DeepDive>
 
-#### How to manage a list of refs using a ref callback {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
+#### কীভাবে একটি ref callback ব্যবহার করে ref এর একটা তালিকা ম্যানেজ করবেন {/*how-to-manage-a-list-of-refs-using-a-ref-callback*/}
 
-In the above examples, there is a predefined number of refs. However, sometimes you might need a ref to each item in the list, and you don't know how many you will have. Something like this **wouldn't work**:
+উপরের উদাহরণগুলিতে, ref এর একটি পূর্বনির্ধারিত সংখ্যা রয়েছে। যদিও, মাঝে মাঝে আপনার তালিকার প্রতিটি আইটেমের জন্য একটি ref প্রয়োজন হতে পারে, এবং আপনি জানবেন না আপনার কতগুলো থাকবে। এরকম কিছু **কাজ করবে নাঃ**
 
 ```js
 <ul>
   {items.map((item) => {
-    // Doesn't work!
+    // কাজ করে না!
     const ref = useRef(null);
     return <li ref={ref} />;
   })}
 </ul>
 ```
 
-This is because **Hooks must only be called at the top-level of your component.** You can't call `useRef` in a loop, in a condition, or inside a `map()` call.
+এর কারণ **হুক শুধুমাত্র আপনার কম্পোনেন্টের শীর্ষ-স্তরে ডাকতে হবে।** আপনি একটি লুপে, একটি কন্ডিশনে, বা একটি `map()` কলের ভিতরে `useRef` ডাকতে পারবেন না।
 
-One possible way around this is to get a single ref to their parent element, and then use DOM manipulation methods like [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) to "find" the individual child nodes from it. However, this is brittle and can break if your DOM structure changes.
+একে এডিয়ে যাবার একটি সম্ভাব্য উপায় হল প্যারেন্ট এলিমেন্টে একটা মাত্র ref নিয়ে যাওয়া এবং তারপরে DOM ম্যানিপুলেশন পদ্ধতিগুলি যেমন [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) ব্যবহার করে এটি থেকে individual child node "খুঁজে" বের করা। যদিও, এটি অত্যন্ত নাজুক এবং যদি আপনার DOM কাঠামো পরিবর্তন হয় তবে এটি ভেঙে যেতে পারে।
 
-Another solution is to **pass a function to the `ref` attribute.** This is called a [`ref` callback.](/reference/react-dom/components/common#ref-callback) React will call your ref callback with the DOM node when it's time to set the ref, and with `null` when it's time to clear it. This lets you maintain your own array or a [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), and access any ref by its index or some kind of ID.
+অন্য একটি সমাধান হলো **`ref` এট্রিবিউটে একটি ফাংশন পাস করা।** এটি [`ref` callback.](/reference/react-dom/components/common#ref-callback) নামে পরিচিত। React যখন ref সেট করার সময় হবে তখন এটি আপনার ref callback কে DOM নোড দিয়ে কল করবে, এবং যখন এটি সাফ করার সময় হবে তখন `null` দিয়ে ডাকবে। এটি আপনাকে আপনার নিজের একটি array বা একটি [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) বজায় রাখতে দেয়, এবং এর মাধ্যমে আপনি তার ইনডেক্স বা কোন ধরণের ID দ্বারা যেকোনো ref অ্যাক্সেস করতে পারেন।
 
-This example shows how you can use this approach to scroll to an arbitrary node in a long list:
+এই উদাহরণটি দেখায় যে আপনি এই পদ্ধতিটি কীভাবে ব্যবহার করে একটি দীর্ঘ তালিকায় যেকোনো নোডে স্ক্রল করতে পারেনঃ
 
 <Sandpack>
 
@@ -235,7 +235,7 @@ export default function CatFriends() {
 
   function getMap() {
     if (!itemsRef.current) {
-      // Initialize the Map on first usage.
+      // প্রথম ব্যবহারে ম্যাপ ইনিশিয়ালাইজ করুন
       itemsRef.current = new Map();
     }
     return itemsRef.current;
@@ -318,7 +318,7 @@ li {
 
 </Sandpack>
 
-In this example, `itemsRef` doesn't hold a single DOM node. Instead, it holds a [Map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) from item ID to a DOM node. ([Refs can hold any values!](/learn/referencing-values-with-refs)) The [`ref` callback](/reference/react-dom/components/common#ref-callback) on every list item takes care to update the Map:
+এউ উদাহরণে, `itemsRef` একটা DOM নোডও রাখে না। বরং এটা আইটেম ID থেকে DOM নোডের একটা [ম্যাপ](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) রাখে। তালিকার প্রতিটি আইটেমে [`ref` callback](/reference/react-dom/components/common#ref-callback) ম্যাপের আপডেটের বিষয়টা ঠিক রাখে।
 
 ```js
 <li
@@ -326,25 +326,25 @@ In this example, `itemsRef` doesn't hold a single DOM node. Instead, it holds a 
   ref={node => {
     const map = getMap();
     if (node) {
-      // Add to the Map
+      // ম্যাপে যোগ করুন
       map.set(cat.id, node);
     } else {
-      // Remove from the Map
+      // ম্যাপ থেকে সরিয়ে ফেলুন
       map.delete(cat.id);
     }
   }}
 >
 ```
 
-This lets you read individual DOM nodes from the Map later.
+এটা আপনাকে ম্যাপ থেকে DOM নোড পৃথকভাবে রিড করতে দেয়।
 
 </DeepDive>
 
-## Accessing another component's DOM nodes {/*accessing-another-components-dom-nodes*/}
+## অন্য একটি কম্পোনেন্টের DOM নোড অ্যাক্সেস করা {/*accessing-another-components-dom-nodes*/}
 
-When you put a ref on a built-in component that outputs a browser element like `<input />`, React will set that ref's `current` property to the corresponding DOM node (such as the actual `<input />` in the browser).
+আপনি যখন এমন একটা বিল্ট-ইন কম্পোনেন্টে রেফ বসান যা `<input />` এর মত একটি ব্রাউজার এলিমেন্ট আউটপুট হিসেবে দেয়, React সেই ref এর  `current` হিসেবে প্রপার্টি সম্পর্কিত DOM নোড (যেমন ব্রাউজারের প্রকৃত `<input />`) সেট করে দেবে। 
 
-However, if you try to put a ref on **your own** component, like `<MyInput />`, by default you will get `null`. Here is an example demonstrating it. Notice how clicking the button **does not** focus the input:
+তবে, আপনি যদি **আপনার নিজের** কম্পোনেন্টে একটা ref বসাতে চান, যেমন `<MyInput />`, তাহলে স্বাভাবিকভাবে আপনি `null` পাবেন। এখানে বিষয়টা দেখায় এমন একটি উদাহরণ দেখানো হল। খেয়াল করুন বাটনে ক্লিক করলে ইনপুটে ফোকাস **হয় না।**
 
 <Sandpack>
 
@@ -375,17 +375,17 @@ export default function MyForm() {
 
 </Sandpack>
 
-To help you notice the issue, React also prints an error to the console:
+আপনি যেন ঝামেলাটা খেয়াল করেন, সেজন্য React কনসোলে একটি এরর দেখিয়ে দেয়ঃ
 
 <ConsoleBlock level="error">
 
-Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+সতর্কতাঃ ফাংশন কম্পোনেন্টে ref দেওয়া যায় না। এমন একটি ref এ অ্যাক্সেসের চেষ্টা বিফল হবে। আপনি কি React.forwardRef() ব্যবহার করতে চেয়েছিলেন?
 
 </ConsoleBlock>
 
-This happens because by default React does not let a component access the DOM nodes of other components. Not even for its own children! This is intentional. Refs are an escape hatch that should be used sparingly. Manually manipulating _another_ component's DOM nodes makes your code even more fragile.
+এটি ঘটে কারণ স্বাভাবিকভাবে React কম্পোনেন্টকে অন্যান্য কম্পোনেন্টের DOM নোড অ্যাক্সেস করতে দেয় না। তার নিজের children দের জন্যও নয়! এটি ইচ্ছাকৃত। Ref এক ধরণের escape hatch যা খুব কম ব্যবহার করা উচিত। ম্যানুয়ালি _অন্য_ কম্পোনেন্টের DOM নোড পরিবর্তন করা আপনার কোডকে আরও নাজুক বানিয়ে ফেলে।
 
-Instead, components that _want_ to expose their DOM nodes have to **opt in** to that behavior. A component can specify that it "forwards" its ref to one of its children. Here's how `MyInput` can use the `forwardRef` API:
+এর পরিবর্তে, যে কম্পোনেন্টগুলি তাদের DOM নোড উন্মুক্ত করতে _চায়_ তাদেরকে এই আচরণ **আয়ত্ব করে** নিতে হবে। একটি কম্পোনেন্ট নির্দিষ্ট করতে পারে যে এটি তার ref তার একটি সন্তানের কাছে "ফরোয়ার্ড" করে। এটা কিভাবে MyInput forwardRef API ব্যবহার করতে পারে তা দেখানো হলো:
 
 ```js
 const MyInput = forwardRef((props, ref) => {
@@ -393,13 +393,13 @@ const MyInput = forwardRef((props, ref) => {
 });
 ```
 
-This is how it works:
+এটা কাজ করে এই ভাবেঃ
 
-1. `<MyInput ref={inputRef} />` tells React to put the corresponding DOM node into `inputRef.current`. However, it's up to the `MyInput` component to opt into that--by default, it doesn't.
-2. The `MyInput` component is declared using `forwardRef`. **This opts it into receiving the `inputRef` from above as the second `ref` argument** which is declared after `props`.
-3. `MyInput` itself passes the `ref` it received to the `<input>` inside of it.
+1. `<MyInput ref={inputRef} />` React কে বলে corresponding DOM নোড `inputRef.current` এর মধ্যে রাখতে। কিন্তু, এই সিদ্ধান্তটা`MyInput` কম্পোনেন্টের উপর নির্ভর করে যে সে এটা করবে কি না--স্বাভাবিকভাবে সে এটা করে না।
+2. `MyInput` কম্পোনেন্টটা `forwardRef` ব্যবহার করে ডিক্লেয়ার করা হয়। **এটা  উপরের `inputRef` কে দ্বিতীয় `ref` আর্গুমেন্ট হিসেবে নেওয়ার সিদ্ধান্ত নেয়,** যা `props` এর পরে ডিক্লেয়ার করা হয়।
+3. `MyInput` যেই `ref` টা পায় সেটা নিজেই এর ভিতরকার `<input>` এ পাস করে দেয়।
 
-Now clicking the button to focus the input works:
+এখন বাটন ক্লিক করে ইনপুট ফোকাস হচ্ছে ঠিকঠাকভাবেঃ
 
 <Sandpack>
 
@@ -430,13 +430,13 @@ export default function Form() {
 
 </Sandpack>
 
-In design systems, it is a common pattern for low-level components like buttons, inputs, and so on, to forward their refs to their DOM nodes. On the other hand, high-level components like forms, lists, or page sections usually won't expose their DOM nodes to avoid accidental dependencies on the DOM structure.
+সাধারণত ডিজাইন সিস্টেমে, বাটন, ইনপুট এবং এরকম কিছু অন্যান্য নিম্ন-স্তরের কম্পোনেন্টগুলির জন্য তাদের ref তাদের DOM নোডে ফরওয়ার্ড করা একটি সাধারণ প্যাটার্ন। অন্যদিকে, ফরম, তালিকা, বা পেইজের সেকশনের মতো উচ্চ-স্তরের কম্পোনেন্টগুলি সাধারণত DOM নোড প্রকাশ করবে না যাতে DOM  কাঠামোতে আকস্মিক নির্ভরতা কমে যায়।
 
 <DeepDive>
 
-#### Exposing a subset of the API with an imperative handle {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
+#### API এর একাংশ imperative handle এর সাহায্যে উন্মুক্ত করা {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
 
-In the above example, `MyInput` exposes the original DOM input element. This lets the parent component call `focus()` on it. However, this also lets the parent component do something else--for example, change its CSS styles. In uncommon cases, you may want to restrict the exposed functionality. You can do that with `useImperativeHandle`:
+উপরের উদাহরণে, `MyInput` মূল DOM ইনপুট এলিমেন্টটি প্রকাশ করে। এটি প্যারেন্ট কম্পোনেন্টকে এটির উপর `focus()` কল করার সুযোগ দেয়। যদিও, এটি প্যারেন্ট কম্পোনেন্টকে অন্য একটা কাজ সুযোগ করে দেয় - উদাহরণস্বরূপ, এর CSS স্টাইল পরিবর্তন করা। হঠাৎ হঠাৎ, আপনি হয়তো exposed functionality সীমাবদ্ধ করতে চাইবেন। আপনি এটি `useImperativeHandle` এর সাহায্যে করতে পারেনঃ
 
 <Sandpack>
 
@@ -450,7 +450,7 @@ import {
 const MyInput = forwardRef((props, ref) => {
   const realInputRef = useRef(null);
   useImperativeHandle(ref, () => ({
-    // Only expose focus and nothing else
+    // শুধুমাত্র ফোকাস উন্মুক্ত করুন আর কিছু না
     focus() {
       realInputRef.current.focus();
     },
@@ -478,28 +478,28 @@ export default function Form() {
 
 </Sandpack>
 
-Here, `realInputRef` inside `MyInput` holds the actual input DOM node. However, `useImperativeHandle` instructs React to provide your own special object as the value of a ref to the parent component. So `inputRef.current` inside the `Form` component will only have the `focus` method. In this case, the ref "handle" is not the DOM node, but the custom object you create inside `useImperativeHandle` call.
+এখানে, `MyInput` এর মধ্যে `realInputRef` আসল ইনপুট DOM নোডটি ধারণ করে। যদিও, `useImperativeHandle` React-কে বলে যেন প্যারেন্ট কম্পোনেন্টের জন্য ref এর মান হিসাবে আপনার নিজের বিশেষ একটা অবজেক্ট সরবরাহ করবে। তাই `Form` কম্পোনেন্টের ভেতরে `inputRef.current` শুধু মাত্র `focus` মেথডটি আছে। এই ক্ষেত্রে, ref "handle" DOM নোড নয়, বরং `useImperativeHandle` কলের ভেতরে আপনি যে কাস্টম অবজেক্ট তৈরি করেন সেটা।
 
 </DeepDive>
 
 ## When React attaches the refs {/*when-react-attaches-the-refs*/}
 
-In React, every update is split in [two phases](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom):
+React এ, প্রতিটি আপডেট [দুটি পর্যায়ে](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom) ভাগ করা হয়ঃ
 
-* During **render,** React calls your components to figure out what should be on the screen.
-* During **commit,** React applies changes to the DOM.
+* **render** এর সময়, React আপনার কম্পোনেন্টগুলি কল করে যেন পর্দায় কী থাকা উচিত তা নির্ধারণ করতে পারে।
+* **commit** এর সময়, React DOM এ পরিবর্তনগুলি প্রয়োগ করে।
 
-In general, you [don't want](/learn/referencing-values-with-refs#best-practices-for-refs) to access refs during rendering. That goes for refs holding DOM nodes as well. During the first render, the DOM nodes have not yet been created, so `ref.current` will be `null`. And during the rendering of updates, the DOM nodes haven't been updated yet. So it's too early to read them.
+সাধারণত, আপনি রেন্ডারিং এর সময় ref গুলিতে অ্যাক্সেস করতে [চান না](/learn/referencing-values-with-refs#best-practices-for-refs)। DOM নোডগুলি ধারণ করা ref এর জন্য এটিও প্রযোজ্য। প্রথম রেন্ডারের সময়, DOM নোডগুলি এখনও তৈরি হয়নি, সুতরাং `ref.current` হবে `null`। আর আপডেট রেন্ডারিং এর সময়, DOM নোডগুলি এখনও আপডেট হয়নি। সুতরাং এখনো তাদের read করার সময় হয় নাই।
 
-React sets `ref.current` during the commit. Before updating the DOM, React sets the affected `ref.current` values to `null`. After updating the DOM, React immediately sets them to the corresponding DOM nodes.
+React কমিটের সময় `ref.current` সেট করে। DOM আপডেট করার আগে, React প্রভাবিত `ref.current` মানগুলিকে `null` সেট করে। DOM আপডেট করার পরে, React তা অবিলম্বে সম্পর্কিত DOM নোডগুলিতে সেট করে।
 
-**Usually, you will access refs from event handlers.** If you want to do something with a ref, but there is no particular event to do it in, you might need an Effect. We will discuss effects on the next pages.
+**সাধারণত, আপনি ইভেন্ট হ্যান্ডলারগুলি থেকে ref গুলি অ্যাক্সেস করবেন।** আপনি যদি কোনও ref এর সাথে কিছু করতে চান, কিন্তু এটি করার জন্য কোনও নির্দিষ্ট ইভেন্ট নেই, আপনার একটি Effect প্রয়োজন হতে পারে। আমরা পরবর্তী সেকশন গুলিতে effects সম্পর্কে আলোচনা করব।
 
 <DeepDive>
 
-#### Flushing state updates synchronously with flushSync {/*flushing-state-updates-synchronously-with-flush-sync*/}
+#### flushSync ব্যবহার করে সিঙ্ক্রোনাস ভাবে state update flush করা {/*flushing-state-updates-synchronously-with-flush-sync*/}
 
-Consider code like this, which adds a new todo and scrolls the screen down to the last child of the list. Notice how, for some reason, it always scrolls to the todo that was *just before* the last added one:
+এরকম কোড বিবেচনা করুন, যা একটি নতুন todo যোগ করে এবং স্ক্রিনটি তালিকার শেষ চাইল্ডের দিকে স্ক্রল করে। লক্ষ্য করুন কিভাবে, কিছু কারণে, এটি সবসময় শেষে যোগ করা todo এর *ঠিক আগের* একটিতে স্ক্রল করেঃ
 
 <Sandpack>
 
@@ -553,16 +553,16 @@ for (let i = 0; i < 20; i++) {
 
 </Sandpack>
 
-The issue is with these two lines:
+এই দুটি লাইনে সমস্যাটি আছেঃ
 
 ```js
 setTodos([ ...todos, newTodo]);
 listRef.current.lastChild.scrollIntoView();
 ```
 
-In React, [state updates are queued.](/learn/queueing-a-series-of-state-updates) Usually, this is what you want. However, here it causes a problem because `setTodos` does not immediately update the DOM. So the time you scroll the list to its last element, the todo has not yet been added. This is why scrolling always "lags behind" by one item.
+React এ, [state আপডেট কিউ করে রাখা হয়।](/learn/queueing-a-series-of-state-updates) সাধারণত, আপনি এইটাই চাইবেন।  তবে, এখানে এটা সমস্যা করে কারণ `setTodos` DOM কে সাথে সাথে আপডেট করে না। সুতরাং যখন আপনি স্ক্রল করে তালিকের শেষ এলিমেন্টে যাবেন, তখনো todo যোগ করা হয় নাই। এই কারণে স্ক্রলিং সব সময়ে এক আইটেমের হিসেবে "পিছিয়ে থাকে।"
 
-To fix this issue, you can force React to update ("flush") the DOM synchronously. To do this, import `flushSync` from `react-dom` and **wrap the state update** into a `flushSync` call:
+এই সমস্যাটা সমাধানের জন্য, আপনি React কে DOM সিঙ্ক্রোনাসভাবে আপডেট ("flush") করতে বাধ্য করতে পারেন। এটা করার জন্য `react-dom` থেকে `flushSync` ইমপোর্ট করুন এবং **state আপডেটকে ঘিরে ফেলুন** একটা `flushSync` কলের মধ্যেঃ
 
 ```js
 flushSync(() => {
@@ -571,7 +571,7 @@ flushSync(() => {
 listRef.current.lastChild.scrollIntoView();
 ```
 
-This will instruct React to update the DOM synchronously right after the code wrapped in `flushSync` executes. As a result, the last todo will already be in the DOM by the time you try to scroll to it:
+এটা React কে নির্দেশ করবে যেন `flushSync` দিয়ে ঘেরা কোড চলার সাথে সাথে সিঙ্ক্রোনাস ভাবে DOM আপডেট হয়ে যায়। ফলাফলস্বরূপ, আপনি যতক্ষণে শেষ TODO তে স্ক্রল করে যাবেন তার আগেই এটা DOM এর মধ্যে থাকবে।
 
 <Sandpack>
 
@@ -630,15 +630,15 @@ for (let i = 0; i < 20; i++) {
 
 </DeepDive>
 
-## Best practices for DOM manipulation with refs {/*best-practices-for-dom-manipulation-with-refs*/}
+## ref ব্যবহার করে DOM ম্যানিপুলেশনের ক্ষেত্রে যা যা মেনে চলা উচিত {/*best-practices-for-dom-manipulation-with-refs*/}
 
-Refs are an escape hatch. You should only use them when you have to "step outside React". Common examples of this include managing focus, scroll position, or calling browser APIs that React does not expose.
+Ref হচ্ছে এক ধরণের escape hatch। আপনার শুধুমাত্র "React এর বাইরে পদক্ষেপ নিতে" হলে এর ব্যবহার করা উচিত। এই ধরনের সাধারণ উদাহরণগুলির মধ্যে রয়েছে ফোকাস করা, স্ক্রোল অবস্থান বা ব্রাউজার API গুলি কল করা যা React প্রকাশ করে না।
 
-If you stick to non-destructive actions like focusing and scrolling, you shouldn't encounter any problems. However, if you try to **modify** the DOM manually, you can risk conflicting with the changes React is making.
+আপনি যদি ফোকাসিং এবং স্ক্রোলিং এর মতো অবিনাশী কাজগুলিতে স্থাপিত থাকেন, তবে আপনার কোনও সমস্যা হওয়ার কথা নয়। যদিও, আপনি যদি ম্যানুয়ালি DOM পরিবর্তন করার চেষ্টা করেন, তবে আপনি React এর করা পরিবর্তনের সাথে বিরোধিতা ঘটানোর ঝুঁকি নিতে পারেন।
 
-To illustrate this problem, this example includes a welcome message and two buttons. The first button toggles its presence using [conditional rendering](/learn/conditional-rendering) and [state](/learn/state-a-components-memory), as you would usually do in React. The second button uses the [`remove()` DOM API](https://developer.mozilla.org/en-US/docs/Web/API/Element/remove) to forcefully remove it from the DOM outside of React's control.
+এই সমস্যাটা ব্যাখ্যা করতে, এই উদাহরণে একটা ওয়েলকাম মেসেজ এবং দুটি বাটন আছে। প্রথম বাটনটি [conditional rendering](/learn/conditional-rendering) এবং [state](/learn/state-a-components-memory) ব্যবহার করে এর উপস্থিতি বদল করে, যেমন আপনি স্বাভাবিকভাবে React এ করেন। দ্বিতীয় বাটনটি [`remove()` DOM API](https://developer.mozilla.org/en-US/docs/Web/API/Element/remove) ব্যবহার করে একে জোর করে DOM থকে সরিয়ে React এর নিয়ন্ত্রণের বাইরে পাঠিয়ে দেয়। 
 
-Try pressing "Toggle with setState" a few times. The message should disappear and appear again. Then press "Remove from the DOM". This will forcefully remove it. Finally, press "Toggle with setState":
+কয়েকবার "Toggle with setState" চাপার চেষ্টা করেন। মেসেজটা হারিয়ে যাবার কথা আবার আসার কথা। এরপরে "Remove from the DOM" এ চাপ দিন। এটা একে জোর করে সরিয়ে ফেলবে। সবশেষে,  "Toggle with setState" চাপ দিনঃ
 
 <Sandpack>
 
@@ -679,20 +679,20 @@ button {
 
 </Sandpack>
 
-After you've manually removed the DOM element, trying to use `setState` to show it again will lead to a crash. This is because you've changed the DOM, and React doesn't know how to continue managing it correctly.
+আপনি নিজে DOM এলিমেন্ট সরিয়ে ফেলবার পরে, `setState` ব্যবহার করে একে আবার দেখানোর চেষ্টা করলে সিস্টেম ক্র্যাশ করবে। এর কারণ আপনি DOM বদলে ফেলেছেন, এবং React জানে না এর পরে একে কীভাবে পরিচালনা করবে।
 
-**Avoid changing DOM nodes managed by React.** Modifying, adding children to, or removing children from elements that are managed by React can lead to inconsistent visual results or crashes like above.
+**React দিয়ে পরিচালিত DOM নোড পরিবর্তন এড়িয়ে চলবেন।** যেসব এলিমেন্ট React পরিচালনা করে সেগুলোর পরিবর্তন, চাইল্ড যোগ করা বা চাইল্ড বাদ দেয়ার কারণে ভিজ্যুয়াল ফলাফলে অসামাঞ্জস্য দেখা যেতে পারে বা উপরের মত ক্র্যাশ করতে পারে।
 
-However, this doesn't mean that you can't do it at all. It requires caution. **You can safely modify parts of the DOM that React has _no reason_ to update.** For example, if some `<div>` is always empty in the JSX, React won't have a reason to touch its children list. Therefore, it is safe to manually add or remove elements there.
+তবে, এর মানে এটা না যে আপনি এটা একদমই করতে পারবেন না। এর জন্য দরকার সতর্কতা। **আপনি নিরাপদভাবে DOM এর সেই অংশগুলো পরিবর্তন করতে পারবেন যেগুলো React এর আপডেট করার কোন _কারণ নেই_।** উদাহরণস্বরূপ, যদি JSX এ কোন `<div>` সবসময় খালি থাকে, এর চিলড্রেন তালিকায় হাত দেয়ার কোন কারণ থাকবে না React এর। সুতরাং, সেখানে নিজ থেকে এলিমেন্ট যুক্ত করা বা বাদ দেওয়াটা নিরাপদ। 
 
 <Recap>
 
-- Refs are a generic concept, but most often you'll use them to hold DOM elements.
-- You instruct React to put a DOM node into `myRef.current` by passing `<div ref={myRef}>`.
-- Usually, you will use refs for non-destructive actions like focusing, scrolling, or measuring DOM elements.
-- A component doesn't expose its DOM nodes by default. You can opt into exposing a DOM node by using `forwardRef` and passing the second `ref` argument down to a specific node.
-- Avoid changing DOM nodes managed by React.
-- If you do modify DOM nodes managed by React, modify parts that React has no reason to update.
+- Ref একটি সাধারণ ধারণা, কিন্তু বেশিরভাগ সময় আপনি DOM এলিমেন্ট হোল্ড করার জন্য এর ব্যবহার করবেন।
+- আপনি `<div ref={myRef}>` পাস করার মাধ্যমে React কে নির্দেশ করবেন যেন `myRef.current` এর মধ্যে একটি DOM নোড ঢুকানো হয়। 
+- সাধারণত, আপনি ref ব্যবহার করবেন এমন কাজ করার জন্য যা ধ্বংসাত্মক না। যেমন ফোকাস করা, স্ক্রল করা বা DOM এলিমেন্টের measure করা।
+- একটা কম্পোনেন্ট এর DOM নোড স্বাভাবিকভাবে উন্মুক্ত করে না। আপনি `forwardRef` ব্যবহার করার মাধ্যমে এবং একটা নির্দিষ্ট নোডে দ্বিতীয় `ref` আর্গুমেন্ট পাঠিয়ে দেবার মাধ্যমে DOM নোড উন্মুক্ত করার সিদ্ধান্ত নিতে পারেন।
+- React পরিচালনা করে এমন DOM নোড পরিবর্তন করা এড়িয়ে চলুন।
+- আপনি যদি React এর পরিচালিত DOM নোড পরিবর্তন করে, তাহলে এমন অংশে পরিবর্তনটা আনেন যেটা React এর আপডেট করার কোন কারণ নেই। 
 
 </Recap>
 
@@ -700,9 +700,9 @@ However, this doesn't mean that you can't do it at all. It requires caution. **Y
 
 <Challenges>
 
-#### Play and pause the video {/*play-and-pause-the-video*/}
+#### ভিডিও চালু এবং বন্ধ করুন {/*play-and-pause-the-video*/}
 
-In this example, the button toggles a state variable to switch between a playing and a paused state. However, in order to actually play or pause the video, toggling state is not enough. You also need to call [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) on the DOM element for the `<video>`. Add a ref to it, and make the button work.
+এই উদাহরণে, ভিডিও চালু এবং বন্ধ থাকা অবস্থার সুইচ করার জন্য বাটন একটি state ভ্যারিয়েবল পরিবর্তন করে। তবে, ভিডিও আসলেই বন্ধ বা চালু করার জন্য, state ভ্যারিয়েবল পরিবর্তন করা যথেষ্ট না। আপনাকে `<video>` এর DOM এলিমেন্টে [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) এবং [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) কল করতে হবে। এর সাথে একটি ref যোগ করুন, এবং নিশ্চিত করুন যে বাটনটা কাজ করছে।
 
 <Sandpack>
 
@@ -739,11 +739,11 @@ button { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-For an extra challenge, keep the "Play" button in sync with whether the video is playing even if the user right-clicks the video and plays it using the built-in browser media controls. You might want to listen to `onPlay` and `onPause` on the video to do that.
+একটা অতিরিক্ত চ্যালেঞ্জের জন্য, যদি ব্যবহারকারী ভিডিওতে রাইট ক্লিক করে বিল্ট-ইন ব্রাউজার মিডিয়া কন্ট্রোল ব্যবহার করে ভিডিও চালু করে দেয়, সেটার সাথে "Play" বাটন sync রাখুন। আপনি ভিডিওর `onPlay` এবং `onPause` listen করতে চাইতে পারেন।
 
 <Solution>
 
-Declare a ref and put it on the `<video>` element. Then call `ref.current.play()` and `ref.current.pause()` in the event handler depending on the next state.
+একটা ref ডিক্লেয়ার করুন এবং তাকে `<video>` এলিমেন্টে রাখুন। তারপর পরবর্তী state এর উপর নির্ভর করে ইভেন্ট হ্যান্ডলারে `ref.current.play()` এবং `ref.current.pause()` কল করুন।
 
 <Sandpack>
 
@@ -792,13 +792,13 @@ button { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-In order to handle the built-in browser controls, you can add `onPlay` and `onPause` handlers to the `<video>` element and call `setIsPlaying` from them. This way, if the user plays the video using the browser controls, the state will adjust accordingly.
+ব্রাউজারের বিল্ট-ইন কন্ট্রোল ব্যবহার করতে, আপনি  `<video>` এলিমেন্টে `onPlay` এবং `onPause` যোগ করতে পারেন এবং সেখান থেকে  `setIsPlaying` কল করতে পারেন। এই ভাবে, যদি ব্যবহারকারী ব্রাউজারের কন্ট্রোল ব্যবহার করে, state যথাযথভাবে নিজেকে বদলে নেবে।
 
 </Solution>
 
-#### Focus the search field {/*focus-the-search-field*/}
+#### সার্চ ফিল্ডে ফোকাস করুন {/*focus-the-search-field*/}
 
-Make it so that clicking the "Search" button puts focus into the field.
+একে এমন ভাবে বানান যেন "Search" বাটনে ক্লিক করা হলে ফিল্ডটা ফোকাস হয়।
 
 <Sandpack>
 
@@ -825,7 +825,7 @@ button { display: block; margin-bottom: 10px; }
 
 <Solution>
 
-Add a ref to the input, and call `focus()` on the DOM node to focus it:
+ইনপুটে একটা ref যোগ করুন, এবং একে ফোকাস করতে DOM নোডে `focus()` কল করুন।
 
 <Sandpack>
 
@@ -860,9 +860,9 @@ button { display: block; margin-bottom: 10px; }
 
 </Solution>
 
-#### Scrolling an image carousel {/*scrolling-an-image-carousel*/}
+#### একটি ছবির ক্যারোসেলে স্ক্রল করা {/*scrolling-an-image-carousel*/}
 
-This image carousel has a "Next" button that switches the active image. Make the gallery scroll horizontally to the active image on click. You will want to call [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) on the DOM node of the active image:
+এই ছবির ক্যারোসেলের একটা "Next" বাটন আছে যেটা সক্রিয় ছবিটাকে বদলে ফেলে। নিশ্চিত করুন যেন ক্লিক করলে গ্যালারি উপর নিচে স্ক্রল করে সক্রিয় ছবিটায় চলে যায়। আপনি সক্রিয় ছবির DOM নোডে [`scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) কল করতে চাইবেন।
 
 ```js
 node.scrollIntoView({
@@ -874,7 +874,7 @@ node.scrollIntoView({
 
 <Hint>
 
-You don't need to have a ref to every image for this exercise. It should be enough to have a ref to the currently active image, or to the list itself. Use `flushSync` to ensure the DOM is updated *before* you scroll.
+এই অনুশীলনের জন্য প্রতিটি ছবিতে একটা ref এর দরকার নাই। বর্তমানে সক্রিয় যে ছবি তার, অথবা তালিকার নিজের একটা ref থাকাই যথেষ্ট। আপনি স্ক্রল করার *আগে* যেন DOM আপডেটেড হয়ে যায় সেটা নিশ্চিত করতে `flushSync` ব্যবহার করুন।
 
 </Hint>
 
@@ -969,15 +969,15 @@ img {
 
 <Solution>
 
-You can declare a `selectedRef`, and then pass it conditionally only to the current image:
+আপনি একটি `selectedRef` ঘোষণা দিতে পারেন, এবং শর্ত দিয়ে শুধুমাত্র বর্তমান ছবিতে একে পাস করে দিতে পারেন।
 
 ```js
 <li ref={index === i ? selectedRef : null}>
 ```
 
-When `index === i`, meaning that the image is the selected one, the `<li>` will receive the `selectedRef`. React will make sure that `selectedRef.current` always points at the correct DOM node.
+যখন `index === i`, অর্থাৎ এই ছবিটাই নির্বাচিত ছবি, `<li>` `selectedRef` রিসিভ করবে। React নিশ্চিত করবে যে `selectedRef.current` সবসময় সঠিক DOM নোড নির্দেশ করছে। 
 
-Note that the `flushSync` call is necessary to force React to update the DOM before the scroll. Otherwise, `selectedRef.current` would always point at the previously selected item.
+লক্ষ্য করুন স্ক্রল এর আগে DOM নোড আপডেট করার জন্য React-কে বাধ্য করতে `flushSync` কলটা দরকার পড়ে। নাহলে, `selectedRef.current` সবসময়ই আগে থেকে নির্বাচিত আইটেমটাতেই নির্দেশ করবে। 
 
 <Sandpack>
 
@@ -1088,11 +1088,11 @@ img {
 
 #### Focus the search field with separate components {/*focus-the-search-field-with-separate-components*/}
 
-Make it so that clicking the "Search" button puts focus into the field. Note that each component is defined in a separate file and shouldn't be moved out of it. How do you connect them together?
+এমনভাবে একে বানান যেন "Search" বাটনে ক্লিক করা হলে ফিল্ডটা ফোকাস হয়। লক্ষ্য করবেন প্রতিটা কম্পোনেন্ট একটা পৃথক ফাইলে ডিফাইন করা আছে এবং সেখান থেকে তাদের বের করা উচিত না। সেগুলোকে আপনি কীভাবে একসাথে যুক্ত করবেন?
 
 <Hint>
 
-You'll need `forwardRef` to opt into exposing a DOM node from your own component like `SearchInput`.
+`SearchInput` এর মত, আপনার নিজের কোন কম্পোনেন্ট থেকে একটি DOM নোড উন্মুক্ত করার জন্য আপনার প্রয়োজন হবে `forwardRef`
 
 </Hint>
 
@@ -1142,7 +1142,7 @@ button { display: block; margin-bottom: 10px; }
 
 <Solution>
 
-You'll need to add an `onClick` prop to the `SearchButton`, and make the `SearchButton` pass it down to the browser `<button>`. You'll also pass a ref down to `<SearchInput>`, which will forward it to the real `<input>` and populate it. Finally, in the click handler, you'll call `focus` on the DOM node stored inside that ref.
+আপনাকে `SearchButton`এ একটা `onClick` প্রপ যোগ করতে হবে, এবং নিশ্চিত করতে হবে যেন `SearchButton` একে ব্রাউজার `<button>` পর্যন্ত পাস করে নিয়ে যায়। আপনি `<SearchInput>` পর্যন্ত একটি ref ও নিয়ে যাবেন, যা একে আসল `<input>` পর্যন্ত ফরোয়ার্ড করবে এবং populate করবে। সবশেষে, ক্লিক হ্যান্ডলারে, আপনি ref এর মধ্যে থাকা DOM নোডে `focus` কল করবেন।
 
 <Sandpack>
 
