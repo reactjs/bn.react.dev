@@ -4,21 +4,21 @@ title: Writing Markup with JSX
 
 <Intro>
 
-*JSX* is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file. Although there are other ways to write components, most React developers prefer the conciseness of JSX, and most codebases use it.
+*JSX* হল JavaScript-এর জন্য একটি সিনট্যাক্স এক্সটেনশন যা আপনাকে জাভাস্ক্রিপ্ট ফাইলের ভিতরে HTML-এর মতো মার্কআপ লিখতে দেয়। যদিও কম্পোনেন্টগুলো লেখার অন্যান্য উপায় রয়েছে, বেশিরভাগ ডেভেলপার  JSX এর সংক্ষিপ্ততা পছন্দ করে এবং বেশিরভাগ কোডবেস এটি ব্যবহার করে।
 
 </Intro>
 
 <YouWillLearn>
 
-* Why React mixes markup with rendering logic
-* How JSX is different from HTML
-* How to display information with JSX
+* React কেন রেন্ডারিং লজিকের সাথে মার্কআপকে মিশ্রিত করে
+* JSX কিভাবে HTML থেকে আলাদা
+* কিভাবে JSX এর সাথে তথ্য প্রদর্শন করবেন
 
 </YouWillLearn>
 
-## JSX: Putting markup into JavaScript {/*jsx-putting-markup-into-javascript*/}
+## JSX: জাভাস্ক্রিপ্টে মার্কআপ করা {/*jsx-putting-markup-into-javascript*/}
 
-The Web has been built on HTML, CSS, and JavaScript. For many years, web developers kept content in HTML, design in CSS, and logic in JavaScript—often in separate files! Content was marked up inside HTML while the page's logic lived separately in JavaScript:
+ওয়েবটি এইচটিএমএল, সিএসএস এবং জাভাস্ক্রিপ্টে তৈরি করা হয়েছে। বহু বছর ধরে, ওয়েব ডেভেলপাররা HTML-এ কন্টেন্ট, সিএসএস-এ ডিজাইন এবং জাভাস্ক্রিপ্টে লজিক রাখে—প্রায়ই আলাদা ফাইলে! পেইজের লজিক জাভাস্ক্রিপ্টে আলাদাভাবে থাকলেও বিষয়বস্তু HTML-এর মধ্যে চিহ্নিত করা হয়েছিল:
 
 <DiagramGroup>
 
@@ -36,7 +36,9 @@ JavaScript
 
 </DiagramGroup>
 
-But as the Web became more interactive, logic increasingly determined content. JavaScript was in charge of the HTML! This is why **in React, rendering logic and markup live together in the same place—components.**
+কিন্তু ওয়েব যত বেশি ইন্টারেক্টিভ হয়ে ওঠে, যুক্তি ক্রমবর্ধমান বিষয়বস্তু নির্ধারণ করে। এইচটিএমএল এর দায়িত্বে ছিল জাভাস্ক্রিপ্ট!  **এই কারণেই React-এ, রেন্ডারিং লজিক এবং মার্কআপ একই জায়গায় একসাথে থাকে—কম্পোনেন্ট।**
+
+
 
 <DiagramGroup>
 
