@@ -287,13 +287,13 @@ export default function TopNav({
                 <NavItem
                   isActive={section === 'reference'}
                   url="/reference/react">
-                  Reference
+                  রেফারেন্স
                 </NavItem>
                 <NavItem isActive={section === 'community'} url="/community">
-                  Community
+                  কমিউনিটি
                 </NavItem>
                 <NavItem isActive={section === 'blog'} url="/blog">
-                  Blog
+                  ব্লগ
                 </NavItem>
               </div>
               <div className="flex w-full md:hidden"></div>
