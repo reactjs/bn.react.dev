@@ -30,7 +30,7 @@ HTML
 
 <Diagram name="writing_jsx_js" height={237} width={325} alt="Three JavaScript handlers with yellow background: onSubmit, onLogin, and onClick.">
 
-JavaScript
+জাভাস্ক্রিপ্ট
 
 </Diagram>
 
