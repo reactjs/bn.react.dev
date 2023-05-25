@@ -1,23 +1,23 @@
 ---
-title: Queueing a Series of State Updates
+title: State আপডেটস এর একটি ক্রম সারিবদ্ধ করা
 ---
 
 <Intro>
 
-Setting a state variable will queue another render. But sometimes you might want to perform multiple operations on the value before queueing the next render. To do this, it helps to understand how React batches state updates.
+State ভেরিয়েবল সেট করা হলে আরেকটি রেনডারকে সারিবদ্ধ করবে। কিন্তু পরের রেনডারকে সারিবদ্ধ করার আগে, কখনো কখনো আপনি হয়তো ভালুতে অনেকগুলো অপারেশন করতে চাইতে পারেন। এটা করতে, React কিভাবে state আপডেট গুলোকে কে ব্যাচিং করে তা বুজতে পারবেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* What "batching" is and how React uses it to process multiple state updates
-* How to apply several updates to the same state variable in a row
+* "ব্যাচিং" কি এবং React কিভাবে এটা ব্যবহার করে অনেকগুলো state আপডেটসকে প্রক্রিয়া করে।
+* একটি সারিতে একই state ভেরিয়েবলে কীভাবে বেশ কয়েকটি আপডেট প্রয়োগ করবেন।
 
 </YouWillLearn>
 
-## React batches state updates {/*react-batches-state-updates*/}
+## React state আপডেটসকে ব্যাচিং করে {/*react-batches-state-updates*/}
 
-You might expect that clicking the "+3" button will increment the counter three times because it calls `setNumber(number + 1)` three times:
+আপনি হয়তো অনুমান করতে পারেন যে, "+৩" বাটনে ক্লিক করার পর, বাটনটি কাউন্টার কে তিন বার বৃদ্ধি করবে কারণ এটা এই `setNumber(number + 1)` ফাংশনকে ৩ বার কল করেঃ
 
 <Sandpack>
 
@@ -34,7 +34,7 @@ export default function Counter() {
         setNumber(number + 1);
         setNumber(number + 1);
         setNumber(number + 1);
-      }}>+3</button>
+      }}>+৩</button>
     </>
   )
 }
@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-However, as you might recall from the previous section, [each render's state values are fixed](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), so the value of `number` inside the first render's event handler is always `0`, no matter how many times you call `setNumber(1)`:
+তবে, আপনি হয়তো আগের অধ্যায় থেকে মনে করতে পারেন, [প্রতিটি রেন্ডারের state এর মানগুলো স্থায়ী](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), সুতরাং প্রথম ইভেন্ট হ্যান্ডলারের ভিতরে `number` এর মান সর্বদাই `0` হবে, আপনি যতবারই `setNumber(1)` ফাংশনটি কল করুন না কেনঃ
 
 ```js
 setNumber(0 + 1);
@@ -55,21 +55,21 @@ setNumber(0 + 1);
 setNumber(0 + 1);
 ```
 
-But there is one other factor at play here. **React waits until *all* code in the event handlers has run before processing your state updates.** This is why the re-render only happens *after* all these `setNumber()` calls.
+কিন্তু এখানে অন্য একটি ফ্যাক্টর কাজ করে। **React আপনার state আপডেটগুলো প্রচেসসিং করার আগে, ইভেন্ট হ্যান্ডলারের *সকল* কোড রান করা পর্যন্ত অপেক্ষা করে।** এই কারণে সকল `setNumber()` ফাংশন কল করার *পরে*, শুধুমাত্র তখনি রি-রেন্ডার ঘটে।
 
-This might remind you of a waiter taking an order at the restaurant. A waiter doesn't run to the kitchen at the mention of your first dish! Instead, they let you finish your order, let you make changes to it, and even take orders from other people at the table.
+এটি আপনাকে একজন ওয়েটারের রেস্টুরেন্টে অর্ডার নেওয়ার কথা মনে করিয়ে দিতে পারে। একজন ওয়েটার আপনার প্রথম খাবারের কথা বলার সাথে সাথে রান্নাঘরে দৌড়ে যায় না! এর বদলে, তারা আপনাকে আপনার অর্ডারটি শেষ করতে দেয়, আপনাকে এতে পরিবর্তন করতে দেয় এবং এমনকি টেবিলে থাকা অন্য লোকেদের কাছ থেকে অর্ডার নেয়।
 
 <Illustration src="/images/docs/illustrations/i_react-batching.png"  alt="An elegant cursor at a restaurant places and order multiple times with React, playing the part of the waiter. After she calls setState() multiple times, the waiter writes down the last one she requested as her final order." />
 
-This lets you update multiple state variables--even from multiple components--without triggering too many [re-renders.](/learn/render-and-commit#re-renders-when-state-updates) But this also means that the UI won't be updated until _after_ your event handler, and any code in it, completes. This behavior, also known as **batching,** makes your React app run much faster. It also avoids dealing with confusing "half-finished" renders where only some of the variables have been updated.
+এটি আপনাকে একাধিক state ভেরিয়েবল আপডেট করতে দেয়।--এমনকি একাধিক কম্পোনেন্টস থেকেও--অনেক [রি-রেন্ডারস](/learn/render-and-commit#re-renders-when-state-updates) ট্রিগার করা ছাড়াই। কিন্তু এর মানে হল যে UI আপডেট করা হবে না যতক্ষণ না আপনার ইভেন্ট হ্যান্ডলার থাকা কোনো কোড সম্পূর্ণ না হয়। এই আচরণ, **ব্যাচিং** নামেও পরিচিত, এটা আপনার react অ্যাপকে আরও দ্রুত চালায়। এটি বিভ্রান্তিকর "অর্ধ-সমাপ্ত" রেন্ডার কে এড়িয়ে যায় যেখানে শুধুমাত্র কিছু ভেরিয়েবল আপডেট করা হয়েছে।
 
-**React does not batch across *multiple* intentional events like clicks**--each click is handled separately. Rest assured that React only does batching when it's generally safe to do. This ensures that, for example, if the first button click disables a form, the second click would not submit it again.
+**ক্লিকের মত, *একাধিক* ইচ্ছাকৃত ইভেন্ট জুড়ে react ব্যাচ করে না**--প্রতিটি ক্লিক আলাদাভাবে পরিচালনা করা হয়। নিশ্চিন্ত থাকুন যে react শুধুমাত্র তখনই ব্যাচিং করে যখন এটি করা সাধারণত নিরাপদ। এটি নিশ্চিত করে যে, উদাহরণস্বরূপ, যদি প্রথম বাটন ক্লিকে একটি ফর্ম নিষ্ক্রিয় করে, দ্বিতীয় ক্লিকটি আবার সাবমিট দিবে না।
 
-## Updating the same state multiple times before the next render {/*updating-the-same-state-multiple-times-before-the-next-render*/}
+## পরবর্তী রেন্ডারের আগে একই state একাদিকবার আপডেট করা {/*updating-the-same-state-multiple-times-before-the-next-render*/}
 
-It is an uncommon use case, but if you would like to update the same state variable multiple times before the next render, instead of passing the *next state value* like `setNumber(number + 1)`, you can pass a *function* that calculates the next state based on the previous one in the queue, like `setNumber(n => n + 1)`. It is a way to tell React to "do something with the state value" instead of just replacing it.
+এটা একটি বিরল ব্যবহার, কিন্তু যদি আপনার ভাল লাগে তাহলে পরবর্তী রেন্ডারের আগে একই state একাদিকবার আপডেট করতে পারেন, `setNumber(number + 1)` এর মতো করে *পরবর্তী state এর মান* পাস করার পরিবর্তে, আপনি একটা *ফাংশন* পাস করতে পারেন যেটা সারিতে থাকা আগেরটির উপর ভিত্তি করে পরবর্তী state গণনা করে, উদাহরণস্বরূপ `setNumber(n => n + 1)`। এটি react কে প্রতিস্থাপনের পরিবর্তে "state এর মান দিয়ে কিছু করতে" বলে।
 
-Try incrementing the counter now:
+এখন কাউন্টার বৃদ্ধি করার চেষ্টা করুন:
 
 <Sandpack>
 
@@ -86,7 +86,7 @@ export default function Counter() {
         setNumber(n => n + 1);
         setNumber(n => n + 1);
         setNumber(n => n + 1);
-      }}>+3</button>
+      }}>+৩</button>
     </>
   )
 }
@@ -99,10 +99,10 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here, `n => n + 1` is called an **updater function.** When you pass it to a state setter:
+এখানে, `n => n + 1` একটি **আপডেটার ফাংশন।** যখন আপনি এটিকে state setter এ পাস করেন:
 
-1. React queues this function to be processed after all the other code in the event handler has run.
-2. During the next render, React goes through the queue and gives you the final updated state.
+১। ইভেন্ট হ্যান্ডলারের অন্যান্য সমস্ত কোড চালানোর পরে এই ফাংশনটি প্রক্রিয়া করার জন্য react সারিবদ্ধ করে।
+২। পরবর্তী রেন্ডারের সময়, React সারির মধ্য দিয়ে যায় এবং আপনাকে চূড়ান্ত আপডেটেড state দেয়।
 
 ```js
 setNumber(n => n + 1);
@@ -110,13 +110,13 @@ setNumber(n => n + 1);
 setNumber(n => n + 1);
 ```
 
-Here's how React works through these lines of code while executing the event handler:
+ইভেন্ট হ্যান্ডলার চালানোর সময় কোডের এই লাইনগুলির মাধ্যমে react কীভাবে কাজ করে তা এখানে বলা হল:
 
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
+১। `setNumber(n => n + 1)`: `n => n + 1` একটি ফাংশন। React এটিকে একটি সারিতে যোগ করে।
+২। `setNumber(n => n + 1)`: `n => n + 1` একটি ফাংশন। React এটিকে একটি সারিতে যোগ করে।
+৩। `setNumber(n => n + 1)`: `n => n + 1` একটি ফাংশন। React এটিকে একটি সারিতে যোগ করে।
 
-When you call `useState` during the next render, React goes through the queue. The previous `number` state was `0`, so that's what React passes to the first updater function as the `n` argument. Then React takes the return value of your previous updater function and passes it to the next updater as `n`, and so on:
+আপনি যখন পরবর্তী রেন্ডারের সময় `useState` কল করেন, তখন react সারির মধ্য দিয়ে যায়। আগের `number` এর state ছিল `0`, তাই 'n' আর্গুমেন্ট হিসাবে প্রথম আপডেটার ফাংশনে react একটাকে পাস করে। তারপর react আপনার পূর্ববর্তী আপডেটার ফাংশনের রিটার্নের মান নেয় এবং এটিকে পরবর্তী আপডেটারকে `n` হিসাবে প্রেরণ করে, ইত্যাদিঃ
 
 |  queued update | `n` | returns |
 |--------------|---------|-----|
@@ -124,12 +124,12 @@ When you call `useState` during the next render, React goes through the queue. T
 | `n => n + 1` | `1` | `1 + 1 = 2` |
 | `n => n + 1` | `2` | `2 + 1 = 3` |
 
-React stores `3` as the final result and returns it from `useState`.
+চূড়ান্ত ফলাফল হিসাবে react `3` কে সঞ্চয় করে এবং `useState` এ রিটার্ন করে।
 
-This is why clicking "+3" in the above example correctly increments the value by 3.
-### What happens if you update state after replacing it {/*what-happens-if-you-update-state-after-replacing-it*/}
+এই কারণে উপরের উদাহরণে "+৩" ক্লিক করলে মানটি 3 দ্বারা সঠিকভাবে বৃদ্ধি পায়।
+### State এর মান প্রতিস্থাপন করার পর আপনি যদি এটিকে আবার আপডেট করেন তাহলে কি হয় {/*what-happens-if-you-update-state-after-replacing-it*/}
 
-What about this event handler? What do you think `number` will be in the next render?
+এই ইভেন্ট হ্যান্ডলার সম্পর্কে কি ভাবেন? আপনি কি মনে করেন `number` এর মান পরবর্তী রেন্ডারে কি হবে?
 
 ```js
 <button onClick={() => {
@@ -152,7 +152,7 @@ export default function Counter() {
       <button onClick={() => {
         setNumber(number + 5);
         setNumber(n => n + 1);
-      }}>Increase the number</button>
+      }}>সংখ্যার মান বৃদ্ধি করুন</button>
     </>
   )
 }
@@ -165,29 +165,29 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's what this event handler tells React to do:
+এই ইভেন্ট হ্যান্ডলার react কে কী করতে বলে তা এখানে দেখানো হল:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
+১। `setNumber(number + 5)`: `number` হয় `0`, তাই `setNumber(0 + 5)`. React তার সারিতে *"`5` দিয়ে প্রতিস্থাপন করে"* যোগ করে।
+২। `setNumber(n => n + 1)`: `n => n + 1` একটি আপডেটার ফাংশন. React তার সারিতে *সেই আপডেটার ফাংশন কে* যোগ করে।
 
-During the next render, React goes through the state queue:
+পরবর্তী রেন্ডারের সময়, React state এর সারির মধ্য দিয়ে যায়:
 
-|   queued update       | `n` | returns |
+|   সারিবদ্ধ আপডেট       | `n` | রিটার্নস |
 |--------------|---------|-----|
-| "replace with `5`" | `0` (unused) | `5` |
+| "`5` দিয়ে প্রতিস্থাপন" | `0` (অব্যবহৃত) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
-React stores `6` as the final result and returns it from `useState`. 
+চূড়ান্ত ফলাফল হিসাবে React `6` সঞ্চয় করে এবং `useState` এ রিটার্ন করে।
 
 <Note>
 
-You may have noticed that `setState(5)` actually works like `setState(n => 5)`, but `n` is unused!
+আপনি হয়তো লক্ষ্য করেছেন যে `setState(5)` আসলে `setState(n => 5)` এর মতো কাজ করে, কিন্তু `n` অব্যবহৃত!
 
 </Note>
 
-### What happens if you replace state after updating it {/*what-happens-if-you-replace-state-after-updating-it*/}
+### State আপডেট করার পরে যদি এটিকে কে আবার প্রতিস্থাপন করেন তাহলে কি হয় {/*what-happens-if-you-replace-state-after-updating-it*/}
 
-Let's try one more example. What do you think `number` will be in the next render?
+চলেন আরো একটি উদাহরণ দিয়ে চেষ্টা করি। আপনি কি মনে করেন `number` এর মান পরবর্তী রেন্ডারে কি হবে?
 
 ```js
 <button onClick={() => {
@@ -212,7 +212,7 @@ export default function Counter() {
         setNumber(number + 5);
         setNumber(n => n + 1);
         setNumber(42);
-      }}>Increase the number</button>
+      }}>সংখ্যার মান বৃদ্ধি করুন</button>
     </>
   )
 }
@@ -225,32 +225,32 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's how React works through these lines of code while executing this event handler:
+এই ইভেন্ট হ্যান্ডলারটি চালানোর সময় কোডের এই লাইনগুলির মাধ্যমে react কীভাবে কাজ করে তা এখানে দেখানো হল:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
-3. `setNumber(42)`: React adds *"replace with `42`"* to its queue.
+১। `setNumber(number + 5)`: `number` হয় `0`, তাই `setNumber(0 + 5)`. React তার সারিতে *"`5` দিয়ে প্রতিস্থাপন করে"* যোগ করে।
+২। `setNumber(n => n + 1)`: `n => n + 1` একটি আপডেটার ফাংশন। React তার সারিতে *সেই আপডেটার ফাংশন কে* যোগ করে।
+৩। `setNumber(42)`: React তার সারিতে *"`42` দিয়ে প্রতিস্থাপন করে"* যোগ করে।
 
-During the next render, React goes through the state queue:
+পরবর্তী রেন্ডারের সময়, React state এর সারির মধ্য দিয়ে যায়:
 
-|   queued update       | `n` | returns |
+|   সারিবদ্ধ আপডেট       | `n` | রিটার্নস |
 |--------------|---------|-----|
-| "replace with `5`" | `0` (unused) | `5` |
+| “`5` দিয়ে প্রতিস্থাপন" | `0` (অব্যবহৃত) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
-| "replace with `42`" | `6` (unused) | `42` |
+| “`42` দিয়ে প্রতিস্থাপন" | `6` (অব্যবহৃত) | `42` |
 
-Then React stores `42` as the final result and returns it from `useState`.
+তারপর react চূড়ান্ত ফলাফল হিসাবে `42` সঞ্চয় করে এবং `useState` এ রিটার্ন করে।
 
-To summarize, here's how you can think of what you're passing to the `setNumber` state setter:
+সংক্ষেপে, আপনি `setNumber` state সেটারে কী পাস করছেন তা আপনি কীভাবে ভাবতে পারেন তা এখানে দেয়া হলঃ
 
-* **An updater function** (e.g. `n => n + 1`) gets added to the queue.
-* **Any other value** (e.g. number `5`) adds "replace with `5`" to the queue, ignoring what's already queued.
+* **একটি আপডেটার ফাংশন** (যেমন `n => n + 1`) সারিতে যোগ করা হয়।
+* **অন্য যেকোনো মান** (যেমন `5` সংখ্যা) সারিতে "`5` দিয়ে প্রতিস্থাপন করে" যোগ করে, যা ইতিমধ্যে সারিবদ্ধ আছে তা বাতিল করে।
 
-After the event handler completes, React will trigger a re-render. During the re-render, React will process the queue. Updater functions run during rendering, so **updater functions must be [pure](/learn/keeping-components-pure)** and only *return* the result. Don't try to set state from inside of them or run other side effects. In Strict Mode, React will run each updater function twice (but discard the second result) to help you find mistakes.
+ইভেন্ট হ্যান্ডলার সম্পূর্ণ হওয়ার পরে, React পুনরায় একটি রেন্ডার ট্রিগার করবে। পুনরায় রেন্ডার করার সময়, React সারিটি প্রক্রিয়া করবে। আপডেটার ফাংশনগুলি রেন্ডারিংয়ের সময় চলে, তাই **আপডেটার ফাংশনগুলি অবশ্যই [বিশুদ্ধ](/learn/keeping-components-pure)** হতে হবে এবং ফলাফলটি শুধুমাত্র *রিটার্ন* করতে হবে। তাদের ভিতর থেকে state সেট করার চেষ্টা করবেন না বা অন্যান্য পার্শ্ব প্রতিক্রিয়া চালাবেন না। কঠোর মোডে, React আপনার ভুল খুঁজে পেতে সাহায্য করার জন্য প্রতিটি আপডেটার ফাংশন দুবার চালাবে (কিন্তু দ্বিতীয় ফলাফলটি বাতিল করবে)।
 
-### Naming conventions {/*naming-conventions*/}
+### নামকরণের কনভেনশন {/*naming-conventions*/}
 
-It's common to name the updater function argument by the first letters of the corresponding state variable:
+সংশ্লিষ্ট state ভেরিয়েবলের প্রথম অক্ষর দ্বারা আপডেটার ফাংশন এর আর্গুমেন্টের নাম দেওয়া হয় প্রচলিতভাবে:
 
 ```js
 setEnabled(e => !e);
@@ -258,13 +258,13 @@ setLastName(ln => ln.reverse());
 setFriendCount(fc => fc * 2);
 ```
 
-If you prefer more verbose code, another common convention is to repeat the full state variable name, like `setEnabled(enabled => !enabled)`, or to use a prefix like `setEnabled(prevEnabled => !prevEnabled)`.
+আপনি যদি আরও শব্দবহুল কোড পছন্দ করেন, তাহলে আরেকটি সাধারণ নিয়ম হল `setEnabled(enabled => !enabled)` এটার মতো করে পূর্ণ state ভেরিয়েবল নাম পুনরাবৃত্তি করা, অথবা `setEnabled(prevEnabled => !prevEnabled)` এর মতো করে একটি প্রিফিক্স ব্যবহার করা।
 
 <Recap>
 
-* Setting state does not change the variable in the existing render, but it requests a new render.
-* React processes state updates after event handlers have finished running. This is called batching.
-* To update some state multiple times in one event, you can use `setNumber(n => n + 1)` updater function.
+* সেটিং state বিদ্যমান রেন্ডারে ভেরিয়েবলকে পরিবর্তন করে না, কিন্তু এটি একটি নতুন রেন্ডারের অনুরোধ করে।
+* ইভেন্ট হ্যান্ডলারদের চালানো শেষ হওয়ার পরে react state আপডেটগুলি প্রক্রিয়া করে। একে ব্যাচিং বলে।
+* একটি ইভেন্টে কিছু state একাধিকবার আপডেট করতে, আপনি `setNumber(n => n + 1)` আপডেটার ফাংশন ব্যবহার করতে পারেন।
 
 </Recap>
 
@@ -272,13 +272,13 @@ If you prefer more verbose code, another common convention is to repeat the full
 
 <Challenges>
 
-#### Fix a request counter {/*fix-a-request-counter*/}
+#### Request কাউন্টারটি ঠিক করুন {/*fix-a-request-counter*/}
 
-You're working on an art marketplace app that lets the user submit multiple orders for an art item at the same time. Each time the user presses the "Buy" button, the "Pending" counter should increase by one. After three seconds, the "Pending" counter should decrease, and the "Completed" counter should increase.
+আপনি একটি আর্ট মার্কেটপ্লেস অ্যাপে কাজ করছেন যা ব্যবহারকারীকে একই সময়ে একটি আর্ট আইটেমের জন্য একাধিক অর্ডার জমা দিতে দেয়। প্রতিবার ব্যবহারকারী "কিনুন" বাটনে ক্লিক করলে, "পেন্ডিং" কাউন্টারটি এক দ্বারা বৃদ্ধি করা উচিত। তিন সেকেন্ড পরে, "পেন্ডিং" কাউন্টারটি হ্রাস করা উচিত এবং "সম্পূর্ণ" কাউন্টারটি বৃদ্ধি করা উচিত।
 
-However, the "Pending" counter does not behave as intended. When you press "Buy", it decreases to `-1` (which should not be possible!). And if you click fast twice, both counters seem to behave unpredictably.
+তবে, "পেন্ডিং" কাউন্টারটি যেভাবে চাচ্ছি সে অনুযায়ী আচরণ করে না। আপনি যখন "কিনুন" বাটনে ক্লিক করেন, তখন তা কমে `-1` হয়ে যায় (যা সম্ভব নয়!)। এবং যদি আপনি দ্রুত দুইবার ক্লিক করেন, উভয় কাউন্টার অপ্রত্যাশিতভাবে আচরণ করে বলে মনে হচ্ছে।
 
-Why does this happen? Fix both counters.
+কেন এটা ঘটবে? উভয় কাউন্টার ঠিক করুন।
 
 <Sandpack>
 
@@ -299,13 +299,13 @@ export default function RequestTracker() {
   return (
     <>
       <h3>
-        Pending: {pending}
+        পেন্ডিং: {pending}
       </h3>
       <h3>
-        Completed: {completed}
+        সম্পূর্ণ: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        কিনুন     
       </button>
     </>
   );
@@ -322,7 +322,7 @@ function delay(ms) {
 
 <Solution>
 
-Inside the `handleClick` event handler, the values of `pending` and `completed` correspond to what they were at the time of the click event. For the first render, `pending` was `0`, so `setPending(pending - 1)` becomes `setPending(-1)`, which is wrong. Since you want to *increment* or *decrement* the counters, rather than set them to a concrete value determined during the click, you can instead pass the updater functions:
+`HandleClick` ইভেন্ট হ্যান্ডলারের ভিতরে, `পেন্ডিং` এবং `সম্পূর্ণ` এর মানগুলি ক্লিক ইভেন্টের সময় যা ছিল তার সাথে মিলে যায়। প্রথম রেন্ডারের জন্য, `পেন্ডিং` ছিল `0`, তাই `setPending(pending - 1)` হয়ে `setPending(-1)`, যা ভুল। যেহেতু আপনি কাউন্টারগুলিকে *বৃদ্ধি* বা *হ্রাস* করতে চান, ক্লিক করার সময় নির্ধারিত একটি কংক্রিট মান সেট করার পরিবর্তে, আপডেটার ফাংশনগুলি পাস করতে পারেন:
 
 <Sandpack>
 
@@ -343,13 +343,13 @@ export default function RequestTracker() {
   return (
     <>
       <h3>
-        Pending: {pending}
+        পেন্ডিং: {pending}
       </h3>
       <h3>
-        Completed: {completed}
+        সম্পূর্ণ: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        কিনুন     
       </button>
     </>
   );
@@ -364,23 +364,23 @@ function delay(ms) {
 
 </Sandpack>
 
-This ensures that when you increment or decrement a counter, you do it in relation to its *latest* state rather than what the state was at the time of the click.
+এটি নিশ্চিত করে যে আপনি যখন একটি কাউন্টার বৃদ্ধি বা হ্রাস করেন, আপনি প্রথম ক্লিক করার সময় state টি কী ছিল তার চেয়ে আপনি এটির সর্বশেষ অবস্থার সাথে সম্পর্কিত করতে পারেন।
 
 </Solution>
 
-#### Implement the state queue yourself {/*implement-the-state-queue-yourself*/}
+#### State এর সারি আপনি নিজেই তৈরি করুন {/*implement-the-state-queue-yourself*/}
 
-In this challenge, you will reimplement a tiny part of React from scratch! It's not as hard as it sounds.
+এই চ্যালেঞ্জে, আপনি স্ক্র্যাচ থেকে state এর একটি ছোট অংশ পুনরায় প্রয়োগ করবেন! এটা যতটা কঠিন মনে হচ্ছে ততটা কঠিন নয়।
 
-Scroll through the sandbox preview. Notice that it shows **four test cases.** They correspond to the examples you've seen earlier on this page. Your task is to implement the `getFinalState` function so that it returns the correct result for each of those cases. If you implement it correctly, all four tests should pass.
+স্যান্ডবক্সের পূর্বরূপ স্ক্রোল করুন। লক্ষ্য করুন যে এটি **চারটি টেস্ট কেস দেখায়।** এগুলি আপনি এই পৃষ্ঠায় আগে দেখা উদাহরণগুলির সাথে মিলে যায়৷ আপনার কাজ হল `getFinalState` ফাংশন বাস্তবায়ন করা যাতে এটি প্রতিটি ক্ষেত্রে সঠিক ফলাফল প্রদান করে। আপনি যদি এটি সঠিকভাবে বাস্তবায়ন করেন তবে চারটি পরীক্ষাই পাস করা উচিত.
 
-You will receive two arguments: `baseState` is the initial state (like `0`), and the `queue` is an array which contains a mix of numbers (like `5`) and updater functions (like `n => n + 1`) in the order they were added.
+আপনি দুটি আর্গুমেন্ট পাবেন: `বেসস্টেট` হল প্রারম্ভিক অবস্থা (যেমন `0`), এবং `সারি` হল একটি অ্যারে যাতে সংখ্যার মিশ্রণ থাকে (যেমন `5`) এবং আপডেটার ফাংশন (যেমন `n => n + 1`) ক্রমানুসারে তাদের যোগ করা হয়েছে।
 
-Your task is to return the final state, just like the tables on this page show!
+আপনার টাস্ক হল চূড়ান্ত state রিটার্ন করা, যাতে ঠিক এই পৃষ্ঠার টেবিলের মত দেখায়!
 
 <Hint>
 
-If you're feeling stuck, start with this code structure:
+আপনি যদি আটকে জান তবে এই কোড কাঠামো দিয়ে শুরু করুন:
 
 ```js
 export function getFinalState(baseState, queue) {
@@ -398,7 +398,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-Fill out the missing lines!
+অনুপস্থিত লাইন পূরণ করুন!
 
 </Hint>
 
@@ -471,19 +471,19 @@ function TestCase({
   const actual = getFinalState(baseState, queue);
   return (
     <>
-      <p>Base state: <b>{baseState}</b></p>
-      <p>Queue: <b>[{queue.join(', ')}]</b></p>
-      <p>Expected result: <b>{expected}</b></p>
+      <p>বেসস্টেটঃ <b>{baseState}</b></p>
+      <p>সারিঃ <b>[{queue.join(', ')}]</b></p>
+      <p>আশানুরূপ ফালাফলঃ <b>{expected}</b></p>
       <p style={{
         color: actual === expected ?
           'green' :
           'red'
       }}>
-        Your result: <b>{actual}</b>
+        আপনার ফলাফলঃ <b>{actual}</b>
         {' '}
         ({actual === expected ?
-          'correct' :
-          'wrong'
+          'সঠিক' :
+          'ভুল'
         })
       </p>
     </>
@@ -495,7 +495,7 @@ function TestCase({
 
 <Solution>
 
-This is the exact algorithm described on this page that React uses to calculate the final state:
+এটি এই পৃষ্ঠায় বর্ণিত সঠিক অ্যালগরিদম যা react চূড়ান্ত state গণনা করতে ব্যবহার করে:
 
 <Sandpack>
 
@@ -574,19 +574,19 @@ function TestCase({
   const actual = getFinalState(baseState, queue);
   return (
     <>
-      <p>Base state: <b>{baseState}</b></p>
-      <p>Queue: <b>[{queue.join(', ')}]</b></p>
-      <p>Expected result: <b>{expected}</b></p>
+      <p>বেসস্টেটঃ <b>{baseState}</b></p>
+      <p>সারিঃ <b>[{queue.join(', ')}]</b></p>
+      <p>আশানুরূপ ফালাফলঃ <b>{expected}</b></p>
       <p style={{
         color: actual === expected ?
           'green' :
           'red'
       }}>
-        Your result: <b>{actual}</b>
+        আপনার ফলাফলঃ <b>{actual}</b>
         {' '}
         ({actual === expected ?
-          'correct' :
-          'wrong'
+          'সঠিক' :
+          'ভুল'
         })
       </p>
     </>
@@ -596,7 +596,7 @@ function TestCase({
 
 </Sandpack>
 
-Now you know how this part of React works!
+এখন আপনি জানেন কিভাবে react এই অংশ কাজ করে!
 
 </Solution>
 
