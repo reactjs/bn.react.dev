@@ -380,7 +380,7 @@ function delay(ms) {
 
 <Hint>
 
-আপনি যদি আটকে জান তবে এই কোড কাঠামো দিয়ে শুরু করুন:
+আপনি যদি আটকে যান তবে এই কোড কাঠামো দিয়ে শুরু করুনঃ
 
 ```js
 export function getFinalState(baseState, queue) {
