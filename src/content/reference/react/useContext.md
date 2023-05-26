@@ -946,25 +946,26 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### Specifying a fallback default value {/*specifying-a-fallback-default-value*/}
+### ফলব্যাক এর ক্ষেত্রে ডিফল্ট মান নির্ধারন করা {/*specifying-a-fallback-default-value*/}
 
+React যদি প্যারেন্ট ট্রিতে নির্দিষ্ট <CodeStep step={1}>context</CodeStep> এর কোন provider খুঁজে না পায়, তাহলে `useContext()` থেকে রিটার্ন্ড context এর মান ডিফল্ট মানের সমান হবে যা আপনি সেই [context টি তৈরি](/reference/react/createContext) করার সময় নির্ধারন করেছিলেনঃ
 If React can't find any providers of that particular <CodeStep step={1}>context</CodeStep> in the parent tree, the context value returned by `useContext()` will be equal to the <CodeStep step={3}>default value</CodeStep> that you specified when you [created that context](/reference/react/createContext):
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "null"]]
 const ThemeContext = createContext(null);
 ```
 
-The default value **never changes**. If you want to update context, use it with state as [described above.](#updating-data-passed-via-context)
+ডিফল্ট মান **কখনই পরিবর্তন হয় না**। আপনি যদি context আপডেট করতে চান, তাহলে [উপরে বর্ণিত](#updating-data-passed-via-context) নিয়মে state এর সাথে এটি ব্যবহার করুন।
 
-Often, instead of `null`, there is some more meaningful value you can use as a default, for example:
+প্রায়শই, `null` এর পরিবর্তে আপনি ডিফল্ট মান হিসাবে ব্যবহার করতে পারেন এমন অনেক অর্থপূর্ণ মান রয়েছে, উদাহরণ স্বরূপঃ
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "light"]]
 const ThemeContext = createContext('light');
 ```
 
-This way, if you accidentally render some component without a corresponding provider, it won't break. This also helps your components work well in a test environment without setting up a lot of providers in the tests.
+এইভাবে, আপনি যদি দুর্ঘটনাক্রমে সংশ্লিষ্ট provider ছাড়া কোন কম্পোনেন্ট রেন্ডার করেন, তবে এটি ব্রেক করবে না। এটি আপনার কম্পোনেন্টগুলিকে টেস্টের সময় অনেক অনেক provider সেট আপ না করে একটি টেস্ট ইনভায়রনমেন্টে ভালভাবে কাজ করতে সহায়তা করে।
 
-In the example below, the "Toggle theme" button is always light because it's **outside any theme context provider** and the default context theme value is `'light'`. Try editing the default theme to be `'dark'`.
+নীচের উদাহরণে, "Toggle theme" বাটনটি সবসময় light কারণ এটি **সবরকম theme context provider এর বাইরে** এবং ডিফল্ট context theme এর মান `'light'`। ডিফল্ট থিমকে `'dark'` করার জন্য এডিট করন।
 
 <Sandpack>
 
