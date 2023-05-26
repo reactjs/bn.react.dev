@@ -95,15 +95,15 @@ function AboutPage() {
 
 JSX এ পোর্ট করার জন্য আপনার যদি অনেকগুলো HTML থাকে, আপনি একটি [অনলাইন কনভার্টার](https://transform.tools/html-to-jsx) ব্যবহার করতে পারেন।
 
-## Adding styles {/*adding-styles*/}
+## Styles যোগ করা {/*adding-styles*/}
 
-In React, you specify a CSS class with `className`. It works the same way as the HTML [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) attribute:
+React এ আপনি `className` সহ একটি CSS ক্লাস নির্দিষ্ট করেন। যা একেবারে HTML এর মতই কাজ করে [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) attribute:
 
 ```js
 <img className="avatar" />
 ```
 
-Then you write the CSS rules for it in a separate CSS file:
+তারপর আপনি একটি পৃথক CSS ফাইলে এটির জন্য CSS নিয়ম লিখুন:
 
 ```css
 /* In your CSS */
@@ -112,11 +112,11 @@ Then you write the CSS rules for it in a separate CSS file:
 }
 ```
 
-React does not prescribe how you add CSS files. In the simplest case, you'll add a [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag to your HTML. If you use a build tool or a framework, consult its documentation to learn how to add a CSS file to your project.
+আপনি কিভাবে CSS ফাইল যোগ করবেন, তা নিয়ে React কোনো কিছুই নির্ধারণ করে না। সবচেয়ে সহজ ক্ষেত্রে, আপনি আপনার HTML-এ একটি [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) ট্যাগ যোগ করবেন। আপনি যদি একটি বিল্ড টুল বা ফ্রেমওয়ার্ক ব্যবহার করেন, তাহলে আপনার প্রোজেক্টে কিভাবে একটি CSS ফাইল যোগ করবেন তা জানতে তাদের ডকুমেন্টেশন গুলো দেখুন।
 
-## Displaying data {/*displaying-data*/}
+## Data প্রদর্শন করা {/*displaying-data*/}
 
-JSX lets you put markup into JavaScript. Curly braces let you "escape back" into JavaScript so that you can embed some variable from your code and display it to the user. For example, this will display `user.name`:
+JSX আপনাকে জাভাস্ক্রিপ্টে মার্কআপ ব্যবহার করতে দেয়। Curly braces আপনাকে জাভাস্ক্রিপ্টে "escape back" করতে দেয় যাতে আপনি আপনার কোড থেকে কিছু ভ্যারিয়েবল embed করতে পারেন এবং ব্যবহারকারীর কাছে এটি প্রদর্শন করতে পারেন। উদাহরণস্বরূপ, এটি প্রদর্শন করবে `user.name`:
 
 ```js {3}
 return (
@@ -126,7 +126,7 @@ return (
 );
 ```
 
-You can also "escape into JavaScript" from JSX attributes, but you have to use curly braces *instead of* quotes. For example, `className="avatar"` passes the `"avatar"` string as the CSS class, but `src={user.imageUrl}` reads the JavaScript `user.imageUrl` variable value, and then passes that value as the `src` attribute:
+আপনি JSX অ্যাট্রিবিউটগুলি থেকে "escape into JavaScript" করতে পারেন, তবে আপনাকে quotes এর *পরিবর্তে* curly braces ব্যবহার করতে হবে।  উদাহরণ স্বরূপ, `className="avatar"` CSS ক্লাস হিসেবে `"avatar"` স্ট্রিংকে pass করে, কিন্তু `src={user.imageUrl}` জাভাস্ক্রিপ্ট `user.imageUrl` ভেরিয়েবল মানটি  পড়ে এবং তারপর সেই মানটিকে এভাবে পাস করে `src` বৈশিষ্ট্য:
 
 ```js {3,4}
 return (
@@ -137,7 +137,7 @@ return (
 );
 ```
 
-You can put more complex expressions inside the JSX curly braces too, for example, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
+আপনি JSX curly braces এর ভিতরে আরও জটিল expressions রাখতে পারেন, উদাহরণস্বরূপ, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
 
 <Sandpack>
 
@@ -178,7 +178,7 @@ export default function Profile() {
 
 </Sandpack>
 
-In the above example, `style={{}}` is not a special syntax, but a regular `{}` object inside the `style={ }` JSX curly braces. You can use the `style` attribute when your styles depend on JavaScript variables.
+উপরের উদাহরণে, `style={{}}` বিশেষ কোনো সিনট্যাক্স নয়, এখানে `style={ }` শুধুমাত্র jsx curly braces এর ভিতরে একটি নিয়মিত `{}` অবজেক্ট। যখন আপনার styles গুলো জাভাস্ক্রিপ্ট ভেরিয়েবলের উপর নির্ভর করবে তখন আপনি `style` অ্যাট্রিবিউট ব্যবহার করতে পারেন।
 
 ## Conditional rendering {/*conditional-rendering*/}
 
