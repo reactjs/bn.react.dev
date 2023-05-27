@@ -1062,9 +1062,9 @@ function Button({ children, onClick }) {
 
 ---
 
-### Overriding context for a part of the tree {/*overriding-context-for-a-part-of-the-tree*/}
+### ট্রির একটি অংশের জন্য context ওভাররাইড করা {/*overriding-context-for-a-part-of-the-tree*/}
 
-You can override the context for a part of the tree by wrapping that part in a provider with a different value.
+আপনি ট্রির একটি অংশকে একটি ভিন্ন মান সহ একটি provider দিয়ে র‍্যাপ করার মাধ্যমে সেই অংশের জন্য context টি ওভাররাইড করতে পারেন।
 
 ```js {3,5}
 <ThemeContext.Provider value="dark">
@@ -1076,13 +1076,13 @@ You can override the context for a part of the tree by wrapping that part in a p
 </ThemeContext.Provider>
 ```
 
-You can nest and override providers as many times as you need.
+আপনি যতবার প্রয়োজন ততবার provider গুলিকে নেস্ট এবং ওভাররাইড করতে পারেন।
 
 <Recipes title="Examples of overriding context">
 
-#### Overriding a theme {/*overriding-a-theme*/}
+#### একটি থিম ওভাররাইড করা {/*overriding-a-theme*/}
 
-Here, the button *inside* the `Footer` receives a different context value (`"light"`) than the buttons outside (`"dark"`).
+এখানে, `Footer` এর *ভিতরের* বাটনটি বাইরের বাটনের (`"dark"`) না পেয়ে একটি ভিন্ন context মান (`"light"`) পায়।
 
 <Sandpack>
 
@@ -1186,11 +1186,11 @@ footer {
 
 <Solution />
 
-#### Automatically nested headings {/*automatically-nested-headings*/}
+#### স্বয়ংক্রিয়ভাবে নেস্টেড হেডিং {/*automatically-nested-headings*/}
 
-You can "accumulate" information when you nest context providers. In this example, the `Section` component keeps track of the `LevelContext` which specifies the depth of the section nesting. It reads the `LevelContext` from the parent section, and provides the `LevelContext` number increased by one to its children. As a result, the `Heading` component can automatically decide which of the `<h1>`, `<h2>`, `<h3>`, ..., tags to use based on how many `Section` components it is nested inside of.
+আপনি যখন context provider গুলো নেস্ট করবেন তখন আপনি তথ্য "সঞ্চয়" করতে পারেন। এই উদাহরণে, `Section` কম্পোনেন্টটি `LevelContext` এর ট্র্যাক রাখে যা সেকশন নেস্টিংয়ের গভীরতা পরিমাপ করে। এটি প্যারেন্ট সেকশন থেকে `LevelContext` রিড করে এবং তার চিলড্রেনের জন্য `LevelContext` সংখ্যা এক এক করে বৃদ্ধি করে প্রদান করে। ফলস্বরূপ, এর ভিতরে কতগুলি সেকশন কম্পোনেন্ট নেস্ট করা হয়েছে তার উপর ভিত্তি করে `Heading` কম্পোনেন্ট স্বয়ংক্রিয়ভাবে সিদ্ধান্ত নিতে পারে যে `<h1>`, `<h2>`, `<h3>`, ..., এর ভিতর কোন ট্যাগটি ব্যবহার করতে হবে।
 
-Read a [detailed walkthrough](/learn/passing-data-deeply-with-context) of this example.
+এই উদাহরণের [সম্পূর্ন ওয়াকথ্রু](/learn/passing-data-deeply-with-context) পড়ুন।
 
 <Sandpack>
 
