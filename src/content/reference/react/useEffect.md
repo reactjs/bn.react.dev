@@ -4,7 +4,8 @@ title: useEffect
 
 <Intro>
 
-`useEffect` is a React Hook that lets you [synchronize a component with an external system.](/learn/synchronizing-with-effects)
+`useEffect` হলো একটি React হুক যা আপনাকে [একটি কম্পোনেন্টকে একটি বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতে দেয়।](/learn/synchronizing-with-effects)
+
 
 ```js
 useEffect(setup, dependencies?)
@@ -20,7 +21,7 @@ useEffect(setup, dependencies?)
 
 ### `useEffect(setup, dependencies?)` {/*useeffect*/}
 
-Call `useEffect` at the top level of your component to declare an Effect:
+একটি ইফেক্ট ডিক্লেয়ার করার জন্য আপনার কম্পোনেন্টের শীর্ষ স্তরে `useEffect` কল করুন:
 
 ```js
 import { useEffect } from 'react';
@@ -44,9 +45,9 @@ function ChatRoom({ roomId }) {
 
 #### Parameters {/*parameters*/}
 
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
- 
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If you omit this argument, your Effect will re-run after every re-render of the component. [See the difference between passing an array of dependencies, an empty array, and no dependencies at all.](#examples-dependencies)
+* `setup`: আপনার ইফেক্টের যুক্তি সহ ফাংশন। আপনার সেটআপ ফাংশন অপশনালি একটি *cleanup* ফাংশন রিটার্ন করতে পারে। যখন আপনার কম্পোনেন্টটি DOM-এ যুক্ত করা হয়, React আপনার সেটআপ ফাংশন চালাবে। প্রতিটি রি-রেন্ডারের পরে পরিবর্তিত ডিপেন্ডেন্সি সহ, React প্রথমে পুরানো মানগুলির সাথে আপনার cleanup ফাংশন চালাবে (আপনি যদি এটি প্রদান করেন), এবং তারপর নতুন মানগুলির সাথে আপনার সেটআপ ফাংশন চালাবে। আপনার কম্পোনেন্টটি DOM থেকে সরানোর পরে, React আপনার cleanup ফাংশন চালাবে।
+
+* **optional** `dependencies`: সমস্ত reactive মানের তালিকা যা `setup` কোডের ভিতরে উল্লেখিত। Reactive মানগুলির মধ্যে রয়েছে props, state, এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার করা সমস্ত ভেরিয়েবল এবং ফাংশন। আপনার লিন্টার যদি [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), তা প্রতিটি reactive মানটি সঠিকভাবে একটি ডিপেন্ডেন্সি হিসেবে নির্দিষ্ট করা হয়েছে তা যাচাই করবে। ডিপেন্ডেন্সির তালিকায় একটি কনস্ট্যান্ট সংখ্যক আইটেম অবশ্যই থাকতে হবে এবং এটি ইনলাইনে লিখতে হবে যেমন `[dep1, dep2, dep3]`। React প্রতিটি ডিপেন্ডেন্সি তার পূর্বের মানের সাথে তুলনা করবে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) তারতম্য ব্যবহার করে। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তাহলে আপনার ইফেক্ট কম্পোনেন্টের প্রতিটি রি-রেন্ডারের পরে পুনরায় চালানো হবে। [ডিপেন্ডেন্সির একটি অ্যারে পাস করার মধ্যে, একটি খালি অ্যারে, এবং সম্পূর্ণই কোনও ডিপেন্ডেন্সি না থাকার মধ্যে পার্থক্য দেখুন।](#examples-dependencies)
 
 #### Returns {/*returns*/}
 
@@ -54,19 +55,19 @@ function ChatRoom({ roomId }) {
 
 #### Caveats {/*caveats*/}
 
-* `useEffect` is a Hook, so you can only call it **at the top level of your component** or your own Hooks. You can't call it inside loops or conditions. If you need that, extract a new component and move the state into it.
+* `useEffect` একটি হুক, সুতরাং আপনি এটি কেবল আপনার কম্পোনেন্টের শীর্ষ স্তরে বা আপনার নিজের হুকগুলিতে কল করতে পারেন। আপনি এটি লুপ বা কন্ডিশনসের ভিতরে কল করতে পারবেন না। আপনার যদি তা প্রয়োজন হয়, একটি নতুন কম্পোনেন্ট পৃথক করুন এবং এটির মধ্যে state স্থানান্তর করুন।
 
-* If you're **not trying to synchronize with some external system,** [you probably don't need an Effect.](/learn/you-might-not-need-an-effect)
+* আপনি যদি **কোনো বাহ্যিক সিস্টেমের সাথে সিঙ্ক্রোনাইজ করার চেষ্টা না করেন,,** [তবে আপনার সম্ভবত একটি ইফেক্টের প্রয়োজন নেই।.](/learn/you-might-not-need-an-effect)
 
-* When Strict Mode is on, React will **run one extra development-only setup+cleanup cycle** before the first real setup. This is a stress-test that ensures that your cleanup logic "mirrors" your setup logic and that it stops or undoes whatever the setup is doing. If this causes a problem, [implement the cleanup function.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+* যখন স্ট্রিক্ট মোড চালু থাকে, React প্রথম আসল সেটআপের আগে **একটি অতিরিক্ত ডেভেলপমেন্ট-অনলি সেটআপ+cleanup** চক্র চালাবে। এটি একটি স্ট্রেস-পরীক্ষা যা নিশ্চিত করে যে আপনার cleanup যুক্তি "mirrors" আপনার সেটআপ যুক্তি এবং এটি যা কিছু সেটআপ করছে তা বন্ধ করে বা পূর্বাবস্থায় ফিরিয়ে আনে। যদি এটি একটি সমস্যা সৃষ্টি করে, [cleanup ফাংশন বাস্তবায়ন করুন।](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
-* If some of your dependencies are objects or functions defined inside the component, there is a risk that they will **cause the Effect to re-run more often than needed.** To fix this, remove unnecessary [object](#removing-unnecessary-object-dependencies) and [function](#removing-unnecessary-function-dependencies) dependencies. You can also [extract state updates](#updating-state-based-on-previous-state-from-an-effect) and [non-reactive logic](#reading-the-latest-props-and-state-from-an-effect) outside of your Effect.
+* আপনার ডিপেন্ডেন্সির মধ্যে কিছু যদি অবজেক্টস বা ফাংশনস যা কম্পোনেন্টের ভিতরে ডিফাইন্ড, তাদের উপরে একটি ঝুঁকি আছে যে তারা **প্রয়োজনের চেয়ে Effect পুনরায় বেশি বার চালানোর কারণ হবে**। এটি ঠিক করতে, অপ্রয়োজনীয় [অবজেক্ট](#removing-unnecessary-object-dependencies) এবং [ফাংশন](#removing-unnecessary-function-dependencies) ডিপেন্ডেন্সি সরান। এছাড়াও আপনি [state আপডেট পৃথক](#updating-state-based-on-previous-state-from-an-effect) এবং [non-reactive যুক্তি](#reading-the-latest-props-and-state-from-an-effect) আপনার Effect বাইরে বের করতে পারেন।
 
-* If your Effect wasn't caused by an interaction (like a click), React will let the browser **paint the updated screen first before running your Effect.** If your Effect is doing something visual (for example, positioning a tooltip), and the delay is noticeable (for example, it flickers), replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+* আপনার Effect যদি একটি ইন্টারঅ্যাকশনের (যেমন ক্লিক) কারণে না হয়ে থাকে, React ব্রাউজারকে **প্রথমে আপডেটড স্ক্রীন পেইন্ট করতে দেবে আপনার Effect চালানোর আগে।** আপনার Effect যদি কিছু ভিজ্যুয়াল কিছু করে (যেমন, একটি টুলটিপ অবস্থা করা), এবং ডিলে উল্লেখযোগ্য (যেমন, এটি ফ্লিকারস), `useEffect` কে [`useLayoutEffect`.](/reference/react/useLayoutEffect) এর সাথে প্রতিস্থাপন করুন।
 
-* Even if your Effect was caused by an interaction (like a click), **the browser may repaint the screen before processing the state updates inside your Effect.** Usually, that's what you want. However, if you must block the browser from repainting the screen, you need to replace `useEffect` with [`useLayoutEffect`.](/reference/react/useLayoutEffect)
+* আপনার Effect যদি একটি ইন্টারঅ্যাকশন (যেমন ক্লিক) কারণে কারণ হয়, **ব্রাউজার আপনার Effect ভিতরের state আপডেট প্রসেস করার আগে স্ক্রিনটি পুনরায় পেইন্ট করতে পারে।** সাধারণত, আপনি এটিই চান। যদিও, আপনি যদি ব্রাউজারকে স্ক্রিনটি পুনরায় পেইন্ট করা থেকে বাধা দিতে চান, তাহলে আপনাকে `useEffect` কে [`useLayoutEffect`](/reference/react/useLayoutEffect) দিয়ে প্রতিস্থাপন করতে হবে।
 
-* Effects **only run on the client.** They don't run during server rendering.
+* Effects **শুধুমাত্র ক্লায়েন্টে চলে।** তারা সার্ভার রেন্ডারিং করার সময় চলে না।
 
 ---
 
@@ -110,7 +111,7 @@ You need to pass two arguments to `useEffect`:
    - Then, your <CodeStep step={1}>setup code</CodeStep> runs with the new props and state.
 3. Your <CodeStep step={2}>cleanup code</CodeStep> runs one final time after your component is removed from the page *(unmounts).*
 
-**Let's illustrate this sequence for the example above.**  
+**Let's illustrate this sequence for the example above.**
 
 When the `ChatRoom` component above gets added to the page, it will connect to the chat room with the initial `serverUrl` and `roomId`. If either `serverUrl` or `roomId` change as a result of a re-render (say, if the user picks a different chat room in a dropdown), your Effect will *disconnect from the previous room, and connect to the next one.* When the `ChatRoom` component is removed from the page, your Effect will disconnect one last time.
 
@@ -1079,7 +1080,7 @@ If either `serverUrl` or `roomId` change, your Effect will reconnect to the chat
 ```js {8}
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
-  
+
   useEffect(() => {
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
@@ -1433,7 +1434,7 @@ function Counter() {
 }
 ```
 
-Since `count` is a reactive value, it must be specified in the list of dependencies. However, that causes the Effect to cleanup and setup again every time the `count` changes. This is not ideal. 
+Since `count` is a reactive value, it must be specified in the list of dependencies. However, that causes the Effect to cleanup and setup again every time the `count` changes. This is not ideal.
 
 To fix this, [pass the `c => c + 1` state updater](/reference/react/useState#updating-state-based-on-the-previous-state) to `setCount`:
 
