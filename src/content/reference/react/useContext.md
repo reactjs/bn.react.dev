@@ -1288,9 +1288,9 @@ export const LevelContext = createContext(0);
 
 ---
 
-### Optimizing re-renders when passing objects and functions {/*optimizing-re-renders-when-passing-objects-and-functions*/}
+### object এবং function পাস করার সময় পুনরায় রেন্ডার অপ্টিমাইজ করা {/*optimizing-re-renders-when-passing-objects-and-functions*/}
 
-You can pass any values via context, including objects and functions.
+আপনি object এবং function সহ যেকোনো মান context এর মাধ্যমে পাস করতে পারেন।
 
 ```js [[2, 10, "{ currentUser, login }"]] 
 function MyApp() {
@@ -1309,9 +1309,9 @@ function MyApp() {
 }
 ```
 
-Here, the <CodeStep step={2}>context value</CodeStep> is a JavaScript object with two properties, one of which is a function. Whenever `MyApp` re-renders (for example, on a route update), this will be a *different* object pointing at a *different* function, so React will also have to re-render all components deep in the tree that call `useContext(AuthContext)`.
+এখানে, <CodeStep step={2}>context এর মান</CodeStep> হল একটি JavaScript অবজেক্ট যার দুইটি প্যারামিটার রয়েছে, যার ভিতর একটি function। যখনই `MyApp` পুনরায় রেন্ডার করে (উদাহরণস্বরূপ, একটি রাউট আপডেটে), তখন এটি একটি *ভিন্ন* object হবে যা একটি ভিন্ন function নির্দেশ করে, তাই React কেও ট্রির গভীরে সব কম্পোনেন্টকে পুনরায় রেন্ডার করতে হবে যারা `useContext(AuthContext)` কল করেছে।
 
-In smaller apps, this is not a problem. However, there is no need to re-render them if the underlying data, like `currentUser`, has not changed. To help React take advantage of that fact, you may wrap the `login` function with [`useCallback`](/reference/react/useCallback) and wrap the object creation into [`useMemo`](/reference/react/useMemo). This is a performance optimization:
+ছোট অ্যাপগুলিতে এটি কোনো সমস্যা নয়। যাইহোক, যদি `currentUser` এর মত অন্তর্নিহিত ডেটা পরিবর্তিত না হয় তবে তাদের পুনরায় রেন্ডার করার কোন প্রয়োজন নেই। এই ক্ষেত্রে React কে সুবিধা নিতে সাহায্য করার জন্য আপনি [`useCallback`](/reference/react/useCallback) দিয়ে `login` ফাংশনটি র‍্যাপ করে দিতে পারেন এবং object তৈরিকে [`useMemo`](/reference/react/useMemo) দিয়ে র‍্যাপ করে দিতে পারেন। এটি একটি পারফরমেন্স অপ্টিমাইজেশানঃ
 
 ```js {6,9,11,14,17}
 import { useCallback, useMemo } from 'react';
@@ -1337,9 +1337,9 @@ function MyApp() {
 }
 ```
 
-As a result of this change, even if `MyApp` needs to re-render, the components calling `useContext(AuthContext)` won't need to re-render unless `currentUser` has changed.
+এই পরিবর্তনের ফলস্বরূপ, এমনকি যদি `MyApp` কে পুনরায় রেন্ডার করার প্রয়োজন হয়, তবুও `useContext(AuthContext)` কল করা কম্পোনেন্ট পুনরায় রেন্ডার করার প্রয়োজন হবে না যদি না বর্তমান ব্যবহারকারী পরিবর্তিত হয়।
 
-Read more about [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) and [`useCallback`.](/reference/react/useCallback#skipping-re-rendering-of-components)
+[`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) এবং [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) সম্পর্কে আরও পড়ুন।
 
 ---
 
