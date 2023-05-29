@@ -31,7 +31,7 @@ import { useRef } from 'react';
 const myRef = useRef(null);
 ```
 
-সবশেষে, DOM নোডে একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
+সবশেষে, যেই JSX ট্যাগের জন্য আপনি DOM নোড চাচ্ছেন, সেটায় একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
 
 ```js
 <div ref={myRef}>
