@@ -31,11 +31,7 @@ import { useRef } from 'react';
 const myRef = useRef(null);
 ```
 
-<<<<<<< HEAD
-সবশেষে, DOM নোডে একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
-=======
-Finally, pass your ref as the `ref` attribute to the JSX tag for which you want to get the DOM node:
->>>>>>> 3364c93feb358a7d1ac2e8d8b0468c3e32214062
+সবশেষে, যেই JSX ট্যাগের জন্য আপনি DOM নোড চাচ্ছেন, সেটায় একে `ref` এট্রিবিউট হিসেবে পাস করে দিনঃ
 
 ```js
 <div ref={myRef}>
