@@ -1,24 +1,24 @@
 ---
-title: Reacting to Input with State
+title: State এর সঙ্গে Input-র upor প্রতিক্রিয়া
 ---
 
 <Intro>
 
-React provides a declarative way to manipulate the UI. Instead of manipulating individual pieces of the UI directly, you describe the different states that your component can be in, and switch between them in response to the user input. This is similar to how designers think about the UI.
+React UI ম্যানিপুলেট করার জন্য একটি ঘোষণামূলক উপায় সরবরাহ করে। UI-র প্রতিটি টুকরো সরাসরি ম্যানিপুলেট করার পরিবর্তে, আপনি আপনার কম্পোনেন্টের বিভিন্ন state-র বর্ণনা করেন, এবং ব্যবহারকারীর input-র জন্য তাদের মাঝে switch করেন। এটি UI-র বিষয়ে ডিজাইনাররা কীভাবে চিন্তা করে, তার মতো।
 
 </Intro>
 
 <YouWillLearn>
 
-* How declarative UI programming differs from imperative UI programming
-* How to enumerate the different visual states your component can be in
-* How to trigger the changes between the different visual states from code
+* কিভাবে ঘোষণামূলক UI প্রোগ্রামিং অপরিহার্য UI প্রোগ্রামিং থেকে পৃথক(alada)
+* আপনার কম্পোনেন্ট যে বিভিন্ন ভিজ্যুয়াল অবস্থায় থাকতে পারে তা কীভাবে গণনা করবেন
+* কোড থেকে বিভিন্ন ভিজ্যুয়াল স্টেটের মধ্যে পরিবর্তনগুলি কীভাবে ট্রিগার করবেন
 
 </YouWillLearn>
 
-## How declarative UI compares to imperative {/*how-declarative-ui-compares-to-imperative*/}
+## কীভাবে ঘোষণামূলক UI অপরিহার্য UI-র সাথে তুলনা করে {/*how-declarative-ui-compares-to-imperative*/}
 
-When you design UI interactions, you probably think about how the UI *changes* in response to user actions. Consider a form that lets the user submit an answer:
+আপনি যখন UI ইন্টারঅ্যাকশন ডিজাইন করেন, আপনি সম্ভবত ব্যবহারকারীর ক্রিয়াকলাপের প্রতিক্রিয়ায় UI কীভাবে *পরিবর্তিত*  হয় সে সম্পর্কে চিন্তা করেন। এমন একটি ফর্ম বিবেচনা করুন যা ব্যবহারকারীকে একটি উত্তর জমা দিতে দেয়:
 
 * When you type something into the form, the "Submit" button **becomes enabled.**
 * When you press "Submit", both the form and the button **become disabled,** and a spinner **appears.**
