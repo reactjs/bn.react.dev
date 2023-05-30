@@ -62,6 +62,7 @@ function Button() {
   const theme = useContext(ThemeContext);
   // ... 
 ```
+
 `useContext` আপনার পাস করা <CodeStep step={1}>context</CodeStep> এর জন্য <CodeStep step={2}>context এর মান</CodeStep> রিটার্ন করে। context এর মান নির্ধারণ করার জন্য, React কম্পোনেন্ট ট্রিতে সার্চ করে এবং এই নির্দিষ্ট context এর জন্য **উপরের দিকে সব থেকে কাছের context provider** কে খুঁজে বের করে।
 
 একটি `Button` এ context পাস করতে, এটিকে বা এর প্যারেন্ট কম্পোনেন্টগুলির একটিকে সংশ্লিষ্ট context provider দিয়ে wrap করতে হবেঃ
@@ -200,7 +201,7 @@ function MyPage() {
 
 #### context এর মাধ্যমে মান আপডেট করা {/*updating-a-value-via-context*/}
 
-এই উদাহরণে, `MyApp` কম্পোনেন্ট একটি state ভ্যারিয়েবল ধারণ করে যা পরবর্তিতে `ThemeContext` provider এ পাস করা হয়। "Dark mode" চেকবক্স চেক করলে state আপডেট হয়। প্রদত্ত মানের পরিবর্তন সেই সব কম্পোনেন্টকে পুনরায় রেন্ডার করে যারা এই context ব্যবহার করেছে।
+এই উদাহরণে, `MyApp` কম্পোনেন্ট একটি state ভ্যারিয়েবল ধারণ করে যা পরবর্তীতে `ThemeContext` provider এ পাস করা হয়। "Dark mode" চেকবক্স চেক করলে state আপডেট হয়। প্রদত্ত মানের পরিবর্তন সেই সব কম্পোনেন্টকে পুনরায় রেন্ডার করে যারা এই context ব্যবহার করেছে।
 
 <Sandpack>
 
@@ -563,7 +564,7 @@ label {
 
 #### কম্পোনেন্ট থেকে provider কে পৃথক করা {/*extracting-providers-to-a-component*/}
 
-আপনার অ্যাপ গ্রো করার সাথে সাথে আপনার অ্যাপের রুটের কাছাকাছি context গুলোর একটি "পিরামিড" থাকবে বলে আশা করা যাচ্ছে। এটাতে কোন সমস্যা নেই। যাইহোক, আপনি যদি নান্দনিকভাবে নেস্টিং অপছন্দ করেন, তাহলে আপনি একটি কম্পোনেন্টে provider গুলোকে পৃথক করে ফেলতে পারেন। এই উদাহরণে, `MyProviders` "প্লম্বিং" লুকিয়ে রাখে এবং এর ভিতর দিয়ে প্রয়োজনীয় provider দের জন্য পাস করা চিলড্রেন রেন্ডার করে। উল্লেখ্য যে `MyApp` এ `theme` এবং `setTheme` state প্রয়োজন, তাই `MyApp` এখনও state এর এই অংশটুকুর মালিক।
+আপনার অ্যাপ বড় হবার সাথে সাথে আপনার অ্যাপের রুটের কাছাকাছি context গুলোর একটি "পিরামিড" থাকবে বলে আশা করা যাচ্ছে। এটাতে কোন সমস্যা নেই। যাই হোক, আপনি যদি নান্দনিকভাবে নেস্টিং অপছন্দ করেন, তাহলে আপনি একটি কম্পোনেন্টে provider গুলোকে পৃথক করে ফেলতে পারেন। এই উদাহরণে, `MyProviders` "plumbing" লুকিয়ে রাখে এবং এর ভিতর দিয়ে প্রয়োজনীয় provider দের জন্য পাস করা চিলড্রেন রেন্ডার করে। উল্লেখ্য যে `MyApp` এ `theme` এবং `setTheme` state প্রয়োজন, তাই `MyApp` এখনও state এর এই অংশটুকুর মালিক।
 
 <Sandpack>
 
@@ -740,7 +741,7 @@ label {
 
 বড় অ্যাপ্লিকেশানগুলিতে, context এর সাথে একটি [reducer](/reference/react/useReducer) কে একত্রিত করে কম্পোনেন্টগুলোর বাইরের কিছু লজিক সম্পর্কিত state কে পৃথক করা খুবই সাধারণ। এই উদাহরণে, সমস্ত "ওয়্যারিং" `TasksContext.js` এ লুকানো আছে, যেটিতে একটি reducer এবং দুটি পৃথক context রয়েছে।
 
-এই উদাহরণের [সম্পূর্ন ওয়াকথ্রু](/learn/scaling-up-with-reducer-and-context) পড়ুন।
+এই উদাহরণের [সম্পূর্ণ ওয়াকথ্রু](/learn/scaling-up-with-reducer-and-context) পড়ুন।
 
 <Sandpack>
 
@@ -946,10 +947,9 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### ফলব্যাক এর ক্ষেত্রে ডিফল্ট মান নির্ধারন করা {/*specifying-a-fallback-default-value*/}
+### ফলব্যাক এর ক্ষেত্রে ডিফল্ট মান নির্ধারণ করা {/*specifying-a-fallback-default-value*/}
 
-React যদি প্যারেন্ট ট্রিতে নির্দিষ্ট <CodeStep step={1}>context</CodeStep> এর কোন provider খুঁজে না পায়, তাহলে `useContext()` থেকে রিটার্ন্ড context এর মান ডিফল্ট মানের সমান হবে যা আপনি সেই [context টি তৈরি](/reference/react/createContext) করার সময় নির্ধারন করেছিলেনঃ
-If React can't find any providers of that particular <CodeStep step={1}>context</CodeStep> in the parent tree, the context value returned by `useContext()` will be equal to the <CodeStep step={3}>default value</CodeStep> that you specified when you [created that context](/reference/react/createContext):
+React যদি প্যারেন্ট ট্রিতে নির্দিষ্ট <CodeStep step={1}>context</CodeStep> এর কোন provider খুঁজে না পায়, তাহলে `useContext()` থেকে রিটার্ন্ড context এর মান <CodeStep step={3}>ডিফল্ট মানের</CodeStep> সমান হবে যা আপনি সেই [context টি তৈরি](/reference/react/createContext) করার সময় নির্ধারণ করেছিলেনঃ
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "null"]]
 const ThemeContext = createContext(null);
@@ -963,7 +963,7 @@ const ThemeContext = createContext(null);
 const ThemeContext = createContext('light');
 ```
 
-এইভাবে, আপনি যদি দুর্ঘটনাক্রমে সংশ্লিষ্ট provider ছাড়া কোন কম্পোনেন্ট রেন্ডার করেন, তবে এটি ব্রেক করবে না। এটি আপনার কম্পোনেন্টগুলিকে টেস্টের সময় অনেক অনেক provider সেট আপ না করে একটি টেস্ট ইনভায়রনমেন্টে ভালভাবে কাজ করতে সহায়তা করে।
+এইভাবে, আপনি যদি দুর্ঘটনাক্রমে সংশ্লিষ্ট provider ছাড়া কোন কম্পোনেন্ট রেন্ডার করেন, তবে এটি ভাংবে করবে না। এটি আপনার কম্পোনেন্টগুলিকে টেস্টের সময় অনেক অনেক provider সেট আপ না করে একটি টেস্ট ইনভায়রনমেন্টে ভালভাবে কাজ করতে সহায়তা করে।
 
 নীচের উদাহরণে, "Toggle theme" বাটনটি সবসময় light কারণ এটি **সবরকম theme context provider এর বাইরে** এবং ডিফল্ট context theme এর মান `'light'`। ডিফল্ট থিমকে `'dark'` করার জন্য এডিট করন।
 
@@ -1064,7 +1064,7 @@ function Button({ children, onClick }) {
 
 ### ট্রির একটি অংশের জন্য context ওভাররাইড করা {/*overriding-context-for-a-part-of-the-tree*/}
 
-আপনি ট্রির একটি অংশকে একটি ভিন্ন মান সহ একটি provider দিয়ে র‍্যাপ করার মাধ্যমে সেই অংশের জন্য context টি ওভাররাইড করতে পারেন।
+আপনি ট্রির একটি অংশকে একটি ভিন্ন মান সহ একটি provider দিয়ে wrap করার মাধ্যমে সেই অংশের জন্য context টি ওভাররাইড করতে পারেন।
 
 ```js {3,5}
 <ThemeContext.Provider value="dark">
@@ -1190,7 +1190,7 @@ footer {
 
 আপনি যখন context provider গুলো নেস্ট করবেন তখন আপনি তথ্য "সঞ্চয়" করতে পারেন। এই উদাহরণে, `Section` কম্পোনেন্টটি `LevelContext` এর ট্র্যাক রাখে যা সেকশন নেস্টিংয়ের গভীরতা পরিমাপ করে। এটি প্যারেন্ট সেকশন থেকে `LevelContext` রিড করে এবং তার চিলড্রেনের জন্য `LevelContext` সংখ্যা এক এক করে বৃদ্ধি করে প্রদান করে। ফলস্বরূপ, এর ভিতরে কতগুলি সেকশন কম্পোনেন্ট নেস্ট করা হয়েছে তার উপর ভিত্তি করে `Heading` কম্পোনেন্ট স্বয়ংক্রিয়ভাবে সিদ্ধান্ত নিতে পারে যে `<h1>`, `<h2>`, `<h3>`, ..., এর ভিতর কোন ট্যাগটি ব্যবহার করতে হবে।
 
-এই উদাহরণের [সম্পূর্ন ওয়াকথ্রু](/learn/passing-data-deeply-with-context) পড়ুন।
+এই উদাহরণের [বিস্তারিত ওয়াকথ্রু](/learn/passing-data-deeply-with-context) পড়ুন।
 
 <Sandpack>
 
@@ -1311,7 +1311,7 @@ function MyApp() {
 
 এখানে, <CodeStep step={2}>context এর মান</CodeStep> হল একটি JavaScript অবজেক্ট যার দুইটি প্যারামিটার রয়েছে, যার ভিতর একটি function। যখনই `MyApp` পুনরায় রেন্ডার করে (উদাহরণস্বরূপ, একটি রাউট আপডেটে), তখন এটি একটি *ভিন্ন* object হবে যা একটি ভিন্ন function নির্দেশ করে, তাই React কেও ট্রির গভীরে সব কম্পোনেন্টকে পুনরায় রেন্ডার করতে হবে যারা `useContext(AuthContext)` কল করেছে।
 
-ছোট অ্যাপগুলিতে এটি কোনো সমস্যা নয়। যাইহোক, যদি `currentUser` এর মত অন্তর্নিহিত ডেটা পরিবর্তিত না হয় তবে তাদের পুনরায় রেন্ডার করার কোন প্রয়োজন নেই। এই ক্ষেত্রে React কে সুবিধা নিতে সাহায্য করার জন্য আপনি [`useCallback`](/reference/react/useCallback) দিয়ে `login` ফাংশনটি র‍্যাপ করে দিতে পারেন এবং object তৈরিকে [`useMemo`](/reference/react/useMemo) দিয়ে র‍্যাপ করে দিতে পারেন। এটি একটি পারফরমেন্স অপ্টিমাইজেশানঃ
+ছোট অ্যাপগুলিতে এটি কোনো সমস্যা নয়। যাই হোক, যদি `currentUser` এর মত অন্তর্নিহিত ডেটা পরিবর্তিত না হয় তবে তাদের পুনরায় রেন্ডার করার কোন প্রয়োজন নেই। এই ক্ষেত্রে React কে সুবিধা নিতে সাহায্য করার জন্য আপনি [`useCallback`](/reference/react/useCallback) দিয়ে `login` ফাংশনটি wrap করে দিতে পারেন এবং object তৈরিকে [`useMemo`](/reference/react/useMemo) দিয়ে wrap করে দিতে পারেন। এটি একটি পারফরমেন্স অপ্টিমাইজেশানঃ
 
 ```js {6,9,11,14,17}
 import { useCallback, useMemo } from 'react';
