@@ -1,7 +1,6 @@
 ---
-title: State এর সঙ্গে Input-র upor প্রতিক্রিয়া
+title: State এর সঙ্গে Input-র ওপর প্রতিক্রিয়া
 ---
-
 <Intro>
 
 React UI ম্যানিপুলেট করার জন্য একটি ঘোষণামূলক উপায় সরবরাহ করে। UI-র প্রতিটি টুকরো সরাসরি ম্যানিপুলেট করার পরিবর্তে, আপনি আপনার কম্পোনেন্টের বিভিন্ন state-র বর্ণনা করেন, এবং ব্যবহারকারীর input-র জন্য তাদের মাঝে switch করেন। এটি UI-র বিষয়ে ডিজাইনাররা কীভাবে চিন্তা করে, তার মতো।
@@ -10,20 +9,20 @@ React UI ম্যানিপুলেট করার জন্য একট�
 
 <YouWillLearn>
 
-* কিভাবে ঘোষণামূলক UI প্রোগ্রামিং অপরিহার্য UI প্রোগ্রামিং থেকে পৃথক(alada)
+* কিভাবে ঘোষণামূলক UI প্রোগ্রামিং অপরিহার্য UI প্রোগ্রামিং থেকে আলাদা
 * আপনার কম্পোনেন্ট যে বিভিন্ন ভিজ্যুয়াল অবস্থায় থাকতে পারে তা কীভাবে গণনা করবেন
 * কোড থেকে বিভিন্ন ভিজ্যুয়াল স্টেটের মধ্যে পরিবর্তনগুলি কীভাবে ট্রিগার করবেন
 
 </YouWillLearn>
 
-## কীভাবে ঘোষণামূলক UI অপরিহার্য UI-র সাথে তুলনা করে {/*how-declarative-ui-compares-to-imperative*/}
+## কীভাবে ঘোষণামূলক UI অপরিহার্য UI-র সাথে তুলনা করে
 
 আপনি যখন UI ইন্টারঅ্যাকশন ডিজাইন করেন, আপনি সম্ভবত ব্যবহারকারীর ক্রিয়াকলাপের প্রতিক্রিয়ায় UI কীভাবে *পরিবর্তিত*  হয় সে সম্পর্কে চিন্তা করেন। এমন একটি ফর্ম বিবেচনা করুন যা ব্যবহারকারীকে একটি উত্তর জমা দিতে দেয়:
 
-* When you type something into the form, the "Submit" button **becomes enabled.**
-* When you press "Submit", both the form and the button **become disabled,** and a spinner **appears.**
-* If the network request succeeds, the form **gets hidden,** and the "Thank you" message **appears.**
-* If the network request fails, an error message **appears,** and the form **becomes enabled** again.
+* আপনি যখন ফর্মে কিছু টাইপ করেন, তখন "জমা দিন" বোতামটি **সক্রিয় হয়ে যায়।**
+* আপনি যখন "জমা দিন" টিপুন, ফর্ম এবং বোতাম উভয়ই **নিষ্ক্রিয় হয়ে যায়** এবং একটি **স্পিনার উপস্থিত হয়।**
+* নেটওয়ার্ক অনুরোধ সফল হলে, ফর্মটি **লুকানো হবে** এবং "ধন্যবাদ" বার্তাটি **প্রদর্শিত হবে।**
+* নেটওয়ার্ক অনুরোধ ব্যর্থ হলে, একটি ত্রুটি বার্তা **প্রদর্শিত হবে**, এবং ফর্ম আবার **সক্রিয় হয়ে যাবে ।**
 
 In **imperative programming,** the above corresponds directly to how you implement interaction. You have to write the exact instructions to manipulate the UI depending on what just happened. Here's another way to think about this: imagine riding next to someone in a car and telling them turn by turn where to go.
 
@@ -35,7 +34,7 @@ In this example of imperative UI programming, the form is built *without* React.
 
 <Sandpack>
 
-```js index.js active
+```js
 async function handleFormSubmit(e) {
   e.preventDefault();
   disable(textarea);
@@ -103,13 +102,13 @@ form.onsubmit = handleFormSubmit;
 textarea.oninput = handleTextareaChange;
 ```
 
-```js sandbox.config.json hidden
+```js
 {
   "hardReloadOnChange": true
 }
 ```
 
-```html public/index.html
+```html
 <form id="form">
   <h2>City quiz</h2>
   <p>
@@ -133,25 +132,25 @@ body { font-family: sans-serif; margin: 20px; padding: 0; }
 
 Manipulating the UI imperatively works well enough for isolated examples, but it gets exponentially more difficult to manage in more complex systems. Imagine updating a page full of different forms like this one. Adding a new UI element or a new interaction would require carefully checking all existing code to make sure you haven't introduced a bug (for example, forgetting to show or hide something).
 
-React was built to solve this problem.
+React বানানোই হয়েছিল এই সমস্যাটি সমাধান করার জন্য।
 
 In React, you don't directly manipulate the UI--meaning you don't enable, disable, show, or hide components directly. Instead, you **declare what you want to show,** and React figures out how to update the UI. Think of getting into a taxi and telling the driver where you want to go instead of telling them exactly where to turn. It's the driver's job to get you there, and they might even know some shortcuts you haven't considered!
 
 <Illustration src="/images/docs/illustrations/i_declarative-ui-programming.png" alt="In a car driven by React, a passenger asks to be taken to a specific place on the map. React figures out how to do that." />
 
-## Thinking about UI declaratively {/*thinking-about-ui-declaratively*/}
+## ঘোষণামূলকভাবে UI সম্পর্কে চিন্তা করা
 
-You've seen how to implement a form imperatively above. To better understand how to think in React, you'll walk through reimplementing this UI in React below:
+আপনি উপরে দেখেছেন কিভাবে একটি ফর্ম অপরিহার্যভাবে বাস্তবায়ন করতে হয়। React-এ কীভাবে চিন্তা করতে হয় তা আরও ভালোভাবে বোঝার জন্য আপনি React-এ এই UI পুনরায় প্রয়োগ করবেন:
 
-1. **Identify** your component's different visual states
-2. **Determine** what triggers those state changes
-3. **Represent** the state in memory using `useState`
-4. **Remove** any non-essential state variables
-5. **Connect** the event handlers to set the state
+1. কম্পোনেন্ট এর বিভিন্ন ভিজুয়্যাল states **চিহ্নিত** করা
+2. State পরিবর্তনের কারণ কী তা **নির্ধারণ** করুন
+3. `useState` ব্যবহার করে মেমরিতে state এর **প্রতিনিধিত্ব** করুন
+4. কোনো অপ্রয়োজনীয় state ভেরিয়েবল কে **সরিয়ে** দিন
+5. state সেট করতে ইভেন্ট হ্যান্ডলারদের সাথে **সংযোগ** করুন
 
-### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
+### Step 1: Identify your component's different visual states
 
-In computer science, you may hear about a ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
+In computer science, you may hear about a [&#34;state machine&#34;](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
 
 First, you need to visualize all the different "states" of the UI the user might see:
 
@@ -240,13 +239,13 @@ export default function Form({
 
 <DeepDive>
 
-#### Displaying many visual states at once {/*displaying-many-visual-states-at-once*/}
+#### Displaying many visual states at once
 
 If a component has a lot of visual states, it can be convenient to show them all on one page:
 
 <Sandpack>
 
-```js App.js active
+```js
 import Form from './Form.js';
 
 let statuses = [
@@ -271,7 +270,7 @@ export default function App() {
 }
 ```
 
-```js Form.js
+```js
 export default function Form({ status }) {
   if (status === 'success') {
     return <h1>That's right!</h1>
@@ -311,7 +310,7 @@ Pages like this are often called "living styleguides" or "storybooks".
 
 </DeepDive>
 
-### Step 2: Determine what triggers those state changes {/*step-2-determine-what-triggers-those-state-changes*/}
+### Step 2: Determine what triggers those state changes
 
 You can trigger state updates in response to two kinds of inputs:
 
@@ -348,7 +347,7 @@ Form states
 
 </DiagramGroup>
 
-### Step 3: Represent the state in memory with `useState` {/*step-3-represent-the-state-in-memory-with-usestate*/}
+### Step 3: Represent the state in memory with `useState`
 
 Next you'll need to represent the visual states of your component in memory with [`useState`.](/reference/react/useState) Simplicity is key: each piece of state is a "moving piece", and **you want as few "moving pieces" as possible.** More complexity leads to more bugs!
 
@@ -373,7 +372,7 @@ const [isError, setIsError] = useState(false);
 
 Your first idea likely won't be the best, but that's ok--refactoring state is a part of the process!
 
-### Step 4: Remove any non-essential state variables {/*step-4-remove-any-non-essential-state-variables*/}
+### Step 4: Remove any non-essential state variables
 
 You want to avoid duplication in the state content so you're only tracking what is essential. Spending a little time on refactoring your state structure will make your components easier to understand, reduce duplication, and avoid unintended meanings. Your goal is to **prevent the cases where the state in memory doesn't represent any valid UI that you'd want a user to see.** (For example, you never want to show an error message and disable the input at the same time, or the user won't be able to correct the error!)
 
@@ -395,13 +394,13 @@ You know they are essential, because you can't remove any of them without breaki
 
 <DeepDive>
 
-#### Eliminating “impossible” states with a reducer {/*eliminating-impossible-states-with-a-reducer*/}
+#### Eliminating “impossible” states with a reducer
 
 These three variables are a good enough representation of this form's state. However, there are still some intermediate states that don't fully make sense. For example, a non-null `error` doesn't make sense when `status` is `'success'`. To model the state more precisely, you can [extract it into a reducer.](/learn/extracting-state-logic-into-a-reducer) Reducers let you unify multiple state variables into a single object and consolidate all the related logic!
 
 </DeepDive>
 
-### Step 5: Connect the event handlers to set state {/*step-5-connect-the-event-handlers-to-set-state*/}
+### Step 5: Connect the event handlers to set state
 
 Lastly, create event handlers that update the state. Below is the final form, with all event handlers wired up:
 
@@ -499,11 +498,9 @@ Although this code is longer than the original imperative example, it is much le
 
 </Recap>
 
-
-
 <Challenges>
 
-#### Add and remove a CSS class {/*add-and-remove-a-css-class*/}
+#### Add and remove a CSS class
 
 Make it so that clicking on the picture *removes* the `background--active` CSS class from the outer `<div>`, but *adds* the `picture--active` class to the `<img>`. Clicking the background again should restore the original CSS classes.
 
@@ -701,13 +698,13 @@ Keep in mind that if two different JSX chunks describe the same tree, their nest
 
 </Solution>
 
-#### Profile editor {/*profile-editor*/}
+#### Profile editor
 
 Here is a small form implemented with plain JavaScript and DOM. Play with it to understand its behavior:
 
 <Sandpack>
 
-```js index.js active
+```js
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Edit Profile') {
@@ -763,13 +760,13 @@ firstNameInput.oninput = handleFirstNameChange;
 lastNameInput.oninput = handleLastNameChange;
 ```
 
-```js sandbox.config.json hidden
+```js
 {
   "hardReloadOnChange": true
 }
 ```
 
-```html public/index.html
+```html
 <form id="form">
   <label>
     First name:
@@ -903,13 +900,13 @@ Compare this solution to the original imperative code. How are they different?
 
 </Solution>
 
-#### Refactor the imperative solution without React {/*refactor-the-imperative-solution-without-react*/}
+#### Refactor the imperative solution without React
 
 Here is the original sandbox from the previous challenge, written imperatively without React:
 
 <Sandpack>
 
-```js index.js active
+```js
 function handleFormSubmit(e) {
   e.preventDefault();
   if (editButton.textContent === 'Edit Profile') {
@@ -965,13 +962,13 @@ firstNameInput.oninput = handleFirstNameChange;
 lastNameInput.oninput = handleLastNameChange;
 ```
 
-```js sandbox.config.json hidden
+```js
 {
   "hardReloadOnChange": true
 }
 ```
 
-```html public/index.html
+```html
 <form id="form">
   <label>
     First name:
@@ -1008,7 +1005,7 @@ If you're struggling to think where to start, the stub below already has most of
 
 <Sandpack>
 
-```js index.js active
+```js
 let firstName = 'Jane';
 let lastName = 'Jacobs';
 let isEditing = false;
@@ -1072,13 +1069,13 @@ firstNameInput.oninput = handleFirstNameChange;
 lastNameInput.oninput = handleLastNameChange;
 ```
 
-```js sandbox.config.json hidden
+```js
 {
   "hardReloadOnChange": true
 }
 ```
 
-```html public/index.html
+```html
 <form id="form">
   <label>
     First name:
@@ -1115,7 +1112,7 @@ The missing logic included toggling the display of inputs and content, and updat
 
 <Sandpack>
 
-```js index.js active
+```js
 let firstName = 'Jane';
 let lastName = 'Jacobs';
 let isEditing = false;
@@ -1191,13 +1188,13 @@ firstNameInput.oninput = handleFirstNameChange;
 lastNameInput.oninput = handleLastNameChange;
 ```
 
-```js sandbox.config.json hidden
+```js
 {
   "hardReloadOnChange": true
 }
 ```
 
-```html public/index.html
+```html
 <form id="form">
   <label>
     First name:
