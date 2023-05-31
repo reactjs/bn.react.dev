@@ -150,19 +150,19 @@ React-এ, আপনি সরাসরি UI-কে ম্যানিপুল
 4. কোনো অপ্রয়োজনীয় state ভেরিয়েবল কে **সরিয়ে** দিন
 5. state সেট করতে ইভেন্ট হ্যান্ডলারদের সাথে **সংযোগ** করুন
 
-### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
+### Step 1: আপনার উপাদানের বিভিন্ন ভিজ্যুয়াল state চিহ্নিত করুন {/*step-1-identify-your-components-different-visual-states*/}
 
-In computer science, you may hear about a ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
+কম্পিউটার বিজ্ঞানে, আপনি শুনতে পারেন একটি ["স্টেট মেশিন"](https://en.wikipedia.org/wiki/Finite-state_machine) বেশ কয়েকটি "state"-র মধ্যে একটি। আপনি যদি একজন ডিজাইনারের সাথে কাজ করেন তবে আপনি বিভিন্ন "ভিজ্যুয়াল state" এর জন্য মকআপ দেখে থাকতে পারেন। React ডিজাইন এবং কম্পিউটার বিজ্ঞানের সংযোগস্থলে দাঁড়িয়েছে, তাই এই দুটি ধারণাই অনুপ্রেরণার উৎস।
 
-First, you need to visualize all the different "states" of the UI the user might see:
+প্রথমত, আপনাকে ব্যবহারকারী দেখতে পারে এমন UI এর সমস্ত ভিন্ন "state" কল্পনা করতে হবে:
 
-* **Empty**: Form has a disabled "Submit" button.
-* **Typing**: Form has an enabled "Submit" button.
-* **Submitting**: Form is completely disabled. Spinner is shown.
-* **Success**: "Thank you" message is shown instead of a form.
-* **Error**: Same as Typing state, but with an extra error message.
+* **খালি**: ফর্মটিতে একটি নিষ্ক্রিয় "জমা দিন" বোতাম রয়েছে।
+* **টাইপিং**: ফর্মটিতে একটি সক্রিয় "জমা দিন" বোতাম রয়েছে।
+* **জমা করা**: ফর্ম সম্পূর্ণরূপে অক্ষম। স্পিনার দেখানো হয়।
+* **সফল**: একটি ফর্মের পরিবর্তে "ধন্যবাদ" বার্তাটি দেখানো হয়েছে।
+* **ত্রুটি**: টাইপিং অবস্থার মতো, কিন্তু একটি অতিরিক্ত ত্রুটি বার্তা সহ.
 
-Just like a designer, you'll want to "mock up" or create "mocks" for the different states before you add logic. For example, here is a mock for just the visual part of the form. This mock is controlled by a prop called `status` with a default value of `'empty'`:
+ঠিক একজন ডিজাইনারের মতো, আপনি যুক্তি যোগ করার আগে বিভিন্ন state-র জন্য "মকআপ" বা "মক" তৈরি করতে চাইবেন। উদাহরণস্বরূপ, এখানে ফর্মের শুধুমাত্র ভিজ্যুয়াল অংশের জন্য একটি মক। এই মকআপটি `status` নামক একটি prop দ্বারা নিয়ন্ত্রিত হয় যার একটি ডিফল্ট মান `'empty'`:
 
 <Sandpack>
 
@@ -193,7 +193,7 @@ export default function Form({
 
 </Sandpack>
 
-You could call that prop anything you like, the naming is not important. Try editing `status = 'empty'` to `status = 'success'` to see the success message appear. Mocking lets you quickly iterate on the UI before you wire up any logic. Here is a more fleshed out prototype of the same component, still "controlled" by the `status` prop:
+আপনি এই prop-কে আপনার পছন্দ মতো নাম দিতে পারেন, নামকরণ গুরুত্বপূর্ণ নয়। সফলতার বার্তাটি দেখতে `স্থিতি = 'খালি'` থেকে `স্থিতি = 'সফল'` পাল্টানোর চেষ্টা করুন। মকআপ করার ফলে আপনি যেকোন যুক্তি যুক্ত করার আগে দ্রুত UI-তে পুনরাবৃত্তি করতে পারবেন। এখানে একই কম্পোনেন্টের একটি আরও ফ্লেশ আউট প্রোটোটাইপ রয়েছে, যা এখনও `status` প্রপ দ্বারা "নিয়ন্ত্রিত":
 
 <Sandpack>
 
