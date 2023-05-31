@@ -30,7 +30,7 @@ HTML
 
 <Diagram name="writing_jsx_js" height={237} width={325} alt="Three JavaScript handlers with yellow background: onSubmit, onLogin, and onClick.">
 
-JavaScript
+জাভাস্ক্রিপ্ট
 
 </Diagram>
 
@@ -56,19 +56,19 @@ JavaScript
 
 </DiagramGroup>
 
-Keeping a button's rendering logic and markup together ensures that they stay in sync with each other on every edit. Conversely, details that are unrelated, such as the button's markup and a sidebar's markup, are isolated from each other, making it safer to change either of them on their own.
+একটি বাটনের রেন্ডারিং লজিক এবং মার্কআপ একসাথে রাখা নিশ্চিত করে যে তারা প্রতিটি ইডিটে একে অপরের সাথে সিঙ্কে থাকে। বিপরীতভাবে, বিশদ বিবরণ যা সম্পর্কহীন, যেমন বাটনের মার্কআপ এবং একটি সাইডবারের মার্কআপ, একে অপরের থেকে বিচ্ছিন্ন হয়ে যায়, যার ফলে তাদের যেকোনো একটিকে নিজেরাই পরিবর্তন করা নিরাপদ করে তোলে।
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information. The best way to understand this is to convert some HTML markup to JSX markup.
+প্রতিটি রিয়েক্ট কম্পোনেন্ট একটি জাভাস্ক্রিপ্ট ফাংশন যাতে কিছু মার্কআপ থাকতে পারে যা রিয়েক্ট ব্রাউজারে রেন্ডার করে। রিয়েক্ট কম্পোনেন্টগুলি সেই মার্কআপটি উপস্থাপন করতে JSX নামক একটি সিনট্যাক্স এক্সটেনশন ব্যবহার করে। JSX দেখতে অনেকটা HTML এর মত, কিন্তু এটি একটু জটিল এবং ডাইন্যামিক তথ্য প্রদর্শন করতে পারে। এটি বোঝার সর্বোত্তম উপায় হল কিছু HTML মার্কআপকে JSX মার্কআপে রূপান্তর করা।
 
 <Note>
 
-JSX and React are two separate things. They're often used together, but you *can* [use them independently](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) of each other. JSX is a syntax extension, while React is a JavaScript library.
+জেএসএক্স এবং রিয়েক্ট দুটি পৃথক জিনিস। এগুলি প্রায়শই একসাথে ব্যবহার করা হয়,  তবে  আপনি একে অপরের থেকে স্বাধীনভাবে [ব্যবহার করতে পারেন](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) ।JSX হল একটি সিনট্যাক্স এক্সটেনশন, যখন React হল একটি JavaScript লাইব্রেরি।
 
 </Note>
 
-## Converting HTML to JSX {/*converting-html-to-jsx*/}
+##  HTML কে JSX এ রূপান্তর {/*converting-html-to-jsx*/}
 
-Suppose that you have some (perfectly valid) HTML:
+ধরুন আপনার কিছু (ভ্যালিড) HTML আছে:
 
 ```html
 <h1>Hedy Lamarr's Todos</h1>
@@ -84,7 +84,7 @@ Suppose that you have some (perfectly valid) HTML:
 </ul>
 ```
 
-And you want to put it into your component:
+এবং আপনি এটি আপনার কম্পোনেন্ট- এ রাখতে চান:
 
 ```js
 export default function TodoList() {
@@ -94,7 +94,7 @@ export default function TodoList() {
 }
 ```
 
-If you copy and paste it as is, it will not work:
+আপনি যদি এটিকে কপি এবং পেস্ট করেন তবে এটি কাজ করবে না:
 
 
 <Sandpack>
@@ -124,21 +124,21 @@ img { height: 90px }
 
 </Sandpack>
 
-This is because JSX is stricter and has a few more rules than HTML! If you read the error messages above, they'll guide you to fix the markup, or you can follow the guide below.
+এর কারণ হল JSX জটিল এবং এইচটিএমএল থেকে আরও কিছু নিয়ম রয়েছে! আপনি যদি উপরের error messages পড়ে থাকেন, তাহলে তারা আপনাকে মার্কআপ ঠিক করার জন্য গাইড করবে, অথবা আপনি নীচের নির্দেশিকা অনুসরণ করতে পারেন।
 
 <Note>
 
-Most of the time, React's on-screen error messages will help you find where the problem is. Give them a read if you get stuck!
+বেশিরভাগ সময়, রিয়েক্টের অন-স্ক্রিন error messages আপনাকে সমস্যাটি কোথায় তা খুঁজে পেতে সহায়তা করবে। আপনি আটকে গেলে এগুলো ভালভাবে পড়ে নিতে পারেন!
 
 </Note>
 
-## The Rules of JSX {/*the-rules-of-jsx*/}
+## JSX এর নিয়মাবলী {/*the-rules-of-jsx*/}
 
 ### 1. Return a single root element {/*1-return-a-single-root-element*/}
 
-To return multiple elements from a component, **wrap them with a single parent tag.**
+একটি কম্পোনেন্ট থেকে একাধিক ইলিমেন্ট রিটার্ন করতে,**একটি একক অভিভাবক ট্যাগ দিয়ে তাদের মোড়িয়ে দিন**.
 
-For example, you can use a `<div>`:
+উদাহরণস্বরূপ , আপনি `<div>` ব্যবহার করতে পারেন:
 
 ```js {1,11}
 <div>
@@ -155,7 +155,7 @@ For example, you can use a `<div>`:
 ```
 
 
-If you don't want to add an extra `<div>` to your markup, you can write `<>` and `</>` instead:
+আপনি যদি আপনার মার্কআপে  অতিরিক্ত `<div>` যোগ করতে না চান, তাহলে আপনি এর পরিবর্তে `<>` এবং `</>` লিখতে পারেন:
 
 ```js {1,11}
 <>
@@ -171,21 +171,21 @@ If you don't want to add an extra `<div>` to your markup, you can write `<>` and
 </>
 ```
 
-This empty tag is called a *[Fragment.](/reference/react/Fragment)* Fragments let you group things without leaving any trace in the browser HTML tree.
+এই খালি ট্যাগটিকে *[ফ্র্যাগমেন্ট ](/reference/react/Fragment)* বলা হয়। ফ্র্যাগমেন্ট আপনাকে ব্রাউজার HTML ট্রিতে কোনো চিহ্ন না রেখে জিনিসগুলিকে গোষ্ঠীবদ্ধ করতে দেয়।
 
 <DeepDive>
 
-#### Why do multiple JSX tags need to be wrapped? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
+#### কেন একাধিক JSX ট্যাগ মোড়ানো প্রয়োজন? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
 
-JSX looks like HTML, but under the hood it is transformed into plain JavaScript objects. You can't return two objects from a function without wrapping them into an array. This explains why you also can't return two JSX tags without wrapping them into another tag or a Fragment.
+JSX দেখতে HTML এর মতো, কিন্তু আসলে এটি প্লেইন জাভাস্ক্রিপ্ট অবজেক্টে রূপান্তরিত হয়। আপনি একটি অ্যারের মধ্যে মোড়ানো ছাড়া একটি ফাংশন থেকে দুটি অবজেক্ট ফেরত দিতে পারবেন না। এটি ব্যাখ্যা করে যে আপনি কেন দুটি JSX ট্যাগকে অন্য ট্যাগ বা একটি ফ্র্যাগমেন্টে মোড়ানো ছাড়াই ফেরত দিতে পারবেন না।
 
 </DeepDive>
 
-### 2. Close all the tags {/*2-close-all-the-tags*/}
+### 2. সবগুলো ট্যাগ ক্লোজ করুন {/*2-close-all-the-tags*/}
 
-JSX requires tags to be explicitly closed: self-closing tags like `<img>` must become `<img />`, and wrapping tags like `<li>oranges` must be written as `<li>oranges</li>`.
+JSX-এর জন্য ট্যাগগুলি স্পষ্টভাবে ক্লোজ করতে হবে:  `<img>`-এর মতো স্ব-বন্ধ হওয়া ট্যাগগুলিকে অবশ্যই `<img />` হতে হবে, এবং `<li>oranges` মতো মোড়ানো ট্যাগগুলিকে `<li>oranges</li>` হিসাবে লিখতে হবে।
 
-This is how Hedy Lamarr's image and list items look closed:
+হেডি লামারের ইমেইজ এবং লিস্টআইটেমগুলি ক্লোজ হলে এমন দেখায়:
 
 ```js {2-6,8-10}
 <>
@@ -202,11 +202,11 @@ This is how Hedy Lamarr's image and list items look closed:
 </>
 ```
 
-### 3. camelCase <s>all</s> most of the things! {/*3-camelcase-salls-most-of-the-things*/}
+### 3. ক্যামেলকেস <s>প্রায়</s> অধিকাংশ জিনিস! {/*3-camelcase-salls-most-of-the-things*/}
 
-JSX turns into JavaScript and attributes written in JSX become keys of JavaScript objects. In your own components, you will often want to read those attributes into variables. But JavaScript has limitations on variable names. For example, their names can't contain dashes or be reserved words like `class`.
+JSX জাভাস্ক্রিপ্টে পরিণত হয় এবং JSX-এ লেখা বৈশিষ্ট্যগুলি জাভাস্ক্রিপ্ট অবজেক্টের কী হয়ে ওঠে। আপনার নিজস্ব কম্পোনেন্টে, আপনি প্রায়শই এই এট্রিবিউটগুলোকে ভেরিয়েবলে রাখবেন। কিন্তু জাভাস্ক্রিপ্টের ভেরিয়েবলের নামের সীমাবদ্ধতা রয়েছে। উদাহরণস্বরূপ, তাদের নামের ড্যাশ থাকতে পারে না বা `class`-এর মতো সংরক্ষিত শব্দ থাকতে পারে না।
 
-This is why, in React, many HTML and SVG attributes are written in camelCase. For example, instead of `stroke-width` you use `strokeWidth`. Since `class` is a reserved word, in React you write `className` instead, named after the [corresponding DOM property](https://developer.mozilla.org/en-US/docs/Web/API/Element/className):
+এই কারণেই, React-এ, অনেক HTML এবং SVG অ্যাট্রিবিউট ক্যামেলকেসে লেখা থাকে। উদাহরণস্বরূপ, `stroke-width` এর পরিবর্তে আপনি `strokeWidth` ব্যবহার করেন। যেহেতু `class` একটি সংরক্ষিত শব্দ, তাই রিয়েক্টে আপনি পরিবর্তে `className` লিখবেন,[সংশ্লিষ্ট DOM প্রপার্টি](https://developer.mozilla.org/en-US/docs/Web/API/Element/className)এর নামানুসারে। ):
 
 ```js {4}
 <img 
@@ -216,19 +216,19 @@ This is why, in React, many HTML and SVG attributes are written in camelCase. Fo
 />
 ```
 
-You can [find all these attributes in the list of DOM component props.](/reference/react-dom/components/common) If you get one wrong, don't worry—React will print a message with a possible correction to the [browser console.](https://developer.mozilla.org/docs/Tools/Browser_Console)
+আপনি [DOM কম্পোনেন্ট প্রপসের তালিকায় এই সমস্ত বৈশিষ্ট্যগুলি খুঁজে পেতে পারেন](/reference/react-dom/components/common) If you get one wrong, don't worry—React will print a message with a possible correction to the [browser console.](https://developer.mozilla.org/docs/Tools/Browser_Console)। আপনি যদি একটিও ভুল বুঝে থাকেন, চিন্তা করবেন না—রিয়েক্ট ব্রাউজার কনসোলে সম্ভাব্য সংশোধন সহ একটি মেসেজ প্রিন্ট করবে।
 
 <Pitfall>
 
-For historical reasons, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) and [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) attributes are written as in HTML with dashes.
+ঐতিহাসিক কারণে, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) এবং [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) অ্যাট্রিবিউটগুলি ড্যাশ সহ HTML এর মতো লেখা হয়।
 
 </Pitfall>
 
-### Pro-tip: Use a JSX Converter {/*pro-tip-use-a-jsx-converter*/}
+### প্রো-টিপ: JSX কনভার্টার ব্যবহার করুন {/*pro-tip-use-a-jsx-converter*/}
 
-Converting all these attributes in existing markup can be tedious! We recommend using a [converter](https://transform.tools/html-to-jsx) to translate your existing HTML and SVG to JSX. Converters are very useful in practice, but it's still worth understanding what is going on so that you can comfortably write JSX on your own.
+বিদ্যমান মার্কআপে এই সমস্ত বৈশিষ্ট্যগুলিকে রূপান্তর করা ক্লান্তিকর হতে পারে! আপনার বিদ্যমান HTML এবং SVG কে JSX-এ অনুবাদ করতে আমরা একটি [কনভার্টার](https://transform.tools/html-to-jsx) ব্যবহার করার পরামর্শ দিই। রূপান্তরকারীগুলি অনুশীলনে খুব দরকারী, তবে কী চলছে তা বোঝার জন্য এটি এখনও জরুরী যেন আপনি স্বাচ্ছন্দ্যে JSX লিখতে পারেন৷
 
-Here is your final result:
+এখানে আপনার চূড়ান্ত ফলাফল:
 
 <Sandpack>
 
@@ -260,11 +260,11 @@ img { height: 90px }
 
 <Recap>
 
-Now you know why JSX exists and how to use it in components:
+এখন আপনি জানেন JSX কেন রয়েছে এবং কীভাবে এটি কম্পনেন্টে ব্যবহার করবেন:
 
-* React components group rendering logic together with markup because they are related.
-* JSX is similar to HTML, with a few differences. You can use a [converter](https://transform.tools/html-to-jsx) if you need to.
-* Error messages will often point you in the right direction to fixing your markup.
+* রিঅ্যাক্ট কম্পোনেন্ট গ্রুপ রেন্ডারিং লজিক মার্কআপের সাথে একসাথে থাকে কারণ তারা সম্পর্কিত।
+* JSX কিছু পার্থক্য সহ HTML এর অনুরূপ। আপনার প্রয়োজন হলে আপনি একটি [কনভার্টার](https://transform.tools/html-to-jsx) ব্যবহার করতে পারেন।
+* Error messages প্রায়ই আপনার মার্কআপ ঠিক করার জন্য সঠিক দিক নির্দেশ করবে.
 
 </Recap>
 
@@ -274,7 +274,7 @@ Now you know why JSX exists and how to use it in components:
 
 #### Convert some HTML to JSX {/*convert-some-html-to-jsx*/}
 
-This HTML was pasted into a component, but it's not valid JSX. Fix it:
+এই HTML একটি কম্পোনেন্টে ব্যবহার করা হয়েছে, কিন্তু এটি সঠিক JSX নয়। ঠিক করুন:
 
 <Sandpack>
 
@@ -310,7 +310,7 @@ export default function Bio() {
 
 </Sandpack>
 
-Whether to do it by hand or using the converter is up to you!
+এটা নিজের হাতে করবেন নাকি কনভার্টার ব্যবহার করবেন সেটা আপনার ব্যাপার!
 
 <Solution>
 
