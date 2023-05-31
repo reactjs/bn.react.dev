@@ -48,12 +48,12 @@ function MyComponent() {
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহারবিধি {/*usage*/}
 
 
-### Passing data deeply into the tree {/*passing-data-deeply-into-the-tree*/}
+### ট্রির গভীরে ডাটা পাস করা {/*passing-data-deeply-into-the-tree*/}
 
-Call `useContext` at the top level of your component to read and subscribe to [context.](/learn/passing-data-deeply-with-context)
+[context](/learn/passing-data-deeply-with-context) রিড করা এবং সেখানে সাবস্ক্রাইব করার জন্য `useContext` কে আপনার কম্পোনেন্ট এর একেবারে উপরের স্তরে কল করতে হবে।
 
 ```js [[2, 4, "theme"], [1, 4, "ThemeContext"]]
 import { useContext } from 'react';
@@ -63,9 +63,9 @@ function Button() {
   // ... 
 ```
 
-`useContext` returns the <CodeStep step={2}>context value</CodeStep> for the <CodeStep step={1}>context</CodeStep> you passed. To determine the context value, React searches the component tree and finds **the closest context provider above** for that particular context.
+`useContext` আপনার পাস করা <CodeStep step={1}>context</CodeStep> এর জন্য <CodeStep step={2}>context এর মান</CodeStep> রিটার্ন করে। context এর মান নির্ধারণ করার জন্য, React কম্পোনেন্ট ট্রিতে সার্চ করে এবং এই নির্দিষ্ট context এর জন্য **উপরের দিকে সব থেকে কাছের context provider** কে খুঁজে বের করে।
 
-To pass context to a `Button`, wrap it or one of its parent components into the corresponding context provider:
+একটি `Button` এ context পাস করতে, এটিকে বা এর প্যারেন্ট কম্পোনেন্টগুলির একটিকে সংশ্লিষ্ট context provider দিয়ে wrap করতে হবেঃ
 
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
@@ -81,11 +81,11 @@ function Form() {
 }
 ```
 
-It doesn't matter how many layers of components there are between the provider and the `Button`. When a `Button` *anywhere* inside of `Form` calls `useContext(ThemeContext)`, it will receive `"dark"` as the value.
+Provider এবং `Button` এর মধ্যে কম্পোনেন্টগুলির কতগুলি স্তর রয়েছে তা বিবেচ্য নয়। যখন `Form` এর ভিতরে যেকোনো জায়গায় একটি `Button` `useContext(ThemeContext)` কল করে, তখন এটি মান হিসাবে `"dark"` পাবে।
 
 <Pitfall>
 
-`useContext()` always looks for the closest provider *above* the component that calls it. It searches upwards and **does not** consider providers in the component from which you're calling `useContext()`.
+`useContext()` সবসময় একে কল করে এমন কম্পোনেন্টের *উপরের দিকে* নিকটতম provider কে খুঁজে। এটি উপরের দিকে সার্চ করে এবং আপনি যে কম্পোনেন্ট থেকে `useContext()` কল করছেন সেখানকার provider গুলোকে বিবেচনা **করা হয় না**।
 
 </Pitfall>
 
@@ -175,9 +175,9 @@ function Button({ children }) {
 
 ---
 
-### Updating data passed via context {/*updating-data-passed-via-context*/}
+### context পাস করার মাধ্যমে ডাটা আপডেট করা {/*updating-data-passed-via-context*/}
 
-Often, you'll want the context to change over time. To update context, combine it with [state.](/reference/react/useState) Declare a state variable in the parent component, and pass the current state down as the <CodeStep step={2}>context value</CodeStep> to the provider.
+মাঝে মাঝেই আপনি সময়ের সাথে সাথে context পরিবর্তন করতে চাইবেন। context আপডেট করতে, এটিকে [state](/reference/react/useState) এর সাথে একত্রে ব্যবহার করতে হবে। প্যারেন্ট কম্পোনেন্টে একটি state ভ্যারিয়েবল ডিক্লেয়ার করতে হবে এবং provider এ <CodeStep step={2}>context এর মান</CodeStep> হিসেবে বর্তমান state কে পাস করে দিতে হবে।
 
 ```js {2} [[1, 4, "ThemeContext"], [2, 4, "theme"], [1, 11, "ThemeContext"]]
 function MyPage() {
@@ -195,13 +195,13 @@ function MyPage() {
 }
 ```
 
-Now any `Button` inside of the provider will receive the current `theme` value. If you call `setTheme` to update the `theme` value that you pass to the provider, all `Button` components will re-render with the new `'light'` value.
+এখন provider এর ভিতরে যেকোনো `Button` বর্তমান `theme` এর মান পাবে। আপনি provider এর কাছে যে `theme` এর মানটি পাস করেছেন সেটি আপডেট করতে আপনি `setTheme` কে কল করলে, সব `Button` কম্পোনেন্ট নতুন `'light'` মান এর জন্য পুনরায় রেন্ডার হবে।
 
-<Recipes titleText="Examples of updating context" titleId="examples-basic">
+<Recipes titleText="context আপডেট করার উদাহরণ" titleId="examples-basic">
 
-#### Updating a value via context {/*updating-a-value-via-context*/}
+#### context এর মাধ্যমে মান আপডেট করা {/*updating-a-value-via-context*/}
 
-In this example, the `MyApp` component holds a state variable which is then passed to the `ThemeContext` provider. Checking the "Dark mode" checkbox updates the state. Changing the provided value re-renders all the components using that context.
+এই উদাহরণে, `MyApp` কম্পোনেন্ট একটি state ভ্যারিয়েবল ধারণ করে যা পরবর্তীতে `ThemeContext` provider এ পাস করা হয়। "Dark mode" চেকবক্স চেক করলে state আপডেট হয়। প্রদত্ত মানের পরিবর্তন সেই সব কম্পোনেন্টকে পুনরায় রেন্ডার করে যারা এই context ব্যবহার করেছে।
 
 <Sandpack>
 
@@ -299,13 +299,13 @@ function Button({ children }) {
 
 </Sandpack>
 
-Note that `value="dark"` passes the `"dark"` string, but `value={theme}` passes the value of the JavaScript `theme` variable with [JSX curly braces.](/learn/javascript-in-jsx-with-curly-braces) Curly braces also let you pass context values that aren't strings.
+উল্লেখ্য যে `value="dark"`, `"dark"` কে string হিসাবে পাস করা হচ্ছে, কিন্তু `value={theme}` জাভাস্ক্রিপ্টের `theme` ভ্যারিয়েবলের মান [JSX curly braces](/learn/javascript-in-jsx-with-curly-braces) দিয়ে পাস করা হচ্ছে। স্ট্রিং নয় এমন context এর মানগুলিও curly braces পাস করতে দেয়।
 
 <Solution />
 
-#### Updating an object via context {/*updating-an-object-via-context*/}
+#### context এর মাধ্যমে object আপডেট করা {/*updating-an-object-via-context*/}
 
-In this example, there is a `currentUser` state variable which holds an object. You combine `{ currentUser, setCurrentUser }` into a single object and pass it down through the context inside the `value={}`. This lets any component below, such as `LoginButton`, read both `currentUser` and `setCurrentUser`, and then call `setCurrentUser` when needed.
+এই উদাহরণে, একটি `currentUser` state ভ্যারিয়েবল রয়েছে যা একটি object কে ধারণ করে। আপনি একটি object এর মধ্যে `{ currentUser, setCurrentUser }` কে একত্রিত করুন এবং context এর ভিতর `value={}` এর মাধ্যমে পাস করে দিন। এটি নীচের যেকোন কম্পোনেন্ট যেমন ধরুন `LoginButton` কে, `currentUser` এবং `setCurrentUser` উভয়ই রিড করতে দেয়, এবং যখন প্রয়োজন `setCurrentUser` কে কল করতে দেয়।
 
 <Sandpack>
 
@@ -395,9 +395,9 @@ label {
 
 <Solution />
 
-#### Multiple contexts {/*multiple-contexts*/}
+#### একাধিক context {/*multiple-contexts*/}
 
-In this example, there are two independent contexts. `ThemeContext` provides the current theme, which is a string, while `CurrentUserContext` holds the object representing the current user.
+এই উদাহরণে, দুটি স্বাধীন context আছে। `ThemeContext` বর্তমান থিম প্রদান করে, যা একটি string, যখন `CurrentUserContext` বর্তমান ব্যবহারকারীর প্রতিনিধিত্ব করে এমন object কে ধারণ করে।
 
 <Sandpack>
 
@@ -562,9 +562,9 @@ label {
 
 <Solution />
 
-#### Extracting providers to a component {/*extracting-providers-to-a-component*/}
+#### কম্পোনেন্ট থেকে provider কে পৃথক করা {/*extracting-providers-to-a-component*/}
 
-As your app grows, it is expected that you'll have a "pyramid" of contexts closer to the root of your app. There is nothing wrong with that. However, if you dislike the nesting aesthetically, you can extract the providers into a single component. In this example, `MyProviders` hides the "plumbing" and renders the children passed to it inside the necessary providers. Note that the `theme` and `setTheme` state is needed in `MyApp` itself, so `MyApp` still owns that piece of the state.
+আপনার অ্যাপ বড় হবার সাথে সাথে আপনার অ্যাপের রুটের কাছাকাছি context গুলোর একটি "পিরামিড" থাকবে বলে আশা করা যাচ্ছে। এটাতে কোন সমস্যা নেই। যাই হোক, আপনি যদি নান্দনিকভাবে নেস্টিং অপছন্দ করেন, তাহলে আপনি একটি কম্পোনেন্টে provider গুলোকে পৃথক করে ফেলতে পারেন। এই উদাহরণে, `MyProviders` "plumbing" লুকিয়ে রাখে এবং এর ভিতর দিয়ে প্রয়োজনীয় provider দের জন্য পাস করা চিলড্রেন রেন্ডার করে। উল্লেখ্য যে `MyApp` এ `theme` এবং `setTheme` state প্রয়োজন, তাই `MyApp` এখনও state এর এই অংশটুকুর মালিক।
 
 <Sandpack>
 
@@ -737,11 +737,11 @@ label {
 
 <Solution />
 
-#### Scaling up with context and a reducer {/*scaling-up-with-context-and-a-reducer*/}
+#### context এবং reducer এর মাধ্যমে স্কেল করা {/*scaling-up-with-context-and-a-reducer*/}
 
-In larger apps, it is common to combine context with a [reducer](/reference/react/useReducer) to extract the logic related to some state out of components. In this example, all the "wiring" is hidden in the `TasksContext.js`, which contains a reducer and two separate contexts.
+বড় অ্যাপ্লিকেশানগুলিতে, context এর সাথে একটি [reducer](/reference/react/useReducer) কে একত্রিত করে কম্পোনেন্টগুলোর বাইরের কিছু লজিক সম্পর্কিত state কে পৃথক করা খুবই সাধারণ। এই উদাহরণে, সমস্ত "ওয়্যারিং" `TasksContext.js` এ লুকানো আছে, যেটিতে একটি reducer এবং দুটি পৃথক context রয়েছে।
 
-Read a [full walkthrough](/learn/scaling-up-with-reducer-and-context) of this example.
+এই উদাহরণের [সম্পূর্ণ ওয়াকথ্রু](/learn/scaling-up-with-reducer-and-context) পড়ুন।
 
 <Sandpack>
 
@@ -947,25 +947,25 @@ ul, li { margin: 0; padding: 0; }
 
 ---
 
-### Specifying a fallback default value {/*specifying-a-fallback-default-value*/}
+### ফলব্যাক এর ক্ষেত্রে ডিফল্ট মান নির্ধারণ করা {/*specifying-a-fallback-default-value*/}
 
-If React can't find any providers of that particular <CodeStep step={1}>context</CodeStep> in the parent tree, the context value returned by `useContext()` will be equal to the <CodeStep step={3}>default value</CodeStep> that you specified when you [created that context](/reference/react/createContext):
+React যদি প্যারেন্ট ট্রিতে নির্দিষ্ট <CodeStep step={1}>context</CodeStep> এর কোন provider খুঁজে না পায়, তাহলে `useContext()` থেকে রিটার্ন্ড context এর মান <CodeStep step={3}>ডিফল্ট মানের</CodeStep> সমান হবে যা আপনি সেই [context টি তৈরি](/reference/react/createContext) করার সময় নির্ধারণ করেছিলেনঃ
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "null"]]
 const ThemeContext = createContext(null);
 ```
 
-The default value **never changes**. If you want to update context, use it with state as [described above.](#updating-data-passed-via-context)
+ডিফল্ট মান **কখনই পরিবর্তন হয় না**। আপনি যদি context আপডেট করতে চান, তাহলে [উপরে বর্ণিত](#updating-data-passed-via-context) নিয়মে state এর সাথে এটি ব্যবহার করুন।
 
-Often, instead of `null`, there is some more meaningful value you can use as a default, for example:
+প্রায়শই, `null` এর পরিবর্তে আপনি ডিফল্ট মান হিসাবে ব্যবহার করতে পারেন এমন অনেক অর্থপূর্ণ মান রয়েছে, উদাহরণ স্বরূপঃ
 
 ```js [[1, 1, "ThemeContext"], [3, 1, "light"]]
 const ThemeContext = createContext('light');
 ```
 
-This way, if you accidentally render some component without a corresponding provider, it won't break. This also helps your components work well in a test environment without setting up a lot of providers in the tests.
+এইভাবে, আপনি যদি দুর্ঘটনাক্রমে সংশ্লিষ্ট provider ছাড়া কোন কম্পোনেন্ট রেন্ডার করেন, তবে এটি ভাংবে করবে না। এটি আপনার কম্পোনেন্টগুলিকে টেস্টের সময় অনেক অনেক provider সেট আপ না করে একটি টেস্ট ইনভায়রনমেন্টে ভালভাবে কাজ করতে সহায়তা করে।
 
-In the example below, the "Toggle theme" button is always light because it's **outside any theme context provider** and the default context theme value is `'light'`. Try editing the default theme to be `'dark'`.
+নীচের উদাহরণে, "Toggle theme" বাটনটি সবসময় light কারণ এটি **সবরকম theme context provider এর বাইরে** এবং ডিফল্ট context theme এর মান `'light'`। ডিফল্ট থিমকে `'dark'` করার জন্য এডিট করন।
 
 <Sandpack>
 
@@ -1062,9 +1062,9 @@ function Button({ children, onClick }) {
 
 ---
 
-### Overriding context for a part of the tree {/*overriding-context-for-a-part-of-the-tree*/}
+### ট্রির একটি অংশের জন্য context ওভাররাইড করা {/*overriding-context-for-a-part-of-the-tree*/}
 
-You can override the context for a part of the tree by wrapping that part in a provider with a different value.
+আপনি ট্রির একটি অংশকে একটি ভিন্ন মান সহ একটি provider দিয়ে wrap করার মাধ্যমে সেই অংশের জন্য context টি ওভাররাইড করতে পারেন।
 
 ```js {3,5}
 <ThemeContext.Provider value="dark">
@@ -1076,13 +1076,13 @@ You can override the context for a part of the tree by wrapping that part in a p
 </ThemeContext.Provider>
 ```
 
-You can nest and override providers as many times as you need.
+আপনি যতবার প্রয়োজন ততবার provider গুলিকে নেস্ট এবং ওভাররাইড করতে পারেন।
 
 <Recipes title="Examples of overriding context">
 
-#### Overriding a theme {/*overriding-a-theme*/}
+#### একটি থিম ওভাররাইড করা {/*overriding-a-theme*/}
 
-Here, the button *inside* the `Footer` receives a different context value (`"light"`) than the buttons outside (`"dark"`).
+এখানে, `Footer` এর *ভিতরের* বাটনটি বাইরের বাটনের (`"dark"`) না পেয়ে একটি ভিন্ন context মান (`"light"`) পায়।
 
 <Sandpack>
 
@@ -1186,11 +1186,11 @@ footer {
 
 <Solution />
 
-#### Automatically nested headings {/*automatically-nested-headings*/}
+#### স্বয়ংক্রিয়ভাবে নেস্টেড হেডিং {/*automatically-nested-headings*/}
 
-You can "accumulate" information when you nest context providers. In this example, the `Section` component keeps track of the `LevelContext` which specifies the depth of the section nesting. It reads the `LevelContext` from the parent section, and provides the `LevelContext` number increased by one to its children. As a result, the `Heading` component can automatically decide which of the `<h1>`, `<h2>`, `<h3>`, ..., tags to use based on how many `Section` components it is nested inside of.
+আপনি যখন context provider গুলো নেস্ট করবেন তখন আপনি তথ্য "সঞ্চয়" করতে পারেন। এই উদাহরণে, `Section` কম্পোনেন্টটি `LevelContext` এর ট্র্যাক রাখে যা সেকশন নেস্টিংয়ের গভীরতা পরিমাপ করে। এটি প্যারেন্ট সেকশন থেকে `LevelContext` রিড করে এবং তার চিলড্রেনের জন্য `LevelContext` সংখ্যা এক এক করে বৃদ্ধি করে প্রদান করে। ফলস্বরূপ, এর ভিতরে কতগুলি সেকশন কম্পোনেন্ট নেস্ট করা হয়েছে তার উপর ভিত্তি করে `Heading` কম্পোনেন্ট স্বয়ংক্রিয়ভাবে সিদ্ধান্ত নিতে পারে যে `<h1>`, `<h2>`, `<h3>`, ..., এর ভিতর কোন ট্যাগটি ব্যবহার করতে হবে।
 
-Read a [detailed walkthrough](/learn/passing-data-deeply-with-context) of this example.
+এই উদাহরণের [বিস্তারিত ওয়াকথ্রু](/learn/passing-data-deeply-with-context) পড়ুন।
 
 <Sandpack>
 
@@ -1288,9 +1288,9 @@ export const LevelContext = createContext(0);
 
 ---
 
-### Optimizing re-renders when passing objects and functions {/*optimizing-re-renders-when-passing-objects-and-functions*/}
+### object এবং function পাস করার সময় পুনরায় রেন্ডার অপ্টিমাইজ করা {/*optimizing-re-renders-when-passing-objects-and-functions*/}
 
-You can pass any values via context, including objects and functions.
+আপনি object এবং function সহ যেকোনো মান context এর মাধ্যমে পাস করতে পারেন।
 
 ```js [[2, 10, "{ currentUser, login }"]] 
 function MyApp() {
@@ -1309,9 +1309,9 @@ function MyApp() {
 }
 ```
 
-Here, the <CodeStep step={2}>context value</CodeStep> is a JavaScript object with two properties, one of which is a function. Whenever `MyApp` re-renders (for example, on a route update), this will be a *different* object pointing at a *different* function, so React will also have to re-render all components deep in the tree that call `useContext(AuthContext)`.
+এখানে, <CodeStep step={2}>context এর মান</CodeStep> হল একটি JavaScript অবজেক্ট যার দুইটি প্যারামিটার রয়েছে, যার ভিতর একটি function। যখনই `MyApp` পুনরায় রেন্ডার করে (উদাহরণস্বরূপ, একটি রাউট আপডেটে), তখন এটি একটি *ভিন্ন* object হবে যা একটি ভিন্ন function নির্দেশ করে, তাই React কেও ট্রির গভীরে সব কম্পোনেন্টকে পুনরায় রেন্ডার করতে হবে যারা `useContext(AuthContext)` কল করেছে।
 
-In smaller apps, this is not a problem. However, there is no need to re-render them if the underlying data, like `currentUser`, has not changed. To help React take advantage of that fact, you may wrap the `login` function with [`useCallback`](/reference/react/useCallback) and wrap the object creation into [`useMemo`](/reference/react/useMemo). This is a performance optimization:
+ছোট অ্যাপগুলিতে এটি কোনো সমস্যা নয়। যাই হোক, যদি `currentUser` এর মত অন্তর্নিহিত ডেটা পরিবর্তিত না হয় তবে তাদের পুনরায় রেন্ডার করার কোন প্রয়োজন নেই। এই ক্ষেত্রে React কে সুবিধা নিতে সাহায্য করার জন্য আপনি [`useCallback`](/reference/react/useCallback) দিয়ে `login` ফাংশনটি wrap করে দিতে পারেন এবং object তৈরিকে [`useMemo`](/reference/react/useMemo) দিয়ে wrap করে দিতে পারেন। এটি একটি পারফরমেন্স অপ্টিমাইজেশানঃ
 
 ```js {6,9,11,14,17}
 import { useCallback, useMemo } from 'react';
@@ -1337,9 +1337,9 @@ function MyApp() {
 }
 ```
 
-As a result of this change, even if `MyApp` needs to re-render, the components calling `useContext(AuthContext)` won't need to re-render unless `currentUser` has changed.
+এই পরিবর্তনের ফলস্বরূপ, এমনকি যদি `MyApp` কে পুনরায় রেন্ডার করার প্রয়োজন হয়, তবুও `useContext(AuthContext)` কল করা কম্পোনেন্ট পুনরায় রেন্ডার করার প্রয়োজন হবে না যদি না বর্তমান ব্যবহারকারী পরিবর্তিত হয়।
 
-Read more about [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) and [`useCallback`.](/reference/react/useCallback#skipping-re-rendering-of-components)
+[`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) এবং [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) সম্পর্কে আরও পড়ুন।
 
 ---
 
