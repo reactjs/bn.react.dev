@@ -4,7 +4,7 @@ title: createRoot
 
 <Intro>
 
-`createRoot` lets you create a root to display React components inside a browser DOM node.
+একটি ব্রাউজার DOM নোডে React কম্পোনেন্ট দেখানোর জন্য `createRoot` আপনাকে একটি root তৈরী করতে দেবে।
 
 ```js
 const root = createRoot(domNode, options?)
@@ -16,11 +16,11 @@ const root = createRoot(domNode, options?)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `createRoot(domNode, options?)` {/*createroot*/}
 
-Call `createRoot` to create a React root for displaying content inside a browser DOM element.
+একটি ব্রাউজার DOM এলিমেন্টে React কম্পোনেন্ট দেখানোর স্বার্থে একটি React root তৈরী করার জন্য `createRoot` কল করুন।
 
 ```js
 import { createRoot } from 'react-dom/client';
@@ -29,7 +29,7 @@ const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 ```
 
-React will create a root for the `domNode`, and take over managing the DOM inside it. After you've created a root, you need to call [`root.render`](#root-render) to display a React component inside of it:
+React  `domNode` এর জন্য একটি root তৈরী করবে, এবং এর মধ্যকার DOM পরিচালনার দায়িত্ব নিয়ে নিবে। root তৈরী করবার পর আপনাকে এর মধ্যে একটি React কম্পোনেন্ট দেখাবার জন্য [`root.render`](#root-render) কল করতে হবেঃ
 
 ```js
 root.render(<App />);
