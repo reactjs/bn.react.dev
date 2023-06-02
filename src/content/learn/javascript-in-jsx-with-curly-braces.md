@@ -67,11 +67,11 @@ export default function Avatar() {
 
 </Sandpack>
 
-`className="avatar"` এর মধ্যে পার্থক্য লক্ষ্য করুন, যা একটি `"avatar"` CSS ক্লাসের নাম নির্দিষ্ট করে যা ইমেজটিকে গোলাকার করে, এবং `src={avatar}` যেটি `avatar` নামে জাভাস্ক্রিপ্ট ভেরিয়েবলের value পড়ে। কারণ curly braces আপনাকে আপনার মার্কআপে জাভাস্ক্রিপ্টের সাথে কাজ করতে দেয়!
+`className="avatar"` এবং `src={avatar}` এর মধ্যে পার্থক্য লক্ষ্য করুন। `className="avatar"` একটি `"avatar"` নামের CSS ক্লাসকে নির্দিষ্ট করে ও ইমেজকে গোলাকার করে অপরদিকে, `src={avatar}`, `avatar` নামের জাভাস্ক্রিপ্ট ভেরিয়েবলের value পড়ে। এর কারণ হচ্ছে, curly braces আপনাকে আপনার মার্কআপ এর ভিতরে জাভাস্ক্রিপ্ট এর কাজ করতে দেয়!
 
 ## Curly braces ব্যবহার: জাভাস্ক্রিপ্ট জগতের একটি window {/*using-curly-braces-a-window-into-the-javascript-world*/}
 
-JSX জাভাস্ক্রিপ্ট লেখার একটি বিশেষ উপায়। তার মানে এর ভিতরে জাভাস্ক্রিপ্ট ব্যবহার করা সম্ভব— curly braces `{ }` দিয়ে। নীচের উদাহরণটিতে প্রথমে বিজ্ঞানীর জন্য একটি নাম ঘোষণা করা হয়েছে, নাম, তারপর এটিকে `<h1>` এর ভিতরে curly braces দিয়ে embeds করা হয়েছে:
+JSX হল জাভাস্ক্রিপ্ট লেখার একটি বিশেষ উপায়। তার মানে curly braces `{ }` দিয়ে JSX এর ভিতরে জাভাস্ক্রিপ্ট ব্যবহার করা সম্ভব। নীচের উদাহরণটিতে প্রথমে বিজ্ঞানীর জন্য একটি নাম ঘোষণা করা হয়েছে, `name`, তারপর এটিকে `<h1>` এর ভিতরে curly braces দিয়ে embeds করা হয়েছে:
 
 <Sandpack>
 
@@ -86,9 +86,9 @@ export default function TodoList() {
 
 </Sandpack>
 
-Try changing the `name`'s value from `'Gregorio Y. Zara'` to `'Hedy Lamarr'`. See how the list title changes?
+নামের value `'Gregorio Y. Zara'` থেকে `'Hedy Lamarr'`-এ পরিবর্তন করার চেষ্টা করুন। দেখুন কিভাবে list title পরিবর্তন হয়?
 
-Any JavaScript expression will work between curly braces, including function calls like `formatDate()`:
+যেকোন জাভাস্ক্রিপ্ট এক্সপ্রেশন curly braces মধ্যে কাজ করবে, যেমন `formatDate()` এর মতো function calls:
 
 <Sandpack>
 
@@ -111,9 +111,11 @@ export default function TodoList() {
 
 </Sandpack>
 
-### Where to use curly braces {/*where-to-use-curly-braces*/}
+### কোথায় curly braces ব্যবহার করবেন {/*where-to-use-curly-braces*/}
 
-You can only use curly braces in two ways inside JSX:
+আপনি JSX এর ভিতরে শুধুমাত্র দুটি উপায়ে curly braces ব্যবহার করতে পারেন:
+
+1. সরাসরি JSX ট্যাগের ভিতরে **text হিসাবে**: `<h1>{name}'s To Do List</h1>` কাজ করে, কিন্তু `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` করবে না৷
 
 1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
 2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
