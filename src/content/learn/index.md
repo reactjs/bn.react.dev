@@ -40,7 +40,7 @@ function MyButton() {
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>আমার অ্যাপে স্বাগতম</h1>
       <MyButton />
     </div>
   );
@@ -388,51 +388,52 @@ button {
 
 Hooks অন্যান্য ফাংশন তুলনায় আরো সীমাবদ্ধ।  আপনি শুধুমাত্র আপনার components গুলির (বা অন্যান্য Hooks) *একবারে উপরে* hook গুলিকে কল করতে পারেন৷ আপনি যদি একটি if বা loop এ `useState` ব্যবহার করতে চান, একটি নতুন component বের করে সেখানে রাখুন।
 
-## Sharing data between components {/*sharing-data-between-components*/}
+## Components গুলির মধ্যে ডেটা আদান প্রদান করা {/*sharing-data-between-components*/}
 
-In the previous example, each `MyButton` had its own independent `count`, and when each button was clicked, only the `count` for the button clicked changed:
+পূর্ববর্তী উদাহরণে, প্রতিটি `MyButton` এর নিজস্ব স্বতন্ত্র `count` ছিল, এবং যখন প্রতিটি button এ ক্লিক করা হয়, ক্লিক করা button এর জন্য শুধুমাত্র `count` পরিবর্তিত হয়:
 
 <DiagramGroup>
 
-<Diagram name="sharing_data_child" height={367} width={407} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. Both MyButton components contain a count with value zero.">
+<Diagram name="sharing_data_child" height={367} width={407} alt="ডায়াগ্রামে তিনটি Components এর একটি tree দেখানো হয়েছে, যেখানে একটি parent কে MyApp লেবেল করা হয়েছে এবং দুটি children কে MyButton লেবেল করা হয়েছে। উভয় MyButton component এ শূন্য মান সহ একটি count রয়েছে।">
 
-Initially, each `MyButton`'s `count` state is `0`
+প্রাথমিকভাবে, প্রতিটি `MyButton` এর `count` state `0`
 
 </Diagram>
 
-<Diagram name="sharing_data_child_clicked" height={367} width={407} alt="The same diagram as the previous, with the count of the first child MyButton component highlighted indicating a click with the count value incremented to one. The second MyButton component still contains value zero." >
+<Diagram name="sharing_data_child_clicked" height={367} width={407} alt="আগেরটির মতো একই ডায়াগ্রাম, প্রথম চাইল্ড MyButton component এর গণনার সাথে হাইলাইট করা একটি ক্লিক নির্দেশ করে count এর মান একটিতে বৃদ্ধি করা হয়েছে। দ্বিতীয় MyButton component টিতে এখনও মান শূন্য রয়েছে।" >
 
-The first `MyButton` updates its `count` to `1`
+প্রথম `MyButton` তার `count` আপডেট করে `1` এ
 
 </Diagram>
 
 </DiagramGroup>
 
-However, often you'll need components to *share data and always update together*.
+যাইহোক, প্রায়ই *ডেটা শেয়ার করতে এবং সবসময় একসাথে আপডেট করার জন্য*  আপনার component গুলির প্রয়োজন হবে।
 
-To make both `MyButton` components display the same `count` and update together, you need to move the state from the individual buttons "upwards" to the closest component containing all of them.
+উভয় `MyButton` component এ একই `count` প্রদর্শন করতে এবং একসাথে আপডেট করতে, আপনাকে পৃথক button গুলি থেকে state টিকে "উপরের দিকে" সবকটি সমন্বিত নিকটতম component এ সরাতে হবে।
 
-In this example, it is `MyApp`:
+এই উদাহরণে, এটি `MyApp`:
+
 
 <DiagramGroup>
 
-<Diagram name="sharing_data_parent" height={385} width={410} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. MyApp contains a count value of zero which is passed down to both of the MyButton components, which also show value zero." >
+<Diagram name="sharing_data_parent" height={385} width={410} alt="ডায়াগ্রামে তিনটি component এর একটি tree দেখানো হয়েছে, একটি কে parent হিসেবে MyApp লেবেল করা হয়েছে এবং দুটি children কে MyButton লেবেল করা হয়েছে। MyApp-এ শূন্যের একটি গণনা মান রয়েছে যা উভয় MyButton component গুলিতে পাস করা হয়, যার মান শূন্যও দেখায়।" >
 
-Initially, `MyApp`'s `count` state is `0` and is passed down to both children
+প্রাথমিকভাবে, `MyApp`-এর `count` state `0` এবং উভয় children এর কাছে পাঠানো হয়
 
 </Diagram>
 
-<Diagram name="sharing_data_parent_clicked" height={385} width={410} alt="The same diagram as the previous, with the count of the parent MyApp component highlighted indicating a click with the value incremented to one. The flow to both of the children MyButton components is also highlighted, and the count value in each child is set to one indicating the value was passed down." >
+<Diagram name="sharing_data_parent_clicked" height={385} width={410} alt="আগেরটির মতো একই ডায়াগ্রাম, প্যারেন্ট MyApp কম্পোনেন্টের গণনা সহ হাইলাইট করা একটি ক্লিকের সাথে মান বৃদ্ধি করে। উভয় সন্তানের MyButton উপাদানগুলির প্রবাহও হাইলাইট করা হয়েছে, এবং প্রতিটি children এর গণনার মান একটিতে সেট করা হয়েছে যা নির্দেশ করে যে মানটি পাস হয়েছে।" >
 
-On click, `MyApp` updates its `count` state to `1` and passes it down to both children
+ক্লিক করলে, `MyApp` তার `count` state `1`-এ আপডেট করে এবং উভয় children এর কাছেই তা পাঠিয়ে দেয়
 
 </Diagram>
 
 </DiagramGroup>
 
-Now when you click either button, the `count` in `MyApp` will change, which will change both of the counts in `MyButton`. Here's how you can express this in code.
+এখন যখন আপনি যেকোনো একটি button এ ক্লিক করবেন, তখন `MyApp`-এ `count` পরিবর্তিত হবে, যা `MyButton`-এর উভয় সংখ্যাই পরিবর্তন করবে। এখানে আপনি কোডে এটি প্রকাশ করতে পারেন যেভাবে, সেটি দেখানো হল। 
 
-First, *move the state up* from `MyButton` into `MyApp`:
+প্রথমে, `MyButton` থেকে `MyApp`-এ *state টিকে উপরে সরান*:
 
 ```js {2-6,18}
 export default function MyApp() {
@@ -444,7 +445,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update separately</h1>
+      <h1>যে কাউন্টারগুলো আলাদাভাবে আপডেট হয়</h1>
       <MyButton />
       <MyButton />
     </div>
@@ -452,12 +453,12 @@ export default function MyApp() {
 }
 
 function MyButton() {
-  // ... we're moving code from here ...
+  // ... আমরা এখান থেকে কোড সরাচ্ছি...
 }
 
 ```
 
-Then, *pass the state down* from `MyApp` to each `MyButton`, together with the shared click handler. You can pass information to `MyButton` using the JSX curly braces, just like you previously did with built-in tags like `<img>`:
+তারপরে, শেয়ার করা ক্লিক হ্যান্ডলারের সাথে একসাথে প্রতিটি `MyButton`-এ `MyApp` থেকে *state টি পাস করুন*। আপনি JSX curly braces ব্যবহার করে `MyButton`-এ তথ্য পাঠাতে পারেন, ঠিক যেমন আপনি পূর্বে `<img>`-এর মতো বিল্ট-ইন ট্যাগ দিয়ে করেছিলেন:
 
 ```js {11-12}
 export default function MyApp() {
@@ -469,7 +470,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>কাউন্টার যে একসাথে আপডেট হয়</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -477,21 +478,21 @@ export default function MyApp() {
 }
 ```
 
-The information you pass down like this is called _props_. Now the `MyApp` component contains the `count` state and the `handleClick` event handler, and *passes both of them down as props* to each of the buttons.
+আপনি এইভাবে যে তথ্য পাস করেন তাকে _props_ বলা হয়। এখন `MyApp` component এ `count` state এবং `handleClick` ইভেন্ট হ্যান্ডলার রয়েছে এবং *প্রপস হিসেবে এ দুটিকে প্রতিটি button এ পাঠানো হয়েছে*।
 
-Finally, change `MyButton` to *read* the props you have passed from its parent component:
+অবশেষে, এর মূল component থেকে আপনি যে প্রপগুলি পাস করেছেন তা *read* করার জন্য `MyButton` পরিবর্তন করুন:
 
 ```js {1,3}
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
-      Clicked {count} times
+    {count} বার ক্লিক করা হয়েছে
     </button>
   );
 }
 ```
 
-When you click the button, the `onClick` handler fires. Each button's `onClick` prop was set to the `handleClick` function inside `MyApp`, so the code inside of it runs. That code calls `setCount(count + 1)`, incrementing the `count` state variable. The new `count` value is passed as a prop to each button, so they all show the new value. This is called "lifting state up". By moving state up, you've shared it between components.
+যখন আপনি button টি ক্লিক করেন, তখন 'onClick' হ্যান্ডলারটি ফায়ার হয়। প্রতিটি button এর `onClick` প্রপ `MyApp`-এর ভিতরে `handleClick` ফাংশনে সেট করা হয়েছিল, তাই এর ভিতরের কোডটি চলে। সেই কোডটিকে `setCount(count + 1)` বলে, `count` স্টেট ভেরিয়েবলকে বৃদ্ধি করে। নতুন `count` মান প্রতিটি buuton এ একটি প্রপ হিসাবে পাস করা হয়, তাই তারা সব নতুন মান দেখায়। একে বলা হয় "lifting state up"। State up করার মাধ্যমে, আপনি এটিকে component গুলির মধ্যে শেয়ার করেছেন৷
 
 <Sandpack>
 
@@ -507,7 +508,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>কাউন্টার যে একসাথে আপডেট হয়</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -532,8 +533,8 @@ button {
 
 </Sandpack>
 
-## Next Steps {/*next-steps*/}
+## পরবর্তী পদক্ষেপ {/*next-steps*/}
 
-By now, you know the basics of how to write React code!
+এখন পর্যন্ত, আপনি কীভাবে React এ কোড লিখতে হয় তার মূল বিষয়গুলি জেনে গিয়েছেন।
 
-Check out the [Tutorial](/learn/tutorial-tic-tac-toe) to put them into practice and build your first mini-app with React.
+এগুলিকে অনুশীলনে আনতে এবং React সহ আপনার প্রথম মিনি-অ্যাপ তৈরি করতে [টিউটোরিয়াল](/learn/tutorial-tic-tac-toe) দেখুন।
