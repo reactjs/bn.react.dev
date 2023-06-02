@@ -180,9 +180,10 @@ export default function Profile() {
 
 উপরের উদাহরণে, `style={{}}` বিশেষ কোনো সিনট্যাক্স নয়, এখানে `style={ }` শুধুমাত্র jsx curly braces এর ভিতরে একটি নিয়মিত `{}` অবজেক্ট। যখন আপনার styles গুলো জাভাস্ক্রিপ্ট ভেরিয়েবলের উপর নির্ভর করবে তখন আপনি `style` অ্যাট্রিবিউট ব্যবহার করতে পারেন।
 
-## Conditional rendering {/*conditional-rendering*/}
+## শর্তসাপেক্ষে rendering {/*conditional-rendering*/}
 
-In React, there is no special syntax for writing conditions. Instead, you'll use the same techniques as you use when writing regular JavaScript code. For example, you can use an [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statement to conditionally include JSX:
+React এ শর্ত লেখার জন্য কোন বিশেষ বাক্য গঠন নেই। যার ফলে, আপনি নিয়মিত জাভাস্ক্রিপ্ট কোড লেখার সময় যে কৌশলগুলি ব্যবহার করতে পারেন সেই একই কৌশলগুলি এখানে ব্যবহার করতে পারবেন।
+ উদাহরণস্বরূপ, শর্তসাপেক্ষে JSX অন্তর্ভুক্ত করতে, আপনি একটি [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) বিবৃতি ব্যবহার করতে পারেন:
 
 ```js
 let content;
@@ -198,7 +199,7 @@ return (
 );
 ```
 
-If you prefer more compact code, you can use the [conditional `?` operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) Unlike `if`, it works inside JSX:
+আপনি যদি আরও কমপ্যাক্ট কোড পছন্দ করেন তবে আপনি [শর্তাধীন `?` অপারেটর ব্যবহার করতে পারেন।](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) `if` এর বিপরীত , এটি JSX এর ভিতরে কাজ করে:
 
 ```js
 <div>
@@ -209,8 +210,7 @@ If you prefer more compact code, you can use the [conditional `?` operator.](htt
   )}
 </div>
 ```
-
-When you don't need the `else` branch, you can also use a shorter [logical `&&` syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
+আপনার যখন `else ` শাখার প্রয়োজন হয় না, আপনি একটি সংক্ষিপ্ত [লজিক্যাল `&&` সিনট্যাক্স] ব্যবহার করতে পারেন(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
 
 ```js
 <div>
@@ -218,13 +218,13 @@ When you don't need the `else` branch, you can also use a shorter [logical `&&` 
 </div>
 ```
 
-All of these approaches also work for conditionally specifying attributes. If you're unfamiliar with some of this JavaScript syntax, you can start by always using `if...else`.
+এই সমস্ত পদ্ধতিগুলি শর্তসাপেক্ষে নির্দিষ্ট বৈশিষ্ট্যগুলির জন্যও কাজ করে। আপনি যদি এই জাভাস্ক্রিপ্ট সিনট্যাক্সের কিছুর সাথে অপরিচিত হন তবে আপনি সর্বদা `if...else` ব্যবহার করে শুরু করতে পারেন।
 
-## Rendering lists {/*rendering-lists*/}
+## Rendering তালিকা {/*rendering-lists*/}
 
-You will rely on JavaScript features like [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) and the [array `map()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) to render lists of components.
+আপনি [`for ` লুপ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) এবং [array `map()` ফাংশনের মতো জাভাস্ক্রিপ্ট features এর উপর নির্ভর করবেন ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) কম্পোনেন্টস এর তালিকা রেন্ডার করতে।
 
-For example, let's say you have an array of products:
+উদাহরণস্বরূপ, ধরুন আপনার কাছে products এর একটি array আছে:
 
 ```js
 const products = [
@@ -233,8 +233,7 @@ const products = [
   { title: 'Apple', id: 3 },
 ];
 ```
-
-Inside your component, use the `map()` function to transform an array of products into an array of `<li>` items:
+আপনার কম্পোনেন্টের ভিতরে, products এর একটি অ্যারেকে `<li>` আইটেমগুলির array তে রূপান্তর করতে `map()` ফাংশন ব্যবহার করুন:
 
 ```js
 const listItems = products.map(product =>
@@ -248,7 +247,7 @@ return (
 );
 ```
 
-Notice how `<li>` has a `key` attribute. For each item in a list, you should pass a string or a number that uniquely identifies that item among its siblings. Usually, a key should be coming from your data, such as a database ID. React uses your keys to know what happened if you later insert, delete, or reorder the items.
+লক্ষ্য করুন কিভাবে `<li>` এর একটি `key ` attribute আছে। একটি তালিকার প্রতিটি আইটেমের জন্য, আপনাকে একটি স্ট্রিং বা একটি সংখ্যা পাস করতে হবে যা সেই আইটেমটিকে তার ভাইবোনদের মধ্যে অনন্যভাবে সনাক্ত করে। সাধারণত, একটি কী আপনার ডেটা থেকে আসা উচিত, যেমন একটি ডাটাবেস আইডি। আপনি পরে আইটেমগুলি সন্নিবেশ, মুছে বা পুনর্বিন্যাস করলে কী ঘটেছিল তা জানতে React আপনার key গুলি ব্যবহার করে৷
 
 <Sandpack>
 
@@ -279,9 +278,9 @@ export default function ShoppingList() {
 
 </Sandpack>
 
-## Responding to events {/*responding-to-events*/}
+## Events এর জন্যে প্রতিক্রিয়া করা {/*responding-to-events*/}
 
-You can respond to events by declaring *event handler* functions inside your components:
+আপনি আপনার উপাদানগুলির মধ্যে *event handler* ফাংশন ঘোষণা করে ইভেন্টগুলিতে প্রতিক্রিয়া জানাতে পারেন:
 
 ```js {2-4,7}
 function MyButton() {
@@ -297,19 +296,20 @@ function MyButton() {
 }
 ```
 
-Notice how `onClick={handleClick}` has no parentheses at the end! Do not _call_ the event handler function: you only need to *pass it down*. React will call your event handler when the user clicks the button.
+লক্ষ্য করুন কিভাবে `onClick={handleClick}` এর শেষে কোন বন্ধনী নেই! ইভেন্ট হ্যান্ডলার ফাংশন _কল_ করবেন না: আপনাকে শুধুমাত্র এটি পাস করতে হবে। ব্যবহারকারী button টি ক্লিক করলে React আপনার ইভেন্ট হ্যান্ডলারকে কল করবে।
 
-## Updating the screen {/*updating-the-screen*/}
+## স্ক্রিন আপডেট করা {/*updating-the-screen*/}
 
-Often, you'll want your component to "remember" some information and display it. For example, maybe you want to count the number of times a button is clicked. To do this, add *state* to your component.
+প্রায়শই, আপনি চাইবেন আপনার উপাদান কিছু তথ্য "মনে রাখুক" এবং এটি প্রদর্শন করুক। উদাহরণস্বরূপ, হয়ত আপনি একটি বোতামে ক্লিক করার সংখ্যা গণনা করতে চান। এটি করতে, আপনার কম্পোনেন্টে *state* যোগ করুন।
 
-First, import [`useState`](/reference/react/useState) from React:
+প্রথমে, React থেকে [`useState`](/reference/react/useState) import করুন:
 
 ```js
 import { useState } from 'react';
 ```
 
-Now you can declare a *state variable* inside your component:
+এখন আপনি আপনার উপাদানের ভিতরে একটি *state variable* ঘোষণা করতে পারেন:
+
 
 ```js
 function MyButton() {
@@ -317,9 +317,9 @@ function MyButton() {
   // ...
 ```
 
-You’ll get two things from `useState`: the current state (`count`), and the function that lets you update it (`setCount`). You can give them any names, but the convention is to write `[something, setSomething]`.
+আপনি `useState` থেকে দুটি জিনিস পাবেন: বর্তমান state (`count`), এবং ফাংশন যা আপনাকে এটি আপডেট করতে দেয় (`setCount`)। আপনি তাদের যে কোনো নাম দিতে পারেন, কিন্তু নিয়ম হল `[something, setSomething]` লিখতে হবে।
 
-The first time the button is displayed, `count` will be `0` because you passed `0` to `useState()`. When you want to change state, call `setCount()` and pass the new value to it. Clicking this button will increment the counter:
+প্রথমবার button টি প্রদর্শিত হলে, `count` হবে `0` কারণ আপনি `0`কে `useState()`-এ পাস করেছেন। আপনি যখন state পরিবর্তন করতে চান, `setCount()` কল করুন এবং এটিতে নতুন মান পাস করুন। এই button টি ক্লিক করলে কাউন্টারটি বৃদ্ধি পাবে:
 
 ```js {5}
 function MyButton() {
@@ -337,9 +337,9 @@ function MyButton() {
 }
 ```
 
-React will call your component function again. This time, `count` will be `1`. Then it will be `2`. And so on.
+React আপনার কম্পোনেন্ট ফাংশনকে আবার কল করবে। এবার, `count` হবে `1`। পরবর্তীতে এটা হবে `2` এবং এভাবে বাড়তে থাকবে।
 
-If you render the same component multiple times, each will get its own state. Click each button separately:
+আপনি যদি একই component একাধিকবার render করেন তবে প্রতিটি তার নিজস্ব state পাবে। প্রতিটি button এ আলাদাভাবে ক্লিক করুন:
 
 <Sandpack>
 
@@ -349,7 +349,7 @@ import { useState } from 'react';
 export default function MyApp() {
   return (
     <div>
-      <h1>Counters that update separately</h1>
+      <h1>যে কাউন্টারগুলো আলাদাভাবে আপডেট হয়</h1>
       <MyButton />
       <MyButton />
     </div>
@@ -380,7 +380,7 @@ button {
 
 </Sandpack>
 
-Notice how each button "remembers" its own `count` state and doesn't affect other buttons.
+লক্ষ্য করুন কিভাবে প্রতিটি button তার নিজস্ব `count` state  কে "মনে রাখে" এবং অন্যান্য button গুলিকে প্রভাবিত না করে।
 
 ## Using Hooks {/*using-hooks*/}
 
