@@ -382,11 +382,11 @@ button {
 
 লক্ষ্য করুন কিভাবে প্রতিটি button তার নিজস্ব `count` state  কে "মনে রাখে" এবং অন্যান্য button গুলিকে প্রভাবিত না করে।
 
-## Using Hooks {/*using-hooks*/}
+## Hooks এর ব্যবহার {/*using-hooks*/}
 
-Functions starting with `use` are called *Hooks*. `useState` is a built-in Hook provided by React. You can find other built-in Hooks in the [API reference.](/reference/react) You can also write your own Hooks by combining the existing ones.
+`use` দিয়ে শুরু হওয়া ফাংশনকে *Hooks* বলা হয়। `useState` হল একটি বিল্ট-ইন Hook যা React দ্বারা প্রদত্ত। আপনি [API রেফারেন্স](/reference/react) এ অন্যান্য অন্তর্নির্মিত Hooks খুঁজে পেতে পারে। এছাড়াও বিদ্যমান Hooks গুলিকেও একত্রিত করে আপনার নিজস্ব Hooks লিখতে পারেন৷
 
-Hooks are more restrictive than other functions. You can only call Hooks *at the top* of your components (or other Hooks). If you want to use `useState` in a condition or a loop, extract a new component and put it there.
+Hooks অন্যান্য ফাংশন তুলনায় আরো সীমাবদ্ধ।  আপনি শুধুমাত্র আপনার components গুলির (বা অন্যান্য Hooks) *একবারে উপরে* hook গুলিকে কল করতে পারেন৷ আপনি যদি একটি if বা loop এ `useState` ব্যবহার করতে চান, একটি নতুন component বের করে সেখানে রাখুন।
 
 ## Sharing data between components {/*sharing-data-between-components*/}
 
