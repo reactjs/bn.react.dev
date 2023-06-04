@@ -1,37 +1,37 @@
 ---
-title: Reacting to Input with State
+title: State ব্যবহার করে ইনপুটের উপর প্রতিক্রিয়া
 ---
 
 <Intro>
 
-React provides a declarative way to manipulate the UI. Instead of manipulating individual pieces of the UI directly, you describe the different states that your component can be in, and switch between them in response to the user input. This is similar to how designers think about the UI.
+React UI ম্যানিপুলেট করার জন্য একটি declarative উপায় সরবরাহ করে। UI-র প্রতিটি টুকরো সরাসরি ম্যানিপুলেট করার পরিবর্তে, আপনি আপনার কম্পোনেন্টের বিভিন্ন state-র বর্ণনা করেন, এবং ব্যবহারকারীর input-র জন্য তাদের মাঝে switch করেন। এটি UI-র বিষয়ে ডিজাইনাররা কীভাবে চিন্তা করে, তার মতো।
 
 </Intro>
 
 <YouWillLearn>
 
-* How declarative UI programming differs from imperative UI programming
-* How to enumerate the different visual states your component can be in
-* How to trigger the changes between the different visual states from code
+* কিভাবে declarative UI প্রোগ্রামিং imperative UI প্রোগ্রামিং থেকে আলাদা
+* আপনার কম্পোনেন্ট যে বিভিন্ন ভিজ্যুয়াল অবস্থায় থাকতে পারে তা কীভাবে গণনা করবেন
+* কোড থেকে বিভিন্ন ভিজ্যুয়াল স্টেটের মধ্যে পরিবর্তনগুলি কীভাবে ট্রিগার করবেন
 
 </YouWillLearn>
 
-## How declarative UI compares to imperative {/*how-declarative-ui-compares-to-imperative*/}
+## কীভাবে Declarative UI Imperative UI-র সাথে তুলনা করে {/*how-declarative-ui-compares-to-imperative*/}
 
-When you design UI interactions, you probably think about how the UI *changes* in response to user actions. Consider a form that lets the user submit an answer:
+আপনি যখন UI ইন্টারঅ্যাকশন ডিজাইন করেন, আপনি সম্ভবত ব্যবহারকারীর ক্রিয়াকলাপের প্রতিক্রিয়ায় UI কীভাবে *পরিবর্তিত*  হয় সে সম্পর্কে চিন্তা করেন। এমন একটি ফর্ম বিবেচনা করুন যা ব্যবহারকারীকে একটি উত্তর জমা দিতে দেয়:
 
-* When you type something into the form, the "Submit" button **becomes enabled.**
-* When you press "Submit", both the form and the button **become disabled,** and a spinner **appears.**
-* If the network request succeeds, the form **gets hidden,** and the "Thank you" message **appears.**
-* If the network request fails, an error message **appears,** and the form **becomes enabled** again.
+* আপনি যখন ফর্মে কিছু টাইপ করেন, তখন "Submit" বোতামটি **সক্রিয় হয়ে যায়।**
+* আপনি যখন "Submit" বোতামটি টিপবেন, ফর্ম এবং বোতাম দুটোই **নিষ্ক্রিয় হয়ে যায়** এবং একটি **স্পিনার উপস্থিত হয়।**
+* নেটওয়ার্ক অনুরোধ সফল হলে, ফর্মটি **লুকানো হবে** এবং "Thank you" বার্তাটি **প্রদর্শিত হবে।**
+* নেটওয়ার্ক অনুরোধ ব্যর্থ হলে, একটি ত্রুটি বার্তা **প্রদর্শিত হবে**, এবং ফর্ম আবার **সক্রিয় হয়ে যাবে ।**
 
-In **imperative programming,** the above corresponds directly to how you implement interaction. You have to write the exact instructions to manipulate the UI depending on what just happened. Here's another way to think about this: imagine riding next to someone in a car and telling them turn by turn where to go.
+**Imperative প্রোগ্রামিং**-এ, আপনি কীভাবে ইন্টারঅ্যাকশন বাস্তবায়ন করেন তার সাথে উপরে কি লেখা আছে সরাসরি মিলে যায়। এইমাত্র যা ঘটেছে তার উপর নির্ভর করে UI ম্যানিপুলেট করার জন্য আপনাকে সঠিক নির্দেশাবলী লিখতে হবে। এটি সম্পর্কে চিন্তা করার আরেকটি উপায় এখানে রয়েছে: কল্পনা করুন যে একজন গাড়িতে কারও পাশে চড়ছেন এবং তাদের বলুন কোথায় যেতে হবে।
 
 <Illustration src="/images/docs/illustrations/i_imperative-ui-programming.png"  alt="In a car driven by an anxious-looking person representing JavaScript, a passenger orders the driver to execute a sequence of complicated turn by turn navigations." />
 
-They don't know where you want to go, they just follow your commands. (And if you get the directions wrong, you end up in the wrong place!) It's called *imperative* because you have to "command" each element, from the spinner to the button, telling the computer *how* to update the UI.
+তারা জানে না আপনি কোথায় যেতে চান, তারা শুধু আপনার আদেশ অনুসরণ করে। (এবং যদি আপনি ভুল দিকনির্দেশ দেন, তাহলে আপনি ভুল জায়গায় পৌঁছে যাবেন!) এটাকে *imperative*  বলা হয় কারণ আপনাকে স্পিনার থেকে বোতাম পর্যন্ত প্রতিটি কম্পনেন্টকে "কমান্ড" করতে হবে, কম্পিউটারকে কীভাবে UI আপডেট করতে হবে তা বলতে হবে।
 
-In this example of imperative UI programming, the form is built *without* React. It only uses the browser [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model):
+Imperative UI প্রোগ্রামিংয়ের এই উদাহরণে, ফর্মটি  React *ব্যবহার না করেই*  তৈরি করা হয়েছে। এটি শুধুমাত্র ব্রাউজার [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) ব্যবহার করে:
 
 <Sandpack>
 
@@ -131,37 +131,37 @@ body { font-family: sans-serif; margin: 20px; padding: 0; }
 
 </Sandpack>
 
-Manipulating the UI imperatively works well enough for isolated examples, but it gets exponentially more difficult to manage in more complex systems. Imagine updating a page full of different forms like this one. Adding a new UI element or a new interaction would require carefully checking all existing code to make sure you haven't introduced a bug (for example, forgetting to show or hide something).
+UI ম্যানিপুলেট করা imperative ভাবে বিচ্ছিন্ন উদাহরণগুলির জন্য যথেষ্ট ভাল কাজ করে, তবে আরও জটিল সিস্টেমে এটি পরিচালনা করা দ্রুতগতিতে আরও কঠিন হয়ে যায়। এই মত বিভিন্ন ফর্ম পূর্ণ একটি পৃষ্ঠা আপডেট করার কল্পনা করুন. একটি নতুন UI উপাদান বা একটি নতুন ইন্টারঅ্যাকশন যোগ করার জন্য আপনি একটি বাগ (উদাহরণস্বরূপ, কিছু দেখাতে বা লুকাতে ভুলে গেছেন) তা নিশ্চিত করতে সমস্ত বিদ্যমান কোড সাবধানে পরীক্ষা করতে হবে
 
-React was built to solve this problem.
+React বানানোই হয়েছিল এই সমস্যাটি সমাধান করার জন্য।
 
-In React, you don't directly manipulate the UI--meaning you don't enable, disable, show, or hide components directly. Instead, you **declare what you want to show,** and React figures out how to update the UI. Think of getting into a taxi and telling the driver where you want to go instead of telling them exactly where to turn. It's the driver's job to get you there, and they might even know some shortcuts you haven't considered!
+React-এ, আপনি সরাসরি UI-কে ম্যানিপুলেট করবেন না--অর্থাৎ আপনি সরাসরি কম্পনেন্টগুলি সক্রিয়, নিষ্ক্রিয়, দেখান বা লুকাবেন না। পরিবর্তে, আপনি **কী দেখাতে চান তা ঘোষণা করেন** এবং React ভেবে নেয় কিভাবে UI আপডেট করতে হবে। একটি ট্যাক্সিতে উঠার কথা ভাবুন এবং ড্রাইভারকে ঠিক কোথায় ঘুরতে হবে না বোলে বলুন আপনি কোথায় যেতে চান । আপনাকে সেখানে নিয়ে যাওয়া ড্রাইভারের কাজ, এবং তারা এমন কিছু শর্টকাটও জানতে পারে যা আপনি বিবেচনা করেননি!
 
 <Illustration src="/images/docs/illustrations/i_declarative-ui-programming.png" alt="In a car driven by React, a passenger asks to be taken to a specific place on the map. React figures out how to do that." />
 
-## Thinking about UI declaratively {/*thinking-about-ui-declaratively*/}
+## Declarative ভাবে UI সম্পর্কে চিন্তা করা  {/*thinking-about-ui-declaratively*/}
 
-You've seen how to implement a form imperatively above. To better understand how to think in React, you'll walk through reimplementing this UI in React below:
+আপনি উপরে দেখেছেন কিভাবে একটি ফর্ম imperative ভাবে বাস্তবায়ন করতে হয়। React-এ কীভাবে চিন্তা করতে হয় তা আরও ভালোভাবে বোঝার জন্য, আপনি React-এ এই UI পুনরায় প্রয়োগ করবেন:
 
-1. **Identify** your component's different visual states
-2. **Determine** what triggers those state changes
-3. **Represent** the state in memory using `useState`
-4. **Remove** any non-essential state variables
-5. **Connect** the event handlers to set the state
+1. কম্পোনেন্ট এর বিভিন্ন ভিজুয়্যাল states **চিহ্নিত** করা
+2. State-র পরিবর্তনের কারণ কী তা **নির্ধারণ** করুন
+3. `useState` ব্যবহার করে মেমরিতে state-র **প্রতিনিধিত্ব** করুন
+4. কোনো অপ্রয়োজনীয় state ভেরিয়েবল কে **সরিয়ে** দিন
+5. state সেট করতে ইভেন্ট হ্যান্ডলারদের সাথে **সংযোগ** করুন
 
-### Step 1: Identify your component's different visual states {/*step-1-identify-your-components-different-visual-states*/}
+### Step 1: আপনার কম্পোনেন্টের বিভিন্ন ভিজ্যুয়াল state চিহ্নিত করুন {/*step-1-identify-your-components-different-visual-states*/}
 
-In computer science, you may hear about a ["state machine"](https://en.wikipedia.org/wiki/Finite-state_machine) being in one of several “states”. If you work with a designer, you may have seen mockups for different "visual states". React stands at the intersection of design and computer science, so both of these ideas are sources of inspiration.
+কম্পিউটার বিজ্ঞানে, আপনি শুনতে পারেন একটি ["স্টেট মেশিন"](https://en.wikipedia.org/wiki/Finite-state_machine) বেশ কয়েকটি "state"-র মধ্যে একটি। আপনি যদি একজন ডিজাইনারের সাথে কাজ করেন তবে আপনি বিভিন্ন "ভিজ্যুয়াল state" এর জন্য মকআপ দেখে থাকতে পারেন। React ডিজাইন এবং কম্পিউটার বিজ্ঞানের সংযোগস্থলে দাঁড়িয়েছে, তাই এই দুটি ধারণাই অনুপ্রেরণার উৎস।
 
-First, you need to visualize all the different "states" of the UI the user might see:
+প্রথমত, আপনাকে ব্যবহারকারী দেখতে পারে এমন UI এর সমস্ত ভিন্ন "state" কল্পনা করতে হবে:
 
-* **Empty**: Form has a disabled "Submit" button.
-* **Typing**: Form has an enabled "Submit" button.
-* **Submitting**: Form is completely disabled. Spinner is shown.
-* **Success**: "Thank you" message is shown instead of a form.
-* **Error**: Same as Typing state, but with an extra error message.
+* **Empty**: ফর্মটিতে একটি নিষ্ক্রিয় "Submit" বোতাম রয়েছে।
+* **Typing**: ফর্মটিতে একটি সক্রিয় "Submit" বোতাম রয়েছে।
+* **Submitting**: ফর্ম সম্পূর্ণরূপে অক্ষম। স্পিনার দেখানো হয়।
+* **Success**: একটি ফর্মের পরিবর্তে "Thank You" বার্তাটি দেখানো হয়েছে।
+* **Error**: Typing অবস্থার মতো, কিন্তু একটি অতিরিক্ত ত্রুটি বার্তা সহ.
 
-Just like a designer, you'll want to "mock up" or create "mocks" for the different states before you add logic. For example, here is a mock for just the visual part of the form. This mock is controlled by a prop called `status` with a default value of `'empty'`:
+ঠিক একজন ডিজাইনারের মতো, আপনি যুক্তি যোগ করার আগে বিভিন্ন state-র জন্য "মকআপ" বা "মক" তৈরি করতে চাইবেন। উদাহরণস্বরূপ, এখানে ফর্মের শুধুমাত্র ভিজ্যুয়াল অংশের জন্য একটি মক। এই মকআপটি `status` নামক একটি prop দ্বারা নিয়ন্ত্রিত হয় যার একটি ডিফল্ট মান `'empty'`:
 
 <Sandpack>
 
@@ -192,7 +192,7 @@ export default function Form({
 
 </Sandpack>
 
-You could call that prop anything you like, the naming is not important. Try editing `status = 'empty'` to `status = 'success'` to see the success message appear. Mocking lets you quickly iterate on the UI before you wire up any logic. Here is a more fleshed out prototype of the same component, still "controlled" by the `status` prop:
+আপনি এই prop-কে আপনার পছন্দ মতো নাম দিতে পারেন, নামকরণ গুরুত্বপূর্ণ নয়। সফলতার বার্তাটি দেখতে `status = 'empty'` থেকে `status = 'success'` পাল্টানোর চেষ্টা করুন। মকআপ করার ফলে আপনি যেকোন যুক্তি যুক্ত করার আগে দ্রুত UI-তে পুনরাবৃত্তি করতে পারবেন। এখানে একই কম্পোনেন্টের একটি আরও ফ্লেশ আউট প্রোটোটাইপ রয়েছে, যা এখনও `status` প্রপ দ্বারা "নিয়ন্ত্রিত":
 
 <Sandpack>
 
@@ -240,9 +240,9 @@ export default function Form({
 
 <DeepDive>
 
-#### Displaying many visual states at once {/*displaying-many-visual-states-at-once*/}
+#### একবারে অনেক ভিজ্যুয়াল state প্রদর্শন করা{/*displaying-many-visual-states-at-once*/}
 
-If a component has a lot of visual states, it can be convenient to show them all on one page:
+যদি একটি কম্পোনেন্টের অনেকগুলি ভিজ্যুয়াল state থাকে, তবে সেগুলিকে এক পৃষ্ঠায় দেখানো সুবিধাজনক হতে পারে:
 
 <Sandpack>
 
@@ -307,7 +307,7 @@ body { margin: 0; }
 
 </Sandpack>
 
-Pages like this are often called "living styleguides" or "storybooks".
+এই জাতীয় পৃষ্ঠাগুলিকে প্রায়শই "লিভিং স্টাইলগাইড" বা "গল্পের বই" বলা হয়।
 
 </DeepDive>
 
