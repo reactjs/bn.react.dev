@@ -92,7 +92,7 @@ React `root`-এ `<App />` দেখাবে, এবং এর মধ্যক�
 
 ### `root.unmount()` {/*root-unmount*/}
 
-Call `root.unmount` to destroy a rendered tree inside a React root.
+React রুটের মধ্যে রেন্ডার হওয়া একটি ট্রি মুছে ফেলতে `root.unmount` কল করুন।
 
 ```js
 root.unmount();
@@ -105,20 +105,20 @@ This is mostly useful if your React root's DOM node (or any of its ancestors) ma
 Calling `root.unmount` will unmount all the components in the root and "detach" React from the root DOM node, including removing any event handlers or state in the tree. 
 
 
-#### Parameters {/*root-unmount-parameters*/}
+#### প্যারামিটার {/*root-unmount-parameters*/}
 
-`root.unmount` does not accept any parameters.
+`root.unmount` কোন প্যারামিটার গ্রহণ করে না।
 
 
-#### Returns {/*root-unmount-returns*/}
+#### রিটার্ন {/*root-unmount-returns*/}
 
-`root.unmount` returns `undefined`.
+`root.unmount` `undefined` রিটার্ন করে।
 
-#### Caveats {/*root-unmount-caveats*/}
+#### সতর্কতা {/*root-unmount-caveats*/}
 
-* Calling `root.unmount` will unmount all the components in the tree and "detach" React from the root DOM node.
+* `root.unmount` কল করলে ট্রি-এর সকল কম্পোনেন্ট আনমাউন্ট হবে এবং React কে রুট DOM নোড থেকে "বিচ্ছিন" করবে।
 
-* Once you call `root.unmount` you cannot call `root.render` again on the same root. Attempting to call `root.render` on an unmounted root will throw a "Cannot update an unmounted root" error. However, you can create a new root for the same DOM node after the previous root for that node has been unmounted.
+* একবার `root.unmount` কল করা হলে একই রুটে `root.render` আর কল করা যাবে না। আনমাউন্ট করা রুটে `root.render` কলের চেষ্টা করা হলে "Cannot update an unmounted root" এরর দেখাবে। যদিও, আপনি একই DOM নোডে নতুন রুট তৈরী করতে পারেন যখন সেই নোডে আগের রুট আনমাউন্ট করা হয়ে গেছে। 
 
 ---
 
