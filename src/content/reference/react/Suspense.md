@@ -255,7 +255,12 @@ async function getAlbums() {
 - Suspense-enabled ফ্রেমওয়ার্কের সাহায্যে ডেটা নিয়ে আসা যেমন, [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/advanced-features/react-18)
 - [`lazy`](/reference/react/lazy) এর সাথে Lazy-loading কম্পোনেন্ট কোড 
 
+<<<<<<< HEAD
 Suspense বুঝতে **পারে না** যখন কোনো Effect বা ইভেন্ট হ্যান্ডলারের ভিতরে ডেটা নিয়ে আসা হয়।
+=======
+- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
+- Lazy-loading component code with [`lazy`](/reference/react/lazy)
+>>>>>>> ca93140eb98a7ff4364a719075fccea980c55b55
 
 উপরের `Albums` কম্পোনেন্টে আপনি ঠিক কিভাবে ডেটা লোড করবেন তা আপনার ফ্রেমওয়ার্ক এর উপর নির্ভর করে। আপনি যদি Suspense-enabled ফ্রেমওয়ার্ক ব্যাবহার করেন তাহলে আপনি এর ডেটা নিয়ে আসার ডকুমেন্টেশনে বিস্তারিত তথ্য পাবেন। 
 
