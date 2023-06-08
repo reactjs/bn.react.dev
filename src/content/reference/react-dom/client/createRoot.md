@@ -122,11 +122,11 @@ Calling `root.unmount` will unmount all the components in the root and "detach" 
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering an app fully built with React {/*rendering-an-app-fully-built-with-react*/}
+### সম্পূর্ণরূপে React দিয়ে তৈরি অ্যাপের রেন্ডারিং {/*rendering-an-app-fully-built-with-react*/}
 
-If your app is fully built with React, create a single root for your entire app.
+যদি আপনার অ্যাপটি সম্পূর্ণরূপে React দিয়ে বানানো হয়ে থাকে, তবে পুরো অ্যাপের জন্য একটি মাত্র রুট তৈরি করুন।
 
 ```js [[1, 3, "document.getElementById('root')"], [2, 4, "<App />"]]
 import { createRoot } from 'react-dom/client';
@@ -135,10 +135,10 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-Usually, you only need to run this code once at startup. It will:
+সাধারণত, আপনাকে একবারই শুরুতে এই কোড রান করতে হবে। এটা যা করবে তা হলঃ
 
-1. Find the <CodeStep step={1}>browser DOM node</CodeStep> defined in your HTML.
-2. Display the <CodeStep step={2}>React component</CodeStep> for your app inside.
+1. আপনার HTML এ ডিফাইন্ড হওয়া <CodeStep step={1}>ব্রাউজার DOM নোড</CodeStep> খুঁজে বের করবে।
+2. আপনার অ্যাপের ভেতর থাকা <CodeStep step={2}>React কম্পোনেন্ট</CodeStep> দেখাবে।
 
 <Sandpack>
 
@@ -186,35 +186,35 @@ function Counter() {
 
 </Sandpack>
 
-**If your app is fully built with React, you shouldn't need to create any more roots, or to call [`root.render`](#root-render) again.** 
+**যদি আপনার অ্যাপটি সম্পূর্ণরূপে React দিয়ে বানানো হয়ে থাকে, আপনার আর কোন রুট তৈরির বা আবার [`root.render`](#root-render) কল করার প্রয়োজন হবার কথা না** 
 
-From this point on, React will manage the DOM of your entire app. To add more components, [nest them inside the `App` component.](/learn/importing-and-exporting-components) When you need to update the UI, each of your components can do this by [using state.](/reference/react/useState) When you need to display extra content like a modal or a tooltip outside the DOM node, [render it with a portal.](/reference/react-dom/createPortal)
+এর পর থেকে, React আপনার পুরো অ্যাপের DOM পরিচালনা করবে। আরো কম্পোনেন্ট যুক্ত করবার জন্য [`App` কম্পোনেন্টে তাদের nest করুন।](/learn/importing-and-exporting-components) যখন আপনার UI আপডেটের প্রয়োজন হবে, আপনার প্রতিটি কম্পোনেন্ট [স্টেট ব্যবহার করে](/reference/react/useState) সেটা করতে পারবে। যখন আপনার DOM নোডের বাইরে অতিরিক্ত কোন কনটেন্ট যেমন একটা মোডাল বা টুলটিপ দেখানোর প্রয়োজন হবে তখন, [একটা পোর্টাল ব্যবহার করে সেটা রেন্ডার করুন।](/reference/react-dom/createPortal)
 
 <Note>
 
-When your HTML is empty, the user sees a blank page until the app's JavaScript code loads and runs:
+যখন আপনার HTML খালি থাকে, যতক্ষণ পর্যন্ত জাভাস্ক্রিপ্ট লোড এবং রান না হয়, ততক্ষণ ব্যবহারকারী একটা খালি পেইজ দেখবে।
 
 ```html
 <div id="root"></div>
 ```
 
-This can feel very slow! To solve this, you can generate the initial HTML from your components [on the server or during the build.](/reference/react-dom/server) Then your visitors can read text, see images, and click links before any of the JavaScript code loads. We recommend [using a framework](/learn/start-a-new-react-project#production-grade-react-frameworks) that does this optimization out of the box. Depending on when it runs, this is called *server-side rendering (SSR)* or *static site generation (SSG).*
+বিষয়টা খুব ধীর রকম অনুভূত হতে পারে! এটা সমাধানের জন্য, আপনি [বিল্ডের সময় বা সার্ভারে](/reference/react-dom/server) আপনার কম্পোনেন্ট গুলো থেকে প্রাথমিক HTML তৈরি করে ফেলতে পারেন। এর পরে আপনার ভিজিটররা জাভাস্ক্রিপ্ট লোড হবার আগেই টেক্সট পড়তে, ছবি দেখতে এবং লিঙ্ক ক্লিক করতে পারবে। আমাদের উপদেশ থাকবে যে আপনি এর জন্য একটা [ফ্রেমওয়ার্ক ব্যবহার করুন](/learn/start-a-new-react-project#production-grade-react-frameworks) যা নিজেই এই অপটিমাইজেশনটুকু করে দেবে। কখন এটা রান করছে তার উপর নির্ভর করে একে বলা হয়, *server-side rendering (SSR)* অথবা *static site generation (SSG)।*
 
 </Note>
 
 <Pitfall>
 
-**Apps using server rendering or static generation must call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) instead of `createRoot`.** React will then *hydrate* (reuse) the DOM nodes from your HTML instead of destroying and re-creating them.
+**যেসব অ্যাপ server rendering বা static generation ব্যবহার করে তাদেরকে অবশ্যই `createRoot` এর জায়গায় [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করতে হবে।** React তখন আপনার HTML থেকে DOM নোডগুলো ধ্বংস এবং পুনরায় তৈরি করার বদলে *hydrate* (পুনর্ব্যবহার) করবে।
 
 </Pitfall>
 
 ---
 
-### Rendering a page partially built with React {/*rendering-a-page-partially-built-with-react*/}
+### React দিয়ে আংশিকভাবে বানানো পেইজের রেন্ডারিং {/*rendering-a-page-partially-built-with-react*/}
 
-If your page [isn't fully built with React](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), you can call `createRoot` multiple times to create a root for each top-level piece of UI managed by React. You can display different content in each root by calling [`root.render`.](#root-render)
+যদি আপনার পেইজ [সম্পূর্ণরূপে React দিয়ে বানানো না হয়ে থাকে](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React দিয়ে পরিচালিত প্রতিটি উচ্চ স্তরের UI piece এর জন্য একটি রুট তৈরি করার জন্য আপনি একাধিকবার   you can call `createRoot` multiple times to create a root for each top-level piece of UI managed by React. You can display different content in each root by calling [`root.render`.](#root-render)
 
-Here, two different React components are rendered into two DOM nodes defined in the `index.html` file:
+এখানে, দুটি ভিন্ন React কম্পোনেন্ট `index.html` এর দুটি DOM নোডে রেন্ডার হচ্ছেঃ
 
 <Sandpack>
 
