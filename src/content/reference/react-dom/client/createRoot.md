@@ -212,7 +212,7 @@ function Counter() {
 
 ### React দিয়ে আংশিকভাবে বানানো পেইজের রেন্ডারিং {/*rendering-a-page-partially-built-with-react*/}
 
-যদি আপনার পেইজ [সম্পূর্ণরূপে React দিয়ে বানানো না হয়ে থাকে](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React দিয়ে পরিচালিত প্রতিটি উচ্চ স্তরের UI piece এর জন্য একটি রুট তৈরি করার জন্য আপনি একাধিকবার   you can call `createRoot` multiple times to create a root for each top-level piece of UI managed by React. You can display different content in each root by calling [`root.render`.](#root-render)
+যদি আপনার পেইজ [সম্পূর্ণরূপে React দিয়ে বানানো না হয়ে থাকে](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page), React দিয়ে পরিচালিত প্রতিটি উচ্চ স্তরের UI piece এর জন্য একটি রুট তৈরি করার খাতিরে আপনি একাধিকবার `createRoot` কল করতে পারেন। আপনি [`root.render`](#root-render) কল করার মাধ্যমে প্রতিটি রুটে ভিন্ন ভিন্ন কনটেন্ট দেখাতে পারেন।
 
 এখানে, দুটি ভিন্ন React কম্পোনেন্ট `index.html` এর দুটি DOM নোডে রেন্ডার হচ্ছেঃ
 
