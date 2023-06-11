@@ -1343,15 +1343,15 @@ function MyApp() {
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## সমস্যা সমাধান {/*troubleshooting*/}
 
-### My component doesn't see the value from my provider {/*my-component-doesnt-see-the-value-from-my-provider*/}
+### আমার কম্পোনেন্ট আমার provider এর মান দেখতে পায় না {/*my-component-doesnt-see-the-value-from-my-provider*/}
 
-There are a few common ways that this can happen:
+এটি ঘটতে পারে এমন কয়েকটি সাধারণ উপায় রয়েছে:
 
-1. You're rendering `<SomeContext.Provider>` in the same component (or below) as where you're calling `useContext()`. Move `<SomeContext.Provider>` *above and outside* the component calling `useContext()`.
-2. You may have forgotten to wrap your component with `<SomeContext.Provider>`, or you might have put it in a different part of the tree than you thought. Check whether the hierarchy is right using [React DevTools.](/learn/react-developer-tools)
-3. You might be running into some build issue with your tooling that causes `SomeContext` as seen from the providing component and `SomeContext` as seen by the reading component to be two different objects. This can happen if you use symlinks, for example. You can verify this by assigning them to globals like `window.SomeContext1` and `window.SomeContext2` and then checking whether `window.SomeContext1 === window.SomeContext2` in the console. If they're not the same, fix that issue on the build tool level.
+1. আপনি যেখানে `useContext()` কল করছেন সেই কম্পোনেন্টে (অথবা  নিচে) `<SomeContext.Provider>` রেন্ডার করেছেন। যে কম্পোনেন্টে `useContext()` কল হচ্ছে তার *উপরে এবং বাইরে* `<SomeContext.Provider>` কে সরিয়ে ফেলুন।
+2. আপনি হয়ত `<SomeContext.Provider>` দিয়ে আপনার কম্পোনেন্টকে র‍্যাপ করতে ভুলে গেছেন, অথবা আপনি এটিকে ট্রির যেখানে রাখার কথা ভেবেছিলেন তার থেকে হয়ত ভিন্ন কোথাও রেখেছেন। [React DevTools](/learn/react-developer-tools) ব্যবহার করে hierarchy টি সঠিক কিনা তা পরীক্ষা করুন।
+3. আপনি হয়ত আপনার টুলিং সম্পর্কিত কিছু বিল্ড সমস্যার ভিতর দিয়ে যাচ্ছেন যার ফলে প্রোভাইডিং কম্পোনেন্ট থেকে `SomeContext` এবং রিডিং কম্পোনেন্ট থেকে `SomeContext` ভিন্ন object হিসাবে দেখাচ্ছে। উদাহরণস্বরূপ, আপনি যদি symlink ব্যবহার করেন। আপনি এগুলোকে গ্লোবালে যুক্ত করে (যেমন `window.SomeContext1` এবং `window.SomeContext2`) এবং তারপর কনসোলে `window.SomeContext1 === window.SomeContext2` কিনা তা পরীক্ষা করে এটি যাচাই করতে পারেন। যদি তারা একই না হয়, তাহলে বিল্ড টুল স্তরে সেই সমস্যাটি ঠিক করুন।
 
 ### I am always getting `undefined` from my context although the default value is different {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
