@@ -137,8 +137,8 @@ To hydrate your app, React will "attach" your components' logic to the initial g
 
 ```html public/index.html
 <!--
-  HTML content inside <div id="root">...</div>
-  was generated from App by react-dom/server.
+  <div id="root">...</div> এর মধ্যকার সব HTML কনটেন্ট react-dom/server
+  দ্বারা <App /> রেন্ডার করার মাধ্যমে তৈরি করা হয়েছে।
 -->
 <div id="root"><h1>Hello, world!</h1><button>You clicked me <!-- -->0<!-- --> times</button></div>
 ```
@@ -232,18 +232,18 @@ hydrateRoot(document, <App />);
 
 ---
 
-### Suppressing unavoidable hydration mismatch errors {/*suppressing-unavoidable-hydration-mismatch-errors*/}
+### অনিবার্য hydrartion অমিলের এরর বন্ধ করবেন যেভাবে {/*suppressing-unavoidable-hydration-mismatch-errors*/}
 
-If a single element’s attribute or text content is unavoidably different between the server and the client (for example, a timestamp), you may silence the hydration mismatch warning.
+যদি একটিমাত্র এলিমেন্টের এট্রিবিউট বা টেক্সট কনটেন্ট সার্ভার এবং ক্লায়েন্টে আবশ্যিকভাবে আলাদা রাখা দরকার হয়, যেমন একতা টাইমস্ট্যাম্প, তাহলে আপনি hydration অমিল হবার কারণে যে সতর্কতা বার্তা দেখায় তা বন্ধ করতে পারেন।
 
-To silence hydration warnings on an element, add `suppressHydrationWarning={true}`:
+একটা এলিমেন্টে hydration বিষয়ক সতর্কতা বার্তা দেখানো বন্ধ করতে চাইলে, `suppressHydrationWarning={true}` যুক্ত করুনঃ
 
 <Sandpack>
 
 ```html public/index.html
 <!--
-  HTML content inside <div id="root">...</div>
-  was generated from App by react-dom/server.
+  <div id="root">...</div> এর মধ্যকার সব HTML কনটেন্ট react-dom/server
+  দ্বারা <App /> রেন্ডার করার মাধ্যমে তৈরি করা হয়েছে।
 -->
 <div id="root"><h1>Current Date: <!-- -->01/01/2020</h1></div>
 ```
@@ -268,20 +268,20 @@ export default function App() {
 
 </Sandpack>
 
-This only works one level deep, and is intended to be an escape hatch. Don’t overuse it. Unless it’s text content, React still won’t attempt to patch it up, so it may remain inconsistent until future updates.
+এটা শুধুমাত্র এক স্তর গভীরে কাজ করে, এবং এর উদ্দেশ্য একটা escape hatch এর মত কাজ করা। এর অতিরিক্ত ব্যবহার এড়িয়ে চলুন। যদি না এটা টেক্সট কনটেন্ট হয়, React একে প্যাচ আপ করার চেষ্টা করবে না, সুতরাং এটা ভবিষ্যতে আপডেট হবার আগ পর্যন্ত অসামাঞ্জস্যপূর্ন থাকতে পারে।
 
 ---
 
-### Handling different client and server content {/*handling-different-client-and-server-content*/}
+### ক্লায়েন্ট এবং সার্ভারে ভিন্ন কনটেন্ট পরিচালনা করতে হবে যেভাবে {/*handling-different-client-and-server-content*/}
 
-If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a [state variable](/reference/react/useState) like `isClient`, which you can set to `true` in an [Effect](/reference/react/useEffect):
+আপনি যদি ইচ্ছাকৃতভাবে সার্ভার এবং ক্লায়েন্টে ভিন্ন কিছু রেন্ডার করতে চান, আপনি দুই পাসে রেন্ডারিং চালাতে পারেন। ক্লায়েন্টের যেসব কম্পোনেন্ট কিছুটা ভিন্ন ভাবে রেন্ডার করবে, তারা `isClient` এর মত একটি [state variable](/reference/react/useState) রিড করতে পারে, যেটা আপনি একটা [Effect](/reference/react/useEffect) এ `true` সেট করে দিতে পারেনঃ
 
 <Sandpack>
 
 ```html public/index.html
 <!--
-  HTML content inside <div id="root">...</div>
-  was generated from App by react-dom/server.
+  <div id="root">...</div> এর মধ্যকার সব HTML কনটেন্ট react-dom/server
+  দ্বারা <App /> রেন্ডার করার মাধ্যমে তৈরি করা হয়েছে।
 -->
 <div id="root"><h1>Is Server</h1></div>
 ```
@@ -314,21 +314,21 @@ export default function App() {
 
 </Sandpack>
 
-This way the initial render pass will render the same content as the server, avoiding mismatches, but an additional pass will happen synchronously right after hydration.
+এই ভাবে প্রাথমিক রেন্ডার পাস সার্ভারের মত একই কনটেন্ট রেন্ডার করবে, অমিল এড়িয়ে গিয়ে, কিন্তু hydration এর ঠিক পর সিংক্রোনাসভাবে অতিরিক্ত একটি পাস হবে।
 
 <Pitfall>
 
-This approach makes hydration slower because your components have to render twice. Be mindful of the user experience on slow connections. The JavaScript code may load significantly later than the initial HTML render, so rendering a different UI immediately after hydration may also feel jarring to the user.
+এই পন্থায় hydration ধীর হয়ে যায় কারণ আপনার কম্পোনেন্ট দুই বার রেন্ডার হয়। যেসব ব্যবহারকারীর ইন্টারনেট ধীর গতির তাদের এটা ব্যবহারের অভিজ্ঞতার দিকে খেয়াল রাখবেন। প্রাথমিক HTML এর চেয়ে জাভাস্ক্রিপ্ট উল্লেখজনক ভাবে ধীরে লোড হতে পারে, সুতরাং hydration এর পর পর অন্য কোন UI রেন্ডার করা ব্যবহারকারীর জন্য বিরক্তিকর হতে পারে।
 
 </Pitfall>
 
 ---
 
-### Updating a hydrated root component {/*updating-a-hydrated-root-component*/}
+### একটি hydrated root কম্পোনেন্টের আপডেট যেভাবে করা হয় {/*updating-a-hydrated-root-component*/}
 
-After the root has finished hydrating, you can call [`root.render`](#root-render) to update the root React component. **Unlike with [`createRoot`](/reference/react-dom/client/createRoot), you don't usually need to do this because the initial content was already rendered as HTML.**
+রুটের hydrating শেষ হবার পরে, রুট React কম্পোনেন্ট আপডেট করার জন্য আপনি [`root.render`](#root-render) কল করতে পারেন। **[`createRoot`](/reference/react-dom/client/createRoot) এর সাথে অমিল এখানে যে, এখানে আপনাকে আসলে এটা করবার দরকার নেই, কারণ ইতোমধ্যেই প্রাথমিক কনটেন্ট HTML হিসেবে রেন্ডার করা হয়ে গেছে।**
 
-If you call `root.render` at some point after hydration, and the component tree structure matches up with what was previously rendered, React will [preserve the state.](/learn/preserving-and-resetting-state) Notice how you can type in the input, which means that the updates from repeated `render` calls every second in this example are not destructive:
+Hydration এর পরে কোন এক সময়ে যদি আপনি  `root.render` কল করেন, এবং আগের বার তৈরি হওয়া ট্রির সাথে নতুন কম্পোনেন্ট ট্রির গঠন কাঠামো মিলে যায়, React [state সংরক্ষণ করবে।](/learn/preserving-and-resetting-state) খেয়াল করুন যে আপনি ইনপুটে টাই করে পারছেন, যার অর্থ এই উদাহরণে প্রতি সেকেন্ডে বার বার হওয়া `render` কল ধ্বংসাত্মক নাঃ
 
 <Sandpack>
 
@@ -370,4 +370,4 @@ export default function App({counter}) {
 
 </Sandpack>
 
-It is uncommon to call [`root.render`](#root-render) on a hydrated root. Usually, you'll [update state](/reference/react/useState) inside one of the components instead.
+একটা hydrated রুটে  [`root.render`](#root-render) কল করার বিষয়টা বিরল। সাধারণত, আপনি এর বদলে কম্পোনেন্টগুলোর কোন একটির মধ্যে [state আপডেট](/reference/react/useState) করবেন। 
