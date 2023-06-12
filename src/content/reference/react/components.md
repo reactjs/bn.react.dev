@@ -4,7 +4,7 @@ title: "Built-in React Components"
 
 <Intro>
 
-React exposes a few built-in components that you can use in your JSX.
+React কিছু বিল্ট-ইন কম্পোনেন্ট উন্মুক্ত করে যা আপনি আপনার JSX এ ব্যবহার করতে পারেন।
 
 </Intro>
 
@@ -12,13 +12,13 @@ React exposes a few built-in components that you can use in your JSX.
 
 ## Built-in components {/*built-in-components*/}
 
-* [`<Fragment>`](/reference/react/Fragment), alternatively written as `<>...</>`, lets you group multiple JSX nodes together.
-* [`<Profiler>`](/reference/react/Profiler) lets you measure rendering performance of a React tree programmatically.
-* [`<Suspense>`](/reference/react/Suspense) lets you display a fallback while the child components are loading.
-* [`<StrictMode>`](/reference/react/StrictMode) enables extra development-only checks that help you find bugs early.
+* [`<Fragment>`](/reference/react/Fragment), যাকে `<>...</>` হিসেবেও লেখা হয়, আপনাকে একাধিক JSX নোড একসাথে গ্রুপ করতে দেয়।
+* [`<Profiler>`](/reference/react/Profiler) আপনাকে প্রোগ্রামের মাধ্যমে একটি React ট্রি-এর রেন্ডারিং পারফরমেন্স হিসেব করতে দেয়। 
+* [`<Suspense>`](/reference/react/Suspense) চাইল্ড কম্পোনেন্ট লোড হবার সময় ফলব্যাক দেখাতে আপনাকে সাহায্য করে।
+* [`<StrictMode>`](/reference/react/StrictMode) কিছু অতিরিক্ত develop-only চেক সক্রিয় করে দেয় যা আপনাকে আগে থেকেই বিভিন্ন বাগ চিনতে সাহায্য করে।
 
 ---
 
 ## Your own components {/*your-own-components*/}
 
-You can also [define your own components](/learn/your-first-component) as JavaScript functions.
+আপনি চাইলে জাভাস্ক্রিপ্ট ফাংশন হিসেবে আপনার [নিজের কম্পোনেন্টও ডিফাইন করতে পারেন।](/learn/your-first-component) as JavaScript functions.
