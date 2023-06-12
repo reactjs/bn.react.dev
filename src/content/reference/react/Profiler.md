@@ -35,15 +35,15 @@ title: <Profiler>
 * `id`: একটা স্ট্রিং যেটা আপনি UI এর যে অংশ পরিমাপ করতে চান সেটাকে চিহ্নিত করতে ব্যবহৃত হয়।
 * `onRender`: এটা একটা [`onRender` কলব্যাক](#onrender-callback) যেটাকে প্রতিবার প্রোফাইল হতে থাকা ট্রিয়ের মধ্যকার কম্পোনেন্ট আপডেট হলে React কল করে। কী রেন্ডার হল এবং কেমন সময় লাগল এই তথ্যটা সে পায়।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
+* প্রোফাইলিং কিছু অতিরক্ত কাজ বাড়ায়, তাই এটা **প্রোডাকশন বিল্ডে স্বাভাবিকভাবে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং করতে, আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) চালু করতে হবে।
 
 ---
 
-### `onRender` callback {/*onrender-callback*/}
+### `onRender` কলব্যাক {/*onrender-callback*/}
 
-React will call your `onRender` callback with information about what was rendered.
+React `onRender` কে কল করবে যেখানে কী রেন্ডার হয়েছিল সেই তথ্য থাকবে।
 
 ```js
 function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime) {
@@ -51,7 +51,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 }
 ```
 
-#### Parameters {/*onrender-parameters*/}
+#### প্যারামিটার {/*onrender-parameters*/}
 
 * `id`: The string `id` prop of the `<Profiler>` tree that has just committed. This lets you identify which part of the tree was committed if you are using multiple profilers.
 * `phase`: `"mount"`, `"update"` or `"nested-update"`. This lets you know whether the tree has just been mounted for the first time or re-rendered due to a change in props, state, or hooks.
@@ -62,11 +62,11 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Measuring rendering performance programmatically {/*measuring-rendering-performance-programmatically*/}
+### প্রোগামেটিকালি রেন্ডারিং পারফরম্যান্সের পরিমাপ {/*measuring-rendering-performance-programmatically*/}
 
-Wrap the `<Profiler>` component around a React tree to measure its rendering performance.
+একটা React ট্রিয়ের রেন্ডারিং পারফরম্যান্স পরিমাপ করার জন্য একে `<Profiler>` কম্পোনেন্ট দিয়ে wrap করে ফেলুন।
 
 ```js {2,4}
 <App>
@@ -77,7 +77,7 @@ Wrap the `<Profiler>` component around a React tree to measure its rendering per
 </App>
 ```
 
-It requires two props: an `id` (string) and an `onRender` callback (function) which React calls any time a component within the tree "commits" an update.
+এর দুটি প্রপ প্রয়োজন হয়ঃ একটা `id` (স্ট্রিং) এবং একটি `onRender` কলব্যাক (ফাংশন) which React calls any time a component within the tree "commits" an update.
 
 <Pitfall>
 
