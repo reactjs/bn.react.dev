@@ -33,7 +33,7 @@ title: <Fragment> (<>...</>)
 
 - আপনি যদি একটা ফ্র্যাগমেন্টে `key` পাস করতে চান, আপনি `<>...</>` সিনট্যাক্স ব্যবহার করতে পারবেন না। আপনাকে স্পষ্টভাবে `'react'` থেকে `Fragment` ইমপোর্ট করতে হবে এবং `<Fragment key={yourKey}>...</Fragment>` রেন্ডার করতে হবে।
 
-- React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
+- যখন আপনি `<><Child /></>` থেকে `[<Child />]` রেন্ডারিং এ চলে যান বা ফিরে আসেন, অথবা `<><Child /></>` থেকে `<Child />` রেন্ডারিং এ যান এবং ফিরে আসেন React [state রিসেট](/learn/preserving-and-resetting-state) করে না। এটা শুধুমাত্র এক স্তর গভীরে কাজ করেঃ উদাহরণস্বরূপ, `<><><Child /></></>` থেকে `<Child />` এ গেলে state রিসেট হয়। সুনির্দিষ্ট semantics দেখুন [এখানে।](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
 
 ---
 
@@ -41,7 +41,7 @@ title: <Fragment> (<>...</>)
 
 ### একাধিক এলিমেন্ট রিটার্নিং {/*returning-multiple-elements*/}
 
-Use `Fragment`, or the equivalent `<>...</>` syntax, to group multiple elements together. You can use it to put multiple elements in any place where a single element can go. For example, a component can only return one element, but by using a Fragment you can group multiple elements together and then return them as a group:
+একাধিক এলিমেন্ট গ্রুপ করতে `Fragment` বা সমার্থক `<>...</>` সিনট্যাক্স ব্যবহার করুন। এমন যেকোন জায়গা যেখানে একটি এলিমেন্ট যেতে পারে সেখানে আপনি একাধিক এলিমেন্ট রাখার জন্য এটা ব্যবহার করতে পারেন। উদাহরণস্বরূপ, একটা কম্পোনেন্ট শুধুমাত্র একটি এলিমেন্ট রিটার্ন করতে পারে, কিন্তু ফ্র্যাগমেন্ট ব্যবহার করে আপনি একাধিক এলিমেন্টকে একসাথে করে গ্রুপ হিসেবে রিটার্ন করতে পারেনঃ
 
 ```js {3,6}
 function Post() {
@@ -54,7 +54,7 @@ function Post() {
 }
 ```
 
-Fragments are useful because grouping elements with a Fragment has no effect on layout or styles, unlike if you wrapped the elements in another container like a DOM element. If you inspect this example with the browser tools, you'll see that all `<h1>` and `<article>` DOM nodes appear as siblings without wrappers around them:
+ফ্র্যাগমেন্ট কাজে লাগে কারণ ফ্র্যাগমেন্টে এলিমেন্ট গ্রুপ করলে সেটা লেআউট বা স্টাইলে কোন প্রভাব ফেলে না, যে সুবিধাটা আপনি DOM এলিমেন্টের মত অন্য একটা কনটেইনারে এলিমেন্টগুলো wrap করলে পেতেন না। আপনি যদি ব্রাউজার টুল ব্যবহার করে এই উদাহরণটি inspect করেন, দেখবেন যে সব `<h1>` এবং `<article>` DOM নোডকে sibling হিসেবে দেখায়। তাদের ঘিরে কোন wrapper দেখবেন নাঃ
 
 <Sandpack>
 
@@ -94,9 +94,9 @@ function PostBody({ body }) {
 
 <DeepDive>
 
-#### How to write a Fragment without the special syntax? {/*how-to-write-a-fragment-without-the-special-syntax*/}
+#### বিশেষ সিনট্যাক্স ব্যবহার না করে কীভাবে একটি ফ্র্যাগমেন্ট লিখতে হয়? {/*how-to-write-a-fragment-without-the-special-syntax*/}
 
-The example above is equivalent to importing `Fragment` from React:
+উপরের এই উদাহরণটি React থেকে `Fragment` ইমপোর্ট করার মতই কাজ করবেঃ
 
 ```js {1,5,8}
 import { Fragment } from 'react';
@@ -111,7 +111,7 @@ function Post() {
 }
 ```
 
-Usually you won't need this unless you need to [pass a `key` to your `Fragment`.](#rendering-a-list-of-fragments)
+সাধারণত আপনার এর দরকার পড়বে না যদি না আপনার [`Fragment` এ একটা `key` পাস করার](#rendering-a-list-of-fragments) প্রয়োজন পড়ে।
 
 </DeepDive>
 
