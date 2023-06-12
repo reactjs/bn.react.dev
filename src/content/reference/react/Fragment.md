@@ -37,9 +37,9 @@ title: <Fragment> (<>...</>)
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Returning multiple elements {/*returning-multiple-elements*/}
+### একাধিক এলিমেন্ট রিটার্নিং {/*returning-multiple-elements*/}
 
 Use `Fragment`, or the equivalent `<>...</>` syntax, to group multiple elements together. You can use it to put multiple elements in any place where a single element can go. For example, a component can only return one element, but by using a Fragment you can group multiple elements together and then return them as a group:
 
@@ -117,9 +117,9 @@ Usually you won't need this unless you need to [pass a `key` to your `Fragment`.
 
 ---
 
-### Assigning multiple elements to a variable {/*assigning-multiple-elements-to-a-variable*/}
+### একটি ভ্যারিয়েবলে একাধিক এলিমেন্ট এসাইনিং {/*assigning-multiple-elements-to-a-variable*/}
 
-Like any other element, you can assign Fragment elements to variables, pass them as props, and so on:
+অন্য যেকোন এলিমেন্টের মত, আপনি ফ্র্যাগমেন্ট এলিমেন্ট ভ্যারিয়েবলে এসাইন করতে পারবেন, prop হিসেবে পাস করতে পারবেন, এবং আরো যা যা করা যায় করতে পারবেনঃ
 
 ```js
 function CloseDialog() {
@@ -139,9 +139,9 @@ function CloseDialog() {
 
 ---
 
-### Grouping elements with text {/*grouping-elements-with-text*/}
+### টেক্সটের সাথে এলিমেন্ট এর গ্রুপিং {/*grouping-elements-with-text*/}
 
-You can use `Fragment` to group text together with components:
+আপনি কম্পোনেন্টের সাথে টেক্সট গ্রুপ করতে চাইলে `Fragment` ব্যবহার করতে পারেনঃ
 
 ```js
 function DateRangePicker({ start, end }) {
@@ -158,9 +158,9 @@ function DateRangePicker({ start, end }) {
 
 ---
 
-### Rendering a list of Fragments {/*rendering-a-list-of-fragments*/}
+### ফ্র্যাগমেন্টের একটা তালিকার রেন্ডার {/*rendering-a-list-of-fragments*/}
 
-Here's a situation where you need to write `Fragment` explicitly instead of using the `<></>` syntax. When you [render multiple elements in a loop](/learn/rendering-lists), you need to assign a `key` to each element. If the elements within the loop are Fragments, you need to use the normal JSX element syntax in order to provide the `key` attribute:
+এখানে এমন একটা অবস্থা দেখা যাচ্ছে যেখানে আপনাকে `<></>` এর জায়গায় স্পষ্টভাবে `Fragment` সিনট্যাক্স ব্যবহার করতে হবে। যখন আপনি [একটা লুপে একাধিক এলিমেন্ট রেন্ডার করছেন](/learn/rendering-lists), আপনাকে প্রতি এলিমেন্টের জন্য একটি `key` ঠিক করে দিতে হবে। যদি লুপের মধ্যকার এলিমেন্টগুলা ফ্র্যাগমেন্ট হয়, আপনাকে `key` এট্রিবিউট দেবার জন্য সাধারণ JSX এলিমেন্ট সিনট্যাক্স ব্যবহার করতে হবেঃ
 
 ```js {3,6}
 function Blog() {
@@ -173,7 +173,7 @@ function Blog() {
 }
 ```
 
-You can inspect the DOM to verify that there are no wrapper elements around the Fragment children:
+আপনি DOM এ inspect করে দেখতে পারেন ফ্র্যাগমেন্ট চিলড্রেন এর আসে পাশে কোন wrapper এলিমেন্ট নেইঃ
 
 <Sandpack>
 
