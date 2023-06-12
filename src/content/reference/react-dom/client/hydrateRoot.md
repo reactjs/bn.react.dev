@@ -53,75 +53,75 @@ const root = hydrateRoot(domNode, reactNode);
 
 * `hydrateRoot()` প্রত্যাশা করে যে রেন্ডার হওয়া কন্টেন্ট সার্ভারে রেন্ডার হওয়া কম্পোনেন্টের সাথে হুবহু মিলে যাবে। যদি অমিল পান, তাহলে সেটাকে বাগ হিসেবে ধরে নিয়ে ঠিক করে ফেলুন। 
 * ্ডেভেলপমেন্ট মোডে থাকা অবস্থায়, hydration চলাকালীন React অমিলের বিষয়ে সতর্ক করে। এমন কোন নিশ্চয়তা নাই যে অমিলের ক্ষেত্রে এট্রিবিউটের ভিন্নতা patch up হয়ে যাবে। এটা পারফরম্যান্স ঠিক রাখতে জরুরী। কারণ বেশিরভাগ অ্যাপে, অমিল থাকেই না বলা যায়, তাই সব markup ঠিকঠাক আছে কি না দেখা খুব কষ্টসাধ্য হয়।
-* You'll likely have only one `hydrateRoot` call in your app. If you use a framework, it might do this call for you.
-* If your app is client-rendered with no HTML rendered already, using `hydrateRoot()` is not supported. Use [`createRoot()`](/reference/react-dom/client/createRoot) instead.
+* আপনার অ্যাপে খুব সম্ভবতঃ একটি মাত্র `hydrateRoot` কল থাকবে। আপনি যদি একটি ফ্রেমওয়ার্ক ব্যবহার করেন, সেটা আপনার জন্য কলটা করে দিতে পারে।
+* যদি আপনার অ্যাপ ক্লায়েন্ট সাইডে রেন্ডার করা হয় যেখানে ইতোমধ্যে কোন HTML রেন্ডার করা নেই, সেক্ষেত্রে `hydrateRoot()` ব্যবহার করা যাবে না। বরং [`createRoot()`](/reference/react-dom/client/createRoot) ব্যবহার করুন।
 
 ---
 
 ### `root.render(reactNode)` {/*root-render*/}
 
-Call `root.render` to update a React component inside a hydrated React root for a browser DOM element.
+একটি ব্রাউজার DOM এলিমেন্টের জন্য hydrated React রুটের মধ্যকার একটি React কম্পোনেন্ট আপডেট করতে `root.render` কল করুন।
 
 ```js
 root.render(<App />);
 ```
 
-React will update `<App />` in the hydrated `root`.
+React hydrated `root` এর ভেতরে থাকা `<App />` আপডেট করবে।
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন](#usage)
 
-#### Parameters {/*root-render-parameters*/}
+#### প্যারামিটার {/*root-render-parameters*/}
 
-* `reactNode`: A "React node" that you want to update. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`.
+* `reactNode`: এটা হচ্ছে এমন একটি "React নোড" যা আপনি আপডেট করতে চান। এটা সাধারণত `<App />` এর মত একটি JSX এর অংশ হয়ে থাকে, তবে আপনি [`createElement()`](/reference/react/createElement) দিয়ে বানানো একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null` বা `undefined` পাস করে দিতে পারেন।
 
 
-#### Returns {/*root-render-returns*/}
+#### রিটার্ন {/*root-render-returns*/}
 
-`root.render` returns `undefined`.
+`root.render` `undefined` রিটার্ন করে।
 
-#### Caveats {/*root-render-caveats*/}
+#### সতর্কতা {/*root-render-caveats*/}
 
-* If you call `root.render` before the root has finished hydrating, React will clear the existing server-rendered HTML content and switch the entire root to client rendering.
+* রুটের hydrating শেষ হবার আগে আপনি যদি  `root.render` কল করেন, তাহলে React সার্ভার-রেন্ডার্ড HTML মুছে ফেলবে এবং সম্পূর্ণ রুটটাকে ক্লায়েন্ট রেন্ডারিং এর জন্য তৈরী করে ফেলবে।
 
 ---
 
 ### `root.unmount()` {/*root-unmount*/}
 
-Call `root.unmount` to destroy a rendered tree inside a React root.
+একটি React রুটের মধ্যে রেন্ডার হওয়া একটি ট্রি মুছে ফেলতে `root.unmount` কল করুন।
 
 ```js
 root.unmount();
 ```
 
-An app fully built with React will usually not have any calls to `root.unmount`.
+সম্পূর্ণরূপে React দিয়ে বানানো একটি অ্যাপের সাধারণত `root.unmount` এ কোন কল থাকবে না।
 
-This is mostly useful if your React root's DOM node (or any of its ancestors) may get removed from the DOM by some other code. For example, imagine a jQuery tab panel that removes inactive tabs from the DOM. If a tab gets removed, everything inside it (including the React roots inside) would get removed from the DOM as well. You need to tell React to "stop" managing the removed root's content by calling `root.unmount`. Otherwise, the components inside the removed root won't clean up and free up resources like subscriptions.
+এটা তখন সবচেয়ে কাজে লাগে যদি আপনার React রুটের DOM নোড (বা এর কোন ancestor) অন্য কোন কোডের কারণে DOM থেকে মুছে যায়। উদাহরণস্বরূপ, ধরে একটা jQuery ট্যাব প্যানেল আছে যা DOM থেকে অচল ট্যাবগুলো মুছে ফেলে। যদি একটা ট্যাব মুছে যায় তবে এর ভেতর থাকা সব কিছুও (ভিতরে থাকা React রুটগুলো সহ) DOM থেকে মুছে যাবে। সেক্ষেত্রে, `root.unmount` কল করার মাধ্যমে আপনার React কে বলতে হবে মুছে যাওয়া রুটের কনটেন্ট ম্যানেজ করা "বন্ধ" করতে। না হলে, মুছে যাওয়া রুটের ভেতরকার কম্পোনেন্ট সাবস্ক্রিপশনের মত global resource মুছবে না এবং সেগুলো ফ্রি হবে না। 
 
-Calling `root.unmount` will unmount all the components in the root and "detach" React from the root DOM node, including removing any event handlers or state in the tree. 
+`root.unmount` কল করলে রুটের সব কম্পোনেন্ট আনমাউন্ট হবে এবং রুট DOM নোড থেকে React "detach" হয়ে যাবে। একই সাথে ট্রিতে কোন ইভেন্ট হ্যান্ডলার বা স্টেট থাকলে সেটাও মুছে যাবে। 
 
 
-#### Parameters {/*root-unmount-parameters*/}
+#### প্যারামিটার {/*root-unmount-parameters*/}
 
 `root.unmount` does not accept any parameters.
 
 
-#### Returns {/*root-unmount-returns*/}
+#### রিটার্ন {/*root-unmount-returns*/}
 
-`render` returns `null`.
+`render` `null` রিটার্ন করে।
 
-#### Caveats {/*root-unmount-caveats*/}
+#### সতর্কতা {/*root-unmount-caveats*/}
 
-* Calling `root.unmount` will unmount all the components in the tree and "detach" React from the root DOM node.
+* `root.unmount` কল করলে ট্রি-এর সকল কম্পোনেন্ট আনমাউন্ট হবে এবং React কে রুট DOM নোড থেকে "বিচ্ছিন্ন" করবে।
 
-* Once you call `root.unmount` you cannot call `root.render` again on the root. Attempting to call `root.render` on an unmounted root will throw a "Cannot update an unmounted root" error.
+* একবার `root.unmount` কল করা হলে একই রুটে `root.render` আর কল করা যাবে না। আনমাউন্ট করা রুটে `root.render` কলের চেষ্টা করা হলে "Cannot update an unmounted root" এরর দেখাবে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Hydrating server-rendered HTML {/*hydrating-server-rendered-html*/}
+### সার্ভার-রেন্ডার্ড HTML এর hydrating {/*hydrating-server-rendered-html*/}
 
-If your app's HTML was generated by [`react-dom/server`](/reference/react-dom/client/createRoot), you need to *hydrate* it on the client.
+আপনার অ্যাপের HTML যদি [`react-dom/server`](/reference/react-dom/client/createRoot) দিয়ে বানানো হয়ে থাকে, আপনাকে একে ক্লায়েন্টে *hydrate* করতে হবে।
 
 ```js [[1, 3, "document.getElementById('root')"], [2, 3, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
@@ -129,9 +129,9 @@ import { hydrateRoot } from 'react-dom/client';
 hydrateRoot(document.getElementById('root'), <App />);
 ````
 
-This will hydrate the server HTML inside the <CodeStep step={1}>browser DOM node</CodeStep> with the <CodeStep step={2}>React component</CodeStep> for your app. Usually, you will do it once at startup. If you use a framework, it might do this behind the scenes for you.
+এটা আপনার অ্যাপের জন্য <CodeStep step={2}>React কম্পোনেন্ট</CodeStep> দিয়ে <CodeStep step={1}>ব্রাউজার DOM নোডের</CodeStep> ভিতরকার সার্ভার HTML hydrate করে দেবে। সাধারণত, এটা আপনি startup এর সময় একবার করবেন। আপনি যদি একটি ফ্রেমওয়ার্ক ব্যবহার করেন, সে আপনার হয়ে ভেতরে ভেতরে কাজটা করে দেবে।
 
-To hydrate your app, React will "attach" your components' logic to the initial generated HTML from the server. Hydration turns the initial HTML snapshot from the server into a fully interactive app that runs in the browser.
+আপনার অ্যাপ hydrate করতে, React প্রাথমিকভাবে সার্ভারে তৈরী হওয়া HTML এর সাথে আপনার কম্পোনেন্টগুলোর লজিক "যুক্ত" করে দেবে। Hydration সার্ভার থেকে হওয়া প্রাথমিক HTML স্ন্যাপশটকে সম্পূর্ণভাবে interactive একটা অ্যাপে রূপান্তরিত করে যা ব্রাউজারে চলতে পারে। 
 
 <Sandpack>
 
@@ -178,30 +178,30 @@ function Counter() {
 
 </Sandpack>
 
-You shouldn't need to call `hydrateRoot` again or to call it in more places. From this point on, React will be managing the DOM of your application. To update the UI, your components will [use state](/reference/react/useState) instead.
+আপনার `hydrateRoot` আবার বা একাধিক জায়গায় কল করার প্রয়োজন হবার কথা না। এর পর থেকে React আপনার অ্যাপ্লিকেশনের DOM ম্যানেজ করবে। UI আপডেটের জন্য আপনার কম্পোনেন্ট বরং [state ব্যবহার](/reference/react/useState) করবে।
 
 <Pitfall>
 
-The React tree you pass to `hydrateRoot` needs to produce **the same output** as it did on the server.
+এটা জরুরি যে আপনি `hydrateRoot` এ যে React ট্রি পাস করছেন সেটা সার্ভারে যেমন আউটপুট দিয়েছিল **ঠিক হুবহু আউটপুট** দিবে।
 
-This is important for the user experience. The user will spend some time looking at the server-generated HTML before your JavaScript code loads. Server rendering creates an illusion that the app loads faster by showing the HTML snapshot of its output. Suddenly showing different content breaks that illusion. This is why the server render output must match the initial render output on the client.
+এটা ব্যবহারকারীর অভিজ্ঞতার জন্য জরুরী। আপনার জাভাস্ক্রিপ্ট কোড লোড হবার আগে ব্যবহারকারী কিছুক্ষণ সার্ভার থেকে রেন্ডার হওয়া HTML দেখবে। সার্ভারে হওয়া HTML স্ন্যাপশটের যে আউটপুট সেটার রেন্ডারিং অ্যাপ দ্রুত লোড হবার একটা ভ্রম তৈরী করছে। হঠাৎ করে অন্য কিছু দেখালে সেই ভ্রমটা ভেঙে যায়। এইজন্য সার্ভার আর ক্লায়েন্টে প্রাথমিকভাবে হওয়া রেন্ডার একইরকম হতে হবে।
 
-The most common causes leading to hydration errors include:
+যেসব কারণে সবচেয়ে hydration এরর সবচেয়ে বেশি দেখা যায় তার মধ্যে অন্যতম হলঃ
 
-* Extra whitespace (like newlines) around the React-generated HTML inside the root node.
-* Using checks like `typeof window !== 'undefined'` in your rendering logic.
-* Using browser-only APIs like [`window.matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) in your rendering logic.
-* Rendering different data on the server and the client.
+* রুট নোডের মধ্যে থাকা React এর বানানো HTML এর আশে পাশে থাকা অতিরিক্ত whitespace (যেমন newline)।
+* রেন্ডারিং লজিকে `typeof window !== 'undefined'` এর মত চেক ব্যবহার করা।
+* আপনার রেন্ডারিং লজিকে [`window.matchMedia`](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) এর মত browser-only API এর ব্যবহার।
+* সার্ভার আর ক্লায়েন্টে ভিন্ন ডেটা রেন্ডার করা।
 
-React recovers from some hydration errors, but **you must fix them like other bugs.** In the best case, they'll lead to a slowdown; in the worst case, event handlers can get attached to the wrong elements.
+React কিছু hydration এরর থেকে সামলে ওঠে, কিন্তু **আপনাকে অবশ্যই এগুলোকে অন্যান্য বাগের মতই ঠিক করতে হবে।** যদি সব ঠিকঠাক থাকেও, এরা আপনার অ্যাপ ধীরগতির করে ফেলবে; আর সবচেয়ে খারাপ যেটা হতে পারে, ইভেন্ট হ্যান্ডলার ভুল এলিমেন্টে যুক্ত হয়ে যেতে পারে।
 
 </Pitfall>
 
 ---
 
-### Hydrating an entire document {/*hydrating-an-entire-document*/}
+### একটি সম্পূর্ণ ডকুমেন্টের hydrating {/*hydrating-an-entire-document*/}
 
-Apps fully built with React can render the entire document as JSX, including the [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) tag:
+সম্পূর্ণরূপে React দিয়ে বানানো একটি অ্যাপ [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) ট্যাগসহ পুরো ডকুমেন্ট JSX হিসেবে রেন্ডার করতে পারেঃ 
 
 ```js {3,13}
 function App() {
@@ -221,7 +221,7 @@ function App() {
 }
 ```
 
-To hydrate the entire document, pass the [`document`](https://developer.mozilla.org/en-US/docs/Web/API/Window/document) global as the first argument to `hydrateRoot`:
+সম্পূর্ণ ডকুমেন্ট hydrate করতে, `hydrateRoot` এ [`document`](https://developer.mozilla.org/en-US/docs/Web/API/Window/document) global প্রথম আর্গুমেন্ট হিসেবে পাস করে দিনঃ
 
 ```js {4}
 import { hydrateRoot } from 'react-dom/client';
