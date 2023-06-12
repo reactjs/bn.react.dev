@@ -4,7 +4,7 @@ title: <Profiler>
 
 <Intro>
 
-`<Profiler>` lets you measure rendering performance of a React tree programmatically.
+`<Profiler>` আপনাকে একটা React ট্রিয়ের রেন্ডারিং পারফরম্যান্স প্রোগ্রামের সাহায্যে পরিমাপ করার সুযোগ দেয়।
 
 ```js
 <Profiler id="App" onRender={onRender}>
@@ -18,11 +18,11 @@ title: <Profiler>
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `<Profiler>` {/*profiler*/}
 
-Wrap a component tree in a `<Profiler>` to measure its rendering performance.
+কম্পোনেন্ট ট্রিয়ের রেন্ডারিং পারফরম্যান্স পরিমাপ করার জন্য একে `<Profiler>` এর মধ্যে wrap করুন।
 
 ```js
 <Profiler id="App" onRender={onRender}>
@@ -32,8 +32,8 @@ Wrap a component tree in a `<Profiler>` to measure its rendering performance.
 
 #### Props {/*props*/}
 
-* `id`: A string identifying the part of the UI you are measuring.
-* `onRender`: An [`onRender` callback](#onrender-callback) that React calls it every time components within the profiled tree update. It receives information about what was rendered and how much time it took.
+* `id`: একটা স্ট্রিং যেটা আপনি UI এর যে অংশ পরিমাপ করতে চান সেটাকে চিহ্নিত করতে ব্যবহৃত হয়।
+* `onRender`: এটা একটা [`onRender` কলব্যাক](#onrender-callback) যেটাকে প্রতিবার প্রোফাইল হতে থাকা ট্রিয়ের মধ্যকার কম্পোনেন্ট আপডেট হলে React কল করে। কী রেন্ডার হল এবং কেমন সময় লাগল এই তথ্যটা সে পায়।
 
 #### Caveats {/*caveats*/}
 
@@ -87,15 +87,15 @@ Profiling adds some additional overhead, so **it is disabled in the production b
 
 <Note>
 
-`<Profiler>` lets you gather measurements programmatically. If you're looking for an interactive profiler, try the Profiler tab in [React Developer Tools](/learn/react-developer-tools). It exposes similar functionality as a browser extension.
+`<Profiler>` আপনাকে প্রোগ্রামেটিকালি পরিমাপ জানতে সাহায্য করে। আপনি যদি interactive প্রোফাইলার চান, তাহলে [React ডেভেলপার টুলসের](/learn/react-developer-tools) Profiler ট্যাবটা ব্যবহার করে দেখতে পারেন। এটা ব্রাউজার এক্সটেনশন হিসেবে কাছাকাছি রকম কাজ করে।
 
 </Note>
 
 ---
 
-### Measuring different parts of the application {/*measuring-different-parts-of-the-application*/}
+### অ্যাপ্লিকেশনের বিভিন্ন অংশের পরিমাপ {/*measuring-different-parts-of-the-application*/}
 
-You can use multiple `<Profiler>` components to measure different parts of your application:
+অ্যাপ্লিকেশনের বিভিন্ন অংশের পরিমাপের জন্য আপনি একাধিক `<Profiler>` ব্যবহার করতে পারেনঃ
 
 ```js {5,7}
 <App>
@@ -108,7 +108,7 @@ You can use multiple `<Profiler>` components to measure different parts of your 
 </App>
 ```
 
-You can also nest `<Profiler>` components:
+আপনি `<Profiler>` কম্পোনেন্টগুলো নেস্টও করতে পারেনঃ
 
 ```js {5,7,9,12}
 <App>
@@ -126,7 +126,7 @@ You can also nest `<Profiler>` components:
 </App>
 ```
 
-Although `<Profiler>` is a lightweight component, it should be used only when necessary. Each use adds some CPU and memory overhead to an application.
+যদি `<Profiler>` একটা হালকা কম্পোনেন্ট, এটা শুধুমাত্র তখনি ব্যবহার করা উচিত যখন প্রয়োজন পড়ছে। প্রতি বার ব্যবহারে অ্যাপের CPU এবং Memory এর উপরে অতিরিক্ত কিছু চাপ পড়ে।
 
 ---
 
