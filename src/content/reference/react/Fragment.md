@@ -4,7 +4,7 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node.
+`<Fragment>`, যেটা বেশিরভাগ সময় `<>...</>` সিনট্যাক্স ব্যবহার করে প্রকাশ করা হয়, আপনাকে একটা wrapper নোড ছাড়াই এলিমেন্ট গ্রুপ করার সুবিধা দেবে।
 
 ```js
 <>
@@ -19,19 +19,19 @@ title: <Fragment> (<>...</>)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `<Fragment>` {/*fragment*/}
 
-Wrap elements in `<Fragment>` to group them together in situations where you need a single element. Grouping elements in `Fragment` has no effect on the resulting DOM; it is the same as if the elements were not grouped. The empty JSX tag `<></>` is shorthand for `<Fragment></Fragment>` in most cases.
+যেসব ক্ষেত্রে আপনার একটি মাত্র এলিমেন্ট লাগবে `<Fragment>` এর মধ্যে একাধিক এলিমেন্ট গ্রুপ করে wrap করে ফেলুন। `Fragment` এর মধ্যে গ্রুপ করা হলে ফলাফলে যে DOM পাওয়া যায় তার উপর কোন প্রভাব পড়ে না; গ্রুপ করা না হলে যেমন হত ঠিক তেমনি ঘটে। বেশিরভাগ ক্ষেত্রে খালি JSX ট্যাগ `<></>` কে `<Fragment></Fragment>` প্রকাশ করতে সংক্ষেপে ব্যবহার করা হয়।
 
 #### Props {/*props*/}
 
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
+- **অপশনাল** `key`: যেসব ফ্র্যাগমেন্ট স্পষ্টভাবে `<Fragment>` সিনট্যাক্স দিয়ে ডিক্লেয়ার করা হয় তাদের [keys](/learn/rendering-lists#keeping-list-items-in-order-with-key) থাকতে পারে।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-- If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
+- আপনি যদি একটা ফ্র্যাগমেন্টে `key` পাস করতে চান, আপনি `<>...</>` সিনট্যাক্স ব্যবহার করতে পারবেন না। আপনাকে স্পষ্টভাবে `'react'` থেকে `Fragment` ইমপোর্ট করতে হবে এবং `<Fragment key={yourKey}>...</Fragment>` রেন্ডার করতে হবে।
 
 - React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
 
