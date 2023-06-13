@@ -1343,19 +1343,19 @@ function MyApp() {
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## সমস্যা সমাধান {/*troubleshooting*/}
 
-### My component doesn't see the value from my provider {/*my-component-doesnt-see-the-value-from-my-provider*/}
+### আমার কম্পোনেন্ট আমার provider এর মান দেখতে পায় না {/*my-component-doesnt-see-the-value-from-my-provider*/}
 
-There are a few common ways that this can happen:
+কিছু সাধারণ কারণে এমনটি ঘটতে পারে:
 
-1. You're rendering `<SomeContext.Provider>` in the same component (or below) as where you're calling `useContext()`. Move `<SomeContext.Provider>` *above and outside* the component calling `useContext()`.
-2. You may have forgotten to wrap your component with `<SomeContext.Provider>`, or you might have put it in a different part of the tree than you thought. Check whether the hierarchy is right using [React DevTools.](/learn/react-developer-tools)
-3. You might be running into some build issue with your tooling that causes `SomeContext` as seen from the providing component and `SomeContext` as seen by the reading component to be two different objects. This can happen if you use symlinks, for example. You can verify this by assigning them to globals like `window.SomeContext1` and `window.SomeContext2` and then checking whether `window.SomeContext1 === window.SomeContext2` in the console. If they're not the same, fix that issue on the build tool level.
+1. আপনি যেখানে `useContext()` কল করছেন সেই কম্পোনেন্টে (অথবা  নিচে) `<SomeContext.Provider>` রেন্ডার করেছেন। যে কম্পোনেন্টে `useContext()` কল হচ্ছে তার *উপরে এবং বাইরে* `<SomeContext.Provider>` কে সরিয়ে ফেলুন।
+2. আপনি হয়ত `<SomeContext.Provider>` দিয়ে আপনার কম্পোনেন্টকে wrap করতে ভুলে গেছেন, অথবা আপনি এটিকে ট্রির যেখানে রাখার কথা ভেবেছিলেন তার থেকে হয়ত ভিন্ন কোথাও রেখেছেন। [React DevTools](/learn/react-developer-tools) ব্যবহার করে hierarchy টি সঠিক কি না তা পরীক্ষা করুন।
+3. আপনি হয়ত আপনার টুলিং সম্পর্কিত কিছু বিল্ড সমস্যার ভিতর দিয়ে যাচ্ছেন যার ফলে প্রোভাইডিং কম্পোনেন্ট থেকে `SomeContext` এবং রিডিং কম্পোনেন্ট থেকে `SomeContext` ভিন্ন object হিসাবে দেখাচ্ছে। উদাহরণস্বরূপ, আপনি যদি symlink ব্যবহার করেন, আপনি এগুলোকে গ্লোবালে যুক্ত করে (যেমন `window.SomeContext1` এবং `window.SomeContext2`) এবং তারপর কনসোলে `window.SomeContext1 === window.SomeContext2` কি না তা পরীক্ষা করে এটি যাচাই করতে পারেন। যদি তারা একই না হয়, তাহলে বিল্ড টুল স্তরে সেই সমস্যাটি ঠিক করুন।
 
-### I am always getting `undefined` from my context although the default value is different {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
+### আমি সব সময় আমার context থেকে `undefined` পাচ্ছি যদিও ডিফল্ট মান ভিন্ন {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
-You might have a provider without a `value` in the tree:
+ট্রিতে হয়ত আপনার একটি `value` বিহীন provider আছেঃ
 
 ```js {1,2}
 // 🚩 Doesn't work: no value prop
@@ -1364,9 +1364,9 @@ You might have a provider without a `value` in the tree:
 </ThemeContext.Provider>
 ```
 
-If you forget to specify `value`, it's like passing `value={undefined}`.
+আপনি যদি `value` উল্লেখ করতে ভুলে যান, তাহলে এটি `value={undefined}` এরকম কিছু পাস করে।
 
-You may have also mistakingly used a different prop name by mistake:
+আপনি হয়ত ভুল করে একটি ভিন্ন প্রপ নাম ব্যবহার করতে পারেন:
 
 ```js {1,2}
 // 🚩 Doesn't work: prop should be called "value"
@@ -1375,7 +1375,7 @@ You may have also mistakingly used a different prop name by mistake:
 </ThemeContext.Provider>
 ```
 
-In both of these cases you should see a warning from React in the console. To fix them, call the prop `value`:
+উভয় ক্ষেত্রেই আপনি কনসোলে React থেকে একটি ওয়ার্নিং দেখতে পাবেন। তাদের ঠিক করতে, প্রপ হিসাবে `value` কল করুন:
 
 ```js {1,2}
 // ✅ Passing the value prop
@@ -1384,4 +1384,4 @@ In both of these cases you should see a warning from React in the console. To fi
 </ThemeContext.Provider>
 ```
 
-Note that the [default value from your `createContext(defaultValue)` call](#specifying-a-fallback-default-value) is only used **if there is no matching provider above at all.** If there is a `<SomeContext.Provider value={undefined}>` component somewhere in the parent tree, the component calling `useContext(SomeContext)` *will* receive `undefined` as the context value.
+মনে রাখবেন যে আপনার [`createContext(defaultValue)` কল থেকে ডিফল্ট মানটি](#specifying-a-fallback-default-value) শুধুমাত্র তখনই ব্যবহার করা হয় **যদি উপরে কোন provider এর সাথে মিল না পায়।** যদি প্যারেন্ট ট্রিতে কোথাও একটি `<SomeContext.Provider value={undefined}>` কম্পোনেন্ট থাকে, তাহলে যে কম্পোনেন্ট `useContext(SomeContext)` কল করছে সে context এর মান হিসাবে `undefined` পাবে।
