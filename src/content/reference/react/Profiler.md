@@ -81,7 +81,6 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 
 <Pitfall>
 
-Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
 প্রোফাইলিং কিছু অতিরিক্ত overhead যুক্ত করে, তাই **বাই ডিফল্ট এটা প্রোডাকশন বিল্ডে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং চালু করার জন্য আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) enable করতে হবে।
 
 </Pitfall>
