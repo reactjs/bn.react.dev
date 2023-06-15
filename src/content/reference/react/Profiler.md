@@ -32,14 +32,12 @@ title: <Profiler>
 
 #### Props {/*props*/}
 
-
 * `id`: একটা স্ট্রিং যেটা আপনি UI এর যে অংশ পরিমাপ করতে চান সেটাকে চিহ্নিত করতে ব্যবহৃত হয়।
 * `onRender`: এটা একটা [`onRender` কলব্যাক](#onrender-callback) যেটাকে প্রতিবার প্রোফাইল হতে থাকা ট্রিয়ের মধ্যকার কম্পোনেন্ট আপডেট হলে React কল করে। কী রেন্ডার হল এবং কেমন সময় লাগল এই তথ্যটা সে পায়।
 
-
 #### সতর্কতা {/*caveats*/}
 
-* প্রোফাইলিং কিছু অতিরক্ত কাজ বাড়ায়, তাই এটা **প্রোডাকশন বিল্ডে স্বাভাবিকভাবে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং করতে, আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) চালু করতে হবে।
+* প্রোফাইলিং কিছু অতিরিক্ত কাজ বাড়ায়, তাই এটা **প্রোডাকশন বিল্ডে স্বাভাবিকভাবে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং করতে, আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) চালু করতে হবে।
 
 ---
 
@@ -84,6 +82,7 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 <Pitfall>
 
 Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](https://fb.me/react-profiling)
+প্রোফাইলিং কিছু অতিরিক্ত overhead যুক্ত করে, তাই **বাই ডিফল্ট এটা প্রোডাকশন বিল্ডে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং চালু করার জন্য আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) enable করতে হবে।
 
 </Pitfall>
 
@@ -128,7 +127,7 @@ Profiling adds some additional overhead, so **it is disabled in the production b
 </App>
 ```
 
-যদি `<Profiler>` একটা হালকা কম্পোনেন্ট, এটা শুধুমাত্র তখনি ব্যবহার করা উচিত যখন প্রয়োজন পড়ছে। প্রতি বার ব্যবহারে অ্যাপের CPU এবং Memory এর উপরে অতিরিক্ত কিছু চাপ পড়ে।
+যদিও `<Profiler>` একটা হালকা কম্পোনেন্ট, এটা শুধুমাত্র তখনই ব্যবহার করা উচিত যখন প্রয়োজন পড়ছে। প্রতি বার ব্যবহারে অ্যাপের CPU এবং Memory এর উপরে অতিরিক্ত কিছু চাপ পড়ে।
 
 ---
 
