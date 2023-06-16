@@ -1,5 +1,6 @@
 ---
-title: Quick Start
+title: দ্রুত শুরু
+
 ---
 
 <Intro>
