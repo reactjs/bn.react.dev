@@ -1,10 +1,10 @@
 ---
-title: Describing the UI
+title: UI এর বর্ণনা
 ---
 
 <Intro>
 
-React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable *components.* From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you'll learn to create, customize, and conditionally display React components.
+React একটা জাভাস্ক্রিপ্ট লাইব্রেরি যার কাজ user interfaces (UI) রেন্ডার করা। UI বিচিন্ন ক্ষুদ্র একক যেমন বাটন, টেক্সট বা ছবির মাধ্যমে গোড়ে ওঠে। React আপনাকে সুযোগ দেয় সেগুলোকে reusable, nestable *কম্পোনেন্টে* একত্রিত করার। ওয়েবসাইট থেকে ফোনের অ্যাপ, যা কিছু আপনি স্ক্রিনে দেখতে পান, সব কিছুই কম্পোনেন্টে ভেঙে ফেলা সম্ভব। এই অধ্যায়ে, আপনি React কম্পোনেন্ট বানানো, পরিবর্তন করা এবং লজিকের উপর ভিত্তি করে প্রদর্শন করা শিখবেন। 
 
 </Intro>
 
