@@ -10,20 +10,20 @@ React একটা জাভাস্ক্রিপ্ট লাইব্রে
 
 <YouWillLearn isChapter={true}>
 
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
+* [আপনার প্রথম কম্পোনেন্ট কীভাবে লিখবেন](/learn/your-first-component)
+* [কখন এবং কীভাবে মাল্টি-কম্পোনেন্ট ফাইল তৈরি করবেন](/learn/importing-and-exporting-components)
+* [JSX দিয়ে কীভাবে জাভাস্ক্রিপ্টে মার্কআপ যুক্ত করবেন](/learn/writing-markup-with-jsx)
+* [কীভাবে আপনার কম্পোনেন্ট থেকে জাভাস্ক্রিপ্ট ফাংশনালিটি ব্যবহারের জন্য কার্লি ব্রেস ব্যবহার করবেন](/learn/javascript-in-jsx-with-curly-braces)
+* [Prop দিয়ে কীভাবে কম্পোনেন্ট কনফিগার করবেন](/learn/passing-props-to-a-component)
+* [কীভাবে কম্পোনেন্ট কন্ডিশনালি রেন্ডার করবেন](/learn/conditional-rendering)
+* [কীভাবে এক সাথে একাধিক কম্পোনেন্ট রেন্ডার করবেন](/learn/rendering-lists)
+* [কীভাবে কম্পোনেন্ট pure রাখার মাধ্যমে বিভ্রান্তিকর বাগ এড়িয়ে চলবেন](/learn/keeping-components-pure)
 
 </YouWillLearn>
 
-## Your first component {/*your-first-component*/}
+## আপনার প্রথম কম্পোনেন্ট {/*your-first-component*/}
 
-React applications are built from isolated pieces of UI called *components*. A React component is a JavaScript function that you can sprinkle with markup. Components can be as small as a button, or as large as an entire page. Here is a `Gallery` component rendering three `Profile` components:
+React অ্যাপ্লিকেশনগুলো UI এর পৃথক পৃথক কিছু অংশের মাধ্যমে গড়ে ওঠে যাদের নাম *কম্পোনেন্ট*। একটা React কম্পোনেন্ট হচ্ছে একটা জাভাস্ক্রিপ্ট ফাংশন যা আপনি মার্কাপ দিয়ে সুন্দর করে তুলতে পারেন। একটা কম্পোনেন্ট একটা বাটনের মত ছোট বা একটা পেইজের মত বড় হতে পারে। এখানে দেখতে পাচ্ছেন একটা একটা  `Gallery` যা তিনটি `Profile` কম্পোনেন্ট রেন্ডার করছেঃ
 
 <Sandpack>
 
@@ -57,13 +57,13 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <LearnMore path="/learn/your-first-component">
 
-Read **[Your First Component](/learn/your-first-component)** to learn how to declare and use React components.
+কীভাবে React কম্পোনেন্ট ডিক্লেয়ার এবং ব্যবহার করবেন তা জানতে পড়ুন **[আপনার প্রথম কম্পোনেন্ট।](/learn/your-first-component)** 
 
 </LearnMore>
 
-## Importing and exporting components {/*importing-and-exporting-components*/}
+## কম্পোনেন্টের ইমপোর্ট এবং এক্সপোর্ট {/*importing-and-exporting-components*/}
 
-You can declare many components in one file, but large files can get difficult to navigate. To solve this, you can *export* a component into its own file, and then *import* that component from another file:
+আপনি একটা ফাইলে অনেকগুলো কম্পোনেন্ট ডিক্লেয়ার করতে পারেন, তবে বড় বড় ফাইল navigate করাটা বেশ কষ্টসাধ্য হতে পারে। এটা সমাধানের জন্য, আপনি একটা কম্পোনেন্টকে তার নিজের ফাইলে *এক্সপোর্ট* করতে পারেন, এবং পরে সেটাকে অন্য ফাইলে *ইমপোর্ট* করতে পারেন।
 
 
 <Sandpack>
@@ -112,11 +112,11 @@ img { margin: 0 10px 10px 0; }
 
 <LearnMore path="/learn/importing-and-exporting-components">
 
-Read **[Importing and Exporting Components](/learn/importing-and-exporting-components)** to learn how to split components into their own files.
+কীভাবে কম্পোনেন্টকে তার নিজের একাধিক ফাইলে ভাগ করে নিবেন জানতে পড়ুন **[কম্পোনেন্টের ইমপোর্ট এবং এক্সপোর্ট।](/learn/importing-and-exporting-components)**
 
 </LearnMore>
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## JSX দিয়া মার্ক আপ লেখা{/*writing-markup-with-jsx*/}
 
 Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
 
