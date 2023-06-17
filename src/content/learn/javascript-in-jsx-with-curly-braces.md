@@ -17,9 +17,9 @@ JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering 
 
 </YouWillLearn>
 
-## Passing strings with quotes {/*passing-strings-with-quotes*/}
+## quotes এর সাথে স্ট্রিং পাসিং {/*passing-strings-with-quotes*/}
 
-When you want to pass a string attribute to JSX, you put it in single or double quotes:
+আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, আপনাকে এটি single বা double quotes রাখতে হবে:
 
 <Sandpack>
 
@@ -41,9 +41,9 @@ export default function Avatar() {
 
 </Sandpack>
 
-Here, `"https://i.imgur.com/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
+এখানে, `"https://i.imgur.com/7vQD0fPs.jpg"` এবং `"Gregorio Y. Zara"` স্ট্রিং হিসেবে পাস করা হয়েছে ।
 
-But what if you want to dynamically specify the `src` or `alt` text? You could **use a value from JavaScript by replacing `"` and `"` with `{` and `}`**:
+কিন্তু যদি আপনি dynamic ভাবে `src` বা `alt` টেক্সট নির্দিষ্ট করতে চান? আপনি **জাভাস্ক্রিপ্ট থেকে একটি value ব্যবহার করে `"` and `"` কে `{` and `}`** দিয়ে পরিবর্তন করতে পারেন:
 
 <Sandpack>
 
@@ -67,11 +67,11 @@ export default function Avatar() {
 
 </Sandpack>
 
-Notice the difference between `className="avatar"`, which specifies an `"avatar"` CSS class name that makes the image round, and `src={avatar}` that reads the value of the JavaScript variable called `avatar`. That's because curly braces let you work with JavaScript right there in your markup!
+`className="avatar"` এবং `src={avatar}` এর মধ্যে পার্থক্য লক্ষ্য করুন। `className="avatar"` একটি `"avatar"` নামের CSS ক্লাসকে নির্দিষ্ট করে ও ইমেজকে গোলাকার করে অপরদিকে, `src={avatar}`, `avatar` নামের জাভাস্ক্রিপ্ট ভেরিয়েবলের value পড়ে। এর কারণ হচ্ছে, curly braces আপনাকে আপনার মার্কআপ এর ভিতরে জাভাস্ক্রিপ্ট এর কাজ করতে দেয়!
 
-## Using curly braces: A window into the JavaScript world {/*using-curly-braces-a-window-into-the-javascript-world*/}
+## Curly braces ব্যবহার: জাভাস্ক্রিপ্ট জগতের একটি window {/*using-curly-braces-a-window-into-the-javascript-world*/}
 
-JSX is a special way of writing JavaScript. That means it’s possible to use JavaScript inside it—with curly braces `{ }`. The example below first declares a name for the scientist, `name`, then embeds it with curly braces inside the `<h1>`:
+JSX হল জাভাস্ক্রিপ্ট লেখার একটি বিশেষ উপায়। তার মানে curly braces `{ }` দিয়ে JSX এর ভিতরে জাভাস্ক্রিপ্ট ব্যবহার করা সম্ভব। নীচের উদাহরণটিতে প্রথমে বিজ্ঞানীর জন্য একটি নাম ঘোষণা করা হয়েছে, `name`, তারপর এটিকে `<h1>` এর ভিতরে curly braces দিয়ে embeds করা হয়েছে:
 
 <Sandpack>
 
@@ -86,9 +86,9 @@ export default function TodoList() {
 
 </Sandpack>
 
-Try changing the `name`'s value from `'Gregorio Y. Zara'` to `'Hedy Lamarr'`. See how the list title changes?
+নামের value `'Gregorio Y. Zara'` থেকে `'Hedy Lamarr'`-এ পরিবর্তন করার চেষ্টা করুন। দেখুন কিভাবে list title পরিবর্তন হয়?
 
-Any JavaScript expression will work between curly braces, including function calls like `formatDate()`:
+যেকোন জাভাস্ক্রিপ্ট এক্সপ্রেশন curly braces মধ্যে কাজ করবে, যেমন `formatDate()` এর মতো function calls:
 
 <Sandpack>
 
@@ -111,18 +111,21 @@ export default function TodoList() {
 
 </Sandpack>
 
-### Where to use curly braces {/*where-to-use-curly-braces*/}
+### কোথায় curly braces ব্যবহার করবেন {/*where-to-use-curly-braces*/}
 
-You can only use curly braces in two ways inside JSX:
+আপনি JSX এর ভিতরে শুধুমাত্র দুটি উপায়ে curly braces ব্যবহার করতে পারেন:
+
+1. সরাসরি JSX ট্যাগের ভিতরে **text হিসাবে**: `<h1>{name}'s To Do List</h1>` কাজ করে, কিন্তু `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` করবে না৷
 
 1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
 2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
 
-## Using "double curlies": CSS and other objects in JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
+## "double curlies" ব্যবহার: JSX-এ CSS এবং অন্যান্য অবজেক্ট {/*using-double-curlies-css-and-other-objects-in-jsx*/}
 
-In addition to strings, numbers, and other JavaScript expressions, you can even pass objects in JSX. Objects are also denoted with curly braces, like `{ name: "Hedy Lamarr", inventions: 5 }`. Therefore, to pass a JS object in JSX, you must wrap the object in another pair of curly braces: `person={{ name: "Hedy Lamarr", inventions: 5 }}`.
 
-You may see this with inline CSS styles in JSX. React does not require you to use inline styles (CSS classes work great for most cases). But when you need an inline style, you pass an object to the `style` attribute:
+স্ট্রিং, নাম্বার এবং অন্যান্য জাভাস্ক্রিপ্ট এক্সপ্রেশন ছাড়াও, আপনি JSX এ অবজেক্টও পাস করতে পারেন। জাভাস্ক্রিপ্ট এ অবজেক্টকে curly braces দিয়ে লেখা হয়, যেমন `{ name: "Hedy Lamarr", inventions: 5 }`। অতএব, JSX-এ একটি JS অবজেক্ট পাস করতে হলে, অবশ্যই অবজেক্টকে অন্য আরেকটি curly braces এর ভিতরে দিয়ে দিতে হবে: `person={{ name: "Hedy Lamarr", inventions: 5 }}`।
+
+আপনি JSX এ ইনলাইন CSS styles এ এটি দেখতে পারেন। React জন্য আপনাকে ইনলাইন styles ব্যবহার করতেই হবে তা না (প্রায় ক্ষেত্রেই CSS ক্লাসগুলি ভালো কাজ করে)। কিন্তু যখন আপনার একটি ইনলাইন style এর প্রয়োজন হবে, তখন আপনি একটি অবজেক্টকে `style` attribute এ পাস করতে পারেন:
 
 <Sandpack>
 
