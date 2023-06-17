@@ -120,11 +120,12 @@ export default function TodoList() {
 1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
 2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
 
-## Using "double curlies": CSS and other objects in JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
+## "double curlies" ব্যবহার: JSX-এ CSS এবং অন্যান্য অবজেক্ট {/*using-double-curlies-css-and-other-objects-in-jsx*/}
 
-In addition to strings, numbers, and other JavaScript expressions, you can even pass objects in JSX. Objects are also denoted with curly braces, like `{ name: "Hedy Lamarr", inventions: 5 }`. Therefore, to pass a JS object in JSX, you must wrap the object in another pair of curly braces: `person={{ name: "Hedy Lamarr", inventions: 5 }}`.
 
-You may see this with inline CSS styles in JSX. React does not require you to use inline styles (CSS classes work great for most cases). But when you need an inline style, you pass an object to the `style` attribute:
+স্ট্রিং, নাম্বার এবং অন্যান্য জাভাস্ক্রিপ্ট এক্সপ্রেশন ছাড়াও, আপনি JSX এ অবজেক্টও পাস করতে পারেন। জাভাস্ক্রিপ্ট এ অবজেক্টকে curly braces দিয়ে লেখা হয়, যেমন `{ name: "Hedy Lamarr", inventions: 5 }`। অতএব, JSX-এ একটি JS অবজেক্ট পাস করতে হলে, অবশ্যই অবজেক্টকে অন্য আরেকটি curly braces এর ভিতরে দিয়ে দিতে হবে: `person={{ name: "Hedy Lamarr", inventions: 5 }}`।
+
+আপনি JSX এ ইনলাইন CSS styles এ এটি দেখতে পারেন। React জন্য আপনাকে ইনলাইন styles ব্যবহার করতেই হবে তা না (প্রায় ক্ষেত্রেই CSS ক্লাসগুলি ভালো কাজ করে)। কিন্তু যখন আপনার একটি ইনলাইন style এর প্রয়োজন হবে, তখন আপনি একটি অবজেক্টকে `style` attribute এ পাস করতে পারেন:
 
 <Sandpack>
 
