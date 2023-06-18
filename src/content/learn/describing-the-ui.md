@@ -116,11 +116,11 @@ img { margin: 0 10px 10px 0; }
 
 </LearnMore>
 
-## JSX দিয়া মার্ক আপ লেখা{/*writing-markup-with-jsx*/}
+## JSX দিয়া মার্ক আপ লেখা {/*writing-markup-with-jsx*/}
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
+প্রতিটা React কম্পোনেন্ট একেকটা জাভাস্ক্রিপ্ট ফাংশন যেটাতে কিছু মার্কআপ থাকতে পারে যা React ব্রাউজারে রেন্ডার করে।এই মার্কআপ এর প্রতিনিধিত্ব করার জন্য React কম্পোনেন্টগুলো একটা সিনট্যাক্স এক্সটেনশন ব্যবহার করে যার নাম JSX। JSX অনেকটা HTML এর মত দেখতে, কিন্তু আরেকটু কঠোর যা dynamic তথ্য দেখাতে পারে।
 
-If we paste existing HTML markup into a React component, it won't always work:
+আমরা যদি ইতোমধ্যে লেখা HTML মার্কআপ একটা React কম্পোনেন্টে পেস্ট করে দেই, এটা সব সময় কাজ করবে নাঃ
 
 <Sandpack>
 
@@ -149,7 +149,7 @@ img { height: 90px; }
 
 </Sandpack>
 
-If you have existing HTML like this, you can fix it using a [converter](https://transform.tools/html-to-jsx):
+আপনার যদি এরকম আগে থেকে HTML লেখা থাকে, সেটা আপনি [converter](https://transform.tools/html-to-jsx) ব্যবহার করে ঠিক করতে পারেনঃ
 
 <Sandpack>
 
@@ -181,13 +181,13 @@ img { height: 90px; }
 
 <LearnMore path="/learn/writing-markup-with-jsx">
 
-Read **[Writing Markup with JSX](/learn/writing-markup-with-jsx)** to learn how to write valid JSX.
+কীভাবে সঠিকভাবে JSX লিখবেন জানার জন্য পড়ুন **[JSX দিয়ে মার্কআপ লেখা।](/learn/writing-markup-with-jsx)** 
 
 </LearnMore>
 
-## JavaScript in JSX with curly braces {/*javascript-in-jsx-with-curly-braces*/}
+## কার্লি ব্রেইস ব্যবহার করে JSX এর মধ্যে জাভাস্ক্রিপ্ট {/*javascript-in-jsx-with-curly-braces*/}
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to "open a window" to JavaScript:
+JSX আপনাকে একটা জাভাস্ক্রিপ্ট ফাইলে HTML এর মত মার্কআপ লিখতে দেয়, এতে রেন্ডারিং লজিক আর কনটেন্ট একি জায়গায় থাকে। মাঝে মাঝে আপনি চাইবেন সেই মার্কআপের মধ্যে কিছু জাভাস্ক্রিপ্ট লজিক যুক্ত করতে বা ডাইনামিক প্রোপার্টি রেফারেন্স করতে। এরকম ক্ষেত্রে, আপনি আপনার JSX এর মধ্যে কার্লি ব্রেইস ব্যবহার করে জাভাস্ক্রিপ্টের জন্য "একটা জানা খুলে দিতে পারেন":
 
 <Sandpack>
 
@@ -229,13 +229,13 @@ body > div > div { padding: 20px; }
 
 <LearnMore path="/learn/javascript-in-jsx-with-curly-braces">
 
-Read **[JavaScript in JSX with Curly Braces](/learn/javascript-in-jsx-with-curly-braces)** to learn how to access JavaScript data from JSX.
+JSX থেকে কীভাবে জাভাস্ক্রিপ্ট ডেটায় এক্সেস নিবেন জানতে, **[কার্লি ব্রেইস ব্যবহার করে JSX এর মধ্যে জাভাস্ক্রিপ্ট](/learn/javascript-in-jsx-with-curly-braces)** পড়ুন।
 
 </LearnMore>
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## একটা কম্পোনেন্টে প্রপ পাঠানো {/*passing-props-to-a-component*/}
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX!
+React কম্পোনেন্ট নিজেদের মধ্যে যোগাযোগ করতে *প্রপ* ব্যবহার করে। যেকোন প্যারেন্ট কম্পোনেন্ট তার চাইল্ড কম্পোনেন্টে তথ্য পাঠাতে পারে প্রপ দেবার মাধ্যমে। প্রপ হয়ত আপনাকে HTML এট্রিবিউটের কথা মনে করিয়ে দেবে, তবে আপনি এর মধ্য দিয়ে যেকোন জাভাস্ক্রিপ্ট ভ্যালু পাঠাতে পারেম। সেটা হতে পারে অবজেক্ট, অ্যারে, ফাংশন এমনকি JSX।
 
 <Sandpack>
 
@@ -310,7 +310,7 @@ export function getImageUrl(person, size = 's') {
 
 <LearnMore path="/learn/passing-props-to-a-component">
 
-Read **[Passing Props to a Component](/learn/passing-props-to-a-component)** to learn how to pass and read props.
+কীভাবে প্রপ পাস এবং রিড করবেন জানতে পড়ুন **[একটা কম্পোনেন্টে প্রপ পাঠানো](/learn/passing-props-to-a-component)**
 
 </LearnMore>
 
