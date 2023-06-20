@@ -314,11 +314,11 @@ export function getImageUrl(person, size = 's') {
 
 </LearnMore>
 
-## Conditional rendering {/*conditional-rendering*/}
+## কন্ডিশনাল রেন্ডারিং {/*conditional-rendering*/}
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+বেশির ভাগ সময় ক্ষেত্র বিশেষে আপনার কম্পোনেন্টগুলোর প্রয়োজন হবে বিভিন্ন কিছু প্রদর্শন করা। React এ, জাভাস্ক্রিপ্ট সিনট্যাক্স যেমন `if` স্টেটমেন্ট, `&&` এবং `? :` অপারেটর ব্যবহার করে কন্ডিশনালি JSX রেন্ডার করতে পারেন।
 
-In this example, the JavaScript `&&` operator is used to conditionally render a checkmark:
+এই উদাহরণে জাভাস্ক্রিপ্টের `&&` অপারেটর ব্যবহৃত হয়েছে একটা চেকমার্ক কন্ডিশনালি রেন্ডার করার জন্যঃ
 
 <Sandpack>
 
@@ -358,15 +358,15 @@ export default function PackingList() {
 
 <LearnMore path="/learn/conditional-rendering">
 
-Read **[Conditional Rendering](/learn/conditional-rendering)** to learn the different ways to render content conditionally.
+কন্ডিশনালি কনটেন্ট প্রদর্শনের বিভিন্ন পন্থা জানতে পড়ুন **[Conditional Rendering](/learn/conditional-rendering)**।
 
 </LearnMore>
 
-## Rendering lists {/*rendering-lists*/}
+## লিস্টের রেন্ডারিং {/*rendering-lists*/}
 
-You will often want to display multiple similar components from a collection of data. You can use JavaScript's `filter()` and `map()` with React to filter and transform your array of data into an array of components.
+আপনি প্রায়ই চাইবেন একটা ডেটা কালেকশন থেকে একাধিক একই রকম কনটেন্ট প্রদর্শন করতে। আপনি আপনার ডেটার অ্যারে-কে একটা কম্পোনেন্টের অ্যারে-তে রূপান্তরিত করার জন্য React এর সাথে জাভাস্ক্রিপ্টের `filter()` এবং `map()` ব্যবহার করতে পারেন।
 
-For each array item, you will need to specify a `key`. Usually, you will want to use an ID from the database as a `key`. Keys let React keep track of each item's place in the list even if the list changes.
+অ্যারের প্রতিটা আইটেমের জন্য, আপনাকে একটা `key` নির্দিষ্ট করতে হবে। আপনি সাধারণত ডেটাবেইজ থেকে একটা আইডিকে `key` হিসেবে ব্যবহার করতে চাইবেন। লিস্টে কোন আইটেমটা কোথায় আছে ট্র্যাক রাখতে React কী-গুলো ব্যবহার করতে পারে, এমনকি লিস্টে পরিবর্তন আসলেও এটা কাজ করে।
 
 <Sandpack>
 
@@ -458,18 +458,18 @@ h2 { font-size: 20px; }
 
 <LearnMore path="/learn/rendering-lists">
 
-Read **[Rendering Lists](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
+কীভাবে একটা কম্পোনেন্টের লিস্ট রেন্ডার করবেন এবং কীভাবে একটা key নির্দিষ্ট করবেন জানতে পড়ুন **[লিস্টের রেন্ডারিং](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
 
 </LearnMore>
 
-## Keeping components pure {/*keeping-components-pure*/}
+## কম্পোনেন্ট pure রাখা {/*keeping-components-pure*/}
 
-Some JavaScript functions are *pure.* A pure function:
+কিছু কিছু জাভাস্ক্রিপ্ট ফাংশন *pure.* একটা pure ফাংশনঃ
 
-* **Minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **কেবলমাত্র নিজেরটাই বুঝে।** এটা এর কল হবার আগে থেকে বিদ্যমান কোন অবজেক্ট বা ভ্যারিয়েবল পরিবর্তন করে না।
+* **একই ইনপুটের একই আউটপুট/** একই ইনপুট দেওয়া হলে একটা pure ফাংশন সব সময় একই আউটপুটই দেয়।
 
-By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. Here is an example of an impure component:
+আপনার কোডবেইজ যত বড় হবে, কঠোরভাবে আপনার কম্পোনেন্টগুলোকে pure ফাংশন হিসেবে লেখার মাধ্যমে, আপনি খুব বিরক্তিকর এক গুচ্ছ বাগ এবং অসামাঞ্জস্যপূর্ণ আচরণ থেকে নিজেকে রক্ষা করতে পারেন। এখানে একটি impure কম্পোনেন্টের উদাহরণ দেওয়া হলঃ
 
 <Sandpack>
 
@@ -495,7 +495,7 @@ export default function TeaSet() {
 
 </Sandpack>
 
-You can make this component pure by passing a prop instead of modifying a preexisting variable:
+আগে থেকে বিদ্যমান একটা ভ্যারিয়েবল পরিবর্তনের জায়গায় আপনি যদি একটা প্রপ পাস করে দেন তাহলেই এই কম্পোনেন্টকে pure বানিয়ে ফেলতে পারবেনঃ
 
 <Sandpack>
 
@@ -519,12 +519,12 @@ export default function TeaSet() {
 
 <LearnMore path="/learn/keeping-components-pure">
 
-Read **[Keeping Components Pure](/learn/keeping-components-pure)** to learn how to write components as pure, predictable functions.
+কীভাবে pure এবং অনুমানযোগ্য ফাংশন হিসেবে কম্পোনেন্ট লিখবেন জানতে পড়ুন **[কম্পোনেন্ট pure রাখা।]
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## এর পর তাহলে কী? {/*whats-next*/}
 
-Head over to [Your First Component](/learn/your-first-component) to start reading this chapter page by page!
+এই অধ্যায়টি গুছিয়ে পড়া শুরু করতে চলে যান  [আপনার প্রথম কম্পোনেন্ট](/learn/your-first-component) অংশে।
 
-Or, if you're already familiar with these topics, why not read about [Adding Interactivity](/learn/adding-interactivity)?
+অথবা, বিষয়গুলো যদি আপনার আগে থেকেই জানা থাকে তাহলে, পড়ে ফেলতে পারেন [ইন্টার‍্যাক্টিভিটির সংযুক্তি](/learn/adding-interactivity) অংশটি!
