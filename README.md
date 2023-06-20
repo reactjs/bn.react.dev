@@ -4,6 +4,9 @@ This repo contains the source code and documentation powering [bn.react.dev](htt
 
 ## Getting started
 
+### Join the Bengali discord community
+Hi dev, We are Bengali React doc translation community welcome you to join the discord server - https://github.com/reactjs/bn.react.dev/issues/26
+
 ### Prerequisites
 
 1. Git
@@ -57,7 +60,7 @@ The documentation is divided into several sections with a different tone and pur
 
 ## Translation
 
-If you are interested in translating `bn.react.dev`, please see the current translation efforts [here](https://github.com/reactjs/bn.react.dev/issues/4135).
+If you are interested in translating `bn.react.dev`, please see the current translation efforts [here](https://github.com/reactjs/bn.react.dev/issues/1).
 
 ## License
 Content submitted to [bn.react.dev](https://bn.react.dev/) is CC-BY-4.0 licensed, as found in the [LICENSE-DOCS.md](https://github.com/reactjs/bn.react.dev/blob/main/LICENSE-DOCS.md) file.

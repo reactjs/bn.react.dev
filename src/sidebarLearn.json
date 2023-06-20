@@ -1,5 +1,5 @@
 {
-  "title": "Learn React",
+  "title": "React শিখুন",
   "path": "/learn",
   "routes": [
     {
@@ -15,17 +15,17 @@
           "path": "/learn/tutorial-tic-tac-toe"
         },
         {
-          "title": "Thinking in React",
+          "title": "React এর আলোকে চিন্তা করা",
           "path": "/learn/thinking-in-react"
         }
       ]
     },
     {
-      "title": "Installation",
+      "title": "ইনস্টলেশন",
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Start a New React Project",
+          "title": "একটি নতুন React প্রোজেক্ট শুরু করুন",
           "path": "/learn/start-a-new-react-project"
         },
         {
@@ -33,7 +33,7 @@
           "path": "/learn/add-react-to-an-existing-project"
         },
         {
-          "title": "Editor Setup",
+          "title": "এডিটর সেটাপ",
           "path": "/learn/editor-setup"
         },
         {
@@ -161,11 +161,11 @@
       "tags": ["advanced"],
       "routes": [
         {
-          "title": "Referencing Values with Refs",
+          "title": "Ref এর সাহায্যে ভ্যালু রেফারেন্সিং",
           "path": "/learn/referencing-values-with-refs"
         },
         {
-          "title": "Manipulating the DOM with Refs",
+          "title": "Ref ব্যবহার করে DOM ম্যানিপুলেশন",
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
@@ -186,7 +186,7 @@
         },
         {
           "title": "Removing Effect Dependencies",
-          "path": "/learn/removing-effect-dependencies"              
+          "path": "/learn/removing-effect-dependencies"
         },
         {
           "title": "Reusing Logic with Custom Hooks",
