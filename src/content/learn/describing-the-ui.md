@@ -12,7 +12,7 @@ React একটা জাভাস্ক্রিপ্ট লাইব্রে
 
 * [আপনার প্রথম কম্পোনেন্ট কীভাবে লিখবেন](/learn/your-first-component)
 * [কখন এবং কীভাবে মাল্টি-কম্পোনেন্ট ফাইল তৈরি করবেন](/learn/importing-and-exporting-components)
-* [JSX দিয়ে কীভাবে জাভাস্ক্রিপ্টে marrkap যুক্ত করবেন](/learn/writing-markup-with-jsx)
+* [JSX দিয়ে কীভাবে জাভাস্ক্রিপ্টে মার্কাপ যুক্ত করবেন](/learn/writing-markup-with-jsx)
 * [কীভাবে আপনার কম্পোনেন্ট থেকে জাভাস্ক্রিপ্ট ফাংশনালিটি ব্যবহারের জন্য কার্লি ব্রেস ব্যবহার করবেন](/learn/javascript-in-jsx-with-curly-braces)
 * [Prop দিয়ে কীভাবে কম্পোনেন্ট কনফিগার করবেন](/learn/passing-props-to-a-component)
 * [কীভাবে কম্পোনেন্ট কন্ডিশনালি রেন্ডার করবেন](/learn/conditional-rendering)
