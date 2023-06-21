@@ -53,24 +53,25 @@ A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams)
 
 * React 18 নাগাদ, এই মেথডটি এর সকল আউটপুট বাফার করে, তার এটা আসলে streaming এর সুবিধা দিতে পারে না। এ কারণেই, এর বদলে  [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করার জন্য আপনাকে পরামর্শ দেওয়া হচ্ছে।
 
-* The returned stream is a byte stream encoded in utf-8. If you need a stream in another encoding, take a look at a project like [iconv-lite](https://www.npmjs.com/package/iconv-lite), which provides transform streams for transcoding text.
+* রিটার্ন হওয়া stream হচ্ছে utf-8 এ এনকোড করা byte stream। আপনি যদি অন্য কোন এনকোডিং এ stream চান, তাহলে [iconv-lite](https://www.npmjs.com/package/iconv-lite) এর মত কোন প্রজেক্ট দেখতে পারে, যা টেক্সট transcoding এর জন্য transform stream দেয়।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering a React tree as HTML to a Node.js Readable Stream {/*rendering-a-react-tree-as-html-to-a-nodejs-readable-stream*/}
+### একটা React ট্রিকে HTML হিসেবে একটা Node.js Readable Stream এ রেন্ডার করা {/*rendering-a-react-tree-as-html-to-a-nodejs-readable-stream*/}
 
-Call `renderToNodeStream` to get a [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) which you can pipe to your server response:
+
+একটি [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) পাবার জন্য `renderToNodeStream` কল করুন, যেটা আপনি সার্ভার রেসপন্সে pipe করে দিতে পারবেনঃ
 
 ```js {5-6}
 import { renderToNodeStream } from 'react-dom/server';
 
-// The route handler syntax depends on your backend framework
+//  Route handler syntax আপনার ব্যাকেন্ড ফ্রেমওয়ার্কের উপর নির্ভর করে
 app.use('/', (request, response) => {
   const stream = renderToNodeStream(<App />);
   stream.pipe(response);
 });
 ```
 
-The stream will produce the initial non-interactive HTML output of your React components. On the client, you will need to call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to *hydrate* that server-generated HTML and make it interactive.
+Stream আপনার React কম্পোনেন্টগুলোর প্রাথমিক নন-ইন্টার‍্যাকটিভ HTML আউটপুট তৈরী করবে। ক্লায়েন্টে, সার্ভারে তৈরী হওয়া HTML কে *hydrate* করতে এবং একে ইন্টার‍্যাকটিভ করতে আপনাকে  [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করতে হবে।
