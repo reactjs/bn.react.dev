@@ -113,7 +113,7 @@ function LearnMore({
       <section className="p-8 mt-16 mb-16 flex flex-row shadow-inner-border dark:shadow-inner-border-dark justify-between items-center bg-card dark:bg-card-dark rounded-2xl">
         <div className="flex-col">
           <h2 className="text-primary font-display dark:text-primary-dark font-bold text-2xl leading-tight">
-            Ready to learn this topic?
+            এই বিষয়ে শিখতে প্রস্তুত তো?
           </h2>
           {children}
           {path ? (
@@ -122,7 +122,7 @@ function LearnMore({
               label="Read More"
               href={path}
               type="primary">
-              Read More
+              আরো পড়ুন
               <IconNavArrow displayDirection="right" className="inline ml-1" />
             </ButtonLink>
           ) : null}
@@ -173,7 +173,7 @@ function YouWillLearn({
   children: any;
   isChapter?: boolean;
 }) {
-  let title = isChapter ? 'এই অংশে যা রয়েছে' : 'আপনি যা শিখবেন';
+  let title = isChapter ? 'এই অধ্যায়ে যা রয়েছে' : 'যা যা আপনি শিখবেন';
   return <SimpleCallout title={title}>{children}</SimpleCallout>;
 }
 

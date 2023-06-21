@@ -1,29 +1,29 @@
 ---
-title: Describing the UI
+title: UI এর বর্ণনা
 ---
 
 <Intro>
 
-React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable *components.* From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you'll learn to create, customize, and conditionally display React components.
+React একটা জাভাস্ক্রিপ্ট লাইব্রেরি যার কাজ user interfaces (UI) রেন্ডার করা। UI বিভিন্ন ক্ষুদ্র একক যেমন বাটন, টেক্সট বা ছবির মাধ্যমে গড়ে ওঠে। React আপনাকে সুযোগ দেয় সেগুলোকে reusable, nestable *কম্পোনেন্টে* একত্রিত করার। ওয়েবসাইট হোক বা ফোনের অ্যাপ, যা কিছু আপনি স্ক্রিনে দেখতে পান, সব কিছুই কম্পোনেন্টে ভেঙে ফেলা সম্ভব। এই অধ্যায়ে, আপনি React কম্পোনেন্ট বানানো, পরিবর্তন করা এবং লজিকের উপর ভিত্তি করে প্রদর্শন করা শিখবেন। 
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
+* [আপনার প্রথম কম্পোনেন্ট কীভাবে লিখবেন](/learn/your-first-component)
+* [কখন এবং কীভাবে মাল্টি-কম্পোনেন্ট ফাইল তৈরি করবেন](/learn/importing-and-exporting-components)
+* [JSX দিয়ে কীভাবে জাভাস্ক্রিপ্টে মার্কাপ যুক্ত করবেন](/learn/writing-markup-with-jsx)
+* [কীভাবে আপনার কম্পোনেন্ট থেকে জাভাস্ক্রিপ্ট ফাংশনালিটি ব্যবহারের জন্য কার্লি ব্রেস ব্যবহার করবেন](/learn/javascript-in-jsx-with-curly-braces)
+* [Prop দিয়ে কীভাবে কম্পোনেন্ট কনফিগার করবেন](/learn/passing-props-to-a-component)
+* [কীভাবে কম্পোনেন্ট কন্ডিশনালি রেন্ডার করবেন](/learn/conditional-rendering)
+* [কীভাবে এক সাথে একাধিক কম্পোনেন্ট রেন্ডার করবেন](/learn/rendering-lists)
+* [কীভাবে কম্পোনেন্ট pure রাখার মাধ্যমে বিভ্রান্তিকর বাগ এড়িয়ে চলবেন](/learn/keeping-components-pure)
 
 </YouWillLearn>
 
-## Your first component {/*your-first-component*/}
+## আপনার প্রথম কম্পোনেন্ট {/*your-first-component*/}
 
-React applications are built from isolated pieces of UI called *components*. A React component is a JavaScript function that you can sprinkle with markup. Components can be as small as a button, or as large as an entire page. Here is a `Gallery` component rendering three `Profile` components:
+React অ্যাপ্লিকেশনগুলো UI এর পৃথক পৃথক কিছু অংশের মাধ্যমে গড়ে ওঠে যাদের নাম *কম্পোনেন্ট*। একটা React কম্পোনেন্ট হচ্ছে একটা জাভাস্ক্রিপ্ট ফাংশন যা আপনি মার্কাপ দিয়ে সুন্দর করে তুলতে পারেন। একটা কম্পোনেন্ট একটা বাটনের মত ছোট বা একটা পেইজের মত বড় হতে পারে। এখানে দেখতে পাচ্ছেন একটা একটা  `Gallery` যা তিনটি `Profile` কম্পোনেন্ট রেন্ডার করছেঃ
 
 <Sandpack>
 
@@ -57,13 +57,13 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <LearnMore path="/learn/your-first-component">
 
-Read **[Your First Component](/learn/your-first-component)** to learn how to declare and use React components.
+কীভাবে React কম্পোনেন্ট ডিক্লেয়ার এবং ব্যবহার করবেন তা জানতে পড়ুন **[আপনার প্রথম কম্পোনেন্ট।](/learn/your-first-component)** 
 
 </LearnMore>
 
-## Importing and exporting components {/*importing-and-exporting-components*/}
+## কম্পোনেন্টের ইমপোর্ট এবং এক্সপোর্ট {/*importing-and-exporting-components*/}
 
-You can declare many components in one file, but large files can get difficult to navigate. To solve this, you can *export* a component into its own file, and then *import* that component from another file:
+আপনি একটা ফাইলে অনেকগুলো কম্পোনেন্ট ডিক্লেয়ার করতে পারেন, তবে বড় বড় ফাইল navigate করাটা বেশ কষ্টসাধ্য হতে পারে। এটা সমাধানের জন্য, আপনি একটা কম্পোনেন্টকে তার নিজের ফাইলে *এক্সপোর্ট* করতে পারেন, এবং পরে সেটাকে অন্য ফাইলে *ইমপোর্ট* করতে পারেন।
 
 
 <Sandpack>
@@ -112,15 +112,15 @@ img { margin: 0 10px 10px 0; }
 
 <LearnMore path="/learn/importing-and-exporting-components">
 
-Read **[Importing and Exporting Components](/learn/importing-and-exporting-components)** to learn how to split components into their own files.
+কীভাবে কম্পোনেন্টকে তার নিজের একাধিক ফাইলে ভাগ করে নিবেন জানতে পড়ুন **[কম্পোনেন্টের ইমপোর্ট এবং এক্সপোর্ট।](/learn/importing-and-exporting-components)**
 
 </LearnMore>
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## JSX দিয়া মার্ক আপ লেখা {/*writing-markup-with-jsx*/}
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
+প্রতিটা React কম্পোনেন্ট একেকটা জাভাস্ক্রিপ্ট ফাংশন যেটাতে কিছু মার্কাপ থাকতে পারে যা React ব্রাউজারে রেন্ডার করে।এই মার্কাপ এর প্রতিনিধিত্ব করার জন্য React কম্পোনেন্টগুলো একটা সিনট্যাক্স এক্সটেনশন ব্যবহার করে যার নাম JSX। JSX অনেকটা HTML এর মত দেখতে, কিন্তু আরেকটু কঠোর যা dynamic তথ্য দেখাতে পারে।
 
-If we paste existing HTML markup into a React component, it won't always work:
+আমরা যদি ইতোমধ্যে লেখা HTML মার্কাপ একটা React কম্পোনেন্টে পেস্ট করে দেই, এটা সব সময় কাজ করবে নাঃ
 
 <Sandpack>
 
@@ -149,7 +149,7 @@ img { height: 90px; }
 
 </Sandpack>
 
-If you have existing HTML like this, you can fix it using a [converter](https://transform.tools/html-to-jsx):
+আপনার যদি এরকম আগে থেকে HTML লেখা থাকে, সেটা আপনি [converter](https://transform.tools/html-to-jsx) ব্যবহার করে ঠিক করতে পারেনঃ
 
 <Sandpack>
 
@@ -181,13 +181,13 @@ img { height: 90px; }
 
 <LearnMore path="/learn/writing-markup-with-jsx">
 
-Read **[Writing Markup with JSX](/learn/writing-markup-with-jsx)** to learn how to write valid JSX.
+কীভাবে সঠিকভাবে JSX লিখবেন জানার জন্য পড়ুন **[JSX দিয়ে মার্কাপ লেখা।](/learn/writing-markup-with-jsx)** 
 
 </LearnMore>
 
-## JavaScript in JSX with curly braces {/*javascript-in-jsx-with-curly-braces*/}
+## কার্লি ব্রেইস ব্যবহার করে JSX এর মধ্যে জাভাস্ক্রিপ্ট {/*javascript-in-jsx-with-curly-braces*/}
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to "open a window" to JavaScript:
+JSX আপনাকে একটা জাভাস্ক্রিপ্ট ফাইলে HTML এর মত মার্কাপ লিখতে দেয়, এতে রেন্ডারিং লজিক আর কনটেন্ট একি জায়গায় থাকে। মাঝে মাঝে আপনি চাইবেন সেই মার্কাপের মধ্যে কিছু জাভাস্ক্রিপ্ট লজিক যুক্ত করতে বা ডাইনামিক প্রোপার্টি রেফারেন্স করতে। এরকম ক্ষেত্রে, আপনি আপনার JSX এর মধ্যে কার্লি ব্রেইস ব্যবহার করে জাভাস্ক্রিপ্টের জন্য "একটা জানালা খুলে দিতে পারেন":
 
 <Sandpack>
 
@@ -229,13 +229,13 @@ body > div > div { padding: 20px; }
 
 <LearnMore path="/learn/javascript-in-jsx-with-curly-braces">
 
-Read **[JavaScript in JSX with Curly Braces](/learn/javascript-in-jsx-with-curly-braces)** to learn how to access JavaScript data from JSX.
+JSX থেকে কীভাবে জাভাস্ক্রিপ্ট ডেটায় এক্সেস নিবেন জানতে, **[কার্লি ব্রেইস ব্যবহার করে JSX এর মধ্যে জাভাস্ক্রিপ্ট](/learn/javascript-in-jsx-with-curly-braces)** পড়ুন।
 
 </LearnMore>
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## একটা কম্পোনেন্টে প্রপ পাঠানো {/*passing-props-to-a-component*/}
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX!
+React কম্পোনেন্ট নিজেদের মধ্যে যোগাযোগ করতে *প্রপ* ব্যবহার করে। যেকোন প্যারেন্ট কম্পোনেন্ট তার চাইল্ড কম্পোনেন্টে তথ্য পাঠাতে পারে প্রপ দেবার মাধ্যমে। প্রপ হয়ত আপনাকে HTML এট্রিবিউটের কথা মনে করিয়ে দেবে, তবে আপনি এর মধ্য দিয়ে যেকোন জাভাস্ক্রিপ্ট ভ্যালু পাঠাতে পারেন। সেটা হতে পারে অবজেক্ট, অ্যারে, ফাংশন এমনকি JSX।
 
 <Sandpack>
 
@@ -310,15 +310,15 @@ export function getImageUrl(person, size = 's') {
 
 <LearnMore path="/learn/passing-props-to-a-component">
 
-Read **[Passing Props to a Component](/learn/passing-props-to-a-component)** to learn how to pass and read props.
+কীভাবে প্রপ পাস এবং রিড করবেন জানতে পড়ুন **[একটা কম্পোনেন্টে প্রপ পাঠানো](/learn/passing-props-to-a-component)**
 
 </LearnMore>
 
-## Conditional rendering {/*conditional-rendering*/}
+## কন্ডিশনাল রেন্ডারিং {/*conditional-rendering*/}
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+বেশির ভাগ সময় ক্ষেত্র বিশেষে আপনার কম্পোনেন্টগুলোর প্রয়োজন হবে বিভিন্ন কিছু প্রদর্শন করা। React এ, জাভাস্ক্রিপ্ট সিনট্যাক্স যেমন `if` স্টেটমেন্ট, `&&` এবং `? :` অপারেটর ব্যবহার করে কন্ডিশনালি JSX রেন্ডার করতে পারেন।
 
-In this example, the JavaScript `&&` operator is used to conditionally render a checkmark:
+এই উদাহরণে জাভাস্ক্রিপ্টের `&&` অপারেটর ব্যবহৃত হয়েছে একটা চেকমার্ক কন্ডিশনালি রেন্ডার করার জন্যঃ
 
 <Sandpack>
 
@@ -358,15 +358,15 @@ export default function PackingList() {
 
 <LearnMore path="/learn/conditional-rendering">
 
-Read **[Conditional Rendering](/learn/conditional-rendering)** to learn the different ways to render content conditionally.
+কন্ডিশনালি কনটেন্ট প্রদর্শনের বিভিন্ন পন্থা জানতে পড়ুন **[Conditional Rendering](/learn/conditional-rendering)**।
 
 </LearnMore>
 
-## Rendering lists {/*rendering-lists*/}
+## লিস্টের রেন্ডারিং {/*rendering-lists*/}
 
-You will often want to display multiple similar components from a collection of data. You can use JavaScript's `filter()` and `map()` with React to filter and transform your array of data into an array of components.
+আপনি প্রায়ই চাইবেন একটা ডেটা কালেকশন থেকে একাধিক একই রকম কনটেন্ট প্রদর্শন করতে। আপনি আপনার ডেটার অ্যারে-কে একটা কম্পোনেন্টের অ্যারে-তে রূপান্তরিত করার জন্য React এর সাথে জাভাস্ক্রিপ্টের `filter()` এবং `map()` ব্যবহার করতে পারেন।
 
-For each array item, you will need to specify a `key`. Usually, you will want to use an ID from the database as a `key`. Keys let React keep track of each item's place in the list even if the list changes.
+অ্যারের প্রতিটা আইটেমের জন্য, আপনাকে একটা `key` নির্দিষ্ট করতে হবে। আপনি সাধারণত ডেটাবেইজ থেকে একটা আইডিকে `key` হিসেবে ব্যবহার করতে চাইবেন। লিস্টে কোন আইটেমটা কোথায় আছে ট্র্যাক রাখতে React কী-গুলো ব্যবহার করতে পারে, এমনকি লিস্টে পরিবর্তন আসলেও এটা কাজ করে।
 
 <Sandpack>
 
@@ -458,18 +458,18 @@ h2 { font-size: 20px; }
 
 <LearnMore path="/learn/rendering-lists">
 
-Read **[Rendering Lists](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
+কীভাবে একটা কম্পোনেন্টের লিস্ট রেন্ডার করবেন এবং কীভাবে একটা key নির্দিষ্ট করবেন জানতে পড়ুন **[লিস্টের রেন্ডারিং।](/learn/rendering-lists)**
 
 </LearnMore>
 
-## Keeping components pure {/*keeping-components-pure*/}
+## কম্পোনেন্ট pure রাখা {/*keeping-components-pure*/}
 
-Some JavaScript functions are *pure.* A pure function:
+কিছু কিছু জাভাস্ক্রিপ্ট ফাংশন *pure.* একটা pure ফাংশনঃ
 
-* **Minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **কেবলমাত্র নিজেরটাই বুঝে।** এটা এর কল হবার আগে থেকে বিদ্যমান কোন অবজেক্ট বা ভ্যারিয়েবল পরিবর্তন করে না।
+* **একই ইনপুটের একই আউটপুট।** একই ইনপুট দেওয়া হলে একটা pure ফাংশন সব সময় একই আউটপুটই দেয়।
 
-By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. Here is an example of an impure component:
+আপনার কোডবেইজ যত বড় হবে, কঠোরভাবে আপনার কম্পোনেন্টগুলোকে pure ফাংশন হিসেবে লেখার মাধ্যমে, আপনি খুব বিরক্তিকর এক গুচ্ছ বাগ এবং অসামাঞ্জস্যপূর্ণ আচরণ থেকে নিজেকে রক্ষা করতে পারেন। এখানে একটি impure কম্পোনেন্টের উদাহরণ দেওয়া হলঃ
 
 <Sandpack>
 
@@ -495,7 +495,7 @@ export default function TeaSet() {
 
 </Sandpack>
 
-You can make this component pure by passing a prop instead of modifying a preexisting variable:
+আগে থেকে বিদ্যমান একটা ভ্যারিয়েবল পরিবর্তনের জায়গায় আপনি যদি একটা প্রপ পাস করে দেন তাহলেই এই কম্পোনেন্টকে pure বানিয়ে ফেলতে পারবেনঃ
 
 <Sandpack>
 
@@ -519,12 +519,12 @@ export default function TeaSet() {
 
 <LearnMore path="/learn/keeping-components-pure">
 
-Read **[Keeping Components Pure](/learn/keeping-components-pure)** to learn how to write components as pure, predictable functions.
+কীভাবে pure এবং অনুমানযোগ্য ফাংশন হিসেবে কম্পোনেন্ট লিখবেন জানতে পড়ুন **[কম্পোনেন্ট pure রাখা।]**
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## এর পর তাহলে কী? {/*whats-next*/}
 
-Head over to [Your First Component](/learn/your-first-component) to start reading this chapter page by page!
+এই অধ্যায়টি গুছিয়ে পড়া শুরু করতে চলে যান  [আপনার প্রথম কম্পোনেন্ট](/learn/your-first-component) অংশে।
 
-Or, if you're already familiar with these topics, why not read about [Adding Interactivity](/learn/adding-interactivity)?
+অথবা, বিষয়গুলো যদি আপনার আগে থেকেই জানা থাকে তাহলে, পড়ে ফেলতে পারেন [ইন্টার‍্যাক্টিভিটির সংযুক্তি](/learn/adding-interactivity) অংশটি!
