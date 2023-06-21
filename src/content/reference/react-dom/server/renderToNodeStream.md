@@ -4,13 +4,13 @@ title: renderToNodeStream
 
 <Deprecated>
 
-This API will be removed in a future major version of React. Use [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) instead.
+এই API ভবিষ্যতে React এর বড় কোন আপডেতে ফেলে দেওয়া হবে। এর বদলে  [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করুন।
 
 </Deprecated>
 
 <Intro>
 
-`renderToNodeStream` renders a React tree to a [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams)
+`renderToNodeStream` একটি React ট্রিকে একটি [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
 
 ```js
 const stream = renderToNodeStream(reactNode)
@@ -22,11 +22,11 @@ const stream = renderToNodeStream(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `renderToNodeStream(reactNode)` {/*rendertonodestream*/}
 
-On the server, call `renderToNodeStream` to get a [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) which you can pipe into the response.
+সার্ভারে, [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) পাবার জন্য `renderToNodeStream` কল করুন, যেটা আপনি রেসপন্সের মধ্যে pipe করে দিতে পারবেন।
 
 ```js
 import { renderToNodeStream } from 'react-dom/server';
@@ -35,7 +35,7 @@ const stream = renderToNodeStream(<App />);
 stream.pipe(response);
 ```
 
-On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to make the server-generated HTML interactive.
+ক্লায়েন্টে, সার্ভার থেকে তৈরী HTML ইন্টার‍্যাক্টিভ করতে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করুন।
 
 [See more examples below.](#usage)
 
@@ -47,11 +47,11 @@ On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to 
 
 A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) that outputs an HTML string.
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* This method will wait for all [Suspense boundaries](/reference/react/Suspense) to complete before returning any output.
+* এই মেথডটি কোন আউটপুট রিটার্ন করবার আগে সকল [Suspense boundary](/reference/react/Suspense) এর সম্পূর্ণ হবার জন্য অপেক্ষা করে।
 
-* As of React 18, this method buffers all of its output, so it doesn't actually provide any streaming benefits. This is why it's recommended that you migrate to [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) instead.
+* React 18 নাগাদ, এই মেথডটি এর সকল আউটপুট বাফার করে, তার এটা আসলে streaming এর সুবিধা দিতে পারে না। এ কারণেই, এর বদলে  [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করার জন্য আপনাকে পরামর্শ দেওয়া হচ্ছে।
 
 * The returned stream is a byte stream encoded in utf-8. If you need a stream in another encoding, take a look at a project like [iconv-lite](https://www.npmjs.com/package/iconv-lite), which provides transform streams for transcoding text.
 
