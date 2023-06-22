@@ -14,8 +14,8 @@ title: Server React DOM API
 
 [Node.js Streams](https://nodejs.org/api/stream.html) সহ এনভায়রনমেন্ট গুলোতে কেবল এই মেথডগুলো পাওয়া যাবেঃ 
 
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটা React ট্রিকে একটা pipeable [Node.js Stream](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
-* [`renderToStaticNodeStream`](/reference/react-dom/server/renderToStaticNodeStream) একটা নন-ইন্টার‍্যাকটিভ React ট্রিকে একটা [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
+* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটা React ট্রি কে একটা pipeable [Node.js Stream](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
+* [`renderToStaticNodeStream`](/reference/react-dom/server/renderToStaticNodeStream) একটা নন-ইন্টার‍্যাকটিভ React ট্রি কে একটা [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
 
 ---
 
@@ -27,12 +27,12 @@ title: Server React DOM API
 
 ---
 
-## Non-streaming এনভায়রনমেন্টের জন্য Server API {/*server-apis-for-non-streaming-environments*/}
+## Non-streaming এনভায়রনমেন্টের জন্য Server API সমূহ {/*server-apis-for-non-streaming-environments*/}
 
-These methods can be used in the environments that don't support streams: এই মেথডগুলো সেই সব এনভায়রনমেন্টে ব্যবহার করা যাবে যেগুলো stream সাপোর্ট করে না।
+এই মেথডগুলো সেই সব এনভায়রনমেন্টে ব্যবহার করা যাবে যেগুলো stream সাপোর্ট করে নাঃ
 
-* [`renderToString`](/reference/react-dom/server/renderToString) একটা React ট্রিকে একটা স্ট্রিং এ রেন্ডার করে।
-* [`renderToStaticMarkup`](/reference/react-dom/server/renderToStaticMarkup) একটা নন-ইন্টার‍্যাকটিভ React ট্রিকে একটা স্ট্রিং এ রেন্ডার করে।
+* [`renderToString`](/reference/react-dom/server/renderToString) একটা React ট্রি কে একটা স্ট্রিং এ রেন্ডার করে।
+* [`renderToStaticMarkup`](/reference/react-dom/server/renderToStaticMarkup) একটা নন-ইন্টার‍্যাকটিভ React ট্রি কে একটা স্ট্রিং এ রেন্ডার করে।
 
 Streaming API গুলোর তুলনার এদের ফাংশনালিটি সীমাবদ্ধ।
 
