@@ -4,7 +4,7 @@ title: renderToStaticMarkup
 
 <Intro>
 
-`renderToStaticMarkup` একটি নন-ইন্টার‌্যাক্টিভ React ট্রি কে একটি HTML স্ট্রিং এ রেন্ডার করে।
+`renderToStaticMarkup` একটি নন-ইন্টার‍্যাক্টিভ React ট্রি কে একটি HTML স্ট্রিং এ রেন্ডার করে।
 
 ```js
 const html = renderToStaticMarkup(reactNode)
@@ -28,13 +28,13 @@ import { renderToStaticMarkup } from 'react-dom/server';
 const html = renderToStaticMarkup(<Page />);
 ```
 
-এটা আপনার React কম্পোনেন্টের নন-ইন্টার‌্যাক্টিভ HTML আউটপুট তৈরি করবে।
+এটা আপনার React কম্পোনেন্টের নন-ইন্টার‍্যাক্টিভ HTML আউটপুট তৈরি করবে।
 
 [নিচে আরো উদাহরণ দেখুন।](#usage)
 
 #### প্যারামিটার {/*parameters*/}
 
-* `reactNode`: একটা React নোড যা আপনি HTML এ রেন্ডার করতে চান। উদাহরণস্বরূপ,  `<Page />` এর মত একটি JSX নোড।
+* `reactNode`: একটা React নোড যা আপনি HTML এ রেন্ডার করতে চান। উদাহরণস্বরূপ, `<Page />` এর মত একটি JSX নোড।
 
 #### রিটার্ন {/*returns*/}
 
@@ -52,7 +52,7 @@ const html = renderToStaticMarkup(<Page />);
 
 ## ব্যবহার {/*usage*/}
 
-### একটি নন-ইন্টার‌্যাক্টিভ React ট্রি কে HTML হিসেবে একটি স্ট্রিং এ রেন্ডার করা {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
+### একটি নন-ইন্টার‍্যাক্টিভ React ট্রি কে HTML হিসেবে একটি স্ট্রিং এ রেন্ডার করা {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
 
 আপনার অ্যাপটি একটি HTML স্ট্রিং এ রেন্ডার করার জন্য `renderToStaticMarkup` কল করুন যেটা আপনি আপনার সার্ভার রেসপন্সের সাথে পাঠাতে পারবেনঃ
 
@@ -66,12 +66,12 @@ app.use('/', (request, response) => {
 });
 ```
 
-এটা আপনার React কম্পোনেন্টের প্রাথমিক নন-ইন্টার‌্যাক্টিভ HTML আউটপুট তৈরি করবে।
+এটা আপনার React কম্পোনেন্টের প্রাথমিক নন-ইন্টার‍্যাক্টিভ HTML আউটপুট তৈরি করবে।
 
 <Pitfall>
 
-এই মেথডটা রেন্ডার করে **নন-ইন্টার‌্যাক্টিভ HTML যা hydrate করা যায় না।** এটা কাজে লাগে যখন আপনি React কে একটি simple static page generator হিসেবে ব্যবহার করতে চান, অথবা আপনি সম্পূর্ণরূপে স্ট্যাটিক কনটেন্ট যেমন ইমেইল রেন্ডার করছেন।
+এই মেথডটা রেন্ডার করে **নন-ইন্টার‍্যাক্টিভ HTML যা hydrate করা যায় না।** এটা কাজে লাগে যখন আপনি React কে একটি simple static page generator হিসেবে ব্যবহার করতে চান, অথবা আপনি সম্পূর্ণরূপে স্ট্যাটিক কনটেন্ট যেমন ইমেইল রেন্ডার করছেন।
 
-ইন্টার‌্যাক্টিভ অ্যাপের উচিত সার্ভারে [`renderToString`](/reference/react-dom/server/renderToString) ব্যবহার করা এবং ক্লায়েন্টে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করা।
+ইন্টার‍্যাক্টিভ অ্যাপের উচিত সার্ভারে [`renderToString`](/reference/react-dom/server/renderToString) ব্যবহার করা এবং ক্লায়েন্টে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করা।
 
 </Pitfall>
