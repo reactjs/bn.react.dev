@@ -4,7 +4,7 @@ title: renderToStaticMarkup
 
 <Intro>
 
-`renderToStaticMarkup` renders a non-interactive React tree to an HTML string.
+`renderToStaticMarkup` একটি নন-ইন্টার‍্যাক্টিভ React ট্রি কে একটি HTML স্ট্রিং এ রেন্ডার করে।
 
 ```js
 const html = renderToStaticMarkup(reactNode)
@@ -16,11 +16,11 @@ const html = renderToStaticMarkup(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
 
-On the server, call `renderToStaticMarkup` to render your app to HTML.
+সার্ভারে, আপনার অ্যাপটি HTML এ রেন্ডার করার জন্য কল করুন `renderToStaticMarkup`।
 
 ```js
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -28,50 +28,50 @@ import { renderToStaticMarkup } from 'react-dom/server';
 const html = renderToStaticMarkup(<Page />);
 ```
 
-It will produce non-interactive HTML output of your React components.
+এটা আপনার React কম্পোনেন্টের নন-ইন্টার‍্যাক্টিভ HTML আউটপুট তৈরি করবে।
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `reactNode`: A React node you want to render to HTML. For example, a JSX node like `<Page />`.
+* `reactNode`: একটা React নোড যা আপনি HTML এ রেন্ডার করতে চান। উদাহরণস্বরূপ, `<Page />` এর মত একটি JSX নোড।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-An HTML string.
+একটি HTML স্ট্রিং।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* `renderToStaticMarkup` output cannot be hydrated.
+* `renderToStaticMarkup` এর আউটপুটকে hydrate করা যায় না।
 
-* `renderToStaticMarkup` has limited Suspense support. If a component suspends, `renderToStaticMarkup` immediately sends its fallback as HTML.
+* `renderToStaticMarkup` সীমাবদ্ধভাবে suspense সাপোর্ট করে। যদি একটি কম্পোনেন্ট suspend করে, `renderToStaticMarkup` তৎক্ষণাৎ এর ফলব্যাক HTML হিসেবে পাঠিয়ে দেয়।
 
-* `renderToStaticMarkup` works in the browser, but using it in the client code is not recommended. If you need to render a component to HTML in the browser, [get the HTML by rendering it into a DOM node.](/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code)
+* `renderToStaticMarkup` ব্রাউজারে কাজ করে, কিন্তু একে ক্লায়েন্ট কোডে ব্যবহার না করার পরামর্শ দেওয়া হয়। আপনার যদি ব্রাউজারে একটি কম্পোনেন্ট HTML এ রেন্ডার করার প্রয়োজন হয়, [HTML কোডটিকে একটি DOM নোডে রেন্ডার করুন।](/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code)
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering a non-interactive React tree as HTML to a string {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
+### একটি নন-ইন্টার‍্যাক্টিভ React ট্রি কে HTML হিসেবে একটি স্ট্রিং এ রেন্ডার করা {/*rendering-a-non-interactive-react-tree-as-html-to-a-string*/}
 
-Call `renderToStaticMarkup` to render your app to an HTML string which you can send with your server response:
+আপনার অ্যাপটি একটি HTML স্ট্রিং এ রেন্ডার করার জন্য `renderToStaticMarkup` কল করুন যেটা আপনি আপনার সার্ভার রেসপন্সের সাথে পাঠাতে পারবেনঃ
 
 ```js {5-6}
 import { renderToStaticMarkup } from 'react-dom/server';
 
-// The route handler syntax depends on your backend framework
+// Route handler syntax আপনার ব্যাকেন্ড ফ্রেমওয়ার্কের উপর নির্ভর করবে
 app.use('/', (request, response) => {
   const html = renderToStaticMarkup(<Page />);
   response.send(html);
 });
 ```
 
-This will produce the initial non-interactive HTML output of your React components.
+এটা আপনার React কম্পোনেন্টের প্রাথমিক নন-ইন্টার‍্যাক্টিভ HTML আউটপুট তৈরি করবে।
 
 <Pitfall>
 
-This method renders **non-interactive HTML that cannot be hydrated.**  This is useful if you want to use React as a simple static page generator, or if you're rendering completely static content like emails.
+এই মেথডটা রেন্ডার করে **নন-ইন্টার‍্যাক্টিভ HTML যা hydrate করা যায় না।** এটা কাজে লাগে যখন আপনি React কে একটি simple static page generator হিসেবে ব্যবহার করতে চান, অথবা আপনি সম্পূর্ণরূপে স্ট্যাটিক কনটেন্ট যেমন ইমেইল রেন্ডার করছেন।
 
-Interactive apps should use [`renderToString`](/reference/react-dom/server/renderToString) on the server and [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) on the client.
+ইন্টার‍্যাক্টিভ অ্যাপের উচিত সার্ভারে [`renderToString`](/reference/react-dom/server/renderToString) ব্যবহার করা এবং ক্লায়েন্টে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করা।
 
 </Pitfall>
