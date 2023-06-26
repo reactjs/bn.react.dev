@@ -4,37 +4,37 @@ title: "React DOM Components"
 
 <Intro>
 
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
+React সকল প্রকার ব্রাউজার বিল্ট-ইন [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) এবং [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) কম্পোনেন্ট সাপোর্ট করে।
 
 </Intro>
 
 ---
 
-## Common components {/*common-components*/}
+## সাধারণ কম্পোনেন্ট {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+সকল বিল্ট-ইন ব্রাউজার কম্পোনেন্ট কিছু প্রপ এবং ইভেন্ট সাপোর্ট করে।
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
+* [সাধারণ component (e.g. `<div>`)](/reference/react-dom/components/common)
 
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
+এর মধ্যে রয়েছে React-specific প্রপ যেমন `ref` এবং `dangerouslySetInnerHTML`।
 
 ---
 
-## Form components {/*form-components*/}
+## ফর্ম কম্পোনেন্ট {/*form-components*/}
 
-These built-in browser components accept user input:
+এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলো ইউজার ইনপুট গ্রহণ করে।
 
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+তারা React এর মধ্যে বিশেষ কারণ তাদের কাছে `value` প্রপ পাঠানোর বিষয়টা তাদেরকে *[নিয়ন্ত্রিত](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* বানায়।
 
 ---
 
-## All HTML components {/*all-html-components*/}
+## সকল HTML কম্পোনেন্ট {/*all-html-components*/}
 
-React supports all built-in browser HTML components. This includes:
+React সকল বিল্ট-ইন ব্রাউজার HTML কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
