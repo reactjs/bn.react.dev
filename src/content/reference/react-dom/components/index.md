@@ -140,36 +140,36 @@ React সকল বিল্ট-ইন ব্রাউজার HTML কম্�
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান HTML কে JSX এ রূপান্তরিত করতে পারবেন।
 
 </Note>
 
 ---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### কাস্টম HTML এলিমেন্ট {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+আপনি যদি dash আছে এমন একটি ট্যাগ রেন্ডার করেন, like `<my-element>`, React ধরে নেবে যে আপনি একটি [কাস্টম HTML এলিমেন্ট](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) রেন্ডার করতে চান।  React এর ক্ষেত্রে, কাস্টম এলিমেন্ট রেন্ডার করা এবং বিল্ট-ইন ব্রাউজার ট্যাগ রেন্ডার করা ভিন্ন ভাবে কাজ করে।
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
+- সকল কাস্টম এলিমেন্ট প্রপ স্ট্রিং এ সিরিয়ালাইজ করা হয় এবং সব সময় এট্রিবিউট ব্যবহার করে সেট করা হয়।
+- কাস্টম এলিমেন্ট এর জায়গায় `class` গ্রহণ করে, এবং `htmlFor` এর জায়গায় `for`।
 
 If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
 
 <Note>
 
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+[ভবিষ্যতে React এর একটি ভার্শনে কাস্টম এলিমেন্টের জন্য আরো বিস্তারিত সাপোর্ট থাকবে।](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
 
-You can try it by upgrading React packages to the most recent experimental version:
+React প্যাকেজগুলো সর্বশেষ পরীক্ষামূলক ভার্শনে আপগ্রেড করার মাধ্যমে আপনি এগুলো ব্যবহার করে দেখতে পারেনঃ
 
 - `react@experimental`
 - `react-dom@experimental`
 
-Experimental versions of React may contain bugs. Don't use them in production.
+React  এর পরীক্ষামূলক ভার্শঙ্গুলোতে বাগ থাকতে পারে। প্রোডাকশনে এই ভার্শঙ্গুলো ব্যবহার করবেন না।
 
 </Note>
 ---
 
-## All SVG components {/*all-svg-components*/}
+## সকল SVG কম্পোনেন্ট {/*all-svg-components*/}
 
 React supports all built-in browser SVG components. This includes:
 
@@ -242,9 +242,9 @@ React supports all built-in browser SVG components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান SVG কে JSX এ রূপান্তরিত করতে পারবেন।
 
-Namespaced attributes also have to be written without the colon:
+Namespaced অ্যাট্রিবিউটগুলো কলন ছাড়া লিখতে হবেঃ
 
 * `xlink:actuate` becomes `xlinkActuate`.
 * `xlink:arcrole` becomes `xlinkArcrole`.
