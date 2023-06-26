@@ -4,7 +4,7 @@ title: renderToStaticNodeStream
 
 <Intro>
 
-`renderToStaticNodeStream` renders a non-interactive React tree to a [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams)
+`renderToStaticNodeStream` একটি নন-ইন্টার‍্যাকটিভ React ট্রি কে একটি [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
 
 ```js
 const stream = renderToStaticNodeStream(reactNode)
@@ -16,11 +16,11 @@ const stream = renderToStaticNodeStream(reactNode)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `renderToStaticNodeStream(reactNode)` {/*rendertostaticnodestream*/}
 
-On the server, call `renderToStaticNodeStream` to get a [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams).
+সার্ভারে, [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) পাবার জন্য `renderToStaticNodeStream` কল করুন।
 
 ```js
 import { renderToStaticNodeStream } from 'react-dom/server';
@@ -29,31 +29,31 @@ const stream = renderToStaticNodeStream(<Page />);
 stream.pipe(response);
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-The stream will produce non-interactive HTML output of your React components.
+এই stream আপনার React কম্পোনেন্ট থেকে নন-ইন্টার‍্যাকটিভ HTML আউটপুট তৈরি করবে।
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `reactNode`: A React node you want to render to HTML. For example, a JSX element like `<Page />`.
+* `reactNode`: একটা React নোড যেটা আপনি HTML এ রেন্ডার করতে চান। যেমন `<Page />` এর মত একটি JSX এলিমেন্ট।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-A [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) that outputs an HTML string. The resulting HTML can't be hydrated on the client.
+একটা [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) যেটা একটা HTML স্ট্রিং আউটপুট দেয়। ফলাফলে যে HTML পাওয়া যায় সেটা ক্লায়েন্টে hydrate করা যায় না।
 
 #### Caveats {/*caveats*/}
 
-* `renderToStaticNodeStream` output cannot be hydrated.
+* `renderToStaticNodeStream` আউটপুট hydrate করা যায় না।
 
-* This method will wait for all [Suspense boundaries](/reference/react/Suspense) to complete before returning any output.
+* এই মেথডটি কোন আউটপুট রিটার্ন করবার আগে সকল [Suspense boundary](/reference/react/Suspense) এর সম্পূর্ণ হবার জন্য অপেক্ষা করবে।
 
-* As of React 18, this method buffers all of its output, so it doesn't actually provide any streaming benefits.
+* React 18 নাগাদ, এই মেথডটি এর সকল আউটপুট বাফার করে, তাই এটা আসলে streaming এর সুবিধা দিতে পারে না।
 
-* The returned stream is a byte stream encoded in utf-8. If you need a stream in another encoding, take a look at a project like [iconv-lite](https://www.npmjs.com/package/iconv-lite), which provides transform streams for transcoding text.
+* রিটার্ন হওয়া stream হচ্ছে utf-8 এ এনকোড করা byte stream। আপনি যদি অন্য কোন এনকোডিং এ stream চান, তাহলে [iconv-lite](https://www.npmjs.com/package/iconv-lite) এর মত কোন প্রজেক্ট দেখতে পারেন, যা টেক্সট transcoding এর জন্য transform stream দেয়।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
 ### Rendering a React tree as static HTML to a Node.js Readable Stream {/*rendering-a-react-tree-as-static-html-to-a-nodejs-readable-stream*/}
 
