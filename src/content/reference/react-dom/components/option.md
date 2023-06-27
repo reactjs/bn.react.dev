@@ -54,7 +54,6 @@ title: "<option>"
 
 ### অপশন সহ একটি সিলেক্ট বক্স প্রদর্শন করা {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
 একটি সিলেক্ট বক্স প্রদর্শনের জন্য একটি `<option>` এর লিস্ট সহ `<select>` রেন্ডার করুন। প্রতিটা `<option>` এ একটি `value` দিন যারা ফর্মে সাবমিট হতে চলা ডেটার প্রতিনিধিত্ব করে।
 
 [`<option>` এর তালিকা সহ `<select>` প্রদর্শন করা নিয়ে আরো পড়ুন।](/reference/react-dom/components/select)
