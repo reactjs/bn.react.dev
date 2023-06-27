@@ -4,7 +4,7 @@ title: React DOM APIs
 
 <Intro>
 
-The `react-dom` package contains methods that are only supported for the web applications (which run in the browser DOM environment). They are not supported for React Native.
+The `react-dom` প্যাকেজে যেসব মেথড রয়েছে সেগুলো কেবল ওয়েব অ্যাপ্লিকেশন (যেগুলো ব্রাউজারের DOM এনভায়রনমেন্টে চলে) সাপোর্ট করে। এগুলো React native সাপোর্ট করে না।
 
 </Intro>
 
@@ -12,19 +12,19 @@ The `react-dom` package contains methods that are only supported for the web app
 
 ## APIs {/*apis*/}
 
-These APIs can be imported from your components. They are rarely used:
+এই API গুলো আপনার কম্পোনেন্ট থেকে ইমপোর্ট করা যেতে পারে। এগুলো ব্যবহার হয় না বললেই চলেঃ
 
-* [`createPortal`](/reference/react-dom/createPortal) lets you render child components in a different part of the DOM tree.
-* [`flushSync`](/reference/react-dom/flushSync) lets you force React to flush a state update and update the DOM synchronously.
+* [`createPortal`](/reference/react-dom/createPortal) আপনাকে DOM ট্রি এর অন্য একটি অংশে চাইল্ড কম্পোনেন্ট রেন্ডার করতে দেয়।
+* [`flushSync`](/reference/react-dom/flushSync) আপনাকে সুযোগ দেয় React কে একটি state আপডেট flush করতে বাধ্য করতে এবং একি সাথে DOM আপডেট করতে।
 
 ---
 
 ## Entry points {/*entry-points*/}
 
-The `react-dom` package provides two additional entry points:
+`react-dom` প্যাকেজ দুটি অতিরিক্ত entry point দেয়ঃ
 
-* [`react-dom/client`](/reference/react-dom/client) contains APIs to render React components on the client (in the browser).
-* [`react-dom/server`](/reference/react-dom/server) contains APIs to render React components on the server.
+* [`react-dom/client`](/reference/react-dom/client) এর মধ্যে রয়েছে সেই API গুলো যেগুলো ক্লায়েন্টে (ব্রাউজারে) React কম্পোনেন্ট রেন্ডার করে।
+* [`react-dom/server`](/reference/react-dom/server) এর মধ্যে রয়েছে সেই API গুলো যেগুলো সার্ভারে React কম্পোনেন্ট রেন্ডার করে।
 
 ---
 
@@ -32,12 +32,12 @@ The `react-dom` package provides two additional entry points:
 
 <Deprecated>
 
-These APIs will be removed in a future major version of React.
+এই API গুলো React এর সামনের কোন বড় ভার্সনে ফেলে দেওয়া হবে।
 
 </Deprecated>
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode) finds the closest DOM node corresponding to a class component instance.
-* [`hydrate`](/reference/react-dom/hydrate) mounts a tree into the DOM created from server HTML. Deprecated in favor of [`hydrateRoot`](/reference/react-dom/client/hydrateRoot).
-* [`render`](/reference/react-dom/render) mounts a tree into the DOM. Deprecated in favor of [`createRoot`](/reference/react-dom/client/createRoot).
-* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode) unmounts a tree from the DOM. Deprecated in favor of [`root.unmount()`.](/reference/react-dom/client/createRoot#root-unmount)
+* [`findDOMNode`](/reference/react-dom/findDOMNode) সবচেয়ে নিকটবর্তী সেই DOM নোডকে খুঁজে বের করে একটি ক্লাস কম্পোনেন্ট ইন্সট্যান্সের সাথে correspond করে।
+* [`hydrate`](/reference/react-dom/hydrate) সার্ভার HTML থেকে তৈরি করা DOM এর মধ্যে একটি ট্রি মাউন্ট করে।  [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) এর কারণে deprecated।
+* [`render`](/reference/react-dom/render) DOM এর মধ্যে একটি ট্রি মাউন্ট করে। [`createRoot`](/reference/react-dom/client/createRoot) এর কারণে deprecated।
+* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode) DOM থেকে ট্রি আনমাউন্ট করে। [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) এর কারণে deprecated।
 
