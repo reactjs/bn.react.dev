@@ -4,7 +4,7 @@ title: "<option>"
 
 <Intro>
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[বিল্ট-ইন ব্রাউজার `<option>` কম্পোনেন্ট](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) আপনাকে একটি [`<select>`](/reference/react-dom/components/select) বক্সের মধ্যে একটি অপশন তৈরি করার সুযোগ দেয়।
 
 ```js
 <select>
@@ -19,11 +19,11 @@ The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `<option>` {/*option*/}
 
-The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) lets you render an option inside a [`<select>`](/reference/react-dom/components/select) box.
+[বিল্ট-ইন ব্রাউজার `<option>` কম্পোনেন্ট](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option) আপনাকে একটি [`<select>`](/reference/react-dom/components/select) বক্সের মধ্যে একটি অপশন তৈরি করার সুযোগ দেয়।
 
 ```js
 <select>
@@ -32,31 +32,31 @@ The [built-in browser `<option>` component](https://developer.mozilla.org/en-US/
 </select>
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Props {/*props*/}
+#### প্রপ {/*props*/}
 
-`<option>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<option>` সকল [কমন এলিমেন্ট প্রপের](/reference/react-dom/components/common#props) সাপোর্ট দেয়।
 
-Additionally, `<option>` supports these props:
+সাথে সাথে, `<option>` এই প্রপগুলোর সাপোর্ট দেয়ঃ
 
-* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): A boolean. If `true`, the option will not be selectable and will appear dimmed.
-* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): A string. Specifies the meaning of the option. If not specified, the text inside the option is used.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): The value to be used [when submitting the parent `<select>` in a form](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) if this option is selected.
+* [`disabled`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#disabled): একটি বুলিয়ান. `true` হলে, অপশন সিলেক্ট করা যাবে না এবং dimmed দেখাবে এটাকে।
+* [`label`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#label): একটি স্ট্রিং। অপশনটা কী বুঝাচ্ছে সেটা নির্দেশ করে। যদি নির্দিষ্ট না করা হয়, তবে অপশনের মধ্যকার টেক্সট ব্যবহৃত হয়।
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#value): [যখন একটা ফর্মে প্যারেন্ট `<select>` সাবমিট করা হয়](/reference/react-dom/components/select#reading-the-select-box-value-when-submitting-a-form) তখন এই অপশনটা সিলেক্ট করা হলে যেই ভ্যালু ব্যবহৃত হবে।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* React does not support the `selected` attribute on `<option>`. Instead, pass this option's `value` to the parent [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option) for an uncontrolled select box, or [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable) for a controlled select.
+* React  `<option>` এ `selected` এট্রিবিউট সাপোর্ট করে না। বরং, একটি অনিয়ন্ত্রিত সিলেক্ট বক্সের জন্য এই অপশনের `value` প্যারেন্ট [`<select defaultValue>`](/reference/react-dom/components/select#providing-an-initially-selected-option) এ পাস করে দিন, অথবা একটি নিয়ন্ত্রিত সিলেক্ট এর জন্য [`<select value>`](/reference/react-dom/components/select#controlling-a-select-box-with-a-state-variable) এ পাস করুন।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Displaying a select box with options {/*displaying-a-select-box-with-options*/}
+### অপশন সহ একটি সিলেক্ট বক্স প্রদর্শন করা {/*displaying-a-select-box-with-options*/}
 
-Render a `<select>` with a list of `<option>` components inside to display a select box. Give each `<option>` a `value` representing the data to be submitted with the form.
+একটি সিলেক্ট বক্স প্রদর্শনের জন্য একটি `<option>` এর লিস্ট সহ `<select>` রেন্ডার করুন। প্রতিটা `<option>` এ একটি `value` দিন যারা ফর্মে সাবমিট হতে চলা ডেটার প্রতিনিধিত্ব করে।
 
-[Read more about displaying a `<select>` with a list of `<option>` components.](/reference/react-dom/components/select)
+[`<option>` এর তালিকা সহ `<select>` প্রদর্শন করা নিয়ে আরো পড়ুন।](/reference/react-dom/components/select)
 
 <Sandpack>
 
