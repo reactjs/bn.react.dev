@@ -4,15 +4,15 @@ title: unmountComponentAtNode
 
 <Deprecated>
 
-This API will be removed in a future major version of React.
+এই API টি React এর একটি আগাম ভার্সনে অপসারিত হবে।
 
-In React 18, `unmountComponentAtNode` was replaced by [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount).
+React 18 এ, `unmountComponentAtNode` কে প্রতিস্থাপন করেছে [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount)।
 
 </Deprecated>
 
 <Intro>
 
-`unmountComponentAtNode` removes a mounted React component from the DOM.
+`unmountComponentAtNode` DOM থেকে একটি মাউন্ট করা React কম্পোনেন্ট অপসারণ করে।
 
 ```js
 unmountComponentAtNode(domNode)
@@ -24,11 +24,11 @@ unmountComponentAtNode(domNode)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `unmountComponentAtNode(domNode)` {/*unmountcomponentatnode*/}
 
-Call `unmountComponentAtNode` to remove a mounted React component from the DOM and clean up its event handlers and state.
+DOM থেকে একটি mounted React কম্পোনেন্ট সরাতে এবং এর ইভেন্ট হ্যান্ডলার তথা স্টেট মুছে ফেলতে কল করুন `unmountComponentAtNode`।
 
 ```js
 import { unmountComponentAtNode } from 'react-dom';
@@ -39,21 +39,21 @@ render(<App />, domNode);
 unmountComponentAtNode(domNode);
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `domNode`: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will remove a mounted React component from this element.
+* `domNode`: একটি [DOM এলিমেন্ট।](https://developer.mozilla.org/en-US/docs/Web/API/Element) React এই এলিমেন্ট থেকে একটি mounted React কম্পোনেন্ট সরিয়ে ফেলবে।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`unmountComponentAtNode` returns `true` if a component was unmounted and `false` otherwise.
+`unmountComponentAtNode` `true` রিটার্ন করে যদি একটি কম্পোনেন্ট unmounted হয়ে থাকে, অন্যথা `false` রিটার্ন করে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-Call `unmountComponentAtNode` to remove a <CodeStep step={1}>mounted React component</CodeStep> from a <CodeStep step={2}>browser DOM node</CodeStep> and clean up its event handlers and state.
+একটি <CodeStep step={2}>ব্রাউজার DOM নোড</CodeStep> থেকে একটি <CodeStep step={1}>মাউন্টেড React কম্পোনেন্ট</CodeStep> সরিয়ে ফেলবার জন্য এবং এর ইভেন্ট হ্যান্ডলার তথা state মুছে ফেলবার জন্য `unmountComponentAtNode` কল করুন।
 
 ```js [[1, 5, "<App />"], [2, 5, "rootNode"], [2, 8, "rootNode"]]
 import { render, unmountComponentAtNode } from 'react-dom';
@@ -67,11 +67,11 @@ unmountComponentAtNode(rootNode);
 ```
 
 
-### Removing a React app from a DOM element {/*removing-a-react-app-from-a-dom-element*/}
+### একটি DOM এলিমেন্ট থেকে একটি React অ্যাপ সরিয়ে ফেলা {/*removing-a-react-app-from-a-dom-element*/}
 
-Occasionally, you may want to "sprinkle" React on an existing page, or a page that is not fully written in React. In those cases, you may need to "stop" the React app, by removing all of the UI, state, and listeners from the DOM node it was rendered to.
+হঠাত হঠাত, আপনি হয়ত আগে থেকে বানানো পেইজে বা সম্পূর্ণরূপে React দিয়ে বানানো নয় এমন একটি পেইজে একটু খানি React "ছিটিয়ে" দিতে চাইবেন। সেই সকল ক্ষেত্রে, আপনাকে হয়ত React অ্যাপটা "বন্ধ" করতে হবে, এর সকল UI, state এবং লিসেনার যেই DOM নোডে রেন্ডার হয়েছে সেখান থেকে মুছে ফেলার মাধ্যমে।
 
-In this example, clicking "Render React App" will render a React app. Click "Unmount React App" to destroy it:
+এই উদাহরণে, "Render React App" এ ক্লিক করলে একটি React অ্যাপ রেন্ডার হবে। "Unmount React App" ক্লিক করার মাধ্যমে একে মুছে ফেলুনঃ
 
 <Sandpack>
 
