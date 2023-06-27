@@ -4,7 +4,7 @@ title: useImperativeHandle
 
 <Intro>
 
-`useImperativeHandle` is a React Hook that lets you customize the handle exposed as a [ref.](/learn/manipulating-the-dom-with-refs)
+`useImperativeHandle` হচ্ছে একটি React Hook যা আপনাকে [ref](/learn/manipulating-the-dom-with-refs) হিসেবে exposed হওয়া হ্যান্ডল কাস্টমাইজ করার সুযোগ দেয়।
 
 ```js
 useImperativeHandle(ref, createHandle, dependencies?)
@@ -16,11 +16,11 @@ useImperativeHandle(ref, createHandle, dependencies?)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useImperativeHandle(ref, createHandle, dependencies?)` {/*useimperativehandle*/}
 
-Call `useImperativeHandle` at the top level of your component to customize the ref handle it exposes:
+আপনার কম্পোনেন্ট যে ref handle এক্সপোজ করে সেটাকে কাস্টমাইজ করতে কম্পোনেন্টের উচ্চ স্তরে `useImperativeHandle` কল করুন।
 
 ```js
 import { forwardRef, useImperativeHandle } from 'react';
@@ -34,9 +34,9 @@ const MyInput = forwardRef(function MyInput(props, ref) {
   // ...
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
 * `ref`: The `ref` you received as the second argument from the [`forwardRef` render function.](/reference/react/forwardRef#render-function)
 
@@ -44,13 +44,13 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 * **optional** `dependencies`: The list of all reactive values referenced inside of the `createHandle` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. If a re-render resulted in a change to some dependency, or if you omitted this argument, your `createHandle` function will re-execute, and the newly created handle will be assigned to the ref.
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`useImperativeHandle` returns `undefined`.
+`useImperativeHandle` রিটার্ন করে `undefined`.
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
 ### Exposing a custom ref handle to the parent component {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
 
@@ -72,7 +72,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 const MyInput = forwardRef(function MyInput(props, ref) {
   useImperativeHandle(ref, () => {
     return {
-      // ... your methods ...
+      // ... আপনার মেথড ...
     };
   }, []);
 
@@ -118,7 +118,7 @@ export default function Form() {
 
   function handleClick() {
     ref.current.focus();
-    // This won't work because the DOM node isn't exposed:
+    // এটা কাজ করবে না কারণ DOM নোড exposed নাঃ
     // ref.current.style.opacity = 0.5;
   }
 
@@ -166,7 +166,7 @@ input {
 
 ---
 
-### Exposing your own imperative methods {/*exposing-your-own-imperative-methods*/}
+### আপনার নিজের imperative মেথড উন্মুক্ত করা {/*exposing-your-own-imperative-methods*/}
 
 The methods you expose via an imperative handle don't have to match the DOM methods exactly. For example, this `Post` component exposes a `scrollAndFocusAddComment` method via an imperative handle. This lets the parent `Page` scroll the list of comments *and* focus the input field when you click the button:
 
@@ -281,8 +281,8 @@ export default AddComment;
 
 <Pitfall>
 
-**Do not overuse refs.** You should only use refs for *imperative* behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
+**ref এর যথেচ্ছ ব্যবহার এড়িয়ে চলুন।** আপনার শুধু মাত্র সেই সকল *imperative* আচরণের জন্য ref ব্যবহার করা উচিত যেগুলো আপনি প্রপ হিসেবে প্রকাশ করতে পারবেন নাঃ যেমন, একটা নোড পর্যন্ত স্ক্রল করা, একতা নোডে ফোকাস করা, একতা অ্যানিমেশন ট্রিগার করা, টেক্সট সিলেক্ট করা, এবং এরকম আরো যা যা আছে।
 
-**If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
+**আপনি যদি কোন কিছু prop হিসেবে প্রকাশ করতে পারেন, তবে আপনার উচিত ref ব্যবহার না করা।** উদাহরণস্বরূপ, একটা `Modal` কম্পোনেন্ট থেকে `{ open, close }` এর মত একটি imperative handle এক্সপোজ করার জায়গায় `isOpen` কে `<Modal isOpen={isOpen} />` এর মত prop হিসেবে নেওয়া ভাল। Prop এর মাধ্যমে imperative কাজ করবার জন্য আপনাকে সাহায্য করতে পারে [Effects।](/learn/synchronizing-with-effects)
 
 </Pitfall>
