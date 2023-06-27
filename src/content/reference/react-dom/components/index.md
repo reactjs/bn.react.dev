@@ -4,37 +4,37 @@ title: "React DOM Components"
 
 <Intro>
 
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
+React সকল প্রকার ব্রাউজার বিল্ট-ইন [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) এবং [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) কম্পোনেন্ট সাপোর্ট করে।
 
 </Intro>
 
 ---
 
-## Common components {/*common-components*/}
+## সাধারণ কম্পোনেন্ট {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+সকল বিল্ট-ইন ব্রাউজার কম্পোনেন্ট কিছু প্রপ এবং ইভেন্ট সাপোর্ট করে।
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
+* [সাধারণ component (e.g. `<div>`)](/reference/react-dom/components/common)
 
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
+এর মধ্যে রয়েছে React-specific প্রপ যেমন `ref` এবং `dangerouslySetInnerHTML`।
 
 ---
 
-## Form components {/*form-components*/}
+## ফর্ম কম্পোনেন্ট {/*form-components*/}
 
-These built-in browser components accept user input:
+এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলো ইউজার ইনপুট গ্রহণ করে।
 
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+তারা React এর মধ্যে বিশেষ কারণ তাদের কাছে `value` প্রপ পাঠানোর বিষয়টা তাদেরকে *[নিয়ন্ত্রিত](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* বানায়।
 
 ---
 
-## All HTML components {/*all-html-components*/}
+## সকল HTML কম্পোনেন্ট {/*all-html-components*/}
 
-React supports all built-in browser HTML components. This includes:
+React সকল বিল্ট-ইন ব্রাউজার HTML কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
@@ -140,38 +140,38 @@ React supports all built-in browser HTML components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান HTML কে JSX এ রূপান্তরিত করতে পারবেন।
 
 </Note>
 
 ---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### কাস্টম HTML এলিমেন্ট {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+আপনি যদি dash আছে এমন একটি ট্যাগ রেন্ডার করেন, like `<my-element>`, React ধরে নেবে যে আপনি একটি [কাস্টম HTML এলিমেন্ট](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) রেন্ডার করতে চান।  React এর ক্ষেত্রে, কাস্টম এলিমেন্ট রেন্ডার করা এবং বিল্ট-ইন ব্রাউজার ট্যাগ রেন্ডার করা ভিন্ন ভাবে কাজ করে।
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
+- সকল কাস্টম এলিমেন্ট প্রপ স্ট্রিং এ সিরিয়ালাইজ করা হয় এবং সব সময় এট্রিবিউট ব্যবহার করে সেট করা হয়।
+- কাস্টম এলিমেন্ট এর জায়গায় `class` গ্রহণ করে, এবং `htmlFor` এর জায়গায় `for`।
 
-If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
+আপনি যদি [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) এট্রিবিউট সহ একটি ব্রাউজার বিল্ট-ইন HTML এলিমেন্ট রেন্ডার করেন, তবে এটিকে একটি কাস্টম এলিমেন্ট হিসাবে গণ্য করা হবে।
 
 <Note>
 
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+[ভবিষ্যতে React এর একটি ভার্শনে কাস্টম এলিমেন্টের জন্য আরো বিস্তারিত সাপোর্ট থাকবে।](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
 
-You can try it by upgrading React packages to the most recent experimental version:
+React প্যাকেজগুলো সর্বশেষ পরীক্ষামূলক ভার্শনে আপগ্রেড করার মাধ্যমে আপনি এগুলো ব্যবহার করে দেখতে পারেনঃ
 
 - `react@experimental`
 - `react-dom@experimental`
 
-Experimental versions of React may contain bugs. Don't use them in production.
+React  এর পরীক্ষামূলক ভার্শনগুলোতে বাগ থাকতে পারে। প্রোডাকশনে এই ভার্শঙ্গুলো ব্যবহার করবেন না।
 
 </Note>
 ---
 
-## All SVG components {/*all-svg-components*/}
+## সকল SVG কম্পোনেন্ট {/*all-svg-components*/}
 
-React supports all built-in browser SVG components. This includes:
+React ব্রাউজারে থাকা সকল বিল্ট-ইন SVG কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
 * [`<a>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a)
 * [`<animate>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate)
@@ -242,9 +242,9 @@ React supports all built-in browser SVG components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান SVG কে JSX এ রূপান্তরিত করতে পারবেন।
 
-Namespaced attributes also have to be written without the colon:
+Namespaced অ্যাট্রিবিউটগুলো কোলন ছাড়া লিখতে হবেঃ
 
 * `xlink:actuate` becomes `xlinkActuate`.
 * `xlink:arcrole` becomes `xlinkArcrole`.
