@@ -4,13 +4,13 @@ title: useInsertionEffect
 
 <Pitfall>
 
-`useInsertionEffect` is for CSS-in-JS library authors. Unless you are working on a CSS-in-JS library and need a place to inject the styles, you probably want [`useEffect`](/reference/react/useEffect) or [`useLayoutEffect`](/reference/react/useLayoutEffect) instead.
+`useInsertionEffect`  CSS-in-JS library author-দের জন্য। যদি না আপনি একটি কাজ করছেন এবং স্টাইল ইনজেক্ট করার জন্য একটা জায়গার প্রয়োজন বোধ করছেন, সম্ভবত আপনি `useInsertionEffect` এর বদলে [`useEffect`](/reference/react/useEffect) অথবা [`useLayoutEffect`](/reference/react/useLayoutEffect) ব্যবহার করতে চান।
 
 </Pitfall>
 
 <Intro>
 
-`useInsertionEffect` is a version of [`useEffect`](/reference/react/useEffect) that fires before any DOM mutations.
+`useInsertionEffect` হচ্ছে [`useEffect`](/reference/react/useEffect) এর একটি ভার্শন যা যেকোন DOM মিউটেশনের আগে fire হয়।
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -22,55 +22,55 @@ useInsertionEffect(setup, dependencies?)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-Call `useInsertionEffect` to insert the styles before any DOM mutations:
+যেকোন DOM মিউটেশনের আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js
 import { useInsertionEffect } from 'react';
 
-// Inside your CSS-in-JS library
+// আপনার CSS-in-JS লাইব্রেরির মধ্যে
 function useCSS(rule) {
   useInsertionEffect(() => {
-    // ... inject <style> tags here ...
+    // ... <style> ট্যাগগুলো এখানে ইনজেক্ট করুন ...
   });
   return rule;
 }
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. Before your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
+* `setup`: যেই ফাংশনে আপনার Effect এর লজিক আছে। আপনার সেটআপ ফাংশন একটি *cleanup* ফাংশন optionally রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM এ যুক্ত হবার আগে, React আপনার সেটআপ ফাংশন রান করবে। পরিবর্তিত ডিপেন্ডেন্সির সাথে যতবার রি-রেন্ডার হবে, React প্রথমে আপনার পুরনো ভ্যালুগুলো ব্যবহার করে cleanup ফাংশন রান করবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন ভ্যালুগুলো ব্যবহার করে সেটআপ ফাংশন রান করবে। আপনার কম্পোনেন্ট DOM থেকে সরিয়ে ফেলবার আগে, React আপনার cleanup ফাংশন রান করবে।
  
 * **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm. If you don't specify the dependencies at all, your Effect will re-run after every re-render of the component.
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`useInsertionEffect` returns `undefined`.
+`useInsertionEffect` রিটার্ন করে `undefined`.
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* Effects only run on the client. They don't run during server rendering.
-* You can't update state from inside `useInsertionEffect`.
-* By the time `useInsertionEffect` runs, refs are not attached yet, and DOM is not yet updated.
+* Effects শুধুমাত্র ক্লায়েন্টে কাজ করে। এগুলো সার্ভার রেন্ডারিং এর সময় রান করে না।
+* আপনি `useInsertionEffect` এর মধ্য হতে state আপডেট করতে পারবেন না।
+* যতক্ষণে `useInsertionEffect` রান করে, ref তখনো যুক্ত হয় নাই এবং DOM আপডেট হয় নাই।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Injecting dynamic styles from CSS-in-JS libraries {/*injecting-dynamic-styles-from-css-in-js-libraries*/}
+### CSS-in-JS লাইব্রেরিতে dynamic styles injection {/*injecting-dynamic-styles-from-css-in-js-libraries*/}
 
-Traditionally, you would style React components using plain CSS.
+প্রথাগতভাবে, আপনি React কম্পোনেন্ট plain CSS ব্যবহার করেই স্টাইল করবেন। 
 
 ```js
-// In your JS file:
+// আপনার JS ফাইলেঃ
 <button className="success" />
 
-// In your CSS file:
+// আপনার CSS ফাইলেঃ
 .success { color: green; }
 ```
 
@@ -90,12 +90,12 @@ The first problem is not solvable, but `useInsertionEffect` helps you solve the 
 Call `useInsertionEffect` to insert the styles before any DOM mutations:
 
 ```js {4-11}
-// Inside your CSS-in-JS library
+// আপনার CSS-in-JS লাইব্রেরির মধ্যে
 let isInserted = new Set();
 function useCSS(rule) {
   useInsertionEffect(() => {
-    // As explained earlier, we don't recommend runtime injection of <style> tags.
-    // But if you have to do it, then it's important to do in useInsertionEffect.
+    // আগেই যেভাবে ব্যখ্যা করা হয়েছে, আমরা রানটাইমে <style> ট্যাগ ইনজেক্ট না করার পরামর্শ দেই।
+    // কিন্তু যদি আপনাকে এটা করতেই হয়, এটা useInsertionEffect এর মধ্যে করা জরুরি।
     if (!isInserted.has(rule)) {
       isInserted.add(rule);
       document.head.appendChild(getStyleForRule(rule));
