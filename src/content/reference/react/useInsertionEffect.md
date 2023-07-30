@@ -74,20 +74,20 @@ function useCSS(rule) {
 .success { color: green; }
 ```
 
-Some teams prefer to author styles directly in JavaScript code instead of writing CSS files. This usually requires using a CSS-in-JS library or a tool. There are three common approaches to CSS-in-JS:
+কেউ কেউ CSS ফাইল লেখবার জায়গায় সরাসরি জাভস্ক্রিপ্ট এর মধ্যে স্টাইল অথর করা পছন্দ করেন। এতে সাধারণত কোন CSS-in-JS লাইব্রেরি বা কোন একটি টুল ব্যবহার করা প্রয়োজন পড়ে। CSS-in-JS ব্যবহারের তিনটি বহুল ব্যবহৃত পদ্ধতি আছে।  Some teams prefer to author styles directly in JavaScript code instead of writing CSS files. This usually requires using a CSS-in-JS library or a tool. There are three common approaches to CSS-in-JS:
 
 1. Static extraction to CSS files with a compiler
 2. Inline styles, e.g. `<div style={{ opacity: 1 }}>`
 3. Runtime injection of `<style>` tags
 
-If you use CSS-in-JS, we recommend a combination of the first two approaches (CSS files for static styles, inline styles for dynamic styles). **We don't recommend runtime `<style>` tag injection for two reasons:**
+আপনি যদি CSS-in-JS ব্যবহার করেন, আমরা উপরের দুটি পদ্ধতির সমন্বয় ব্যবহার করতে উপদেশ দেব (স্ট্যাটিক স্টাইলের জন্য CSS ফাইল, ডাইনামিক স্টাইলের জন্য ইনলাইন স্টাইল।) **আমরা দুটি কারণে রানটাইম `<style>` ট্যাগ ইনজেকশন এড়িয়ে চলতে বলবঃ**
 
-1. Runtime injection forces the browser to recalculate the styles a lot more often.
-2. Runtime injection can be very slow if it happens at the wrong time in the React lifecycle.
+1. রানটাইম ইনজেকশনের ক্ষেত্রে স্টাইলগুলোকে বার বার হিসেব করতে বাধ্য হয় ব্রাউজার। 
+2. React লাইফসাইকেলের ভুল একটা সময়ে যদি রানটাইম ইনজেকশন হয় তাহলে সেটা খুবই ধীরগতির হতে পারে। 
 
-The first problem is not solvable, but `useInsertionEffect` helps you solve the second problem.
+প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
 
-Call `useInsertionEffect` to insert the styles before any DOM mutations:
+যেকোন DOM মিউটেশনের আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js {4-11}
 // আপনার CSS-in-JS লাইব্রেরির মধ্যে
@@ -110,7 +110,7 @@ function Button() {
 }
 ```
 
-Similarly to `useEffect`, `useInsertionEffect` does not run on the server. If you need to collect which CSS rules have been used on the server, you can do it during rendering:
+`useEffect` এর ন্যায়, `useInsertionEffect` সার্ভারে রান করে না। আপনার যদু সার্ভারে ব্যবহৃত CSS rule গুলো সংগ্রহ করার প্রয়োজন পড়ে, আপনি সেটা রেন্ডারিং এর সময়ে করতে পারেনঃ
 
 ```js {1,4-6}
 let collectedRulesSet = new Set();
@@ -126,14 +126,14 @@ function useCSS(rule) {
 }
 ```
 
-[Read more about upgrading CSS-in-JS libraries with runtime injection to `useInsertionEffect`.](https://github.com/reactwg/react-18/discussions/110)
+[CSS-in-JS libraries with runtime injection থেকে `useInsertionEffect` এ আপগ্রেড নিয়ে আরো পড়ুন।](https://github.com/reactwg/react-18/discussions/110)
 
 <DeepDive>
 
-#### How is this better than injecting styles during rendering or useLayoutEffect? {/*how-is-this-better-than-injecting-styles-during-rendering-or-uselayouteffect*/}
+#### Rendering বা useLayoutEffect এর সময় স্টাইল ইঞ্জেক্ট করবার চেয়ে এটা কীভাবে আরো ভাল? {/*how-is-this-better-than-injecting-styles-during-rendering-or-uselayouteffect*/}
 
-If you insert styles during rendering and React is processing a [non-blocking update,](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) the browser will recalculate the styles every single frame while rendering a component tree, which can be **extremely slow.**
+আপনি যদি রেন্ডারিং এর সময় স্টাইল ইনসার্ট করেন যখন React একটি [নন-ব্লকিং আপডেট,](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) প্রসেস করছে, ব্রাউজার একটি কম্পোনেন্ট ট্রি রেন্ডার করতে করতে প্রতিটা ফ্রেমে স্টাইলগুলো আবার হিসেব করে, যেটা **অত্যন্ত ধীরগতির হতে পারে।** 
 
-`useInsertionEffect` is better than inserting styles during [`useLayoutEffect`](/reference/react/useLayoutEffect) or [`useEffect`](/reference/react/useEffect) because it ensures that by the time other Effects run in your components, the `<style>` tags have already been inserted. Otherwise, layout calculations in regular Effects would be wrong due to outdated styles.
+[`useLayoutEffect`](/reference/react/useLayoutEffect) বা [`useEffect`](/reference/react/useEffect) এর সময় স্টাইল ইনসার্ট করার চেয়ে `useInsertionEffect` ভাল, কারণ এটা নিশ্চিত করে যে যতক্ষণে আপনার কম্পোনেন্টে অন্যান্য Effect রান করছে, ততক্ষণে সকল `<style>` ট্যাগ ইনসার্ট করা হয়ে গেছে। অন্যথায়, পুরনো স্টাইলের কারণে সাধারণ Effect এ লেআউটের হিসেব ভুল হবে।
 
 </DeepDive>
