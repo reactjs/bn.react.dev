@@ -2513,7 +2513,7 @@ main {
 
 ---
 
-### server errors এবং server-only কন্টেন্টের জন্য একটি fallback প্রদান করা {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
+### Server errors এবং client-only কন্টেন্টের জন্য একটি fallback দেওয়া {/*providing-a-fallback-for-server-errors-and-server-only-content*/}
 
 আপনি যদি [streaming server rendering APIs](/reference/react-dom/server) (অথবা এদের উপর নির্ভরকারী একটি ফ্রেমওয়ার্ক) এর কোনোটি ব্যবহার করেন, React আপনার `<Suspense>` boundary গুলোও ব্যবহার করবে সার্ভার এর এরর গুলো তত্ত্বাবধান করতে। যদি কোনো কম্পোনেন্ট সার্ভারে এরর থ্রো করে, React সার্ভার রেন্ডার বন্ধ করবে না। বরং, এর সবচেয়ে কাছের `<Suspense>` কম্পোনেন্টটি খুঁজে বের করবে এবং তার fallback (যেমন একটি স্পিনার), তৈরি করা সার্ভার HTML এর মধ্যে যোগ করবে। ব্যবহারকারী প্রথমে একটি স্পিনার দেখবে।
 

@@ -36,7 +36,7 @@ The `react-dom` প্যাকেজে যেসব মেথড রয়েছ�
 
 </Deprecated>
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode) সবচেয়ে নিকটবর্তী সেই DOM নোডকে খুঁজে বের করে একটি ক্লাস কম্পোনেন্ট ইন্সট্যান্সের সাথে correspond করে।
+* [`findDOMNode`](/reference/react-dom/findDOMNode) সবচেয়ে নিকটবর্তী সেই DOM নোডকে খুঁজে বের করে যেটা একটি ক্লাস কম্পোনেন্ট ইন্সট্যান্সের সাথে correspond করে।
 * [`hydrate`](/reference/react-dom/hydrate) সার্ভার HTML থেকে তৈরি করা DOM এর মধ্যে একটি ট্রি মাউন্ট করে।  [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) এর কারণে deprecated।
 * [`render`](/reference/react-dom/render) DOM এর মধ্যে একটি ট্রি মাউন্ট করে। [`createRoot`](/reference/react-dom/client/createRoot) এর কারণে deprecated।
 * [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode) DOM থেকে ট্রি আনমাউন্ট করে। [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) এর কারণে deprecated।
