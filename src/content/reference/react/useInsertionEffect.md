@@ -74,11 +74,11 @@ function useCSS(rule) {
 .success { color: green; }
 ```
 
-কেউ কেউ CSS ফাইল লেখবার জায়গায় সরাসরি জাভস্ক্রিপ্ট এর মধ্যে স্টাইল অথর করা পছন্দ করেন। এতে সাধারণত কোন CSS-in-JS লাইব্রেরি বা কোন একটি টুল ব্যবহার করা প্রয়োজন পড়ে। CSS-in-JS ব্যবহারের তিনটি বহুল ব্যবহৃত পদ্ধতি আছে।  Some teams prefer to author styles directly in JavaScript code instead of writing CSS files. This usually requires using a CSS-in-JS library or a tool. There are three common approaches to CSS-in-JS:
+কেউ কেউ CSS ফাইল লেখবার জায়গায় সরাসরি জাভস্ক্রিপ্ট এর মধ্যে স্টাইল অথর করা পছন্দ করেন। এতে সাধারণত কোন CSS-in-JS লাইব্রেরি বা কোন একটি টুল ব্যবহার করা প্রয়োজন পড়ে। CSS-in-JS ব্যবহারের তিনটি বহুল ব্যবহৃত পদ্ধতি আছেঃ
 
-1. Static extraction to CSS files with a compiler
-2. Inline styles, e.g. `<div style={{ opacity: 1 }}>`
-3. Runtime injection of `<style>` tags
+1. কম্পাইলার ব্যবহার করে CSS ফাইলে স্ট্যাটিক এক্সট্রাকশন
+2. ইনলাইন স্টাইল, যেমন, `<div style={{ opacity: 1 }}>`
+3. `<style>` ট্যাগের রানটাইম ইনজেকশন
 
 আপনি যদি CSS-in-JS ব্যবহার করেন, আমরা উপরের দুটি পদ্ধতির সমন্বয় ব্যবহার করতে উপদেশ দেব (স্ট্যাটিক স্টাইলের জন্য CSS ফাইল, ডাইনামিক স্টাইলের জন্য ইনলাইন স্টাইল।) **আমরা দুটি কারণে রানটাইম `<style>` ট্যাগ ইনজেকশন এড়িয়ে চলতে বলবঃ**
 
