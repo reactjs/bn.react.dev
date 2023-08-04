@@ -10,16 +10,16 @@ JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering 
 
 <YouWillLearn>
 
-* How to pass strings with quotes
-* How to reference a JavaScript variable inside JSX with curly braces
-* How to call a JavaScript function inside JSX with curly braces
-* How to use a JavaScript object inside JSX with curly braces
+* Quotes দিয়ে স্ট্রিং কিভাবে পাস করবেন
+* Curly braces দিয়ে JSX এর ভিতরে একটি জাভাস্ক্রিপ্ট ভেরিয়েবলকে কীভাবে reference করবেন
+* Curly braces দিয়ে JSX-এর ভিতরে একটি জাভাস্ক্রিপ্ট ফাংশনকে কীভাবে কল করবেন
+* Curly braces দিয়ে JSX এর ভিতরে একটি জাভাস্ক্রিপ্ট অবজেক্ট কীভাবে ব্যবহার করবেন
 
 </YouWillLearn>
 
 ## quotes এর সাথে স্ট্রিং পাসিং {/*passing-strings-with-quotes*/}
 
-আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, আপনাকে এটি single বা double quotes রাখতে হবে:
+আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, তখন আপনাকে এটি single বা double quotes এ রাখতে হবে:
 
 <Sandpack>
 
@@ -41,9 +41,9 @@ export default function Avatar() {
 
 </Sandpack>
 
-এখানে, `"https://i.imgur.com/7vQD0fPs.jpg"` এবং `"Gregorio Y. Zara"` স্ট্রিং হিসেবে পাস করা হয়েছে ।
+এখানে, `"https://i.imgur.com/7vQD0fPs.jpg"` এবং `"Gregorio Y. Zara"` কে স্ট্রিং হিসেবে পাস করা হয়েছে ।
 
-কিন্তু যদি আপনি dynamic ভাবে `src` বা `alt` টেক্সট নির্দিষ্ট করতে চান? আপনি **জাভাস্ক্রিপ্ট থেকে একটি value ব্যবহার করে `"` and `"` কে `{` and `}`** দিয়ে পরিবর্তন করতে পারেন:
+কিন্তু যদি আপনি dynamic ভাবে `src` বা `alt` টেক্সট ব্যবহার করতে চান? তাহলে আপনি **জাভাস্ক্রিপ্ট থেকে একটি value ব্যবহার করে `"`and`"` কে curly braces `{`and`}`** দিয়ে পরিবর্তন করতে পারেন:
 
 <Sandpack>
 
@@ -117,8 +117,7 @@ export default function TodoList() {
 
 1. সরাসরি JSX ট্যাগের ভিতরে **text হিসাবে**: `<h1>{name}'s To Do List</h1>` কাজ করে, কিন্তু `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` করবে না৷
 
-1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
-2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
+2. **Attributes হিসেবে** সরাসরি `=` চিহ্ন ব্যবহার করে: `src={avatar}` এখানে `avatar` ভেরিয়েবল নিবে, কিন্তু এটি `src="{avatar}"` স্ট্রিং হিসেবে পাস করবে `"{avatar}"`
 
 ## "double curlies" ব্যবহার: JSX-এ CSS এবং অন্যান্য অবজেক্ট {/*using-double-curlies-css-and-other-objects-in-jsx*/}
 
@@ -151,9 +150,9 @@ ul { padding: 20px 20px 20px 40px; margin: 0; }
 
 </Sandpack>
 
-Try changing the values of `backgroundColor` and `color`.
+`backgroundColor` এবং `color` এর মান পরিবর্তন করার চেষ্টা করুন।
 
-You can really see the JavaScript object inside the curly braces when you write it like this:
+curly braces এর ভিতরে জাভাস্ক্রিপ্ট অবজেক্ট দেখতে পাবেন যখন আপনি এটি এভাবে লিখবেন:
 
 ```js {2-5}
 <ul style={
@@ -164,17 +163,17 @@ You can really see the JavaScript object inside the curly braces when you write 
 }>
 ```
 
-The next time you see `{{` and `}}` in JSX, know that it's nothing more than an object inside the JSX curlies!
+পরবর্তীতে যখন আপনি JSX-এ `{{` and `}}` দেখবেন, তখন আপনি বুঝে নিবেন যে এটি JSX curlies এর ভিতরে একটি বস্তু ছাড়া আর কিছুই নয়! 
 
 <Pitfall>
 
-Inline `style` properties are written in camelCase. For example, HTML `<ul style="background-color: black">` would be written as `<ul style={{ backgroundColor: 'black' }}>`  in your component.
+ইনলাইন `style` এ property গুলোকে camelCase ব্যবহার করে লেখা হয়. উদাহরণস্বরূপ, এই HTML `<ul style="background-color: black">` আপনার কম্পোনেন্টের মধ্যে `<ul style={{ backgroundColor: 'black' }}>` এভাবে লিখতে হবে।
 
 </Pitfall>
 
 ## More fun with JavaScript objects and curly braces {/*more-fun-with-javascript-objects-and-curly-braces*/}
 
-You can move several expressions into one object, and reference them in your JSX inside curly braces:
+আপনি একটি অবজেক্ট এ বেশ কয়েকটি এক্সপ্রেশন রেখে, পরে সেটিকে curly braces এর ভিতরে JSX-এ ব্যবহার করতে পারেন:
 
 <Sandpack>
 
@@ -214,7 +213,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-In this example, the `person` JavaScript object contains a `name` string and a `theme` object:
+এই উদাহরণটিতে, `person` জাভাস্ক্রিপ্ট অবজেক্ট এ একটি `name` স্ট্রিং এবং একটি `theme` অবজেক্ট রয়েছে:
 
 ```js
 const person = {
@@ -226,23 +225,23 @@ const person = {
 };
 ```
 
-The component can use these values from `person` like so:
+এই কম্পোনেন্ট 'person' অবজেক্ট থেকে value গুলি ব্যবহার করতে পারে:
 
 ```js
 <div style={person.theme}>
   <h1>{person.name}'s Todos</h1>
 ```
 
-JSX is very minimal as a templating language because it lets you organize data and logic using JavaScript.
+JSX হল একটি খুবই সাধারণ টেমপ্লেটিং ল্যাংগুয়েজে কারণ এটি আপনাকে জাভাস্ক্রিপ্ট ব্যবহার করে data এবং logic সংগঠিত করতে দেয়।
 
 <Recap>
 
-Now you know almost everything about JSX:
+এখন আপনি JSX সম্পর্কে প্রায় সবকিছু জানেন:
 
-* JSX attributes inside quotes are passed as strings.
-* Curly braces let you bring JavaScript logic and variables into your markup.
-* They work inside the JSX tag content or immediately after `=` in attributes.
-* `{{` and `}}` is not special syntax: it's a JavaScript object tucked inside JSX curly braces.
+* JSX attribute গুলির এর ভিতরে quote গুলি স্ট্রিং হিসাবে পাস করা হয়।
+* Curly braces আপনাকে আপনার মার্কআপে জাভাস্ক্রিপ্ট লজিক এবং ভেরিয়েবল লিখতে দেয়।
+* Curly braces JSX ট্যাগ কন্টেন্টের ভিতরে কাজ করে অথবা attributes `=` এর পরপরই কাজ করে।
+* `{{` and `}}` এটি কোন বিশেষ সিনট্যাক্স নয়: এটি একটি জাভাস্ক্রিপ্ট অবজেক্ট যা JSX এ curly braces এর ভিতরে ব্যবহার করা হয়।
 
 </Recap>
 
