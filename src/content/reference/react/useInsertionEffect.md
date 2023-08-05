@@ -10,7 +10,7 @@ title: useInsertionEffect
 
 <Intro>
 
-`useInsertionEffect` হচ্ছে [`useEffect`](/reference/react/useEffect) এর একটি ভার্শন যা যেকোন DOM মিউটেশনের আগে fire হয়।
+`useInsertionEffect` কোন লেআউট effect fire করার আগেই DOM এ বিভিন্ন এলিমেন্ট ইন্সার্ট করার সুযোগ দেয়।
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -26,7 +26,7 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-যেকোন DOM মিউটেশনের আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+লেআউট রিড করতে হবে এমন কোন effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -44,7 +44,7 @@ function useCSS(rule) {
 
 #### প্যারামিটার {/*parameters*/}
 
-* `setup`: যেই ফাংশনে আপনার Effect এর লজিক আছে। আপনার সেটআপ ফাংশন একটি *cleanup* ফাংশন optionally রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM এ যুক্ত হবার আগে, React আপনার সেটআপ ফাংশন রান করবে। পরিবর্তিত ডিপেন্ডেন্সির সাথে যতবার রি-রেন্ডার হবে, React প্রথমে আপনার পুরনো ভ্যালুগুলো ব্যবহার করে cleanup ফাংশন রান করবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন ভ্যালুগুলো ব্যবহার করে সেটআপ ফাংশন রান করবে। আপনার কম্পোনেন্ট DOM থেকে সরিয়ে ফেলবার আগে, React আপনার cleanup ফাংশন রান করবে।
+* `setup`: যেই ফাংশনে আপনার Effect এর লজিক আছে। আপনার সেটআপ ফাংশন একটি *cleanup* ফাংশন optionally রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM এ যুক্ত হবার সময়, কিন্তু কোন লেআউট effect fire করার আগে, React আপনার সেটআপ ফাংশন রান করবে। পরিবর্তিত ডিপেন্ডেন্সির সাথে যতবার রি-রেন্ডার হবে, React প্রথমে আপনার পুরনো ভ্যালুগুলো ব্যবহার করে cleanup ফাংশন রান করবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন ভ্যালুগুলো ব্যবহার করে সেটআপ ফাংশন রান করবে। আপনার কম্পোনেন্ট DOM থেকে সরিয়ে ফেলবার আগে, React আপনার cleanup ফাংশন রান করবে।
  
 * **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিয়াক্টিভ ভ্যালুর তালিকা। রিয়াক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হঅ্যা সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার  [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিয়াক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত করা আছে। ডিপেন্ডেন্সির তালিকাতে অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং `[dep1, dep2, dep3]` এর মত ইনলাইনে থাকতে হবে।  React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithn ব্যবহার করে প্রতিটা ডিপেন্ডেন্সি এবং এর আগের ভ্যালু তুলনা করবে।আপনি যদি ডিপেন্ডেন্সি চিহ্নিত করে না দেন, আপনার Effect কম্পোনেন্টের প্রতিটি re-render এ re-run হবে।
 
@@ -57,7 +57,8 @@ function useCSS(rule) {
 * Effects শুধুমাত্র ক্লায়েন্টে কাজ করে। এগুলো সার্ভার রেন্ডারিং এর সময় রান করে না।
 * আপনি `useInsertionEffect` এর মধ্য হতে state আপডেট করতে পারবেন না।
 * যতক্ষণে `useInsertionEffect` রান করে, ref তখনো যুক্ত হয় নাই এবং DOM আপডেট হয় নাই।
-
+* `useInsertionEffect` DOM আপডেটের আগেও রান করতে পারে, পরেও করতে পারে। কোন একটি নির্দিষ্ট সময়ে DOM আপডেট হবে এর উপর নির্ভর করে থাকবেন না।
+* অন্যান্য Effect যেম্ন প্রতিবার ক্লিনআপ শুরু করে তার পর সেটাপ শুরু করে, `useInsertionEffect` তার ব্যতিক্রম। এটা প্রতিটি কম্পোনেন্টে একই সাথে ক্লিনাপ এবন সেটাপ শুরু করবে। যেটার ফলস্বরূপ, ক্লিনাপ এবং সেটাপ ফাংশনে একটা "interleaving" থেকে যায়।
 ---
 
 ## ব্যবহার {/*usage*/}
@@ -87,7 +88,7 @@ function useCSS(rule) {
 
 প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
 
-যেকোন DOM মিউটেশনের আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+কোন লেআউট effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js {4-11}
 // আপনার CSS-in-JS লাইব্রেরির মধ্যে

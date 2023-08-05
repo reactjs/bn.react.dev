@@ -107,7 +107,7 @@ root.unmount();
 
 #### রিটার্ন {/*root-unmount-returns*/}
 
-`render` `null` রিটার্ন করে।
+`root.unmount` `undefined`  রিটার্ন করে।
 
 #### সতর্কতা {/*root-unmount-caveats*/}
 
