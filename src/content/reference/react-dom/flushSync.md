@@ -4,13 +4,13 @@ title: flushSync
 
 <Pitfall>
 
-Using `flushSync` is uncommon and can hurt the performance of your app.
+`flushSync` এর ব্যবহার খুব একটা হয় না এবং এটা আপনার অ্যাপের পারফরম্যান্সে বিরূপ প্রভাব ফেলতে পারে।
 
 </Pitfall>
 
 <Intro>
 
-`flushSync` lets you force React to flush any updates inside the provided callback synchronously. This ensures that the DOM is updated immediately.
+`flushSync` আপনাকে সাহায্য করবে যদি আপনি কোন একটি কলব্যাকের মধ্যকার যেকোন আপডেট সিঙ্ক্রোনাসভাবে flush করার জন্য React কে বাধ্য করতে চান। এটা নিশ্চিত করে যে DOM সাথে সাথে আপডেট হয়ে যাচ্ছে। 
 
 ```js
 flushSync(callback)
@@ -22,11 +22,11 @@ flushSync(callback)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `flushSync(callback)` {/*flushsync*/}
 
-Call `flushSync` to force React to flush any pending work and update the DOM synchronously.
+কোন একটি pending কাজ ফ্লাশ করার জন্য এবং একই সাথে DOM আপডেট করার জন্য React কে বাধ্য করতে এবং `flushSync` কল করুন।
 
 ```js
 import { flushSync } from 'react-dom';
@@ -36,24 +36,24 @@ flushSync(() => {
 });
 ```
 
-Most of the time, `flushSync` can be avoided. Use `flushSync` as last resort.
+বেশির ভাগ সময়, `flushSync` এর ব্যবহার এড়িয়ে চলা যায়। `flushSync` কে ব্যবহার করুন last resort হিসেবে।
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
 
-* `callback`: A function. React will immediately call this callback and flush any updates it contains synchronously. It may also flush any pending updates, or Effects, or updates inside of Effects. If an update suspends as a result of this `flushSync` call, the fallbacks may be re-shown.
+* `callback`: একটি ফাংশন। React সাথে সাথে এই কলব্যাক কল দিবে এবং এর মধ্যে থাকা যেকোন আপডেট সিঙ্ক্রোনাসভাবে ফ্লাশ করে দিবে। এটা একই সাথে যেকোন পেন্ডীং আপডেট, Effect অথবা Effect এর মধ্যকার আপডেট ফ্লাশ করে দিতে পারে। যদি এই `flushSync` কলের জন্য একটি আপডেট সাসপেন্ড হয়ে যায়, ফলব্যাক আবার দেখা যেতে পারে।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`flushSync` returns `undefined`.
+`flushSync` রিটার্ন করে `undefined`।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* `flushSync` can significantly hurt performance. Use sparingly.
-* `flushSync` may force pending Suspense boundaries to show their `fallback` state.
-* `flushSync` may run pending effects and synchronously apply any updates they contain before returning.
+* `flushSync` বেশ উল্লেখজনকভাবে পারফরম্যান্স কমিয়ে দিতে পারে, কম ব্যবহারের চেষ্টা করুন।
+* `flushSync` পেন্ডিং সাসপেন্স বাউন্ডারিগুলোকে তাদের `fallback` state দেখাতে বাধ্য করতে পারে।
+* `flushSync` পেন্ডিং Effect গুলো রান করতে পারে এবং সিঙ্ক্রোনাসভাবে  may run pending effects and synchronously apply any updates they contain before returning.
 * `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
 
 ---
