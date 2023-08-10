@@ -32,37 +32,37 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### প্যারামিটার {/*parameters*/}
 
-* `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
+* `load`: একটি ফাংশন যা একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট) রিটার্ন করে।  আপনি যতক্ষণ রিটার্ন হওয়া component লোড করার চেষ্টা করছেন ততক্ষণ React `load` কল করবে না। React প্রথম বার `load` কল করার পর, এটা resolved হবার অপেক্ষা করবে, এবং এর পরে resolved value React component হিসেবে রেন্ডার করবে। রিটার্ন হওয়া Promise এবং Promise এর resolved value cached হয়ে থাকবে, সুতরাং React একবারের বেশি `load` কল করবে না। যদি Promise reject করে, React rejection এর কারণ `throw` করবে যেন সবচেয়ে নিকটবর্তী error boundary সেটা হ্যান্ডেল করে।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`lazy` returns a React component you can render in your tree. While the code for the lazy component is still loading, attempting to render it will *suspend.* Use [`<Suspense>`](/reference/react/Suspense) to display a loading indicator while it's loading.
-
----
-
-### `load` function {/*load*/}
-
-#### Parameters {/*load-parameters*/}
-
-`load` receives no parameters.
-
-#### Returns {/*load-returns*/}
-
-You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other *thenable* (a Promise-like object with a `then` method). It needs to eventually resolve to a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
+`lazy` একটি React component রিটার্ন করে যা আপনি আপনার ট্রিতে রেন্ডার রক্তে পারবেন। যতক্ষণ পর্যন্ত lazy component এর কোড লোড হচ্ছে, এটাকে রেন্ডারের চেষ্টা *suspend* হবে। এটা লোডীং এর সময় লোডীং ইনডিকেটর দেখানোর জন্য [`<Suspense>`](/reference/react/Suspense) ব্যবহার করুন।
 
 ---
 
-## Usage {/*usage*/}
+### `load` ফাংশন {/*load*/}
+
+#### প্যারামিটার {/*load-parameters*/}
+
+`load` কোন প্যারামিটার রিসিভ করে না।
+
+#### রিটার্ন {/*load-returns*/}
+
+আপনাকে একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট)। একে শেষমেশ একটি যথাযথ React component টাইপে যেতে হবে, যেমন একটি ফাংশন, [`memo`](/reference/react/memo), অথবা একটি [`forwardRef`](/reference/react/forwardRef) component।
+
+---
+
+## ব্যবহার {/*usage*/}
 
 ### Lazy-loading components with Suspense {/*suspense-for-code-splitting*/}
 
-Usually, you import components with the static [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) declaration:
+সাধারণত, আপনি component ইমপোর্ট করেন static [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) ডিক্লেয়ারেশন সহঃ
 
 ```js
 import MarkdownPreview from './MarkdownPreview.js';
 ```
 
-To defer loading this component's code until it's rendered for the first time, replace this import with:
+এই component এর কোডের লোডীং প্রথম বার রেন্ডার হবার আগ পর্যন্ত বিলম্বিত করতে এই ইমপোর্ট নিচের কোড দিয়ে প্রতিস্থাপন করুনঃ
 
 ```js
 import { lazy } from 'react';
@@ -70,9 +70,9 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-This code relies on [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which might require support from your bundler or framework.
+এই কোড [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) এর উপর নির্ভর করে যার আপনার বান্ডলার বা ফ্রেমওয়ার্ক থেকে support এর দরকার পড়তে পারে।
 
-Now that your component's code loads on demand, you also need to specify what should be displayed while it is loading. You can do this by wrapping the lazy component or any of its parents into a [`<Suspense>`](/reference/react/Suspense) boundary:
+এখন যেহেতু আপনার component এর কোড চাহিদানুযায়ী লোড হয়, আপনাকে এটা নির্ধারণ করে দিতে হবে যে এটা লোডীং এর সময়ে কী ডিসপ্লে হওয়া উচিত। এটা আপনি করতে পারেন lazy component অথবা এর যেকোন parent কে [`<Suspense>`](/reference/react/Suspense) boundary এর মধ্যে wrap করার মাধ্যমেঃ
 
 ```js {1,4}
 <Suspense fallback={<Loading />}>
