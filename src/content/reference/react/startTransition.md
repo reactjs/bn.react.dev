@@ -4,7 +4,7 @@ title: startTransition
 
 <Intro>
 
-`startTransition` lets you update the state without blocking the UI.
+`startTransition` আপনাকে UI ব্লক না করে state আপডেট করতে দিবে।
 
 ```js
 startTransition(scope)
@@ -16,11 +16,11 @@ startTransition(scope)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `startTransition(scope)` {/*starttransitionscope*/}
 
-The `startTransition` function lets you mark a state update as a transition.
+`startTransition` ফাংশন আপনাকে একটি state update কে transition হিসেবে চিহ্নিত করতে দেবে।
 
 ```js {7,9}
 import { startTransition } from 'react';
@@ -37,15 +37,15 @@ function TabContainer() {
 }
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no parameters and marks all state updates scheduled synchronously during the `scope` function call as transitions. They will be [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](/reference/react/useTransition#preventing-unwanted-loading-indicators)
+* `scope`: একটি ফাংশন যেটা এক বা একাধিক [`set` functions.](/reference/react/useState#setstate) কল করার মাধ্যমে কোন state আপডেট করে। React তৎক্ষণাৎভাবে কোন প্যারামিটার ছাড়া `scope` কল করে এবং `scope` ফাংশন কল হবার সময়ে সিঙ্ক্রোনাসভাবে শিডিউল হওয়া সকল state update কে transition হিসেবে চিহ্নিত করে। এগুলো [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অবাঞ্ছিত কোন লোডিং ইনডিকেটর দেখাবনে না।](/reference/react/useTransition#preventing-unwanted-loading-indicators)
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`startTransition` does not return anything.
+`startTransition` কিছু রিটার্ন করে না।
 
 #### Caveats {/*caveats*/}
 
