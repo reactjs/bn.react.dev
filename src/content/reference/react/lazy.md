@@ -4,7 +4,7 @@ title: lazy
 
 <Intro>
 
-`lazy` lets you defer loading component's code until it is rendered for the first time.
+`lazy` আপনাকে component এর কোড বিলম্বিত করার সুযোগ দেয় যতক্ষণ না এটা প্রথম বারের মত রেন্ডার করা হচ্ছে।
 
 ```js
 const SomeComponent = lazy(load)
@@ -16,11 +16,11 @@ const SomeComponent = lazy(load)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `lazy(load)` {/*lazy*/}
 
-Call `lazy` outside your components to declare a lazy-loaded React component:
+একটি lazy-loaded React component ডিক্লেয়ার করার জন্য আপনার component অস্মূহের বাইরে `lazy` কল করুনঃ
 
 ```js
 import { lazy } from 'react';
@@ -28,9 +28,9 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
 * `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
 
@@ -81,7 +81,7 @@ Now that your component's code loads on demand, you also need to specify what sh
  </Suspense>
 ```
 
-In this example, the code for `MarkdownPreview` won't be loaded until you attempt to render it. If `MarkdownPreview` hasn't loaded yet, `Loading` will be shown in its place. Try ticking the checkbox:
+এই উদাহরণে, `MarkdownPreview` এর কোড ততক্ষণ লোড হবে না যতক্ষণ আপনি এটা রেন্ডারের চেষ্টা করেন। যদি `MarkdownPreview` লোড না হয়ে থাকে, `Loading` তার নিজের জায়গায় দেখাবে। চেকবক্স টিক করে দেখুনঃ
 
 <Sandpack>
 
@@ -175,17 +175,17 @@ body {
 
 </Sandpack>
 
-This demo loads with an artificial delay. The next time you untick and tick the checkbox, `Preview` will be cached, so there will be no loading state. To see the loading state again, click "Reset" on the sandbox.
+এই ডেমো কৃত্রিম একটা বিলম্বের সাথে লোড হয়। এর পরের বার যখন আপনি চেকবক্স টিক করবেন এবং আনটিক করবেন, `Preview` এর cache হয়ে যাবে, সুতরাং কোন লোডীং state থাকবে না। লোডীং state আবার দেখতে চাইলে, স্যান্ডবক্সের উপর "Reset" বাটন ক্লিক করুন।
 
 [Learn more about managing loading states with Suspense.](/reference/react/Suspense)
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশ্যুট {/*troubleshooting*/}
 
-### My `lazy` component's state gets reset unexpectedly {/*my-lazy-components-state-gets-reset-unexpectedly*/}
+### আমার `lazy` component এর state অপ্রত্যাশিতভাবে রিসেট হয়ে যায় {/*my-lazy-components-state-gets-reset-unexpectedly*/}
 
-Do not declare `lazy` components *inside* other components:
+`lazy` component গুলোকে অন্যান্য component গুলোর *ভেতরে* ডিক্লেয়ার করবেন নাঃ
 
 ```js {4-5}
 import { lazy } from 'react';
@@ -197,7 +197,7 @@ function Editor() {
 }
 ```
 
-Instead, always declare them at the top level of your module:
+তার বদলে, এগুলোকে সব সময় আপনার মডিউলের সর্বোচ্চ স্তরে ডিক্লেয়ার করুনঃ
 
 ```js {3-4}
 import { lazy } from 'react';
