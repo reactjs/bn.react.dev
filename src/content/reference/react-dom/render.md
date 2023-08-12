@@ -37,19 +37,19 @@ const domNode = document.getElementById('root');
 render(<App />, domNode);
 ```
 
-React will display `<App />` in the `domNode`, and take over managing the DOM inside it.
+React `<App />` দেখাবে `domNode` এর মধ্যে, এবং এর ভেতরকার DOM ম্যানেজ করার দায়িত্ব নিয়ে নিবে।
 
-An app fully built with React will usually only have one `render` call with its root component.  A page that uses "sprinkles" of React for parts of the page may have as many `render` calls as needed.
+ সম্পূর্ণভাবে React দিয়ে তৈরি একটি অ্যাপ্যাঁ এর রুট component এর সাথে সাধারণত এক বার `render` কল থাকবে। যেই পেইজ তার বিভিন্ন অংশের জন্য React এর "sprinkles" ব্যবহার করে সেটায় যতগুলো প্রয়োজন `render` কল থাকতে পারে।
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `reactNode`: A *React node* that you want to display. This will usually be a piece of JSX like `<App />`, but you can also pass a React element constructed with [`createElement()`](/reference/react/createElement), a string, a number, `null`, or `undefined`. 
+* `reactNode`: একটা *React নোড* যেটা আপনি দেখাতে চান। এটা সাধারণত `<App />` এর মত JSX এর একটি অংশ হবে, কিন্তু আপনি চাইলে [`createElement()`](/reference/react/createElement) দিয়ে তৈরি একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null`, বা `undefined` পাস করতে পারেন। 
 
-* `domNode`: A [DOM element.](https://developer.mozilla.org/en-US/docs/Web/API/Element) React will display the `reactNode` you pass inside this DOM element. From this moment, React will manage the DOM inside the `domNode` and update it when your React tree changes.
+* `domNode`: একটি [DOM এলিমেন্ট।](https://developer.mozilla.org/en-US/docs/Web/API/Element) React এই DOM এলিমেন্টের মধ্যে আপনার পাস করা `reactNode` দেখাবে। এই মুহুর্ত থেকে শুরু করে, React `domNode` এর ভেতরের DOM ম্যানেজ করবে এবং যখন আপনার React ট্রি বদলাবে সেই হিসেবে আপডেট করবে।
 
-* **optional** `callback`: A function. If passed, React will call it after your component is placed into the DOM.
+* **optional** `callback`: একটি ফাংশন। যদি একে পাস করা হয়, আপনার component DOM এ রাখার পর React এটাকে কল করবে।
 
 
 #### রিটার্ন {/*returns*/}
@@ -64,7 +64,7 @@ An app fully built with React will usually only have one `render` call with its 
 
 * আপনি যদি একই `domNode` এ একাধিক বার `render` কল করেন, React আপনার পাস করে সর্বশেষ JSX এর প্রতিফলন দেখানোর জন্য DOM আপডেট করে দেবে। React সিদ্ধান্ত নিবে যে DOM এর কোন কোন অংশ পুনরায় ব্যবহার করা জাবর এবং কোনগুলো আবার আগের বার রেন্ডার হওয়া ট্রি এর সাথে ["মিলানোর মাধ্যমে"](/learn/preserving-and-resetting-state) পুনরায় তৈরি করা দরকার। একই `domNode` এ একাধিক বার `render` কল করা রুট component এ [`set` function](/reference/react/useState#setstate) কল করার মতঃ React avoids অপ্রয়োজনীয় DOM আপডেট এড়িয়ে চলে।
 
-* If your app is fully built with React, you'll likely have only one `render` call in your app. (If you use a framework, it might do this call for you.) When you want to render a piece of JSX in a different part of the DOM tree that isn't a child of your component (for example, a modal or a tooltip), use [`createPortal`](/reference/react-dom/createPortal) instead of `render`.
+* আপনার অ্যাপ যদি সম্পূর্ণভাবে React দিয়ে তৈরি হয়ে থাকে, এতে `render` কল এক বারই থাকার কথা (আপনি যদি একটি ফ্রেমওয়ার্ক ব্যবহার করেন, সেটা আপনার জন্য এই কল করে দিতে পারে)। যখন আপনি JSX এর একটি অংশ এমন জায়গায় রেন্ডার করতে চান যেটা আপনার component এর চাইল্ড না (যেমন, মোডাল বা টুলটিপ), সেক্ষেত্রে `render` এর জায়গায় [`createPortal`](/reference/react-dom/createPortal) ব্যবহার করুন।
 
 ---
 
