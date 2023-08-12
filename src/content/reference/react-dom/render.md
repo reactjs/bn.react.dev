@@ -4,15 +4,15 @@ title: render
 
 <Deprecated>
 
-This API will be removed in a future major version of React.
+এই API ভবিষ্যতে React এর একটি মেজর ভার্সনে সরিয়ে ফেলা হবে।
 
-In React 18, `render` was replaced by [`createRoot`.](/reference/react-dom/client/createRoot) Using `render` in React 18 will warn that your app will behave as if it’s running React 17. Learn more [here.](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
+React 18 এ, `render` এর জায়গায় এসেছে [`createRoot`।](/reference/react-dom/client/createRoot) React 18 এ `render` ব্যবহার করলে সতর্কতা দেখাবে যে আপনার অ্যাপ এমন আচরণ করবে যেন এতে React 17 চলছে। আরো জানুন [এখানে।](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
 
 </Deprecated>
 
 <Intro>
 
-`render` renders a piece of [JSX](/learn/writing-markup-with-jsx) ("React node") into a browser DOM node.
+`render` ব্রাউজারের একটি DOM নোডে [JSX](/learn/writing-markup-with-jsx) ("React node") এর একটি অংশ রেন্ডার করে।
 
 ```js
 render(reactNode, domNode, callback?)
@@ -24,7 +24,7 @@ render(reactNode, domNode, callback?)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `render(reactNode, domNode, callback?)` {/*render*/}
 
@@ -181,9 +181,9 @@ You can destroy the rendered trees with [`unmountComponentAtNode()`.](/reference
 
 ---
 
-### Updating the rendered tree {/*updating-the-rendered-tree*/}
+### Render হওয়া ট্রি এর আপডেট {/*updating-the-rendered-tree*/}
 
-You can call `render` more than once on the same DOM node. As long as the component tree structure matches up with what was previously rendered, React will [preserve the state.](/learn/preserving-and-resetting-state) Notice how you can type in the input, which means that the updates from repeated `render` calls every second are not destructive:
+আপনি একই DOM নোডে একাধিক বার `render` কল করতে পারেন। As long as the component tree structure matches up with what was previously rendered, React will [preserve the state.](/learn/preserving-and-resetting-state) Notice how you can type in the input, which means that the updates from repeated `render` calls every second are not destructive:
 
 <Sandpack>
 
@@ -215,4 +215,4 @@ export default function App({counter}) {
 
 </Sandpack>
 
-It is uncommon to call `render` multiple times. Usually, you'll [update state](/reference/react/useState) inside your components instead.
+`render` সাধারণত একাধিকবার কল দেওয়া হয় না। সাধারণত, আপনি তা না করে আপনার component এর মধ্যে [update state](/reference/react/useState) করবেন।
