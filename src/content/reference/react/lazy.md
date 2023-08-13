@@ -20,7 +20,7 @@ const SomeComponent = lazy(load)
 
 ### `lazy(load)` {/*lazy*/}
 
-একটি lazy-loaded React component ডিক্লেয়ার করার জন্য আপনার component অস্মূহের বাইরে `lazy` কল করুনঃ
+একটি lazy-loaded React component ডিক্লেয়ার করার জন্য আপনার component গুলোর বাইরে `lazy` কল করুনঃ
 
 ```js
 import { lazy } from 'react';
@@ -54,7 +54,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 ## ব্যবহার {/*usage*/}
 
-### Lazy-loading components with Suspense {/*suspense-for-code-splitting*/}
+### সাসপেন্স সহ লেইজি-লোডিং কম্পোনেন্টস {/*suspense-for-code-splitting*/}
 
 সাধারণত, আপনি component ইমপোর্ট করেন static [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) ডিক্লেয়ারেশন সহঃ
 
