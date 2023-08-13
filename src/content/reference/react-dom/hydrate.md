@@ -6,7 +6,7 @@ title: hydrate
 
 এই API ভবিষ্যতে React এর একটি মেজর ভার্সনে সরিয়ে ফেলা হবে।
 
-React 18 এ, `hydrate` এর জায়গায় এসেছে [`hydrateRoot`।](/reference/react-dom/client/createRoot) React 18 এ `render` ব্যবহার করলে সতর্কতা দেখাবে যে আপনার অ্যাপ এমন আচরণ করবে যেন এতে React 17 চলছে। আরো জানুন [এখানে।](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
+React 18 এ, `hydrate` এর জায়গায় এসেছে [`hydrateRoot`।](/reference/react-dom/client/createRoot) React 18 এ `render` ব্যবহার করলে সতর্কতা দেখাবে যে, আপনার অ্যাপ এমন আচরণ করবে যেন এতে React 17 চলছে। আরো জানুন [এখানে।](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
 
 </Deprecated>
 
@@ -53,16 +53,16 @@ React `domNode` DOM নোডে থাকা HTML এর সাথে যুক
 `hydrate` null রিটার্ন করে।
 
 #### সতর্কতা {/*caveats*/}
-* `hydrate` expects the rendered content to be identical with the server-rendered content. React can patch up differences in text content, but you should treat mismatches as bugs and fix them.
-* In development mode, React warns about mismatches during hydration. There are no guarantees that attribute differences will be patched up in case of mismatches. This is important for performance reasons because in most apps, mismatches are rare, and so validating all markup would be prohibitively expensive.
-* You'll likely have only one `hydrate` call in your app. If you use a framework, it might do this call for you.
-* If your app is client-rendered with no HTML rendered already, using `hydrate()` is not supported. Use [render()](/reference/react-dom/render) (for React 17 and below) or [createRoot()](/reference/react-dom/client/createRoot) (for React 18+) instead.
+* `hydrate` প্রত্যাশা করে যে রেন্ডার হওয়া কনটেন্টব সার্ভারে রেন্ডার হওয়া কনটেন্টের সাথে হুবহু মিলে যাবে। টেক্সট কনটেন্টে অমিল React patch up করতে পারে, তবে আপনার উচিত অমিলগুলোকে বাগ হিসেবে বিবেচনা করা এবং সেগুলোকে ঠিক করা।
+* ডেভেলপমেন্ট মোডে, React hydration এর সময়ে অমিলের বিষয়ে সতর্কবাণী দেখায়। অমিলের ক্ষেত্রে এট্রিবিউটের ভিন্নতা patch up হবে কি না তার কোন নিশ্চয়তা নেই। এটা পারফরম্যান্সের জন্য দরকার কেননা বেশিরভাগ অ্যাপে, অমিল খুবই বিরল, সুতরাং সকল মার্কাপ ভ্যালিডেট করাটা এতটাই চাপ ফেলবে যে সেটা করা নিষিদ্ধ বলা যায়।
+* আপনার অ্যাপে `hydrate` কল এক বারই থাকার কথা। আপনি যদি একটি ফ্রেমওয়ার্ক ব্যবহার করেন, সেটা আপনার জন্য এই কল করে দিতে পারে।
+* যদি আপনার অ্যাপ ক্লায়েন্ট-রেন্ডার্ড হয় এবং এতে আগে থেকে কোন HTML রেন্ডার করা না থাকে, `hydrate()` ব্যবহারের সাপোর্ট নেই। [`render()`](/reference/react-dom/render) (React 17 বা তার পূর্ববর্তী ভার্সনের জন্য) অথবা [`createRoot()`](/reference/react-dom/client/createRoot) (React 18+ এ) ব্যবহার করুন বরং।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-Call `hydrate` to attach a <CodeStep step={1}>React component</CodeStep> into a server-rendered <CodeStep step={2}>browser DOM node</CodeStep>.
+সার্ভারে রেন্ডার হওয়া <CodeStep step={2}>ব্রাউজার DOM নোডে</CodeStep>  <CodeStep step={1}>React component</CodeStep> যুক্ত করার জন্য `hydrate` কল করুন।
 
 ```js [[1, 3, "<App />"], [2, 3, "document.getElementById('root')"]]
 import { hydrate } from 'react-dom';
@@ -70,13 +70,13 @@ import { hydrate } from 'react-dom';
 hydrate(<App />, document.getElementById('root'));
 ```
 
-Using `hydrate()` to render a client-only app (an app without server-rendered HTML) is not supported. Use [`render()`](/reference/react-dom/render) (in React 17 and below) or [`createRoot()`](/reference/react-dom/client/createRoot) (in React 18+) instead.
+একটি client-only অ্যাপ (সার্ভারে রেন্ডার হওয়া HTML ব্যতীত একটি অ্যাপ) `hydrate()` এর সাহায্যে রেন্ডার করার সাপোর্ট নেই। [`render()`](/reference/react-dom/render) (React 17 বা তার পূর্ববর্তী ভার্সনের জন্য) অথবা [`createRoot()`](/reference/react-dom/client/createRoot) (React 18+ এ) ব্যবহার করুন বরং।
 
 ### Hydrating server-rendered HTML {/*hydrating-server-rendered-html*/}
 
-In React, "hydration" is how React "attaches" to existing HTML that was already rendered by React in a server environment. During hydration, React will attempt to attach event listeners to the existing markup and take over rendering the app on the client.
+React এ, "hydration" হচ্ছে যেভাবে React ইতোমধ্যে সার্ভার এনভায়রনমেন্টে React এর রেন্ডার করা HTML এর সাথে "যুক্ত হয়"। Hydration এর সময়ে, React বিদ্যমান মার্কাপের সাথে ইভেন্ট লিসেনার যুক্ত করার চেষ্টা করবে এবং ক্লায়েন্টে অ্যাপের রেন্ডারিং এর দায়িত্ব নিয়ে নিবে।
 
-In apps fully built with React, **you will usually only hydrate one "root", once at startup for your entire app**.
+সম্পূর্ণভাবে React দিয়ে তৈরি অ্যাপসমূহে, **আপনি সাধারণত একটি মাত্র "রুট" hydrate করবেন, একদম শুরুতে আপনার পুরো অ্যাপের জন্য।**
 
 <Sandpack>
 
@@ -104,17 +104,17 @@ export default function App() {
 
 </Sandpack>
 
-Usually you shouldn't need to call `hydrate` again or to call it in more places. From this point on, React will be managing the DOM of your application. To update the UI, your components will [use state.](/reference/react/useState)
+সাধারণত আপনার `hydrate` আবার কল দেবার বা আরো জায়গায় কল দেবার প্রয়োজন হবার কথা না। এই জায়গা থেকে, React আপনার অ্যাপ্লিকেশনের DOM ম্যানেজ করবে। UI আপডেটের জন্য, আপনার component গুলো [state ব্যবহার করবে।](/reference/react/useState)
 
-For more information on hydration, see the docs for [`hydrateRoot`.](/reference/react-dom/client/hydrateRoot)
+Hydration নিয়ে আরো তথ্য জানতে, [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) এর ডকুমেন্টেশন দেখুন।
 
 ---
 
-### Suppressing unavoidable hydration mismatch errors {/*suppressing-unavoidable-hydration-mismatch-errors*/}
+### অনিবার্য hydration mismatch error এর দমন {/*suppressing-unavoidable-hydration-mismatch-errors*/}
 
-If a single element’s attribute or text content is unavoidably different between the server and the client (for example, a timestamp), you may silence the hydration mismatch warning.
+যদি একটি মাত্র এলিমেন্টের এট্রিবিউট অথবা টেক্সট কনটেন্ট অনিবার্যভাবে সার্ভার এবং ক্লায়েন্টে ভিন্ন থাকে (যেমন, টাইমস্ট্যাম্প), তবে আপনি hydration mismatch warning কে সাইলেন্ট রাখতে পারেন।
 
-To silence hydration warnings on an element, add `suppressHydrationWarning={true}`:
+কোন এলিমেন্টের hydration সতর্কবাণী সাইলেন্ট করতে চাইলে, `suppressHydrationWarning={true}` যোগ করুনঃ
 
 <Sandpack>
 
@@ -146,13 +146,13 @@ export default function App() {
 
 </Sandpack>
 
-This only works one level deep, and is intended to be an escape hatch. Don’t overuse it. Unless it’s text content, React still won’t attempt to patch it up, so it may remain inconsistent until future updates.
+এটা শুধুমাত্র এক লেভেল গভীরে কাজ করে, এবং এটা একটা escape hatch হবার কথা। এর মাত্রাতিরিক্ত ব্যবহার করবেন না। যদি না এটা টেক্সট কনটেন্ট হয়, React তাও এটাকে patch up করার চেষ্টা করবে না, সুতরাং এটা ভবিষ্যতের কোণ আপডেটের আগ পর্যন্ত ধারাবাহিকতা নাও রক্ষা করতে পারে।
 
 ---
 
-### Handling different client and server content {/*handling-different-client-and-server-content*/}
+### ভিন্ন ক্লায়েন্ট এবং সার্ভার কনটেন্ট এর হ্যান্ডলিং {/*handling-different-client-and-server-content*/}
 
-If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a [state variable](/reference/react/useState) like `isClient`, which you can set to `true` in an [effect](/reference/react/useEffect):
+আপনার যদি ইচ্ছাকৃতভাবে সার্ভার এবং ক্লায়েন্টে ভিন্ন কনটেন্ট রেন্ডার করার প্রয়োজন পড়ে, আপনি two-pass রেন্ডারিং করতে পারেন। যেসব component ক্লায়েন্টে ভিন্ন কিছু রেন্ডার করে তারা `isClient` এর মত একটি [state ভ্যারিয়েবল](/reference/react/useState) read করে নিতে পারে, যেটা আপনি একটা [effect](/reference/react/useEffect) এ `true` সেট করে দিতে পারেনঃ
 
 <Sandpack>
 
@@ -192,10 +192,10 @@ export default function App() {
 
 </Sandpack>
 
-This way the initial render pass will render the same content as the server, avoiding mismatches, but an additional pass will happen synchronously right after hydration.
+এভাবে প্রাথমিক রেন্ডার পাস সার্ভারের মত একই কনটেন্ট রেন্ডার করবে, অমিল এড়িয়ে গিয়ে, কিন্তু hydration এর ঠিক পরেই একটা অতিরিক্ত পাস সিঙ্ক্রোনাসভাবে হবে।
 
 <Pitfall>
 
-This approach makes hydration slower because your components have to render twice. Be mindful of the user experience on slow connections. The JavaScript code may load significantly later than the initial HTML render, so rendering a different UI immediately after hydration may feel jarring to the user.
+এই পদ্ধতি আপনার hydration কে ধীর গতির বানায় কারণ আপনার component গুলোকে দুই বার রেন্ডার হতে হয়। ধীর গতির ইন্টারনেট সংযোগের ক্ষেত্রে ব্যবহারকারীর অভিজ্ঞতার বিষয়ে খেয়াল রাখবেন। প্রাথমিক HTML রেন্ডারের পরে বেশ উল্লেখযোগ্য বিলম্বে জাভাস্ক্রিপ্ট কোড লোড হতে পারে, সুতরাং hydration এর ঠিক পর পর ভিন্ন একটা UI এর রেন্ডারিং ব্যবহারকারীর জন্য বিরক্তিকর হতে পারে।
 
 </Pitfall>
