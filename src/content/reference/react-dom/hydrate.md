@@ -6,7 +6,7 @@ title: hydrate
 
 এই API ভবিষ্যতে React এর একটি মেজর ভার্সনে সরিয়ে ফেলা হবে।
 
-React 18 এ, `hydrate` এর জায়গায় এসেছে [`hydrateRoot`।](/reference/react-dom/client/createRoot) React 18 এ `render` ব্যবহার করলে সতর্কতা দেখাবে যে, আপনার অ্যাপ এমন আচরণ করবে যেন এতে React 17 চলছে। আরো জানুন [এখানে।](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
+React 18 এ, `hydrate` এর জায়গায় এসেছে [`hydrateRoot`।](/reference/react-dom/client/hydrateRoot) React 18 এ `render` ব্যবহার করলে সতর্কতা দেখাবে যে, আপনার অ্যাপ এমন আচরণ করবে যেন এতে React 17 চলছে। আরো জানুন [এখানে।](/blog/2022/03/08/react-18-upgrade-guide#updates-to-client-rendering-apis)
 
 </Deprecated>
 
