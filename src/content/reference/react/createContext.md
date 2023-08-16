@@ -4,7 +4,7 @@ title: createContext
 
 <Intro>
 
-`createContext` lets you create a [context](/learn/passing-data-deeply-with-context) that components can provide or read.
+`createContext` আপনাকে একটি [context](/learn/passing-data-deeply-with-context) তৈরি করতে দেয় যা component provide বা read করতে পারে।
 
 ```js
 const SomeContext = createContext(defaultValue)
@@ -16,11 +16,11 @@ const SomeContext = createContext(defaultValue)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `createContext(defaultValue)` {/*createcontext*/}
 
-Call `createContext` outside of any components to create a context.
+কনটেক্সট তৈরী করবার জন্য যেকোন কম্পোনেন্টের বাইরে `createContext` কল করুন।
 
 ```js
 import { createContext } from 'react';
@@ -28,15 +28,15 @@ import { createContext } from 'react';
 const ThemeContext = createContext('light');
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
 * `defaultValue`: The value that you want the context to have when there is no matching context provider in the tree above the component that reads context. If you don't have any meaningful default value, specify `null`. The default value is meant as a "last resort" fallback. It is static and never changes over time.
 
 #### Returns {/*returns*/}
 
-`createContext` returns a context object.
+`createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে। 
 
 **The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext.Provider`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
 
@@ -196,22 +196,22 @@ function App() {
 }
 ```
 
-This works similar to [importing and exporting components.](/learn/importing-and-exporting-components)
+এটা [components ইমপোর্ট এবং এক্সপোর্টের](/learn/importing-and-exporting-components) মত কাজ করে।
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশ্যুট {/*troubleshooting*/}
 
-### I can't find a way to change the context value {/*i-cant-find-a-way-to-change-the-context-value*/}
+### আমি কনটেক্সট ভ্যালু পরিবর্তন করার কোন উপায় খুঁজে পাচ্ছি না {/*i-cant-find-a-way-to-change-the-context-value*/}
 
 
-Code like this specifies the *default* context value:
+এমন কোড *default* কনটেক্সট ভ্যালু নির্দেশ করেঃ
 
 ```js
 const ThemeContext = createContext('light');
 ```
 
-This value never changes. React only uses this value as a fallback if it can't find a matching provider above.
+এই ভ্যালু কখনো পরিবর্তিত হয় না। যদি React উপড়ে কোন matching provider না পায় তখন এই ভ্যালুটা কেবল মাত্র fallback হিসেবে ব্যবহার করে।
 
-To make context change over time, [add state and wrap components in a context provider.](/reference/react/useContext#updating-data-passed-via-context)
+সময়ের সাথে সাথে কনটেক্সট চেঞ্জ করতে, [state যোগ করুন এবং কনটেক্সট প্রোভাইডারের মধ্যে components wrap করুন।](/reference/react/useContext#updating-data-passed-via-context)
 
