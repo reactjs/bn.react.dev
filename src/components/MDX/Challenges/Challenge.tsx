@@ -61,27 +61,17 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-<<<<<<< HEAD
-            <Button className="mr-2" onClick={toggleHint} active={showHint}>
-              <IconHint className="mr-1.5" />{' '}
-              {showHint ? 'হিন্ট লুকান' : 'হিন্ট দেখান'}
-=======
+
             <Button className="me-2" onClick={toggleHint} active={showHint}>
               <IconHint className="me-1.5" />{' '}
-              {showHint ? 'Hide hint' : 'Show hint'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showHint ? 'হিন্ট লুকান' : 'হিন্ট দেখান'}
             </Button>
             <Button
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-<<<<<<< HEAD
-              <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
-=======
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
             </Button>
           </div>
         ) : (
@@ -90,13 +80,8 @@ export function Challenge({
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-<<<<<<< HEAD
-              <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
-=======
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'Hide solution' : 'Show solution'}
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+              {showSolution ? 'সমাধান লুকান' : 'সমাধান লুকান'}
             </Button>
           )
         )}
@@ -110,13 +95,8 @@ export function Challenge({
             )}
             onClick={handleClickNextChallenge}
             active>
-<<<<<<< HEAD
             পরবর্তী {isRecipes ? 'উদাহরণ' : 'চ্যালেঞ্জ'}
-            <IconArrowSmall displayDirection="right" className="block ml-1.5" />
-=======
-            Next {isRecipes ? 'Example' : 'Challenge'}
             <IconArrowSmall displayDirection="end" className="block ms-1.5" />
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
           </Button>
         )}
       </div>
