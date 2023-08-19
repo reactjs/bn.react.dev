@@ -61,26 +61,27 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-            <Button className="mr-2" onClick={toggleHint} active={showHint}>
-              <IconHint className="mr-1.5" />{' '}
+
+            <Button className="me-2" onClick={toggleHint} active={showHint}>
+              <IconHint className="me-1.5" />{' '}
               {showHint ? 'হিন্ট লুকান' : 'হিন্ট দেখান'}
             </Button>
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
+              <IconSolution className="me-1.5" />{' '}
               {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
             </Button>
           </div>
         ) : (
           !isRecipes && (
             <Button
-              className="mr-2"
+              className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
-              <IconSolution className="mr-1.5" />{' '}
-              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
+              <IconSolution className="me-1.5" />{' '}
+              {showSolution ? 'সমাধান লুকান' : 'সমাধান লুকান'}
             </Button>
           )
         )}
@@ -95,7 +96,7 @@ export function Challenge({
             onClick={handleClickNextChallenge}
             active>
             পরবর্তী {isRecipes ? 'উদাহরণ' : 'চ্যালেঞ্জ'}
-            <IconArrowSmall displayDirection="right" className="block ml-1.5" />
+            <IconArrowSmall displayDirection="end" className="block ms-1.5" />
           </Button>
         )}
       </div>
@@ -120,8 +121,8 @@ export function Challenge({
                 active>
                 পরবর্তী চ্যালেঞ্জ
                 <IconArrowSmall
-                  displayDirection="right"
-                  className="block ml-1.5"
+                  displayDirection="end"
+                  className="block ms-1.5"
                 />
               </Button>
             )}

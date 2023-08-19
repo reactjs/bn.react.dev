@@ -1078,7 +1078,7 @@ function Button({ children, onClick }) {
 
 আপনি যতবার প্রয়োজন ততবার provider গুলিকে নেস্ট এবং ওভাররাইড করতে পারেন।
 
-<Recipes title="Examples of overriding context">
+<Recipes titleText="Examples of overriding context">
 
 #### একটি থিম ওভাররাইড করা {/*overriding-a-theme*/}
 
