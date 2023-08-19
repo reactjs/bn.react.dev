@@ -52,11 +52,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-এই উদাহরণ টি বর্তমানে রয়েছে **রুট কম্পোনেন্ট ফাইলে**, যার নাম `App.js`। [Create React App](https://create-react-app.dev/) এ আপনার অ্যাপ্লিকেশন টি `src/App.js` ফাইলে থাকে। যদিও আপনার সেটআপ এর উপর নির্ভর করে আপনার রুট কম্পোনেন্ট অন্য ফাইলেও থাকতে পারে। যদি আপনি ফাইল ভিত্তিক রাউটিং সহ কোন ফ্রেমওয়ার্ক ব্যবহার করেন, যেমন Next.js, তাহলে প্রতিটি পৃষ্ঠার জন্য আপনার রুট কম্পোনেন্ট ভিন্ন হবে।
-=======
-These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
->>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
+এই উদাহরণ টি বর্তমানে রয়েছে **রুট কম্পোনেন্ট ফাইলে**, যার নাম `App.js`। যদিও আপনার সেটআপ এর উপর নির্ভর করে আপনার রুট কম্পোনেন্ট অন্য ফাইলেও থাকতে পারে। যদি আপনি ফাইল ভিত্তিক রাউটিং সহ কোন ফ্রেমওয়ার্ক ব্যবহার করেন, যেমন Next.js, তাহলে প্রতিটি পৃষ্ঠার জন্য আপনার রুট কম্পোনেন্ট ভিন্ন হবে।
 
 ## কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা {/*exporting-and-importing-a-component*/}
 
