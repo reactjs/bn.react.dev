@@ -61,17 +61,16 @@ export function Challenge({
       <div className="flex justify-between items-center mt-4">
         {currentChallenge.hint ? (
           <div>
-
             <Button className="me-2" onClick={toggleHint} active={showHint}>
               <IconHint className="me-1.5" />{' '}
-              {showHint ? 'হিন্ট লুকান' : 'হিন্ট দেখান'}
+              {showHint ? 'Hide hint' : 'Show hint'}
             </Button>
             <Button
               className="me-2"
               onClick={toggleSolution}
               active={showSolution}>
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'সমাধান লুকান' : 'সমাধান দেখান'}
+              {showSolution ? 'Hide solution' : 'Show solution'}
             </Button>
           </div>
         ) : (
@@ -81,7 +80,7 @@ export function Challenge({
               onClick={toggleSolution}
               active={showSolution}>
               <IconSolution className="me-1.5" />{' '}
-              {showSolution ? 'সমাধান লুকান' : 'সমাধান লুকান'}
+              {showSolution ? 'Hide solution' : 'Show solution'}
             </Button>
           )
         )}
@@ -95,7 +94,7 @@ export function Challenge({
             )}
             onClick={handleClickNextChallenge}
             active>
-            পরবর্তী {isRecipes ? 'উদাহরণ' : 'চ্যালেঞ্জ'}
+            Next {isRecipes ? 'Example' : 'Challenge'}
             <IconArrowSmall displayDirection="end" className="block ms-1.5" />
           </Button>
         )}
@@ -105,12 +104,12 @@ export function Challenge({
       {showSolution && (
         <div className="mt-6">
           <h3 className="text-2xl font-bold text-primary dark:text-primary-dark">
-            সমাধান
+            Solution
           </h3>
           {currentChallenge.solution}
           <div className="flex justify-between items-center mt-4">
             <Button onClick={() => setShowSolution(false)}>
-              সমাধান বন্ধ করুন
+              Close solution
             </Button>
             {hasNextChallenge && (
               <Button
@@ -119,7 +118,7 @@ export function Challenge({
                 )}
                 onClick={handleClickNextChallenge}
                 active>
-                পরবর্তী চ্যালেঞ্জ
+                Next Challenge
                 <IconArrowSmall
                   displayDirection="end"
                   className="block ms-1.5"
