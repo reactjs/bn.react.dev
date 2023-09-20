@@ -1,10 +1,10 @@
 ---
-title: Passing Data Deeply with Context
+title: Context এর মাধ্যমে ডেটা Deeply Pass করা
 ---
 
 <Intro>
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become verbose and inconvenient if you have to pass them through many components in the middle, or if many components in your app need the same information. *Context* lets the parent component make some information available to any component in the tree below it—no matter how deep—without passing it explicitly through props.
+সাধারণত, আপনি props এর মাধ্যমে একটি প্যারেন্ট কম্পোনেন্ট থেকে একটি চাইল্ড কম্পোনেন্টে ইনফর্মেশন pass করবেন। কিন্তু যদি আপনার props কে মাঝের অনেক অনেক কম্পোনেন্টের মধ্যে দিয়ে pass করা লাগে, অথবা আপনার অ্যাপের অনেক কম্পোনেন্টের একই ইনফর্মেশনের দরকার হয়, তখন props পাস করা শব্দবহুল এবং ঝামেলাপূর্ণ হতে পারে। *Context* প্যারেন্ট কম্পোনেন্টকে এর নিম্নস্থ যেকোনো স্তরের যেকোনো কম্পোনেন্টের জন্য কিছু ইনফর্মেশন অ্যাভেইলেবল করতে দেয় (সে নিম্নস্থ কম্পোনেন্ট যতই গভীরে হোক না কেনো) এ ইনফর্মেশনকে props এর মাধ্যমে স্পষ্টভাবে pass করাও লাগেনা।
 
 </Intro>
 
