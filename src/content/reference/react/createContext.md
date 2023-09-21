@@ -32,22 +32,22 @@ const ThemeContext = createContext('light');
 
 #### প্যারামিটার {/*parameters*/}
 
-* `defaultValue`: The value that you want the context to have when there is no matching context provider in the tree above the component that reads context. If you don't have any meaningful default value, specify `null`. The default value is meant as a "last resort" fallback. It is static and never changes over time.
+* `defaultValue`: এটা হল সেই ভ্যালু যেটা আপনি চান যে কনটেক্সটের থাকুক। কখন? যখন সেই কনটেক্সট যেই component read করবে, ট্রিতে তার উপরে কোন ম্যাচিং কনটেক্সট প্রোভাইডার নেই। যদি আপনার কোন অর্থবহ default ভ্যালু না থাকে, ভ্যালুটা `null` করে দেন। ডিফল্ট ভ্যালু একদম "last resort" ফলব্যাক হিসেবে রাখা হয়। এটা স্ট্যাটিক এবং সময়ের সাথে অপরিবর্তিত থাকে।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
 `createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে। 
 
-**The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext.Provider`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+**কনটেক্সট অবজেক্ট নিজে কোন তথ্য ধারণ করে না।** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext.Provider`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
 
-* `SomeContext.Provider` lets you provide the context value to components.
-* `SomeContext.Consumer` is an alternative and rarely used way to read the context value.
+* `SomeContext.Provider` আপনাকে কম্পোনেন্টে কনটেক্সট ভ্যালু দেয়ার সুযোগ দেয়।
+* `SomeContext.Consumer` একটি উপায়ান্তর যা কনটেক্সট ভ্যালু read করার জন্য বিরল ভাবে ব্যবহৃত হয়।
 
 ---
 
 ### `SomeContext.Provider` {/*provider*/}
 
-Wrap your components into a context provider to specify the value of this context for all components inside:
+আপনার কম্পোনেন্টগুলোকে একটি কনটেক্সট প্রোভাইডারে wrap করে ফেলুন এবং এর মাধ্যমে এই সকল কম্পোনেন্টের জন্য এই কন্টেক্সটের মান নির্দিষ্ট করে দিনঃ
 
 ```js
 function App() {
@@ -63,13 +63,13 @@ function App() {
 
 #### Props {/*provider-props*/}
 
-* `value`: The value that you want to pass to all the components reading this context inside this provider, no matter how deep. The context value can be of any type. A component calling [`useContext(SomeContext)`](/reference/react/useContext) inside of the provider receives the `value` of the innermost corresponding context provider above it.
+* `value`: এটা হচ্ছে সেই ভ্যালু যেটা আপনি এই প্রোভাইডারের সেই সকল কম্পোনেন্ট দিয়ে read করাতে চান, সেটা যত গভীরেই হোক না কেন। কনটেক্সট ভ্যালু যেকোন টাইপের হতে পারে। যখন প্রোভাইডারের মধ্যে থাকা একটি কম্পোনেন্ট [`useContext(SomeContext)`](/reference/react/useContext) কল করে, তখন এটা তার উপরে সবচেয়ে ভিতরকার কনটেক্সট প্রোভাইডারের `value` রিসিভ করে।
 
 ---
 
 ### `SomeContext.Consumer` {/*consumer*/}
 
-Before `useContext` existed, there was an older way to read context:
+`useContext` আসার আগে, কনটেক্সট read করার জন্য একটি পুরনো উপায় ছিলঃ
 
 ```js
 function Button() {
@@ -84,7 +84,7 @@ function Button() {
 }
 ```
 
-Although this older way still works, but **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+যদিও এই পুরনো উপায়টি এখনো কাজ করে, তবে **নতুন করে লেখা কোডে কনটেক্সট read করার জন্য বরং [`useContext()`](/reference/react/useContext) ব্যবহার করা উচিতঃ**
 
 ```js
 function Button() {
@@ -156,9 +156,9 @@ Now the `Page` component and any components inside it, no matter how deep, will 
 
 ---
 
-### Importing and exporting context from a file {/*importing-and-exporting-context-from-a-file*/}
+### একটি ফাইল থেকে কনটেক্সট ইমপোর্ট এবং এক্সপোর্ট {/*importing-and-exporting-context-from-a-file*/}
 
-Often, components in different files will need access to the same context. This is why it's common to declare contexts in a separate file. Then you can use the [`export` statement](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) to make context available for other files:
+প্রায় সময়ই, ভিন্ন ভিন্ন ফাইলের component এর একই কনটেক্সট এক্সেস করার প্রয়োজন হবে। এ কারণে, সাধারণত, একটা আলাদা ফাইলে কনটেক্সট ডিক্লেয়ার করা হয়। তখন আপনি অন্যান্য ফাইলের জন্য কনতেক্সট এভেইলেবল করতে [`export` statement](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) ব্যবহার করতে পারেনঃ
 
 ```js {4-5}
 // Contexts.js
@@ -168,7 +168,7 @@ export const ThemeContext = createContext('light');
 export const AuthContext = createContext(null);
 ```
 
-Components declared in other files can then use the [`import`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import) statement to read or provide this context:
+এর পর অন্যান্য ফাইলে ডিক্লেয়ার হওয়া কম্পোনেন্টগুলো এই কনটেক্সট রিড বা প্রোভাইড করার জন্য [`import`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import) statement ব্যবহার করতে পারেঃ
 
 ```js {2}
 // Button.js
