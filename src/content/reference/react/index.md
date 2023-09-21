@@ -106,16 +106,13 @@ function TodoList({ todos, tab, theme }) {
 
 ---
 
-<<<<<<< HEAD
-## অন্যান্য হুক্স {/*other-hooks*/}
-=======
-## Resource Hooks {/*resource-hooks*/}
+## রিসোর্স হুক {/*resource-hooks*/}
 
-*Resources* can be accessed by a component without having them as part of their state. For example, a component can read a message from a Promise or read styling information from a context.
+*Resources* দেরকে state এর অংশ হিসেবে না রেখেও একটি কম্পোনেন্ট এক্সেস করতে পারে। যেমন, একটি কম্পোনেন্ট একটি Promis থেকে একটি মেসেজ অথবা একটি কনটেক্সট থেকে স্টাইলিং এর তথ্য read করতে পারে।
 
-To read a value from a resource, use this Hook:
+একটি রিসোর্স থেকে একটি মান read করার জন্য এই হুকটি ব্যবহার করুনঃ
 
-- [`use`](/reference/react/use) lets you read the value of a resource like a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or [context](/learn/passing-data-deeply-with-context).
+- [`use`](/reference/react/use) আপনাকে একটি রিসোর্সের ভ্যালু একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা [context](/learn/passing-data-deeply-with-context) এর মত read করতে দেয়।
 
 ```js
 function MessageComponent({ messagePromise }) {
@@ -127,8 +124,7 @@ function MessageComponent({ messagePromise }) {
 
 ---
 
-## Other Hooks {/*other-hooks*/}
->>>>>>> 5219d736a7c181a830f7646e616eb97774b43272
+## অন্যান্য হুক {/*other-hooks*/}
 
 এই হুকগুলো মূলত লাইব্রেরি লেখকদের জন্য প্রয়োজনীয় এবং অ্যাপ্লিকেশন কোডে খুব একটা ব্যবহৃত হয় না।
 
