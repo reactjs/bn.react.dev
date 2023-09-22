@@ -17,17 +17,17 @@ title: Context এর মাধ্যমে ডেটা Deeply Pass করা
 
 </YouWillLearn>
 
-## The problem with passing props {/*the-problem-with-passing-props*/}
+## Props পাস করার মূল সমস্যা {/*the-problem-with-passing-props*/}
 
-[Passing props](/learn/passing-props-to-a-component) is a great way to explicitly pipe data through your UI tree to the components that use it.
+[প্রপস পাস করা](/learn/passing-props-to-a-component) UI tree এর মধ্য দিয়ে ডেটাকে এমন কম্পোনেন্টস যেগুলোর ঐ ডেটা কাজে আসবে সেগুলো পর্যন্ত স্পষ্টভাবে পৌঁছে দেয়ার একটি বেশ ভালো পদ্ধতি।
 
-But passing props can become verbose and inconvenient when you need to pass some prop deeply through the tree, or if many components need the same prop. The nearest common ancestor could be far removed from the components that need data, and [lifting state up](/learn/sharing-state-between-components) that high can lead to a situation called "prop drilling".
+কিন্তু প্রপস পাস করা অনেক শব্দ লেখার এবং ঝামেলার কারণ হতে পরে যখন আপনার কোনো প্রপকে tree এর মধ্য দিয়ে অনেক গভীরে (প্যারেন্ট থেকে অনেক দূরের চাইল্ড পর্যন্ত) পাস করা লাগে কিংবা যদি একাধিক কম্পোনেন্টের একই প্রপের দরকার হয়। যে কম্পোনেন্টগুলোর ডেটা প্রয়োজন, তাদের নিকটতম সাধারণ পূর্বপুরুষ (nearest common ancestor) তাদের থেকে অনেক অনেক দূরে হতে পারে, আর এত বেশি উপরের স্তরে [state কে উঠানো](/learn/sharing-state-between-components) এমন একটা পরিস্থিতি তৈরি করতে পারে যাকে বলা হয় "prop drilling"।
 
 <DiagramGroup>
 
 <Diagram name="passing_data_lifting_state" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components. The parent contains a bubble representing a value highlighted in purple. The value flows down to each of the two children, both highlighted in purple." >
 
-Lifting state up
+State কে উপরে উঠানো
 
 </Diagram>
 <Diagram name="passing_data_prop_drilling" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less. The root node contains a bubble representing a value highlighted in purple. The value flows down through the two children, each of which pass the value but do not contain it. The left child passes the value down to two children which are both highlighted purple. The right child of the root passes the value through to one of its two children - the right one, which is highlighted purple. That child passed the value through its single child, which passes it down to both of its two children, which are highlighted purple.">
@@ -38,7 +38,7 @@ Prop drilling
 
 </DiagramGroup>
 
-Wouldn't it be great if there were a way to "teleport" data to the components in the tree that need it without passing props? With React's context feature, there is!
+এমন হলে কী চমৎকার হতোনা যদি প্রপস পাস না করেই tree এর মধ্যে যে কম্পোনেন্টগুলোর ডেটাটি প্রয়োজন সেগুলোর কাছে ডেটাকে "ম্যাজিকের মতো" নিয়ে যাওয়ার কোন উপায় থাকতো? React এর context ফিচারই হলো সে উপায়!
 
 ## Context: an alternative to passing props {/*context-an-alternative-to-passing-props*/}
 
