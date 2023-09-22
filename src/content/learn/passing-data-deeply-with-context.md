@@ -10,10 +10,10 @@ title: Context এর মাধ্যমে ডেটা Deeply Pass করা
 
 <YouWillLearn>
 
-- What "prop drilling" is
-- How to replace repetitive prop passing with context
-- Common use cases for context
-- Common alternatives to context
+- "Prop drilling (প্রপ ড্রিলিং)" কী
+- কিভাবে context এর ব্যবহার করে বার বার prop পাস করা এড়াবেন 
+- Context ব্যবহারের সাধারণ ক্ষেত্রসমূহ
+- Context এর কিছু প্রচলিত বিকল্প
 
 </YouWillLearn>
 
