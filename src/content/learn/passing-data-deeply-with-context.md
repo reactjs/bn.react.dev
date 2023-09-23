@@ -40,9 +40,9 @@ Prop drilling
 
 এমন হলে কী চমৎকার হতোনা যদি প্রপস পাস না করেই tree এর মধ্যে যে কম্পোনেন্টগুলোর ডেটাটি প্রয়োজন সেগুলোর কাছে ডেটাকে "ম্যাজিকের মতো" নিয়ে যাওয়ার কোন উপায় থাকতো? React এর context ফিচারই হলো সে উপায়!
 
-## Context: an alternative to passing props {/*context-an-alternative-to-passing-props*/}
+## কনটেক্সট: প্রপস পাস করার একটি বিকল্প পদ্ধতি {/*context-an-alternative-to-passing-props*/}
 
-Context lets a parent component provide data to the entire tree below it. There are many uses for context. Here is one example. Consider this `Heading` component that accepts a `level` for its size:
+কনটেক্সট একটি প্যারেন্ট কম্পোনেন্টকে এর নিম্নস্থ সকল কম্পনেন্টের tree কে ডেটা সরবরাহ করতে দেয়। কনটেক্সটের বহু ব্যবহার রয়েছে। একটি উদাহরণ দেখা যাক। এই `Heading` কম্পোনেন্টকে একটু দেখুন যেটি এর সাইজের জন্য কোনো `level` গ্রহণ করে:
 
 <Sandpack>
 
