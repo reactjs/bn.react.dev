@@ -4,7 +4,7 @@ title: Scaling Up with Reducer and Context
 
 <Intro>
 
-Reducers let you consolidate a component's state update logic. Context lets you pass information deep down to other components. You can combine reducers and context together to manage state of a complex screen.
+Reducers একটি কম্পোনেন্টের state আপডেট লজিক সংক্ষেপণ করতে সাহায্য করে। Context আপনাকে তথ্য অন্যান্য কম্পোনেন্টগুলির গভীরে পাঠানোর সুযোগ দেয়। আপনি reducers এবং context দুটি একসাথে সংমিলিত করে একটি জটিল স্ক্রিনের state ব্যবস্থাপনা করতে পারেন ।
 
 </Intro>
 
