@@ -48,7 +48,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### রিটার্ন {/*load-returns*/}
 
-আপনাকে একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট)। একে শেষমেশ একটি যথাযথ React component টাইপে যেতে হবে, যেমন একটি ফাংশন, [`memo`](/reference/react/memo), অথবা একটি [`forwardRef`](/reference/react/forwardRef) component।
+আপনাকে একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট)। একে শেষমেশ একটি অবজেক্টে যেতে হবে যার `.default` প্রপার্টি একটি যথাযথ React কম্পোনেন্ট টাইপ , যেমন একটি ফাংশন, [`memo`](/reference/react/memo), অথবা একটি [`forwardRef`](/reference/react/forwardRef) component।
 
 ---
 
@@ -70,7 +70,7 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-এই কোড [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) এর উপর নির্ভর করে যার আপনার বান্ডলার বা ফ্রেমওয়ার্ক থেকে support এর দরকার পড়তে পারে।
+এই কোড [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) এর উপর নির্ভর করে যার আপনার বান্ডলার বা ফ্রেমওয়ার্ক থেকে support এর দরকার পড়তে পারে। এই প্যাটার্ন ব্যবহার করলে এটা জরুরী যে আপনি যেই lazy কম্পোনেন্ট ইম্পোর্ট করছেন সেটা `default` এক্সপোর্ট হিসেবে এক্সপোর্ট করা হয়েছিল।
 
 এখন যেহেতু আপনার component এর কোড চাহিদানুযায়ী লোড হয়, আপনাকে এটা নির্ধারণ করে দিতে হবে যে এটা লোডীং এর সময়ে কী ডিসপ্লে হওয়া উচিত। এটা আপনি করতে পারেন lazy component অথবা এর যেকোন parent কে [`<Suspense>`](/reference/react/Suspense) boundary এর মধ্যে wrap করার মাধ্যমেঃ
 

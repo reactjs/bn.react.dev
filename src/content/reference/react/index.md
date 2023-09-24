@@ -106,7 +106,25 @@ function TodoList({ todos, tab, theme }) {
 
 ---
 
-## অন্যান্য হুক্স {/*other-hooks*/}
+## রিসোর্স হুক {/*resource-hooks*/}
+
+*Resources* দেরকে state এর অংশ হিসেবে না রেখেও একটি কম্পোনেন্ট এক্সেস করতে পারে। যেমন, একটি কম্পোনেন্ট একটি Promis থেকে একটি মেসেজ অথবা একটি কনটেক্সট থেকে স্টাইলিং এর তথ্য read করতে পারে।
+
+একটি রিসোর্স থেকে একটি মান read করার জন্য এই হুকটি ব্যবহার করুনঃ
+
+- [`use`](/reference/react/use) আপনাকে একটি রিসোর্সের ভ্যালু একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা [context](/learn/passing-data-deeply-with-context) এর মত read করতে দেয়।
+
+```js
+function MessageComponent({ messagePromise }) {
+  const message = use(messagePromise);
+  const theme = use(ThemeContext);
+  // ...
+}
+```
+
+---
+
+## অন্যান্য হুক {/*other-hooks*/}
 
 এই হুকগুলো মূলত লাইব্রেরি লেখকদের জন্য প্রয়োজনীয় এবং অ্যাপ্লিকেশন কোডে খুব একটা ব্যবহৃত হয় না।
 
