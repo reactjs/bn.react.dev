@@ -10,15 +10,17 @@ Reducers একটি কম্পোনেন্টের state আপডেট
 
 <YouWillLearn>
 
-* How to combine a reducer with context
-* How to avoid passing state and dispatch through props
-* How to keep context and state logic in a separate file
+* কিভাবে reducer কে context এর সাথে সংযুক্ত করতে হয়
+* কিভাবে state এবং dispatch কে props এর মাধ্যমে পাঠানো থেকে বিরত থাকা যায়
+* কিভাবে context এবং state এর যুক্তিকে ভিন্ন ফাইলে রাখা যায়
 
 </YouWillLearn>
 
-## Combining a reducer with context {/*combining-a-reducer-with-context*/}
+## Context এর সাথে reducer এর সংযুক্তি {/*combining-a-reducer-with-context*/}
 
 In this example from [the introduction to reducers](/learn/extracting-state-logic-into-a-reducer), the state is managed by a reducer. The reducer function contains all of the state update logic and is declared at the bottom of this file:
+
+[Reducers এর সাথে পরিচিতি](/learn/extracting-state-logic-into-a-reducer) এই উদাহরণে, state কে reducer ব্যবস্থাপনা করেছে । Reducer ফাংশনটি সকল state হালানাগাদ যুক্তিসমূহ ধারন করে এবং একে ফাইলের একদম শেষে ডিক্লেয়ার করা হয় ।
 
 <Sandpack>
 
