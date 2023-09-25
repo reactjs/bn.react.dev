@@ -114,6 +114,7 @@ function TodoList({ todos, tab, theme }) {
 
 - [`use`](/reference/react/use) আপনাকে কোন একটি রিসোর্সের ভ্যালু একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) বা [context](/learn/passing-data-deeply-with-context) এর মত read করার সুযোগ দেয়।
 
+
 ```js
 function MessageComponent({ messagePromise }) {
   const message = use(messagePromise);
