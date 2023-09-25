@@ -32,11 +32,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### প্যারামিটার {/*parameters*/}
 
-<<<<<<< HEAD
 * `load`: একটি ফাংশন যা একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট) রিটার্ন করে।  আপনি যতক্ষণ রিটার্ন হওয়া component লোড করার চেষ্টা করছেন ততক্ষণ React `load` কল করবে না। React প্রথম বার `load` কল করার পর, এটা resolved হবার অপেক্ষা করবে, এবং এর পরে resolved value React component হিসেবে রেন্ডার করবে। রিটার্ন হওয়া Promise এবং Promise এর resolved value cached হয়ে থাকবে, সুতরাং React একবারের বেশি `load` কল করবে না। যদি Promise reject করে, React rejection এর কারণ `throw` করবে যেন সবচেয়ে নিকটবর্তী error boundary সেটা হ্যান্ডেল করে।
-=======
-* `load`: A function that returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or another *thenable* (a Promise-like object with a `then` method). React will not call `load` until the first time you attempt to render the returned component. After React first calls `load`, it will wait for it to resolve, and then render the resolved value's `.default` as a React component. Both the returned Promise and the Promise's resolved value will be cached, so React will not call `load` more than once. If the Promise rejects, React will `throw` the rejection reason for the nearest Error Boundary to handle.
->>>>>>> bdc60c26848820239db732b7218d41f4c2b204af
 
 #### রিটার্ন {/*returns*/}
 
@@ -52,11 +48,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 
 #### রিটার্ন {/*load-returns*/}
 
-<<<<<<< HEAD
-আপনাকে একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট)। একে শেষমেশ একটি যথাযথ React component টাইপে যেতে হবে, যেমন একটি ফাংশন, [`memo`](/reference/react/memo), অথবা একটি [`forwardRef`](/reference/react/forwardRef) component।
-=======
-You need to return a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or some other *thenable* (a Promise-like object with a `then` method). It needs to eventually resolve to an object whose `.default` property is a valid React component type, such as a function, [`memo`](/reference/react/memo), or a [`forwardRef`](/reference/react/forwardRef) component.
->>>>>>> bdc60c26848820239db732b7218d41f4c2b204af
+আপনাকে একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) অথবা অন্য কোন *thenable* (`then` মেথড সহ একটি Promise-like অবজেক্ট)। একে শেষমেশ একটি অবজেক্টে resolve করতে হবে যার `.default` প্রপার্টি একটি সঠিক  যথাযথ React কম্পোনেন্ট টাইপ, যেমন একটি ফাংশন, [`memo`](/reference/react/memo), অথবা একটি [`forwardRef`](/reference/react/forwardRef) কম্পোনেন্ট।
 
 ---
 
@@ -78,11 +70,7 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
-<<<<<<< HEAD
-এই কোড [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) এর উপর নির্ভর করে যার আপনার বান্ডলার বা ফ্রেমওয়ার্ক থেকে support এর দরকার পড়তে পারে।
-=======
 This code relies on [dynamic `import()`,](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) which might require support from your bundler or framework. Using this pattern requires that the lazy component you're importing was exported as the `default` export.
->>>>>>> bdc60c26848820239db732b7218d41f4c2b204af
 
 এখন যেহেতু আপনার component এর কোড চাহিদানুযায়ী লোড হয়, আপনাকে এটা নির্ধারণ করে দিতে হবে যে এটা লোডীং এর সময়ে কী ডিসপ্লে হওয়া উচিত। এটা আপনি করতে পারেন lazy component অথবা এর যেকোন parent কে [`<Suspense>`](/reference/react/Suspense) boundary এর মধ্যে wrap করার মাধ্যমেঃ
 
