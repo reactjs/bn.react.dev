@@ -10,15 +10,13 @@ Reducers একটি কম্পোনেন্টের state আপডেট
 
 <YouWillLearn>
 
-* কিভাবে reducer কে context এর সাথে সংযুক্ত করতে হয়
-* কিভাবে state এবং dispatch কে props এর মাধ্যমে পাঠানো থেকে বিরত থাকা যায়
-* কিভাবে context এবং state এর যুক্তিকে ভিন্ন ফাইলে রাখা যায়
+* কিভাবে reducer কে context এর সাথে সংযুক্ত করতে হয় ।
+* কিভাবে state এবং dispatch কে props এর মাধ্যমে পাঠানো থেকে বিরত থাকা যায় ।
+* কিভাবে context এবং state এর যুক্তিকে ভিন্ন ফাইলে রাখা যায় ।
 
 </YouWillLearn>
 
 ## Context এর সাথে reducer এর সংযুক্তি {/*combining-a-reducer-with-context*/}
-
-In this example from [the introduction to reducers](/learn/extracting-state-logic-into-a-reducer), the state is managed by a reducer. The reducer function contains all of the state update logic and is declared at the bottom of this file:
 
 [Reducers এর সাথে পরিচিতি](/learn/extracting-state-logic-into-a-reducer) এই উদাহরণে, state কে reducer ব্যবস্থাপনা করেছে । Reducer ফাংশনটি সকল state হালানাগাদ যুক্তিসমূহ ধারন করে এবং একে ফাইলের একদম শেষে ডিক্লেয়ার করা হয় ।
 
@@ -209,9 +207,9 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-A reducer helps keep the event handlers short and concise. However, as your app grows, you might run into another difficulty. **Currently, the `tasks` state and the `dispatch` function are only available in the top-level `TaskApp` component.** To let other components read the list of tasks or change it, you have to explicitly [pass down](/learn/passing-props-to-a-component) the current state and the event handlers that change it as props.
+একটি Reducer ইভেন্ট হ্যান্ডলারগুলি ছোট এবং সংক্ষিপ্ত রাখতে সাহায্য করে । তবে, আপনার অ্যাপ্লিকেশন বাড়তে শুরু করলে, আপনি আরও একটি সমস্যায় পরে যেতে পারেন । **বর্তমানে, `tasks` state এবং `dispatch` ফাংশনটি শুধুমাত্র শীর্ষ-স্তরের `TaskApp` কম্পোনেন্টে উপলব্ধ রয়েছে।** অন্য কম্পোনেন্টগুলিকে টাস্কের তালিকা পড়তে অথবা তা পরিবর্তন করতে দিতে হলে, আপনাকে বর্তমান state এবং তা পরিবর্তন করার ইভেন্ট হ্যান্ডলারগুলি স্পষ্টভাবে props হিসেবে [পাঠাতে](/learn/passing-props-to-a-component) হবে।
 
-For example, `TaskApp` passes a list of tasks and the event handlers to `TaskList`:
+উদাহরণস্বরূপ, `TaskApp` টাস্কের তালিকা এবং ইভেন্ট হ্যান্ডলারগুলি `TaskList` এ পাঠিয়ে দেয়:
 
 ```js
 <TaskList
@@ -221,7 +219,7 @@ For example, `TaskApp` passes a list of tasks and the event handlers to `TaskLis
 />
 ```
 
-And `TaskList` passes the event handlers to `Task`:
+এবং `TaskList` ইভেন্ট হ্যান্ডলারগুলোকে `Task` এ পাঠিয়ে দেয়ঃ
 
 ```js
 <Task
