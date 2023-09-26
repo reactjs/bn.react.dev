@@ -106,7 +106,7 @@ export default function Heading({ level, children }) {
 
 </Sandpack>
 
-Let's say you want multiple headings within the same `Section` to always have the same size:
+ধরুন আপনি একই `Section` এর ভিতরের বিভিন্ন headings সবসময় একই সাইজের হোক এটা চান:
 
 <Sandpack>
 
@@ -180,7 +180,7 @@ export default function Heading({ level, children }) {
 
 </Sandpack>
 
-Currently, you pass the `level` prop to each `<Heading>` separately:
+এখন, প্রত্যেক `<Heading>` কে আপনার `level` প্রপটি আলাদা আলাদা করে পাস করতে হচ্ছে:
 
 ```js
 <Section>
@@ -190,7 +190,7 @@ Currently, you pass the `level` prop to each `<Heading>` separately:
 </Section>
 ```
 
-It would be nice if you could pass the `level` prop to the `<Section>` component instead and remove it from the `<Heading>`. This way you could enforce that all headings in the same section have the same size:
+এটা আরো সুন্দর হতো যদি আপনি এর বদলে `level` প্রপটিকে `<Section>` কম্পোনেন্টকে পাস করতে, আর `<Heading>` থেকে রিমুভ করতে পারতেন। এভাবে আপনি নিশ্চিত করতে পারতেন যে, একই সেকশনের সব হেডিংস একই সাইজের হবে:
 
 ```js
 <Section level={3}>
@@ -200,27 +200,27 @@ It would be nice if you could pass the `level` prop to the `<Section>` component
 </Section>
 ```
 
-But how can the `<Heading>` component know the level of its closest `<Section>`? **That would require some way for a child to "ask" for data from somewhere above in the tree.**
+কিন্তু `<Heading>` কম্পোনেন্টটি কিভাবে এর সবচেয়ে কাছের `<Section>` এর level জানবে? **তা করার জন্য tree এর উপরের কোথাও বিদ্যমান ডাটা, চাইল্ডের "তালাশ করার" জন্য কোনো উপায় থাকা লাগবে।**
 
-You can't do it with props alone. This is where context comes into play. You will do it in three steps:
+আপনি শুধু প্রপস দিয়েই এটা করতে পারবেন না। এখানেই context এর ভূমিকা চলে আসে। আপনার তা তিনটি ধাপে করতে হবে:
 
-1. **Create** a context. (You can call it `LevelContext`, since it's for the heading level.)
-2. **Use** that context from the component that needs the data. (`Heading` will use `LevelContext`.)
-3. **Provide** that context from the component that specifies the data. (`Section` will provide `LevelContext`.)
+1. একটি কনটেক্সট **Create** করা। (আপনি এর নাম দিবেন `LevelContext`, কেননা এটা হেডিং লেভেলের জন্য।)
+2. যেসব কম্পোনেন্টের ডেটটি প্রয়োজন তাদের মধ্যে কনেটেক্সটটি **Use** করা। (`Heading` কম্পোনেন্টটি `LevelContext` কে use করবে।)
+3. যে কম্পোনেন্টটি ডেটাটিকে স্পেসিফাই (উল্লেখ) করে তাদের থেকে কনটেক্সটটি **Provide** করা। (`Section` কম্পোনেন্টটি `LevelContext` কে provide করবে।)
 
-Context lets a parent--even a distant one!--provide some data to the entire tree inside of it.
+Context একটি প্যারেন্টকে--এমনকি অনেক দূরের হলেও--এর নিচের সম্পূর্ণ tree কে কিছু ডেটা provide (সরবরাহ) করতে দেয়।
 
 <DiagramGroup>
 
 <Diagram name="passing_data_context_close" height={160} width={608} captionPosition="top" alt="Diagram with a tree of three components. The parent contains a bubble representing a value highlighted in orange which projects down to the two children, each highlighted in orange." >
 
-Using context in close children
+কাছের চিলড্রেনদের জন্য context এর ব্যবহার
 
 </Diagram>
 
 <Diagram name="passing_data_context_far" height={430} width={608} captionPosition="top" alt="Diagram with a tree of ten nodes, each node with two children or less. The root parent node contains a bubble representing a value highlighted in orange. The value projects down directly to four leaves and one intermediate component in the tree, which are all highlighted in orange. None of the other intermediate components are highlighted.">
 
-Using context in distant children
+দূরের চিলড্রেনদের জন্য context এর ব্যবহার
 
 </Diagram>
 
