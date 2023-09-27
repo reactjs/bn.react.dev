@@ -310,16 +310,16 @@ export const LevelContext = createContext(1);
 
 `createContext` এর একমাত্র আর্গুমেন্ট হলো _default_ ভ্যালু। এখানে `1` দ্বারা উদ্দেশ্য হলো সবচেয়ে বড় হেডিং লেভেল, কিন্তু আপনি যেকোনো ধরনের ভ্যালু (এমনকি একটি object) পাস করতে পারতেন। আপনি এই ডিফল্ট ভ্যালুর গুরুত্ব এর পরের ধাপে উপলব্ধি করতে পারবেন।
 
-### Step 2: Use the context {/*step-2-use-the-context*/}
+### ধাপ ২: কনটেক্সটটি use করুন {/*step-2-use-the-context*/}
 
-Import the `useContext` Hook from React and your context:
+`useContext` হুককে React থেকে এবং আপনার কনটেক্সট import করুন:
 
 ```js
 import { useContext } from 'react';
 import { LevelContext } from './LevelContext.js';
 ```
 
-Currently, the `Heading` component reads `level` from props:
+বর্তমানে, `Heading` কম্পোনেন্টটি প্রপস থেকে `level` কে read করছে:
 
 ```js
 export default function Heading({ level, children }) {
@@ -327,7 +327,7 @@ export default function Heading({ level, children }) {
 }
 ```
 
-Instead, remove the `level` prop and read the value from the context you just imported, `LevelContext`:
+এর পরিবর্তে, `level` প্রপটিকে রিমুভ করে দিন এবং আপনি `LevelContext` নামের যে কনটেক্সটটিকে মাত্র import করেছেন তার থেকে ভ্যালুটি read করুন:
 
 ```js {2}
 export default function Heading({ children }) {
@@ -336,9 +336,9 @@ export default function Heading({ children }) {
 }
 ```
 
-`useContext` is a Hook. Just like `useState` and `useReducer`, you can only call a Hook immediately inside a React component (not inside loops or conditions). **`useContext` tells React that the `Heading` component wants to read the `LevelContext`.**
+`useContext` একটি হুক। ঠিক `useState` এবং `useReducer` এর মতো, আপনি একটি হুককে React কম্পোনেন্টের ভিতর শুধুমাত্র সবার শুরুতে কল করতে পারবেন (লুপ কিংবা কন্ডিশনের ভিতর না)। **`useContext` রিয়েক্টকে বলে দেয় যে `Heading` কম্পোনেন্টটি `LevelContext` কে read করতে চাচ্ছে।**
 
-Now that the `Heading` component doesn't have a `level` prop, you don't need to pass the level prop to `Heading` in your JSX like this anymore:
+এখন যেহেতু `Heading` কম্পোনেন্টটির কোনো `level` প্রপ নেই, আপনার লেভেল প্রপটিকে JSX এর ভিতর `Heading` কে এভাবে পাস করার কোনো প্রয়োজন নেই:
 
 ```js
 <Section>
@@ -348,7 +348,7 @@ Now that the `Heading` component doesn't have a `level` prop, you don't need to 
 </Section>
 ```
 
-Update the JSX so that it's the `Section` that receives it instead:
+JSX কে আপডেট করুন যাতে এর পরিবর্তে লেভেলটিকে শুধুমাত্র `Section` রিসিভ করে:
 
 ```jsx
 <Section level={4}>
@@ -358,7 +358,7 @@ Update the JSX so that it's the `Section` that receives it instead:
 </Section>
 ```
 
-As a reminder, this is the markup that you were trying to get working:
+মনে আছে তো, এই হলো সেই মার্কআপ যেটার মতো মার্কআপ নিয়ে কাজ করার আশা আপনি করছিলেন:
 
 <Sandpack>
 
@@ -442,9 +442,9 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-Notice this example doesn't quite work, yet! All the headings have the same size because **even though you're *using* the context, you have not *provided* it yet.** React doesn't know where to get it!
+খেয়াল করুন এই এক্সাম্পলটি এখন পর্যন্ত কাজ করছেনা! সব হেডিংয়ের সাইজ একই, কারণ আপনি **কনটেক্সট *use* করলেও, এখনো আপনি একে *provide* করেননি।** React জানেন কোথায় এই কনটেক্সটকে পাওয়া যাবে!
 
-If you don't provide the context, React will use the default value you've specified in the previous step. In this example, you specified `1` as the argument to `createContext`, so `useContext(LevelContext)` returns `1`, setting all those headings to `<h1>`. Let's fix this problem by having each `Section` provide its own context.
+আপনি যদি কনটেক্সটি provide না করেন, React আপনি আগের ধাপে যে ডিফল্ট ভ্যালু ঠিক করে দিয়েছেন তাকেই ব্যবহার করবে। এই উদাহরণে, আপনি `createContext` এর আর্গুমেন্ট হিসেবে `1` ঠিক করে দিয়েছেন, `useContext(LevelContext)` তাই `1` রিটার্ন করছে, ফলে ঐসব হেডিংকে `<h1>` বানিয়ে দিচ্ছে। এখন প্রত্যেক `Section` থেকে এর নিজের কনটেক্সট provide করে চলুন এর সমাধান করা যাক।
 
 ### Step 3: Provide the context {/*step-3-provide-the-context*/}
 
