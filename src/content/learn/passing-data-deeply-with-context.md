@@ -226,9 +226,9 @@ Context একটি প্যারেন্টকে--এমনকি অন�
 
 </DiagramGroup>
 
-### Step 1: Create the context {/*step-1-create-the-context*/}
+### ধাপ ১: কনটেক্সটটি create করুন {/*step-1-create-the-context*/}
 
-First, you need to create the context. You'll need to **export it from a file** so that your components can use it:
+প্রথমে, আপনার কনটেক্সটটি create করতে হবে। আপনার একে **একটি ফাইল থেকে export করতে হবে** যাতে করে আপনার কম্পোনেন্টগুলো একে use করতে পারে:
 
 <Sandpack>
 
@@ -308,7 +308,7 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-The only argument to `createContext` is the _default_ value. Here, `1` refers to the biggest heading level, but you could pass any kind of value (even an object). You will see the significance of the default value in the next step.
+`createContext` এর একমাত্র আর্গুমেন্ট হলো _default_ ভ্যালু। এখানে `1` দ্বারা উদ্দেশ্য হলো সবচেয়ে বড় হেডিং লেভেল, কিন্তু আপনি যেকোনো ধরনের ভ্যালু (এমনকি একটি object) পাস করতে পারতেন। আপনি এই ডিফল্ট ভ্যালুর গুরুত্ব এর পরের ধাপে উপলব্ধি করতে পারবেন।
 
 ### Step 2: Use the context {/*step-2-use-the-context*/}
 
