@@ -229,30 +229,30 @@ ul, li { margin: 0; padding: 0; }
 />
 ```
 
-In a small example like this, this works well, but if you have tens or hundreds of components in the middle, passing down all state and functions can be quite frustrating!
+একটি ছোট উদাহরনে এটি ভালো কাজ করে, কিন্তু যদি এর মাঝে আপনার দশ বা শতাধিক কম্পোনেন্ট থাকে, তাহলে সকল state এবং ফাংশনগুলিকে পাঠানো অনেক বিরক্তিকর হতে পারে ।
 
-This is why, as an alternative to passing them through props, you might want to put both the `tasks` state and the `dispatch` function [into context.](/learn/passing-data-deeply-with-context) **This way, any component below `TaskApp` in the tree can read the tasks and dispatch actions without the repetitive "prop drilling".**
+এই কারনে, props এর মাধমে পাঠানোর বিকল্প হিসেবে, আপনি সমস্ত `tasks` স্টেট এবং  `dispatch` ফাংশনকে [context এর মধ্যে](/learn/passing-data-deeply-with-context) রাখতে পারেন । **এইভাবে, `TaskApp` এর নীচে যেকোনো কম্পোনেন্ট রুটে আপনি "prop drilling" এর পুনরাবৃত্তি ছাড়াই task পড়তে এবং একশনগুলিকে dispatch করতে পারবেন ।**
 
-Here is how you can combine a reducer with context:
+যেভাবে আপনি reducer এবং  context এর সংযুক্তি করতে পারেনঃ
+1. Context **তৈরি** করুন।
+2. state এবং dispatch কে Context এর ভেতরে **রাখুন**।
+3. Context কে যেকোনো কম্পোনেন্ট রুটে **ব্যবহার** করুন।
 
-1. **Create** the context.
-2. **Put** state and dispatch into context.
-3. **Use** context anywhere in the tree.
+### ধাপ ১: Context তৈরি করুন {/*step-1-create-the-context*/}
 
-### Step 1: Create the context {/*step-1-create-the-context*/}
-
-The `useReducer` Hook returns the current `tasks` and the `dispatch` function that lets you update them:
+`useReducer` হুক আপনাকে বর্তমান `tasks` এবং তা আপডেট করার জন্য `dispatch` ফাংশনকে রিটার্ন করে ।
 
 ```js
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
 
 To pass them down the tree, you will [create](/learn/passing-data-deeply-with-context#step-2-use-the-context) two separate contexts:
+তাদেরকে ট্রি-এর নিচে পাঠানোর জন্য আপনি দুটি ভিন্ন context [তৈরি](/learn/passing-data-deeply-with-context#step-2-use-the-context) করবেন ।
 
-- `TasksContext` provides the current list of tasks.
-- `TasksDispatchContext` provides the function that lets components dispatch actions.
+- `TasksContext` বর্তমান tasks তালিকা প্রদান করে ।
+- `TasksDispatchContext` একটি ফাংশন প্রদান করে যা কম্পোনেন্টগুলিকে একশনগুলি dispatch করতে দেয় ।
 
-Export them from a separate file so that you can later import them from other files:
+এদেরকে একটি আলাদা ফাইলে এক্সপোর্ট করুন যাতে আপনি পরবর্তিতে অন্য ফাইলে ইম্পোর্ট করতে পারেন:
 
 <Sandpack>
 
@@ -448,7 +448,8 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-Here, you're passing `null` as the default value to both contexts. The actual values will be provided by the `TaskApp` component.
+এখানে আপনি `null` কে ডিফল্ট মান হিসেবে দুটি context এ পাঠাচ্ছেন । আসল মানগুলি `TaskApp` এর মাধ্যমে সরাসরি প্রদান হবে ।
+
 
 ### Step 2: Put state and dispatch into context {/*step-2-put-state-and-dispatch-into-context*/}
 
