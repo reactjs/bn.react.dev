@@ -21,12 +21,16 @@ title: নতুন প্রোজেক্ট শুরু করুন
 **[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক।** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
 
 <TerminalBlock>
-npx create-next-app
+npx create-next-app@latest
 </TerminalBlock>
 
 আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
+<<<<<<< HEAD
 Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে [Vercel](https://vercel.com/)। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়।
+=======
+Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying) to any Node.js or serverless hosting, or to your own server. Next.js also supports a [static export](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) which doesn't require a server.
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ### Remix {/*remix*/}
 
@@ -91,6 +95,7 @@ Expo এর রক্ষণাবেক্ষণের কাজ করে থ�
 
 ### Next.js (অ্যাপ রাউটার) {/*nextjs-app-router*/}
 
+<<<<<<< HEAD
 **[Next.js's অ্যাপ রাউটার](https://beta.nextjs.org/docs/getting-started) এটি Next.js API-এর একটি পুনঃডিজাইন যা React টিমের ফুল-স্ট্যাক আর্কিটেকচার ভিশন পূরণ করার লক্ষ্যে।** এটি আপনাকে asynchronous কম্পোনেন্ট গুলিতে ডেটা আনতে দেয় যা সার্ভারে বা এমনকি বিল্ড চলাকালীনও চলে।
 
 [Vercel](https://vercel.com/), Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। Next.js [স্ট্যাটিক এক্সপোর্ট](https://beta.nextjs.org/docs/configuring/static-export) সমর্থন করে যার জন্য সার্ভারের প্রয়োজন হয় না।
@@ -99,6 +104,11 @@ Expo এর রক্ষণাবেক্ষণের কাজ করে থ�
 Next.js-এর অ্যাপ রাউটার **বর্তমানে beta তে রয়েছে এবং এটি এখনও প্রোডাকশনের জন্য সাজেস্ট করা হয়নি** (মার্চ 2023 অনুযায়ী). একটি Next.js প্রোজেক্টে এটি নিয়ে পরীক্ষা করতে, [এই ক্রমবর্ধমান মাইগ্রেশন গাইড অনুসরণ করুন](https://beta.nextjs.org/docs/upgrade-guide#migrating-from-pages-to-app)।
 
 </Pitfall>
+=======
+**[Next.js's App Router](https://nextjs.org/docs) is a redesign of the Next.js APIs aiming to fulfill the React team’s full-stack architecture vision.** It lets you fetch data in asynchronous components that run on the server or even during the build.
+
+Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying) to any Node.js or serverless hosting, or to your own server. Next.js also supports [static export](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) which doesn't require a server.
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 <DeepDive>
 
