@@ -26,11 +26,7 @@ npx create-next-app@latest
 
 আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
 
-<<<<<<< HEAD
-Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে [Vercel](https://vercel.com/)। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। [সম্পূর্ণ স্ট্যাটিক Next.js অ্যাপ](https://nextjs.org/docs/advanced-features/static-html-export) যেকোনো স্ট্যাটিক হোস্টিং এ deploy করা যায়।
-=======
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying) to any Node.js or serverless hosting, or to your own server. Next.js also supports a [static export](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) which doesn't require a server.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে [Vercel](https://vercel.com/)। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। Next.js সম্পূর্ণ [স্ট্যাটিক এক্সপোর্ট](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) সাপোর্ট করে যার কোন সার্ভারের প্রয়োজন নেই।
 
 ### Remix {/*remix*/}
 
