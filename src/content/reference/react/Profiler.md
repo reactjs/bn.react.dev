@@ -53,21 +53,12 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 
 #### প্যারামিটার {/*onrender-parameters*/}
 
-<<<<<<< HEAD
 * `id`: `<Profiler>` ট্রিয়ের স্ট্রিং `id` প্রপ যা মাত্র কমিট করেছে। এটা আপনাকে জানায় যে ট্রিয়ের কোন অংশ কমিট করেছে যদি আপনি একাধিক প্রোফাইলার ব্যবহার করে থাকেন।
 * `phase`: `"mount"`, `"update"` অথবা `"nested-update"`। এটা আপনাকে জানায় যে ট্রি কি এই প্রথম মাউন্ট হল নাকি prop, state বা hook এর পরিবর্তনের কারণে পরিবর্তিত হয়েছে।
-* `actualDuration`: বর্তমান আপডেটে `<Profiler>` এবং এর উত্তরসূরিদের রেন্ডার করতে যত মিলিসেকেন্ড খরচ হয়েছে সেই সংখ্যাটা। এটা নির্দেশ করে সাবট্রি মেমোইজেশন কতটা ভালভাবে ব্যবহার করতে পারছে (উদাহরণস্বরূপঃ [`memo`](/reference/react/memo) এবং [`useMemo`](/reference/react/useMemo))। সব ঠিকঠাক থাকলে এই মানটা প্রথম মাউন্টের পর থেকে উল্লেখজনকভাবে কমে যাবার কথা কারণ, উত্তরসূরিদের অনেকেরই পুনরায় রেন্ডার তখনই হবে যখন তাদের কোন prop এর পরিবর্তন হয়।
+* `actualDuration`: বর্তমান আপডেটে `<Profiler>` এবং এর উত্তরসূরিদের রেন্ডার করতে যত মিলিসেকেন্ড খরচ হয়েছে সেই সংখ্যাটা। এটা নির্দেশ করে সাবট্রি মেমোইজেশন কতটা ভালভাবে ব্যবহার করতে পারছে (উদাহরণস্বরূপঃ [`memo`](/reference/react/memo) এবং [`useMemo`](/reference/react/useMemo))। সব ঠিকঠাক থাকলে এই মানটা প্রথম মাউন্টের পর থেকে উল্লেখজনকভাবে কমে যাবার কথা কারণ, উত্তরসূরিদের অনেকেরই পুনরায় রেন্ডার তখনই হবে যখন তাদের কোন prop এর পরিবর্তন হবে।
 * `baseDuration`: এই সংখ্যাটা বোঝায় যে কোন অপটিমাইজেশন ছাড়া পুরো `<Profiler>` সাবট্রি আবার রেন্ডার করার জন্য আনুমানিক কত মিলিসেকেন্ড লাগবে। সর্বশেষ  রেন্ডারের জন্য ট্রিয়ের প্রতিটি কম্পোনেন্টে যে সময় লেগেছিল সেটা থেকে এই সংখ্যাটা হিসেব করা হয়। এই মানটা নির্দেশ করে রেন্ডারিং এর জন্য সবচেয়ে বেশি কত সময় লাগতে পারে (উদাহরণস্বরূপঃ একদম প্রাথমিক মাউন্ট বা মেমোইজেশন ছাড়া মাউন্টের সময়)। এর সাথে `actualDuration` তুলনা করে আপনি বুঝতে পারবেন  মেমোইজেশন কাজ করছে কি না।
 * `startTime`: একটা সাংখ্যিক টাইমস্ট্যাম্প যা নির্দেশ করে কখন React বর্তমান আপডেট শুরু করেছিল।
 * `endTime`: একটা সাংখ্যিক টাইমস্ট্যাম্প যা নির্দেশ করে কখন React বর্তমান আপডেট commit করেছে। এই মানটা একটা কমিটে সব প্রোফাইলের সাথে শেয়ার করা হয়। যা তাদের প্রয়োজনে গ্রুপ হবার সুযোগ দেয়।
-=======
-* `id`: The string `id` prop of the `<Profiler>` tree that has just committed. This lets you identify which part of the tree was committed if you are using multiple profilers.
-* `phase`: `"mount"`, `"update"` or `"nested-update"`. This lets you know whether the tree has just been mounted for the first time or re-rendered due to a change in props, state, or hooks.
-* `actualDuration`: The number of milliseconds spent rendering the `<Profiler>` and its descendants for the current update. This indicates how well the subtree makes use of memoization (e.g. [`memo`](/reference/react/memo) and [`useMemo`](/reference/react/useMemo)). Ideally this value should decrease significantly after the initial mount as many of the descendants will only need to re-render if their specific props change.
-* `baseDuration`: The number of milliseconds estimating how much time it would take to re-render the entire `<Profiler>` subtree without any optimizations. It is calculated by summing up the most recent render durations of each component in the tree. This value estimates a worst-case cost of rendering (e.g. the initial mount or a tree with no memoization). Compare `actualDuration` against it to see if memoization is working.
-* `startTime`: A numeric timestamp for when React began rendering the current update.
-* `commitTime`: A numeric timestamp for when React committed the current update. This value is shared between all profilers in a commit, enabling them to be grouped if desirable.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ---
 
