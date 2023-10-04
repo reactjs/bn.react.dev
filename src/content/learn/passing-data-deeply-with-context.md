@@ -570,9 +570,9 @@ export const LevelContext = createContext(1);
 2. `Section` এর চিলড্রেনকে `<LevelContext.Provider value={level}>` দিয়ে wrap করে নেয়।
 3. `useContext(LevelContext)` এর দ্বারা `Heading` এর উপরস্থ নিকটতম `levelContext` এর ভ্যালু তালাশ করে।
 
-## Using and providing context from the same component {/*using-and-providing-context-from-the-same-component*/}
+## একই কম্পোনেন্ট থেকে কনটেক্সট Use এবং Provide করা {/*using-and-providing-context-from-the-same-component*/}
 
-Currently, you still have to specify each section's `level` manually:
+এখনও, প্রত্যেক সেকশনের `level` আপনি নিজেই নির্ধারিত করে দেয়া লাগছে:
 
 ```js
 export default function Page() {
@@ -585,7 +585,7 @@ export default function Page() {
           ...
 ```
 
-Since context lets you read information from a component above, each `Section` could read the `level` from the `Section` above, and pass `level + 1` down automatically. Here is how you could do it:
+যেহেতু কনটেক্সট উপরের একটি কম্পোনেন্ট থেকে আপনাকে ইনফর্মেশন read করতে দেয়, সেহেতু প্রত্যেক `Section` তার উপরের `Section` থেকে `level` কে read করতে, এবং নিচে `level + 1` অটোম্যাটিক ভাবে পাস করে দিতে পারে। আপনি চাইলে এমনটা এভাবে করে ফেলতে পারেন:
 
 ```js Section.js {5,8}
 import { useContext } from 'react';
@@ -603,7 +603,7 @@ export default function Section({ children }) {
 }
 ```
 
-With this change, you don't need to pass the `level` prop *either* to the `<Section>` or to the `<Heading>`:
+এই পরিবর্তনের করে, আপনার `level` প্রপটিকে `<Section>` কিংবা `<Heading>` *কোনোটিকেই* পাস করা লাগবে না:
 
 <Sandpack>
 
@@ -695,11 +695,11 @@ export const LevelContext = createContext(0);
 
 </Sandpack>
 
-Now both `Heading` and `Section` read the `LevelContext` to figure out how "deep" they are. And the `Section` wraps its children into the `LevelContext` to specify that anything inside of it is at a "deeper" level.
+এখন `Heading` এবং `Section` তারা উভয়ই কতো "deep" লেভেলে আছে সেটা বুঝার জন্য `LevelContext` কে read করছে। এবং `Section` এর ভিতরে যা আছে তা "deeper" লেভেল আছে এটা স্পষ্ট করার জন্য, এর চিলড্রেনকে `LevelContext` দিয়ে wrap করে।
 
 <Note>
 
-This example uses heading levels because they show visually how nested components can override context. But context is useful for many other use cases too. You can pass down any information needed by the entire subtree: the current color theme, the currently logged in user, and so on.
+এই এক্সাম্পলটি হেডিং লেভেলের ব্যবহার করেছে কারণ এতে দেখা যায় যে নেস্টেড কম্পোনেন্ট কিভাবে কনটেক্সটের ভ্যালু পুনরায় পরিবর্তন করে দিতে পরে। কিন্তু কনটেক্সট আরো অনেক ক্ষেত্রেও কাজে আসে। অ্যাপের নিম্নস্থ subtree এর প্রয়োজন এমন যেকোনো ইনফর্মেশন আপনি নিচের দিকে পাস করে দিতে পারেন: বর্তমান কালার থিম, বর্তমানে যে ইউজার লগড ইন ইত্যাদি।
 
 </Note>
 
