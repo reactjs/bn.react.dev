@@ -446,9 +446,9 @@ export const LevelContext = createContext(1);
 
 আপনি যদি কনটেক্সটি provide না করেন, React আপনি আগের ধাপে যে ডিফল্ট ভ্যালু ঠিক করে দিয়েছেন তাকেই ব্যবহার করবে। এই উদাহরণে, আপনি `createContext` এর আর্গুমেন্ট হিসেবে `1` ঠিক করে দিয়েছেন, `useContext(LevelContext)` তাই `1` রিটার্ন করছে, ফলে ঐসব হেডিংকে `<h1>` বানিয়ে দিচ্ছে। এখন প্রত্যেক `Section` থেকে এর নিজের কনটেক্সট provide করে চলুন এর সমাধান করা যাক।
 
-### Step 3: Provide the context {/*step-3-provide-the-context*/}
+### ধাপ ৩: কনটেক্সটটি provide করুন {/*step-3-provide-the-context*/}
 
-The `Section` component currently renders its children:
+`Section` কম্পোনেন্টটি এর চিলড্রেনকে রেন্ডার করছে:
 
 ```js
 export default function Section({ children }) {
@@ -460,7 +460,7 @@ export default function Section({ children }) {
 }
 ```
 
-**Wrap them with a context provider** to provide the `LevelContext` to them:
+**চিলড্রেনকে context provider দিয়ে wrap করুন** যাতে তাদেরকে `LevelContext` টি provide করতে পারেন:
 
 ```js {1,6,8}
 import { LevelContext } from './LevelContext.js';
@@ -476,7 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-This tells React: "if any component inside this `<Section>` asks for `LevelContext`, give them this `level`." The component will use the value of the nearest `<LevelContext.Provider>` in the UI tree above it.
+এটা রিয়েক্টকে বলে দেয় যে: "যদি এই `<Section>` এর ভিতরের কোনো কম্পোনেন্ট `LevelContext` তালাশ করে, তবে তাকে এই `level` দিয়ে দাও"। তখন কম্পোনেন্টটি UI ট্রি এর ভিতর এর সবচেয়ে কাছের `<LevelContext.Provider>` এর ভ্যালু ইউজ করবে।
 
 <Sandpack>
 
@@ -564,11 +564,11 @@ export const LevelContext = createContext(1);
 
 </Sandpack>
 
-It's the same result as the original code, but you did not need to pass the `level` prop to each `Heading` component! Instead, it "figures out" its heading level by asking the closest `Section` above:
+ফলস্বরূপ আমরা অরিজিনাল কোডের মতো হুবহু ফলাফল পেলাম, কিন্তু আপনার `level` প্রপটিকে প্রত্যেক `Heading` কম্পোনেন্টে পাস করতে হয়নি! তার পরিবর্তে `Heading` কম্পোনেন্টটি এর হেডিং লেভেল, উপরস্থ সবচেয়ে কাছের `Section` থেকে "বুঝে নিতে" পারছে:
 
-1. You pass a `level` prop to the `<Section>`.
-2. `Section` wraps its children into `<LevelContext.Provider value={level}>`.
-3. `Heading` asks the closest value of `LevelContext` above with `useContext(LevelContext)`.
+1. আপনি `<Section>` কে `level` প্রপ পাস করলেন।
+2. `Section` এর চিলড্রেনকে `<LevelContext.Provider value={level}>` দিয়ে wrap করে নেয়।
+3. `useContext(LevelContext)` এর দ্বারা `Heading` এর উপরস্থ নিকটতম `levelContext` এর ভ্যালু তালাশ করে।
 
 ## Using and providing context from the same component {/*using-and-providing-context-from-the-same-component*/}
 
