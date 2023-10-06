@@ -451,9 +451,9 @@ ul, li { margin: 0; padding: 0; }
 এখানে আপনি `null` কে ডিফল্ট মান হিসেবে দুটি context এ পাঠাচ্ছেন । আসল মানগুলি `TaskApp` এর মাধ্যমে সরাসরি প্রদান হবে ।
 
 
-### Step 2: Put state and dispatch into context {/*step-2-put-state-and-dispatch-into-context*/}
+### ধাপ ২: State এবং dispatch কে context এর ভেতরে রাখুন {/*step-2-put-state-and-dispatch-into-context*/}
 
-Now you can import both contexts in your `TaskApp` component. Take the `tasks` and `dispatch` returned by `useReducer()` and [provide them](/learn/passing-data-deeply-with-context#step-3-provide-the-context) to the entire tree below:
+এখন আপনি দুটো context কে `TaskApp` কম্পোনেন্টে ইম্পোর্ট করতে পারেন । `useReducer()` এর রিটার্ন করা `tasks` এবং `dispatch` কে গ্রহণ করুন এবং এদেরকে নিচের সম্পূর্ন ট্রিতে [প্রদান করুন](/learn/passing-data-deeply-with-context#step-3-provide-the-context):
 
 ```js {4,7-8}
 import { TasksContext, TasksDispatchContext } from './TasksContext.js';
@@ -471,7 +471,7 @@ export default function TaskApp() {
 }
 ```
 
-For now, you pass the information both via props and in context:
+এখন, আপনি তথ্যকে props এবং context উভয়ের মাধ্যমে পাঠাতে পারবেনঃ
 
 <Sandpack>
 
@@ -670,7 +670,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-In the next step, you will remove prop passing.
+পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন । 
 
 ### Step 3: Use context anywhere in the tree {/*step-3-use-context-anywhere-in-the-tree*/}
 
