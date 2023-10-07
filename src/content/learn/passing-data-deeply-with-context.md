@@ -703,11 +703,11 @@ export const LevelContext = createContext(0);
 
 </Note>
 
-## Context passes through intermediate components {/*context-passes-through-intermediate-components*/}
+## কনটেক্সট মধ্যবর্তী কম্পোনেন্টগুলোকে ভেদ করে যেতে সক্ষম {/*context-passes-through-intermediate-components*/}
 
-You can insert as many components as you like between the component that provides context and the one that uses it. This includes both built-in components like `<div>` and components you might build yourself.
+যে কম্পোনেন্টটি কনটেক্সটকে provide করে আর যে কম্পোনেন্টটি use করে উভয়ের মাঝে আপনি যত খুশি তত কম্পোনেন্ট বসাতে পারবেন। এদের মাঝে আপনি বিল্ট-ইন কম্পোনেন্ট যেমন `div` এবং আপনার নিজের বানানো কম্পোনেন্ট উভয়ই ব্যবহার করতে পারবেন।
 
-In this example, the same `Post` component (with a dashed border) is rendered at two different nesting levels. Notice that the `<Heading>` inside of it gets its level automatically from the closest `<Section>`:
+এই উদাহরণে, একই `Post` কম্পোনেন্ট (ড্যাশড বর্ডারওয়ালা) দুইটা ভিন্ন ভিন্ন নেস্টেড লেভেলে রেন্ডার হচ্ছে। খেয়াল করুন এর ভিতরের `<Heading>` তার লেভেল, অটোমেটিক্যালি নিকটতম `<Section>` থেকে পাচ্ছে:
 
 <Sandpack>
 
@@ -832,13 +832,13 @@ export const LevelContext = createContext(0);
 
 </Sandpack>
 
-You didn't do anything special for this to work. A `Section` specifies the context for the tree inside it, so you can insert a `<Heading>` anywhere, and it will have the correct size. Try it in the sandbox above!
+এটা কাজ করানোর জন্য আপনার বিশেষ কিছু করা লাগেনি। একটি `Section` এর নিম্নস্থ ট্রির জন্য কনটেক্সট নির্ধারিত করে দেয়, তাই আপনি একটি `<Heading>` যেকোনো জায়গায় বসাতে পারবেন, আর এটি এর সঠিক সাইজ পেয়ে যাবে। উপরের স্যান্ডবক্সে চর্চা করে দেখুন!
 
-**Context lets you write components that "adapt to their surroundings" and display themselves differently depending on _where_ (or, in other words, _in which context_) they are being rendered.**
+**কনটেক্সট আপনাকে এমন কম্পোনেন্ট তৈরি করতে দেয়, যা তার "আসে পাশের সাথে তাল মিলিয়ে চলতে পারে" এবং সেটি  _কোথায়_ (অন্যভাবে বলতে গেলে, _কোন কনটেক্সটে_) রেন্ডার হচ্ছে, তার উপর নির্ভর করে নিজেকে ভিন্ন ভিন্ন ভাবে ডিসপ্লে করতে পারে।**
 
-How context works might remind you of [CSS property inheritance.](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) In CSS, you can specify `color: blue` for a `<div>`, and any DOM node inside of it, no matter how deep, will inherit that color unless some other DOM node in the middle overrides it with `color: green`. Similarly, in React, the only way to override some context coming from above is to wrap children into a context provider with a different value.
+কনটেক্সটের কাজ করার পদ্ধতি আপনাকে [CSS property inheritance](https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance) এর কথা মনে করিয়ে দিতে পারে, আপনি একটা `<div>` এর জন্য `color: blue` ঠিক করে দিবেন, তাহলে এর ভিতরের যেকোনো DOM node, তা যত গভীরেই হোক না কেনো, সেটি ঐ কালার পাবে যদিনা মাঝের অন্য কোনো DOM node কালারকে পরিবর্তন করে `color: green` বানিয়ে দেয়। একইভাবে, রিয়েক্টে, উপর থেকে আসতে থাকা কোনো কনটেক্সটকে পরিবর্তন করার একমাত্র উপায় হচ্ছে চিলড্রেনকে ভিন্ন একটি ভ্যালুর context provider দিয়ে wrap করা।
 
-In CSS, different properties like `color` and `background-color` don't override each other. You can set all  `<div>`'s `color` to red without impacting `background-color`. Similarly, **different React contexts don't override each other.** Each context that you make with `createContext()` is completely separate from other ones, and ties together components using and providing *that particular* context. One component may use or provide many different contexts without a problem.
+CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং `background-color` একে অপরকে পরিবর্তন করে না। আপনি সকল `<div>` এর `color` কে red সেট করে দিলে সেটা `background-color` এর উপর কোনো প্রভাব পড়বে না। একইভাবে, **ভিন্ন ভিন্ন রিয়েক্ট কনটেক্সট একে অপরকে পরিবর্তন করে না।** আপনার `createContext()` দিয়ে তৈরি করা প্রত্যেক কনটেক্সট বাকি সকল কনটেক্সটগুলো থেকে পুরোপুরি বিচ্ছিন্ন, *এবং ঐ বিশেষ কনটেক্সটটি* use এবং provide করার দ্বারা কম্পোনেন্টসমূহ ঘিরে থাকে। একটি কম্পোনেন্ট একাধিক ভিন্ন ভিন্ন কনটেক্সট কোনো সমস্যা ছাড়াই use এবং provide করতে পারে।
 
 ## Before you use context {/*before-you-use-context*/}
 
