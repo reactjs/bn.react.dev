@@ -840,16 +840,16 @@ export const LevelContext = createContext(0);
 
 CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং `background-color` একে অপরকে পরিবর্তন করে না। আপনি সকল `<div>` এর `color` কে red সেট করে দিলে সেটা `background-color` এর উপর কোনো প্রভাব পড়বে না। একইভাবে, **ভিন্ন ভিন্ন রিয়েক্ট কনটেক্সট একে অপরকে পরিবর্তন করে না।** আপনার `createContext()` দিয়ে তৈরি করা প্রত্যেক কনটেক্সট বাকি সকল কনটেক্সটগুলো থেকে পুরোপুরি বিচ্ছিন্ন, *এবং ঐ বিশেষ কনটেক্সটটি* use এবং provide করার দ্বারা কম্পোনেন্টসমূহ ঘিরে থাকে। একটি কম্পোনেন্ট একাধিক ভিন্ন ভিন্ন কনটেক্সট কোনো সমস্যা ছাড়াই use এবং provide করতে পারে।
 
-## Before you use context {/*before-you-use-context*/}
+## কনটেক্সট ব্যবহারের পূর্বে যা জানা থাকা দরকার {/*before-you-use-context*/}
 
-Context is very tempting to use! However, this also means it's too easy to overuse it. **Just because you need to pass some props several levels deep doesn't mean you should put that information into context.**
+কনটেক্সট ব্যবহার অনেক লোভনীয় মনে হতে পারে! তবে বুঝতে হবে, এটাকে খুব অতিরিক্ত মাত্রায় ব্যবহার করা খুব সহজ। **শুধু কয়েক লেভেল গভীরে আপনার কিছু প্রপস পাস করতে হবে তাহলেই যে আপনার এই ইনফর্মেশন কনটেক্সট এ রাখতে হবে এমনটি নয়।**
 
-Here's a few alternatives you should consider before using context:
+কিছু বিকল্প রয়েছে যেগুলো কনটেক্সট ব্যবহারের পূর্বে বিবেচনা করা উচিৎ:
 
-1. **Start by [passing props.](/learn/passing-props-to-a-component)** If your components are not trivial, it's not unusual to pass a dozen props down through a dozen components. It may feel like a slog, but it makes it very clear which components use which data! The person maintaining your code will be glad you've made the data flow explicit with props.
-2. **Extract components and [pass JSX as `children`](/learn/passing-props-to-a-component#passing-jsx-as-children) to them.** If you pass some data through many layers of intermediate components that don't use that data (and only pass it further down), this often means that you forgot to extract some components along the way. For example, maybe you pass data props like `posts` to visual components that don't use them directly, like `<Layout posts={posts} />`. Instead, make `Layout` take `children` as a prop, and render `<Layout><Posts posts={posts} /></Layout>`. This reduces the number of layers between the component specifying the data and the one that needs it.
+1. **[প্রপস পাস করা](/learn/passing-props-to-a-component) শুরু করতে পারেন** যদি আপনার কম্পোনেন্টগুলো মামুলি না হয়ে থাকে (মানে সেটি গুরুত্ব বহন করে), তাহলে ডজন খানিক প্রপসকে ডজন খানিক কম্পোনেন্টের মধ্যে দিয়ে পাস করা অস্বাভাবিক নয়। এটি অনেক সময়সাপেক্ষ কঠিন কাজ মানে হতে পারে, কিন্তু এই পদ্ধতিতে কোন কম্পোনেন্ট কোন ডেটা ইউজ করছে সেটি খুব পরিষ্কার হয়ে যায়! যে ব্যক্তি আপনার কোড মেইন্টেইন করবে সে আপনার ডেটা-প্রবাহ প্রপসের মাধ্যমে প্রকাশ্য রাখার জন্য বেশ খুশি হবে।
+2. **কম্পোনেন্টগুলোকে এক্সট্র্যাক্ট (আলাদা) করে নিয়ে [JSX কে `children` হিসেবে পাস করতে পারেন](/learn/passing-props-to-a-component#passing-jsx-as-children)।** যদি আপনি কিছু ডেটা অনেক স্তরের মধ্যে দিয়ে মাঝের এমন অনেক কম্পোনেন্ট ভেদ করে পাস করেন (শুধুমাত্র ডেটাকে অনেক নিচে পাঠানোর উদ্দেশ্যে) যেসব কম্পোনেন্টের ঐ ডেটার প্রয়োজন নেই, প্রায়ই এর মানে এই যে আপনি মাঝের পথের কিছু কম্পোনেন্টকে আলাদা (এক্সট্র্যাক্ট) করতে ভুলে গেছেন। উদাহরণস্বরূপ, হয়তো আপনি ডেটা প্রপ যেমন `posts` এমন দৃশ্যমান কম্পোনেন্টসমূহকে পাস করেছেন যারা সে ডেটা সরাসরি ইউজ করে না, যেমন `<Layout posts={posts} />`। এর পরিবর্তে, `Layout` কে এমন করে দিন যাতে প্রপ হিসেবে `children` কে গ্রহণ করতে পারে, এবং রেন্ডার করে `<Layout><Posts posts={posts} /></Layout>`। এটা ডেটা নির্ধারণকারী কম্পোনেন্ট এবং যে কম্পোনেন্টগুলো ডেটা গ্রহণ করবে তাদের মধ্যবর্তী স্তরের সংখ্যা কমায়।
 
-If neither of these approaches works well for you, consider context.
+এই উভয় পদ্ধতিই যদি আপনার কাছে ঠিক না মনে হয় তাহলে কনটেক্সট ব্যবহার নিয়ে ভেবে দেখতে পারেন। 
 
 ## Use cases for context {/*use-cases-for-context*/}
 
