@@ -851,16 +851,16 @@ CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং
 
 এই উভয় পদ্ধতিই যদি আপনার কাছে ঠিক না মনে হয় তাহলে কনটেক্সট ব্যবহার নিয়ে ভেবে দেখতে পারেন। 
 
-## Use cases for context {/*use-cases-for-context*/}
+## কনটেক্সটের ব্যবহার {/*use-cases-for-context*/}
 
-* **Theming:** If your app lets the user change its appearance (e.g. dark mode), you can put a context provider at the top of your app, and use that context in components that need to adjust their visual look.
-* **Current account:** Many components might need to know the currently logged in user. Putting it in context makes it convenient to read it anywhere in the tree. Some apps also let you operate multiple accounts at the same time (e.g. to leave a comment as a different user). In those cases, it can be convenient to wrap a part of the UI into a nested provider with a different current account value.
-* **Routing:** Most routing solutions use context internally to hold the current route. This is how every link "knows" whether it's active or not. If you build your own router, you might want to do it too.
-* **Managing state:** As your app grows, you might end up with a lot of state closer to the top of your app. Many distant components below may want to change it. It is common to [use a reducer together with context](/learn/scaling-up-with-reducer-and-context) to manage complex state and pass it down to distant components without too much hassle.
+* **থিমিং:** যদি আপনার অ্যাপ ইউজারকে থিম চেঞ্জ করতে দেয় (যেমন, ডার্ক মোড), তখন আপনি আপনার অ্যাপের সবার উপরের স্তরে একটি কনটেক্সট প্রোভাইডার রাখতে পারেন, এবং কনটেক্সটটি ঐসকল কম্পোনেন্টের ভিতর ইউজ করতে পারেন যাদের বর্ণ থিমের সাথে পরিবর্তন হতে পারে। 
+* **বর্তমান একাউন্ট:** বর্তমানে কোন ইউজার লগড ইন আছে তা অনেক কম্পোনেন্টের জানা দরকার হতে পারে। এই ডেটটি কনটেক্সটি রাখলে tree এর যেকোনো স্থানে ডেটটি রিড করা সুবিধাজনক হয়ে যায়। কিছু অ্যাপ আপনাকে একই সময়ে কয়েকটি একাউন্ট ব্যবহার করতে দেয় (যেমন, আরেক ইউজার হয়ে কমেন্ট করতে দেয়া)। ঐসকল ক্ষেত্রে, UI এর একটি অংশ, ভিন্ন current account ভ্যালুর একটি নেস্টেড প্রোভাইডার দিয়ে wrap করাটা সহজ হতে পারে।
+* **রাউটিং:** অধিকাংশ রাউটিং করার পদ্ধতিগুলো, বর্তমান রাউট মনে রাখার জন্য ভিতরে ভিতরে কনটেক্সট ইউজ করে। এভাবেই প্রত্যেকটি লিঙ্ক "জানতে পারে" যে সে active কিনা। যদি আপনি নিজেই রাউটার তৈরি করেন, আপনিও হয়তো এমনটাই করতে চাইবেন।
+* **স্টেট ম্যানেজ করা:** আপনার অ্যাপ যখন বড় হতে থাকে, আপনি এমন পর্যায়ে চলে যেতে পারেন যখন আপনার অ্যাপের সবার উপরের স্তরের খুব কাছেই অনেক স্টেট একত্র হয়ে যায়। যেগুলো নিচের অনেক দূরবর্তী কম্পোনেন্ট পরিবর্তন করার প্রয়োজন পড়তে পারে। বেশি ঝামেলা ছাড়াই, জটিল স্টেট ম্যানেজ এবং সেগুলোকে নিচের অনেক দূরবর্তী কম্পোনেন্টসের কাছে পাস করার জন্য [একটি reducer কে কনটেক্সটের সাথে ব্যবহার করা](/learn/scaling-up-with-reducer-and-context) খুবই স্বাভাবিক।
   
-Context is not limited to static values. If you pass a different value on the next render, React will update all the components reading it below! This is why context is often used in combination with state.
+কনটেক্সট শুধু স্ট্যাটিক ভ্যালুর মধ্যেই সীমাবদ্ধ নয়। যদি আপনি পরবর্তী রেন্ডারে ভিন্ন ভ্যালু পাস করেন, রিয়েক্ট তখন এর নিম্নবর্তী সকল কম্পোনেন্ট যেগুলো ঐ ভ্যালু রিড করছিলো তাদেরকে আপডেট করবে! এজন্যই প্রায়ই কনটেক্সট ও স্টেট একত্রে ব্যবহার করা হয়ে থাকে।
 
-In general, if some information is needed by distant components in different parts of the tree, it's a good indication that context will help you.
+সাধারণভাবে, যদি কোনো ইনফর্মেশন tree এর বিভিন্ন অংশে দূরবর্তী কম্পোনেন্টগুলোর প্রয়োজন হয়, তাহলে কনটেক্সট তখন আপনার উপকারে আসবে এটি তার উত্তম লক্ষণ।
 
 <Recap>
 
