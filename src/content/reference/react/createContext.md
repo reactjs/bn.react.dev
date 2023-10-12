@@ -96,17 +96,17 @@ function Button() {
 
 #### Props {/*consumer-props*/}
 
-* `children`: A function. React will call the function you pass with the current context value determined by the same algorithm as [`useContext()`](/reference/react/useContext) does, and render the result you return from this function. React will also re-run this function and update the UI whenever the context from the parent components changes.
+* `children`: একটি ফাংশন। React আপনার pass করা ফাংশনকে কল করবে বর্তমান কনটেক্সট ভ্যালু দিয়ে যেটা [`useContext()`](/reference/react/useContext) এর মতই এলগোরিদম দিয়ে নির্ণয়কৃত, এবং এই ফাংশন থেকে আপনার রিটার্ন করা ফলাফল রেন্ডার করবে। React এই ফাংশন আবার রান করবে এবং প্যারেন্ট কম্পোনেন্টের কনটেক্সট বদলালেই UI আপডেট করে ফেলবে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Creating context {/*creating-context*/}
+### কনটেক্সট তৈরি {/*creating-context*/}
 
-Context lets components [pass information deep down](/learn/passing-data-deeply-with-context) without explicitly passing props.
+কনটেক্সট কম্পোনেটদেরকে [বেশ গভীরে তথ্য পাঠানোর সুযোগ দেয়](/learn/passing-data-deeply-with-context) explicitly props পাঠানো ছাড়াই।
 
-Call `createContext` outside any components to create one or more contexts.
+যেকোন কম্পোনেন্টের বাইরে `createContext` কল করুন এক বা একাধিক কনটেক্সট তৈরি করার জন্য।
 
 ```js [[1, 3, "ThemeContext"], [1, 4, "AuthContext"], [3, 3, "'light'"], [3, 4, "null"]]
 import { createContext } from 'react';
@@ -129,9 +129,9 @@ function Profile() {
 }
 ```
 
-By default, the values they receive will be the <CodeStep step={3}>default values</CodeStep> you have specified when creating the contexts. However, by itself this isn't useful because the default values never change.
+ডিফল্টভাবে, যেই ভ্যালুগুলো তারা পাবে সেগুলো হবে <CodeStep step={3}>default values</CodeStep> যা আপনি কনটেক্সট তৈরি করার সময় নির্দিষ্ট করে দিয়েছিলেন। তবে, এটা নিজে নিজে খুব একটা কাজের না কারণ ডিফল্ট ভ্যালু কখনো বদলায় না।
 
-Context is useful because you can **provide other, dynamic values from your components:**
+Context কাজের কেননা আপনি **আপনার কম্পোনেন্ট গুলো থেকে অন্যান্য, dynamic মান provide করতে পারবেনঃ**
 
 ```js {8-9,11-12}
 function App() {
@@ -150,15 +150,15 @@ function App() {
 }
 ```
 
-Now the `Page` component and any components inside it, no matter how deep, will "see" the passed context values. If the passed context values change, React will re-render the components reading the context as well.
+এখন `Page` কম্পোনেন্ট এবং এর মধ্যে থাকা যেকোন কম্পোনেন্ট, সেটা যত গভীরেই হোক না কেন, pass হওয়া context ভ্যালু "দেখতে" পারবে। যদি passed হওয়া কনটেক্সট এর ভ্যালু বদলায়, React কনটেক্সট read করে কম্পোনেন্ট পুনরায় render করবে।
 
-[Read more about reading and providing context and see examples.](/reference/react/useContext)
+[কনটেক্সট reading এবং providing এর বিষয়ে আরো পড়ুন এবং উদাহরণ দেখুন।](/reference/react/useContext)
 
 ---
 
 ### একটি ফাইল থেকে কনটেক্সট ইমপোর্ট এবং এক্সপোর্ট {/*importing-and-exporting-context-from-a-file*/}
 
-প্রায় সময়ই, ভিন্ন ভিন্ন ফাইলের component এর একই কনটেক্সট এক্সেস করার প্রয়োজন হবে। এ কারণে, সাধারণত, একটা আলাদা ফাইলে কনটেক্সট ডিক্লেয়ার করা হয়। তখন আপনি অন্যান্য ফাইলের জন্য কনতেক্সট এভেইলেবল করতে [`export` statement](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) ব্যবহার করতে পারেনঃ
+প্রায় সময়ই, ভিন্ন ভিন্ন ফাইলের কম্পোনেন্ট এর একই কনটেক্সট এক্সেস করার প্রয়োজন হবে। এ কারণে, সাধারণত, একটা আলাদা ফাইলে কনটেক্সট ডিক্লেয়ার করা হয়। তখন আপনি অন্যান্য ফাইলের জন্য কনতেক্সট এভেইলেবল করতে [`export` statement](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) ব্যবহার করতে পারেনঃ
 
 ```js {4-5}
 // Contexts.js
