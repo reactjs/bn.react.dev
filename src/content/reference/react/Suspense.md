@@ -255,13 +255,9 @@ async function getAlbums() {
 - Suspense-enabled ফ্রেমওয়ার্কের সাহায্যে ডেটা নিয়ে আসা যেমন, [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
 - [`lazy`](/reference/react/lazy) এর সাথে Lazy-loading কম্পোনেন্ট কোড
 
-<<<<<<< HEAD
-Suspense বুঝতে **পারে না** যখন কোনো Effect বা ইভেন্ট হ্যান্ডলারের ভিতরে ডেটা নিয়ে আসা হয়।
-=======
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a Promise with [`use`](/reference/react/use)
->>>>>>> 9aa84b19222838f38863ce4bd8f516dbfe193bbc
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials) এর মত suspense-enabled ফ্রেমওয়ার্ক ব্যবহার করে ডাটা fetching
+- [`lazy`](/reference/react/lazy) দিয়ে lazy-loding component code
+- [`use`](/reference/react/use) ব্যবহার করে একটি promise এর মান read করা
 
 উপরের `Albums` কম্পোনেন্টে আপনি ঠিক কিভাবে ডেটা লোড করবেন তা আপনার ফ্রেমওয়ার্ক এর উপর নির্ভর করে। আপনি যদি Suspense-enabled ফ্রেমওয়ার্ক ব্যাবহার করেন তাহলে আপনি এর ডেটা নিয়ে আসার ডকুমেন্টেশনে বিস্তারিত তথ্য পাবেন। 
 
@@ -1432,7 +1428,7 @@ function BigSpinner() {
 export default function Layout({ children }) {
   return (
     <div className="layout">
-      <section className="header">
+      <section className="er">
         Music Browser
       </section>
       <main>
@@ -1694,7 +1690,7 @@ main {
   border: 1px solid black;
 }
 
-.header {
+.er {
   background: #222;
   padding: 10px;
   text-align: center;
@@ -1819,7 +1815,7 @@ function BigSpinner() {
 export default function Layout({ children }) {
   return (
     <div className="layout">
-      <section className="header">
+      <section className="er">
         Music Browser
       </section>
       <main>
@@ -2081,7 +2077,7 @@ main {
   border: 1px solid black;
 }
 
-.header {
+.er {
   background: #222;
   padding: 10px;
   text-align: center;
