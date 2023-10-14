@@ -672,9 +672,9 @@ ul, li { margin: 0; padding: 0; }
 
 পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন । 
 
-### Step 3: Use context anywhere in the tree {/*step-3-use-context-anywhere-in-the-tree*/}
+### ধাপ ৩: ট্রি এর যেকোনো জায়গায় context ব্যবহার করুন {/*step-3-use-context-anywhere-in-the-tree*/}
 
-Now you don't need to pass the list of tasks or the event handlers down the tree:
+এখন আপনাকে আর task এর তালিকা অথবা event handlers কে ট্রি এর নিচে পাঠাতে হবেনা :
 
 ```js {4-5}
 <TasksContext.Provider value={tasks}>
@@ -686,7 +686,7 @@ Now you don't need to pass the list of tasks or the event handlers down the tree
 </TasksContext.Provider>
 ```
 
-Instead, any component that needs the task list can read it from the `TaskContext`:
+এর পরিবর্তে যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে পড়তে পারবে ।
 
 ```js {2}
 export default function TaskList() {
@@ -694,7 +694,7 @@ export default function TaskList() {
   // ...
 ```
 
-To update the task list, any component can read the `dispatch` function from context and call it:
+Task তালিকা হালনাগাদ করার জন্য যেকোনো কম্পোনেন্ট `dispatch` ফাংশনকে context থেকে পড়তে পারেন এবং call করতে পারেন ।
 
 ```js {3,9-13}
 export default function AddTask() {
@@ -714,7 +714,8 @@ export default function AddTask() {
     // ...
 ```
 
-**The `TaskApp` component does not pass any event handlers down, and the `TaskList` does not pass any event handlers to the `Task` component either.** Each component reads the context that it needs:
+**`TaskApp` কম্পোনেন্ট কোনো event handlers কে নিচে পাঠায় না এবং `TaskList`  কোনো event handlers কে `Task` কম্পোনেন্টেও পাঠায় না ।** প্রতিটা কম্পোনেন্ট তার প্রয়োজনীয় context কে পড়েঃ
+
 
 <Sandpack>
 
@@ -898,7 +899,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-**The state still "lives" in the top-level `TaskApp` component, managed with `useReducer`.** But its `tasks` and `dispatch` are now available to every component below in the tree by importing and using these contexts.
+**State টি এখনো টপ-লেভেল `TaskApp` কম্পোনেন্টেই অবস্থান করছে, `useReducer` এর ব্যবস্থাপনায়।** কিন্তু এর `tasks` এবং `dispatch` এখন ট্রিয়ের নিচের প্রতিটি কম্পোনেন্ট পাওয়া যাবে ইম্পোর্টিং এবং এই context গুলিকে ব্যবহারের মাধ্যমে।
 
 ## Moving all wiring into a single file {/*moving-all-wiring-into-a-single-file*/}
 
