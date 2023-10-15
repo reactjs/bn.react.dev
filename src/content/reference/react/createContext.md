@@ -38,7 +38,7 @@ const ThemeContext = createContext('light');
 
 `createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে। 
 
-**কনটেক্সট অবজেক্ট নিজে কোন তথ্য ধারণ করে না।** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext.Provider`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+**কনটেক্সট অবজেক্ট নিজে কোন তথ্য ধারণ করে না।** এটা _সেই_ কনটেক্সটকে রিপ্রেজেন্ট করে যেটা অন্যান্য কম্পোনেন্টগুলো read বা provide করে। সাধারণত, কনটেক্সট ভ্যালু নির্দিষ্ট করতে আপনি উপরের কম্পোনেন্টে [`SomeContext.Provider`](#provider) ব্যবহার করবেন, এবং এটাকে read করতে নিচের কম্পোনেন্টগুলোতে [`useContext(SomeContext)`](/reference/react/useContext) কল করবেন। কনটেক্সট অবজেক্টের কিছু প্রপার্টি আছেঃ
 
 * `SomeContext.Provider` আপনাকে কম্পোনেন্টে কনটেক্সট ভ্যালু দেয়ার সুযোগ দেয়।
 * `SomeContext.Consumer` একটি উপায়ান্তর যা কনটেক্সট ভ্যালু read করার জন্য বিরল ভাবে ব্যবহৃত হয়।
