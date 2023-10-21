@@ -4,21 +4,21 @@ title: Scaling Up with Reducer and Context
 
 <Intro>
 
-Reducers একটি কম্পোনেন্টের state আপডেট লজিক সংক্ষেপণ করতে সাহায্য করে। Context আপনাকে অন্যান্য কম্পোনেন্টের গভীরে তথ্য পাঠানোর সুযোগ দেয়। আপনি reducers এবং context দুটি একসাথে সংমিলিত করে একটি জটিল স্ক্রিনের state ব্যবস্থাপনা করতে পারেন ।
+Reducers একটি কম্পোনেন্টের state আপডেট লজিক সংক্ষেপণ করতে সাহায্য করে। Context আপনাকে অন্যান্য কম্পোনেন্টের গভীরে তথ্য পাঠানোর সুযোগ দেয়। আপনি reducers এবং context দুটি একসাথে সংমিলিত করে একটি জটিল স্ক্রিনের state ব্যবস্থাপনা করতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* কিভাবে reducer কে context এর সাথে সংযুক্ত করতে হয় ।
-* কিভাবে state এবং dispatch কে props এর মাধ্যমে পাঠানো থেকে বিরত থাকা যায় ।
-* কিভাবে context এবং state এর যুক্তিকে ভিন্ন ফাইলে রাখা যায় ।
+* কিভাবে reducer কে context এর সাথে সংযুক্ত করতে হয়।
+* কিভাবে state এবং dispatch কে props এর মাধ্যমে পাঠানো থেকে বিরত থাকা যায়।
+* কিভাবে context এবং state এর যুক্তিকে ভিন্ন ফাইলে রাখা যায়।
 
 </YouWillLearn>
 
 ## Context এর সাথে reducer এর সংযুক্তি {/*combining-a-reducer-with-context*/}
 
-[Reducers এর সাথে পরিচিতি](/learn/extracting-state-logic-into-a-reducer) এই উদাহরণে, state কে reducer ব্যবস্থাপনা করেছে । Reducer ফাংশনটি সকল state হালানাগাদ যুক্তিসমূহ ধারন করে এবং একে ফাইলের একদম শেষে ডিক্লেয়ার করা হয় ।
+[Reducers এর সাথে পরিচিতি](/learn/extracting-state-logic-into-a-reducer) এই উদাহরণে, state কে reducer ব্যবস্থাপনা করেছে। Reducer ফাংশনটি সকল state হালানাগাদ যুক্তিসমূহ ধারন করে এবং একে ফাইলের একদম শেষে ডিক্লেয়ার করা হয়।
 
 <Sandpack>
 
@@ -207,7 +207,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-একটি Reducer ইভেন্ট হ্যান্ডলারগুলি ছোট এবং সংক্ষিপ্ত রাখতে সাহায্য করে । তবে, আপনার অ্যাপ্লিকেশন বাড়তে শুরু করলে, আপনি আরও একটি সমস্যায় পরে যেতে পারেন । **বর্তমানে, `tasks` state এবং `dispatch` ফাংশনটি শুধুমাত্র শীর্ষ-স্তরের `TaskApp` কম্পোনেন্টে উপলব্ধ রয়েছে।** অন্য কম্পোনেন্টগুলিকে টাস্কের তালিকা পড়তে অথবা তা পরিবর্তন করতে দিতে হলে, আপনাকে বর্তমান state এবং তা পরিবর্তন করার ইভেন্ট হ্যান্ডলারগুলি স্পষ্টভাবে props হিসেবে [পাঠাতে](/learn/passing-props-to-a-component) হবে।
+একটি Reducer ইভেন্ট হ্যান্ডলারগুলি ছোট এবং সংক্ষিপ্ত রাখতে সাহায্য করে। তবে, আপনার অ্যাপ্লিকেশন বাড়তে শুরু করলে, আপনি আরও একটি সমস্যায় পরে যেতে পারেন। **বর্তমানে, `tasks` state এবং `dispatch` ফাংশনটি শুধুমাত্র শীর্ষ-স্তরের `TaskApp` কম্পোনেন্টে উপলব্ধ রয়েছে।** অন্য কম্পোনেন্টগুলিকে টাস্কের তালিকা পড়তে অথবা তা পরিবর্তন করতে দিতে হলে, আপনাকে বর্তমান state এবং তা পরিবর্তন করার ইভেন্ট হ্যান্ডলারগুলি স্পষ্টভাবে props হিসেবে [পাঠাতে](/learn/passing-props-to-a-component) হবে।
 
 উদাহরণস্বরূপ, `TaskApp` টাস্কের তালিকা এবং ইভেন্ট হ্যান্ডলারগুলি `TaskList` এ পাঠিয়ে দেয়:
 
@@ -229,9 +229,9 @@ ul, li { margin: 0; padding: 0; }
 />
 ```
 
-একটি ছোট উদাহরনে এটি ভালো কাজ করে, কিন্তু যদি এর মাঝে আপনার দশ বা শতাধিক কম্পোনেন্ট থাকে, তাহলে সকল state এবং ফাংশনগুলিকে পাঠানো অনেক বিরক্তিকর হতে পারে ।
+একটি ছোট উদাহরনে এটি ভালো কাজ করে, কিন্তু যদি এর মাঝে আপনার দশ বা শতাধিক কম্পোনেন্ট থাকে, তাহলে সকল state এবং ফাংশনগুলিকে পাঠানো অনেক বিরক্তিকর হতে পারে।
 
-এই কারনে, props এর মাধমে পাঠানোর বিকল্প হিসেবে, আপনি সমস্ত `tasks` স্টেট এবং  `dispatch` ফাংশনকে [context এর মধ্যে](/learn/passing-data-deeply-with-context) রাখতে পারেন । **এইভাবে, `TaskApp` এর নীচে যেকোনো কম্পোনেন্ট রুটে আপনি "prop drilling" এর পুনরাবৃত্তি ছাড়াই task পড়তে এবং একশনগুলিকে dispatch করতে পারবেন ।**
+এই কারনে, props এর মাধমে পাঠানোর বিকল্প হিসেবে, আপনি সমস্ত `tasks` স্টেট এবং  `dispatch` ফাংশনকে [context এর মধ্যে](/learn/passing-data-deeply-with-context) রাখতে পারেন। **এইভাবে, `TaskApp` এর নীচে যেকোনো কম্পোনেন্ট রুটে আপনি "prop drilling" এর পুনরাবৃত্তি ছাড়াই task পড়তে এবং একশনগুলিকে dispatch করতে পারবেন ।**
 
 যেভাবে আপনি reducer এবং  context এর সংযুক্তি করতে পারেনঃ
 1. Context **তৈরি** করুন।
@@ -240,7 +240,7 @@ ul, li { margin: 0; padding: 0; }
 
 ### ধাপ ১: Context তৈরি করুন {/*step-1-create-the-context*/}
 
-`useReducer` হুক আপনাকে বর্তমান `tasks` এবং তা আপডেট করার জন্য `dispatch` ফাংশনকে রিটার্ন করে ।
+`useReducer` হুক আপনাকে বর্তমান `tasks` এবং তা আপডেট করার জন্য `dispatch` ফাংশনকে রিটার্ন করে।
 
 ```js
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
@@ -248,8 +248,8 @@ const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
 তাদেরকে ট্রি-এর নিচে পাঠানোর জন্য আপনি দুটি ভিন্ন context [তৈরি](/learn/passing-data-deeply-with-context#step-2-use-the-context) করবেন ।
 
-- `TasksContext` বর্তমান tasks তালিকা প্রদান করে ।
-- `TasksDispatchContext` একটি ফাংশন প্রদান করে যা কম্পোনেন্টগুলিকে একশনগুলি dispatch করতে দেয় ।
+- `TasksContext` বর্তমান tasks তালিকা প্রদান করে।
+- `TasksDispatchContext` একটি ফাংশন প্রদান করে যা কম্পোনেন্টগুলিকে একশনগুলি dispatch করতে দেয়।
 
 এদেরকে একটি আলাদা ফাইলে এক্সপোর্ট করুন যাতে আপনি পরবর্তিতে অন্য ফাইলে ইম্পোর্ট করতে পারেন:
 
@@ -447,12 +447,12 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-এখানে আপনি `null` কে ডিফল্ট মান হিসেবে দুটি context এ পাঠাচ্ছেন । আসল মানগুলি `TaskApp` এর মাধ্যমে সরাসরি প্রদান হবে ।
+এখানে আপনি `null` কে ডিফল্ট মান হিসেবে দুটি context এ পাঠাচ্ছেন। আসল মানগুলি `TaskApp` এর মাধ্যমে সরাসরি প্রদান হবে।
 
 
 ### ধাপ ২: State এবং dispatch কে context এর ভেতরে রাখুন {/*step-2-put-state-and-dispatch-into-context*/}
 
-এখন আপনি দুটো context কে `TaskApp` কম্পোনেন্টে ইম্পোর্ট করতে পারেন । `useReducer()` এর রিটার্ন করা `tasks` এবং `dispatch` কে গ্রহণ করুন এবং এদেরকে নিচের সম্পূর্ন ট্রিতে [প্রদান করুন](/learn/passing-data-deeply-with-context#step-3-provide-the-context):
+এখন আপনি দুটো context কে `TaskApp` কম্পোনেন্টে ইম্পোর্ট করতে পারেন। `useReducer()` এর রিটার্ন করা `tasks` এবং `dispatch` কে গ্রহণ করুন এবং এদেরকে নিচের সম্পূর্ন ট্রিতে [প্রদান করুন](/learn/passing-data-deeply-with-context#step-3-provide-the-context):
 
 ```js {4,7-8}
 import { TasksContext, TasksDispatchContext } from './TasksContext.js';
@@ -669,11 +669,11 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন । 
+পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন। 
 
 ### ধাপ ৩: ট্রি এর যেকোনো জায়গায় context ব্যবহার করুন {/*step-3-use-context-anywhere-in-the-tree*/}
 
-এখন আপনাকে আর task এর তালিকা অথবা event handlers কে ট্রি এর নিচে পাঠাতে হবেনা :
+এখন আপনাকে আর task এর তালিকা অথবা event handlers কে ট্রি এর নিচে পাঠাতে হবেনা:
 
 ```js {4-5}
 <TasksContext.Provider value={tasks}>
@@ -685,15 +685,14 @@ ul, li { margin: 0; padding: 0; }
 </TasksContext.Provider>
 ```
 
-এর পরিবর্তে যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে পড়তে পারবে ।
+এর পরিবর্তে যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে পড়তে পারবে।
 
 ```js {2}
 export default function TaskList() {
   const tasks = useContext(TasksContext);
   // ...
 ```
-
-Task তালিকা হালনাগাদ করার জন্য যেকোনো কম্পোনেন্ট `dispatch` ফাংশনকে context থেকে পড়তে পারেন এবং call করতে পারেন ।
+Task তালিকা হালনাগাদ করার জন্য যেকোনো কম্পোনেন্ট `dispatch` ফাংশনকে context থেকে পড়তে পারেন এবং call করতে পারেন।
 
 ```js {3,9-13}
 export default function AddTask() {
@@ -713,7 +712,7 @@ export default function AddTask() {
     // ...
 ```
 
-**`TaskApp` কম্পোনেন্ট কোনো event handlers কে নিচে পাঠায় না এবং `TaskList`  কোনো event handlers কে `Task` কম্পোনেন্টেও পাঠায় না ।** প্রতিটা কম্পোনেন্ট তার প্রয়োজনীয় context কে পড়েঃ
+**`TaskApp` কম্পোনেন্ট কোনো event handlers কে নিচে পাঠায় না এবং `TaskList`  কোনো event handlers কে `Task` কম্পোনেন্টেও পাঠায় না।** প্রতিটা কম্পোনেন্ট তার প্রয়োজনীয় context কে পড়েঃ
 
 
 <Sandpack>
@@ -915,8 +914,8 @@ export const TasksDispatchContext = createContext(null);
 
 এই ফাইলটিতে এখন জটলা বেঁধে যাবে! আপনি reducer কে একই ফাইলে সরাবেন। এরপর আপনি একটি নতুন `TaskProvider` কম্পোনেন্ট একই ফাইলে ডিক্লেয়ার করবেন। এই কম্পোনেন্ট সকল অংশকে একীভূত করবে।
 
-1. এটি state কে reducer দিয়ে পরিচালনা করবে ।
-2. এটি উভয় context কে নিচের কম্পোনেন্টে পাঠাবে ।
+1. এটি state কে reducer দিয়ে পরিচালনা করবে।
+2. এটি উভয় context কে নিচের কম্পোনেন্টে পাঠাবে।
 3. এটি [`children` কে prop হিসেবে নেয়](/learn/passing-props-to-a-component#passing-jsx-as-children) যাতে আপনি এতে JSX পাঠাতে পারেন।
 
 ```js
@@ -933,7 +932,7 @@ export function TasksProvider({ children }) {
 }
 ```
 
-**এটি আপনার `TaskApp` থেকে সকল জটিলতা এবং সংযোগকে সরিয়ে দেয় :**
+**এটি আপনার `TaskApp` থেকে সকল জটিলতা এবং সংযোগকে সরিয়ে দেয়:**
 
 
 <Sandpack>
@@ -1358,19 +1357,15 @@ ul, li { margin: 0; padding: 0; }
 
 <Recap>
 
-
 - আপনি Reducer সঙ্গে context যোগ করে যেকোনো কোম্পোনেন্টকে এর উপরের state পড়তে এবং আপডেট করতে দিতে পারেন।
-
 - state এবং dispatch ফাংশনকে নীচের কোম্পোনেন্টগুলিকে প্রদান করতে:
   1. দুটি কনটেক্সট তৈরি করুন (state এবং dispatch ফাংশনের জন্য)।
   2. যে কোম্পোনেন্ট রিডিউসারটি ব্যবহার করে, তার থেকে উভয় কনটেক্সট প্রদান করুন।
   3. যে কোম্পোনেন্ট এর তাদের পড়ার দরকার সেগুলি থেকে যেকোনো কনটেক্সট ব্যবহার করুন।
-
 - আপনি কম্পোনেন্টগুলিকে আরো গোছাতে পারেন এদেরকে একটি ফাইলে সরিয়ে ফেলার মাধ্যমে।
   - আপনি `TasksProvider` এর মতো কম্পোনেন্টকে এক্সপোর্ট করতে পারেন যারা context প্রদান করেন।
   - আপনি `useTasks` এবং `useTasksDispatch` এর মতো কাস্টম হুকগিলে এক্সপোর্ট করতে পারেন পড়ার জন্য।
   - আপনি অনেকগুলি context-reducer জোড়া রাখতে পারেন আপনার app এ।
-
 
 </Recap>
 
