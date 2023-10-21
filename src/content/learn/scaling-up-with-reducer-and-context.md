@@ -909,6 +909,7 @@ import { createContext } from 'react';
 export const TasksContext = createContext(null);
 export const TasksDispatchContext = createContext(null);
 ```
+
 এই ফাইলটিতে এখন জটলা বেঁধে যাবে! আপনি reducer কে একই ফাইলে সরাবেন। এরপর আপনি একটি নতুন `TaskProvider` কম্পোনেন্ট একই ফাইলে ডিক্লেয়ার করবেন। এই কম্পোনেন্ট সকল অংশকে একীভূত করবে।
 
 1. এটি state কে reducer দিয়ে পরিচালনা করবে।
