@@ -714,7 +714,6 @@ export default function AddTask() {
 
 **`TaskApp` কম্পোনেন্ট কোনো event handlers কে নিচে পাঠায় না এবং `TaskList`  কোনো event handlers কে `Task` কম্পোনেন্টেও পাঠায় না।** প্রতিটা কম্পোনেন্ট তার প্রয়োজনীয় context কে পড়েঃ
 
-
 <Sandpack>
 
 ```js App.js
