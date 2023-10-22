@@ -4,7 +4,7 @@ title: forwardRef
 
 <Intro>
 
-`forwardRef` lets your component expose a DOM node to parent component with a [ref.](/learn/manipulating-the-dom-with-refs)
+`forwardRef` আপনার কম্পোনেন্টকে একটি DOM নোড একটি প্যারেন্ট কম্পোনেন্টে একটি [ref](/learn/manipulating-the-dom-with-refs) সহ এক্সপোজ করার সুযোগ দেয়।
 
 ```js
 const SomeComponent = forwardRef(render)
@@ -16,11 +16,11 @@ const SomeComponent = forwardRef(render)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `forwardRef(render)` {/*forwardref*/}
 
-Call `forwardRef()` to let your component receive a ref and forward it to a child component:
+`forwardRef()` কল করুন যেন আপনার কম্পোনেন্ট একটি ref রিসিভ করতে পারে এবং একটি চাইল্ড কম্পোনেন্টে ফরোয়ার্ড করতে পারেঃ
 
 ```js
 import { forwardRef } from 'react';
@@ -30,19 +30,19 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `render`: The render function for your component. React calls this function with the props and `ref` that your component received from its parent. The JSX you return will be the output of your component.
+* `render`: আপনার কম্পোনেন্টের রেন্ডার ফাংশন। আপনার কম্পোনেন্ট তার প্যারেন্ট থেকে যে প্রপ এবং `ref` পায় সেটা নিয়ে React এই ফাংশনে কল করে। আপনি যেই JSX রিটার্ন করবেন সেটা হবে আপনার কম্পোনেন্টের আউটপুট।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, a component returned by `forwardRef` is also able to receive a `ref` prop.
+`forwardRef` এমন একটা React কম্পোনেন্ট রিটার্ন করে যেটা আপনি JSX এ রেন্ডার করতে পারেন। সোজাসাপ্টা ফাংশন হিসেবে ডিফাইন করা React কম্পোনেন্টের সাথে এর অমিল এখানেই যে, `forwardRef` দ্বারা রিটার্ন হওয়া কম্পোনেন্ট একটা `ref` প্রপ রিসিভও করতে পারে।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+* Strict Mode এ, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
 
 
 ---
