@@ -18,6 +18,7 @@ React একটা জাভাস্ক্রিপ্ট লাইব্রে
 * [কীভাবে কম্পোনেন্ট কন্ডিশনালি রেন্ডার করবেন](/learn/conditional-rendering)
 * [কীভাবে এক সাথে একাধিক কম্পোনেন্ট রেন্ডার করবেন](/learn/rendering-lists)
 * [কীভাবে কম্পোনেন্ট pure রাখার মাধ্যমে বিভ্রান্তিকর বাগ এড়িয়ে চলবেন](/learn/keeping-components-pure)
+* [কেন আপনার UI কে tree হিসেবে বুঝাটা কার্যকর](/learn/understanding-your-ui-as-a-tree)
 
 </YouWillLearn>
 
@@ -522,6 +523,29 @@ export default function TeaSet() {
 কীভাবে pure এবং অনুমানযোগ্য ফাংশন হিসেবে কম্পোনেন্ট লিখবেন জানতে পড়ুন **[কম্পোনেন্ট pure রাখা।]**
 
 </LearnMore>
+
+## Tree হিসেবে আপনার UI {/*your-ui-as-a-tree*/}
+
+React কম্পোনেন্ট এবং মডিউলের ভেতরকার সম্পর্ক মডেল করবার জন্য tree ব্যবহার করে।
+
+একটা React রেন্ডার ট্রি হল কম্পোনেন্টের মাঝে থাকা প্যারেন্ট-চাইল্ড সম্পর্কের একটা প্রতিফলন।
+
+<Diagram name="generic_render_tree" height={250} width={500} alt="A tree graph with five nodes, with each node representing a component. The root node is located at the top the tree graph and is labelled 'Root Component'. It has two arrows extending down to two nodes labelled 'Component A' and 'Component C'. Each of the arrows is labelled with 'renders'. 'Component A' has a single 'renders' arrow to a node labelled 'Component B'. 'Component C' has a single 'renders' arrow to a node labelled 'Component D'.">React রেন্ডার ট্রিয়ের একটি উদাহরণ।</Diagram>
+
+ট্রি এর শীর্ষের কাছে থাকা কম্পোনেন্ট, যেগুলো রুটেরও কাছে, সেগুলোকে top-level কম্পোনেন্ট হিসেবে ধরা হয়। যেসব কম্পোনেন্টের কোন চাইল্ড নেই সেগুলোকে leaf কম্পোনেন্ট বলে। দেটা ফলো এবং রেন্ডারিং পারফরম্যান্স বুঝবার জন্য কম্পোনেন্টের এই বিভাজন কাজে লাগে।
+
+জাভাস্ক্রিপ্ট মডিউলগুলোর মধ্যকার সম্পর্ক মডেলিং আপনার অ্যাপ বুঝবার জন্য অন্য একটি কার্যকর উপায়। এটাকে আমরা module dependency tree বলে অভিহিত করি।
+
+<Diagram name="generic_dependency_tree" height={250} width={500} alt="A tree graph with five nodes. Each node represents a JavaScript module. The top-most node is labelled 'RootModule.js'. It has three arrows extending to the nodes: 'ModuleA.js', 'ModuleB.js', and 'ModuleC.js'. Each arrow is labelled as 'imports'. 'ModuleC.js' node has a single 'imports' arrow that points to a node labelled 'ModuleD.js'.">Module dependency tree এর একটি উদাহরণ।</Diagram>
+
+একটি ডিপেন্ডেন্সি ট্রি বেশিরভাগ সময় বিল্ড টুল ব্যবহার করে তৈরি করা হয়, যেন দরকারি পুরো জাভাস্ক্রিপ্ট কোড একত্রিত করে ক্লায়েন্ট ডাউনলোড এবং রেন্ডার করতে পারেন। React অ্যাপের ক্ষেত্রে একটা বড় বান্ডল সাইজ user experience এ বিঘ্ন ঘটায়। এরকম সমস্যা ডিবাগ করার জন্য মডিউল ডিপেন্ডেন্সি ট্রি কাজে লাগে।
+
+<LearnMore path="/learn/understanding-your-ui-as-a-tree">
+
+**[Tree হিসেবে আপনার UI](/learn/understanding-your-ui-as-a-tree)** পড়ুন যাতে আপনি শিখতে পারেন কীভাবে একটি React অ্যাপের জন্য একটি মডিউল ডিপেন্ডেন্সি ট্রি তৈরি করতে হয় এবং রেন্ডার করতে হয় এবং কীভাবে ইউজার এক্সপিরিয়েন্স এবং পারফরম্যান্সের জন্য এগুলো কার্যকর মেন্টাল মডেল।
+
+</LearnMore>
+
 
 ## এর পর তাহলে কী? {/*whats-next*/}
 
