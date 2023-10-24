@@ -864,26 +864,26 @@ CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং
 
 <Recap>
 
-* Context lets a component provide some information to the entire tree below it.
-* To pass context:
-  1. Create and export it with `export const MyContext = createContext(defaultValue)`.
-  2. Pass it to the `useContext(MyContext)` Hook to read it in any child component, no matter how deep.
-  3. Wrap children into `<MyContext.Provider value={...}>` to provide it from a parent.
-* Context passes through any components in the middle.
-* Context lets you write components that "adapt to their surroundings".
-* Before you use context, try passing props or passing JSX as `children`.
+* কনটেক্সট একটি কম্পোনেন্টকে এর নিম্নস্থ পুরো ট্রি কে কিছু ইনফর্মেশন প্রোভাইড করতে দেয়।
+* কনটেক্সট পাস করতে হলে:
+  1. `export const MyContext = createContext(defaultValue)` দিয়ে কনটেক্সট create করে export করুন।
+  2. `useContext(MyContext)` হুককে কনটেক্সটটি পাস করুন যাতে যেকোনো চাইল্ড কম্পোনেন্ট থেকে সেটিকে read করা যায়, তা যত গভীরেই হোক না কেনো।
+  3. চিলড্রেনকে `<MyContext.Provider value={...}>` দিয়ে wrap করুন যাতে একটি প্যারেন্ট থেকে কনটেক্সটটি প্রোভাইড করতে পারেন।
+* কনটেক্সট মধ্যবর্তী যেকোনো কম্পোনেন্ট ভেদ করে যেতে পারে।
+* কনটেক্সট আপনাকে এমন কম্পোনেন্ট তৈরি করতে দেয় যেগুলো "তাদের আসে পাশের সাথে তাল মিলিয়ে চলতে পারে"।
+* কনটেক্সট ব্যবহার করার আগে, চেষ্টা করুন প্রপস পাস করতে বা JSX কে `children` হিসেবে পাস করতে।
 
 </Recap>
 
 <Challenges>
 
-#### Replace prop drilling with context {/*replace-prop-drilling-with-context*/}
+#### প্রপ ড্রিলিং এর পরিবর্তে কনটেক্সট ব্যবহার করুন {/*replace-prop-drilling-with-context*/}
 
-In this example, toggling the checkbox changes the `imageSize` prop passed to each `<PlaceImage>`. The checkbox state is held in the top-level `App` component, but each `<PlaceImage>` needs to be aware of it.
+এই উদাহরণে, চেকবক্সটি toggle করলে `imageSize` প্রপকে পরিবর্তন হয়, যেটিকে প্রত্যেক `<PlaceImage>` এ পাস করা হয়েছে। চেকবক্সের স্টেটটি `App` কম্পোনেন্টে সবার উপরে আছে, কিন্তু প্রত্যেক `<PlaceImage>` এর এই স্টেট সম্পর্কে জানা প্রয়োজন।
 
-Currently, `App` passes `imageSize` to `List`, which passes it to each `Place`, which passes it to the `PlaceImage`. Remove the `imageSize` prop, and instead pass it from the `App` component directly to `PlaceImage`.
+বর্তমানে, `imageSize` স্টেটটি `App` থেকে `List` এ পাস হচ্ছে, সেখান থেকে আবার প্রত্যেক `Place` এ পাস হচ্ছে, সেখান থেকে আবার `PlaceImage` এ পাস হচ্ছে। এখন `imageSize` প্রপটিকে রিমুভ করে দিন, আর এর বদলে একে `App` কম্পোনেন্ট থেকে সরাসরি `PlaceImage` এ পাস করুন।
 
-You can declare context in `Context.js`.
+আপনি কনটেক্সটটি `Context.js` এ declare করতে পারেন।
 
 <Sandpack>
 
