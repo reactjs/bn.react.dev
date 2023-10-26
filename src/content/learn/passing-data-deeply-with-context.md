@@ -476,7 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-এটা রিয়েক্টকে বলে দেয় যে: "যদি এই `<Section>` এর ভিতরের কোনো কম্পোনেন্ট `LevelContext` তালাশ করে, তবে তাকে এই `level` দিয়ে দাও"। তখন কম্পোনেন্টটি UI ট্রি এর ভিতর এর সবচেয়ে কাছের `<LevelContext.Provider>` এর ভ্যালু ইউজ করবে।
+এটা React কে বলে দেয় যে: "যদি এই `<Section>` এর ভিতরের কোনো কম্পোনেন্ট `LevelContext` তালাশ করে, তবে তাকে এই `level` দিয়ে দাও"। তখন কম্পোনেন্টটি UI ট্রি এর ভিতর এর সবচেয়ে কাছের `<LevelContext.Provider>` এর ভ্যালু ইউজ করবে।
 
 <Sandpack>
 
