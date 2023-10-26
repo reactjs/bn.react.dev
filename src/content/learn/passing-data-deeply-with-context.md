@@ -603,7 +603,7 @@ export default function Section({ children }) {
 }
 ```
 
-এই পরিবর্তনের করে, আপনার `level` প্রপটিকে `<Section>` কিংবা `<Heading>` *কোনোটিকেই* পাস করা লাগবে না:
+এই পরিবর্তনের কারণে, আপনার `level` প্রপটিকে `<Section>` কিংবা `<Heading>` *কোনোটিকেই* পাস করা লাগবে না:
 
 <Sandpack>
 
