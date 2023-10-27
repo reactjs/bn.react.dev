@@ -1,10 +1,10 @@
 ---
-title: JavaScript in JSX with Curly Braces
+title: Curly Braces দিয়ে JSX-এ জাভাস্ক্রিপ্ট
 ---
 
 <Intro>
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to open a window to JavaScript.
+JSX আপনাকে একটি জাভাস্ক্রিপ্ট ফাইলের ভিতরে HTML-এর মতো মার্কআপ লিখতে দেয়, logic এবং content একই জায়গায় রেন্ডার করে। কখনও কখনও মার্কআপের ভিতরে জাভাস্ক্রিপ্ট logic বা dynamic property লেখার প্রয়োজন পরে। এই পরিস্থিতিতে, আপনি JSX-এ curly braces ব্যবহার করে জাভাস্ক্রিপ্ট লিখতে পারেন।
 
 </Intro>
 
@@ -247,9 +247,9 @@ JSX হল একটি খুবই সাধারণ টেমপ্লেট
 
 <Challenges>
 
-#### Fix the mistake {/*fix-the-mistake*/}
+#### ভুলটা ঠিক করুন {/*fix-the-mistake*/}
 
-This code crashes with an error saying `Objects are not valid as a React child`:
+এই কোডটি একটি ত্রুটির কারণে ক্র্যাশ হয়েছে যে `অবজেক্টগুলি React child হিসাবে বৈধ নয়`:
 
 <Sandpack>
 
@@ -289,15 +289,15 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Can you find the problem?
+আপনি কি সমস্যা খুঁজে পেতে পারেন?
 
-<Hint>Look for what's inside the curly braces. Are we putting the right thing there?</Hint>
+<Hint>curly braces ভিতরে কি আছে দেখুন। আমরা কি সেখানে সঠিক জিনিস রাখছি?</Hint>
 
 <Solution>
 
-This is happening because this example renders *an object itself* into the markup rather than a string: `<h1>{person}'s Todos</h1>` is trying to render the entire `person` object! Including raw objects as text content throws an error because React doesn't know how you want to display them.
+এটি ঘটছে কারণ এই উদাহরণটি একটি স্ট্রিংয়ের পরিবর্তে একটি object নিজেই মার্কআপে রেন্ডার করে: `<h1>{person}'s Todos</h1>` সম্পূর্ণ person object কে রেন্ডার করার চেষ্টা করছে! সম্পূর্ণ object কে ব্যবহার করার ফলে এখানে একটি error হয়েছে কারণ React জানে না আপনি কীভাবে সেগুলি প্রদর্শন করতে চান।
 
-To fix it, replace `<h1>{person}'s Todos</h1>` with `<h1>{person.name}'s Todos</h1>`:
+এটি ঠিক করতে, `<h1>{person}'s Todos</h1>` কে `<h1>{person.name}'s Todos</h1>` দিয়ে পরিবর্তন করুন:
 
 <Sandpack>
 
