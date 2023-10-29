@@ -1,5 +1,5 @@
 ---
-title: Extracting State Logic into a Reducer
+title: State Logic কে একটি Reducer এ স্থানান্তর করা
 ---
 
 <Intro>
