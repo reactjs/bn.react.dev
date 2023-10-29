@@ -1,16 +1,16 @@
 ---
-title: 'Synchronizing with Effects'
+title: 'Effects এর সাথে Synchronizing'
 ---
 
 <Intro>
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. *Effects* let you run some code after rendering so that you can synchronize your component with some system outside of React.
+কিছু কম্পোনেন্ট কে বাইরের সিস্টেমের সাথে সিংক্রোনাইজ করতে হতে পারে। উদাহরণস্বরূপ, আপনি নন-রিয়েক্ট কম্পোনেন্টকে রিয়েক্ট state এর উপর নির্ভর করে নিয়ন্ত্রণ করতে চান,  একটি সার্ভার সংযোগ স্থাপন করতে চান, বা যখন একটি কম্পোনেন্ট স্ক্রিনে দেখা যায় তখন একটি বিশ্লেষণ লগ পাঠাতে চান। *Effects* আপনাকে রেন্ডার এর পর কিছু কোড রান করার সুযোগ দেয় যাতে আপনি আপনার কম্পোনেন্টটি রিয়েক্টের বাইরে কোন সিস্টেম এর সঙ্গে সিংক্রোনাইজ করতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-- Effects কি  
+- Effects কী  
 - কীভাবে Effect গুলো events থেকে আলাদা 
 - কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লার করবেন 
 - কীভাবে অকারণে কোন Effect রি-রানিং এড়াবেন
@@ -18,9 +18,9 @@ Some components need to synchronize with external systems. For example, you migh
 
 </YouWillLearn>
 
-## What are Effects and how are they different from events? {/*what-are-effects-and-how-are-they-different-from-events*/}
+## Effects কী এবং কীভাবে সেগুলো events থেকে আলাদা? {/*what-are-effects-and-how-are-they-different-from-events*/}
 
-Before getting to Effects, you need to be familiar with two types of logic inside React components:
+Effects সম্পর্কে শুরুর আগে, আপনার রিয়েক্ট কম্পোনেন্টের ভেতরের দুই প্রকার লজিকের সাথে পরিচিয় থাকতে হবে:
 
 - **Rendering code** (introduced in [Describing the UI](/learn/describing-the-ui)) lives at the top level of your component. This is where you take the props and state, transform them, and return the JSX you want to see on the screen. [Rendering code must be pure.](/learn/keeping-components-pure) Like a math formula, it should only _calculate_ the result, but not do anything else.
 
