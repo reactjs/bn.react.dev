@@ -11,7 +11,7 @@ Some components need to synchronize with external systems. For example, you migh
 <YouWillLearn>
 
 - Effects কি  
-- কীভাবে Effects গুলো events থেকে আলাদা 
+- কীভাবে Effect গুলো events থেকে আলাদা 
 - কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লার করবেন 
 - কীভাবে অকারণে কোন Effect রি-রানিং এড়াবেন
 - কেন ডেভেলপমেন্টের সময় Effects দুইবার রান হয় এবং সেগুল কীভাবে ঠিক করবেন
