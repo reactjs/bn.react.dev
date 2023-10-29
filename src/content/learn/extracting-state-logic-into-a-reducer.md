@@ -4,7 +4,7 @@ title: State Logic কে একটি Reducer এ স্থানান্ত�
 
 <Intro>
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called a _reducer._
+একাধিক event handler এ ছড়িয়ে থাকা একাধিক state update ওয়ালা কম্পোনেন্টগুলো দুঃসহ হয়ে যেতে পারে। এসব ক্ষেত্রে, আপনি সকল state update logic কে আপনার কম্পোনেন্টের বাইরে একটিমাত্র function এ একত্রিত করতে পারেন, যাকে বলা হয় _reducer।_
 
 </Intro>
 
