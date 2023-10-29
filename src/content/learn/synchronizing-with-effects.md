@@ -10,11 +10,11 @@ Some components need to synchronize with external systems. For example, you migh
 
 <YouWillLearn>
 
-- What Effects are
-- How Effects are different from events
-- How to declare an Effect in your component
-- How to skip re-running an Effect unnecessarily
-- Why Effects run twice in development and how to fix them
+- Effects কি  
+- কীভাবে Effects গুলো events থেকে আলাদা 
+- কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লার করবেন 
+- কীভাবে অকারণে কোন Effect রি-রানিং এড়াবেন
+- কেন ডেভেলপমেন্টের সময় Effects দুইবার রান হয় এবং সেগুল কীভাবে ঠিক করবেন
 
 </YouWillLearn>
 
