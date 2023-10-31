@@ -10,10 +10,10 @@ title: State Logic কে একটি Reducer এ স্থানান্ত�
 
 <YouWillLearn>
 
-- What a reducer function is
-- How to refactor `useState` to `useReducer`
-- When to use a reducer
-- How to write one well
+- reducer function বলতে কী বুঝায় 
+- কিভাবে `useState` কে গুছিয়ে `useReducer` এ পরিণত করা যায়
+- কখন reducer ব্যবহার করতে হয়
+- কীভাবে একে ভালভাবে লিখতে হয়
 
 </YouWillLearn>
 
