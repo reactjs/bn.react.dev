@@ -17,9 +17,9 @@ title: State Logic কে একটি Reducer এ স্থানান্ত�
 
 </YouWillLearn>
 
-## Consolidate state logic with a reducer {/*consolidate-state-logic-with-a-reducer*/}
+## State logic কে একটি reducer এ একত্র করুন {/*consolidate-state-logic-with-a-reducer*/}
 
-As your components grow in complexity, it can get harder to see at a glance all the different ways in which a component's state gets updated. For example, the `TaskApp` component below holds an array of `tasks` in state and uses three different event handlers to add, remove, and edit tasks:
+ধীরে ধীরে যখন আপনার কম্পোনেন্টগুলোর জটিলতা বাড়তে থাকে, তখন এক নজর দেখে এটা বোঝা কঠিন হয়ে যেতে পারে যে কতোনা উপায়ে একটা কম্পোনেন্টের state আপডেট হতে পারে। উদাহরণস্বরূপ, নিচের `TaskApp` কম্পোনেন্টটি `tasks` নামক array কে state হিসেবে ধারণ করে, আর কোনো task কে add, edit, remove করার জন্য তিনটি ভিন্ন ভিন্ন event handler এর ব্যবহার করে:
 
 <Sandpack>
 
