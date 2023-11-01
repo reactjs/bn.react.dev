@@ -22,7 +22,7 @@ title: 'Effects এর সাথে Synchronizing'
 
 Effects সম্পর্কে শুরুর আগে, আপনার রিয়েক্ট কম্পোনেন্টের ভেতরের দুই প্রকার লজিকের সাথে পরিচিয় থাকতে হবে:
 
-- **রেন্ডারিং কোড** (যা [UI এর বর্ণনা](/learn/describing-the-ui) অধ্যায়ে পরিচয় দেওয়া হয়েছে ) আপনার কম্পোনেন্টের টপ লেভেলে থাকে। এখানে আপনি props এবং state নেন, পরিবর্তন করেন, এবং আপনি যে JSX দেখতে চান তা রিটার্ন করেন।   অংকের সূত্রের মত [রেন্ডারিং কোড অবশ্যই পিওর হতে হবে](/learn/keeping-components-pure), শুধুমাত্র ফলাফল গণনা করতে হবে, কিন্তু অন্য কিছু করতে হবে না।
+- **রেন্ডারিং কোড** (যা [UI এর বর্ণনা](/learn/describing-the-ui) অধ্যায়ে পরিচয় দেওয়া হয়েছে ) আপনার কম্পোনেন্টের টপ লেভেলে থাকে। এটি সেখান থাকে, যেখানে আপনি props এবং state নেন, তাদের পরিবর্তন করেন, এবং আপনি যে JSX দেখতে চান তা রিটার্ন করেন।   [রেন্ডারিং কোড অবশ্যই পিওর হতে হবে](/learn/keeping-components-pure) যেমন একটি গণিত সূত্র, শুধুমাত্র ফলাফল গণনা করতে হবে, কিন্তু অন্য কিছু করতে হবে না।
 
 - **Event handlers** (introduced in [Adding Interactivity](/learn/adding-interactivity)) are nested functions inside your components that *do* things rather than just calculate them. An event handler might update an input field, submit an HTTP POST request to buy a product, or navigate the user to another screen. Event handlers contain ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (they change the program's state) caused by a specific user action (for example, a button click or typing).
 
