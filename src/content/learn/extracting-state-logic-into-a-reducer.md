@@ -179,13 +179,13 @@ li {
 
 </Sandpack>
 
-Each of its event handlers calls `setTasks` in order to update the state. As this component grows, so does the amount of state logic sprinkled throughout it. To reduce this complexity and keep all your logic in one easy-to-access place, you can move that state logic into a single function outside your component, **called a "reducer".**
+এর প্রতিটি event handler state কে আপডেট করার জন্য `setTasks` কে call করে। ধীরে ধীরে যখন এ কম্পোনেন্টটি আকারে বাড়তে থাকবে, তখন সাথে সাথে এর ভিতরকার state logic ও বাড়তে থাকবে এবং জটিলতর হতে থাকবে। এই জটিলতা কমাতে এবং আপনার সব state logic একটি সহজে-পাওয়া-যায় এমন জায়গায় রাখতে, আপনি ঐসব state logic কে আপনার কম্পোনেন্টের বাইরে একটি function এ স্থানান্তর করতে পারেন, যে function টিকে বলা হয় **"reducer".**
 
-Reducers are a different way to handle state. You can migrate from `useState` to `useReducer` in three steps:
+Reducer হলো state হ্যান্ডেল করার একটি বিকল্প পদ্ধতি। আপনি `useState` থেকে `useReducer` এ তিনটি ধাপে স্থানান্তর করতে পারেন:
 
-1. **Move** from setting state to dispatching actions.
-2. **Write** a reducer function.
-3. **Use** the reducer from your component.
+1. state কে set করার বদলে action কে **dispatch করতে শুরু করুন**।
+2. একটি reducer function **লিখুন**।
+3. reducer টিকে আপনার কম্পোনেন্ট থেকে **ইউজ করুন**।
 
 ### Step 1: Move from setting state to dispatching actions {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
