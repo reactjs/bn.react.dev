@@ -28,7 +28,7 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 
 কখনও কখনও এটা যথেষ্ট নয়।  একটি `ChatRoom` কম্পোনেন্ট চিন্তা করুন যখনই স্ক্রিনে দৃশ্যমান হয় তখন অবশ্যই চ্যাট সার্ভারের সাথে সংযোগ করতে হয়। সার্ভারে সংযোগ স্থাপন pure calculation নয় (এটি একটি side effect)  তাই এটি রেন্ডার এর সময় সম্পন্ন হয় না। যাইহোক, ক্লিক ইভেন্ট এর মত কোন নির্দিষ্ট ইভেন্ট নাই যা `ChatRoom` ডিসপ্লে করায়।
 
-***Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.** Sending a message in the chat is an *event* because it is directly caused by the user clicking a specific button. However, setting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear. Effects run at the end of a [commit](/learn/render-and-commit) after the screen updates. This is a good time to synchronize the React components with some external system (like network or a third-party library).
+***Effect গুলি*  নির্দিষ্ট ইভেন্টের মাধ্যমে নয়, বরং স্বয়ংক্রিয় রেন্ডারিং দ্বারা সৃষ্ট side effect গুলি নির্দিষ্ট করতে দেয়।** চ্যাটে message পাঠানো একটি *event* কারণ এটি সরাসরি একজন ব্যবহারকারীর দ্বারা একটি নির্দিষ্ট বাটনে ক্লিক করার মাধ্যমে ঘটে। তবু, সার্ভারের সাথে সংযোগ স্থাপন একটি *Effect* কারণ এটা উপস্থিত কোম্পোনেন্টের প্রদর্শনের কোন ইন্টারেকশনের কারণে হয় না। Effect গুলি স্ক্রিন আপডেটের পরে একটি [commit](/learn/render-and-commit) এর শেষে চালানো হয়। কিছু external system (যেমন network অথবা একটি third-party library) এর সাথে React component গুলো synchronize করার জন্য এটি একটি ভাল সময় ।
 
 <Note>
 
@@ -46,14 +46,16 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
 
 1. **Effect ডিক্লার** By default, প্রত্যেক বার রেন্ডারের সময় Effect রান হবে।
+2. **Effect এর dependenci গুলো বাছাই করুন** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
+
 2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
 3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
 
 Let's look at each of these steps in detail.
 
-### Step 1: Declare an Effect {/*step-1-declare-an-effect*/}
+### ধাপ ১: একটি Effect ডিক্লার {/*step-1-declare-an-effect*/}
 
-To declare an Effect in your component, import the [`useEffect` Hook](/reference/react/useEffect) from React:
+আপনার component এ কোন Effect ডিক্লার করতে, [`useEffect` হুক](/reference/react/useEffect) React থেকে import করুন:
 
 ```js
 import { useEffect } from 'react';
