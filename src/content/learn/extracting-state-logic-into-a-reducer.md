@@ -187,9 +187,9 @@ Reducer হলো state হ্যান্ডেল করার একটি �
 2. একটি reducer function **লিখুন**।
 3. reducer টিকে আপনার কম্পোনেন্ট থেকে **ইউজ করুন**।
 
-### Step 1: Move from setting state to dispatching actions {/*step-1-move-from-setting-state-to-dispatching-actions*/}
+### ধাপ ১: State কে set করার বদলে action কে dispatch করতে শুরু করুন {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
-Your event handlers currently specify _what to do_ by setting state:
+State কে set করার মাধ্যমে আপনার event handler গুলো বর্তমানে নির্ধারণ করছে যে কী করতে হবে:
 
 ```js
 function handleAddTask(text) {
@@ -220,11 +220,11 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-Remove all the state setting logic. What you are left with are three event handlers:
+এখন সব state সেট করার logic দূর করে দিন। এখন আপনার কাছে যা বাকি থাকবে তা হলো:
 
-- `handleAddTask(text)` is called when the user presses "Add".
-- `handleChangeTask(task)` is called when the user toggles a task or presses "Save".
-- `handleDeleteTask(taskId)` is called when the user presses "Delete".
+- ইউজার যখন "Add" প্রেস করে তখন call করা হয় `handleAddTask(text)`।
+- ইউজার যখন "Save" প্রেস করে কিংবা কোনো task কে toggle (বা edit) করে তখন call করা হয় `handleChangeTask(task)`।
+- ইউজার যখন "Delete" প্রেস করে তখন call করা হয় `handleDeleteTask(taskId)`। 
 
 Managing state with reducers is slightly different from directly setting state. Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers. (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action. This is more descriptive of the user's intent.
 
