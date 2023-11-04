@@ -26,26 +26,26 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 
 - **Event handlers** (যা [Adding Interactivity](/learn/adding-interactivity) অধ্যায়ে পরিচয় দেওয়া হয়েছে) আপনার কম্পোনেন্টের ভিতরে একটি নেস্টেড ফাংশন যা কেবল সেগুলি গণনা করার পরিবর্তে অন্য কিছু *করে*।  এটি যে কাজগুলি করতে পারে সেগুলি হতে পারে একটি ইনপুট ফিল্ড আপডেট করা, একটি পণ্য কিনতে HTTP POST request দেওয়া, অথবা ব্যবহারকারীকে অন্য একটি স্ক্রিনে navigate করা। Event handler এ ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) থাকে (এগুলো program এর অবস্থা পরিবর্তন করে) যা নির্দিষ্ট ব্যবহারকারীর ক্রিয়া (উদাহরণস্বরূপ  button click অথবা typing)।
 
-Sometimes this isn't enough. Consider a `ChatRoom` component that must connect to the chat server whenever it's visible on the screen. Connecting to a server is not a pure calculation (it's a side effect) so it can't happen during rendering. However, there is no single particular event like a click that causes `ChatRoom` to be displayed.
+কখনও কখনও এটা যথেষ্ট নয়।  একটি `ChatRoom` কম্পোনেন্ট চিন্তা করুন যখনই স্ক্রিনে দৃশ্যমান হয় তখন অবশ্যই চ্যাট সার্ভারের সাথে সংযোগ করতে হয়। সার্ভারে সংযোগ স্থাপন pure calculation নয় (এটি একটি side effect)  তাই এটি রেন্ডার এর সময় সম্পন্ন হয় না। যাইহোক, ক্লিক ইভেন্ট এর মত কোন নির্দিষ্ট ইভেন্ট নাই যা `ChatRoom` ডিসপ্লে করায়।
 
 ***Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.** Sending a message in the chat is an *event* because it is directly caused by the user clicking a specific button. However, setting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear. Effects run at the end of a [commit](/learn/render-and-commit) after the screen updates. This is a good time to synchronize the React components with some external system (like network or a third-party library).
 
 <Note>
 
-Here and later in this text, capitalized "Effect" refers to the React-specific definition above, i.e. a side effect caused by rendering. To refer to the broader programming concept, we'll say "side effect".
+এখানে এবং পরে এই পাঠটিতে, বড় হাতের "Effect" উপরের React-specific সংজ্ঞা বোঝায়, অর্থাৎ রেন্ডারিংয়ের ফলে সৃষ্ট side effect। বিস্তৃত এই প্রোগ্রামিং concept টি বুঝাতে, আমরা এটিকে "side effect" বলব।
 
 </Note>
 
 
-## You might not need an Effect {/*you-might-not-need-an-effect*/}
+## আপনার কোন Effect প্রয়োজন নাও হতে পারে {/*you-might-not-need-an-effect*/}
 
-**Don't rush to add Effects to your components.** Keep in mind that Effects are typically used to "step out" of your React code and synchronize with some *external* system. This includes browser APIs, third-party widgets, network, and so on. If your Effect only adjusts some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+**অপ্রয়োজনে আপনার component এ Effects অ্যাড করবেন না।** মনে রাখবেন যে Effect গুলি সাধারণত আপনার React কোডের "step out" করতে এবং কিছু *বাহ্যিক* সিস্টামের সাথে synchronize করতে ব্যবহৃত হয়। এর মধ্যে রয়েছে browser APIs, third-party widgets, network, এবং আরও অনেক কিছু। যদি আপনার Effect টি কেবল অন্য state এর উপর ভিত্তি করে কিছু state কে সামঞ্জস্য করে, [তবে আপনার কোন Effect প্রয়োজন নাও হতে পারে।](/learn/you-might-not-need-an-effect)
 
-## How to write an Effect {/*how-to-write-an-effect*/}
+## কিভাবে একটি Effect লিখবেন {/*how-to-write-an-effect*/}
 
-To write an Effect, follow these three steps:
+একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
 
-1. **Declare an Effect.** By default, your Effect will run after every render.
+1. **Effect ডিক্লার** By default, প্রত্যেক বার রেন্ডারের সময় Effect রান হবে।
 2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
 3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
 
