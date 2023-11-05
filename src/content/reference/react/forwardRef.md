@@ -42,14 +42,14 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### সতর্কতা {/*caveats*/}
 
-* Strict Mode এ, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+* Strict Mode এ, React [আপনাকে accidental impurities খুঁজে বের করতে সাহায্য করার জন্য](#my-initializer-or-updater-function-runs-twice) **আপনার রেন্ডার ফাংশন দুবার কল করবে।** এটা development-only আচরণ এবং production এ কোন প্রভাব ফেলবে না। যদি আপনার রেন্ডার ফাংশন pure হয় (যেমন এর হওয়া উচিত), এটা আপনার কম্পোনেন্টের লজিকে কোন প্রভাব ফেলবার কথা না। দুটি কলের একটির ফলাফলকে আমলে আনা হবে না।
 
 
 ---
 
-### `render` function {/*render-function*/}
+### `render` ফাংশন {/*render-function*/}
 
-`forwardRef` accepts a render function as an argument. React calls this function with `props` and `ref`:
+`forwardRef` একটি রেন্ডার ফাংশনকে একটি আর্গুমেন্ট হিসেবে গ্রহণ করে। React এই ফাংশনে `props` এবং `ref` সহ কল করেঃ
 
 ```js
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -62,23 +62,23 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-#### Parameters {/*render-parameters*/}
+#### প্যারামিটার {/*render-parameters*/}
 
-* `props`: The props passed by the parent component.
+* `props`: প্যারেন্ট কম্পোনেন্ট যে প্রপ পাস করে।
 
-* `ref`:  The `ref` attribute passed by the parent component. The `ref` can be an object or a function. If the parent component has not passed a ref, it will be `null`. You should either pass the `ref` you receive to another component, or pass it to [`useImperativeHandle`.](/reference/react/useImperativeHandle)
+* `ref`: প্যারেন্ট কম্পোনেন্টের পাস করা `ref` এট্রিবিউট। এই `ref` হতে পারে অবজেক্ট বা ফাংশন। যদি প্যারেন্ট কম্পোনেন্ট কোন ref পাস না করে থাকে, এটা `null` হবে। আপনার রিসিভ করা `ref` অন্য একটি কম্পোনেন্টে পাস করা উচিত, অথবা [`useImperativeHandle` এ পাস করা উচিত।](/reference/react/useImperativeHandle)
 
-#### Returns {/*render-returns*/}
+#### রিটার্ন {/*render-returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, the component returned by `forwardRef` is able to take a `ref` prop.
+`forwardRef` একটি React কম্পোনেন্ট রিটার্ন করে যেটা আপনি JSX এ রেন্ডার করতে পারবেন। Plain ফাংশন হিসেবে সংজ্ঞায়িত React কম্পোনেন্টের সাথে এর অমিল এখানেই যে, `forwardRef` থেকে রিটার্ন করা কম্পোনেন্ট একটি `ref` প্রপ নিতে পারে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Exposing a DOM node to the parent component {/*exposing-a-dom-node-to-the-parent-component*/}
+### প্যারেন্ট কম্পোনেন্টে একটি DOM নোড এক্সপোজ করা {/*exposing-a-dom-node-to-the-parent-component*/}
 
-By default, each component's DOM nodes are private. However, sometimes it's useful to expose a DOM node to the parent--for example, to allow focusing it. To opt in, wrap your component definition into `forwardRef()`:
+ডিফল্ট ভাবে, প্রতিটা কম্পোনেন্টের DOM নোড প্রাইভেট। তবে, কখনো কখনো প্যারেন্টের দিকে একটা DOM নোড এক্সপোজ করা কাজে লাগতে পারে--যেমন, একে ফোকাসের সুযোগ দেবার জন্য। রটা করার জন্য আপনার কম্পোনেন্ট ডেফিনিশন  `forwardRef()` দিয়ে wrap করে ফেলুনঃ
 
 ```js {3,11}
 import { forwardRef } from 'react';
