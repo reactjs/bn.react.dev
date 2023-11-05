@@ -226,7 +226,7 @@ function handleDeleteTask(taskId) {
 - ইউজার যখন "Save" প্রেস করে কিংবা কোনো task কে toggle (বা edit) করে তখন call করা হয় `handleChangeTask(task)`।
 - ইউজার যখন "Delete" প্রেস করে তখন call করা হয় `handleDeleteTask(taskId)`। 
 
-Managing state with reducers is slightly different from directly setting state. Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers. (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action. This is more descriptive of the user's intent.
+Reducer দিয়ে state ম্যানেজ করা, state সেট করা থেকে কিছুটা ভিন্ন জিনিস। React কে state সেট করার মাধ্যমে "কী করতে হবে" না বলে, আপনি আপনার event handler গুলো থেকে "action" গুলোকে dispatch করার মাধ্যমে ঠিক করে দেন "ইউজার এইমাত্র কী করলো"। (আর state update logic অন্য আরেক জায়গায় থাকবে!) তাই একটি event handler এর মাধ্যমে "`tasks` সেট করার" পরিবর্তে, আপনি "একটি task add/change/delete করার" action(কাজ) dispatch করবেন। আর এই পদ্ধতিটি ইউজারের আকাঙ্ক্ষাকে বেশি বর্ণনা করে। 
 
 ```js
 function handleAddTask(text) {
