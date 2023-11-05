@@ -45,11 +45,12 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
 
 1. **Effect ডিক্লার** By default, প্রত্যেক বার রেন্ডারের সময় Effect রান হবে।
-2. **Effect এর dependenci গুলো বাছাই করুন** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
 
-3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+2. **Effect এর dependenci গুলো specify করুন** বেশিরভাগ Effects প্রত্যেকবার রেন্ডার হওয়ার পরে re-run হওয়ার থেকে *যখন প্রয়োজন*  তখন re-run হওয়া উচিৎ। উদাহরণস্বরূপ, একটি fade-in animation কেবল তখনি টিগার করা উচিৎ যখন কোন একটি component দৃশ্যমান হয়। কোন chat room এর সাথে সংযোগ স্থাপন এবং বিচ্ছিন্ন তখনই ঘটে যখন component টি দৃশ্যমান এবং অদৃশ্যমান হয়ে যায় বা যখন chat room টি পরিবর্তন হয়। কীভাবে *dependencies* specifying এর মাধ্যমে  এটি কন্ট্রোল করবেন তা শিখবেন।
 
-Let's look at each of these steps in detail.
+3. **প্রয়োজনে cleanup অ্যাড করুন** কিছু Effects কিভাবে থামানো হবে, আন্ডু হবে বা এগুলো যা করছে তা clean up করতে হবে তা specify করে দিতে হয়। উধাহরণস্বরূপ, "connect" এর জন্য প্রয়োজন "disconnect", "subscribe" এর জন্য "unsubscribe", and "fetch" এর জন্য প্রয়োজন হয়ত "cancel" অথবা "ignore"। আপনি একটি *cleanup function* রিটার্ন করে কীভাবে এটি করবেন তা শিখবেন।
+
+আসুন, এবার প্রতিটি ধাপ বিস্তারিত দেখি।
 
 ### ধাপ ১: একটি Effect ডিক্লার {/*step-1-declare-an-effect*/}
 
