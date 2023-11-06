@@ -1,20 +1,10 @@
 ---
-<<<<<<< HEAD
-title: "React-এর বিল্ট-ইন হুক্স"
+title: এক নজরে React Reference
 ---
 
 <Intro>
-
-*হুক্স*  আপনাকে আপনার কম্পোনেন্ট থেকে React-এর বিভিন্ন ফিচার ব্যবহার করতে দেয়। আপনি বিল্ট-ইন হুকগুলো ব্যবহার করতে পারেন অথবা তাদের সংযোজন করে আপনার নিজস্ব হুক তৈরি করতে পারেন। এই পেজে React-এর সব বিল্ট-ইন হুকগুলোর তালিকা করা আছে।
-
-=======
-title: React Reference Overview
----
-
-<Intro>
-This section provides detailed reference documentation for working with React. 
-For an introduction to React, please visit the [Learn](/learn) section. 
->>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
+এই অংশে React নিয়ে কাজ করার জন্য বিস্তারিত রেফারেন্স ডকুমেন্টেশন রয়েছে। 
+React এর সাথে পরিচিত হবার জন্য [Learn](/learn) অংশ দেখুন।
 </Intro>
 
 Our The React reference documentation is broken down into functional subsections: 
