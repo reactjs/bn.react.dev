@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 title: "React-এর বিল্ট-ইন হুক্স"
 ---
 
@@ -6,10 +7,19 @@ title: "React-এর বিল্ট-ইন হুক্স"
 
 *হুক্স*  আপনাকে আপনার কম্পোনেন্ট থেকে React-এর বিভিন্ন ফিচার ব্যবহার করতে দেয়। আপনি বিল্ট-ইন হুকগুলো ব্যবহার করতে পারেন অথবা তাদের সংযোজন করে আপনার নিজস্ব হুক তৈরি করতে পারেন। এই পেজে React-এর সব বিল্ট-ইন হুকগুলোর তালিকা করা আছে।
 
-</Intro>
-
+=======
+title: React Reference Overview
 ---
 
+<Intro>
+This section provides detailed reference documentation for working with React. 
+For an introduction to React, please visit the [Learn](/learn) section. 
+>>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
+</Intro>
+
+Our The React reference documentation is broken down into functional subsections: 
+
+<<<<<<< HEAD
 ## State হুক্স {/*state-hooks*/}
 
 *State*  হুকগুলো আপনার কম্পোনেন্টের মধ্যে [ব্যবহৃত "তথ্য সংরক্ষণ" করতে দেয়](/learn/state-a-components-memory)। উদাহরণস্বরূপ, একটি ফর্ম কম্পোনেন্ট স্টেট ব্যবহার করে ইনপুট ভ্যালু সংরক্ষণ করতে পারে, আর একটি ইমেজ গ্যালারি কম্পোনেন্ট স্টেট ব্যবহার করে সিলেক্টেড ইমেজ ইনডেক্স সংরক্ষণ করতে পারে।
@@ -138,3 +148,24 @@ function MessageComponent({ messagePromise }) {
 ## আপনার নিজস্ব হুক {/*your-own-hooks*/}
 
 আপনি নিজেও জাভাস্ক্রিপ্ট ফাংশন হিসাবে [আপনার নিজস্ব কাস্টম হুক বানাতে পারেন।](/learn/reusing-logic-with-custom-hooks#extracting-your-own-custom-hook-from-a-component)
+=======
+## React {/*react*/}
+Programmatic React features:  
+* [Hooks](/reference/react/hooks) - Use different React features from your components.
+* [Components](/reference/react/components) - Documents built-in components that you can use in your JSX.
+* [APIs](/reference/react/apis) - APIs that are useful for defining components. 
+* [Directives](/reference/react/directives) - Provide instructions to bundlers compatible with React Server Components.
+
+## React DOM {/*react-dom*/}
+React-dom contains features that are only supported for web applications 
+(which run in the browser DOM environment). This section is broken into the following:
+
+* [Hooks](/reference/react-dom/hooks) - Hooks for web applications which run in the browser DOM environment.
+* [Components](/reference/react-dom/components) - React supports all of the browser built-in HTML and SVG components.
+* [APIs](/reference/react-dom) - The `react-dom` package contains methods supported only in web applications.
+* [Client APIs](/reference/react-dom/client) - The `react-dom/client` APIs let you render React components on the client (in the browser). 
+* [Server APIs](/reference/react-dom/server) - The `react-dom/server` APIs let you render React components to HTML on the server.
+
+## Legacy APIs {/*legacy-apis*/}
+* [Legacy APIs](/reference/react/legacy) - Exported from the react package, but not recommended for use in newly written code. 
+>>>>>>> a8790ca810c1cebd114db35a433b90eb223dbb04
