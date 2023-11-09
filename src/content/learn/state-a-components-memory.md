@@ -163,12 +163,12 @@ button {
 
 [`useState`](/reference/react/useState) হুক আপনাকে নিচের দুটি জিনিস দেয়ঃ
 
-1. একটি **স্টেট ভেরিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
-2. একটি **স্টেট setter ফাংশন** যা দিয়ে ভেরিয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
+1. একটি **state ভেরিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
+2. একটি **state setter ফাংশন** যা দিয়ে ভেরিয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
 
-## স্টেট ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
+## State ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
 
-স্টেট ভেরিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবেঃ
+State ভেরিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবেঃ
 
 ```js
 import { useState } from 'react';
@@ -186,7 +186,7 @@ let index = 0;
 const [index, setIndex] = useState(0);
 ```
 
-`index` একটি স্টেট ভেরিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
+`index` একটি state ভেরিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
 
 > এখানে `[` এবং `]` সিনট্যাক্সকে বলা হয় [array destructuring](https://javascript.info/destructuring-assignment) এবং এটা আপনাকে একটি অ্যারে থেকে ভ্যালু রিড করতে দেয়। যেই অ্যারেটা `useState` রিটার্ন করে সেটাতে সব সময় দুটি আইটেম থাকে।
 
@@ -337,7 +337,7 @@ React এ, `useState`, এবং অন্য যেকোনো ফাংশন
 
 *Hooks* এক ধরনের স্পেশাল ফাংশন যা শুধু React এর [রেন্ডারিং](/learn/render-and-commit#step-1-trigger-a-render) এর সময় কাজ করে (রেন্ডারিং নিয়ে পরের পাতায় আমরা আরো বিস্তারিত জানব)। এরা রিয়েক্ট এর বিভিন্ন ফিচারকে "আঁকরে ধরতে" সাহায্য করে।
 
-স্টেট এদের মধ্যে একটি ফিচার, কিন্তু অন্যান্য হুক নিয়ে আমরা পরবর্তীতে জানব।
+State এদের মধ্যে একটি ফিচার, কিন্তু অন্যান্য হুক নিয়ে আমরা পরবর্তীতে জানব।
 
 <Pitfall>
 
@@ -378,7 +378,7 @@ const [index, setIndex] = useState(0);
 3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
 4. And so on!
 
-## কম্পোনেন্ট এ একাধিক স্টেট ভেরিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
+## কম্পোনেন্ট এ একাধিক state ভেরিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
 
 একটি কম্পোনেন্ট এ আপনি যত খুশি তত ধরনের ষ্টেট ভেরিয়েবল রাখতে পারেন। এই কম্পোনেন্ট এর দুটি স্টেট ভেরিয়েবল আছে, একটি নাম্বার `index` এবং একটি বুলিয়ান `showMore` যা Toggle করা হয় যখন আপনি "Show details" এ ক্লিক করেন :
 
@@ -523,7 +523,7 @@ It is a good idea to have multiple state variables if their state is unrelated, 
 
 <DeepDive>
 
-#### রিয়েক্ট কিভাবে জানে কোন স্টেট রিটার্ন করতে হবে? {/*how-does-react-know-which-state-to-return*/}
+#### রিয়েক্ট কিভাবে জানে কোন state রিটার্ন করতে হবে? {/*how-does-react-know-which-state-to-return*/}
 
 You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
 
@@ -1449,13 +1449,13 @@ If your linter is [configured for React](/learn/editor-setup#linting), you shoul
 
 </Solution>
 
-#### অপ্রয়োজনীয় স্টেট বাদ দিন {/*remove-unnecessary-state*/}
+#### অপ্রয়োজনীয় state বাদ দিন {/*remove-unnecessary-state*/}
 
 When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
 
 To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
 
-আপনি ব্যাখ্যা করতে পারবেন কেন এই স্টেট ভেরিয়েবলটি অপ্রয়োজনীয়?
+আপনি ব্যাখ্যা করতে পারবেন কেন এই state ভেরিয়েবলটি অপ্রয়োজনীয়?
 
 <Sandpack>
 
@@ -1503,7 +1503,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-স্টেট ভেরিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভেরিয়েবলই যথেষ্ট। যেখানে রেগুলার ভেরিয়েবল যথেষ্ট সেখানে স্টেট ভেরিবল ব্যবহার করা উচিত না।
+State ভেরিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভেরিয়েবলই যথেষ্ট। যেখানে রেগুলার ভেরিয়েবল যথেষ্ট সেখানে state ভেরিবল ব্যবহার করা উচিত না।
 
 </Solution>
 
