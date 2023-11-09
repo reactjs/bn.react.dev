@@ -469,19 +469,19 @@ input {
 
 **Ref অতিরিক্ত ব্যবহার করবেন না।** শুধুমাত্র *imperative* আচরণ যা আপনি prop দিয়ে দেখাতে পারবেন না সেগুলোর ক্ষেত্রেই ref ব্যবহার করবেনঃ যেমন, নোড স্ক্রোল করা, নোড ফোকাস করা, এনিমশন ট্রিগার করা, টেক্সট সিলেক্ট করা, ইত্যাদি।
 
-**If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
+**আপনি যদি কোন কিছু prop এর মাধ্যমে উন্মুক্ত করতে পারেন, তবে ref ব্যবহার করা উচিত হবে না।** যেমন, `Modal` কম্পোনেন্ট থেকে এর মত একটি imperative handle এক্সপোজ করার বদলে, `<Modal isOpen={isOpen} />` এর মত করে `isOpen` prop নেওয়া বেশি ভাল হবে। [Effects](/learn/synchronizing-with-effects) prop এর মাধ্যমে আপনাকে imperative আচরণ এক্সপোজের সুযোগ দেবে।
 
 </Pitfall>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশ্যুট {/*troubleshooting*/}
 
-### My component is wrapped in `forwardRef`, but the `ref` to it is always `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
+### আমার কম্পোনেন্ট `forwardRef` এর মধ্যে wrap করা, কিন্তু এর `ref` সবসময় `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
 
-This usually means that you forgot to actually use the `ref` that you received.
+সাধারণত এর অর্থ হল আপনি যেই `ref` রিসিভ করেছেন, সেটা ব্যবহার করতে ভুলে গেছেন।
 
-For example, this component doesn't do anything with its `ref`:
+উদাহরণস্বরূপ, এই কম্পোনেন্ট এই `ref` এর সাথে কিছু করে নাঃ
 
 ```js {1}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -494,7 +494,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-To fix it, pass the `ref` down to a DOM node or another component that can accept a ref:
+এটা ঠিক করার জন্য, `ref` কে নিচে DOM নোড বা অন্য এমন কোন কম্পোনেন্ট যা ref গ্রহণ করতে পারে সে পর্যন্ত নিয়ে যানঃ
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -507,7 +507,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-The `ref` to `MyInput` could also be `null` if some of the logic is conditional:
+যদি কিছু লজিক কন্ডিশনাল হয় সেক্ষেত্রেও `MyInput` এর `ref` `null` হতে পারেঃ
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
@@ -520,7 +520,7 @@ const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
 });
 ```
 
-If `showInput` is `false`, then the ref won't be forwarded to any node, and a ref to `MyInput` will remain empty. This is particularly easy to miss if the condition is hidden inside another component, like `Panel` in this example:
+যদি `showInput` `false` হয়, তাহলে ref কোন নোডে ফরোয়ার্ড হবে না, এবং `MyInput` এর একটি ref ফাঁকা থাকবে। বিশেষ করে এই বিষয়টি সহজেই উপেক্ষিত হতে পারে যদি কন্ডিশন অন্য কোন কম্পোনেন্টের মধ্যে লুকিয়ে থাকে, যেমন এই উদাহরণে `Panel`:
 
 ```js {5,7}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
