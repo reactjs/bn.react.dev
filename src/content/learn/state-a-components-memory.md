@@ -1,25 +1,25 @@
 ---
-title: "State: A Component's Memory"
+title: "স্টেট: কম্পোনেন্ট এর মেমোরি"
 ---
 
 <Intro>
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" should put a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state*.
+ইন্টারেকশনের ফলে প্রায়ই কম্পোনেন্ট কে স্ক্রিনে যা আছে তা পরিবর্তন করতে হয়। ফর্মে টাইপ করলে ইনপুট ফিল্ড আপডেট হয়ে যাওয়া উচিত, ইমেজ ক্যারাউজেলে এর "next" এ ক্লিক করলে ডিসপ্লের ইমেজ চেঞ্জ হওয়া উচিত, "buy" এ ক্লিক করলে প্রোডাক্ট শপিং কার্ট এ যাওয়া উচিত। কম্পোনেন্ট এর কিছু জিনিস মনে রাখা উচিত, যেমন: বর্তমান ইনপুট ভেলু, বর্তমান ইমেজ, শপিং কার্ট। React এর এমন কম্পোনেন্ট-ভিত্তিক মেমোরি কে *state* বলে।
 
 </Intro>
 
 <YouWillLearn>
 
-* How to add a state variable with the [`useState`](/reference/react/useState) Hook
-* What pair of values the `useState` Hook returns
-* How to add more than one state variable
-* Why state is called local
+* [`useState`](/reference/react/useState) দিয়ে কিভাবে একটি স্টেট ভেরিয়েবল তৈরি করা যায়
+* `useState` হুক কোন দুইটি ভেরিয়েবল রিটার্ন করে 
+* কিভাবে একাধিক স্টেট ভেরিয়েবল তৈরি করতে হয়
+* স্টেট কে কেন লোকাল বলা হয় 
 
 </YouWillLearn>
 
-## When a regular variable isn’t enough {/*when-a-regular-variable-isnt-enough*/}
+## যখন রেগুলার ভেরিয়েবল যথেষ্ট নয় {/*when-a-regular-variable-isnt-enough*/}
 
-Here's a component that renders a sculpture image. Clicking the "Next" button should show the next sculpture by changing the `index` to `1`, then `2`, and so on. However, this **won't work** (you can try it!):
+নিচের কম্পোনেন্টটি একটি ভাস্কর্যের ছবি প্রদর্শন করে। "Next" বাটন এ ক্লিক করলে `index` এর ভেলু `1`, এরপর `2` এবং এভাবে পরিবর্তন হয়ে পরের ভাস্কর্যের ছবি দেখানো উচিত। কিন্তু, এটা **কাজ করবেনা** (আপনি চেষ্টা করে দেখতে পারেন!):
 
 <Sandpack>
 
@@ -151,46 +151,46 @@ button {
 
 </Sandpack>
 
-The `handleClick` event handler is updating a local variable, `index`. But two things prevent that change from being visible:
+`handleClick` ইভেন্ট হ্যান্ডলারটি লোকাল ভেরিয়েবল `index` কে আপডেট করছে। তবে, দুটি বিষয় এই পরিবর্তন দেখতে বাধা তৈরি করছে।
 
-1. **Local variables don't persist between renders.** When React renders this component a second time, it renders it from scratch—it doesn't consider any changes to the local variables.
-2. **Changes to local variables won't trigger renders.** React doesn't realize it needs to render the component again with the new data.
+1. **লোকাল ভেরিবলগুলো রেন্ডারগুলির মধ্যে স্থায়ী হয় না।** যখন React কোন কম্পোনেন্ট দ্বিতীয়বার রেন্ডার করে, তখন এটি সম্পূর্ণরূপে নতুন করে রেন্ডার করে—এটি লোকাল ভেরিয়েবলগুলিতে কোনও পরিবর্তন বিবেচনা করে না।
+2. **লোকাল ভেরিয়েবলগুলিতে পরিবর্তন রেন্ডারগুলি ট্রিগার করে না।** নতুন ডেটার জন্যে React তার কম্পোনেন্ট কে নতুন করে রেন্ডার করার প্রয়োজন মনে করে না।
 
-To update a component with new data, two things need to happen:
+একটি কম্পোনেন্টকে নতুন ডেটা দিয়ে আপডেট করতে, দুটি বিষয় হতে হবে:
 
-1. **Retain** the data between renders.
-2. **Trigger** React to render the component with new data (re-rendering).
+1. রেন্ডার এর মধ্যে ডাটা **Retain** করা।
+2. কম্পোনেন্টকে নতুন ডাটা দিয়ে রেন্ডার করতে রিয়েক্ট কে **Trigger** করা। (রি-রেন্ডারিং)
 
-The [`useState`](/reference/react/useState) Hook provides those two things:
+[`useState`](/reference/react/useState) হুক আপনাকে নিচের দুটি জিনিস দেয়:
 
-1. A **state variable** to retain the data between renders.
-2. A **state setter function** to update the variable and trigger React to render the component again.
+1. একটি **স্টেট ভেরিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
+2. একটি **স্টেট setter ফাংশন** যা দিয়ে ভেরিয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
 
-## Adding a state variable {/*adding-a-state-variable*/}
+## স্টেট ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
 
-To add a state variable, import `useState` from React at the top of the file:
+স্টেট ভেরিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবে :
 
 ```js
 import { useState } from 'react';
 ```
 
-Then, replace this line:
+এরপর, নিচের লাইন টা পরিবর্তন করে:
 
 ```js
 let index = 0;
 ```
 
-with
+নিচের মতো করে নিন
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-`index` is a state variable and `setIndex` is the setter function.
+`index` একটি স্টেট ভেরিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
 
 > The `[` and `]` syntax here is called [array destructuring](https://javascript.info/destructuring-assignment) and it lets you read values from an array. The array returned by `useState` always has exactly two items.
 
-This is how they work together in `handleClick`:
+এইভাবে তারা `handleClick` এ একসাথে কাজ করে :
 
 ```js
 function handleClick() {
@@ -198,7 +198,7 @@ function handleClick() {
 }
 ```
 
-Now clicking the "Next" button switches the current sculpture:
+এখন "Next" বাটনে ক্লিক করলে বর্তমান ভাস্কর্যটি পরিবর্তন হয়:
 
 <Sandpack>
 
@@ -331,18 +331,17 @@ button {
 
 </Sandpack>
 
-### Meet your first Hook {/*meet-your-first-hook*/}
+### আপনার প্রথম হুকের সাথে পরিচয় {/*meet-your-first-hook*/}
 
-In React, `useState`, as well as any other function starting with "`use`", is called a Hook.
+রিয়েক্ট এ, `useState`, এবং অন্য যেকোনো ফাংশন যার শুরু "`use`" দিয়ে তাদেরকে হুক বলা হয়। 
 
-*Hooks* are special functions that are only available while React is [rendering](/learn/render-and-commit#step-1-trigger-a-render) (which we'll get into in more detail on the next page). They let you "hook into" different React features.
+*Hooks* এক ধরনের স্পেশাল ফাংশন যা শুধু React এর [রেন্ডারিং](/learn/render-and-commit#step-1-trigger-a-render) এর সময় কাজ করে (রেন্ডারিং নিয়ে পরের পাতায় আমরা আরো বিস্তারিত জানব)। এরা রিয়েক্ট এর বিভিন্ন ফিচারকে "আঁকরে ধরতে" সাহায্য করে।
 
-State is just one of those features, but you will meet the other Hooks later.
+স্টেট এদের মধ্যে একটি ফিচার, কিন্তু অন্যান্য হুক নিয়ে আমরা পরবর্তীতে জানব।
 
 <Pitfall>
 
-**Hooks—functions starting with `use`—can only be called at the top level of your components or [your own Hooks.](/learn/reusing-logic-with-custom-hooks)** You can't call Hooks inside conditions, loops, or other nested functions. Hooks are functions, but it's helpful to think of them as unconditional declarations about your component's needs. You "use" React features at the top of your component similar to how you "import" modules at the top of your file.
-
+**`use` দিয়ে শুরু হয়েছে এমন Hooks—ফাংশনগুলি—শুধুমাত্র আপনার কম্পোনেন্টগুলির শীর্ষ স্তরে বা [আপনার নিজস্ব Hooks-এ](/learn/reusing-logic-with-custom-hooks) কল করা যায়** আপনি কন্ডিশন, লুপ, বা অন্যান্য নেস্টেড ফাংশনের মধ্যে Hooks কল করতে পারবেন না। Hooks হলো ফাংশন, কিন্তু এদের অনেকটা কম্পোনেন্টের নিশর্ত প্রয়োজন হিসাবে ভাবতে পারেন। এইখানে আপনি কম্পোনেন্টের এর উপরে React এর ফিচার "ব্যবহার" করেন অনেকটা যেভাবে ফাইলের উপরে "import" ব্যবহার করে মডিউল লোড করেন।
 </Pitfall>
 
 ### Anatomy of `useState` {/*anatomy-of-usestate*/}
@@ -353,7 +352,7 @@ When you call [`useState`](/reference/react/useState), you are telling React tha
 const [index, setIndex] = useState(0);
 ```
 
-In this case, you want React to remember `index`.
+এই ক্ষেত্রে আপনি চাচ্ছেন রিয়েক্ট `index` টি মনে রাখুক.
 
 <Note>
 
@@ -379,9 +378,9 @@ const [index, setIndex] = useState(0);
 3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
 4. And so on!
 
-## Giving a component multiple state variables {/*giving-a-component-multiple-state-variables*/}
+## কম্পোনেন্ট এ একাধিক স্টেট ভেরিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
 
-You can have as many state variables of as many types as you like in one component. This component has two state variables, a number `index` and a boolean `showMore` that's toggled when you click "Show details":
+একটি কম্পোনেন্ট এ আপনি যত খুশি তত ধরনের ষ্টেট ভেরিয়েবল রাখতে পারেন। এই কম্পোনেন্ট এর দুটি স্টেট ভেরিয়েবল আছে, একটি নাম্বার `index` এবং একটি বুলিয়ান `showMore` যা Toggle করা হয় যখন আপনি "Show details" এ ক্লিক করেন :
 
 <Sandpack>
 
@@ -524,7 +523,7 @@ It is a good idea to have multiple state variables if their state is unrelated, 
 
 <DeepDive>
 
-#### How does React know which state to return? {/*how-does-react-know-which-state-to-return*/}
+#### রিয়েক্ট কিভাবে জানে কোন স্টেট রিটার্ন করতে হবে? {/*how-does-react-know-which-state-to-return*/}
 
 You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
 
@@ -913,7 +912,7 @@ What if you wanted both galleries to keep their states in sync? The right way to
 
 <Challenges>
 
-#### Complete the gallery {/*complete-the-gallery*/}
+#### গ্যালারিটি সম্পূর্ণ করুণ {/*complete-the-gallery*/}
 
 When you press "Next" on the last sculpture, the code crashes. Fix the logic to prevent the crash. You may do this by adding extra logic to event handler or by disabling the button when the action is not possible.
 
@@ -1325,7 +1324,7 @@ h1 { margin-top: 10px; }
 
 </Solution>
 
-#### Fix a crash {/*fix-a-crash*/}
+#### ক্র্যাশ ঠিক করুন {/*fix-a-crash*/}
 
 Here is a small form that is supposed to let the user leave some feedback. When the feedback is submitted, it's supposed to display a thank-you message. However, it crashes with an error message saying "Rendered fewer hooks than expected". Can you spot the mistake and fix it?
 
@@ -1450,13 +1449,13 @@ If your linter is [configured for React](/learn/editor-setup#linting), you shoul
 
 </Solution>
 
-#### Remove unnecessary state {/*remove-unnecessary-state*/}
+#### অপ্রয়োজনীয় স্টেট বাদ দিন {/*remove-unnecessary-state*/}
 
 When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
 
 To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
 
-Can you explain why this state variable was unnecessary?
+আপনি ব্যাখ্যা করতে পারবেন কেন এই স্টেট ভেরিয়েবলটি অপ্রয়োজনীয়?
 
 <Sandpack>
 
@@ -1483,13 +1482,11 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Here is a fixed version that uses a regular `name` variable declared in the function that needs it:
+এখানে একটি ঠিক ভার্সন দেওয়া হলো যা ফাংশনের এর মধ্যে প্রয়োজনীয় রেগুলার `name` ভেরিয়েবল ব্যবহার করে:
 
 <Sandpack>
 
 ```js
-import { useState } from 'react';
-
 export default function FeedbackForm() {
   function handleClick() {
     const name = prompt('What is your name?');
@@ -1506,7 +1503,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-A state variable is only necessary to keep information between re-renders of a component. Within a single event handler, a regular variable will do fine. Don't introduce state variables when a regular variable works well.
+স্টেট ভেরিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভেরিয়েবলই যথেষ্ট। যেখানে রেগুলার ভেরিয়েবল যথেষ্ট সেখানে স্টেট ভেরিবল ব্যবহার করা উচিত না।
 
 </Solution>
 
