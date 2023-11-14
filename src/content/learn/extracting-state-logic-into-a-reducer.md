@@ -252,7 +252,7 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-The object you pass to `dispatch` is called an "action":
+আপনি `dispatch` এর কাছে যে object টি pass করেন, তাকে একটি "action" বলে:
 
 ```js {3-7}
 function handleDeleteTask(taskId) {
@@ -266,7 +266,7 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-It is a regular JavaScript object. You decide what to put in it, but generally it should contain the minimal information about _what happened_. (You will add the `dispatch` function itself in a later step.)
+এটি একটি সাধারণ JavaScript object। এর মধ্যে কী রাখতে হবে সেটা আপনার উপর, তবে স্বাভাবিকভাবে এর মধ্যে _কী ঘটলো(what happened)_ সে ব্যপারে ন্যূনতম ইনফর্মেশন থাকতে হবে। (আর আপনি `dispatch` ফাংশনটিকেই একটি পরবর্তী ধাপে যুক্ত করবেন।)
 
 <Note>
 
