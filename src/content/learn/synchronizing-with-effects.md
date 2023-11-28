@@ -227,12 +227,12 @@ Effect গুলো সাধারণত আপনার component গুলো
 
 ### ধাপ ২: Effect এর dependency গুলো নির্দিষ্ট করুন {/*step-2-specify-the-effect-dependencies*/}
 
-By default, Effects run after *every* render. Often, this is **not what you want:**
+By default,  Effect গুলো *প্রত্যেক* রেন্ডারের পরে run হয়। অনেক সময়, এটি **আপনি চান না:**
 
-- Sometimes, it's slow. Synchronizing with an external system is not always instant, so you might want to skip doing it unless it's necessary. For example, you don't want to reconnect to the chat server on every keystroke.
-- Sometimes, it's wrong. For example, you don't want to trigger a component fade-in animation on every keystroke. The animation should only play once when the component appears for the first time.
+- কখনো কখনো, এটি slow কাজ করে। একটি external system এর সাথে Synchroniz করা সর্বদা তাতক্ষণিক হয় না, সুতরং আপনি এটি প্রয়োজন না হলে এটি এড়িয়ে যেতে চাইতে পারেন। উদাহরণস্বরূপ, আপনি প্রতি keystoke এ চ্যাট সার্ভারের সাথে পুনরায় সংযোগ স্থাপন করতে চান না। 
+- কখনো কখনো, এটি ভুল।  উদাহরণস্বরূপ, আপনি প্রতিটি keystroke এ কোন component ফেড-ইন animation ট্রিগার করতে চান না। component টি প্রথমবারের মত appear হলে animation টি কেবল একবার play হওয়া উচিৎ।
 
-To demonstrate the issue, here is the previous example with a few `console.log` calls and a text input that updates the parent component's state. Notice how typing causes the Effect to re-run:
+সমস্যাটি প্রদর্শনের করতে, এখানে কয়েকটি `console.log` কল এবং একটি টেক্সট ইনপুট সহ পূর্ববর্তী উদাহরণটি যেটি parent component এর স্টেটকে update করে । খেয়াল করুন কিভাবে typing এর ফলে Effect টি re-run হয়:
 
 <Sandpack>
 
@@ -280,7 +280,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-You can tell React to **skip unnecessarily re-running the Effect** by specifying an array of *dependencies* as the second argument to the `useEffect` call. Start by adding an empty `[]` array to the above example on line 14:
+আপনি `useEffect` এর দ্বিতীয় আর্গুমেন্ট হিসাবে *dependency* এর একটি array specify করে React কে **অপ্রয়োজনীয়ভাবে Effect টি re-running এড়িয়ে** যেতে বলতে পারেন। উপরের উদাহরণের ১৪ লাইনে একটি খালি `[]` array যুক্ত করে শুরু করুন:
 
 ```js {3}
   useEffect(() => {
@@ -288,7 +288,7 @@ You can tell React to **skip unnecessarily re-running the Effect** by specifying
   }, []);
 ```
 
-You should see an error saying `React Hook useEffect has a missing dependency: 'isPlaying'`:
+আপনি একটি error দেখতে পাবেন যে `React Hook useEffect has a missing dependency: 'isPlaying'`:
 
 <Sandpack>
 
@@ -336,7 +336,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-The problem is that the code inside of your Effect *depends on* the `isPlaying` prop to decide what to do, but this dependency was not explicitly declared. To fix this issue, add `isPlaying` to the dependency array:
+সমস্যাটি হলো আপনার Effect এর মধ্যের কোড কি করবে তা সিদ্ধান্ত নেওয়ার জন্য `isPlaying` প্রপ্সের উপর *নির্ভর করে*, কিন্তু এই dependency টি স্পষ্টভাবে declare করা হয়নি। এই সমস্যাটির সমাধান করতে, dependency array তে `isPlaying` যুক্ত করুন:
 
 ```js {2,7}
   useEffect(() => {
@@ -348,7 +348,7 @@ The problem is that the code inside of your Effect *depends on* the `isPlaying` 
   }, [isPlaying]); // ...so it must be declared here!
 ```
 
-Now all dependencies are declared, so there is no error. Specifying `[isPlaying]` as the dependency array tells React that it should skip re-running your Effect if `isPlaying` is the same as it was during the previous render. With this change, typing into the input doesn't cause the Effect to re-run, but pressing Play/Pause does:
+এখন সকল dependency গুলো declar করা হয়ে গেছে, সুতারং কোন error নাই। `[isPlaying]` কে dependency array তে রাখার মানে হলো React কে বলা যে যদি `isPlaying` এর মান আগের রেন্ডারে যেমন ছিল তেমন থাকে তবে re-running স্কিপ করতে। এই পরিবর্তনের কারণে, ইনপুট ফিল্ডটিতে টাইপ করালেও Effect টি re-run হয় না, কিন্তু Play/Pause বাটনে press করলে হয়:
 
 <Sandpack>
 
@@ -396,13 +396,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-The dependency array can contain multiple dependencies. React will only skip re-running the Effect if *all* of the dependencies you specify have exactly the same values as they had during the previous render. React compares the dependency values using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. See the [`useEffect` reference](/reference/react/useEffect#reference) for details.
+dependency array তে একাধিক dependency থাকতে পারে। যদি *সবগুলো* dependency এর value গুলো previous render এর মতই থাকে কেবল তখনই React Effect টি re-runn করবে না। React dependency value গুলোকে তুলনা করতে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে। বিস্তারির জানতে [`useEffect` reference](/reference/react/useEffect#reference) দেখুন। 
 
-**Notice that you can't "choose" your dependencies.** You will get a lint error if the dependencies you specified don't match what React expects based on the code inside your Effect. This helps catch many bugs in your code. If you don't want some code to re-run, [*edit the Effect code itself* to not "need" that dependency.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
+**লক্ষ্য করুন যে আপনি আপনার dependency গুলো "choose" করতে পারছেন না।** আপনি যে dependecy গুলো specify করেছেন তা যদি আপনি Effect এর মধ্যে যে কোড রেখেছেন তার উপর base করে React এর expectation এর সাথে না মিলে তাহলে আপনি একটি lint error পাবেন। এটি আপনার কোডে অনেক bug খুজে পাতে সাহায্য করে । যদি আপনি কছু কোড re-run করতে না চান, [*Effect কোড edit করুন* যাতে ঐ  dependencyর "প্রয়োজন" না হয়।](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
 <Pitfall>
 
-The behaviors without the dependency array and with an *empty* `[]` dependency array are different:
+dependency array ছাড়া এবং একটি *empty* `[]` dependency array সহ এদের behavior আলাদা হয়ে থাকে:
 
 ```js {3,7,11}
 useEffect(() => {
@@ -418,15 +418,15 @@ useEffect(() => {
 }, [a, b]);
 ```
 
-We'll take a close look at what "mount" means in the next step.
+আমরা পরবর্তি step এ "mount" এর মানে কী তা ভালোভাবে দেখবো।
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why was the ref omitted from the dependency array? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
+#### dependency array থেকে কেন ref বাদ দেওয়া হয়েছিল? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
 
-This Effect uses _both_ `ref` and `isPlaying`, but only `isPlaying` is declared as a dependency:
+এই Effect টিতে `ref` এবং `isPlaying` উভয়ই ব্যবহার হচ্ছে, কিন্তু কেবল `isPlaying` কে dependency হিসাবে ডিক্লার করা হয়েছে:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -439,8 +439,7 @@ function VideoPlayer({ src, isPlaying }) {
     }
   }, [isPlaying]);
 ```
-
-This is because the `ref` object has a *stable identity:* React guarantees [you'll always get the same object](/reference/react/useRef#returns) from the same `useRef` call on every render. It never changes, so it will never by itself cause the Effect to re-run. Therefore, it does not matter whether you include it or not. Including it is fine too:
+এর কারণ হল `ref` object এর একটি *stable identity* রয়েছে: React গ্যারান্টি দেয় যে [প্রতি রেন্ডারে একই `useRef` কল থেকে সর্বদা একই object পাবেন](/reference/react/useRef#returns)। এটি কখনো পরিবর্তন হয় না, সুতারং  এটি নিজেই Effect টি re-run হওয়ার কারণ হতে পারেনা। অতএব, এটি বিবেচ্য বিষয় নয় যে আপনি এটি include করছেন কি করেন নাই।  এটি Includ করাও ঠিক আছে:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -454,13 +453,13 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying, ref]);
 ```
 
-The [`set` functions](/reference/react/useState#setstate) returned by `useState` also have stable identity, so you will often see them omitted from the dependencies too. If the linter lets you omit a dependency without errors, it is safe to do.
+`useState` দ্বারা রিটার্ন করা [`set` function গুলোরও](/reference/react/useState#setstate) stable identity রয়েছে, তাই আপনি প্রায়ই দেখতে পাবেন তাদের dependencie থেকে বাদ দেওয়া হয়েছে। যদি lint আপনাকে error ছাড়াই dependency বাদ দিতে দেয়, তবে এটি করা নিরাপদ।
 
-Omitting always-stable dependencies only works when the linter can "see" that the object is stable. For example, if `ref` was passed from a parent component, you would have to specify it in the dependency array. However, this is good because you can't know whether the parent component always passes the same ref, or passes one of several refs conditionally. So your Effect _would_ depend on which ref is passed.
+always-stable dependency বাদ দেওয়া তখনই কাজ করে যখন linter "দেখতে" পারে যা object টি stable। উদাহরণস্বরূপ, যদি কোন parent component থেকে `ref` pass করা হয়, আপনাকে একটি dependency array specify করতে হবে। যাইহোক, এটি ভাল কারণ আপনি জানতে পারবেন না যে parent component সবসময় একই রেফ পাস করে কিনা, অথবা শর্তসাপেক্ষে বেশ কয়েকটি রেফের একটি পাস করে কিনা। সুতারং আপনার Effect নির্ভর _করবে_ কোন ref pass করা হয়েছে তার উপর।
 
 </DeepDive>
 
-### Step 3: Add cleanup if needed {/*step-3-add-cleanup-if-needed*/}
+### ধাপ ৩: প্রয়োজনে cleanup যোগ করুন {/*step-3-add-cleanup-if-needed*/}
 
 Consider a different example. You're writing a `ChatRoom` component that needs to connect to the chat server when it appears. You are given a `createConnection()` API that returns an object with `connect()` and `disconnect()` methods. How do you keep the component connected while it is displayed to the user?
 
