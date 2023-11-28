@@ -461,9 +461,9 @@ always-stable dependency বাদ দেওয়া তখনই কাজ কর
 
 ### ধাপ ৩: প্রয়োজনে cleanup যোগ করুন {/*step-3-add-cleanup-if-needed*/}
 
-Consider a different example. You're writing a `ChatRoom` component that needs to connect to the chat server when it appears. You are given a `createConnection()` API that returns an object with `connect()` and `disconnect()` methods. How do you keep the component connected while it is displayed to the user?
+একটি ভিন্ন উদাহরণ বিবেচনা করুন। আপনি একটি `ChatRoom` component লিখেছেন যা এটি প্রদর্শিত হওয়ার সময় chat server এর সাথে সংযোগ স্থাপন করা দরকার। আপনাকে একটি `createConnection()` API দেওয়া হয়েছে যেটি `connect()` এবং `disconnect()` method এর একটি object রিটার্ন করে। user এর কাছে প্রদর্শিত হওয়ার সময় আপনি কিভাবে component টিকে সংযুক্ত রাখবেন?
 
-Start by writing the Effect logic:
+Effect logic লিখে শুরু করুন:
 
 ```js
 useEffect(() => {
@@ -472,7 +472,7 @@ useEffect(() => {
 });
 ```
 
-It would be slow to connect to the chat after every re-render, so you add the dependency array:
+প্রত্যেকবার re-render এর পরে chat এর সাথে সংযোগ স্থাপন করা ধীর হবে, সুতারং আপনি dependency array যুক্ত করুন:
 
 ```js {4}
 useEffect(() => {
@@ -481,9 +481,9 @@ useEffect(() => {
 }, []);
 ```
 
-**The code inside the Effect does not use any props or state, so your dependency array is `[]` (empty). This tells React to only run this code when the component "mounts", i.e. appears on the screen for the first time.**
+**Effect এর ভিতরের কোড কোন props or state ব্যবহার করে না, সুতারং আপনার dependency array টি `[]` (empty)। এটি React কে শুধুমাত্র তখনই এই কোডটি চালাতে বলে যখন component টি "মাউন্ট" হয়, অর্থাৎ, প্রথমবারের জন্য স্কিনে উপস্থিত হয়।**
 
-Let's try running this code:
+আসুন code টি রান করার চেষ্টা করি:
 
 <Sandpack>
 
@@ -520,15 +520,15 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-This Effect only runs on mount, so you might expect `"✅ Connecting..."` to be printed once in the console. **However, if you check the console, `"✅ Connecting..."` gets printed twice. Why does it happen?**
+এই Effect টি কেবল মাউন্ট হওয়ার সময় চলে, সুতারং আপনি প্রত্যাশা করতে পারেন console একবার `"✅ Connecting..."` প্রিন্ট হবে। **তবে, আপনি যদি console চেক করেন, দেখবেন `"✅ Connecting..."` দুই বার প্রিন্ট হয়েছে। কেন এমন হচ্ছে?**
 
-Imagine the `ChatRoom` component is a part of a larger app with many different screens. The user starts their journey on the `ChatRoom` page. The component mounts and calls `connection.connect()`. Then imagine the user navigates to another screen--for example, to the Settings page. The `ChatRoom` component unmounts. Finally, the user clicks Back and `ChatRoom` mounts again. This would set up a second connection--but the first connection was never destroyed! As the user navigates across the app, the connections would keep piling up.
+কল্পনা করুন যে `ChatRoom` এর component টি অনেক গুলো ভিন্ন ভিন্ন স্কিন সহ একটি বৃহিত্তর app এর একটি অংশ। ব্যবহারকারী তাদের journey শুরু করে `ChatRoom` পেইজ দিয়ে। component টি মাউন্ট করে এবং `connection.connect()` কে কল করে। তারপরে কল্পনা করুন যে ব্যবহারকারী অন্য স্কিনে নেভিগেট করেছে --উদাহরণস্বরূপ, Settings পেইজে। এখন `ChatRoom` এর component আনমাউন্ট। অবশেষে, ব্যবহারকারী Back এ ক্লিক করে এবং `ChatRoom` টি আবার মাউন্ট করে। এটি একটি second connection স্থাপন করবে--তবে প্রথম connection টি কখনই বিচ্ছিন্ন হয়নি! ব্যবহারকারী অ্যাপ জুড়ে নেভিগেট করার সাথে সাথে সংযোগগুলি pulling হতে থাকবে।
 
-Bugs like this are easy to miss without extensive manual testing. To help you spot them quickly, in development React remounts every component once immediately after its initial mount.
+এই ধরনের বাগগুলি ব্যাপক ম্যানুয়াল পরীক্ষা ছাড়া সহজই মিস হয়ে যায়। আপনাকে দ্রুত সেগুলি সনাক্ত করতে সহায়তা করার জন্য, React development এ প্রতিটি component কে তার প্রাথমিক মাউন্টের পরপরই পুনরায় মাউন্ট করে।
 
-Seeing the `"✅ Connecting..."` log twice helps you notice the real issue: your code doesn't close the connection when the component unmounts.
+`"✅ Connecting..."` দু'বার log হচ্ছে দেখা আপনাকে আসল সমস্যাটি লক্ষ্য করতে সাহায্য করে: যখন component টি আনমিউট হয় আপনার কোড সংযোগটি বন্ধ করে না।
 
-To fix the issue, return a *cleanup function* from your Effect:
+সমস্যাটি সমাধান করেতে, আপনার Effect থেকে একটি *cleanup function* return করুন:
 
 ```js {4-6}
   useEffect(() => {
@@ -540,7 +540,7 @@ To fix the issue, return a *cleanup function* from your Effect:
   }, []);
 ```
 
-React will call your cleanup function each time before the Effect runs again, and one final time when the component unmounts (gets removed). Let's see what happens when the cleanup function is implemented:
+Effect পুনরায় run হওয়ার আগে প্রতিবার আপনার cleanup function কে কল করবে, এবং শেষ সময় যখন component টি আনমিউট করে (রিমুভ করা হয়)। আসুন দেখা যাক যখন cleanup function টি implemente করা হয় তখন কি ঘটে:
 
 <Sandpack>
 
@@ -578,15 +578,15 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Now you get three console logs in development:
+এখন আপনি development এ তিনটি console log পাবেন:
 
 1. `"✅ Connecting..."`
 2. `"❌ Disconnected."`
 3. `"✅ Connecting..."`
 
-**This is the correct behavior in development.** By remounting your component, React verifies that navigating away and back would not break your code. Disconnecting and then connecting again is exactly what should happen! When you implement the cleanup well, there should be no user-visible difference between running the Effect once vs running it, cleaning it up, and running it again. There's an extra connect/disconnect call pair because React is probing your code for bugs in development. This is normal--don't try to make it go away!
+**এটি development এর সঠিক behavior।** আপনার component রিমাউন্টিং করে, React যাচাই করে যে নেভিগেট করে সামনে গিয়ে এবং পিছনে back করলে আপনার কোড ব্রেক করবে না। সংযোগ বিচ্ছিন্ন এবং তারপর আবার সংযোগ স্থাপন করলে ঠিক কি হওয়া উচিৎ! যখন আপনি cleanup টি ভালোভাবে implement করেন, Effect টি একবার run করা vs এটি চালাতে থাকা, এটি cleaning করা এবং পুনরায় run করার মধ্যে কোন ব্যবহারকারীর দৃশ্যমান পার্থক্য থাকা উচিত নয়। এখানে একটি অতিরিক্ত কানেক্ট/ডিসকানেক্ট কল পেয়ার আছে কারণ React ডেভেলপমেন্টে থাকা বাগগুলির জন্য আপনার কোড পরীক্ষা করছে। এটি স্বাভাবিক--এটিকে দুরে সরিয়ে দেওয়ার চেষ্টা করবেন না!
 
-**In production, you would only see `"✅ Connecting..."` printed once.** Remounting components only happens in development to help you find Effects that need cleanup. You can turn off [Strict Mode](/reference/react/StrictMode) to opt out of the development behavior, but we recommend keeping it on. This lets you find many bugs like the one above.
+**production এ, আপনি কেবল একবার `"✅ Connecting..."` প্রিন্ট হতে দেখতে পাবেন।** component গুলো রিমাউন্টং কেবল development এর ক্ষেত্রে ঘটে যা আপনাকে এমন Effect গুলো খুঁজে পেতে সাহায্য করে যা ক্লিনাপের প্রয়োজন। আপনি development behavior থেকে বেরিয়ে বেরিয়ে আসার জন্য [Strict Mode](/reference/react/StrictMode) অফ করতে পারেন, তবে আমরা এটি চালিয়ে যাওয়ার পরামর্শ দেই। এটি আপনাকে উপরের মত অনেক গুলো বাগ খুঁজে পেতে সাহায্য করবে।
 
 ## How to handle the Effect firing twice in development? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
