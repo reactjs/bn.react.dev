@@ -590,15 +590,15 @@ input { display: block; margin-bottom: 20px; }
 
 ## How to handle the Effect firing twice in development? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
-React intentionally remounts your components in development to find bugs like in the last example. **The right question isn't "how to run an Effect once", but "how to fix my Effect so that it works after remounting".**
+React ইচ্ছাকৃতভাবে আপনার কম্পোনেন্ট গুলোকে ডেভেলপমেন্টে রিমাউন্ট করে যাতে শেষ উদাহরণের মতো বাগ খুঁজে পাওয়া যায়। **প্রশ্ন ঠিক নয় "কীভাবে একটি Effect একবার চালাতে হয়", তবে "কিভাবে আমার Effect টি ঠিক করব যাতে এটি পুনরায় মাউন্ট করার পরে কাজ করে"।**
 
-Usually, the answer is to implement the cleanup function.  The cleanup function should stop or undo whatever the Effect was doing. The rule of thumb is that the user shouldn't be able to distinguish between the Effect running once (as in production) and a _setup → cleanup → setup_ sequence (as you'd see in development).
+সাধারণত, উত্তর হল ক্লিনআপ ফাংশন implement করা। ক্লিনআপ ফাংশনটির বন্ধ করা উচিৎ বা Effect যা কিছু করতেছল তা পূর্বাবস্থায় ফিরিয়ে আনা উচিৎ। rule of thumb হল যে ব্যবহারকারী একবার Effect run হওয়া (production এ)  এবং একটি _setup → cleanup → setup_ সিকোয়েন্সের (যেমন আপনি development এ দেখতে পাবেন) মধ্যে পার্থক্য করতে সক্ষম হবে না।
 
-Most of the Effects you'll write will fit into one of the common patterns below.
+আপনি যে Effect গুলো লিখবেন তার বেশিরভাগই নীচের সাধারণ প্যাটার্নগুলির মধ্যে একটিতে ফিট হবে৷
 
-### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+### non-React widget গুলো controll করা {/*controlling-non-react-widgets*/}
 
-Sometimes you need to add UI widgets that aren't written to React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+কখনো কখনো আপনাকে UI widget অ্যাড করতে হবে যা React দিয়ে লেখা হয়নি। উদাহরণস্বরূপ, আপনি আপনার পেইজে একটি ম্যাপ component অ্যাড করেছেন। এটিতে একটি `setZoomLevel()` method রয়েছে, এবং আপনি আপনার React কোডে `zoomLevel` স্টেট variable এর সাথে zoom level সিঙ্ক রাখতে চান। আপনার Effect এটির মত দেখতে হবে:
 
 ```js
 useEffect(() => {
@@ -607,9 +607,9 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-Note that there is no cleanup needed in this case. In development, React will call the Effect twice, but this is not a problem because calling `setZoomLevel` twice with the same value does not do anything. It may be slightly slower, but this doesn't matter because it won't remount needlessly in production.
+মনে রাখবেন যে এই ক্ষেত্রে কোন cleanup এর প্রয়োজন নেই। development এ, React দু'বার Effect কল করে, কিন্তু এটি কোন সমস্যা নয় কারণ একই value সহ `setZoomLevel` কে দু'বার কল করলে কিছুই হবে না। এটি কিছুটা স্লো হতে পারে, তবে ব্যাপার না কারণ এটি production এ অযথা রিমাউন্ট করবে না। 
 
-Some APIs may not allow you to call them twice in a row. For example, the [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) method of the built-in [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) element throws if you call it twice. Implement the cleanup function and make it close the dialog:
+কিছু API আপনাকে পরপর দুবার কল করার allow নাও দিতে পারে। উদাহরণস্বরূপ, বিল্ট-ইন [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) ইলিমেন্টটি [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ম্যাথোড থ্রো করে যদি আপনি এটিকে দুবার কল করেন। cleanup function টি ইমপ্লিমেন্ট করুন এবং ডায়লগটি close করুন:
 
 ```js {4}
 useEffect(() => {
@@ -619,11 +619,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `showModal()`, then immediately `close()`, and then `showModal()` again. This has the same user-visible behavior as calling `showModal()` once, as you would see in production.
+development এ, আপনার Effect `showModal()` কল করবে, তারপর immediately `close()` কল করবে, এবং এরপর আবার `showModal()` কল করবে। `showModal()` কে একবার কল করার মতই user-visible behavior এটির, যেমনটি আপনি production এ দেখতে পাবেন।
 
-### Subscribing to events {/*subscribing-to-events*/}
+### ইভেন্ট subscribing {/*subscribing-to-events*/}
 
-If your Effect subscribes to something, the cleanup function should unsubscribe:
+যদি আপনার Effect কোন কিছু সাবস্ক্রাইব করে, তবে ক্লিনআপ ফাংশনটির তা আনসাবস্ক্রাইব করা উচিৎ:
 
 ```js {6}
 useEffect(() => {
@@ -635,11 +635,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `addEventListener()`, then immediately `removeEventListener()`, and then `addEventListener()` again with the same handler. So there would be only one active subscription at a time. This has the same user-visible behavior as calling `addEventListener()` once, as in production.
+development এ, আপনার Effect `addEventListener()` কে কল করবে, তারপর immediately `removeEventListener()` কে, এবং তারপরে আবার `addEventListener()` কে একই handler দিয়ে কল করবে। তাই এক সময়ে শুধুমাত্র একটি subscription এক্টিভ থাকবে। `addEventListener()` কে একবার কল করার মতই user-visible behavior এটির, যেমনটি আপনি production এ দেখতে পাবেন।
 
-### Triggering animations {/*triggering-animations*/}
+### animation টিগার করা {/*triggering-animations*/}
 
-If your Effect animates something in, the cleanup function should reset the animation to the initial values:
+যদি আপনার Effect টি কিছু animate করে, তবে আপনার ক্লিনাপ function টির উচিৎ initial value দিয়ে animation টি reset করা:
 
 ```js {4-6}
 useEffect(() => {
@@ -651,11 +651,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, opacity will be set to `1`, then to `0`, and then to `1` again. This should have the same user-visible behavior as setting it to `1` directly, which is what would happen in production. If you use a third-party animation library with support for tweening, your cleanup function should reset the timeline to its initial state.
+development এ, opacity সেট করা হবে `1`, এরপরে `0`, এবং তারপরে আবার `1` । এটি সরাসরি `1` এ সেট করার মতই user-visible behavior হওয়া উচিৎ, যা production এ ঘটবে। আপনি যদি tweening এর জন্য support সহ একটি third-party অ্যানিমেশন লাইব্রেরি ব্যবহার করেন, তবে আপনার ক্লিনআপ ফাংশনটি টাইমলাইনটিকে তার initial state পুনরায় সেট করা উচিৎ।
 
-### Fetching data {/*fetching-data*/}
+### ডাটা Fetch করা {/*fetching-data*/}
 
-If your Effect fetches something, the cleanup function should either [abort the fetch](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) or ignore its result:
+যদি আপনার Effect টি কিছু fetch করে, তবে আপনার ক্লিনাপ function টির উচিৎ হয়ত [fetch বাতিল করা](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) অথবা এর ফলাফল ignore করা:
 
 ```js {2,6,13-15}
 useEffect(() => {
@@ -676,11 +676,11 @@ useEffect(() => {
 }, [userId]);
 ```
 
-You can't "undo" a network request that already happened, but your cleanup function should ensure that the fetch that's _not relevant anymore_ does not keep affecting your application. If the `userId` changes from `'Alice'` to `'Bob'`, cleanup ensures that the `'Alice'` response is ignored even if it arrives after `'Bob'`.
+নেটওয়ার্ক রিকুয়েস্ট যা ইতিমধ্যে ঘটে দিয়েছেন, তা আপনি "বাতিল" করতে পারবেন না, তবে আপনার ক্লিন-আপ ফাংশনটির এটি নিশ্চিত করতে হবে যে, যে fetch গুলো _আর প্রাসঙ্গিক নয়_ সেগুলো আপনার অ্যাপ্লিকেশনে প্রভাব ফেলবে না। যদি `userId` `'Alice'` থেকে `'Bob'` পরিবর্তন করে, তবে ক্লিন-আপ নিশ্চিত করেবে যে `'Alice'` রেসপন্সটি `'Bob'` এর পরেও যদি আসে তাহলেও সেটি আপনার অ্যাপ্লিকেশনে প্রভাবিত করবে না।
 
-**In development, you will see two fetches in the Network tab.** There is nothing wrong with that. With the approach above, the first Effect will immediately get cleaned up so its copy of the `ignore` variable will be set to `true`. So even though there is an extra request, it won't affect the state thanks to the `if (!ignore)` check.
+**development এ, আপনি Network tab এ দুটি fetch দেখতে পাবেন।** এতে কোন সমস্যা নাই।  উপরের পদ্ধতিতে, প্রথম ইফেক্টটি তাৎক্ষণিকভাবে ক্লিন-আপ হবে তাই তার `ignore` ভেরিয়েবলের কপি `true` হবে। তাই, যদিও অতিরিক্ত একটি রিকুয়েস্ট আছে, সুতরাং অতিরিক্ত অনুরোধ থাকা সত্ত্বেও, এটি state কে প্রভাবিত করবে না  `if (!ignore)` চেক কে ধন্যবাদ।
 
-**In production, there will only be one request.** If the second request in development is bothering you, the best approach is to use a solution that deduplicates requests and caches their responses between components:
+**production এ, কেবল একটি request থাকবে।** যদি development এর দ্বিতীয় request টি আপনাকে বিরক্ত করে, তবে সর্বোত্তম পদ্ধতি হল এমন একটি সমাধান ব্যবহার করা যা request গুলিকে ডিডপ্লিকেট করেবে এবং component গুলো তাদের response গুলো ক্যাশ করেবে:
 
 ```js
 function TodoList() {
@@ -688,25 +688,26 @@ function TodoList() {
   // ...
 ```
 
-This will not only improve the development experience, but also make your application feel faster. For example, the user pressing the Back button won't have to wait for some data to load again because it will be cached. You can either build such a cache yourself or use one of the many alternatives to manual fetching in Effects.
+এটি শুধুমাত্র ডেভেলপমেন্ট experience ই  improve করবে না, বরং আপনার অ্যাপ্লিকেশনকে দ্রুত অনুভব করতে সাহায্য করবে।  উদাহরণস্বরূপ, ব্যবহারকারী যদি ব্যাক বোতাম চাপে, তাকে আবার কিছু ডেটা লোড করতে অপেক্ষা করতে হয় না কারণ সেটি ক্যাশ করা থাকবে। আপনি এমন একটি ক্যাশ নিজেই তৈরি করতে পারেন অথবা Effect এ ম্যানুয়াল ফেচিংয়ের জন্য অনেকগুলো alternative ব্যবহার করতে পারেন।
 
 <DeepDive>
 
-#### What are good alternatives to data fetching in Effects? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Effect ডেটা ফেচিংয়ের জন্য ভাল Alternatives কী? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Writing `fetch` calls inside Effects is a [popular way to fetch data](https://www.robinwieruch.de/react-hooks-fetch-data/), especially in fully client-side apps. This is, however, a very manual approach and it has significant downsides:
+Effect এ `fetch` কল লেখা [ডেটা ফেচিংর জন্য একটি জনপ্রিয় উপায়](https://www.robinwieruch.de/react-hooks-fetch-data/), বিশেষভাবে সম্পূর্ণ ক্লায়েন্ট-সাইড অ্যাপসগুলোতে। তবে, এটি একটি অনেকটাই ম্যানুয়াল পদ্ধতি এবং এটির কিছু উল্লেখযোগ্য downside রয়েছে:
 
-- **Effects don't run on the server.** This means that the initial server-rendered HTML will only include a loading state with no data. The client computer will have to download all JavaScript and render your app only to discover that now it needs to load the data. This is not very efficient.
-- **Fetching directly in Effects makes it easy to create "network waterfalls".** You render the parent component, it fetches some data, renders the child components, and then they start fetching their data. If the network is not very fast, this is significantly slower than fetching all data in parallel.
-- **Fetching directly in Effects usually means you don't preload or cache data.** For example, if the component unmounts and then mounts again, it would have to fetch the data again.
-- **It's not very ergonomic.** There's quite a bit of boilerplate code involved when writing `fetch` calls in a way that doesn't suffer from bugs like [race conditions.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- **এফেক্টস সার্ভারে চলতে পারে না।** যার মানে, initial সার্ভার একটি লোডিং স্টেট সহ HTML রেন্ডার করবে কোনো ডেটা ছাড়াই। ক্লায়েন্ট কম্পিউটারকে সমস্ত জাভাস্ক্রিপ্ট ডাউনলোড করতে হবে এবং আপনার অ্যাপটি রেন্ডার করতে হবে শুধুমাত্র এটি discover করতে যে এটির এখন ডেটা লোড করতে হবে। এটি খুব একটা efficient না।
+- **Effects এ সরাসরি ডেটা ফেচিং "নেটওয়ার্ক ওয়াটারফল" তৈরি করতে সাহায্য করে।** আপনি parent কম্পোনেন্টটি রেন্ডার করেন, এটি কিছু ডেটা ফেচ করে, চাইল্ড কম্পোনেন্টগুলো রেন্ডার হয়, এবং তারপরে তারা তাদের ডেটা ফেচ করতে শুরু করে। যদি নেটওয়ার্ক খুব ফাস্ট না হয়, এটি সব ডেটা পারালেলভাবে ফেচ হইয়ার তুলনায় অনেকটাই ধীর।
 
-This list of downsides is not specific to React. It applies to fetching data on mount with any library. Like with routing, data fetching is not trivial to do well, so we recommend the following approaches:
+- **মূলত Effect এ সরাসরি ডেটা ফেচ করার মানে এই যে, আপনি ডেটা প্রিলোড বা ক্যাশ করতে পারবেন না।** উদাহরণস্বরূপ, যদি কোম্পোনেন্টটি আনমাউন্ট হয় এবং পুনরায় মাউন্ট হয়, এটিকে পুনরায় ডাটা ফেচ করতে হবে।
+- **এটা খুব একটা ইর্গোনমিক নয়।**  ফেচ কল লেখার সময়, যদি [রেস কন্ডিশন](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) এর মতো বাগে ছাফার হতে না হয়, তার জন্য কিছু বয়লারপ্লেট কোড থাকে।
 
-- **If you use a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+ডাউনসাইডের এই তালিকাটি React জন্য নির্দিষ্ট নয়। এটি যে কোনো লাইব্রেরির মাধ্যমে মাউন্টে ডেটা ফেচের ক্ষেত্রে প্রযোজ্য। রাউটিংয়ের মতো, ডেটা ফেটচিং ভালভাবে করা সহজ নয়, তাই আমরা নিম্নলিখিত পদ্ধতির পরামর্শ দিই:
 
-You can continue fetching data directly in Effects if neither of these approaches suit you.
+- **আপনি যদি একটি [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) ব্যবহার করেন, তার built-in ডেটা ফেটচিং প্রক্রিয়া ব্যবহার করুন।** আধুনিক রিয়্যাক্ট ফ্রেমওয়ার্কগুলির মধ্যে integrated ডেটা ফেটচিং প্রক্রিয়া রয়েছে যা কার্যকর এবং উপরের সমস্যা গুলো মুক্ত।
+- **অন্যথায়, একটি ক্লায়েন্ট-সাইড ক্যাশ ইউজ করুন বা বিল্ড করুন।** জনপ্রিয় ওপেন সোর্স সমাধানের মধ্যে [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), এবং [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) রয়েছে। আপনি একটি নিজস্ব সমাধানো তৈরি করতে পারেন এই ক্ষেত্রে আপনি Effect গুলো আন্ডার দ্যা হুডে ব্যবহার করতে পারেন, তবে request ডিডুপ্লিকেট করাতে, response ক্যাশ করতে, এবং নেটওয়ার্ক ওয়াটারফল এড়াতে লজ্যিক add করুন। (ডাটা প্রিলোডিং করে বা ডাটা requirement গুলো রাউটে hoisting করে)।
+
+যদি এই পদক্ষেপগুলোর মধ্যে কোনটিই আপনার জন্য প্রযোজ্য না হয়, তবে সরাসরি ইফেক্টে ডেটা ফেটচিং চালিয়ে যেতে পারেন।"
 
 </DeepDive>
 
