@@ -24,11 +24,7 @@ title: নতুন প্রোজেক্ট শুরু করুন
 npx create-next-app@latest
 </TerminalBlock>
 
-<<<<<<< HEAD
-আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে তাদের অফিসিয়াল [Next.js tutorial](https://nextjs.org/learn/foundations/about-nextjs) দেখতে পারেন।
-=======
-If you're new to Next.js, check out the [learn Next.js course.](https://nextjs.org/learn)
->>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
+আপনি যদি Next.js এ নতুন হয়ে থাকেন তাহলে [learn Next.js course](https://nextjs.org/learn)-টা দেখে ফেলুন।
 
 Next.js এর রক্ষণাবেক্ষণের কাজ করে থাকে [Vercel](https://vercel.com/)। যেকোনো Node.js অথবা serverless হোস্টিং, অথবা আপনার নিজস্ব সার্ভারে [একটি Next.js অ্যাপ deploy](https://nextjs.org/docs/deployment) করতে পারবেন। Next.js সম্পূর্ণ [স্ট্যাটিক এক্সপোর্ট](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) সাপোর্ট করে যার কোন সার্ভারের প্রয়োজন নেই।
 
