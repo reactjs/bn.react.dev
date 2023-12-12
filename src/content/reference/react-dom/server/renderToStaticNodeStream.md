@@ -37,6 +37,9 @@ stream.pipe(response);
 
 * `reactNode`: একটা React নোড যেটা আপনি HTML এ রেন্ডার করতে চান। যেমন `<Page />` এর মত একটি JSX এলিমেন্ট।
 
+* **optional** `options`: সার্ভার রেন্ডারের জন্য একটি অবজেক্ট।
+  * **optional** `identifierPrefix`: [`useId`](/reference/react/useId) দিয়ে বানানো ID এর জন্য React যে স্ট্রিং প্রিফিক্স ব্যবহার করে। একই পেইজে একাধিক রুট ব্যবহার করলে কনফ্লিক্ট এড়াতে এটা কাজে লাগে।
+
 #### রিটার্ন {/*returns*/}
 
 একটা [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) যেটা একটা HTML স্ট্রিং আউটপুট দেয়। ফলাফলে যে HTML পাওয়া যায় সেটা ক্লায়েন্টে hydrate করা যায় না।
