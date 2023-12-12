@@ -344,30 +344,30 @@ State এদের মধ্যে একটি ফিচার, কিন্ত
 **`use` দিয়ে শুরু হয়েছে এমন Hooks—ফাংশনগুলি—শুধুমাত্র আপনার কম্পোনেন্টগুলির শীর্ষ স্তরে বা [আপনার নিজস্ব Hooks-এ](/learn/reusing-logic-with-custom-hooks) কল করা যায়** আপনি কন্ডিশন, লুপ, বা অন্যান্য নেস্টেড ফাংশনের মধ্যে Hooks কল করতে পারবেন না। Hooks হলো ফাংশন, কিন্তু এদের অনেকটা কম্পোনেন্টের নিশর্ত প্রয়োজন হিসাবে ভাবতে পারেন। এইখানে আপনি কম্পোনেন্টের এর উপরে React এর ফিচার "ব্যবহার" করেন অনেকটা যেভাবে ফাইলের উপরে "import" ব্যবহার করে মডিউল লোড করেন।
 </Pitfall>
 
-### Anatomy of `useState` {/*anatomy-of-usestate*/}
+### `useState` এর বিস্তারিত {/*anatomy-of-usestate*/}
 
-When you call [`useState`](/reference/react/useState), you are telling React that you want this component to remember something:
+যখন আপনি [`useState`](/reference/react/useState) কল দিচ্ছেন, আপনি React-কে বলছেন যে আপনি চান এই কম্পোনেন্ট কিছু একটা মনে রাখুকঃ
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-এই ক্ষেত্রে আপনি চাচ্ছেন রিয়েক্ট `index` টি মনে রাখুক.
+এই ক্ষেত্রে আপনি চাচ্ছেন React `index` টি মনে রাখুক.
 
 <Note>
 
-The convention is to name this pair like `const [something, setSomething]`. You could name it anything you like, but conventions make things easier to understand across projects.
+রীতিমতে এই জোড়ার নাম দেওয়া উচিত এভাবে `const [something, setSomething]`. আপনি এটার নাম নিজের ইচ্ছা মত দিতে পারেন, তবে রীতি মেনে চললে বিভিন্ন প্রজেক্টের মধ্যে বুঝতে সুবিধা হয়।
 
 </Note>
 
-The only argument to `useState` is the **initial value** of your state variable. In this example, the `index`'s initial value is set to `0` with `useState(0)`. 
+`useState` এর একমাত্র আর্গুমেন্ট হচ্ছে আপনার স্টেট ভ্যারিয়েবলের **initial value**। এই উদাহরণে, `index` এর initial value `useState(0)` দিয়ে `0` তে সেট করা। 
 
-Every time your component renders, `useState` gives you an array containing two values:
+প্রতিবার যখন আপনার কম্পোনেন্ট রেন্ডার হয়, `useState` আপনাকে দুটি মান সহ একটি অ্যারে দেয়ঃ
 
-1. The **state variable** (`index`) with the value you stored.
-2. The **state setter function** (`setIndex`) which can update the state variable and trigger React to render the component again.
+1. আপনার স্টোর করা ভ্যালু সহ **state variable** (`index`)।
+2. **State setter function** (`setIndex`) যেটা স্টেট ভ্যারিয়েবল আপডেট করতে পারে এবং কম্পোনেন্ট আবার রেন্ডার করার জন্য React কে ট্রিগার করতে পারে।
 
-Here's how that happens in action:
+এটা আসলে কীভাবে হয় নিচে বর্ণিত আছেঃ
 
 ```js
 const [index, setIndex] = useState(0);
@@ -1451,9 +1451,9 @@ If your linter is [configured for React](/learn/editor-setup#linting), you shoul
 
 #### অপ্রয়োজনীয় state বাদ দিন {/*remove-unnecessary-state*/}
 
-When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
+যখন বাটনটি ক্লিক করা হয়, এই উদাহরণটি ব্যবহারকারীর নাম জানতে চাইবার কথা এবং এর পরে অভিবাদন সহ একটি এলার্ট দেখানোর কথা। নামতই রাখবার জন্য আপনি স্টেট ব্যবহারের চেষ্টা করেছেন, কিন্তু কোন একটি কারণে এটি কেবল "Hello, !" দেখায়।
 
-To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
+এই কোড ঠিক করার জন্য, অপ্রয়োজনীয় স্টেট ভ্যারিয়েবল ফেলে দিন। ([এটা কেন কাজ করল না](/learn/state-as-a-snapshot) সেটা নিয়ে আমরা পরে আলোচনা করব।)
 
 আপনি ব্যাখ্যা করতে পারবেন কেন এই state ভেরিয়েবলটি অপ্রয়োজনীয়?
 
