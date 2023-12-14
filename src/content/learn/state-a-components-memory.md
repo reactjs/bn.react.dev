@@ -890,22 +890,21 @@ button {
 
 </Sandpack>
 
-This is what makes state different from regular variables that you might declare at the top of your module. State is not tied to a particular function call or a place in the code, but it's "local" to the specific place on the screen. You rendered two `<Gallery />` components, so their state is stored separately.
+এটাই স্টেটকে আপনার মডিউলের শীর্ষে ডিক্লেয়ার করা সাধারণ ভেরিয়েবলগুলি থেকে ভিন্ন করে তোলে। স্টেট কোনো নির্দিষ্ট ফাংশন কল বা কোডের একটি বিশেষ স্থানের সাথে সংযুক্ত নয়, বরং এটি স্ক্রিনের নির্দিষ্ট স্থানে 'স্থানীয়'। আপনি দুটি `<Gallery />` কম্পোনেন্ট রেন্ডার করেছেন, তাই তাদের স্টেট পৃথকভাবে সংরক্ষিত হয়।
 
-Also notice how the `Page` component doesn't "know" anything about the `Gallery` state or even whether it has any. Unlike props, **state is fully private to the component declaring it.** The parent component can't change it. This lets you add state to any component or remove it without impacting the rest of the components.
+`Page` কম্পোনেন্ট সম্পর্কে লক্ষ্য করুন, এটি `Gallery` স্টেট সম্পর্কে কিছুই 'জানে না' বা এটি কোনো স্টেট আছে কিনা তাও জানে না। প্রপসের বিপরীতে, **স্টেট পুরোপুরি তার ডিক্লেয়ার করা কম্পোনেন্টের জন্য গোপন।** অভিভাবক কম্পোনেন্ট এটি পরিবর্তন করতে পারে না। এটি আপনাকে যেকোনো কম্পোনেন্টে স্টেট যোগ করতে বা সরিয়ে নিতে দেয়, অন্যান্য কম্পোনেন্টের উপর কোনো প্রভাব না ফেলে।
 
-What if you wanted both galleries to keep their states in sync? The right way to do it in React is to *remove* state from child components and add it to their closest shared parent. The next few pages will focus on organizing state of a single component, but we will return to this topic in [Sharing State Between Components.](/learn/sharing-state-between-components)
+আপনি যদি চান দুটি গ্যালারি তাদের স্টেট সিঙ্ক্রোনাইজড রাখুক, তাহলে React-এ এটি করার সঠিক উপায় হলো সন্তান কম্পোনেন্টগুলি থেকে স্টেট সরিয়ে নেওয়া এবং তা তাদের নিকটতম যৌথ parent এ যোগ করা। পরের কয়েকটি পৃষ্ঠা একটি একক কম্পোনেন্টের স্টেট সংগঠনের উপর ফোকাস করবে, কিন্তু আমরা এই বিষয়ে [কম্পোনেন্টগুলির মধ্যে স্টেট শেয়ারিং](/learn/sharing-state-between-components) পৃষ্ঠায় ফিরে আসব।
 
 <Recap>
 
-* Use a state variable when a component needs to "remember" some information between renders.
-* State variables are declared by calling the `useState` Hook.
-* Hooks are special functions that start with `use`. They let you "hook into" React features like state.
-* Hooks might remind you of imports: they need to be called unconditionally. Calling Hooks, including `useState`, is only valid at the top level of a component or another Hook.
-* The `useState` Hook returns a pair of values: the current state and the function to update it.
-* You can have more than one state variable. Internally, React matches them up by their order.
-* State is private to the component. If you render it in two places, each copy gets its own state.
-
+* যখন একটি কম্পোনেন্টের রেন্ডারের মধ্যে কিছু তথ্য 'মনে রাখতে' হয়, তখন একটি স্টেট ভেরিয়েবল ব্যবহার করুন।
+* স্টেট ভেরিয়েবলগুলি `useState` হুক কল করে ডিক্লেয়ার হয়।
+* হুক হলো বিশেষ ফাংশন যা `use` দিয়ে শুরু হয়। এগুলি আপনাকে স্টেটের মতো React বৈশিষ্ট্যগুলিতে 'হুক করতে' দেয়।
+* হুক আপনাকে ইম্পোর্টের কথা মনে করাতে পারে: এগুলি অবশ্যই শর্তহীনভাবে কল করতে হবে। কোনো কম্পোনেন্টের শীর্ষ স্তরে অথবা অন্য কোনো হুকের মধ্যে হুকস, যেমন `useState`, কল করা বৈধ।
+* `useState` হুক দুটি মান ফেরত দেয়: বর্তমান স্টেট এবং এটি আপডেট করার ফাংশন।
+* আপনি একাধিক স্টেট ভেরিয়েবল রাখতে পারেন। অভ্যন্তরীণভাবে, React এগুলিকে তাদের ক্রম অনুসারে মিলিয়ে দেয়।
+* স্টেট একটি কম্পোনেন্টের জন্য ব্যক্তিগত। যদি আপনি এটি দুটি জায়গায় রেন্ডার করেন, প্রতিটি কপি নিজের স্টেট পায়।
 </Recap>
 
 
@@ -1326,11 +1325,11 @@ h1 { margin-top: 10px; }
 
 #### ক্র্যাশ ঠিক করুন {/*fix-a-crash*/}
 
-Here is a small form that is supposed to let the user leave some feedback. When the feedback is submitted, it's supposed to display a thank-you message. However, it crashes with an error message saying "Rendered fewer hooks than expected". Can you spot the mistake and fix it?
+এখানে একটা ছোট্ট ফর্ম আছে যেটা ব্যবহারকারী থেকে কিছু ফিডব্যাক নেবার কথা।. ফিডব্যাক সাবমিট হলে, এটা একটা thank-you মেসেজ দেখানর কথা।. কিন্তু, এটা ক্র্যাশ করে এবং এরর মেসেজ দেখায় যে "Rendered fewer hooks than expected"। আপনি কি ভুলটা চিহ্নিত করে ঠিক করতে পারবেন?
 
 <Hint>
 
-Are there any limitations on _where_ Hooks may be called? Does this component break any rules? Check if there are any comments disabling the linter checks--this is where the bugs often hide!
+_কোথায়_ হুক কল করা যাবে, সেটার কি কোন সীমাবদ্ধতা আছে? এই কম্পোনেন্টটি কি কোন নিয়ম ভঙ্গ করছে? খুঁজে দেখুন কোন কমেন্ট লিন্টার চেক বন্ধ করে রেখেছে কি না -- বেশিরভাগ সময় এমন জায়গাতেই বাগ লুকিয়ে থাকে!
 
 </Hint>
 
@@ -1369,9 +1368,9 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Hooks can only be called at the top level of the component function. Here, the first `isSent` definition follows this rule, but the `message` definition is nested in a condition.
+হুক কম্পোনেন্ট ফাংশনের একদম টপ লেভেলেই কেবল কল দেওয়া যায়। এখানে, প্রথম `isSent` ডেফিনিশন এই নিয়ম অনুসরণ করে, কিন্তু `message` ডেফিনিশন একটি কন্ডিশনে নেস্টেড করা হয়েছে।
 
-Move it out of the condition to fix the issue:
+সমস্যা ঠিক করতে কন্ডিশন থেকে এটি সরিয়ে নিনঃ
 
 <Sandpack>
 
@@ -1406,9 +1405,9 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Remember, Hooks must be called unconditionally and always in the same order!
+মনে রাখবেন, Hooks অবশ্যই শর্তহীনভাবে এবং সবসময় একই ক্রমে কল করতে হবে!
 
-You could also remove the unnecessary `else` branch to reduce the nesting. However, it's still important that all calls to Hooks happen *before* the first `return`.
+আপনি অপ্রয়োজনীয় `else` শাখা সরিয়ে নেস্টিং কমাতে পারেন। তবে, প্রথম `return`-এর আগে সব Hooks কল ঘটানো গুরুত্বপূর্ণ।
 
 <Sandpack>
 
@@ -1443,9 +1442,9 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Try moving the second `useState` call after the `if` condition and notice how this breaks it again.
+`useState` কলটির দ্বিতীয় উদাহরণটি `if` কন্ডিশনের পরে সরিয়ে নিয়ে যান এবং লক্ষ্য করুন কীভাবে এটি আবার ভেঙে যায়।
 
-If your linter is [configured for React](/learn/editor-setup#linting), you should see a lint error when you make a mistake like this. If you don't see an error when you try the faulty code locally, you need to set up linting for your project. 
+যদি আপনার লিন্টার [React-এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), তাহলে এরকম ভুল করলে আপনি একটি লিন্ট এরর দেখতে পাবেন। যদি আপনি লোকালি এই ভুল কোড চেষ্টা করে কোনো এরর না দেখেন, তাহলে আপনার প্রজেক্টের জন্য লিন্টিং সেট আপ করা প্রয়োজন।
 
 </Solution>
 
