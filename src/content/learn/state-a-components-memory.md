@@ -10,14 +10,14 @@ title: "State: কম্পোনেন্ট এর মেমোরি"
 
 <YouWillLearn>
 
-* [`useState`](/reference/react/useState) দিয়ে কিভাবে একটি state ভেরিয়েবল তৈরি করা যায়
-* `useState` হুক কোন দুইটি ভেরিয়েবল রিটার্ন করে 
-* কিভাবে একাধিক state ভেরিয়েবল তৈরি করতে হয়
+* [`useState`](/reference/react/useState) দিয়ে কিভাবে একটি state ভ্যারিয়েবল তৈরি করা যায়
+* `useState` হুক কোন দুইটি ভ্যারিয়েবল রিটার্ন করে 
+* কিভাবে একাধিক state ভ্যারিয়েবল তৈরি করতে হয়
 * state কে কেন লোকাল বলা হয় 
 
 </YouWillLearn>
 
-## যখন সাধারণ ভেরিয়েবল যথেষ্ট নয় {/*when-a-regular-variable-isnt-enough*/}
+## যখন সাধারণ ভ্যারিয়েবল যথেষ্ট নয় {/*when-a-regular-variable-isnt-enough*/}
 
 নিচের কম্পোনেন্টটি একটি ভাস্কর্যের ছবি প্রদর্শন করে। "Next" বাটন এ ক্লিক করলে `index` এর ভ্যালু `1`, এরপর `2` এবং এভাবে পরিবর্তন হয়ে পরের ভাস্কর্যের ছবি দেখানো উচিত। কিন্তু, এটা **কাজ করবে না** (আপনি চেষ্টা করে দেখতে পারেন!):
 
@@ -151,10 +151,10 @@ button {
 
 </Sandpack>
 
-`handleClick` ইভেন্ট হ্যান্ডলারটি লোকাল ভেরিয়েবল `index` কে আপডেট করছে। তবে, দুটি বিষয় এই পরিবর্তন দেখতে বাধা তৈরি করছে।
+`handleClick` ইভেন্ট হ্যান্ডলারটি লোকাল ভ্যারিয়েবল `index` কে আপডেট করছে। তবে, দুটি বিষয় এই পরিবর্তন দেখতে বাধা তৈরি করছে।
 
-1. **লোকাল ভেরিয়েবলগুলো রেন্ডারগুলির মধ্যে স্থায়ী হয় না।** যখন React কোন কম্পোনেন্ট দ্বিতীয়বার রেন্ডার করে, তখন এটি সম্পূর্ণ রূপে নতুন করে রেন্ডার করে—এটি লোকাল ভেরিয়েবলগুলিতে কোনও পরিবর্তন বিবেচনা করে না।
-2. **লোকাল ভেরিয়েবলগুলিতে পরিবর্তন রেন্ডারগুলি ট্রিগার করে না।** নতুন ডেটার জন্যে React তার কম্পোনেন্ট কে নতুন করে রেন্ডার করার প্রয়োজন মনে করে না।
+1. **লোকাল ভ্যারিয়েবলগুলো রেন্ডারগুলির মধ্যে স্থায়ী হয় না।** যখন React কোন কম্পোনেন্ট দ্বিতীয়বার রেন্ডার করে, তখন এটি সম্পূর্ণ রূপে নতুন করে রেন্ডার করে—এটি লোকাল ভ্যারিয়েবলগুলিতে কোনও পরিবর্তন বিবেচনা করে না।
+2. **লোকাল ভ্যারিয়েবলগুলিতে পরিবর্তন রেন্ডারগুলি ট্রিগার করে না।** নতুন ডেটার জন্যে React তার কম্পোনেন্ট কে নতুন করে রেন্ডার করার প্রয়োজন মনে করে না।
 
 একটি কম্পোনেন্টকে নতুন ডেটা দিয়ে আপডেট করতে, দুটি বিষয় হতে হবে:
 
@@ -163,12 +163,12 @@ button {
 
 [`useState`](/reference/react/useState) হুক আপনাকে নিচের দুটি জিনিস দেয়ঃ
 
-1. একটি **state ভেরিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
-2. একটি **state setter ফাংশন** যা দিয়ে ভেরিয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
+1. একটি **state ভ্যারিয়েবল** যা রি-রেন্ডারের মধ্যে ডাটা মনে রাখে।
+2. একটি **state setter ফাংশন** যা দিয়ে vyariয়েবল আপডেট করা যায় এবং রিয়েক্ট কে ট্রিগার করে কম্পোনেন্টকে আবার রেন্ডার করতে।
 
-## State ভেরিয়েবল তৈরি করা {/*adding-a-state-variable*/}
+## State ভ্যারিয়েবল তৈরি করা {/*adding-a-state-variable*/}
 
-State ভেরিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবেঃ
+State ভ্যারিয়েবল তৈরি করতে হলে,রিয়েক্ট থেকে ফাইলের উপরে `useState` ইমপোর্ট করতে হবেঃ
 
 ```js
 import { useState } from 'react';
@@ -186,7 +186,7 @@ let index = 0;
 const [index, setIndex] = useState(0);
 ```
 
-`index` একটি state ভেরিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
+`index` একটি state ভ্যারিয়েবল এবং `setIndex` হচ্ছে setter ফাংশন।
 
 > এখানে `[` এবং `]` সিনট্যাক্সকে বলা হয় [array destructuring](https://javascript.info/destructuring-assignment) এবং এটা আপনাকে একটি অ্যারে থেকে ভ্যালু রিড করতে দেয়। যেই অ্যারেটা `useState` রিটার্ন করে সেটাতে সব সময় দুটি আইটেম থাকে।
 
@@ -360,12 +360,12 @@ const [index, setIndex] = useState(0);
 
 </Note>
 
-`useState` এর একমাত্র আর্গুমেন্ট হচ্ছে আপনার স্টেট ভ্যারিয়েবলের **initial value**। এই উদাহরণে, `index` এর initial value `useState(0)` দিয়ে `0` তে সেট করা। 
+`useState` এর একমাত্র আর্গুমেন্ট হচ্ছে আপনার state ভ্যারিয়েবলের **initial value**। এই উদাহরণে, `index` এর initial value `useState(0)` দিয়ে `0` তে সেট করা। 
 
 প্রতিবার যখন আপনার কম্পোনেন্ট রেন্ডার হয়, `useState` আপনাকে দুটি মান সহ একটি অ্যারে দেয়ঃ
 
 1. আপনার স্টোর করা ভ্যালু সহ **state variable** (`index`)।
-2. **State setter function** (`setIndex`) যেটা স্টেট ভ্যারিয়েবল আপডেট করতে পারে এবং কম্পোনেন্ট আবার রেন্ডার করার জন্য React কে ট্রিগার করতে পারে।
+2. **State setter function** (`setIndex`) যেটা state ভ্যারিয়েবল আপডেট করতে পারে এবং কম্পোনেন্ট আবার রেন্ডার করার জন্য React কে ট্রিগার করতে পারে।
 
 এটা আসলে কীভাবে হয় নিচে বর্ণিত আছেঃ
 
@@ -373,14 +373,14 @@ const [index, setIndex] = useState(0);
 const [index, setIndex] = useState(0);
 ```
 
-1. **Your component renders the first time.** Because you passed `0` to `useState` as the initial value for `index`, it will return `[0, setIndex]`. React remembers `0` is the latest state value.
-2. **You update the state.** When a user clicks the button, it calls `setIndex(index + 1)`. `index` is `0`, so it's `setIndex(1)`. This tells React to remember `index` is `1` now and triggers another render.
-3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
-4. And so on!
+1. **আপনার কম্পোনেন্ট প্রথমবার রেন্ডার করে।** আপনি `useState`-এ প্রারম্ভিক মান হিসেবে `0` পাস করেছেন, তাই এটি `[0, setIndex]` ফেরত দেবে। React মনে রাখে যে `0` সর্বশেষ state মান।
+2. **আপনি state আপডেট করেন।** যখন একজন ব্যবহারকারী বাটনে ক্লিক করে, এটি `setIndex(index + 1)` কল করে। `index` হল `0`, তাই এটি `setIndex(1)`। এটি React-কে বলে যে এখন থেকে `index` হল `1` এবং অন্য একটি রেন্ডার ট্রিগার করে।
+3. **আপনার কম্পোনেন্টের দ্বিতীয় রেন্ডার।** React এখনও `useState(0)` দেখে, কিন্তু যেহেতু React *মনে রাখে* যে আপনি `index`-কে `1`-এ সেট করেছেন, তাই এটি `[1, setIndex]` ফেরত দেয়।
+4. এবং এভাবেই চলতে থাকে!
 
-## কম্পোনেন্ট এ একাধিক state ভেরিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
+## কম্পোনেন্ট এ একাধিক state ভ্যারিয়েবল ব্যবহার করা {/*giving-a-component-multiple-state-variables*/}
 
-একটি কম্পোনেন্ট এ আপনি যত খুশি তত ধরনের ষ্টেট ভেরিয়েবল রাখতে পারেন। এই কম্পোনেন্ট এর দুটি স্টেট ভেরিয়েবল আছে, একটি নাম্বার `index` এবং একটি বুলিয়ান `showMore` যা Toggle করা হয় যখন আপনি "Show details" এ ক্লিক করেন :
+একটি কম্পোনেন্ট এ আপনি যত খুশি তত ধরনের ষ্টেট ভ্যারিয়েবল রাখতে পারেন। এই কম্পোনেন্ট এর দুটি state ভ্যারিয়েবল আছে, একটি নাম্বার `index` এবং একটি বুলিয়ান `showMore` যা Toggle করা হয় যখন আপনি "Show details" এ ক্লিক করেন :
 
 <Sandpack>
 
@@ -519,19 +519,19 @@ button {
 
 </Sandpack>
 
-It is a good idea to have multiple state variables if their state is unrelated, like `index` and `showMore` in this example. But if you find that you often change two state variables together, it might be easier to combine them into one. For example, if you have a form with many fields, it's more convenient to have a single state variable that holds an object than state variable per field. Read [Choosing the State Structure](/learn/choosing-the-state-structure) for more tips.
+একাধিক state ভ্যারিয়েবল রাখা ভালো কাজ করে যদি তাদের state পরস্পর অসম্পর্কিত হয়, যেমন `index` এবং `showMore` এই উদাহরণে। কিন্তু যদি আপনি দেখেন যে আপনি প্রায়ই দুটি state ভ্যারিয়েবল একসাথে পরিবর্তন করছেন, তাহলে এগুলিকে একটি ভ্যারিয়েবলে মিলিয়ে ফেলা সহজ হতে পারে। উদাহরণস্বরূপ, যদি আপনার একটি ফর্ম থাকে অনেকগুলি ফিল্ড সহ, প্রতি ফিল্ডের জন্য একটি state ভ্যারিয়েবলের চেয়ে একটি অবস্থা ভ্যারিয়েবল থাকা যে একটি অবজেক্ট ধারণ করে তা আরো সুবিধাজনক। [স্টেট স্ট্রাকচার নির্বাচন](/learn/choosing-the-state-structure) এ আরও টিপস পড়ুন।
 
 <DeepDive>
 
 #### রিয়েক্ট কিভাবে জানে কোন state রিটার্ন করতে হবে? {/*how-does-react-know-which-state-to-return*/}
 
-You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
+আপনি লক্ষ্য করে থাকতে পারেন যে `useState` কলের সময় কোনো তথ্য পাস করা হয় না যে এটি *কোন* state ভ্যারিয়েবলের কথা বলছে। `useState`-এ কোনো "আইডেন্টিফায়ার" পাস করা হয় না, তাহলে এটি কীভাবে জানে কোন state ভ্যারিয়েবল ফেরত দিতে হবে? এটি কি আপনার ফাংশনগুলি পার্স করার মতো কোনো ম্যাজিকের উপর নির্ভর করে? উত্তর হল না।
 
-Instead, to enable their concise syntax, Hooks **rely on a stable call order on every render of the same component.** This works well in practice because if you follow the rule above ("only call Hooks at the top level"), Hooks will always be called in the same order. Additionally, a [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) catches most mistakes.
+পরিবর্তে, তাদের সংক্ষিপ্ত সিনট্যাক্স সক্ষম করার জন্য, হুকস **একই কম্পোনেন্টের প্রতিটি রেন্ডারে একটি স্থির কল ক্রমের উপর নির্ভর করে।** এটি ব্যবহারিকভাবে ভালো কাজ করে কারণ যদি আপনি উপরের নিয়মটি অনুসরণ করেন ("কেবল হুকস শীর্ষ স্তরে কল করুন"), হুকস সবসময় একই ক্রমে কল করা হবে। এছাড়াও, একটি [লিন্টার প্লাগইন](https://www.npmjs.com/package/eslint-plugin-react-hooks) বেশিরভাগ ভুল ধরে ফেলে।
 
-Internally, React holds an array of state pairs for every component. It also maintains the current pair index, which is set to `0` before rendering. Each time you call `useState`, React gives you the next state pair and increments the index. You can read more about this mechanism in [React Hooks: Not Magic, Just Arrays.](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
+অভ্যন্তরীণভাবে, React প্রতিটি কম্পোনেন্টের জন্য একটি state জুটির অ্যারে রাখে। এটি বর্তমান জুটি ইনডেক্সও বজায় রাখে, যা রেন্ডারিংয়ের আগে `0`-এ সেট করা হয়। প্রতিবার আপনি `useState` কল করলে, React আপনাকে পরবর্তী স্টেট জুটি দেয় এবং ইনডেক্স বাড়িয়ে দেয়। এই মেকানিজম সম্পর্কে আরও জানতে [React হুকস: ম্যাজিক নয়, শুধুমাত্র অ্যারে](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e) পড়ুন।
 
-This example **doesn't use React** but it gives you an idea of how `useState` works internally:
+এই উদাহরণটি **React ব্যবহার করে না** কিন্তু এটি আপনাকে একটি ধারণা দেয় যে `useState` অভ্যন্তরীণভাবে কীভাবে কাজ করে:
 
 <Sandpack>
 
@@ -890,21 +890,21 @@ button {
 
 </Sandpack>
 
-এটাই স্টেটকে আপনার মডিউলের শীর্ষে ডিক্লেয়ার করা সাধারণ ভেরিয়েবলগুলি থেকে ভিন্ন করে তোলে। স্টেট কোনো নির্দিষ্ট ফাংশন কল বা কোডের একটি বিশেষ স্থানের সাথে সংযুক্ত নয়, বরং এটি স্ক্রিনের নির্দিষ্ট স্থানে 'স্থানীয়'। আপনি দুটি `<Gallery />` কম্পোনেন্ট রেন্ডার করেছেন, তাই তাদের স্টেট পৃথকভাবে সংরক্ষিত হয়।
+এটাই stateকে আপনার মডিউলের শীর্ষে ডিক্লেয়ার করা সাধারণ ভ্যারিয়েবলগুলি থেকে ভিন্ন করে তোলে। state কোনো নির্দিষ্ট ফাংশন কল বা কোডের একটি বিশেষ স্থানের সাথে সংযুক্ত নয়, বরং এটি স্ক্রিনের নির্দিষ্ট স্থানে 'স্থানীয়'। আপনি দুটি `<Gallery />` কম্পোনেন্ট রেন্ডার করেছেন, তাই তাদের state পৃথকভাবে সংরক্ষিত হয়।
 
-`Page` কম্পোনেন্ট সম্পর্কে লক্ষ্য করুন, এটি `Gallery` স্টেট সম্পর্কে কিছুই 'জানে না' বা এটি কোনো স্টেট আছে কিনা তাও জানে না। প্রপসের বিপরীতে, **স্টেট পুরোপুরি তার ডিক্লেয়ার করা কম্পোনেন্টের জন্য গোপন।** অভিভাবক কম্পোনেন্ট এটি পরিবর্তন করতে পারে না। এটি আপনাকে যেকোনো কম্পোনেন্টে স্টেট যোগ করতে বা সরিয়ে নিতে দেয়, অন্যান্য কম্পোনেন্টের উপর কোনো প্রভাব না ফেলে।
+`Page` কম্পোনেন্ট সম্পর্কে লক্ষ্য করুন, এটি `Gallery` state সম্পর্কে কিছুই 'জানে না' বা এটি কোনো state আছে কিনা তাও জানে না। প্রপসের বিপরীতে, **state পুরোপুরি তার ডিক্লেয়ার করা কম্পোনেন্টের জন্য গোপন।** অভিভাবক কম্পোনেন্ট এটি পরিবর্তন করতে পারে না। এটি আপনাকে যেকোনো কম্পোনেন্টে state যোগ করতে বা সরিয়ে নিতে দেয়, অন্যান্য কম্পোনেন্টের উপর কোনো প্রভাব না ফেলে।
 
-আপনি যদি চান দুটি গ্যালারি তাদের স্টেট সিঙ্ক্রোনাইজড রাখুক, তাহলে React-এ এটি করার সঠিক উপায় হলো সন্তান কম্পোনেন্টগুলি থেকে স্টেট সরিয়ে নেওয়া এবং তা তাদের নিকটতম যৌথ parent এ যোগ করা। পরের কয়েকটি পৃষ্ঠা একটি একক কম্পোনেন্টের স্টেট সংগঠনের উপর ফোকাস করবে, কিন্তু আমরা এই বিষয়ে [কম্পোনেন্টগুলির মধ্যে স্টেট শেয়ারিং](/learn/sharing-state-between-components) পৃষ্ঠায় ফিরে আসব।
+আপনি যদি চান দুটি গ্যালারি তাদের state সিঙ্ক্রোনাইজড রাখুক, তাহলে React-এ এটি করার সঠিক উপায় হলো সন্তান কম্পোনেন্টগুলি থেকে state সরিয়ে নেওয়া এবং তা তাদের নিকটতম যৌথ parent এ যোগ করা। পরের কয়েকটি পৃষ্ঠা একটি একক কম্পোনেন্টের state সংগঠনের উপর ফোকাস করবে, কিন্তু আমরা এই বিষয়ে [কম্পোনেন্টগুলির মধ্যে state শেয়ারিং](/learn/sharing-state-between-components) পৃষ্ঠায় ফিরে আসব।
 
 <Recap>
 
-* যখন একটি কম্পোনেন্টের রেন্ডারের মধ্যে কিছু তথ্য 'মনে রাখতে' হয়, তখন একটি স্টেট ভেরিয়েবল ব্যবহার করুন।
-* স্টেট ভেরিয়েবলগুলি `useState` হুক কল করে ডিক্লেয়ার হয়।
-* হুক হলো বিশেষ ফাংশন যা `use` দিয়ে শুরু হয়। এগুলি আপনাকে স্টেটের মতো React বৈশিষ্ট্যগুলিতে 'হুক করতে' দেয়।
+* যখন একটি কম্পোনেন্টের রেন্ডারের মধ্যে কিছু তথ্য 'মনে রাখতে' হয়, তখন একটি state ভ্যারিয়েবল ব্যবহার করুন।
+* state ভ্যারিয়েবলগুলি `useState` হুক কল করে ডিক্লেয়ার হয়।
+* হুক হলো বিশেষ ফাংশন যা `use` দিয়ে শুরু হয়। এগুলি আপনাকে state এর মতো React বৈশিষ্ট্যগুলিতে 'হুক করতে' দেয়।
 * হুক আপনাকে ইম্পোর্টের কথা মনে করাতে পারে: এগুলি অবশ্যই শর্তহীনভাবে কল করতে হবে। কোনো কম্পোনেন্টের শীর্ষ স্তরে অথবা অন্য কোনো হুকের মধ্যে হুকস, যেমন `useState`, কল করা বৈধ।
-* `useState` হুক দুটি মান ফেরত দেয়: বর্তমান স্টেট এবং এটি আপডেট করার ফাংশন।
-* আপনি একাধিক স্টেট ভেরিয়েবল রাখতে পারেন। অভ্যন্তরীণভাবে, React এগুলিকে তাদের ক্রম অনুসারে মিলিয়ে দেয়।
-* স্টেট একটি কম্পোনেন্টের জন্য ব্যক্তিগত। যদি আপনি এটি দুটি জায়গায় রেন্ডার করেন, প্রতিটি কপি নিজের স্টেট পায়।
+* `useState` হুক দুটি মান ফেরত দেয়: বর্তমান state এবং এটি আপডেট করার ফাংশন।
+* আপনি একাধিক state ভ্যারিয়েবল রাখতে পারেন। অভ্যন্তরীণভাবে, React এগুলিকে তাদের ক্রম অনুসারে মিলিয়ে দেয়।
+* state একটি কম্পোনেন্টের জন্য ব্যক্তিগত। যদি আপনি এটি দুটি জায়গায় রেন্ডার করেন, প্রতিটি কপি নিজের state পায়।
 
 </Recap>
 
@@ -914,9 +914,9 @@ button {
 
 #### গ্যালারিটি সম্পূর্ণ করুণ {/*complete-the-gallery*/}
 
-When you press "Next" on the last sculpture, the code crashes. Fix the logic to prevent the crash. You may do this by adding extra logic to event handler or by disabling the button when the action is not possible.
+যখন আপনি শেষ ভাস্কর্যের উপর "Next" বাটন চাপেন, তখন কোড ক্র্যাশ করে। ক্র্যাশ প্রতিরোধের জন্য লজিক সংশোধন করুন। আপনি ইভেন্ট হ্যান্ডলারে অতিরিক্ত লজিক যোগ করে অথবা অ্যাকশন সম্ভব না হলে বাটনটি ডিজেবল করে এটি করতে পারেন।
 
-After fixing the crash, add a "Previous" button that shows the previous sculpture. It shouldn't crash on the first sculpture.
+ক্র্যাশ ঠিক করার পরে, একটি "Previous" বাটন যোগ করুন যা আগের ভাস্কর্যটি দেখায়। এটি প্রথম ভাস্কর্যে ক্র্যাশ করা উচিত নয়।
 
 <Sandpack>
 
@@ -1058,7 +1058,7 @@ img { width: 120px; height: 120px; }
 
 <Solution>
 
-This adds a guarding condition inside both event handlers and disables the buttons when needed:
+এটি উভয় ইভেন্ট হ্যান্ডলারের মধ্যে একটি সুরক্ষামূলক শর্ত যোগ করে এবং প্রয়োজনে বাটনগুলি ডিজেবল করে:
 
 <Sandpack>
 
@@ -1218,13 +1218,13 @@ img { width: 120px; height: 120px; }
 
 </Sandpack>
 
-Notice how `hasPrev` and `hasNext` are used *both* for the returned JSX and inside the event handlers! This handy pattern works because event handler functions ["close over"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) any variables declared while rendering.
+লক্ষ্য করুন কীভাবে `hasPrev` এবং `hasNext` রিটার্ন করা JSX এবং ইভেন্ট হ্যান্ডলারগুলি *উভয়ের* মধ্যে ব্যবহৃত হয়েছে! এই সুবিধাজনক প্যাটার্নটি কাজ করে কারণ ইভেন্ট হ্যান্ডলার ফাংশনগুলি রেন্ডারিং সময় ঘোষিত যেকোনো ভ্যারিয়েবলের উপর ["ক্লোজ ওভার"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) হয়।
 
 </Solution>
 
-#### Fix stuck form inputs {/*fix-stuck-form-inputs*/}
+#### আটকে যাওয়া ফর্ম ইনপুটগুলি ঠিক করুন {/*fix-stuck-form-inputs*/}
 
-When you type into the input fields, nothing appears. It's like the input values are "stuck" with empty strings. The `value` of the first `<input>` is set to always match the `firstName` variable, and the `value` for the second `<input>` is set to always match the `lastName` variable. This is correct. Both inputs have `onChange` event handlers, which try to update the variables based on the latest user input (`e.target.value`). However, the variables don't seem to "remember" their values between re-renders. Fix this by using state variables instead.
+আপনি যখন ইনপুট ফিল্ডগুলিতে টাইপ করেন, কিছুই প্রদর্শিত হয় না। মনে হয় যেন ইনপুট মানগুলি খালি স্ট্রিংগুলি দিয়ে "আটকে" গেছে। প্রথম `<input>`-এর `value` সবসময় `firstName` ভ্যারিয়েবলের সাথে মিলে যায়, এবং দ্বিতীয় `<input>`-এর `value` সবসময় `lastName` ভ্যারিয়েবলের সাথে মিলে যায়। এটি ঠিক। উভয় ইনপুটের `onChange` ইভেন্ট হ্যান্ডলার রয়েছে, যা সর্বশেষ ব্যবহারকারীর ইনপুট (`e.target.value`) অনুসারে ভ্যারিয়েবলগুলিকে আপডেট করার চেষ্টা করে। তবে, ভ্যারিয়েবলগুলি মনে হয় রি-রেন্ডারের মধ্যে তাদের মানগুলি "মনে রাখে না"। এটি ঠিক করতে state ভ্যারিয়েবলের ব্যবহার করুন।
 
 <Sandpack>
 
@@ -1273,7 +1273,7 @@ h1 { margin-top: 10px; }
 
 <Solution>
 
-First, import `useState` from React. Then replace `firstName` and `lastName` with state variables declared by calling `useState`. Finally, replace every `firstName = ...` assignment with `setFirstName(...)`, and do the same for `lastName`. Don't forget to update `handleReset` too so that the reset button works.
+প্রথমে, React থেকে `useState` ইম্পোর্ট করুন। তারপর, `firstName` এবং `lastName`-কে `useState` দ্বারা ডিক্লেয়ার করা state ভ্যারিয়েবলগুলি দিয়ে প্রতিস্থাপন করুন। শেষে, প্রতিটি `firstName = ...` অ্যাসাইনমেন্টকে `setFirstName(...)` দিয়ে প্রতিস্থাপন করুন, এবং `lastName`-এর জন্যও একই কাজ করুন। `handleReset`-কে আপডেট করতে ভুলবেন না, যাতে রিসেট বাটন কাজ করে।
 
 <Sandpack>
 
@@ -1451,11 +1451,11 @@ export default function FeedbackForm() {
 
 #### অপ্রয়োজনীয় state বাদ দিন {/*remove-unnecessary-state*/}
 
-যখন বাটনটি ক্লিক করা হয়, এই উদাহরণটি ব্যবহারকারীর নাম জানতে চাইবার কথা এবং এর পরে অভিবাদন সহ একটি এলার্ট দেখানোর কথা। নামতই রাখবার জন্য আপনি স্টেট ব্যবহারের চেষ্টা করেছেন, কিন্তু কোন একটি কারণে এটি কেবল "Hello, !" দেখায়।
+যখন বাটনটি ক্লিক করা হয়, এই উদাহরণটি ব্যবহারকারীর নাম জানতে চাইবার কথা এবং এর পরে অভিবাদন সহ একটি এলার্ট দেখানোর কথা। নামতই রাখবার জন্য আপনি state ব্যবহারের চেষ্টা করেছেন, কিন্তু কোন একটি কারণে এটি কেবল "Hello, !" দেখায়।
 
-এই কোড ঠিক করার জন্য, অপ্রয়োজনীয় স্টেট ভ্যারিয়েবল ফেলে দিন। ([এটা কেন কাজ করল না](/learn/state-as-a-snapshot) সেটা নিয়ে আমরা পরে আলোচনা করব।)
+এই কোড ঠিক করার জন্য, অপ্রয়োজনীয় state ভ্যারিয়েবল ফেলে দিন। ([এটা কেন কাজ করল না](/learn/state-as-a-snapshot) সেটা নিয়ে আমরা পরে আলোচনা করব।)
 
-আপনি ব্যাখ্যা করতে পারবেন কেন এই state ভেরিয়েবলটি অপ্রয়োজনীয়?
+আপনি ব্যাখ্যা করতে পারবেন কেন এই state ভ্যারিয়েবলটি অপ্রয়োজনীয়?
 
 <Sandpack>
 
@@ -1482,7 +1482,7 @@ export default function FeedbackForm() {
 
 <Solution>
 
-এখানে একটি ঠিক ভার্সন দেওয়া হলো যা ফাংশনের এর মধ্যে প্রয়োজনীয় রেগুলার `name` ভেরিয়েবল ব্যবহার করে:
+এখানে একটি ঠিক ভার্সন দেওয়া হলো যা ফাংশনের এর মধ্যে প্রয়োজনীয় রেগুলার `name` ভ্যারিয়েবল ব্যবহার করে:
 
 <Sandpack>
 
@@ -1503,7 +1503,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-State ভেরিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভেরিয়েবলই যথেষ্ট। যেখানে রেগুলার ভেরিয়েবল যথেষ্ট সেখানে state ভেরিবল ব্যবহার করা উচিত না।
+State ভ্যারিয়েবল শুধু রি-রেন্ডার এর মাঝে তথ্য মনে রাখার জন্য দরকার। যেকোনো একই ইভেন্ট হ্যান্ডলার এর মধ্যে রেগুলার ভ্যারিয়েবলই যথেষ্ট। যেখানে রেগুলার ভ্যারিয়েবল যথেষ্ট সেখানে state ভ্যারিয়েবল ব্যবহার করা উচিত না।
 
 </Solution>
 
