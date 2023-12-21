@@ -41,7 +41,7 @@ function TabContainer() {
 
 #### প্যারামিটার {/*parameters*/}
 
-* `scope`: একটি ফাংশন যেটা এক বা একাধিক [`set` functions.](/reference/react/useState#setstate) কল করার মাধ্যমে কোন state আপডেট করে। React তৎক্ষণাৎভাবে কোন প্যারামিটার ছাড়া `scope` কল করে এবং `scope` ফাংশন কল হবার সময়ে সিঙ্ক্রোনাসভাবে শিডিউল হওয়া সকল state update কে transition হিসেবে চিহ্নিত করে। এগুলো [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অবাঞ্ছিত কোন লোডিং ইনডিকেটর দেখাবনে না।](/reference/react/useTransition#preventing-unwanted-loading-indicators)
+* `scope`: একটি ফাংশন যেটা এক বা একাধিক [`set` functions.](/reference/react/useState#setstate) কল করার মাধ্যমে কোন state আপডেট করে। React তৎক্ষণাৎভাবে কোন প্যারামিটার ছাড়া `scope` কল করে এবং `scope` ফাংশন কল হবার সময়ে সিঙ্ক্রোনাসভাবে শিডিউল হওয়া সকল state update কে transition হিসেবে চিহ্নিত করে। এগুলো [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অবাঞ্ছিত কোন লোডিং ইনডিকেটর দেখাবে না।](/reference/react/useTransition#preventing-unwanted-loading-indicators)
 
 #### রিটার্ন {/*returns*/}
 
