@@ -17,8 +17,8 @@ Programmatic React ফিচারঃ
 * [Directives](/reference/react/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
 
 ## React DOM {/*react-dom*/}
-React-dom contains features that are only supported for web applications 
-(which run in the browser DOM environment). This section is broken into the following:
+
+React-dom contains features that are only supported for web applications (which run in the browser DOM environment). This section is broken into the following:
 
 * [Hooks](/reference/react-dom/hooks) - ওয়েব এপ্লিকেশনের জন্য hooks যা ব্রাউজারের DOM এনভায়রনমেন্টে চলে।
 * [Components](/reference/react-dom/components) - React ব্রাউজারের সকল বিল্ট-ইন HTML এবং SVG কম্পোনেন্ট সাপোর্ট করে।

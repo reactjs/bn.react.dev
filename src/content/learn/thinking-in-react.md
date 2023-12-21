@@ -81,7 +81,7 @@ React এ একটি UI ইমপ্লিমেন্ট করতে আপ�
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -299,7 +299,7 @@ You can start seeing how your application will behave. Edit the `filterText` ini
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {
@@ -496,7 +496,7 @@ function FilterableProductTable({ products }) {
 
 <Sandpack>
 
-```jsx App.js
+```jsx src/App.js
 import { useState } from 'react';
 
 function FilterableProductTable({ products }) {
