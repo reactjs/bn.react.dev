@@ -102,23 +102,20 @@ const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
 
-অবশ্যই আপনি সত্যিই বিদ্যমান HTML কন্টেন্টটি মুছতে চান না!
+
+নিঃসন্দেহে আপনি সত্যি সত্যি বিদ্যমান HTML কন্টেন্ট মুছতে চান না!
 
 এই কোডটি মুছে ফেলুন।
 
-বরং, আপনি সম্ভবত আপনার React কম্পোনেন্টগুলি নির্দিষ্ট জায়গাগুলিতে আপনার HTML এ রেন্ডার করতে চান। এখন আপনার HTML পৃষ্ঠাটি খুলুন
-(অথবা সার্ভার টেমপ্লেটগুলি যা এটি তৈরি করে)
-
-এবং কোনও ট্যাগে একটি অনন্য [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) এট্রিবিউট যুক্ত করুন, যেমন:
+বরং, আপনি সম্ভবত আপনার HTML এ React কম্পোনেন্টগুলি নির্দিষ্ট জায়গায় রেন্ডার করতে চান। এখন আপনার HTML পেইজটি খুলুন
+(অথবা সার্ভার টেমপ্লেটগুলি যা একে তৈরি করে) এবং কোনও ট্যাগে একটি ইউনিক [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) এট্রিবিউট যুক্ত করুন, যেমনঃ
 
 ```html
-<!-- ... somewhere in your html ... -->
+<!-- ... আপনার HTML এর কোন এক জায়গায় ... -->
 <nav id="navigation"></nav>
-<!-- ... more html ... -->
+<!-- ... আরো HTML ... -->
 ```
-এটি আপনাকে [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) ব্যবহার করে ঐ HTML উপাদানটি খুঁজে বের করতে দেয়। এরপর [`createRoot`](/reference/react-dom/client/createRoot) এ তা পাঠাতে হবেন, যাতে আপনি আপনার নিজের React কম্পোনেন্টটি রেন্ডার করতে পারেন:
-
-
+এটি আপনাকে [`document.getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) ব্যবহার করে ঐ HTML উপাদানটি খুঁজে বের করতে দেয়। এরপর [`createRoot`](/reference/react-dom/client/createRoot) এ তা পাঠাতে হবে, যাতে আপনি আপনার নিজের React কম্পোনেন্টটি রেন্ডার করতে পারেনঃ
 
 <Sandpack>
 
@@ -138,7 +135,7 @@ root.render(<h1>Hello, world</h1>);
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
-  // TODO: Actually implement a navigation bar
+  // TODO: প্রকৃতপক্ষে একটি ন্যাভিগেশন বার তৈরি করা
   return <h1>Hello from React!</h1>;
 }
 
@@ -149,10 +146,10 @@ root.render(<NavigationBar />);
 
 </Sandpack>
 
-দেখতে হলে যে index.html ফাইলের মূল HTML কন্টেন্টটি সংরক্ষিত আছে এবং আপনার নিজের NavigationBar React কম্পোনেন্টটি এখন আপনার HTML এর মধ্যে প্রদর্শিত হয় যেটি `<nav id="navigation">` এর ভিতরে অবস্থিত। React কম্পোনেন্টগুলি অবশ্যই বিদ্যমান HTML পৃষ্ঠার ভিতরে রেন্ডার করা সম্ভব হবে। বিস্তারিত জানতে, [createRoot ব্যবহারের নথিপত্র](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) পড়ুন।
+লক্ষ্য করুন যে index.html ফাইলের মূল HTML কন্টেন্টটি সংরক্ষিত আছে এবং আপনার নিজের NavigationBar React কম্পোনেন্টটি এখন আপনার HTML এর মধ্যে প্রদর্শিত হয় যেটি `<nav id="navigation">` এর ভিতরে অবস্থিত। React কম্পোনেন্টগুলি অবশ্যই বিদ্যমান HTML পৃষ্ঠার ভিতরে রেন্ডার করা সম্ভব হবে। বিস্তারিত জানতে, [createRoot usage documentation](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) পড়ুন।
 
-যখন আপনি একটি বিদ্যমান প্রকল্পে React অনুমোদন করবেন, তখন ছোট ইন্টারঅ্যাকটিভ কম্পোনেন্টগুলি দিয়ে শুরু করা সাধারণ (যেমন বাটন), এবং পরে ধীরে ধীরে বাকী পৃষ্ঠাগুলি React দিয়ে তৈরি করা হয়। আপনি যদি ঐ নির্দিষ্ট সীমানা পাশাপাশি অবজ্ঞার পর্যন্ত এসে যান তখন আমরা React এর সর্বাধিক সুবিধা পেতে হলে একটি [React ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করার সুপারিশ করি।
+যখন আপনি একটি বিদ্যমান প্রকল্পে React অনুমোদন করবেন, তখন সাধারণত ছোট ইন্টারেক্টিভ কম্পোনেন্টগুলি দিয়ে শুরু করা হয় (যেমন বাটন), এবং পরে ধীরে ধীরে "উপরের দিকে" যাওয়া হয় এবং আপনার পুরো পেইজ এক সময় React দিয়ে বিল্ড হয়। আপনি যদি ঐ পর্যায়ে চলে আসেন, আমাদের উপদেশ থাকবে এর ঠিক পরই একটি [React ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করবেন যেন React এর সুবিধাদি পূর্ণরূপে ব্যবহার করতে পারেন।
 
 ## একটি বিদ্যমান নেটিভ মোবাইল অ্যাপ এ React Native ব্যবহার করা {/*using-react-native-in-an-existing-native-mobile-app*/}
 
-[React Native](https://reactnative.dev/) বিদ্যমান নেটিভ অ্যাপগুলির সাথে একত্রিত করা যেতে পারে। আপনার যদি Android (Java বা Kotlin) বা iOS (Objective-C বা Swift) জন্য একটি বিদ্যমান নেটিভ অ্যাপ থাকে, তবে এই গাইডটি অনুসরণ করে সেখানে একটি React Native স্ক্রিন যুক্ত করতে পারেন।
+[React Native](https://reactnative.dev/) বিদ্যমান নেটিভ অ্যাপগুলির সাথে এক করা যেতে পারে। আপনার যদি Android (Java বা Kotlin) বা iOS (Objective-C বা Swift) এর জন্য একটি বিদ্যমান নেটিভ অ্যাপ থাকে, তবে [এই গাইডটি](https://reactnative.dev/docs/integration-with-existing-apps) অনুসরণ করে সেখানে একটি React Native স্ক্রিন যুক্ত করতে পারেন।
