@@ -1,27 +1,27 @@
 ---
-title: State as a Snapshot
+title: স্ন্যাপশট হিসেবে State
 ---
 
 <Intro>
 
-State variables might look like regular JavaScript variables that you can read and write to. However, state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render.
+State ভেরিয়েবলকে সাধারণ জাভাস্ক্রিপ্ট ভেরিয়েবলের মতো রিড এবং রাইট করতে পারলেও এটি আসলে একটি স্ন্যাপশটের মতো আচরণ করে। State ভেরিয়েবল সেট করলে তার পূর্ববর্তী মান পরিবর্তন না হলেও একটি রেন্ডার ট্রিগার হয়।
 
 </Intro>
 
 <YouWillLearn>
 
-* How setting state triggers re-renders
-* When and how state updates
-* Why state does not update immediately after you set it
-* How event handlers access a "snapshot" of the state
+* State সেট করলে কিভাবে রেন্ডার ট্রিগার হয়
+* কখন এবং কিভাবে State আপডেট হয়
+* সেট করার সাথেসাথেই কেন State আপডেট হয় না
+* Event handler কিভাবে একটি স্ন্যাপশট এক্সেস করে
 
 </YouWillLearn>
 
-## Setting state triggers renders {/*setting-state-triggers-renders*/}
+## State সেট করলে রি-রেন্ডার ট্রিগার হয় {/*setting-state-triggers-renders*/}
 
-You might think of your user interface as changing directly in response to the user event like a click. In React, it works a little differently from this mental model. On the previous page, you saw that [setting state requests a re-render](/learn/render-and-commit#step-1-trigger-a-render) from React. This means that for an interface to react to the event, you need to *update the state*.
+আপনি হয়ত ভাবতে পারেন ইউজার ইন্টারফেস ক্লিক এর মতো ইউজার ইভেন্টের সরাসরি প্রতিক্রিয়া হিসেবে পরিবর্তন হয়। কিন্তু React-এ এটি একটু অন্যভাবে কাজ করে। আগের পৃষ্ঠায় দেখেছেন [State সেট করলে রি-রেন্ডার ট্রিগার হয়](/learn/render-and-commit#step-1-trigger-a-render)। তার মানে কোন ইভেন্টের প্রতিক্রিয়া পেতে আপনার আগে *State আপডেট* করতে হবে।
 
-In this example, when you press "send", `setIsSent(true)` tells React to re-render the UI:
+এই উদাহরণে "send" বাটনে চাপলে `setIsSent(true)` এর মাধ্যমে React-কে রি-রেন্ডার করতে জানানো হবেঃ
 
 <Sandpack>
 
@@ -61,43 +61,43 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-Here's what happens when you click the button:
+বাটনটি ক্লিক করলে নিম্নলিখিত ঘটনাগুলো ঘটেঃ
 
-1. The `onSubmit` event handler executes.
-2. `setIsSent(true)` sets `isSent` to `true` and queues a new render.
-3. React re-renders the component according to the new `isSent` value.
+১. `onSubmit` event handler এক্সিকিউট হয়।
+২. `setIsSent(true)` এর মাধ্যমে `isSent` এর মান true করা হয় এবং একটি নতুন রি-রেন্ডার কিউ করা হয়।
+৩. React নতুন `isSent` মান অনুযায়ী কম্পোনেন্টটি পুনরায় রি-রেন্ডার করে।
 
-Let's take a closer look at the relationship between state and rendering.
+এখন State এবং রেন্ডারিং মধ্যে সম্পর্কটিতে নজর দেই।
 
-## Rendering takes a snapshot in time {/*rendering-takes-a-snapshot-in-time*/}
+## রেন্ডারিং সময়ের একটি স্ন্যাপশট নেয় {/*rendering-takes-a-snapshot-in-time*/}
 
-["Rendering"](/learn/render-and-commit#step-2-react-renders-your-components) means that React is calling your component, which is a function. The JSX you return from that function is like a snapshot of the UI in time. Its props, event handlers, and local variables were all calculated **using its state at the time of the render.**
+কম্পোনেন্ট হল একটি ফাংশন। আপনার কম্পোনেন্ট React-এর দ্বারা কল হওয়াকেই ["রেন্ডারিং"](/learn/render-and-commit#step-2-react-renders-your-components) বলে। সেই ফাংশন থেকে রিটার্ন করা JSX টি ঐ মুহূর্তের একটি স্ন্যাপশটের মতো। এর সমস্ত props, event handler এবং লোকাল ভেরিয়েবলগুলো **রেন্ডার করার সময়ের State ব্যবহার করে ক্যালকুলেট করা হয়েছিল।**
 
-Unlike a photograph or a movie frame, the UI "snapshot" you return is interactive. It includes logic like event handlers that specify what happens in response to inputs. React updates the screen to match this snapshot and connects the event handlers. As a result, pressing a button will trigger the click handler from your JSX.
+আপনার কম্পোনেন্ট থেকে রিটার্ন হওয়া "স্ন্যাপশট" একটি ছবি বা একটি মুভির ফ্রেমের মতো না, এটি ইন্টারেক্টিভ। ইনপুটের উত্তর হিসাবে কী ঘটবে তার লজিক event handler-এ দেওয়া আছে। React স্ন্যাপশটের সাথে মেলানোর জন্য স্ক্রিনটি আপডেট করে এবং event handler-গুলো UI-এর সাথে কানেক্ট করে। ফলস্বরূপ, আপনার JSX থেকে একটি বাটন চাপলে click handler-টি ট্রিগার হয়।
 
-When React re-renders a component:
+যখন React কোন কম্পোনেন্ট রি-রেন্ডার করেঃ
 
-1. React calls your function again.
-2. Your function returns a new JSX snapshot.
-3. React then updates the screen to match the snapshot your function returned.
-
-<IllustrationBlock sequential>
-    <Illustration caption="React executing the function" src="/images/docs/illustrations/i_render1.png" />
-    <Illustration caption="Calculating the snapshot" src="/images/docs/illustrations/i_render2.png" />
-    <Illustration caption="Updating the DOM tree" src="/images/docs/illustrations/i_render3.png" />
-</IllustrationBlock>
-
-As a component's memory, state is not like a regular variable that disappears after your function returns. State actually "lives" in React itself--as if on a shelf!--outside of your function. When React calls your component, it gives you a snapshot of the state for that particular render. Your component returns a snapshot of the UI with a fresh set of props and event handlers in its JSX, all calculated **using the state values from that render!**
+1. React আবার আপনার ফাংশনটি কল করে।
+2. আপনার ফাংশন একটি নতুন JSX স্ন্যাপশট রিটার্ন করে।
+3. তারপরে React আপনার ফাংশনের রিটার্ন করা স্ন্যাপশটের সাথে মেলানোর জন্য স্ক্রিনটি আপডেট করে।
 
 <IllustrationBlock sequential>
-  <Illustration caption="You tell React to update the state" src="/images/docs/illustrations/i_state-snapshot1.png" />
-  <Illustration caption="React updates the state value" src="/images/docs/illustrations/i_state-snapshot2.png" />
-  <Illustration caption="React passes a snapshot of the state value into the component" src="/images/docs/illustrations/i_state-snapshot3.png" />
+    <Illustration caption="React ফাংশন এক্সিকিউট করছে" src="/images/docs/illustrations/i_render1.png" />
+    <Illustration caption="স্ন্যাপশট ক্যালকুলেট করছে" src="/images/docs/illustrations/i_render2.png" />
+    <Illustration caption="DOM-ট্রি আপডেট করছে" src="/images/docs/illustrations/i_render3.png" />
 </IllustrationBlock>
 
-Here's a little experiment to show you how this works. In this example, you might expect that clicking the "+3" button would increment the counter three times because it calls `setNumber(number + 1)` three times.
+State একটি নিয়মিত ভেরিয়েবলের মতো নয় যা আপনার ফাংশন রিটার্ন করার পরে হারিয়ে যায়। বরং State React-এর ভেতরে বাস করে--আপনার ফাংশনের বাইরে! React কম্পোনেন্টটি কল করলে এটি আপনাকে ঐ রেন্ডারের সময়ের State-এর একটি স্ন্যাপশট দেয়। আপনার কম্পোনেন্ট তার নতুন props এবং event handler সহ একটি নতুন স্ন্যাপশট ফেরত দেয়, যা আপনার **ঐ রেন্ডারের সময়ের State-এর ভ্যালুগুলি ব্যবহার করে ক্যালকুলেট করা হয়!**
 
-See what happens when you click the "+3" button:
+<IllustrationBlock sequential>
+  <Illustration caption="React-কে State আপডেট করতে বলা হচ্ছে" src="/images/docs/illustrations/i_state-snapshot1.png" />
+  <Illustration caption="React State-এর ভ্যালু আপডেট করছে" src="/images/docs/illustrations/i_state-snapshot2.png" />
+  <Illustration caption="রিয়েক্ট কম্পোনেন্টে State ভ্যালুর স্ন্যাপশট পাঠায়।" src="/images/docs/illustrations/i_state-snapshot3.png" />
+</IllustrationBlock>
+
+ নিচে একটি ছোট এক্সপিরিমেন্টে এটি কিভাবে কাজ করে তা দেখানো হল। এই উদাহরণে আপনি যেহেতু তিনবার `setNumber(number + 1)` কল করবেন, আপনি হয়ত ধরে নিতে পারেন যে "+3" বোতামে ক্লিক করলে কাউন্টারটি তিনবার ইনক্রিমেন্ট হবে।
+
+ "+3" বাটনটি ক্লিক করে দেখুন কি হয়ঃ
 
 <Sandpack>
 
