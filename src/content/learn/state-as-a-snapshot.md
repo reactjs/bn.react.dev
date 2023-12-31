@@ -77,9 +77,9 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 যখন React কোন কম্পোনেন্ট রি-রেন্ডার করেঃ
 
-১। React আবার আপনার ফাংশনটি কল করে।
-২। আপনার ফাংশন একটি নতুন JSX-এর স্ন্যাপশট রিটার্ন করে।
-৩। তারপরে React রিটার্ন করা স্ন্যাপশটের সাথে মেলানোর জন্য স্ক্রিনটি আপডেট করে।
+1. React আবার আপনার ফাংশনটি কল করে।
+2. আপনার ফাংশন একটি নতুন JSX স্ন্যাপশট রিটার্ন করে।
+3. তারপরে React আপনার ফাংশনের রিটার্ন করা স্ন্যাপশটের সাথে মেলানোর জন্য স্ক্রিনটি আপডেট করে।
 
 <IllustrationBlock sequential>
     <Illustration caption="React ফাংশন এক্সিকিউট করছে" src="/images/docs/illustrations/i_render1.png" />
@@ -327,7 +327,7 @@ But what if you wanted to read the latest state before a re-render? You'll want 
 
 #### Implement a traffic light {/*implement-a-traffic-light*/}
 
-Here is a crosswalk light component that toggles on when the button is pressed:
+Here is a crosswalk light component that toggles when the button is pressed:
 
 <Sandpack>
 

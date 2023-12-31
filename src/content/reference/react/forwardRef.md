@@ -4,7 +4,7 @@ title: forwardRef
 
 <Intro>
 
-`forwardRef` lets your component expose a DOM node to parent component with a [ref.](/learn/manipulating-the-dom-with-refs)
+`forwardRef` আপনার কম্পোনেন্টকে একটি DOM নোড একটি প্যারেন্ট কম্পোনেন্টে একটি [ref](/learn/manipulating-the-dom-with-refs) সহ এক্সপোজ করার সুযোগ দেয়।
 
 ```js
 const SomeComponent = forwardRef(render)
@@ -16,11 +16,11 @@ const SomeComponent = forwardRef(render)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `forwardRef(render)` {/*forwardref*/}
 
-Call `forwardRef()` to let your component receive a ref and forward it to a child component:
+`forwardRef()` কল করুন যেন আপনার কম্পোনেন্ট একটি ref রিসিভ করতে পারে এবং একটি চাইল্ড কম্পোনেন্টে ফরোয়ার্ড করতে পারেঃ
 
 ```js
 import { forwardRef } from 'react';
@@ -30,26 +30,26 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `render`: The render function for your component. React calls this function with the props and `ref` that your component received from its parent. The JSX you return will be the output of your component.
+* `render`: আপনার কম্পোনেন্টের রেন্ডার ফাংশন। আপনার কম্পোনেন্ট তার প্যারেন্ট থেকে যে প্রপ এবং `ref` পায় সেটা নিয়ে React এই ফাংশনে কল করে। আপনি যেই JSX রিটার্ন করবেন সেটা হবে আপনার কম্পোনেন্টের আউটপুট।
 
-#### Returns {/*returns*/}
+#### রিটার্ন {/*returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, a component returned by `forwardRef` is also able to receive a `ref` prop.
+`forwardRef` এমন একটা React কম্পোনেন্ট রিটার্ন করে যেটা আপনি JSX এ রেন্ডার করতে পারেন। সোজাসাপ্টা ফাংশন হিসেবে ডিফাইন করা React কম্পোনেন্টের সাথে এর অমিল এখানেই যে, `forwardRef` দ্বারা রিটার্ন হওয়া কম্পোনেন্ট একটা `ref` প্রপ রিসিভও করতে পারে।
 
-#### Caveats {/*caveats*/}
+#### সতর্কতা {/*caveats*/}
 
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
+* Strict Mode এ, React [আপনাকে accidental impurities খুঁজে বের করতে সাহায্য করার জন্য](#my-initializer-or-updater-function-runs-twice) **আপনার রেন্ডার ফাংশন দুবার কল করবে।** এটা development-only আচরণ এবং production এ কোন প্রভাব ফেলবে না। যদি আপনার রেন্ডার ফাংশন pure হয় (যেমন এর হওয়া উচিত), এটা আপনার কম্পোনেন্টের লজিকে কোন প্রভাব ফেলবার কথা না। দুটি কলের একটির ফলাফলকে আমলে আনা হবে না।
 
 
 ---
 
-### `render` function {/*render-function*/}
+### `render` ফাংশন {/*render-function*/}
 
-`forwardRef` accepts a render function as an argument. React calls this function with `props` and `ref`:
+`forwardRef` একটি রেন্ডার ফাংশনকে একটি আর্গুমেন্ট হিসেবে গ্রহণ করে। React এই ফাংশনে `props` এবং `ref` সহ কল করেঃ
 
 ```js
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -62,23 +62,23 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-#### Parameters {/*render-parameters*/}
+#### প্যারামিটার {/*render-parameters*/}
 
-* `props`: The props passed by the parent component.
+* `props`: প্যারেন্ট কম্পোনেন্ট যে প্রপ পাস করে।
 
-* `ref`:  The `ref` attribute passed by the parent component. The `ref` can be an object or a function. If the parent component has not passed a ref, it will be `null`. You should either pass the `ref` you receive to another component, or pass it to [`useImperativeHandle`.](/reference/react/useImperativeHandle)
+* `ref`: প্যারেন্ট কম্পোনেন্টের পাস করা `ref` এট্রিবিউট। এই `ref` হতে পারে অবজেক্ট বা ফাংশন। যদি প্যারেন্ট কম্পোনেন্ট কোন ref পাস না করে থাকে, এটা `null` হবে। আপনার রিসিভ করা `ref` অন্য একটি কম্পোনেন্টে পাস করা উচিত, অথবা [`useImperativeHandle` এ পাস করা উচিত।](/reference/react/useImperativeHandle)
 
-#### Returns {/*render-returns*/}
+#### রিটার্ন {/*render-returns*/}
 
-`forwardRef` returns a React component that you can render in JSX. Unlike React components defined as plain functions, the component returned by `forwardRef` is able to take a `ref` prop.
+`forwardRef` একটি React কম্পোনেন্ট রিটার্ন করে যেটা আপনি JSX এ রেন্ডার করতে পারবেন। Plain ফাংশন হিসেবে সংজ্ঞায়িত React কম্পোনেন্টের সাথে এর অমিল এখানেই যে, `forwardRef` থেকে রিটার্ন করা কম্পোনেন্ট একটি `ref` প্রপ নিতে পারে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Exposing a DOM node to the parent component {/*exposing-a-dom-node-to-the-parent-component*/}
+### প্যারেন্ট কম্পোনেন্টে একটি DOM নোড এক্সপোজ করা {/*exposing-a-dom-node-to-the-parent-component*/}
 
-By default, each component's DOM nodes are private. However, sometimes it's useful to expose a DOM node to the parent--for example, to allow focusing it. To opt in, wrap your component definition into `forwardRef()`:
+ডিফল্ট ভাবে, প্রতিটা কম্পোনেন্টের DOM নোড প্রাইভেট। তবে, কখনো কখনো প্যারেন্টের দিকে একটা DOM নোড এক্সপোজ করা কাজে লাগতে পারে--যেমন, একে ফোকাসের সুযোগ দেবার জন্য। রটা করার জন্য আপনার কম্পোনেন্ট ডেফিনিশন  `forwardRef()` দিয়ে wrap করে ফেলুনঃ
 
 ```js {3,11}
 import { forwardRef } from 'react';
@@ -94,7 +94,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-You will receive a <CodeStep step={1}>ref</CodeStep> as the second argument after props. Pass it to the DOM node that you want to expose:
+আপনি props এর পর দ্বিতীয় আর্গুমেন্ট হিসেবে একটি <CodeStep step={1}>ref</CodeStep> রিসিভ করবেন। আপনি যেই DOM নোড এক্সপোজ করতে চান সেখানে এটি পাস করে দিনঃ
 
 ```js {8} [[1, 3, "ref"], [1, 8, "ref", 30]]
 import { forwardRef } from 'react';
@@ -110,7 +110,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-This lets the parent `Form` component access the <CodeStep step={2}>`<input>` DOM node</CodeStep> exposed by `MyInput`:
+এইটা প্যারেন্ট `Form` কম্পোনেন্টকে `MyInput` এর কারণে এক্সপোজ হওয়া <CodeStep step={2}>`<input>` DOM নোড</CodeStep> এক্সেসের সুযোগ দেয়।  
 
 ```js [[1, 2, "ref"], [1, 10, "ref", 41], [2, 5, "ref.current"]]
 function Form() {
@@ -131,15 +131,15 @@ function Form() {
 }
 ```
 
-This `Form` component [passes a ref](/reference/react/useRef#manipulating-the-dom-with-a-ref) to `MyInput`. The `MyInput` component *forwards* that ref to the `<input>` browser tag. As a result, the `Form` component can access that `<input>` DOM node and call [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) on it.
+এই `Form` কম্পোনেন্টটি `MyInput` এ [একটি ref পাস করে।](/reference/react/useRef#manipulating-the-dom-with-a-ref) `MyInput` কম্পোনেন্ট এই ref কে `<input>` ব্রাউজার ট্যাগে  *ফরোয়ার্ড* করে দেয়। ফলে, `Form` কম্পোনেন্ট ঐ `<input>` DOM নোডে এক্সেস করতে পারে এবং এতে [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) কল দিতে পারে।
 
-Keep in mind that exposing a ref to the DOM node inside your component makes it harder to change your component's internals later. You will typically expose DOM nodes from reusable low-level components like buttons or text inputs, but you won't do it for application-level components like an avatar or a comment.
+মনে রাখবেন যে, আপনার কম্পোনেন্টের মধ্যে একটি ref এক্সপোজ করার ফোলে আপনার কম্পোনেন্টের ভেতরকার তথ্য পরিবর্তন করা কঠিন হয়ে পড়ে। আপনি বাটন বা টেক্সট ইনপুটের মত পুনরায় ব্যবহারযোগ্য লো-লেভেল কম্পোনেন্ট থেকেই সাধরণত DOM nodes এক্সপোজ করবেন, কিন্তু আপনি এপ্লিকেশন-লেভেল কম্পোনেন্ট যেমন avatar বা কমেন্ট এর জন্য এটি করবেন না।
 
-<Recipes title="Examples of forwarding a ref">
+<Recipes titleText="ref ফরোওয়ার্ডের উদাহরণ">
 
-#### Focusing a text input {/*focusing-a-text-input*/}
+#### একটি টেক্সট ইনপুটে ফোকাস করা {/*focusing-a-text-input*/}
 
-Clicking the button will focus the input. The `Form` component defines a ref and passes it to the `MyInput` component. The `MyInput` component forwards that ref to the browser `<input>`. This lets the `Form` component focus the `<input>`.
+বাটনে ক্লিক করা হলে ইনপুট ফোকাস হবে। `Form` কম্পোনেন্ট একটি ref ডিফাইন করে এবং `MyInput` কম্পোনেন্টে পাস করে দেয়। `MyInput` কম্পোনেন্ট সেই ref টি ব্রাউজার `<input>` এ ফরোয়ার্ড করে দেয়। এর কারণে `Form` কম্পোনেন্ট `<input>` এ ফোকাস করতে পারে।
 
 <Sandpack>
 
@@ -165,7 +165,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -191,9 +191,9 @@ input {
 
 <Solution />
 
-#### Playing and pausing a video {/*playing-and-pausing-a-video*/}
+#### একটি ভিডিও চালানো এবং থামানো {/*playing-and-pausing-a-video*/}
 
-Clicking the button will call [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) on a `<video>` DOM node. The `App` component defines a ref and passes it to the `MyVideoPlayer` component. The `MyVideoPlayer` component forwards that ref to the browser `<video>` node. This lets the `App` component play and pause the `<video>`.
+বাটনে ক্লিক করা হলে `<video>` DOM এ [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) এবং [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) কল হবে। `App` কম্পোনেন্ট একটি ref ডিফাইন করে এবং `MyVideoPlayer` কম্পোনেন্টে পাস করে দেয়। The `MyVideoPlayer` কম্পোনেন্ট সেই ref টি ব্রাউজার `<video>` নোডে ফরোয়ার্ড করে দেয়। এটি `App` কম্পোনেন্টকে `<video>` চালানো এবং থামানোর সুযোগ দেয়।
 
 <Sandpack>
 
@@ -223,7 +223,7 @@ export default function App() {
 }
 ```
 
-```js MyVideoPlayer.js
+```js src/MyVideoPlayer.js
 import { forwardRef } from 'react';
 
 const VideoPlayer = forwardRef(function VideoPlayer({ src, type, width }, ref) {
@@ -252,9 +252,9 @@ button { margin-bottom: 10px; margin-right: 10px; }
 
 ---
 
-### Forwarding a ref through multiple components {/*forwarding-a-ref-through-multiple-components*/}
+### একাধিক কম্পোনেন্টের মধ্য দিয়ে ref ফরোয়ার্ড {/*forwarding-a-ref-through-multiple-components*/}
 
-Instead of forwarding a `ref` to a DOM node, you can forward it to your own component like `MyInput`:
+DOM নোডে `ref` ফরোয়ার্ড করার বদলে, আপনি এটি আপনার নিজের কম্পোনেন্ট যেমন `MyInput` এ ফরোয়ার্ড করতে পারেনঃ
 
 ```js {1,5}
 const FormField = forwardRef(function FormField(props, ref) {
@@ -268,7 +268,7 @@ const FormField = forwardRef(function FormField(props, ref) {
 });
 ```
 
-If that `MyInput` component forwards a ref to its `<input>`, a ref to `FormField` will give you that `<input>`:
+যদি `MyInput` কম্পোনেন্ট তার `<input>` এ একটি ref ফরোয়ার্ড করে, `FormField` এর ref আপনাকে সেই `<input>` দিবেঃ
 
 ```js {2,5,10}
 function Form() {
@@ -289,7 +289,7 @@ function Form() {
 }
 ```
 
-The `Form` component defines a ref and passes it to `FormField`. The `FormField` component forwards that ref to `MyInput`, which forwards it to a browser `<input>` DOM node. This is how `Form` accesses that DOM node.
+`Form` কম্পোনেন্ট একটি ref ডিফাইন করে এবং `FormField` কম্পোনেন্টে পাস করে দেয়। `FormField` কম্পোনেন্ট সেই ref টি `MyInput` এ ফরোয়ার্ড করে, যা একে ব্রাউজার DOM নোড `<input>` এ ফরোয়ার্ড করে। এই ভাবে `Form` ঐ DOM নোড এক্সেস করে।
 
 
 <Sandpack>
@@ -316,7 +316,7 @@ export default function Form() {
 }
 ```
 
-```js FormField.js
+```js src/FormField.js
 import { forwardRef, useState } from 'react';
 import MyInput from './MyInput.js';
 
@@ -341,7 +341,7 @@ export default FormField;
 ```
 
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef } from 'react';
 
 const MyInput = forwardRef((props, ref) => {
@@ -367,9 +367,9 @@ input, button {
 
 ---
 
-### Exposing an imperative handle instead of a DOM node {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
+### DOM নোডের বদলে একটি imperative handle এক্সপোজ করা {/*exposing-an-imperative-handle-instead-of-a-dom-node*/}
 
-Instead of exposing an entire DOM node, you can expose a custom object, called an *imperative handle,* with a more constrained set of methods. To do this, you'd need to define a separate ref to hold the DOM node:
+সম্পূর্ণ DOM নোড এক্সপোজ করবার বদলে, আপনি একটি কাস্টম অবজেক্ট এক্সপোজ করতে পারেন, যাকে *imperative handle* বলা হয়, যার সীমিত কিছু মেথড আছে। এটা করার জন্য, DOM নোড ধরে রাখতে আপনাকে একটি আলাদা ref ডিফাইন করতে হবেঃ
 
 ```js {2,6}
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -381,7 +381,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-Pass the `ref` you received to [`useImperativeHandle`](/reference/react/useImperativeHandle) and specify the value you want to expose to the `ref`:
+আপনার রিসিভ করা `ref`, [`useImperativeHandle`](/reference/react/useImperativeHandle) এ পাস করে করে দিন এবং আপনি যেই ভ্যালু `ref` এ এক্সপোজ করতে চান সেটা নির্দেশ করে দিনঃ
 
 ```js {6-15}
 import { forwardRef, useRef, useImperativeHandle } from 'react';
@@ -404,7 +404,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-If some component gets a ref to `MyInput`, it will only receive your `{ focus, scrollIntoView }` object instead of the DOM node. This lets you limit the information you expose about your DOM node to the minimum.
+যদি কোন কম্পোনেন্ট `MyInput` এর ref পায়, এটা DOM নোডের বদলে কেবল আপনার `{ focus, scrollIntoView }` অবজেক্ট রিসিভ করবে। এভাবে আপনি আপনার DOM নোডের তথ্যের সর্বনিম্ন পরিমাণ এক্সপোজ হবে।
 
 <Sandpack>
 
@@ -423,7 +423,7 @@ export default function Form() {
 
   return (
     <form>
-      <MyInput label="Enter your name:" ref={ref} />
+      <MyInput placeholder="Enter your name" ref={ref} />
       <button type="button" onClick={handleClick}>
         Edit
       </button>
@@ -432,7 +432,7 @@ export default function Form() {
 }
 ```
 
-```js MyInput.js
+```js src/MyInput.js
 import { forwardRef, useRef, useImperativeHandle } from 'react';
 
 const MyInput = forwardRef(function MyInput(props, ref) {
@@ -463,25 +463,25 @@ input {
 
 </Sandpack>
 
-[Read more about using imperative handles.](/reference/react/useImperativeHandle)
+[Imperative handles সম্বন্ধে আরো পড়ুন।](/reference/react/useImperativeHandle)
 
 <Pitfall>
 
-**Do not overuse refs.** You should only use refs for *imperative* behaviors that you can't express as props: for example, scrolling to a node, focusing a node, triggering an animation, selecting text, and so on.
+**Ref অতিরিক্ত ব্যবহার করবেন না।** শুধুমাত্র *imperative* আচরণ যা আপনি prop দিয়ে দেখাতে পারবেন না সেগুলোর ক্ষেত্রেই ref ব্যবহার করবেনঃ যেমন, নোড স্ক্রোল করা, নোড ফোকাস করা, এনিমশন ট্রিগার করা, টেক্সট সিলেক্ট করা, ইত্যাদি।
 
-**If you can express something as a prop, you should not use a ref.** For example, instead of exposing an imperative handle like `{ open, close }` from a `Modal` component, it is better to take `isOpen` as a prop like `<Modal isOpen={isOpen} />`. [Effects](/learn/synchronizing-with-effects) can help you expose imperative behaviors via props.
+**আপনি যদি কোন কিছু prop এর মাধ্যমে উন্মুক্ত করতে পারেন, তবে ref ব্যবহার করা উচিত হবে না।** যেমন, `Modal` কম্পোনেন্ট থেকে এর মত একটি imperative handle এক্সপোজ করার বদলে, `<Modal isOpen={isOpen} />` এর মত করে `isOpen` prop নেওয়া বেশি ভাল হবে। [Effects](/learn/synchronizing-with-effects) prop এর মাধ্যমে আপনাকে imperative আচরণ এক্সপোজের সুযোগ দেবে।
 
 </Pitfall>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশ্যুট {/*troubleshooting*/}
 
-### My component is wrapped in `forwardRef`, but the `ref` to it is always `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
+### আমার কম্পোনেন্ট `forwardRef` এর মধ্যে wrap করা, কিন্তু এর `ref` সবসময় `null` {/*my-component-is-wrapped-in-forwardref-but-the-ref-to-it-is-always-null*/}
 
-This usually means that you forgot to actually use the `ref` that you received.
+সাধারণত এর অর্থ হল আপনি যেই `ref` রিসিভ করেছেন, সেটা ব্যবহার করতে ভুলে গেছেন।
 
-For example, this component doesn't do anything with its `ref`:
+উদাহরণস্বরূপ, এই কম্পোনেন্ট এই `ref` এর সাথে কিছু করে নাঃ
 
 ```js {1}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -494,7 +494,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-To fix it, pass the `ref` down to a DOM node or another component that can accept a ref:
+এটা ঠিক করার জন্য, `ref` কে নিচে DOM নোড বা অন্য এমন কোন কম্পোনেন্ট যা ref গ্রহণ করতে পারে সে পর্যন্ত নিয়ে যানঃ
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label }, ref) {
@@ -507,7 +507,7 @@ const MyInput = forwardRef(function MyInput({ label }, ref) {
 });
 ```
 
-The `ref` to `MyInput` could also be `null` if some of the logic is conditional:
+যদি কিছু লজিক কন্ডিশনাল হয় সেক্ষেত্রেও `MyInput` এর `ref` `null` হতে পারেঃ
 
 ```js {1,5}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
@@ -520,7 +520,7 @@ const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
 });
 ```
 
-If `showInput` is `false`, then the ref won't be forwarded to any node, and a ref to `MyInput` will remain empty. This is particularly easy to miss if the condition is hidden inside another component, like `Panel` in this example:
+যদি `showInput` `false` হয়, তাহলে ref কোন নোডে ফরোয়ার্ড হবে না, এবং `MyInput` এর একটি ref ফাঁকা থাকবে। বিশেষ করে এই বিষয়টি সহজেই উপেক্ষিত হতে পারে যদি কন্ডিশন অন্য কোন কম্পোনেন্টের মধ্যে লুকিয়ে থাকে, যেমন এই উদাহরণে `Panel`:
 
 ```js {5,7}
 const MyInput = forwardRef(function MyInput({ label, showInput }, ref) {
