@@ -320,6 +320,9 @@ label, textarea { margin-bottom: 10px; display: block; }
 * অতীতে তৈরি করা ইভেন্ট হ্যান্ডলারগুলি সেই রেন্ডারের state মান বহন করে, যে রেন্ডারে তারা তৈরি হয়েছিল।
 
 </Recap>
+
+
+
 <Challenges>
 
 #### একটি ট্রাফিক লাইট বাস্তবায়ন করুন {/*implement-a-traffic-light*/}
