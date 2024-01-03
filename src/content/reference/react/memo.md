@@ -32,21 +32,21 @@ const SomeComponent = memo(function SomeComponent(props) {
 
 [নিচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটারস {/*parameters*/}
 
-* `Component`: The component that you want to memoize. The `memo` does not modify this component, but returns a new, memoized component instead. Any valid React component, including functions and [`forwardRef`](/reference/react/forwardRef) components, is accepted.
+* `Component`: যে কম্পোনেন্টটি আপনি মেমোয়াইজ করতে চান। `memo` এই কম্পোনেন্টকে পরিবর্তন করে না, বরং এর পরিবর্তে একটি নতুন, মেমোয়াইজড কম্পোনেন্ট রিটার্ন করে। যেকোনো বৈধ React কম্পোনেন্ট, ফাংশন এবং [`forwardRef`](/reference/react/forwardRef) কম্পোনেন্টসহ, গ্রহণযোগ্য।
 
-* **optional** `arePropsEqual`: A function that accepts two arguments: the component's previous props, and its new props. It should return `true` if the old and new props are equal: that is, if the component will render the same output and behave in the same way with the new props as with the old. Otherwise it should return `false`. Usually, you will not specify this function. By default, React will compare each prop with [`Object.is`.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+* **ঐচ্ছিক** `arePropsEqual`: দুটি আর্গুমেন্ট গ্রহণকারী একটি ফাংশন: কম্পোনেন্টের পূর্ববর্তী প্রপস এবং এর নতুন প্রপস। যদি পুরানো এবং নতুন প্রপস একই হয়ঃ অর্থাৎ, যদি কম্পোনেন্ট নতুন প্রপসের সাথে পুরানো প্রপসের মতোই আউটপুট দেয় এবং আচরণ করে, তাহলে এটি `true` রিটার্ন করবে। অন্যথায় এটি `false` রিটার্ন করবে। সাধারণত, আপনি এই ফাংশনটি নির্দিষ্ট করবেন না। ডিফল্ট হিসাবে, React প্রতিটি প্রপকে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)-এর সাথে তুলনা করবে।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-`memo` returns a new React component. It behaves the same as the component provided to `memo` except that React will not always re-render it when its parent is being re-rendered unless its props have changed.
+`memo` একটি নতুন React কম্পোনেন্ট ফেরত দেয়। এটি `memo`-তে প্রদত্ত কম্পোনেন্টের মতোই আচরণ করে, তবে React সবসময় এটিকে তার প্যারেন্ট পুনরায় রেন্ডার হলে পুনরায় রেন্ডার করবে না, যদি না তার প্রপস পরিবর্তিত হয়।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Skipping re-rendering when props are unchanged {/*skipping-re-rendering-when-props-are-unchanged*/}
+### প্রপস অপরিবর্তিত থাকলে রি-রেন্ডারিং এড়ানো {/*skipping-re-rendering-when-props-are-unchanged*/}
 
 React normally re-renders a component whenever its parent re-renders. With `memo`, you can create a component that React will not re-render when its parent re-renders so long as its new props are the same as the old props. Such a component is said to be *memoized*.
 
