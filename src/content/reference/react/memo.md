@@ -4,7 +4,7 @@ title: memo
 
 <Intro>
 
-`memo` lets you skip re-rendering a component when its props are unchanged.
+`memo` আপনাকে একটি কম্পোনেন্টের পুনরায় রেন্ডারিং এড়াতে দেয় যখন এর প্রপস অপরিবর্তিত থাকে।
 
 ```
 const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
@@ -16,11 +16,11 @@ const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `memo(Component, arePropsEqual?)` {/*memo*/}
 
-Wrap a component in `memo` to get a *memoized* version of that component. This memoized version of your component will usually not be re-rendered when its parent component is re-rendered as long as its props have not changed. But React may still re-render it: memoization is a performance optimization, not a guarantee.
+একটি কম্পোনেন্টকে `memo`-তে মোড়ানো হলে এর *memoized* সংস্করণ পাওয়া যায়। এই মেমোয়াইজড কম্পোনেন্ট সাধারণত তার parent কম্পোনেন্ট পুনরায় রেন্ডার হলেও পুনরায় রেন্ডার করা হয় না, যদি তার প্রপস অপরিবর্তিত থাকে। তবে React তারপরও এটি পুনরায় রেন্ডার করতে পারেঃ মেমোয়াইজেশন একটি পারফরম্যান্স অপ্টিমাইজেশন, গ্যারান্টি নয়।
 
 ```js
 import { memo } from 'react';
@@ -30,7 +30,7 @@ const SomeComponent = memo(function SomeComponent(props) {
 });
 ```
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুন।](#usage)
 
 #### Parameters {/*parameters*/}
 
