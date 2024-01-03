@@ -48,9 +48,9 @@ const SomeComponent = memo(function SomeComponent(props) {
 
 ### প্রপস অপরিবর্তিত থাকলে রি-রেন্ডারিং এড়ানো {/*skipping-re-rendering-when-props-are-unchanged*/}
 
-React normally re-renders a component whenever its parent re-renders. With `memo`, you can create a component that React will not re-render when its parent re-renders so long as its new props are the same as the old props. Such a component is said to be *memoized*.
+React সাধারণত একটি কম্পোনেন্ট পুনরায় রেন্ডার করে যখন এর প্যারেন্ট পুনরায় রেন্ডার হয়। `memo` দ্বারা, আপনি এমন একটি কম্পোনেন্ট তৈরি করতে পারেন যা React তার প্যারেন্ট পুনরায় রেন্ডার হলেও পুনরায় রেন্ডার করবে না, যতক্ষণ না এর নতুন প্রপস পুরানো প্রপসের সাথে একই থাকে। এমন একটি কম্পোনেন্টকে *মেমোয়াইজড* বলা হয়।
 
-To memoize a component, wrap it in `memo` and use the value that it returns in place of your original component:
+একটি কম্পোনেন্টকে মেমোয়াইজ করতে, এটিকে `memo`-এ wrap korun মোড়ান এবং এর রিটার্ন করা মানটি আপনার মূল কম্পোনেন্টের পরিবর্তে ব্যবহার করুনঃ
 
 ```js
 const Greeting = memo(function Greeting({ name }) {
@@ -60,9 +60,9 @@ const Greeting = memo(function Greeting({ name }) {
 export default Greeting;
 ```
 
-A React component should always have [pure rendering logic.](/learn/keeping-components-pure) This means that it must return the same output if its props, state, and context haven't changed. By using `memo`, you are telling React that your component complies with this requirement, so React doesn't need to re-render as long as its props haven't changed. Even with `memo`, your component will re-render if its own state changes or if a context that it's using changes.
+একটি React কম্পোনেন্টের সবসময় [pure রেন্ডারিং লজিক](/learn/keeping-components-pure) থাকা উচিত। এর অর্থ এটি একই আউটপুট ফেরত দেবে যদি এর প্রপস, স্টেট এবং কন্টেক্স্ট পরিবর্তিত না হয়। `memo` ব্যবহার করে, আপনি React-কে জানাচ্ছেন যে আপনার কম্পোনেন্ট এই প্রয়োজনীয়তাটি পূরণ করে, তাই React-এর প্রপস পরিবর্তিত না হলে পুনরায় রেন্ডার করতে হবে না। `memo` ব্যবহার করলেও, আপনার কম্পোনেন্ট তার নিজের স্টেট পরিবর্তন হলে অথবা ব্যবহৃত কন্টেক্স্ট পরিবর্তন হলে পুনরায় রেন্ডার করবে।
 
-In this example, notice that the `Greeting` component re-renders whenever `name` is changed (because that's one of its props), but not when `address` is changed (because it's not passed to `Greeting` as a prop):
+এই উদাহরণে, লক্ষ্য করুন যে `Greeting` কম্পোনেন্টটি `name` পরিবর্তিত হলে পুনরায় রেন্ডার হয় (কারণ এটি এর একটি প্রপ), কিন্তু `address` পরিবর্তন হলে নয় (কারণ এটি `Greeting`-এ প্রপ হিসেবে পাস করা হয় না):
 
 <Sandpack>
 
@@ -104,7 +104,7 @@ label {
 
 <Note>
 
-**You should only rely on `memo` as a performance optimization.** If your code doesn't work without it, find the underlying problem and fix it first. Then you may add `memo` to improve performance.
+**আপনি কেবল কর্মক্ষমতা অপ্টিমাইজেশন হিসাবে `memo`-এর উপর নির্ভর করা উচিত।** যদি আপনার কোড `memo` ছাড়া কাজ না করে, তাহলে প্রথমে মৌলিক সমস্যাটি খুঁজে বের করুন এবং তা ঠিক করুন। তারপর আপনি কর্মক্ষমতা উন্নতির জন্য `memo` যোগ করতে পারেন।
 
 </Note>
 
