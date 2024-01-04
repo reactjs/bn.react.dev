@@ -110,15 +110,24 @@ label {
 
 <DeepDive>
 
-#### Should you add memo everywhere? {/*should-you-add-memo-everywhere*/}
+#### আপনি কি সর্বত্র `memo` যোগ করবেন? {/*should-you-add-memo-everywhere*/}
 
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful. 
+যদি আপনার অ্যাপ এই সাইটের মতো হয়, এবং বেশিরভাগ ইন্টারেকশন ভারী (যেমন একটি পৃষ্ঠা বা পুরো অংশ প্রতিস্থাপন করা) হয়, তাহলে মেমোয়াইজেশন সাধারণত অপ্রয়োজনীয়। অন্যদিকে, যদি আপনার অ্যাপ একটি ড্রয়িং এডিটরের মতো হয়, এবং বেশিরভাগ ইন্টারেকশন সূক্ষ্ম (যেমন shape সরানো), তাহলে মেমোয়াইজেশন আপনার কাছে খুব উপকারী মনে হতে পারে।
 
-Optimizing with `memo`  is only valuable when your component re-renders often with the same exact props, and its re-rendering logic is expensive. If there is no perceptible lag when your component re-renders, `memo` is unnecessary. Keep in mind that `memo` is completely useless if the props passed to your component are *always different,* such as if you pass an object or a plain function defined during rendering. This is why you will often need [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) and [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) together with `memo`.
+`memo` দ্বারা অপ্টিমাইজেশন তখনই মূল্যবান যখন আপনার কম্পোনেন্ট একই নির্দিষ্ট প্রপসের সাথে প্রায়শই পুনরায় রেন্ডার হয়, এবং এর পুনরায় রেন্ডার লজিক খরচবহুল। যদি আপনার কম্পোনেন্ট পুনরায় রেন্ডার হওয়ার সময় কোনো লক্ষণীয় ধীরতা না থাকে, তাহলে `memo` অপ্রয়োজনীয়। মনে রাখবেন, যদি আপনার কম্পোনেন্টের পাস করা প্রপস *সর্বদা আলাদা* হয়, যেমন যদি আপনি একটি অবজেক্ট বা রেন্ডারিং সময় ডিফাইন করা একটি সাধারণ ফাংশন পাস করেন। এই কারণে আপনার প্রায়শই [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) এবং [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) এর সাথে `memo` ব্যবহার করা প্রয়োজন হবে।
 
-There is no benefit to wrapping a component in `memo` in other cases. There is no significant harm to doing that either, so some teams choose to not think about individual cases, and memoize as much as possible. The downside of this approach is that code becomes less readable. Also, not all memoization is effective: a single value that's "always new" is enough to break memoization for an entire component.
+`memo` দ্বারা একটি কম্পোনেন্ট wrap করার অন্যান্য ক্ষেত্রে কোনো উপকার নেই। এটি করলে বিশেষ কোনো ক্ষতি হয় না, তাই কিছু টিম প্রতিটি ক্ষেত্রে ভেবে না দেখে যথাসম্ভব মেমোয়াইজ করতে চায়। এই পদ্ধতির নেতিবাচক দিক হল কোড কম পাঠযোগ্য হয়ে যায়। এছাড়াও, সব মেমোয়াইজেশন কার্যকর নয়ঃ একটি "সর্বদা নতুন" মান পুরো কম্পোনেন্টের মেমোয়াইজেশন ভেঙ্গে দেবার জন্য যথেষ্ট।
 
-**In practice, you can make a lot of memoization unnecessary by following a few principles:**
+**ব্যবহারিকভাবে, কয়েকটি নীতি অনুসরণ করে আপনি ক্ষেত্রবিশেষে অনেক মেমোয়াইজেশন অপ্রয়োজনীয় করে তুলতে পারেনঃ**
+
+1. যখন একটি কম্পোনেন্ট অন্যান্য কম্পোনেন্টগুলিকে দৃশ্যত জড়িয়ে রাখে, তখন এটিকে [JSX চাইল্ড হিসাবে গ্রহণ করতে দিন](/learn/passing-props-to-a-component#passing-jsx-as-children)। এর ফলে, যখন র‍্যাপার কম্পোনেন্ট নিজের স্টেট আপডেট করে, React জানে যে এর চাইল্ডগুলিকে পুনরায় রেন্ডার করার প্রয়োজন নেই।
+1. স্থানীয় স্টেটকে প্রাধান্য দিন এবং [স্টেট উপরে তোলা](/learn/sharing-state-between-components) প্রয়োজনের চেয়ে বেশি না করা ভালো। উদাহরণস্বরূপ, ফর্ম এবং কোনো আইটেম উপরে হোভার করা নিয়ে অস্থায়ী স্টেট আপনার ট্রির শীর্ষে বা একটি গ্লোবাল স্টেট লাইব্রেরিতে রাখবেন না।
+1. আপনার [রেন্ডারিং লজিক শুদ্ধ](/learn/keeping-components-pure) রাখুন। যদি কোনো কম্পোনেন্ট পুনরায় রেন্ডার করা সমস্যা সৃষ্টি করে বা কোনো লক্ষণীয় দৃশ্য সমস্যা তৈরি করে, তাহলে এটি আপনার কম্পোনেন্টের বাগ! মেমোয়াইজেশন যোগ করার পরিবর্তে বাগটি ঠিক করুন।
+1. [অপ্রয়োজনীয় ইফেক্ট যা স্টেট আপডেট করে](/learn/you-might-not-need-an-effect) এড়িয়ে চলুন। বেশিরভাগ React অ্যাপের কর্মক্ষমতা সমস্যা এমন আপডেট চেইন থেকে উদ্ভূত হয় যা ইফেক্ট থেকে আসে এবং আপনার কম্পোনেন্টগুলিকে বারবার রেন্ডার করায়।
+1. আপনার ইফেক্ট থেকে [অপ্রয়োজনীয় নির্ভরতা সরিয়ে ফেলার](/learn/removing-effect-dependencies) চেষ্টা করুন। উদাহরণস্বরূপ, মেমোয়াইজেশনের পরিবর্তে, কোনো অবজেক্ট বা ফাংশনকে একটি ইফেক্টের মধ্যে বা কম্পোনেন্টের বাইরে সরান৤
+
+যদি কোনো নির্দিষ্ট ইন্টারেকশন এখনও ধীর অনুভূত হয়, [React Developer Tools প্রোফাইলার ব্যবহার করুন](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) যে
+
 
 1. When a component visually wraps other components, let it [accept JSX as children.](/learn/passing-props-to-a-component#passing-jsx-as-children) This way, when the wrapper component updates its own state, React knows that its children don't need to re-render.
 1. Prefer local state and don't [lift state up](/learn/sharing-state-between-components) any further than necessary. For example, don't keep transient state like forms and whether an item is hovered at the top of your tree or in a global state library.
