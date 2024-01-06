@@ -269,10 +269,9 @@ label {
 
 ### প্রপস পরিবর্তন সর্বনিম্ন করা {/*minimizing-props-changes*/}
 
-When you use `memo`, your component re-renders whenever any prop is not *shallowly equal* to what it was previously. This means that React compares every prop in your component with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Note that `Object.is(3, 3)` is `true`, but `Object.is({}, {})` is `false`.
+`memo` ব্যবহার করলে, আপনার কম্পোনেন্ট পুনরায় রেন্ডার হয় যখন যেকোনো প্রপ আগের থেকে *shallowly equal* নয়। এর অর্থ হলো React আপনার কম্পোনেন্টের প্রতিটি প্রপকে এর আগের মানের সাথে [`Object.is` comparison](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ব্যবহার করে তুলনা করে। লক্ষ্য করুন যে `Object.is(3, 3)` `true` হলেও, `Object.is({}, {})` `false`।
 
-
-To get the most out of `memo`, minimize the times that the props change. For example, if the prop is an object, prevent the parent component from re-creating that object every time by using [`useMemo`:](/reference/react/useMemo)
+`memo` থেকে সর্বাধিক উপকার পেতে, প্রপস পরিবর্তনের সংখ্যা সর্বনিম্ন করুন। উদাহরণস্বরূপ, যদি প্রপটি একটি অবজেক্ট হয়, তাহলে প্যারেন্ট কম্পোনেন্ট প্রতিবার সেই অবজেক্টটি পুনরায় তৈরি করা থেকে বিরত থাকতে [`useMemo`](/reference/react/useMemo) ব্যবহার করুনঃ
 
 ```js {5-8}
 function Page() {
@@ -292,7 +291,7 @@ const Profile = memo(function Profile({ person }) {
 });
 ```
 
-A better way to minimize props changes is to make sure the component accepts the minimum necessary information in its props. For example, it could accept individual values instead of a whole object:
+প্রপস পরিবর্তন আরও কমানোর ভালো উপায় হলো নিশ্চিত করা যে কম্পোনেন্টটি তার প্রপসে কেবল সর্বনিম্ন প্রয়োজনীয় তথ্য গ্রহণ করে। উদাহরণস্বরূপ, এটি একটি পুরো অবজেক্টের পরিবর্তে পৃথক মানগুলি গ্রহণ করতে পারেঃ
 
 ```js {4,7}
 function Page() {
@@ -306,7 +305,7 @@ const Profile = memo(function Profile({ name, age }) {
 });
 ```
 
-Even individual values can sometimes be projected to ones that change less frequently. For example, here a component accepts a boolean indicating the presence of a value rather than the value itself:
+এমনকি পৃথক মানগুলিও কখনও কখনও কম পরিবর্তিত হওয়া মানগুলিতে project করা যেতে পারে। উদাহরণস্বরূপ, এখানে একটি কম্পোনেন্ট একটি মানের উপস্থিতি নির্দেশ করা একটি বুলিয়ান গ্রহণ করেঃ
 
 ```js {3}
 function GroupsLanding({ person }) {
@@ -319,13 +318,13 @@ const CallToAction = memo(function CallToAction({ hasGroups }) {
 });
 ```
 
-When you need to pass a function to memoized component, either declare it outside your component so that it never changes, or [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) to cache its definition between re-renders.
+যখন আপনার মেমোয়াইজড কম্পোনেন্টে একটি ফাংশন পাস করতে হবে, তখন এটি হয় আপনার কম্পোনেন্টের বাইরে declare করুন যাতে এটি কখনই পরিবর্তিত না হয়, অথবা এর definition পুনরায় রেন্ডারের মধ্যে cache করতে [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) ব্যবহার করুন।
 
 ---
 
-### Specifying a custom comparison function {/*specifying-a-custom-comparison-function*/}
+### কাস্টম তুলনা ফাংশন নির্দিষ্ট করা {/*specifying-a-custom-comparison-function*/}
 
-In rare cases it may be infeasible to minimize the props changes of a memoized component. In that case, you can provide a custom comparison function, which React will use to compare the old and new props instead of using shallow equality. This function is passed as a second argument to `memo`. It should return `true` only if the new props would result in the same output as the old props; otherwise it should return `false`.
+বিরল ক্ষেত্রে মেমোয়াইজড কম্পোনেন্টের প্রপস পরিবর্তন সর্বনিম্ন করা অসম্ভব হতে পারে। সেক্ষেত্রে, আপনি একটি কাস্টম তুলনা ফাংশন দিতে পারেন, যা React পুরানো এবং নতুন প্রপসের তুলনা করতে ব্যবহার করবে shallow equality এর পরিবর্তে। এই ফাংশনটি `memo`-র দ্বিতীয় আর্গুমেন্ট হিসেবে পাস করা হয়। এটি কেবল `true` ফেরত দেবে যদি নতুন প্রপস পুরানো প্রপসের মতোই আউটপুট তৈরি করে; অন্যথায় এটি `false` ফেরত দেবে।
 
 ```js {3}
 const Chart = memo(function Chart({ dataPoints }) {
