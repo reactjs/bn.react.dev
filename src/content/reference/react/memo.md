@@ -126,24 +126,15 @@ label {
 1. [অপ্রয়োজনীয় ইফেক্ট যা স্টেট আপডেট করে](/learn/you-might-not-need-an-effect) এড়িয়ে চলুন। বেশিরভাগ React অ্যাপের কর্মক্ষমতা সমস্যা এমন আপডেট চেইন থেকে উদ্ভূত হয় যা ইফেক্ট থেকে আসে এবং আপনার কম্পোনেন্টগুলিকে বারবার রেন্ডার করায়।
 1. আপনার ইফেক্ট থেকে [অপ্রয়োজনীয় নির্ভরতা সরিয়ে ফেলার](/learn/removing-effect-dependencies) চেষ্টা করুন। উদাহরণস্বরূপ, মেমোয়াইজেশনের পরিবর্তে, কোনো অবজেক্ট বা ফাংশনকে একটি ইফেক্টের মধ্যে বা কম্পোনেন্টের বাইরে সরান৤
 
-যদি কোনো নির্দিষ্ট ইন্টারেকশন এখনও ধীর অনুভূত হয়, [React Developer Tools প্রোফাইলার ব্যবহার করুন](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) যে
-
-
-1. When a component visually wraps other components, let it [accept JSX as children.](/learn/passing-props-to-a-component#passing-jsx-as-children) This way, when the wrapper component updates its own state, React knows that its children don't need to re-render.
-1. Prefer local state and don't [lift state up](/learn/sharing-state-between-components) any further than necessary. For example, don't keep transient state like forms and whether an item is hovered at the top of your tree or in a global state library.
-1. Keep your [rendering logic pure.](/learn/keeping-components-pure) If re-rendering a component causes a problem or produces some noticeable visual artifact, it's a bug in your component! Fix the bug instead of adding memoization.
-1. Avoid [unnecessary Effects that update state.](/learn/you-might-not-need-an-effect) Most performance problems in React apps are caused by chains of updates originating from Effects that cause your components to render over and over.
-1. Try to [remove unnecessary dependencies from your Effects.](/learn/removing-effect-dependencies) For example, instead of memoization, it's often simpler to move some object or a function inside an Effect or outside the component.
-
-If a specific interaction still feels laggy, [use the React Developer Tools profiler](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) to see which components would benefit the most from memoization, and add memoization where needed. These principles make your components easier to debug and understand, so it's good to follow them in any case. In the long term, we're researching [doing granular memoization automatically](https://www.youtube.com/watch?v=lGEMwh32soc) to solve this once and for all.
+যদি কোনো নির্দিষ্ট ইন্টারেকশন এখনও ধীর অনুভূত হয়, [React Developer Tools প্রোফাইলার ব্যবহার করুন](https://legacy.reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) যেগুলি কম্পোনেন্টগুলি মেমোয়াইজেশন থেকে সর্বাধিক উপকার পাবে তা দেখার জন্য, এবং প্রয়োজনমতো মেমোয়াইজেশন যোগ করুন। এই নীতিগুলি আপনার কম্পোনেন্টগুলিকে ডিবাগ করা এবং বোঝা সহজ করে তোলে, তাই যেকোনো অবস্থায় এগুলি অনুসরণ করা ভালো। দীর্ঘমেয়াদে, আমরা [স্বয়ংক্রিয়ভাবে সূক্ষ্ম মেমোয়াইজেশন করা](https://www.youtube.com/watch?v=lGEMwh32soc) নিয়ে গবেষণা করছি যা এই সমস্যাটি একবারের জন্য সমাধান করবে।
 
 </DeepDive>
 
 ---
 
-### Updating a memoized component using state {/*updating-a-memoized-component-using-state*/}
+### স্টেট ব্যবহার করে মেমোয়াইজড কম্পোনেন্ট আপডেট করা {/*updating-a-memoized-component-using-state*/}
 
-Even when a component is memoized, it will still re-render when its own state changes. Memoization only has to do with props that are passed to the component from its parent.
+যদিও একটি কম্পোনেন্ট মেমোয়াইজ করা হয়, এটি তবুও পুনরায় রেন্ডার হবে যখন এর নিজের স্টেট বদলায়। মেমোয়াইজেশন শুধুমাত্র প্যারেন্ট কম্পোনেন্ট থেকে পাস করা প্রপস নিয়ে কাজ করে।
 
 <Sandpack>
 
@@ -212,13 +203,13 @@ label {
 
 </Sandpack>
 
-If you set a state variable to its current value, React will skip re-rendering your component even without `memo`. You may still see your component function being called an extra time, but the result will be discarded.
+যদি আপনি একটি স্টেট ভেরিয়েবলকে এর বর্তমান মানে সেট করেন, React আপনার কম্পোনেন্টের পুনরায় রেন্ডার করা এড়িয়ে যাবে, এমনকি `memo` ছাড়াও। আপনি হয়তো দেখতে পাবেন যে আপনার কম্পোনেন্ট ফাংশনটি অতিরিক্ত সময় কল করা হচ্ছে, কিন্তু ফলাফলটি বাতিল করা হবে।
 
 ---
 
-### Updating a memoized component using a context {/*updating-a-memoized-component-using-a-context*/}
+### একটি কনটেক্সট ব্যবহার করে মেমোয়াইজড কম্পোনেন্ট আপডেট করা {/*updating-a-memoized-component-using-a-context*/}
 
-Even when a component is memoized, it will still re-render when a context that it's using changes. Memoization only has to do with props that are passed to the component from its parent.
+যদিও একটি কম্পোনেন্ট মেমোয়াইজ করা হয়, এটি তবুও পুনরায় রেন্ডার হবে যখন এর ব্যবহার করা কনটেক্সট পরিবর্তন হয়। মেমোয়াইজেশন শুধুমাত্র অভিভাবক কম্পোনেন্ট থেকে পাস করা প্রপস নিয়ে কাজ করে।
 
 <Sandpack>
 
@@ -272,11 +263,11 @@ label {
 
 </Sandpack>
 
-To make your component re-render only when a _part_ of some context changes, split your component in two. Read what you need from the context in the outer component, and pass it down to a memoized child as a prop.
+আপনার কম্পোনেন্টকে কেবল তখনই পুনরায় রেন্ডার করতে দিন যখন কোনো কনটেক্সটের _একটি অংশ_ পরিবর্তন হয়, আপনার কম্পোনেন্টকে দুই ভাগে ভাগ করুন। বাইরের কম্পোনেন্টে কনটেক্সট থেকে প্রয়োজনীয় তথ্য পড়ুন এবং এটি একটি মেমোয়াইজড চাইল্ডে প্রপ হিসেবে পাস করুন।
 
 ---
 
-### Minimizing props changes {/*minimizing-props-changes*/}
+### প্রপস পরিবর্তন সর্বনিম্ন করা {/*minimizing-props-changes*/}
 
 When you use `memo`, your component re-renders whenever any prop is not *shallowly equal* to what it was previously. This means that React compares every prop in your component with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Note that `Object.is(3, 3)` is `true`, but `Object.is({}, {})` is `false`.
 
@@ -352,13 +343,6 @@ function arePropsEqual(oldProps, newProps) {
 }
 ```
 
-If you do this, use the Performance panel in your browser developer tools to make sure that your comparison function is actually faster than re-rendering the component. You might be surprised.
-
-When you do performance measurements, make sure that React is running in the production mode.
-
-<Pitfall>
-
-If you provide a custom `arePropsEqual` implementation, **you must compare every prop, including functions.** Functions often [close over](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) the props and state of parent components. If you return `true` when `oldProps.onClick !== newProps.onClick`, your component will keep "seeing" the props and state from a previous render inside its `onClick` handler, leading to very confusing bugs.
 
 Avoid doing deep equality checks inside `arePropsEqual` unless you are 100% sure that the data structure you're working with has a known limited depth. **Deep equality checks can become incredibly slow** and can freeze your app for many seconds if someone changes the data structure later.
 
@@ -370,3 +354,23 @@ Avoid doing deep equality checks inside `arePropsEqual` unless you are 100% sure
 ### My component re-renders when a prop is an object, array, or function {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
 
 React compares old and new props by shallow equality: that is, it considers whether each new prop is reference-equal to the old prop. If you create a new object or array each time the parent is re-rendered, even if the individual elements are each the same, React will still consider it to be changed. Similarly, if you create a new function when rendering the parent component, React will consider it to have changed even if the function has the same definition. To avoid this, [simplify props or memoize props in the parent component](#minimizing-props-changes).
+
+এটি করলে, আপনার ব্রাউজার ডেভেলপার টুলসের পারফরম্যান্স প্যানেল ব্যবহার করে নিশ্চিত করুন যে আপনার comparison ফাংশনটি কম্পোনেন্টের পুনরায় রেন্ডার করার চেয়ে দ্রুত হচ্ছে। আপনি অবাক হয়ে যেতে পারেন।
+
+যখন আপনি পারফরম্যান্স পরিমাপ করবেন, নিশ্চিত করুন যে React প্রোডাকশন মোডে চলছে।
+
+<Pitfall>
+
+যদি আপনি কাস্টম `arePropsEqual` implementation সরবরাহ করেন, **আপনাকে প্রতিটি প্রপ, ফাংশনসহ তুলনা করতে হবে।** ফাংশনগুলি প্রায়শই প্যারেন্ট কম্পোনেন্টের প্রপস এবং স্টেটের উপর [ক্লোজ করে](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)। যদি আপনি `oldProps.onClick !== newProps.onClick` হলে `true` ফেরত দেন, আপনার কম্পোনেন্ট তার `onClick` হ্যান্ডলারে আগের রেন্ডারের প্রপস এবং স্টেট দেখতে থাকবে, যা খুব বিভ্রান্তিকর বাগের জন্ম দেয়।
+
+`arePropsEqual`-এ গভীর সমতুল্য চেক করা এড়িয়ে চলুন, যদি না আপনি 100% নিশ্চিত হন যে আপনি যে ডেটা স্ট্রাকচার নিয়ে কাজ করছেন তার একটি পরিচিত সীমিত গভীরতা রয়েছে। **গভীর সমতুল্য চেক অত্যন্ত ধীর হতে পারে** এবং যদি কেউ পরে ডেটা স্ট্রাকচার পরিবর্তন করে তাহলে আপনার অ্যাপটি অনেক সেকেন্ড ধরে জমে থাকতে পারে।
+
+</Pitfall>
+
+---
+
+## ট্রাবলশুটিং {/*troubleshooting*/}
+### আমার কম্পোনেন্ট পুনরায় রেন্ডার হয় যখন একটি প্রপ অবজেক্ট, অ্যারে, অথবা ফাংশন হয় {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
+
+React পুরানো এবং নতুন প্রপসগুলি পৃষ্ঠতুল্য সমতুল্যতা দ্বারা তুলনা করে: অর্থাৎ, এটি বিবেচনা করে যে প্রতিটি নতুন প্রপ পুরানো প্রপের সাথে রেফারেন্স-সমান কিনা। যদি আপনি প্রতিবার অভিভাবক পুনরায় রেন্ডার হলে একটি নতুন অবজেক্ট বা অ্যারে তৈরি করেন, এমনকি যদি প্রতিটি উপাদান একই হয়, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে। একইভাবে, যদি আপনি অভিভাবক কম্পোনেন্ট রেন্ডার করার সময় একটি নতুন ফাংশন তৈরি করেন, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে, এমনকি যদি ফাংশনের সংজ্ঞা একই হয়। এটি এড়াতে, [প্রপসগুলি সরলীকরণ করুন অথবা প্যারেন্ট কম্পোনেন্টে প্রপসগুলি মেমোয়াইজ করুন](#minimizing-props-changes)।
+
