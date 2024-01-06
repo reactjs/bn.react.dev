@@ -343,18 +343,6 @@ function arePropsEqual(oldProps, newProps) {
 }
 ```
 
-
-Avoid doing deep equality checks inside `arePropsEqual` unless you are 100% sure that the data structure you're working with has a known limited depth. **Deep equality checks can become incredibly slow** and can freeze your app for many seconds if someone changes the data structure later.
-
-</Pitfall>
-
----
-
-## Troubleshooting {/*troubleshooting*/}
-### My component re-renders when a prop is an object, array, or function {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
-
-React compares old and new props by shallow equality: that is, it considers whether each new prop is reference-equal to the old prop. If you create a new object or array each time the parent is re-rendered, even if the individual elements are each the same, React will still consider it to be changed. Similarly, if you create a new function when rendering the parent component, React will consider it to have changed even if the function has the same definition. To avoid this, [simplify props or memoize props in the parent component](#minimizing-props-changes).
-
 এটি করলে, আপনার ব্রাউজার ডেভেলপার টুলসের পারফরম্যান্স প্যানেল ব্যবহার করে নিশ্চিত করুন যে আপনার comparison ফাংশনটি কম্পোনেন্টের পুনরায় রেন্ডার করার চেয়ে দ্রুত হচ্ছে। আপনি অবাক হয়ে যেতে পারেন।
 
 যখন আপনি পারফরম্যান্স পরিমাপ করবেন, নিশ্চিত করুন যে React প্রোডাকশন মোডে চলছে।
@@ -363,7 +351,7 @@ React compares old and new props by shallow equality: that is, it considers whet
 
 যদি আপনি কাস্টম `arePropsEqual` implementation সরবরাহ করেন, **আপনাকে প্রতিটি প্রপ, ফাংশনসহ তুলনা করতে হবে।** ফাংশনগুলি প্রায়শই প্যারেন্ট কম্পোনেন্টের প্রপস এবং স্টেটের উপর [ক্লোজ করে](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)। যদি আপনি `oldProps.onClick !== newProps.onClick` হলে `true` ফেরত দেন, আপনার কম্পোনেন্ট তার `onClick` হ্যান্ডলারে আগের রেন্ডারের প্রপস এবং স্টেট দেখতে থাকবে, যা খুব বিভ্রান্তিকর বাগের জন্ম দেয়।
 
-`arePropsEqual`-এ গভীর সমতুল্য চেক করা এড়িয়ে চলুন, যদি না আপনি 100% নিশ্চিত হন যে আপনি যে ডেটা স্ট্রাকচার নিয়ে কাজ করছেন তার একটি পরিচিত সীমিত গভীরতা রয়েছে। **গভীর সমতুল্য চেক অত্যন্ত ধীর হতে পারে** এবং যদি কেউ পরে ডেটা স্ট্রাকচার পরিবর্তন করে তাহলে আপনার অ্যাপটি অনেক সেকেন্ড ধরে জমে থাকতে পারে।
+`arePropsEqual`-এ deep equality চেক করা এড়িয়ে চলুন, যদি না আপনি শতভাগ নিশ্চিত হন যে আপনি যে ডেটা স্ট্রাকচার নিয়ে কাজ করছেন তার একটি পরিচিত সীমিত গভীরতা রয়েছে। **Deep equality চেক অত্যন্ত ধীর হতে পারে** এবং যদি কেউ পরে ডেটা স্ট্রাকচার পরিবর্তন করে তাহলে আপনার অ্যাপটি অনেক সেকেন্ড ধরে আটকে থাকতে পারে।
 
 </Pitfall>
 
@@ -372,5 +360,5 @@ React compares old and new props by shallow equality: that is, it considers whet
 ## ট্রাবলশুটিং {/*troubleshooting*/}
 ### আমার কম্পোনেন্ট পুনরায় রেন্ডার হয় যখন একটি প্রপ অবজেক্ট, অ্যারে, অথবা ফাংশন হয় {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
 
-React পুরানো এবং নতুন প্রপসগুলি পৃষ্ঠতুল্য সমতুল্যতা দ্বারা তুলনা করে: অর্থাৎ, এটি বিবেচনা করে যে প্রতিটি নতুন প্রপ পুরানো প্রপের সাথে রেফারেন্স-সমান কিনা। যদি আপনি প্রতিবার অভিভাবক পুনরায় রেন্ডার হলে একটি নতুন অবজেক্ট বা অ্যারে তৈরি করেন, এমনকি যদি প্রতিটি উপাদান একই হয়, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে। একইভাবে, যদি আপনি অভিভাবক কম্পোনেন্ট রেন্ডার করার সময় একটি নতুন ফাংশন তৈরি করেন, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে, এমনকি যদি ফাংশনের সংজ্ঞা একই হয়। এটি এড়াতে, [প্রপসগুলি সরলীকরণ করুন অথবা প্যারেন্ট কম্পোনেন্টে প্রপসগুলি মেমোয়াইজ করুন](#minimizing-props-changes)।
+React পুরানো এবং নতুন প্রপসগুলি shallow equality দ্বারা তুলনা করেঃ অর্থাৎ, এটি বিবেচনা করে যে প্রতিটি নতুন প্রপ পুরানো প্রপের সাথে রেফারেন্স-সমান কিনা। যদি আপনি প্রতি বার প্যারেন্ট পুনরায় রেন্ডার হলে একটি নতুন অবজেক্ট বা অ্যারে তৈরি করেন, এমনকি যদি প্রতিটি উপাদান একই হয়, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে। একই ভাবে, যদি আপনি প্যারেন্ট কম্পোনেন্ট রেন্ডার করার সময় একটি নতুন ফাংশন তৈরি করেন, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে, এমনকি যদি ফাংশনের ডেফিনিশন একই হয়। এটি এড়াতে, [প্রপসগুলি সরল করুন অথবা প্যারেন্ট কম্পোনেন্টে প্রপসগুলি মেমোয়াইজ করুন](#minimizing-props-changes)।
 
