@@ -248,7 +248,7 @@ export default function ModalContent({ onClose }) {
 
 ### নন-React সার্ভার মার্কআপে React কম্পোনেন্টগুলি রেন্ডার করা {/*rendering-react-components-into-non-react-server-markup*/}
 
-Portals can be useful if your React root is only part of a static or server-rendered page that isn't built with React. For example, if your page is built with a server framework like Rails, you can create areas of interactivity within static areas such as sidebars. Compared with having [multiple separate React roots,](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) portals let you treat the app as a single React tree with shared state even though its parts render to different parts of the DOM.
+যদি আপনার React রুট স্ট্যাটিক বা সার্ভার-রেন্ডার করা পেইজের শুধুমাত্র একটি অংশ হয় যা React দ্বারা তৈরি নয়, তাহলে পোর্টাল উপকারী হতে পারে। উদাহরণস্বরূপ, যদি আপনার পেইজ Rails বা অন্য কোনো সার্ভার ফ্রেমওয়ার্ক দ্বারা তৈরি হয়, আপনি সাইডবারের মতো স্ট্যাটিক অঞ্চলের মধ্যে ইন্টার‌্যাক্টিভ এলাকা তৈরি করতে পারেন। [আলাদা আলাদা React রুটের](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) তুলনায়, পোর্টালগুলি আপনাকে অ্যাপটিকে একটি একক React ট্রি হিসাবে আচরণ করতে দেয় যার shared স্টেট রয়েছে, যদিও এর অংশগুলি DOM-এর ভিন্ন ভিন্ন অংশে রেন্ডার হয়।
 
 <Sandpack>
 
@@ -342,15 +342,15 @@ p {
 
 ---
 
-### Rendering React components into non-React DOM nodes {/*rendering-react-components-into-non-react-dom-nodes*/}
+### নন-React DOM নোডে React কম্পোনেন্টগুলি রেন্ডার করা {/*rendering-react-components-into-non-react-dom-nodes*/}
 
-You can also use a portal to manage the content of a DOM node that's managed outside of React. For example, suppose you're integrating with a non-React map widget and you want to render React content inside a popup. To do this, declare a `popupContainer` state variable to store the DOM node you're going to render into:
+আপনি একটি পোর্টাল ব্যবহার করেও React এর বাইরে পরিচালিত DOM নোডের কন্টেন্ট পরিচালনা করতে পারেন। উদাহরণস্বরূপ, ধরুন আপনি একটি নন-React ম্যাপ উইজেটের সাথে সংযোজন করছেন এবং আপনি একটি পপআপের মধ্যে React কন্টেন্ট রেন্ডার করতে চান। এটি করতে, `popupContainer` নামক একটি স্টেট ভেরিয়েবল ঘোষণা করুন যেখানে আপনি রেন্ডার করতে যাচ্এঁরন সেই DOM নোডটি সংরক্ষণ করবেন
 
 ```js
 const [popupContainer, setPopupContainer] = useState(null);
 ```
 
-When you create the third-party widget, store the DOM node returned by the widget so you can render into it:
+যখন আপনি থার্ড-পার্টি উইজেট তৈরি করবেন, উইজেট দ্বারা ফেরত আসা DOM নোডটি সংরক্ষণ করুন যাতে আপনি এতে রেন্ডার করতে পারেন:
 
 ```js {5-6}
 useEffect(() => {
@@ -363,7 +363,7 @@ useEffect(() => {
 }, []);
 ```
 
-This lets you use `createPortal` to render React content into `popupContainer` once it becomes available:
+এটি আপনাকে `createPortal` ব্যবহার করে `popupContainer`-এ React কন্টেন্ট রেন্ডার করতে দেয় যখন এটি available হয়:
 
 ```js {3-6}
 return (
@@ -376,7 +376,7 @@ return (
 );
 ```
 
-Here is a complete example you can play with:
+এখানে একটি সম্পূর্ণ উদাহরণ রয়েছে যা নিয়ে আপনি ঘাটাঘাটি করতে পারেন:
 
 <Sandpack>
 
