@@ -68,17 +68,7 @@ import { createPortal } from 'react-dom';
 
 *পোর্টাল* আপনার কম্পোনেন্টগুলিকে তাদের কিছু চাইল্ডকদ DOM-এর ভিন্ন স্থানে রেন্ডার করতে দেয়। এটি আপনার কম্পোনেন্টের একটি অংশকে যেকোনো কন্টেইনার থেকে "মুক্ত" করে। উদাহরণস্বরূপ, একটি কম্পোনেন্ট একটি মডাল ডায়লগ বা একটি টুলটিপ প্রদর্শন করতে পারে যা বাকি পৃষ্ঠার উপরে এবং বাইরে প্রদর্শিত হয়।
 
-একটি পোর্টাল তৈরি করতে, `createPortal`-এর ফলাফল রেন্ডার করুন <CodeStep step={1}>কিছু JSX</CodeStep> এবং <CodeStep step={2}>DOM নোড যেখানে এটি যাওয়া উচিত</CodeStep>:
-
-React <CodeStep step={1}>আপনি যে JSX পাস করেছেন</CodeStep> এর DOM নোডগুলি <CodeStep step={2}>আপনি প্রদত্ত DOM নোডের</CodeStep> মধ্যে রাখবে।
-
-একটি পোর্টাল ছাড়া, দ্বিতীয় `<p>` অভিভাবক `<div>`-এর ভেতরে স্থাপন করা হবে, কিন্তু পোর্টালটি এটিকে [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body) এ "টেলিপোর্ট" করেছে।
-
-
-
-*Portals* let your components render some of their children into a different place in the DOM. This lets a part of your component "escape" from whatever containers it may be in. For example, a component can display a modal dialog or a tooltip that appears above and outside of the rest of the page.
-
-To create a portal, render the result of `createPortal` with <CodeStep step={1}>some JSX</CodeStep> and the <CodeStep step={2}>DOM node where it should go</CodeStep>:
+একটি পোর্টাল তৈরি করতে, `createPortal`-এর ফলাফল রেন্ডার করুন <CodeStep step={1}>কিছু JSX</CodeStep> এবং <CodeStep step={2}>DOM নোডে যেখানে এটি যাওয়া উচিত</CodeStep>:
 
 ```js [[1, 8, "<p>This child is placed in the document body.</p>"], [2, 9, "document.body"]]
 import { createPortal } from 'react-dom';
@@ -96,9 +86,9 @@ function MyComponent() {
 }
 ```
 
-React will put the DOM nodes for <CodeStep step={1}>the JSX you passed</CodeStep> inside of the <CodeStep step={2}>DOM node you provided</CodeStep>.
+React <CodeStep step={1}>আপনি যে JSX পাস করেছেন</CodeStep> এর DOM নোডগুলি <CodeStep step={2}>আপনার প্রদত্ত DOM নোডের</CodeStep> মধ্যে রাখবে।
 
-Without a portal, the second `<p>` would be placed inside the parent `<div>`, but the portal "teleported" it into the [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body)
+একটি পোর্টাল ছাড়া, দ্বিতীয় `<p>` প্যারেন্ট `<div>`-এর ভেতরে স্থাপন করা হত, কিন্তু পোর্টালটি এটিকে [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body) এ "টেলিপোর্ট" করেছে।
 
 <Sandpack>
 
@@ -120,7 +110,7 @@ export default function MyComponent() {
 
 </Sandpack>
 
-Notice how the second paragraph visually appears outside the parent `<div>` with the border. If you inspect the DOM structure with developer tools, you'll see that the second `<p>` got placed directly into the `<body>`:
+লক্ষ্য করুন কিভাবে দ্বিতীয় প্যারাগ্রাফ দৃশ্যত বর্ডার সহ প্যারেন্ট `<div>`-এর বাইরে প্রদর্শিত হচ্ছে। যদি আপনি ডেভেলপার টুলস দ্বারা DOM কাঠামো পরীক্ষা করেন, আপনি দেখবেন যে দ্বিতীয় `<p>` সরাসরি `<body>`-তে রাখা হয়েছে:
 
 ```html {4-6,9}
 <body>
@@ -135,7 +125,7 @@ Notice how the second paragraph visually appears outside the parent `<div>` with
 </body>
 ```
 
-A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events still bubble up from children to parents according to the React tree.
+একটি পোর্টাল কেবল DOM নোডের physcial অবস্থান পরিবর্তন করে। অন্যান্য সকল উপায়ে, আপনি যে JSX পোর্টালে রেন্ডার করেন তা React কম্পোনেন্টের একটি চাইল্ড নোড হিসেবে কাজ করে যা এটিকে রেন্ডার করে। উদাহরণস্বরূপ, চাইল্ড প্যারেন্ট ট্রি দ্বারা প্রদত্ত কনটেক্স্ট অ্যাক্সেস করতে পারে, এবং ইভেন্টগুলি চাইল্ড থেকে প্যারেন্টের কাছে React ট্রি অনুসারে বুদবুদ করে উপরে উঠে।
 
 ---
 
