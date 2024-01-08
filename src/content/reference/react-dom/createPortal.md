@@ -48,23 +48,33 @@ import { createPortal } from 'react-dom';
 
 * `children`: যেকোনো জিনিস যা React দ্বারা রেন্ডার করা যায়, যেমন একটি JSX অংশ (উদাহরণস্বরূপ `<div />` বা `<SomeComponent />`), একটি [ফ্র্যাগমেন্ট](/reference/react/Fragment) (`<>...</>`), একটি স্ট্রিং বা একটি সংখ্যা, অথবা এগুলির একটি অ্যারে।
 
-* `domNode`: Some DOM node, such as those returned by `document.getElementById()`. The node must already exist. Passing a different DOM node during an update will cause the portal content to be recreated.
+* `domNode`: কিছু DOM নোড, যেমন `document.getElementById()` দ্বারা ফেরত আসা নোডগুলি। নোডটি ইতোমধ্যে বিদ্যমান থাকতে হবে। আপডেটের সময় ভিন্ন DOM নোড পাস করা হলে পোর্টাল কন্টেন্ট পুনরায় তৈরি করা হবে।
 
-* **optional** `key`: A unique string or number to be used as the portal's [key.](/learn/rendering-lists/#keeping-list-items-in-order-with-key)
+* **ঐচ্ছিক** `key`: পোর্টালের [কী](/learn/rendering-lists/#keeping-list-items-in-order-with-key) হিসাবে ব্যবহার করার জন্য একটি অনন্য স্ট্রিং বা সংখ্যা।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-`createPortal` returns a React node that can be included into JSX or returned from a React component. If React encounters it in the render output, it will place the provided `children` inside the provided `domNode`.
+`createPortal` একটি React নোড ফেরত দেয় যা JSX-এ অন্তর্ভুক্ত করা যেতে পারে বা একটি React কম্পোনেন্ট থেকে ফেরত দেওয়া যেতে পারে। যদি React এটি রেন্ডার আউটপুটে দেখে, এটি প্রদত্ত `children`-কে প্রদত্ত `domNode`-এর মধ্যে রাখবে।
 
-#### Caveats {/*caveats*/}
+#### সাবধানতা {/*caveats*/}
 
-* Events from portals propagate according to the React tree rather than the DOM tree. For example, if you click inside a portal, and the portal is wrapped in `<div onClick>`, that `onClick` handler will fire. If this causes issues, either stop the event propagation from inside the portal, or move the portal itself up in the React tree.
+* পোর্টাল থেকে ইভেন্টগুলি DOM ট্রি নয়, বরং React ট্রি অনুসারে এগিয়ে যায়। উদাহরণস্বরূপ, যদি আপনি একটি পোর্টালের ভেতরে ক্লিক করেন, এবং পোর্টালটি `<div onClick>`-এ wrap করা থাকে, তাহলে `onClick` হ্যান্ডলারটি ফায়ার হবে। যদি এটি সমস্যা তৈরি করে, তাহলে পোর্টালের ভেতরে event propagation বন্ধ করুন, অথবা পোর্টালটি React ট্রিতে উপরের দিকে উঠিয়ে নিন।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering to a different part of the DOM {/*rendering-to-a-different-part-of-the-dom*/}
+### DOM-এর ভিন্ন একটি অংশে রেন্ডারিং {/*rendering-to-a-different-part-of-the-dom*/}
+
+*পোর্টাল* আপনার কম্পোনেন্টগুলিকে তাদের কিছু চাইল্ডকদ DOM-এর ভিন্ন স্থানে রেন্ডার করতে দেয়। এটি আপনার কম্পোনেন্টের একটি অংশকে যেকোনো কন্টেইনার থেকে "মুক্ত" করে। উদাহরণস্বরূপ, একটি কম্পোনেন্ট একটি মডাল ডায়লগ বা একটি টুলটিপ প্রদর্শন করতে পারে যা বাকি পৃষ্ঠার উপরে এবং বাইরে প্রদর্শিত হয়।
+
+একটি পোর্টাল তৈরি করতে, `createPortal`-এর ফলাফল রেন্ডার করুন <CodeStep step={1}>কিছু JSX</CodeStep> এবং <CodeStep step={2}>DOM নোড যেখানে এটি যাওয়া উচিত</CodeStep>:
+
+React <CodeStep step={1}>আপনি যে JSX পাস করেছেন</CodeStep> এর DOM নোডগুলি <CodeStep step={2}>আপনি প্রদত্ত DOM নোডের</CodeStep> মধ্যে রাখবে।
+
+একটি পোর্টাল ছাড়া, দ্বিতীয় `<p>` অভিভাবক `<div>`-এর ভেতরে স্থাপন করা হবে, কিন্তু পোর্টালটি এটিকে [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body) এ "টেলিপোর্ট" করেছে।
+
+
 
 *Portals* let your components render some of their children into a different place in the DOM. This lets a part of your component "escape" from whatever containers it may be in. For example, a component can display a modal dialog or a tooltip that appears above and outside of the rest of the page.
 
