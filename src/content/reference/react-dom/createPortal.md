@@ -129,11 +129,11 @@ export default function MyComponent() {
 
 ---
 
-### Rendering a modal dialog with a portal {/*rendering-a-modal-dialog-with-a-portal*/}
+### একটি পোর্টাল দ্বারা মোডাল ডায়লগ রেন্ডার করা {/*rendering-a-modal-dialog-with-a-portal*/}
 
-You can use a portal to create a modal dialog that floats above the rest of the page, even if the component that summons the dialog is inside a container with `overflow: hidden` or other styles that interfere with the dialog.
+আপনি একটি পোর্টাল ব্যবহার করে একটি মোডাল ডায়লগ তৈরি করতে পারেন যা পেইজের বাকি অংশের উপরে ভাসমান, এমনকি যদি ডায়লগ কল করা কম্পোনেন্টটি `overflow: hidden` বা অন্যান্য স্টাইল যা ডায়লগের সাথে বাধা দেয় এমন কন্টেইনারের মধ্যে থাকে।
 
-In this example, the two containers have styles that disrupt the modal dialog, but the one rendered into a portal is unaffected because, in the DOM, the modal is not contained within the parent JSX elements.
+এই উদাহরণে, দুটি কন্টেইনারের স্টাইলগুলি মডাল ডায়লগের জন্য বিঘ্ন ঘটাচ্ছে, কিন্তু পোর্টালে রেন্ডার করা একটি অপ্রভাবিত থাকে, কারণ DOM-এ, মোডালটি প্যারেন্ট JSX উপাদানগুলির মধ্যে contained নয়।
 
 <Sandpack>
 
@@ -238,15 +238,15 @@ export default function ModalContent({ onClose }) {
 
 <Pitfall>
 
-It's important to make sure that your app is accessible when using portals. For instance, you may need to manage keyboard focus so that the user can move the focus in and out of the portal in a natural way.
+পোর্টাল ব্যবহার করার সময় আপনার অ্যাপটি অ্যাক্সেসিবল হওয়া নিশ্চিত করা গুরুত্বপূর্ণ। উদাহরণস্বরূপ, আপনাকে কীবোর্ড ফোকাস পরিচালনা করতে হতে পারে যাতে ব্যবহারকারী স্বাভাবিকভাবে পোর্টালের ভিতরে এবং বাইরে ফোকাস নড়াতে পারে।
 
-Follow the [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) when creating modals. If you use a community package, ensure that it is accessible and follows these guidelines.
+মডাল তৈরি করার সময় [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) অনুসরণ করুন। যদি আপনি কোনো কমিউনিটি প্যাকেজ ব্যবহার করেন, নিশ্চিত করুন যে এটি অ্যাক্সেসিবল এবং এই নির্দেশিকাগুলি অনুসরণ করে।
 
 </Pitfall>
 
 ---
 
-### Rendering React components into non-React server markup {/*rendering-react-components-into-non-react-server-markup*/}
+### নন-React সার্ভার মার্কআপে React কম্পোনেন্টগুলি রেন্ডার করা {/*rendering-react-components-into-non-react-server-markup*/}
 
 Portals can be useful if your React root is only part of a static or server-rendered page that isn't built with React. For example, if your page is built with a server framework like Rails, you can create areas of interactivity within static areas such as sidebars. Compared with having [multiple separate React roots,](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) portals let you treat the app as a single React tree with shared state even though its parts render to different parts of the DOM.
 
