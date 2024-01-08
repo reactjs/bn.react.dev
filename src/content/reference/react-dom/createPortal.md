@@ -4,7 +4,7 @@ title: createPortal
 
 <Intro>
 
-`createPortal` lets you render some children into a different part of the DOM.
+`createPortal` আপনাকে DOM-এর ভিন্ন অংশে কিছু চাইল্ড রেন্ডার করতে দেয়।
 
 
 ```js
@@ -20,11 +20,11 @@ title: createPortal
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `createPortal(children, domNode, key?)` {/*createportal*/}
 
-To create a portal, call `createPortal`, passing some JSX, and the DOM node where it should be rendered:
+একটি পোর্টাল তৈরি করতে, `createPortal` কল করুন, কিছু JSX এবং DOM নোড পাস করুন যেখানে এটি রেন্ডার করা হবেঃ
 
 ```js
 import { createPortal } from 'react-dom';
@@ -40,13 +40,13 @@ import { createPortal } from 'react-dom';
 </div>
 ```
 
-[See more examples below.](#usage)
+[নীচে আরও উদাহরণ দেখুন।](#usage)
 
-A portal only changes the physical placement of the DOM node. In every other way, the JSX you render into a portal acts as a child node of the React component that renders it. For example, the child can access the context provided by the parent tree, and events bubble up from children to parents according to the React tree.
+একটি পোর্টাল কেবল DOM নোডের physical অবস্থান পরিবর্তন করে। অন্যান্য সকল উপায়ে, আপনি যে JSX পোর্টালে রেন্ডার করেন তা React কম্পোনেন্টের একটি চাইল্ড নোড হিসাবে কাজ করে যা এটিকে রেন্ডার করে। উদাহরণস্বরূপ, চাইল্ড প্যারেন্ট ট্রি দ্বারা প্রদত্ত কনটেক্স্ট অ্যাক্সেস করতে পারে, এবং ইভেন্টগুলি চাইল্ড থেকে প্যারেন্টদের কাছে React ট্রি অনুসারে বুদবুদ করে উঠে।
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটার {/*parameters*/}
 
-* `children`: Anything that can be rendered with React, such as a piece of JSX (e.g. `<div />` or `<SomeComponent />`), a [Fragment](/reference/react/Fragment) (`<>...</>`), a string or a number, or an array of these.
+* `children`: যেকোনো জিনিস যা React দ্বারা রেন্ডার করা যায়, যেমন একটি JSX অংশ (উদাহরণস্বরূপ `<div />` বা `<SomeComponent />`), একটি [ফ্র্যাগমেন্ট](/reference/react/Fragment) (`<>...</>`), একটি স্ট্রিং বা একটি সংখ্যা, অথবা এগুলির একটি অ্যারে।
 
 * `domNode`: Some DOM node, such as those returned by `document.getElementById()`. The node must already exist. Passing a different DOM node during an update will cause the portal content to be recreated.
 
