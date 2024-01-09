@@ -46,24 +46,24 @@ root.render(
 - আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
 - আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
 
-#### Props {/*props*/}
+#### প্রপ্স {/*props*/}
 
-`StrictMode` accepts no props.
+`StrictMode` কোনো প্রপ গ্রহণ করে না।
 
-#### Caveats {/*caveats*/}
+#### সাবধানতা {/*caveats*/}
 
-* There is no way to opt out of Strict Mode inside a tree wrapped in `<StrictMode>`. This gives you confidence that all components inside `<StrictMode>` are checked. If two teams working on a product disagree whether they find the checks valuable, they need to either reach consensus or move `<StrictMode>` down in the tree.
+* `<StrictMode>`-এ মোড়ানো একটি ট্রিতে স্ট্রিক্ট মোড থেকে বের হওয়ার কোনো উপায় নেই। এটি আপনাকে এই আশ্বাস দেয় যে `<StrictMode>`-এর মধ্যে সমস্ত কম্পোনেন্ট পরীক্ষিত হয়েছে। যদি দুটি টিম যারা একটি পণ্য নিয়ে কাজ করছে তারা এই চেকগুলির দরকার নিয়ে একমত না হয়, তাদের হয় সমঝোতায় পৌঁছাতে হবে অথবা ট্রিতে `<StrictMode>` নিচে সরিয়ে নিতে হবে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Enabling Strict Mode for entire app {/*enabling-strict-mode-for-entire-app*/}
+### পুরো অ্যাপের জন্য স্ট্রিক্ট মোড সক্রিয় করা {/*enabling-strict-mode-for-entire-app*/}
 
-Strict Mode enables extra development-only checks for the entire component tree inside the `<StrictMode>` component. These checks help you find common bugs in your components early in the development process.
+`<StrictMode>` কম্পোনেন্টের মধ্যে থাকা পুরো কম্পোনেন্ট ট্রির জন্য স্ট্রিক্ট মোড অতিরিক্ত development-only চেক সক্রিয় করে। এই চেকগুলি আপনাকে ডেভেলপমেন্ট প্রক্রিয়ার শুরুতেই আপনার কম্পোনেন্টগুলিতে সাধারণ বাগগুলি খুঁজে পেতে সাহায্য করে।
 
 
-To enable Strict Mode for your entire app, wrap your root component with `<StrictMode>` when you render it:
+আপনার পুরো অ্যাপের জন্য স্ট্রিক্ট মোড সক্রিয় করতে, এটি রেন্ডার করার সময় আপনার রুট কম্পোনেন্টকে `<StrictMode>` দিয়ে মোড়ান:
 
 ```js {6,8}
 import { StrictMode } from 'react';
