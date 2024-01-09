@@ -5,7 +5,7 @@ title: <StrictMode>
 
 <Intro>
 
-`<StrictMode>` lets you find common bugs in your components early during development.
+`<StrictMode>` আপনাকে ডেভেলপমেন্টের সময় আপনার কম্পোনেন্টগুলিতে সাধারণ বাগ সহজে খুঁজে পেতে সাহায্য করে।
 
 
 ```js
@@ -20,11 +20,11 @@ title: <StrictMode>
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `<StrictMode>` {/*strictmode*/}
 
-Use `StrictMode` to enable additional development behaviors and warnings for the component tree inside:
+কম্পোনেন্ট ট্রির মধ্যে অতিরিক্ত ডেভেলপমেন্ট বিহেভিয়ার এবং সতর্কতা সক্রিয় করতে `StrictMode` ব্যবহার করুন:
 
 ```js
 import { StrictMode } from 'react';
@@ -38,13 +38,13 @@ root.render(
 );
 ```
 
-[See more examples below.](#usage)
+[নীচে আরও উদাহরণ দেখুন।](#usage)
 
-Strict Mode enables the following development-only behaviors:
+স্ট্রিক্ট মোড নিম্নলিখিত development-only আচরণগুলি সক্রিয় করে:
 
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
+- আপনার কম্পোনেন্টগুলি impure রেন্ডারিং এর কারণে সৃষ্ট বাগ খুঁজে পেতে [একটি অতিরিক্ত সময় রেন্ডার হবে](#fixing-bugs-found-by-double-rendering-in-development)।
+- আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
+- আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
 
 #### Props {/*props*/}
 
