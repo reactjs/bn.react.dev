@@ -95,9 +95,9 @@ root.render(
 
 ---
 
-### Enabling Strict Mode for a part of the app {/*enabling-strict-mode-for-a-part-of-the-app*/}
+### অ্যাপের একটি অংশের জন্য স্ট্রিক্ট মোড সক্রিয় করা {/*enabling-strict-mode-for-a-part-of-the-app*/}
 
-You can also enable Strict Mode for any part of your application:
+আপনি আপনার অ্যাপ্লিকেশনের যেকোন অংশের জন্যও স্ট্রিক্ট মোড সক্রিয় করতে পারেনঃ
 
 ```js {7,12}
 import { StrictMode } from 'react';
@@ -118,15 +118,15 @@ function App() {
 }
 ```
 
-In this example, Strict Mode checks will not run against the `Header` and `Footer` components. However, they will run on `Sidebar` and `Content`, as well as all of the components inside them, no matter how deep.
+এই উদাহরণে, Strict Mode চেকগুলি `Header` এবং `Footer` কম্পোনেন্টগুলির বিরুদ্ধে চালানো হবে না। তবে, `Sidebar` এবং `Content`, সেই সাথে তাদের ভেতরে থাকা সমস্ত কম্পোনেন্টগুলিতে, যত গভীরেই হোক না কেন, চেকগুলি চালানো হবে।
 
 ---
 
-### Fixing bugs found by double rendering in development {/*fixing-bugs-found-by-double-rendering-in-development*/}
+### ডেভেলপমেন্টে ডাবল রেন্ডারিং দ্বারা পাওয়া বাগ ঠিক করা {/*fixing-bugs-found-by-double-rendering-in-development*/}
 
-[React assumes that every component you write is a pure function.](/learn/keeping-components-pure) This means that React components you write must always return the same JSX given the same inputs (props, state, and context).
+[React ধরে নেয় যে আপনি যেকোনো কম্পোনেন্ট লিখেন সেটি একটি পিওর ফাংশন হয়।](/learn/keeping-components-pure) এর অর্থ হলো React আপনার লিখিত কম্পোনেন্টগুলি সর্বদা একই ইনপুট (প্রপস, স্টেট এবং কনটেক্স্ট) দেওয়া হলে একই JSX রিটার্ন করবে।
 
-Components breaking this rule behave unpredictably and cause bugs. To help you find accidentally impure code, Strict Mode calls some of your functions (only the ones that should be pure) **twice in development.** This includes:
+এই নিয়ম ভঙ্গ করা কম্পোনেন্টগুলি অনির্দিষ্টভাবে আচরণ করে এবং বাগ তৈরি করে। আপনাকে আকস্মিকভাবে অশুদ্ধ কোড খুঁজে পেতে সাহায্য করার জন্য, Strict Mode ডেভেলপমেন্টে **আপনার কিছু ফাংশনকে দুবার কল করে**। এতে অন্তর্ভুক্ত:
 
 - Your component function body (only top-level logic, so this doesn't include code inside event handlers)
 - Functions that you pass to [`useState`](/reference/react/useState), [`set` functions](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), or [`useReducer`](/reference/react/useReducer)
@@ -829,24 +829,6 @@ React warns if some component anywhere inside a `<StrictMode>` tree uses one of 
 
 These APIs are primarily used in older [class components](/reference/react/Component) so they rarely appear in modern apps.
 
-
-
-
-================
-### Enabling Strict Mode for a part of the app {/*enabling-strict-mode-for-a-part-of-the-app*/}
-
-You can also enable Strict Mode for any part of your application:
-
-In this example, Strict Mode checks will not run against the `Header` and `Footer` components. However, they will run on `Sidebar` and `Content`, as well as all of the components inside them, no matter how deep.
-
----
-
-### Fixing bugs found by double rendering in development {/*fixing-bugs-found-by-double-rendering-in-development*/}
-
-[React assumes that every component you write is a pure function.](/learn/keeping-components-pure) This means that React components you write must always return the same JSX given the same inputs (props, state, and context).
-
-Components breaking this rule behave unpredictably and cause bugs. To help you find accidentally impure code, Strict Mode calls some of your functions (only the ones that should be pure) **twice in development.** This includes:
-
 - Your component function body (only top-level logic, so this doesn't include code inside event handlers)
 - Functions that you pass to [`useState`](/reference/react/useState), [`set` functions](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), or [`useReducer`](/reference/react/useReducer)
 - Some class component methods like [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([see the whole list](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects))
@@ -929,33 +911,11 @@ These APIs are primarily used in older [class components](/reference/react/Compo
 
 
 
-### DOM-এর ভিন্ন অংশে রেন্ডারিং {/*rendering-to-a-different-part-of-the-dom*/}
 
-*পোর্টালস* আপনার কম্পোনেন্টগুলিকে তাদের কিছু চাইল্ড DOM-এর ভিন্ন স্থানে রেন্ডার করতে দেয়। এটি আপনার কম্পোনেন্টের একটি অংশকে যেকোনো কন্টেইনার থেকে "মুক্ত" করে। উদাহরণস্বরূপ, একটি কম্পোনেন্ট একটি মডাল ডায়লগ বা একটি টুলটিপ প্রদর্শন করতে পারে যা বাকি পৃষ্ঠার উপরে এবং বাইরে প্রদর্শিত হয়।
-
-একটি পোর্টাল তৈরি করতে, `createPortal`-এর ফলাফল রেন্ডার করুন <CodeStep step={1}>কিছু JSX</CodeStep> এবং <CodeStep step={2}>DOM নোড যেখানে এটি যাওয়া উচিত</CodeStep>:
-
-React <CodeStep step={1}>আপনি যে JSX পাস করেছেন</CodeStep> এর DOM নোডগুলি <CodeStep step={2}>আপনি প্রদত্ত DOM নোডের</CodeStep> মধ্যে রাখবে।
-
-একটি পোর্টাল ছাড়া, দ্বিতীয় `<p>` অভিভাবক `<div>`-এর ভেতরে স্থাপন করা হবে, কিন্তু পোর্টালটি এটিকে [`document.body`:](https://developer.mozilla.org/en-US/docs/Web/API/Document/body) এ "টেলিপোর্ট" করেছে।
-
-লক্ষ্য করুন কিভাবে দ্বিতীয় প্যারাগ্রাফ দৃশ্যত বর্ডার সহ অভিভাবক `<div>`-এর বাইরে প্রদর্শিত হচ্ছে। যদি আপনি ডেভেলপার টুলস দ্বারা DOM কাঠামো পরীক্ষা করেন, আপনি দেখবেন যে দ্বিতীয় `<p>` সরাসরি `<body>`-তে স্থাপন করা হয়েছে:
-
-একটি পোর্টাল কেবল DOM নোডের শারীরিক অবস্থান পরিবর্তন করে। অন্যান্য সকল উপায়ে, আপনি যে JSX পোর্টালে রেন্ডার করেন তা React কম্পোনেন্টের একটি চাইল্ড নোড হিসেবে কাজ করে যা এটি রেন্ডার করে। উদাহরণস্বরূপ, চাইল্ড অভিভাবক ট্রি দ্বারা প্রদত্ত কনটেক্স্ট অ্যাক্সেস করতে পারে, এবং ইভেন্টগুলি চাইল্ড থেকে অভিভাবকদের কাছে React ট্রি অনুসারে বুদবুদ করে উঠে।
-
-### একটি পোর্টাল দ্বারা মডাল ডায়লগ রেন্ডার করা {/*rendering-a-modal-dialog-with-a-portal*/}
-
-আপনি একটি পোর্টাল ব্যবহার করে একটি মডাল ডায়লগ তৈরি করতে পারেন যা পৃষ্ঠার বাকি অংশের উপরে ভাসমান, এমনকি যদি ডায়লগ ডাকা কম্পোনেন্টটি `overflow: hidden` বা অন্যান্য স্টাইল যা ডায়লগের সাথে বাধা দেয় এমন কন্টেইনারের মধ্যে থাকে।
-
-এই উদাহরণে, Strict Mode চেকগুলি `Header` এবং `Footer` কম্পোনেন্টগুলির বিরুদ্ধে চালানো হবে না। তবে, `Sidebar` এবং `Content`, সেইসাথে তাদের ভেতরে থাকা সমস্ত কম্পোনেন্টগুলিতে, যত গভীরেই হোক না কেন, চেকগুলি চালানো হবে।
 
 ---
 
-### ডেভেলপমেন্টে ডাবল রেন্ডারিং দ্বারা পাওয়া বাগ ঠিক করা {/*fixing-bugs-found-by-double-rendering-in-development*/}
 
-[React ধরে নেয় যে আপনি যেকোনো কম্পোনেন্ট লিখেন সেটি একটি শুদ্ধ ফাংশন হয়।](/learn/keeping-components-pure) এর অর্থ হলো React আপনার লিখিত কম্পোনেন্টগুলি সর্বদা একই ইনপুট (প্রপস, স্টেট এবং কনটেক্স্ট) দেওয়া হলে একই JSX ফেরত দেবে।
-
-এই নিয়ম ভঙ্গ করা কম্পোনেন্টগুলি অনির্দিষ্টভাবে আচরণ করে এবং বাগ তৈরি করে। আপনাকে আকস্মিকভাবে অশুদ্ধ কোড খুঁজে পেতে সাহায্য করার জন্য, Strict Mode ডেভেলপমেন্টে **আপনার কিছু ফাংশনকে দুবার কল করে**। এতে অন্তর্ভুক্ত:
 
 - আপনার কম্পোনেন্ট ফাংশন বডি (শুধুমাত্র টপ-লেভেল লজিক, তাই এতে ইভেন্ট হ্যান্ডলারের ভেতরের কোড অন্তর্ভুক্ত নয়)
 - ফাংশনগুলি যা আপনি [`useState`](/reference/react/useState), [`set` ফাংশনগুলি](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), অথবা [`useReducer`](/reference/react/useReducer)-এ পাস করেন
