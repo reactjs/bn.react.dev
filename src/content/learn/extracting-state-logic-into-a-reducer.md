@@ -266,13 +266,13 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-এটি একটি সাধারণ JavaScript object। এর মধ্যে কী রাখতে হবে সেটা আপনার উপর, তবে স্বাভাবিকভাবে এর মধ্যে _কী ঘটলো(what happened)_ সে ব্যপারে ন্যূনতম ইনফর্মেশন থাকতে হবে। (আর আপনি `dispatch` ফাংশনটিকেই একটি পরবর্তী ধাপে যুক্ত করবেন।)
+এটি একটি সাধারণ JavaScript object। এর মধ্যে কী রাখতে হবে সেটা আপনার উপর, তবে স্বাভাবিকভাবে এর মধ্যে _কী ঘটলো(what happened)_ সে ব্যপারে ন্যূনতম ইনফর্মেশন থাকতে হবে। (আর আপনি `dispatch` ফাংশনটিকে পরবর্তী একটি ধাপে যুক্ত করবেন।)
 
 <Note>
 
-An action object can have any shape.
+একটি object যেকোনো আকৃতির হতে পারে।
 
-By convention, it is common to give it a string `type` that describes what happened, and pass any additional information in other fields. The `type` is specific to a component, so in this example either `'added'` or `'added_task'` would be fine. Choose a name that says what happened!
+তবে নিয়ম হচ্ছে, এই object কে `type` হিসেবে একটি string পাস করা যে type টি ব্যাখ্যা করে "কি ঘটলো" তা, আর যেকোনো অতিরিক্ত ইনফর্রমেশন অন্যান্য ফিল্ড গুলোতে পাস করে দেয়াই সাধারণ প্রচলন। `type` একটি কম্পোনেন্টের জন্য নির্ধারিত, তাই এই উদাহরণে `'added'` অথবা `'added_task'` নাম দিলেই চলবে। এমন একটি নাম দেয়ার চেষ্টা করুন যে নামটি বলে দেয় কী ঘটলো!
 
 ```js
 dispatch({
