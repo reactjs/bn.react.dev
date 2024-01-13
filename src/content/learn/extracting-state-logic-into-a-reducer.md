@@ -284,9 +284,9 @@ dispatch({
 
 </Note>
 
-### Step 2: Write a reducer function {/*step-2-write-a-reducer-function*/}
+### ধাপ ২: একটি reducer function লিখুন {/*step-2-write-a-reducer-function*/}
 
-A reducer function is where you will put your state logic. It takes two arguments, the current state and the action object, and it returns the next state:
+একটি reducer function হলো যেখানে আপনি আপনার state লজিক রাখবেন। এটি দুটি argument নেয়, বর্তমান state এবং action অবজেক্ট, অতঃপর এটি পরবর্তী state কে return করেঃ
 
 ```js
 function yourReducer(state, action) {
@@ -294,15 +294,15 @@ function yourReducer(state, action) {
 }
 ```
 
-React will set the state to what you return from the reducer.
+আপনি reducer থেকে যা return করবেন, React সেটিকে state হিসেবে সেট করে দিবে। 
 
-To move your state setting logic from your event handlers to a reducer function in this example, you will:
+এই উদাহরণে, state সেট করার লজিককে event handlers থেকে একটি reducer function এ সরাতে, আপনার:
 
-1. Declare the current state (`tasks`) as the first argument.
-2. Declare the `action` object as the second argument.
-3. Return the _next_ state from the reducer (which React will set the state to).
+1. বর্তমান state (`tasks`) কে প্রথম argument হিসেবে declare করতে হবে।
+2. `action` অবজেক্টকে দ্বিতীয় argument হিসেবে declare করতে হবে।
+3. reducer থেকে _পরবর্তী_ state কে return করতে হবে। (যেটিকে React পরবর্তী state হিসেবে সেট করবে)
 
-Here is all the state setting logic migrated to a reducer function:
+সব state সেট করার লজিক reducer function এ সরানোর পর এমন দেখাবেঃ
 
 ```js
 function tasksReducer(tasks, action) {
@@ -331,7 +331,7 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-Because the reducer function takes state (`tasks`) as an argument, you can **declare it outside of your component.** This decreases the indentation level and can make your code easier to read.
+যেহেতু reducer function টি state (`tasks`) কে একটি argument হিসেবে নিচ্ছে, আপনি একে **আপনার কম্পোনেন্টের বাইরে declare করতে পারবেন।** এটা indentation level কমিয়ে আনে এবং আপনার কোডকে পড়তে সহজ করে।
 
 <Note>
 
