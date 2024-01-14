@@ -335,9 +335,9 @@ function tasksReducer(tasks, action) {
 
 <Note>
 
-The code above uses if/else statements, but it's a convention to use [switch statements](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) inside reducers. The result is the same, but it can be easier to read switch statements at a glance.
+উপরের কোডে if/else স্টেটমেন্ট ব্যবহৃত হয়েছে, কিন্তু reducer এর ভিতর [switch স্টেটমেন্ট](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) ব্যাবহার করাটা প্রচলিত। ফলাফল একই থাকবে, কিন্তু switch স্টেটমেন্ট একনজরে পরাটা আরো সহজতর।
 
-We'll be using them throughout the rest of this documentation like so:
+আমরা ডকুমেন্টেশনের বাকী অংশ জুড়ে এই প্রচলন অনুসারেই চালিয়ে যাবো:
 
 ```js
 function tasksReducer(tasks, action) {
@@ -371,9 +371,9 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-We recommend wrapping each `case` block into the `{` and `}` curly braces so that variables declared inside of different `case`s don't clash with each other. Also, a `case` should usually end with a `return`. If you forget to `return`, the code will "fall through" to the next `case`, which can lead to mistakes!
+আমরা প্রত্যেক `case` ব্লককে `{` এবং `}` বক্র ব্র্যাকেটে আবদ্ধ করতে রিকমেন্ড করি যাতে ভিন্ন ভিন্ন `case` এর মধ্যে declare করা variable একে অপরের সাথে সাংঘর্ষিক না হয়। আর, একটি `case` সাধারণত একটি `return` দিয়ে শেষ হবে। যদি আপনি `return` করতে ভুলে যান, তাহলে (ঐ `case` এর) কোডটি "ভেদ করে" পরবর্তী `case` এ গিয়ে পড়বে, যেটা ত্রুটি ঘটাতে পারে!
 
-If you're not yet comfortable with switch statements, using if/else is completely fine.
+যদি আপনি switch স্টেটমেন্ট এর ব্যাপারে এখনো কমফোর্টেবল না হয়ে থাকেন, if/else ব্যাবহার করায় কোনো সমস্যা নেই।
 
 </Note>
 
