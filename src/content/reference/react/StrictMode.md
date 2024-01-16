@@ -505,7 +505,7 @@ When Strict Mode is on, React will also run **one extra setup+cleanup cycle in d
 
 **Here is an example to illustrate how re-running Effects in Strict Mode helps you find bugs early.**
 
-Consider this example that connects a component to a chat:
+এই উদাহরণটি বিবেচনা করুন যা একটি কম্পোনেন্টকে একটি চ্যাটে সংযুক্ত করে:
 
 <Sandpack>
 
@@ -562,9 +562,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-There is an issue with this code, but it might not be immediately clear.
+এই কোডে একটি সমস্যা রয়েছে, কিন্তু এটি সঙ্গে সঙ্গে স্পষ্ট নাও হতে পারে।
 
-To make the issue more obvious, let's implement a feature. In the example below, `roomId` is not hardcoded. Instead, the user can select the `roomId` that they want to connect to from a dropdown. Click "Open chat" and then select different chat rooms one by one. Keep track of the number of active connections in the console:
+সমস্যাটি আরও স্পষ্ট করতে, চলুন একটি ফিচার বাস্তবায়ন করি। নীচের উদাহরণে, `roomId` হার্ডকোডেড নয়। বরং, ব্যবহারকারী ড্রপডাউন থেকে তারা যে `roomId`-এ সংযুক্ত হতে চান তা নির্বাচন করতে পারে। "Open chat" ক্লিক করুন এবং তারপর একে একে বিভিন্ন চ্যাট রুম নির্বাচন করুন। কনসোলে সক্রিয় সংযোগের সংখ্যা লক্ষ্য রাখুন:
 
 <Sandpack>
 
@@ -646,7 +646,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-You'll notice that the number of open connections always keeps growing. In a real app, this would cause performance and network problems. The issue is that [your Effect is missing a cleanup function:](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed)
+আপনি লক্ষ্য করবেন যে খোলা সংযোগের সংখ্যা সর্বদা বাড়তে থাকে। একটি বাস্তব অ্যাপে, এটি পারফরম্যান্স এবং নেটওয়ার্ক সমস্যা তৈরি করবে। সমস্যাটি হলো [আপনার ইফেক্টে একটি ক্লিনআপ ফাংশনের অভাব:](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed)
 
 ```js {4}
   useEffect(() => {
@@ -656,7 +656,7 @@ You'll notice that the number of open connections always keeps growing. In a rea
   }, [roomId]);
 ```
 
-Now that your Effect "cleans up" after itself and destroys the outdated connections, the leak is solved. However, notice that the problem did not become visible until you've added more features (the select box).
+এখন যেহেতু আপনার ইফেক্ট "নিজের ঝামেলা পরিষ্কার" করে এবং পুরানো সংযোগগুলি ধ্বংস করে, লিক সমাধান হয়েছে। তবে, লক্ষ্য করুন যে সমস্যাটি তখনই প্রকাশ পেল যখন আপনি আরও বৈশিষ্ট্য (সিলেক্ট বক্স) যোগ করেছেন।
 
 **In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
 
