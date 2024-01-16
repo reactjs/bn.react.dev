@@ -489,21 +489,21 @@ li {
 
 <Note>
 
-If you have [React DevTools](/learn/react-developer-tools) installed, any `console.log` calls during the second render call will appear slightly dimmed. React DevTools also offers a setting (off by default) to suppress them completely.
+আপনার যদি [React DevTools](/learn/react-developer-tools) ইনস্টল করা থাকে, তাহলে দ্বিতীয় রেন্ডার কলের সময় যেকোনো `console.log` কলগুলি সামান্য ম্লান দেখাবে। React DevTools একটি সেটিংও অফার করে (ডিফল্ট অনুযায়ী বন্ধ) যা এগুলিকে সম্পূর্ণভাবে দমন করতে পারে।
 
 </Note>
 
 ---
 
-### Fixing bugs found by re-running Effects in development {/*fixing-bugs-found-by-re-running-effects-in-development*/}
+### ডেভেলপমেন্টে ইফেক্টস পুনরায় চালানোর মাধ্যমে পাওয়া বাগগুলি সংশোধন করা {/*fixing-bugs-found-by-re-running-effects-in-development*/}
 
-Strict Mode can also help find bugs in [Effects.](/learn/synchronizing-with-effects)
+স্ট্রিক্ট মোড [ইফেক্টসে](/learn/synchronizing-with-effects) বাগ খুঁজে পেতেও সাহায্য করতে পারে।
 
-Every Effect has some setup code and may have some cleanup code. Normally, React calls setup when the component *mounts* (is added to the screen) and calls cleanup when the component *unmounts* (is removed from the screen). React then calls cleanup and setup again if its dependencies changed since the last render.
+প্রতিটি ইফেক্টের কিছু সেটআপ কোড থাকে এবং কিছু ক্লিনআপ কোড থাকতে পারে। সাধারণত, React কম্পোনেন্ট *মাউন্ট* হলে (স্ক্রিনে যোগ হলে) সেটআপ কল করে এবং কম্পোনেন্ট *আনমাউন্ট* হলে (স্ক্রিন থেকে সরানো হলে) ক্লিনআপ কল করে। তারপর React তার ডিপেন্ডেন্সি গত রেন্ডার থেকে পরিবর্তিত হলে ক্লিনআপ এবং সেটআপ পুনরায় কল করে।
 
-When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every Effect.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
+স্ট্রিক্ট মোড চালু থাকলে, React ডেভেলপমেন্টের জন্য প্রতিটি ইফেক্টের জন্য **একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালাবে।** এটি হয়তো অবাক করে দিতে পারে, কিন্তু এটি সূক্ষ্ম বাগগুলি খুঁজে পেতে সাহায্য করে যা ম্যানুয়ালি ধরা কঠিন।
 
-**Here is an example to illustrate how re-running Effects in Strict Mode helps you find bugs early.**
+**এখানে একটি উদাহরণ রয়েছে যা দেখায় যে স্ট্রিক্ট মোডে ইফেক্টস পুনরায় চালানো কীভাবে আপনাকে বাগ খুঁজে পেতে সাহায্য করে।**
 
 এই উদাহরণটি বিবেচনা করুন যা একটি কম্পোনেন্টকে একটি চ্যাটে সংযুক্ত করে:
 
@@ -835,13 +835,20 @@ These APIs are primarily used in older [class components](/reference/react/Compo
 ==============================
 ==============================
 
-If you have [React DevTools](/learn/react-developer-tools) installed, any `console.log` calls during the second render call will appear slightly dimmed. React DevTools also offers a setting (off by default) to suppress them completely.
 
-### Fixing bugs found by re-running Effects in development {/*fixing-bugs-found-by-re-running-effects-in-development*/}
 
-Strict Mode can also help find bugs in [Effects.](/learn/synchronizing-with-effects)
 
-Every Effect has some setup code and may have some cleanup code. Normally, React calls setup when the component *mounts* (is added to the screen) and calls cleanup when the component *unmounts* (is removed from the screen). React then calls cleanup and setup again if its dependencies changed since the last render.
+
+এই কোডে একটি সমস্যা রয়েছে, কিন্তু এটি সঙ্গে সঙ্গে পরিষ্কার নাও হতে পারে।
+
+
+
+
+
+
+===============================
+===============================
+===============================
 
 When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every Effect.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
 
