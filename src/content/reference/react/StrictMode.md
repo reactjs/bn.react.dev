@@ -136,7 +136,7 @@ function App() {
 
 **এখানে একটি উদাহরণ দেওয়া হয়েছে যা দেখায় কিভাবে Strict Mode-এ ডাবল রেন্ডারিং আপনাকে বাগগুলি শীঘ্রই খুঁজে পেতে সাহায্য করে।**
 
-This `StoryTray` component takes an array of `stories` and adds one last "Create Story" item at the end:
+এই `StoryTray` কম্পোনেন্টটি `stories` নামের একটি অ্যারে নেয় এবং শেষে একটি "Create Story" আইটেম যোগ করে:
 
 <Sandpack>
 
@@ -212,9 +212,9 @@ li {
 
 </Sandpack>
 
-There is a mistake in the code above. However, it is easy to miss because the initial output appears correct.
+উপরের কোডে একটি ভুল রয়েছে। তবে, এটি লক্ষ্য করা সহজ নয় কারণ প্রাথমিক আউটপুট সঠিক মনে হয়।
 
-This mistake will become more noticeable if the `StoryTray` component re-renders multiple times. For example, let's make the `StoryTray` re-render with a different background color whenever you hover over it: 
+এই ভুলটি আরও প্রকট হবে যদি `StoryTray` কম্পোনেন্টটি একাধিকবার রি-রেন্ডার হয়। উদাহরণস্বরূপ, চলুন দেখি যদি `StoryTray` আপনি এর উপরে মাউস নিয়ে গেলে ব্যাকগ্রাউন্ডের রঙ পরিবর্তন হয়ে পুনরায় রেন্ডার হয়:
 
 <Sandpack>
 
@@ -299,9 +299,9 @@ li {
 
 </Sandpack>
 
-Notice how every time you hover over the `StoryTray` component, "Create Story" gets added to the list again. The intention of the code was to add it once at the end. But `StoryTray` directly modifies the `stories` array from the props. Every time `StoryTray` renders, it adds "Create Story" again at the end of the same array. In other words, `StoryTray` is not a pure function--running it multiple times produces different results.
+লক্ষ করুন যে প্রতিবার আপনি `StoryTray` কম্পোনেন্টের উপরে মাউস নিয়ে যান, "Create Story" পুনরায় তালিকায় যোগ হচ্ছে। কোডের উদ্দেশ্য ছিল এটি একবার শেষে যোগ করা। কিন্তু `StoryTray` সরাসরি প্রপস থেকে `stories` অ্যারেটি পরিবর্তন করে। প্রতিবার `StoryTray` রেন্ডার হলে, এটি "Create Story" আবার সেই একই অ্যারের শেষে যোগ করে। অর্থাৎ, `StoryTray` একটি পিওর ফাংশন নয়—এটি বারবার চালানো হলে ভিন্ন ভিন্ন ফলাফল দেখা যায়।
 
-To fix this problem, you can make a copy of the array, and modify that copy instead of the original one:
+এই সমস্যাটি ঠিক করতে, আপনি অ্যারের একটি কপি তৈরি করতে পারেন, এবং মূল অ্যারের পরিবর্তে সেই কপিটি পরিবর্তন করুন:
 
 ```js {2}
 export default function StoryTray({ stories }) {
@@ -829,27 +829,13 @@ React warns if some component anywhere inside a `<StrictMode>` tree uses one of 
 
 These APIs are primarily used in older [class components](/reference/react/Component) so they rarely appear in modern apps.
 
-- আপনার কম্পোনেন্ট ফাংশন বডি (শুধুমাত্র টপ-লেভেল লজিক, তাই এতে ইভেন্ট হ্যান্ডলারের ভেতরের কোড অন্তর্ভুক্ত নয়)
-- ফাংশনগুলি যা আপনি [`useState`](/reference/react/useState), [`set` ফাংশনগুলি](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), অথবা [`useReducer`](/reference/react/useReducer)-এ পাস করেন
-- ক্লাস কম্পোনেন্টের কিছু মেথড যেমন [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([পুরো তালিকা দেখুন](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects))
 
-যদি কোনো ফাংশন পিওর হয়, তাহলে এটি দুবার চালানোর ফলে এর আচরণ পরিবর্তন হয় না কারণ একটি পিওর ফাংশন প্রতিবারই একই ফলাফল উৎপন্ন করে। তবে, যদি কোনো ফাংশন ইমপিওর হয় (উদাহরণস্বরূপ, এটি প্রাপ্ত ডেটা পরিবর্তন করে), তাহলে এটি দু'বার চালানো সাধারণত লক্ষ্যণীয় হয় (এটাই এটিকে ইমপিওর করে!) এটি আপনাকে বাগটি শীঘ্রই চিহ্নিত করতে এবং ঠিক করতে সাহায্য করে।
 
-**এখানে একটি উদাহরণ দেওয়া হয়েছে যা দেখায় কিভাবে Strict Mode-এ ডাবল রেন্ডারিং আপনাকে বাগগুলি শীঘ্রই খুঁজে পেতে সাহায্য করে।**
+এটি [করলে `StoryTray` ফাংশনটি পিওর হবে।](/learn/keeping-components-pure) প্রতিবার এটি কল হলে, এটি শুধু অ্যারের একটি নতুন কপি পরিবর্তন করবে, এবং কোনো বাহ্যিক অবজেক্ট বা ভেরিয়েবলে প্রভাব ফেলবে না। এটি বাগটি সমাধান করে, কিন্তু আপনাকে কম্পোনেন্টটি আরও প্রায়ই রি-রেন্ডার করতে হয়েছে যাতে বোঝা যায় যে এর আচরণে কিছু ভুল আছে।
 
-This `StoryTray` component takes an array of `stories` and adds one last "Create Story" item at the end:
+**মূল উদাহরণে, বাগটি স্পষ্ট ছিল না। এখন চলুন মূল (বাগযুক্ত) কোডটি `<StrictMode>`-এ রাখি:**
 
-There is a mistake in the code above. However, it is easy to miss because the initial output appears correct.
-
-This mistake will become more noticeable if the `StoryTray` component re-renders multiple times. For example, let's make the `StoryTray` re-render with a different background color whenever you hover over it: 
-
-Notice how every time you hover over the `StoryTray` component, "Create Story" gets added to the list again. The intention of the code was to add it once at the end. But `StoryTray` directly modifies the `stories` array from the props. Every time `StoryTray` renders, it adds "Create Story" again at the end of the same array. In other words, `StoryTray` is not a pure function--running it multiple times produces different results.
-
-To fix this problem, you can make a copy of the array, and modify that copy instead of the original one:
-
-This would [make the `StoryTray` function pure.](/learn/keeping-components-pure) Each time it is called, it would only modify a new copy of the array, and would not affect any external objects or variables. This solves the bug, but you had to make the component re-render more often before it became obvious that something is wrong with its behavior.
-
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
+**Strict Mode সর্বদা আপনার রেন্ডারিং ফাংশনটি দুইবার কল করে, যাতে আপনি সহজেই ভুলটি দেখতে পারেন** ("Create Story" দুইবার দেখা যায়)। এটি আপনাকে প্রক্রিয়ার প্রাথমিক পর্যায়ে এমন ভুলগুলি লক্ষ্য করতে সাহায্য করে। যখন আপনি আপনার কম্পোনেন্টকে Strict Mode-এ রেন্ডার করার জন্য সংশোধন করেন, আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগ সংশোধন করেন, যেমন আগের হোভার ফ
 
 **Strict Mode *always* calls your rendering function twice, so you can see the mistake right away** ("Create Story" appears twice). This lets you notice such mistakes early in the process. When you fix your component to render in Strict Mode, you *also* fix many possible future production bugs like the hover functionality from before:
 
