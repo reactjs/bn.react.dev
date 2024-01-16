@@ -42,12 +42,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 
 #### সতর্কতা {/*caveats*/}
 
-<<<<<<< HEAD
-* Strict Mode এ, React [আপনাকে accidental impurities খুঁজে বের করতে সাহায্য করার জন্য](#my-initializer-or-updater-function-runs-twice) **আপনার রেন্ডার ফাংশন দুবার কল করবে।** এটা development-only আচরণ এবং production এ কোন প্রভাব ফেলবে না। যদি আপনার রেন্ডার ফাংশন pure হয় (যেমন এর হওয়া উচিত), এটা আপনার কম্পোনেন্টের লজিকে কোন প্রভাব ফেলবার কথা না। দুটি কলের একটির ফলাফলকে আমলে আনা হবে না।
-=======
-* In Strict Mode, React will **call your render function twice** in order to [help you find accidental impurities.](/reference/react/useState#my-initializer-or-updater-function-runs-twice) This is development-only behavior and does not affect production. If your render function is pure (as it should be), this should not affect the logic of your component. The result from one of the calls will be ignored.
->>>>>>> 6bfde58c109ec86fd6c5767421404cb679ffba9a
-
+* Strict Mode এ, React [আপনাকে accidental impurities খুঁজে বের করতে সাহায্য করার জন্য](/reference/react/useState#my-initializer-or-updater-function-runs-twice) **আপনার রেন্ডার ফাংশন দুবার কল করবে।** এটা development-only আচরণ এবং production এ কোন প্রভাব ফেলবে না। যদি আপনার রেন্ডার ফাংশন pure হয় (যেমন এর হওয়া উচিত), এটা আপনার কম্পোনেন্টের লজিকে কোন প্রভাব ফেলবার কথা না। দুটি কলের একটির ফলাফলকে আমলে আনা হবে না।
 
 ---
 
