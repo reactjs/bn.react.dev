@@ -310,9 +310,9 @@ export default function StoryTray({ stories }) {
   items.push({ id: 'create', label: 'Create Story' });
 ```
 
-This would [make the `StoryTray` function pure.](/learn/keeping-components-pure) Each time it is called, it would only modify a new copy of the array, and would not affect any external objects or variables. This solves the bug, but you had to make the component re-render more often before it became obvious that something is wrong with its behavior.
+এটি [করলে `StoryTray` ফাংশনটি পিওর হবে।](/learn/keeping-components-pure) প্রতিবার এটি কল হলে, এটি শুধু অ্যারের একটি নতুন কপি পরিবর্তন করবে, এবং কোনো বাহ্যিক অবজেক্ট বা ভেরিয়েবলে প্রভাব ফেলবে না। এটি বাগটি সমাধান করে, কিন্তু আপনাকে কম্পোনেন্টটি আরও প্রায়ই রি-রেন্ডার করতে হয়েছে যাতে বোঝা যায় যে এর আচরণে কিছু ভুল আছে।
 
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
+**মূল উদাহরণে, বাগটি স্পষ্ট ছিল না। এখন চলুন মূল (বাগযুক্ত) কোডটি `<StrictMode>`-এ রাখি:**
 
 <Sandpack>
 
@@ -393,7 +393,7 @@ li {
 
 </Sandpack>
 
-**Strict Mode *always* calls your rendering function twice, so you can see the mistake right away** ("Create Story" appears twice). This lets you notice such mistakes early in the process. When you fix your component to render in Strict Mode, you *also* fix many possible future production bugs like the hover functionality from before:
+**স্ট্রিক্ট মোড *সর্বদা* আপনার রেন্ডারিং ফাংশনটি দুইবার কল করে, তাই আপনি সহজেই ভুলটি দেখতে পাবেন** ("Create Story" দুইবার প্রদর্শিত হয়)। এটি আপনাকে প্রক্রিয়ার শুরুতেই এমন ভুলগুলি লক্ষ্য করতে সাহায্য করে। আপনি যখন আপনার কম্পোনেন্টকে স্ট্রিক্ট মোডে রেন্ডার করার জন্য সংশোধন করেন, তখন আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগগুলি ঠিক করেন যেমন আগের হভার ফাংশনালিটি:
 
 <Sandpack>
 
@@ -483,9 +483,9 @@ li {
 
 </Sandpack>
 
-Without Strict Mode, it was easy to miss the bug until you added more re-renders. Strict Mode made the same bug appear right away. Strict Mode helps you find bugs before you push them to your team and to your users.
+স্ট্রিক্ট মোড ছাড়া, আরও রি-রেন্ডার যোগ করা পর্যন্ত বাগটি লক্ষ্য করা সহজ ছিল না। স্ট্রিক্ট মোড একই বাগটি সঙ্গে সঙ্গে প্রদর্শন করেছে। স্ট্রিক্ট মোড আপনাকে আপনার টিম এবং আপনার ব্যবহারকারীদের কাছে বাগগুলি প্রকাশ করার আগে তা খুঁজে পেতে সাহায্য করে।
 
-[Read more about keeping components pure.](/learn/keeping-components-pure)
+[কম্পোনেন্টগুলিকে পিওর রাখা সম্পর্কে আরও জানুন।](/learn/keeping-components-pure)
 
 <Note>
 
@@ -831,22 +831,11 @@ These APIs are primarily used in older [class components](/reference/react/Compo
 
 
 
-এটি [করলে `StoryTray` ফাংশনটি পিওর হবে।](/learn/keeping-components-pure) প্রতিবার এটি কল হলে, এটি শুধু অ্যারের একটি নতুন কপি পরিবর্তন করবে, এবং কোনো বাহ্যিক অবজেক্ট বা ভেরিয়েবলে প্রভাব ফেলবে না। এটি বাগটি সমাধান করে, কিন্তু আপনাকে কম্পোনেন্টটি আরও প্রায়ই রি-রেন্ডার করতে হয়েছে যাতে বোঝা যায় যে এর আচরণে কিছু ভুল আছে।
-
-**মূল উদাহরণে, বাগটি স্পষ্ট ছিল না। এখন চলুন মূল (বাগযুক্ত) কোডটি `<StrictMode>`-এ রাখি:**
-
-**Strict Mode সর্বদা আপনার রেন্ডারিং ফাংশনটি দুইবার কল করে, যাতে আপনি সহজেই ভুলটি দেখতে পারেন** ("Create Story" দুইবার দেখা যায়)। এটি আপনাকে প্রক্রিয়ার প্রাথমিক পর্যায়ে এমন ভুলগুলি লক্ষ্য করতে সাহায্য করে। যখন আপনি আপনার কম্পোনেন্টকে Strict Mode-এ রেন্ডার করার জন্য সংশোধন করেন, আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগ সংশোধন করেন, যেমন আগের হোভার ফ
-
-**Strict Mode *always* calls your rendering function twice, so you can see the mistake right away** ("Create Story" appears twice). This lets you notice such mistakes early in the process. When you fix your component to render in Strict Mode, you *also* fix many possible future production bugs like the hover functionality from before:
-
-Without Strict Mode, it was easy to miss the bug until you added more re-renders. Strict Mode made the same bug appear right away. Strict Mode helps you find bugs before you push them to your team and to your users.
-
-[Read more about keeping components pure.](/learn/keeping-components-pure)
-
-<Note>
+==============================
+==============================
+==============================
 
 If you have [React DevTools](/learn/react-developer-tools) installed, any `console.log` calls during the second render call will appear slightly dimmed. React DevTools also offers a setting (off by default) to suppress them completely.
-
 
 ### Fixing bugs found by re-running Effects in development {/*fixing-bugs-found-by-re-running-effects-in-development*/}
 
