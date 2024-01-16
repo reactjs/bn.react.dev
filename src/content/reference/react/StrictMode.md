@@ -812,69 +812,19 @@ button { margin-left: 10px; }
 
 লক্ষ করুন কনসোলে সক্রিয় সংযোগের সংখ্যা আর বাড়ছে না।
 
-Without Strict Mode, it was easy to miss that your Effect needed cleanup. By running *setup → cleanup → setup* instead of *setup* for your Effect in development, Strict Mode made the missing cleanup logic more noticeable.
+স্ট্রিক্ট মোড ছাড়া, আপনার ইফেক্টের ক্লিনআপের প্রয়োজন বুঝাটা সহজ ছিল না। *সেটআপ → ক্লিনআপ → সেটআপ* এর পরিবর্তে শুধু *সেটআপ* ব্যবহার করার মাধ্যমে ডেভেলপমেন্টে আপনার ইফেক্টের জন্য, স্ট্রিক্ট মোড অনুপস্থিত ক্লিনআপ লজিকটি আরও লক্ষণীয় করে তোলে।
 
-[Read more about implementing Effect cleanup.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
-
----
-
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
-
-React warns if some component anywhere inside a `<StrictMode>` tree uses one of these deprecated APIs:
-
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [See alternatives.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [See alternatives.](/reference/react/createContext)
-* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
-
-These APIs are primarily used in older [class components](/reference/react/Component) so they rarely appear in modern apps.
-
-
-
-==============================
-==============================
-==============================
-
-
-
-
-
-
-
-
-
-===============================
-===============================
-===============================
-
-
-
-Without Strict Mode, it was easy to miss that your Effect needed cleanup. By running *setup → cleanup → setup* instead of *setup* for your Effect in development, Strict Mode made the missing cleanup logic more noticeable.
-
-[Read more about implementing Effect cleanup.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
+[ইফেক্ট ক্লিনআপ বাস্তবায়ন সম্পর্কে আরও জানুন।](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 ---
 
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
+### স্ট্রিক্ট মোড দ্বারা সক্রিয় ডিপ্রিকেশন সতর্কতা সংশোধন করা {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
-React warns if some component anywhere inside a `<StrictMode>` tree uses one of these deprecated APIs:
+React সতর্ক করে দেয় যদি কোনো কম্পোনেন্ট `<StrictMode>` ট্রির মধ্যে থাকে এবং সেটি এই পুরাতন APIগুলির যেকোনো একটি ব্যবহার করে:
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [See alternatives.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [See alternatives.](/reference/react/createContext)
-* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [See alternatives.](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
+* [`findDOMNode`](/reference/react-dom/findDOMNode). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
+* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [অল্টারনেটিভ দেখুন।](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
+* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [অল্টারনেটিভ দেখুন।](/reference/react/createContext)
+* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
 
-These APIs are primarily used in older [class components](/reference/react/Component) so they rarely appear in modern apps.
-
-
-
-
-
-
----
-
-
-
-
-
-
+এই APIগুলি প্রধানত পুরানো [ক্লাস কম্পোনেন্টস](/reference/react/Component) এ ব্যবহৃত হয়, তাই এগুলি আধুনিক অ্যাপসে হঠাত দেখা যায়।
