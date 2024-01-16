@@ -379,11 +379,11 @@ function tasksReducer(tasks, action) {
 
 <DeepDive>
 
-#### Why are reducers called this way? {/*why-are-reducers-called-this-way*/}
+#### Reducer কে কেনো এভাবে call করা হয়? {/*why-are-reducers-called-this-way*/}
 
-Although reducers can "reduce" the amount of code inside your component, they are actually named after the [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) operation that you can perform on arrays.
+যদিও reducer আপনার কম্পোনেন্টের ভিতরে কোডের পরিমাণ কমাতে পারে, কিন্তু reducer নাম দেয়ার পিছনে আসল রহস্য হচ্ছে [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) অপারেশন, যেটি আপনি array এর উপর প্রয়োগ করতে পারেন।
 
-The `reduce()` operation lets you take an array and "accumulate" a single value out of many:
+`reduce()` অপারেশনটি আপনাকে একটি array এর একাধিক ভ্যালুকে "একত্র করে" একটি ভ্যালুতে নিয়ে আনার ক্ষমতা দেয়:
 
 ```
 const arr = [1, 2, 3, 4, 5];
@@ -392,9 +392,9 @@ const sum = arr.reduce(
 ); // 1 + 2 + 3 + 4 + 5
 ```
 
-The function you pass to `reduce` is known as a "reducer". It takes the _result so far_ and the _current item,_ then it returns the _next result._ React reducers are an example of the same idea: they take the _state so far_ and the _action_, and return the _next state._ In this way, they accumulate actions over time into state.
+`reduce` কে আপনি যে ফাংশনটি পাস করেন তাকে বলা হয় "reducer"। এটা গ্রহণ করে _এখন অবধি রেজাল্ট_ এবং _বর্তমান item,_ তারপর এটা return করে _পরবর্তী রেজাল্ট।_  React reducer ও এর অনুরূপ: গ্রহণ করে _এখন অবধি state_ এবং _action_, এবং return করে _পরবর্তী state।_ এমন করে, সময়ের সাথে সেটি action সমূহকে কে state হিসেবে একত্র করে।
 
-You could even use the `reduce()` method with an `initialState` and an array of `actions` to calculate the final state by passing your reducer function to it:
+এমনকি আপনি `reduce()` মেথডটি দিয়েও একটি `initialState` এবং একটি `actions` এর array থেকে সর্বশেষ state বের করতে পারবেন, তার জন্য মেথডটিকে আপনার reducer ফাংশনটি পাস করতে হবে:
 
 <Sandpack>
 
@@ -453,7 +453,7 @@ export default function tasksReducer(tasks, action) {
 
 </Sandpack>
 
-You probably won't need to do this yourself, but this is similar to what React does!
+আপনার নিজের এমনটা করার প্রয়োজন না হওয়ারই সম্ভাবনা বেশি, তবে এটা React যেভাবে করে দেয় তার মতোই!
 
 </DeepDive>
 
