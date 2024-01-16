@@ -128,13 +128,13 @@ function App() {
 
 এই নিয়ম ভঙ্গ করা কম্পোনেন্টগুলি অনির্দিষ্টভাবে আচরণ করে এবং বাগ তৈরি করে। আপনাকে আকস্মিকভাবে অশুদ্ধ কোড খুঁজে পেতে সাহায্য করার জন্য, Strict Mode ডেভেলপমেন্টে **আপনার কিছু ফাংশনকে দুবার কল করে**। এতে অন্তর্ভুক্ত:
 
-- Your component function body (only top-level logic, so this doesn't include code inside event handlers)
-- Functions that you pass to [`useState`](/reference/react/useState), [`set` functions](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), or [`useReducer`](/reference/react/useReducer)
-- Some class component methods like [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([see the whole list](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects))
+- আপনার কম্পোনেন্ট ফাংশন বডি (শুধুমাত্র টপ-লেভেল লজিক, তাই এতে ইভেন্ট হ্যান্ডলারের ভেতরের কোড অন্তর্ভুক্ত নয়)
+- সে সকল ফাংশন যা আপনি [`useState`](/reference/react/useState), [`set` ফাংশনগুলি](/reference/react/useState#setstate), [`useMemo`](/reference/react/useMemo), অথবা [`useReducer`](/reference/react/useReducer)-এ পাস করেন
+- ক্লাস কম্পোনেন্টের কিছু মেথড যেমন [`constructor`](/reference/react/Component#constructor), [`render`](/reference/react/Component#render), [`shouldComponentUpdate`](/reference/react/Component#shouldcomponentupdate) ([পুরো তালিকা দেখুন](https://reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects))
 
-If a function is pure, running it twice does not change its behavior because a pure function produces the same result every time. However, if a function is impure (for example, it mutates the data it receives), running it twice tends to be noticeable (that's what makes it impure!) This helps you spot and fix the bug early.
+যদি কোনো ফাংশন পিওর হয়, তাহলে এটি দুবার চালানোর ফলে এর আচরণ পরিবর্তন হয় না কারণ একটি পিওর ফাংশন প্রতিবারই একই ফলাফল উৎপন্ন করে। তবে, যদি কোনো ইমপিওর হয় (উদাহরণস্বরূপ, এটি প্রাপ্ত ডেটা পরিবর্তন করে), তাহলে এটি দু'বার চালানো সাধারণত লক্ষ্যণীয় হয় (এটাই এটিকে ইমপিওর করে!) এটি আপনাকে বাগটি শীঘ্রই চিহ্নিত করতে এবং ঠিক করতে সাহায্য করে।
 
-**Here is an example to illustrate how double rendering in Strict Mode helps you find bugs early.**
+**এখানে একটি উদাহরণ দেওয়া হয়েছে যা দেখায় কিভাবে Strict Mode-এ ডাবল রেন্ডারিং আপনাকে বাগগুলি শীঘ্রই খুঁজে পেতে সাহায্য করে।**
 
 This `StoryTray` component takes an array of `stories` and adds one last "Create Story" item at the end:
 
