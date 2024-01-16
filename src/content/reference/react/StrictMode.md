@@ -658,7 +658,7 @@ button { margin-left: 10px; }
 
 এখন যেহেতু আপনার ইফেক্ট "নিজের ঝামেলা পরিষ্কার" করে এবং পুরানো সংযোগগুলি ধ্বংস করে, লিক সমাধান হয়েছে। তবে, লক্ষ্য করুন যে সমস্যাটি তখনই প্রকাশ পেল যখন আপনি আরও বৈশিষ্ট্য (সিলেক্ট বক্স) যোগ করেছেন।
 
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
+**মূল উদাহরণে, বাগটি স্পষ্ট ছিল না। এখন আসুন মূল (বাগযুক্ত) কোডটি `<StrictMode>` এ মোড়ানো যাক:**
 
 <Sandpack>
 
@@ -720,9 +720,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-**With Strict Mode, you immediately see that there is a problem** (the number of active connections jumps to 2). Strict Mode runs an extra setup+cleanup cycle for every Effect. This Effect has no cleanup logic, so it creates an extra connection but doesn't destroy it. This is a hint that you're missing a cleanup function.
+**স্ট্রিক্ট মোডে, আপনি সঙ্গে সঙ্গে দেখতে পাবেন যে একটি সমস্যা আছে** (সক্রিয় সংযোগের সংখ্যা ২-এ ওঠে)। স্ট্রিক্ট মোড প্রতিটি ইফেক্টের জন্য একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালায়। এই ইফেক্টের কোনো ক্লিনআপ লজিক নেই, তাই এটি একটি অতিরিক্ত সংযোগ তৈরি করে কিন্তু এটি ধ্বংস করে না। এটি একটি ইঙ্গিত যে আপনি একটি ক্লিনআপ ফাংশন মিস করছেন।
 
-Strict Mode lets you notice such mistakes early in the process. When you fix your Effect by adding a cleanup function in Strict Mode, you *also* fix many possible future production bugs like the select box from before:
+স্ট্রিক্ট মোড আপনাকে প্রক্রিয়ার শুরুতেই এমন ভুলগুলি লক্ষ্য করতে দেয়। আপনি যখন স্ট্রিক্ট মোডে একটি ক্লিনআপ ফাংশন যোগ করে আপনার ইফেক্ট সংশোধন করেন, আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগগুলি ঠিক করেন যেমন আগের সিলেক্ট বক্স:
 
 <Sandpack>
 
@@ -810,7 +810,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how the active connection count in the console doesn't keep growing anymore.
+লক্ষ করুন কনসোলে সক্রিয় সংযোগের সংখ্যা আর বাড়ছে না।
 
 Without Strict Mode, it was easy to miss that your Effect needed cleanup. By running *setup → cleanup → setup* instead of *setup* for your Effect in development, Strict Mode made the missing cleanup logic more noticeable.
 
@@ -839,9 +839,6 @@ These APIs are primarily used in older [class components](/reference/react/Compo
 
 
 
-এই কোডে একটি সমস্যা রয়েছে, কিন্তু এটি সঙ্গে সঙ্গে পরিষ্কার নাও হতে পারে।
-
-
 
 
 
@@ -850,28 +847,7 @@ These APIs are primarily used in older [class components](/reference/react/Compo
 ===============================
 ===============================
 
-When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every Effect.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
 
-**Here is an example to illustrate how re-running Effects in Strict Mode helps you find bugs early.**
-
-Consider this example that connects a component to a chat:
-
-
-There is an issue with this code, but it might not be immediately clear.
-
-To make the issue more obvious, let's implement a feature. In the example below, `roomId` is not hardcoded. Instead, the user can select the `roomId` that they want to connect to from a dropdown. Click "Open chat" and then select different chat rooms one by one. Keep track of the number of active connections in the console:
-
-You'll notice that the number of open connections always keeps growing. In a real app, this would cause performance and network problems. The issue is that [your Effect is missing a cleanup function:](/learn/synchronizing-with-effects#step-3-add-cleanup-if-needed)
-
-Now that your Effect "cleans up" after itself and destroys the outdated connections, the leak is solved. However, notice that the problem did not become visible until you've added more features (the select box).
-
-**In the original example, the bug wasn't obvious. Now let's wrap the original (buggy) code in `<StrictMode>`:**
-
-**With Strict Mode, you immediately see that there is a problem** (the number of active connections jumps to 2). Strict Mode runs an extra setup+cleanup cycle for every Effect. This Effect has no cleanup logic, so it creates an extra connection but doesn't destroy it. This is a hint that you're missing a cleanup function.
-
-Strict Mode lets you notice such mistakes early in the process. When you fix your Effect by adding a cleanup function in Strict Mode, you *also* fix many possible future production bugs like the select box from before:
-
-Notice how the active connection count in the console doesn't keep growing anymore.
 
 Without Strict Mode, it was easy to miss that your Effect needed cleanup. By running *setup → cleanup → setup* instead of *setup* for your Effect in development, Strict Mode made the missing cleanup logic more noticeable.
 
