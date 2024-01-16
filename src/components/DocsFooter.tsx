@@ -76,7 +76,7 @@ function FooterLink({
       )}>
       <IconNavArrow
         className="inline text-tertiary dark:text-tertiary-dark group-focus:text-link dark:group-focus:text-link-dark"
-        displayDirection={type === 'Previous' ? 'start' : 'end'}
+        displayDirection={type === 'পূর্ববর্তী পেইজ' ? 'start' : 'end'}
       />
       <div className="flex flex-col overflow-hidden">
         <span className="text-sm font-bold tracking-wide no-underline uppercase text-secondary dark:text-secondary-dark group-focus:text-link dark:group-focus:text-link-dark group-focus:text-opacity-100">
