@@ -457,39 +457,39 @@ export default function tasksReducer(tasks, action) {
 
 </DeepDive>
 
-### Step 3: Use the reducer from your component {/*step-3-use-the-reducer-from-your-component*/}
+### ধাপ ৩: আপনার কম্পোনেন্টে reducer টি ব্যাবহার করুন {/*step-3-use-the-reducer-from-your-component*/}
 
-Finally, you need to hook up the `tasksReducer` to your component. Import the `useReducer` Hook from React:
+সবশেষে, আপনার `tasksReducer` টিকে আপনার কম্পোনেন্টের সাথে সংযুক্ত করে দিতে হবে। React থেকে `useReducer` হুকটি import করুন:
 
 ```js
 import { useReducer } from 'react';
 ```
 
-Then you can replace `useState`:
+অতঃপর আপনি `useState` কে সরিয়ে দিতে পারেন:
 
 ```js
 const [tasks, setTasks] = useState(initialTasks);
 ```
 
-with `useReducer` like so:
+`useReducer` দিয়ে, ঠিক এভাবে:
 
 ```js
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
 
-The `useReducer` Hook is similar to `useState`—you must pass it an initial state and it returns a stateful value and a way to set state (in this case, the dispatch function). But it's a little different.
+`useReducer` হুকটি অনেকটা `useState` মতো—আপনার অবশ্যই একে একটি initial state (স্টেটের প্রাথমিক ভ্যালু) পাস করতে হবে আর এটি return করে state এর ভ্যালু এবং state কে সেট করার একটি পদ্ধতি (এক্ষেত্রে, dispatch ফাংশন)। কিন্তু এটি (`useState` থেকে) একটু আলাদা।
 
-The `useReducer` Hook takes two arguments:
+`useReducer` হুকটি দুটি argument নেয়:
 
-1. A reducer function
-2. An initial state
+1. একটি reducer function
+2. একটি initial state
 
-And it returns:
+আর এটি return করে:
 
-1. A stateful value
-2. A dispatch function (to "dispatch" user actions to the reducer)
+1. একটি state ভ্যালু
+2. একটি dispatch function (ইউজার actions কে reducer এর নিকট "dispatch বা প্রেরণ" করার জন্য)
 
-Now it's fully wired up! Here, the reducer is declared at the bottom of the component file:
+এখন এটিকে পুরোপুরি সেট আপ করা হয়ে গেছে। এখানে, reducer টিকে component file এর নিচের দিকে declare করা হয়েছে:
 
 <Sandpack>
 
@@ -674,7 +674,7 @@ li {
 
 </Sandpack>
 
-If you want, you can even move the reducer to a different file:
+যদি চান, তাহলে আপনি reducer টিকে ভিন্ন আরেকটি ফাইলেও নিতে পারেন:
 
 <Sandpack>
 
@@ -862,7 +862,7 @@ li {
 
 </Sandpack>
 
-Component logic can be easier to read when you separate concerns like this. Now the event handlers only specify _what happened_ by dispatching actions, and the reducer function determines _how the state updates_ in response to them.
+যখন আপনি এমন করে separation of concern বজায় রাখবেন, কম্পোনেন্ট লজিক পড়াটা তখন সহজতর হবে। এখন event handler গুলো actions কে dispatch (প্রেরণ) করার মাধ্যমে শুধু _কি ঘটলো_ সেটা নির্ধারণ করে, আর তার জবাবে reducer function টি নির্ধারণ করে _কিভাবে state টি update হয়_।
 
 ## Comparing `useState` and `useReducer` {/*comparing-usestate-and-usereducer*/}
 
