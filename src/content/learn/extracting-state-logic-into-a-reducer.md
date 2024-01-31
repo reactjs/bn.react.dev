@@ -864,13 +864,13 @@ li {
 
 যখন আপনি এমন করে separation of concern বজায় রাখবেন, কম্পোনেন্ট লজিক পড়াটা তখন সহজতর হবে। এখন event handler গুলো actions কে dispatch (প্রেরণ) করার মাধ্যমে শুধু _কি ঘটলো_ সেটা নির্ধারণ করে, আর তার জবাবে reducer function টি নির্ধারণ করে _কিভাবে state টি update হয়_।
 
-## Comparing `useState` and `useReducer` {/*comparing-usestate-and-usereducer*/}
+## `useState` এবং `useReducer` এর তুলনা {/*comparing-usestate-and-usereducer*/}
 
-Reducers are not without downsides! Here's a few ways you can compare them:
+Reducer এর যে একদম কোনো খারাপ দিক নেই এমনটি না! আপনি নিচের কয়েকটি উপায়ে উভয়ের মাঝে তুলনা করতে পারেনঃ
 
-- **Code size:** Generally, with `useState` you have to write less code upfront. With `useReducer`, you have to write both a reducer function _and_ dispatch actions. However, `useReducer` can help cut down on the code if many event handlers modify state in a similar way.
-- **Readability:** `useState` is very easy to read when the state updates are simple. When they get more complex, they can bloat your component's code and make it difficult to scan. In this case, `useReducer` lets you cleanly separate the _how_ of update logic from the _what happened_ of event handlers.
-- **Debugging:** When you have a bug with `useState`, it can be difficult to tell _where_ the state was set incorrectly, and _why_. With `useReducer`, you can add a console log into your reducer to see every state update, and _why_ it happened (due to which `action`). If each `action` is correct, you'll know that the mistake is in the reducer logic itself. However, you have to step through more code than with `useState`.
+- **কোডের দৈর্ঘ্য (Code size):** সাধারণত, `useState` এর বেলায় আপনার শুরুতে কম কোড লেখা লাগে। আর `useReducer` এর বেলায়, আপনাকে একটি reducer function লেখা _এবং_ actions কে dispatch করা উভয়টিই করতে হয়। তবে, `useReducer` কোডের দৈর্ঘ্য কমাতে সহায়তা করতে পারে যদি কয়েকটি event handler একইভাবে state কে modify করে থাকে।
+- **পড়ার সহজতা (Readability):** `useState` পড়তে খুব সহজ যখন state update গুলো simple হয়। যখন তা জটিল হয়, তখন `useState` গুলো আপনার কম্পোনেটের কোডকে হিজিবিজি করে তোলে ও কোডে চোখ বুলানোটা কঠিনতর করে তোলে। এক্ষেত্রে, `useReducer` আপনাকে লজিক আপডেট _কিভাবে হলো (how)_ এবং event handler গুলোতে _কি ঘটলো (what happened_) পরিষ্কারভাবে আলাদা আলাদা রাখতে দেয়।
+- **বাগ দূর করা (Debugging):** যখন আপনার `useState` সংক্রান্ত কোনো bug থাকে, তখন _কোথায়_ এবং _কেনো_ স্টেটটিকে ভুলভাবে সেট করা হয়েছিলো এটা নির্ণয় করা কঠিন হয়ে উঠতে পারে। `useReducer` এর ক্ষেত্রে, আপনি প্রত্যেক স্টেট আপডেট এবং _কেনো_ (কোন `action` এর কারণে) তা ঘটলো সেটা দেখার জন্য reducer টিতে একটি console log যুক্ত করে দিতে পারেন। যদি প্রতিটি `action` সঠিক হয়ে থাকে, তখন আপনি বুঝে যাবেন যে ভুলটি আসলে reducer logic এর ভিতরে রয়েছে। তবে, আপনাকে এক্ষেত্রে `useState` এর থেকে বেশি কোড ঘাঁটাঘাঁটি করতে হবে।
 - **Testing:** A reducer is a pure function that doesn't depend on your component. This means that you can export and test it separately in isolation. While generally it's best to test components in a more realistic environment, for complex state update logic it can be useful to assert that your reducer returns a particular state for a particular initial state and action.
 - **Personal preference:** Some people like reducers, others don't. That's okay. It's a matter of preference. You can always convert between `useState` and `useReducer` back and forth: they are equivalent!
 
