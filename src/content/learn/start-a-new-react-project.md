@@ -4,21 +4,52 @@ title: নতুন প্রোজেক্ট শুরু করুন
 
 <Intro>
 
+<<<<<<< HEAD
 আপনি যদি React দিয়ে কোন অ্যাপ বা ওয়েবসাইট বানাতে চান তাহলে, React কমিউনিটি ব্যাবহার করে এমন যেকোনো একটি জনপ্রিয় ফ্রেমওয়ার্ক ব্যাবহার করতে আমরা আপনাকে উৎসাহিত করব। এই ফ্রেমওয়ার্ক গুলো আপনাকে গুরুত্বপূর্ণ কিছু ফিচার দিবে, যেমনঃ Routing, Data fetching এবং HTML generate করা, যা মোটামুটি সব ধরণের অ্যাপ অথবা ওয়েবসাইটের দরকার হয়।
+=======
+If you want to build a new app or a new website fully with React, we recommend picking one of the React-powered frameworks popular in the community.
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 </Intro>
 
-<Note>
 
+<<<<<<< HEAD
 **লোকাল ডেভেলপমেন্টের জন্যে আপনার অবশ্যই [Node.js](https://nodejs.org/en/) ইন্সটল থাকতে হবে।** আপনি চাইলে আপনার production সার্ভারে Node.js ইন্সটল করতে পারেন কিন্তু এটা আবশ্যক নয় কারণ অনেক React ফ্রেমওয়ার্ক আপনার অ্যাপ বা ওয়েবসাইট এর স্ট্যাটিক HTML/CSS/JS তৈরি করে দেয়।
+=======
+You can use React without a framework, however we’ve found that most apps and sites eventually build solutions to common problems such as code-splitting, routing, data fetching, and generating HTML. These problems are common to all UI libraries, not just React.
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
-</Note>
+By starting with a framework, you can get started with React quickly, and avoid essentially building your own framework later.
+
+<DeepDive>
+
+#### Can I use React without a framework? {/*can-i-use-react-without-a-framework*/}
+
+You can definitely use React without a framework--that's how you'd [use React for a part of your page.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) **However, if you're building a new app or a site fully with React, we recommend using a framework.**
+
+Here's why.
+
+Even if you don't need routing or data fetching at first, you'll likely want to add some libraries for them. As your JavaScript bundle grows with every new feature, you might have to figure out how to split code for every route individually. As your data fetching needs get more complex, you are likely to encounter server-client network waterfalls that make your app feel very slow. As your audience includes more users with poor network conditions and low-end devices, you might need to generate HTML from your components to display content early--either on the server, or during the build time. Changing your setup to run some of your code on the server or during the build can be very tricky.
+
+**These problems are not React-specific. This is why Svelte has SvelteKit, Vue has Nuxt, and so on.** To solve these problems on your own, you'll need to integrate your bundler with your router and with your data fetching library. It's not hard to get an initial setup working, but there are a lot of subtleties involved in making an app that loads quickly even as it grows over time. You'll want to send down the minimal amount of app code but do so in a single client–server roundtrip, in parallel with any data required for the page. You'll likely want the page to be interactive before your JavaScript code even runs, to support progressive enhancement. You may want to generate a folder of fully static HTML files for your marketing pages that can be hosted anywhere and still work with JavaScript disabled. Building these capabilities yourself takes real work.
+
+**React frameworks on this page solve problems like these by default, with no extra work from your side.** They let you start very lean and then scale your app with your needs. Each React framework has a community, so finding answers to questions and upgrading tooling is easier. Frameworks also give structure to your code, helping you and others retain context and skills between different projects. Conversely, with a custom setup it's easier to get stuck on unsupported dependency versions, and you'll essentially end up creating your own framework—albeit one with no community or upgrade path (and if it's anything like the ones we've made in the past, more haphazardly designed).
+
+If your app has unusual constraints not served well by these frameworks, or you prefer to solve these problems yourself, you can roll your own custom setup with React. Grab `react` and `react-dom` from npm, set up your custom build process with a bundler like [Vite](https://vitejs.dev/) or [Parcel](https://parceljs.org/), and add other tools as you need them for routing, static generation or server-side rendering, and more.
+
+</DeepDive>
 
 ## Production grade React ফ্রেমওয়ার্কের তালিকা {/*production-grade-react-frameworks*/}
 
-### Next.js {/*nextjs*/}
+These frameworks support all the features you need to deploy and scale your app in production and are working towards supporting our [full-stack architecture vision](#which-features-make-up-the-react-teams-full-stack-architecture-vision). All of the frameworks we recommend are open source with active communities for support, and can be deployed to your own server or a hosting provider. If you’re a framework author interested in being included on this list, [please let us know](https://github.com/reactjs/react.dev/issues/new?assignees=&labels=type%3A+framework&projects=&template=3-framework.yml&title=%5BFramework%5D%3A+).
 
+<<<<<<< HEAD
 **[Next.js](https://nextjs.org/) একটি full-stack React ফ্রেমওয়ার্ক।** এটি খুবই জনপ্রিয় এবং খুবই সহজে একটি ছোট ব্লগ ওয়েবসাইট অথবা অনেক বড় এবং জটিল অ্যাপ বানানোর জন্যে উপযোগী। নিচের কমান্ড টি আপনার টার্মিনাল এ রান করে আপনি একটি Next.js প্রোজেক্ট তৈরি করতে পারবেন।
+=======
+### Next.js {/*nextjs-pages-router*/}
+
+**[Next.js' Pages Router](https://nextjs.org/) is a full-stack React framework.** It's versatile and lets you create React apps of any size--from a mostly static blog to a complex dynamic application. To create a new Next.js project, run in your terminal:
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 <TerminalBlock>
 npx create-next-app@latest
@@ -65,6 +96,7 @@ npx create-expo-app
 
 Expo এর রক্ষণাবেক্ষণের কাজ করে থাকে [Expo (the company)](https://expo.dev/about)। Expo দিয়ে বিনামূল্যে অ্যাপ তৈরি করতে পারবেন, এবং কোন সীমাবদ্ধতা ছাড়াই আপনি সেগুলিকে Google এবং Apple অ্যাপ স্টোরগুলিতে জমা দিতে পারবেন৷ Expo এছাড়াও অপ্ট-ইন ক্লাউড সার্ভিস প্রদান করে থাকে৷
 
+<<<<<<< HEAD
 <DeepDive>
 
 #### আমি কি ফ্রেমওয়ার্ক ছাড়া React ব্যবহার করতে পারি? {/*can-i-use-react-without-a-framework*/}
@@ -84,6 +116,9 @@ Expo এর রক্ষণাবেক্ষণের কাজ করে থ�
 </DeepDive>
 
 ## জনপ্রিয় কিছু React ফ্রেমওয়ার্ক {/*bleeding-edge-react-frameworks*/}
+=======
+## Bleeding-edge React frameworks {/*bleeding-edge-react-frameworks*/}
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 আমরা কীভাবে React এর উন্নতি চালিয়ে যেতে পারি তার খোঁজ করেছি , আমরা বুঝতে পেরেছি যে ফ্রেমওয়ার্কগুলির সাথে React কে আরও ঘনিষ্ঠভাবে একীভূত করা (বিশেষত, রাউটিং, বান্ডলিং এবং সার্ভার প্রযুক্তির সাথে) React ব্যবহারকারীদের আরও ভাল অ্যাপ তৈরি করতে সহায়তা করার সবচেয়ে বড় সুযোগ। Next.js টিম [React সার্ভার কম্পোনেন্টের](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) মতো ফিচারের গবেষণা, বিকাশ, একীভূতকরণ এবং পরীক্ষা করতে আমাদের সাথে সহযোগিতা করতে সম্মত হয়েছে।
 
