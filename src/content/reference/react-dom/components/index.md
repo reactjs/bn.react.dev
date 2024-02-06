@@ -32,12 +32,9 @@ React সকল প্রকার ব্রাউজার বিল্ট-ই�
 
 ---
 
-<<<<<<< HEAD
-## সকল HTML কম্পোনেন্ট {/*all-html-components*/}
-=======
 ## Resource and Metadata Components {/*resource-and-metadata-components*/}
 
-These bulit-in browser components let you load external resources or annotate the document with metadata:
+এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলি আপনাকে বাহ্যিক রিসোর্স লোড করতে অথবা ডকুমেন্টে মেটাডেটা দিয়ে মার্ক করতে দেয়:
 
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
@@ -45,12 +42,11 @@ These bulit-in browser components let you load external resources or annotate th
 * [`<style>`](/reference/react-dom/components/style)
 * [`<title>`](/reference/react-dom/components/title)
 
-They are special in React because React can render them into the document head, suspend while resources are loading, and enact other behaviors that are described on the reference page for each specific component.
+React-এ এগুলি বিশেষ কারণ React এগুলিকে ডকুমেন্টের হেডে রেন্ডার করতে পারে, রিসোর্স লোড হওয়া অবধি সাসপেন্ড করতে পারে, এবং প্রতিটি বিশেষ কম্পোনেন্টের জন্য রেফারেন্স পেজে বর্ণিত অন্যান্য আচরণ সম্পাদন করতে পারে।
 
 ---
 
-## All HTML components {/*all-html-components*/}
->>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
+## সকল HTML কম্পোনেন্ট {/*all-html-components*/}
 
 React সকল বিল্ট-ইন ব্রাউজার HTML কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
