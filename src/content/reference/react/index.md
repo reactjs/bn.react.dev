@@ -7,7 +7,11 @@ title: এক নজরে React Reference
 React এর সাথে পরিচিত হবার জন্য [Learn](/learn) অংশ দেখুন।
 </Intro>
 
+<<<<<<< HEAD
 আমাদের 'The React reference documentation' কয়েকটি ফাংশনাল অংশে ভাগ করা হয়েছেঃ 
+=======
+The React reference documentation is broken down into functional subsections:
+>>>>>>> bb3a0f5c10aaeba6e6fb35f31f36b47812ece158
 
 ## React {/*react*/}
 Programmatic React ফিচারঃ  
