@@ -7,7 +7,7 @@ title: renderToStaticNodeStream
 `renderToStaticNodeStream` একটি নন-ইন্টার‍্যাকটিভ React ট্রি কে একটি [Node.js Readable Stream.](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
 
 ```js
-const stream = renderToStaticNodeStream(reactNode)
+const stream = renderToStaticNodeStream(reactNode, options?)
 ```
 
 </Intro>
@@ -18,7 +18,7 @@ const stream = renderToStaticNodeStream(reactNode)
 
 ## রেফারেন্স {/*reference*/}
 
-### `renderToStaticNodeStream(reactNode)` {/*rendertostaticnodestream*/}
+### `renderToStaticNodeStream(reactNode, options?)` {/*rendertostaticnodestream*/}
 
 সার্ভারে, [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) পাবার জন্য `renderToStaticNodeStream` কল করুন।
 
