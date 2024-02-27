@@ -13,7 +13,7 @@ title: renderToNodeStream
 `renderToNodeStream` একটি React ট্রি কে একটি [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) এ রেন্ডার করে।
 
 ```js
-const stream = renderToNodeStream(reactNode)
+const stream = renderToNodeStream(reactNode, options?)
 ```
 
 </Intro>
@@ -24,7 +24,7 @@ const stream = renderToNodeStream(reactNode)
 
 ## রেফারেন্স {/*reference*/}
 
-### `renderToNodeStream(reactNode)` {/*rendertonodestream*/}
+### `renderToNodeStream(reactNode, options?)` {/*rendertonodestream*/}
 
 সার্ভারে, [Node.js Readable Stream](https://nodejs.org/api/stream.html#readable-streams) পাবার জন্য `renderToNodeStream` কল করুন, যেটা আপনি রেসপন্সের মধ্যে pipe করে দিতে পারবেন।
 

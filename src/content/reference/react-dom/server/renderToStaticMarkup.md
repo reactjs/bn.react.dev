@@ -7,7 +7,7 @@ title: renderToStaticMarkup
 `renderToStaticMarkup` একটি নন-ইন্টার‍্যাক্টিভ React ট্রি কে একটি HTML স্ট্রিং এ রেন্ডার করে।
 
 ```js
-const html = renderToStaticMarkup(reactNode)
+const html = renderToStaticMarkup(reactNode, options?)
 ```
 
 </Intro>
@@ -18,7 +18,7 @@ const html = renderToStaticMarkup(reactNode)
 
 ## রেফারেন্স {/*reference*/}
 
-### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
+### `renderToStaticMarkup(reactNode, options?)` {/*rendertostaticmarkup*/}
 
 সার্ভারে, আপনার অ্যাপটি HTML এ রেন্ডার করার জন্য কল করুন `renderToStaticMarkup`।
 
