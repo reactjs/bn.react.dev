@@ -147,13 +147,13 @@ export default function TeaSet() {
 
 <DeepDive>
 
-#### Detecting impure calculations with StrictMode {/*detecting-impure-calculations-with-strict-mode*/}
+#### স্ট্রিক্ট মোডের সাহায্যে ইমপিওর হিসাব শনাক্ত করা {/*detecting-impure-calculations-with-strict-mode*/}
 
-Although you might not have used them all yet, in React there are three kinds of inputs that you can read while rendering: [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), and [context.](/learn/passing-data-deeply-with-context) You should always treat these inputs as read-only.
+যদিও আপনি এখনো সবগুলো ব্যবহার করেননি, React-এ রেন্ডারিং করার সময় রিড করার জন্য তিন ধরনের ইনপুট রয়েছে: [প্রপস](/learn/passing-props-to-a-component), [স্টেট](/learn/state-a-components-memory), এবং [কন্টেক্সট।](/learn/passing-data-deeply-with-context) আপনার উচিত এই ইনপুটগুলিকে সবসময় রিড-ওনলি হিসেবে বিবেচনা করা।
 
-When you want to *change* something in response to user input, you should [set state](/learn/state-a-components-memory) instead of writing to a variable. You should never change preexisting variables or objects while your component is rendering.
+যখন আপনি ব্যবহারকারীর ইনপুটের প্রতিক্রিয়ায় কিছু *পরিবর্তন* করতে চান, তখন আপনার উচিত [স্টেট সেট করা](/learn/state-a-components-memory) একটি ভেরিয়েবল লিখার পরিবর্তে। আপনার কম্পোনেন্ট রেন্ডারিং হচ্ছে এমন সময়ে আপনার উচিত নয় পূর্ববর্তী ভেরিয়েবলগুলি বা অবজেক্টগুলি পরিবর্তন করা।
 
-React offers a "Strict Mode" in which it calls each component's function twice during development. **By calling the component functions twice, Strict Mode helps find components that break these rules.**
+React "স্ট্রিক্ট মোড" অফার করে, যেখানে এটি উন্নয়নের সময় প্রতিটি কম্পোনেন্টের ফাংশনটি দুইবার কল করে। **কম্পোনেন্ট ফাংশনগুলি দুইবার কল করার মাধ্যমে, স্ট্রিক্ট মোড এমন কম্পোনেন্টগুলি খুঁজে পেতে সাহায্য করে যেগুলি এই নিয়মগুলি ভঙ্গ করে।**
 
 Notice how the original example displayed "Guest #2", "Guest #4", and "Guest #6" instead of "Guest #1", "Guest #2", and "Guest #3". The original function was impure, so calling it twice broke it. But the fixed pure version works even if the function is called twice every time. **Pure functions only calculate, so calling them twice won't change anything**--just like calling `double(2)` twice doesn't change what's returned, and solving <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> twice doesn't change what <MathI>y</MathI> is. Same inputs, same outputs. Always.
 
