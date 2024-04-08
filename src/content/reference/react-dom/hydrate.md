@@ -152,7 +152,11 @@ export default function App() {
 
 ### ভিন্ন ক্লায়েন্ট এবং সার্ভার কনটেন্ট এর হ্যান্ডলিং {/*handling-different-client-and-server-content*/}
 
+<<<<<<< HEAD
 আপনার যদি ইচ্ছাকৃতভাবে সার্ভার এবং ক্লায়েন্টে ভিন্ন কনটেন্ট রেন্ডার করার প্রয়োজন পড়ে, আপনি two-pass রেন্ডারিং করতে পারেন। যেসব component ক্লায়েন্টে ভিন্ন কিছু রেন্ডার করে তারা `isClient` এর মত একটি [state ভ্যারিয়েবল](/reference/react/useState) read করে নিতে পারে, যেটা আপনি একটা [effect](/reference/react/useEffect) এ `true` সেট করে দিতে পারেনঃ
+=======
+If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a [state variable](/reference/react/useState) like `isClient`, which you can set to `true` in an [Effect](/reference/react/useEffect):
+>>>>>>> 93177e6ceac8ffb5c2a8f3ed4bd1f80b63097078
 
 <Sandpack>
 
