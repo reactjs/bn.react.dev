@@ -51,10 +51,17 @@ flushSync(() => {
 
 #### সতর্কতা {/*caveats*/}
 
+<<<<<<< HEAD
 * `flushSync` বেশ উল্লেখজনকভাবে পারফরম্যান্স কমিয়ে দিতে পারে, কম ব্যবহারের চেষ্টা করুন।
 * `flushSync` পেন্ডিং সাসপেন্স বাউন্ডারিগুলোকে তাদের `fallback` state দেখাতে বাধ্য করতে পারে।
 * `flushSync` পেন্ডিং Effect গুলো রান করতে পারে এবং সিঙ্ক্রোনাসভাবে  may run pending effects and synchronously apply any updates they contain before returning.
 * `flushSync` প্রয়োজনে কলব্যাকের ভিতরের আপডেট flush করার জন্য কলব্যাকের বাইরে আপডেট flush করতে পারে। যেমন, যদি কোন একটি ক্লিক থেকে কোন আপডেট পেন্ডীং থাকে, React কলব্যাকের ভিতরের আপডেট flush করার আগে ওগুলো flush করতে পারে।
+=======
+* `flushSync` can significantly hurt performance. Use sparingly.
+* `flushSync` may force pending Suspense boundaries to show their `fallback` state.
+* `flushSync` may run pending Effects and synchronously apply any updates they contain before returning.
+* `flushSync` may flush updates outside the callback when necessary to flush the updates inside the callback. For example, if there are pending updates from a click, React may flush those before flushing the updates inside the callback.
+>>>>>>> 9e1f5cd590fd066e72dda9022237bee30b499951
 
 ---
 
