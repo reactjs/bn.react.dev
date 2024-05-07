@@ -1349,11 +1349,7 @@ input { margin: 10px; }
 
 <Note>
 
-<<<<<<< HEAD
 Deferred values এবং [transitions](#preventing-already-revealed-content-from-hiding) উভয়ের দ্বারাই আপনি ইনলাইন ইন্ডিকেটর এর হিসেবে Suspense fallback দেখানো থেকে বিরত থাকতে পারেন। Transitions সম্পূর্ণ আপডেটটিকে জরুরী নয় হিসেবে ধরে নেয় তাই এগুলো সাধারণত ফ্রেমওয়ার্ক এবং রাউটার লাইব্রেরীগুলিতে নেভিগেশনের জন্য ব্যবহৃত হয়। অন্যদিকে, deferred values সাধারণত অ্যাপ্লিকেশন কোডে বেশি উপযোগী যেখানে আপনি UI এর একটি অংশকে কম-জরুরী হিসেবে চিহ্নিত করে দিতে পারেন এবং এটিকে অন্যান্য UI এর "পরে আসতে" দিতে পারেন।
-=======
-Both deferred values and [Transitions](#preventing-already-revealed-content-from-hiding) let you avoid showing Suspense fallback in favor of inline indicators. Transitions mark the whole update as non-urgent so they are typically used by frameworks and router libraries for navigation. Deferred values, on the other hand, are mostly useful in application code where you want to mark a part of UI as non-urgent and let it "lag behind" the rest of the UI.
->>>>>>> 97489434323b0c4cce78588cd0f48e3808e0eba4
 
 </Note>
 
