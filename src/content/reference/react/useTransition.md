@@ -1596,11 +1596,11 @@ root.render(
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## সমস্যা সমাধান {/*troubleshooting*/}
 
-### Updating an input in a transition doesn't work {/*updating-an-input-in-a-transition-doesnt-work*/}
+### একটি ট্রানজিশনে ইনপুট আপডেট করা কাজ করে না {/*updating-an-input-in-a-transition-doesnt-work*/}
 
-You can't use a transition for a state variable that controls an input:
+আপনি এমন একটি state ভেরিয়েবলের জন্য ট্রানজিশন ব্যবহার করতে পারবেন না যা একটি ইনপুট নিয়ন্ত্রণ করে:
 
 ```js {4,10}
 const [text, setText] = useState('');
@@ -1615,16 +1615,16 @@ function handleChange(e) {
 return <input value={text} onChange={handleChange} />;
 ```
 
-This is because transitions are non-blocking, but updating an input in response to the change event should happen synchronously. If you want to run a transition in response to typing, you have two options:
+এর কারণ হল ট্রানজিশনগুলি নন-ব্লকিং, কিন্তু change ইভেন্টের রেসপন্সে ইনপুট আপডেট করা অবশ্যই synchronous হওয়া উচিত। যদি আপনি টাইপ করার সময় একটি ট্রানজিশন চালাতে চান, তাহলে আপনার দুটি বিকল্প উপায় রয়েছে:
 
-1. You can declare two separate state variables: one for the input state (which always updates synchronously), and one that you will update in a transition. This lets you control the input using the synchronous state, and pass the transition state variable (which will "lag behind" the input) to the rest of your rendering logic.
-2. Alternatively, you can have one state variable, and add [`useDeferredValue`](/reference/react/useDeferredValue) which will "lag behind" the real value. It will trigger non-blocking re-renders to "catch up" with the new value automatically.
+১. আপনি দুটি আলাদা state ভেরিয়েবল ঘোষণা করতে পারেন: একটি ইনপুট state এর জন্য (যা সর্বদা synchronously আপডেট হয়), এবং একটি যা আপনি ট্রানজিশনে আপডেট করবেন। এটি আপনাকে synchronous state ব্যবহার করে ইনপুট নিয়ন্ত্রণ করতে দেয়, এবং বাকি রেন্ডারিং লজিকে ট্রানজিশন state ভেরিয়েবল (যা ইনপুটের পিছনে "বিলম্বিত" হবে) পাস করতে দেয়।
+২. বিকল্প হিসেবে, আপনি একটি state ভেরিয়েবল রাখতে পারেন, এবং [`useDeferredValue`](/reference/react/useDeferredValue) যোগ করতে পারেন যা বাস্তব মানের পিছনে "বিলম্বিত" হবে। এটি নতুন মানের সাথে "মেলে যাওয়ার" জন্য নন-ব্লকিং রি-রেন্ডারগুলি স্বয়ংক্রিয়ভাবে ট্রিগার করবে।
 
 ---
 
-### React doesn't treat my state update as a transition {/*react-doesnt-treat-my-state-update-as-a-transition*/}
+### React আমার state আপডেটকে ট্রানজিশন হিসেবে গ্রহণ করে না {/*react-doesnt-treat-my-state-update-as-a-transition*/}
 
-When you wrap a state update in a transition, make sure that it happens *during* the `startTransition` call:
+যখন আপনি একটি state আপডেটকে ট্রানজিশনে মোড়ান, নিশ্চিত করুন যে এটি `startTransition` কলের *সময়* ঘটে:
 
 ```js
 startTransition(() => {
@@ -1633,9 +1633,9 @@ startTransition(() => {
 });
 ```
 
-The function you pass to `startTransition` must be synchronous.
+`startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই synchronous হতে হবে।
 
-You can't mark an update as a transition like this:
+আপনি এভাবে একটি আপডেটকে ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
 
 ```js
 startTransition(() => {
@@ -1646,7 +1646,7 @@ startTransition(() => {
 });
 ```
 
-Instead, you could do this:
+বরং, আপনি এটি করতে পারেন:
 
 ```js
 setTimeout(() => {
@@ -1657,7 +1657,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-Similarly, you can't mark an update as a transition like this:
+একইভাবে, আপনি একটি আপডেটকে এইরকম ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
 
 ```js
 startTransition(async () => {
@@ -1667,7 +1667,7 @@ startTransition(async () => {
 });
 ```
 
-However, this works instead:
+তবে, এটি এর পরিবর্তে কাজ করে:
 
 ```js
 await someAsyncFunction();
@@ -1679,15 +1679,15 @@ startTransition(() => {
 
 ---
 
-### I want to call `useTransition` from outside a component {/*i-want-to-call-usetransition-from-outside-a-component*/}
+### আমি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে চাই {/*i-want-to-call-usetransition-from-outside-a-component*/}
 
-You can't call `useTransition` outside a component because it's a Hook. In this case, use the standalone [`startTransition`](/reference/react/startTransition) method instead. It works the same way, but it doesn't provide the `isPending` indicator.
+আপনি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে পারবেন না কারণ এটি একটি Hook। এই ক্ষেত্রে, এর পরিবর্তে standalone [`startTransition`](/reference/react/startTransition) পদ্ধতি ব্যবহার করুন। এটি একইভাবে কাজ করে, কিন্তু এটি `isPending` ইন্ডিকেটর প্রদান করে না।
 
 ---
 
-### The function I pass to `startTransition` executes immediately {/*the-function-i-pass-to-starttransition-executes-immediately*/}
+### আমি যে ফাংশন `startTransition`-এ পাস করি তা তাৎক্ষণিকভাবে কার্যকর হয় {/*the-function-i-pass-to-starttransition-executes-immediately*/}
 
-If you run this code, it will print 1, 2, 3:
+আপনি যদি এই কোডটি চালান, তা 1, 2, 3 প্রিন্ট করবে:
 
 ```js {1,3,6}
 console.log(1);
@@ -1698,7 +1698,7 @@ startTransition(() => {
 console.log(3);
 ```
 
-**It is expected to print 1, 2, 3.** The function you pass to `startTransition` does not get delayed. Unlike with the browser `setTimeout`, it does not run the callback later. React executes your function immediately, but any state updates scheduled *while it is running* are marked as transitions. You can imagine that it works like this:
+**এটি 1, 2, 3 প্রিন্ট করার জন্য প্রত্যাশিত।** `startTransition`-এ আপনি যে ফাংশন পাস করেন তা দেরি হয় না। browser-এর `setTimeout`-এর মতো, এটি পরে কলব্যাক চালায় না। React আপনার ফাংশনটি তাৎক্ষণিকভাবে কার্যকর করে, কিন্তু *এটি চালানোর সময়* নির্ধারিত কোনো state আপডেটগুলি ট্রানজিশন হিসাবে চিহ্নিত হয়। এটি এভাবে কাজ করে বলে আপনি কল্পনা করতে পারেন:
 
 ```js
 // A simplified version of how React works
