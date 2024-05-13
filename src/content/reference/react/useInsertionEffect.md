@@ -10,7 +10,11 @@ title: useInsertionEffect
 
 <Intro>
 
+<<<<<<< HEAD
 `useInsertionEffect` কোন লেআউট effect fire করার আগেই DOM এ বিভিন্ন এলিমেন্ট ইন্সার্ট করার সুযোগ দেয়।
+=======
+`useInsertionEffect` allows inserting elements into the DOM before any layout Effects fire.
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -26,7 +30,11 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
+<<<<<<< HEAD
 লেআউট রিড করতে হবে এমন কোন effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+=======
+Call `useInsertionEffect` to insert styles before any Effects fire that may need to read layout:
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -44,7 +52,11 @@ function useCSS(rule) {
 
 #### প্যারামিটার {/*parameters*/}
 
+<<<<<<< HEAD
 * `setup`: যেই ফাংশনে আপনার Effect এর লজিক আছে। আপনার সেটআপ ফাংশন একটি *cleanup* ফাংশন optionally রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM এ যুক্ত হবার সময়, কিন্তু কোন লেআউট effect fire করার আগে, React আপনার সেটআপ ফাংশন রান করবে। পরিবর্তিত ডিপেন্ডেন্সির সাথে যতবার রি-রেন্ডার হবে, React প্রথমে আপনার পুরনো ভ্যালুগুলো ব্যবহার করে cleanup ফাংশন রান করবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন ভ্যালুগুলো ব্যবহার করে সেটআপ ফাংশন রান করবে। আপনার কম্পোনেন্ট DOM থেকে সরিয়ে ফেলবার আগে, React আপনার cleanup ফাংশন রান করবে।
+=======
+* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your component is added to the DOM, but before any layout Effects fire, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. When your component is removed from the DOM, React will run your cleanup function.
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
  
 * **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিয়াক্টিভ ভ্যালুর তালিকা। রিয়াক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার  [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিয়াক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত করা আছে। ডিপেন্ডেন্সির তালিকাতে অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং `[dep1, dep2, dep3]` এর মত ইনলাইনে থাকতে হবে।  React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithn ব্যবহার করে প্রতিটা ডিপেন্ডেন্সি এবং এর আগের ভ্যালু তুলনা করবে।আপনি যদি ডিপেন্ডেন্সি চিহ্নিত করে না দেন, আপনার Effect কম্পোনেন্টের প্রতিটি re-render এ re-run হবে।
 
@@ -88,7 +100,11 @@ function useCSS(rule) {
 
 প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
 
+<<<<<<< HEAD
 কোন লেআউট effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+=======
+Call `useInsertionEffect` to insert the styles before any layout Effects fire:
+>>>>>>> b7bf6c16fb3152626a71c115b3242df6eb93bc6e
 
 ```js {4-11}
 // আপনার CSS-in-JS লাইব্রেরির মধ্যে
