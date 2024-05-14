@@ -22,9 +22,6 @@ startTransition(scope)
 
 `startTransition` ফাংশন আপনাকে একটি state update কে transition হিসেবে চিহ্নিত করতে দেবে।
 
-
-
-
 ```js {7,9}
 import { startTransition } from 'react';
 
