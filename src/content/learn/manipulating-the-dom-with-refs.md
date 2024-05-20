@@ -218,18 +218,19 @@ li {
 <Sandpack>
 
 ```js
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 
 export default function CatFriends() {
   const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
 
-  function scrollToId(itemId) {
+  function scrollToCat(cat) {
     const map = getMap();
-    const node = map.get(itemId);
+    const node = map.get(cat);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
@@ -244,34 +245,25 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => scrollToId(0)}>
-          Tom
-        </button>
-        <button onClick={() => scrollToId(5)}>
-          Maru
-        </button>
-        <button onClick={() => scrollToId(9)}>
-          Jellylorum
-        </button>
+        <button onClick={() => scrollToCat(catList[0])}>Tom</button>
+        <button onClick={() => scrollToCat(catList[5])}>Maru</button>
+        <button onClick={() => scrollToCat(catList[9])}>Jellylorum</button>
       </nav>
       <div>
         <ul>
-          {catList.map(cat => (
+          {catList.map((cat) => (
             <li
-              key={cat.id}
+              key={cat}
               ref={(node) => {
                 const map = getMap();
                 if (node) {
-                  map.set(cat.id, node);
+                  map.set(cat, node);
                 } else {
-                  map.delete(cat.id);
+                  map.delete(cat);
                 }
               }}
             >
-              <img
-                src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
-              />
+              <img src={cat} />
             </li>
           ))}
         </ul>
@@ -280,12 +272,13 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push("https://loremflickr.com/320/240/cat?lock=" + i);
+  }
+
+  return catList;
 }
 
 ```
@@ -316,6 +309,16 @@ li {
 }
 ```
 
+```json package.json hidden
+{
+  "dependencies": {
+    "react": "canary",
+    "react-dom": "canary",
+    "react-scripts": "^5.0.0"
+  }
+}
+```
+
 </Sandpack>
 
 এউ উদাহরণে, `itemsRef` একটা DOM নোডও রাখে না। বরং এটা আইটেম ID থেকে DOM নোডের একটা [ম্যাপ](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map) রাখে। তালিকার প্রতিটি আইটেমে [`ref` callback](/reference/react-dom/components/common#ref-callback) ম্যাপের আপডেটের বিষয়টা ঠিক রাখে।
@@ -326,17 +329,47 @@ li {
   ref={node => {
     const map = getMap();
     if (node) {
+<<<<<<< HEAD
       // ম্যাপে যোগ করুন
       map.set(cat.id, node);
     } else {
       // ম্যাপ থেকে সরিয়ে ফেলুন
       map.delete(cat.id);
+=======
+      // Add to the Map
+      map.set(cat, node);
+    } else {
+      // Remove from the Map
+      map.delete(cat);
+>>>>>>> 9967ded394d85af74e0ecdbf00feeb7921a28142
     }
   }}
 >
 ```
 
 এটা আপনাকে ম্যাপ থেকে DOM নোড পৃথকভাবে রিড করতে দেয়।
+
+<Canary>
+
+This example shows another approach for managing the Map with a `ref` callback cleanup function.
+
+```js
+<li
+  key={cat.id}
+  ref={node => {
+    const map = getMap();
+    // Add to the Map
+    map.set(cat, node);
+
+    return () => {
+      // Remove from the Map
+      map.delete(cat);
+    };
+  }}
+>
+```
+
+</Canary>
 
 </DeepDive>
 
