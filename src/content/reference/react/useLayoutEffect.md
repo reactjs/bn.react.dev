@@ -4,7 +4,7 @@ title: useLayoutEffect
 
 <Pitfall>
 
-`useLayoutEffect` ব্যবহার করলে পারফরম্যান্স কমে যেতে পারে। সম্ভব হলে [`useEffect`](/reference/react/useEffect) ব্যবহার করাই শ্রেয়।
+`useLayoutEffect` ব্যবহার করলে পারফরম্যান্স কমে যেতে পারে। সম্ভব হলে [`useEffect`](/reference/react/useEffect) ব্যবহার করাই ভাল।
 
 </Pitfall>
 
