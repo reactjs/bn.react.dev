@@ -4,7 +4,7 @@ title: useTransition
 
 <Intro>
 
-`useTransition` is a React Hook that lets you update the state without blocking the UI.
+`useTransition` হলো একটি React হুক যা আপনাকে UI ব্লক না করেই স্টেট আপডেট করতে দেয়।
 
 ```js
 const [isPending, startTransition] = useTransition()
@@ -16,11 +16,11 @@ const [isPending, startTransition] = useTransition()
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useTransition()` {/*usetransition*/}
 
-Call `useTransition` at the top level of your component to mark some state updates as Transitions.
+আপনার কম্পোনেন্টের একেবারে উপরের স্তরে `useTransition` কল করুন যাতে কিছু state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করা যায়।
 
 ```js
 import { useTransition } from 'react';
@@ -31,24 +31,24 @@ function TabContainer() {
 }
 ```
 
-[See more examples below.](#usage)
+[নীচে আরো উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটারস {/*parameters*/}
 
-`useTransition` does not take any parameters.
+`useTransition` কোনো প্যারামিটার নেয় না।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-`useTransition` returns an array with exactly two items:
+`useTransition` একটি অ্যারে রিটার্ন করে যাতে ঠিক দুটি আইটেম থাকে:
 
-1. The `isPending` flag that tells you whether there is a pending Transition.
-2. The [`startTransition` function](#starttransition) that lets you mark a state update as a Transition.
+১. `isPending` ফ্ল্যাগ যা আপনাকে জানায় যে একটি পেন্ডিং ট্রানজিশন আছে।
+২. [`startTransition` ফাংশনটি](#starttransition) যা আপনাকে একটি স্টেট আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
 
 ---
 
-### `startTransition` function {/*starttransition*/}
+### `startTransition` ফাংশন {/*starttransition*/}
 
-The `startTransition` function returned by `useTransition` lets you mark a state update as a Transition.
+`useTransition` দ্বারা রিটার্ন করা `startTransition` ফাংশনটি আপনাকে একটি state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
 
 ```js {6,8}
 function TabContainer() {
@@ -64,35 +64,35 @@ function TabContainer() {
 }
 ```
 
-#### Parameters {/*starttransition-parameters*/}
+#### প্যারামিটারসমূহ {/*starttransition-parameters*/}
 
-* `scope`: A function that updates some state by calling one or more [`set` functions.](/reference/react/useState#setstate) React immediately calls `scope` with no parameters and marks all state updates scheduled synchronously during the `scope` function call as Transitions. They will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](#preventing-unwanted-loading-indicators)
+* `scope`: একটি ফাংশন যা এক বা একাধিক [`set` ফাংশন](/reference/react/useState#setstate) কল করে কিছু state আপডেট করে। React কোনো প্রকার দেরি না করে `scope` কে কোনো প্যারামিটার ছাড়াই কল করে এবং `scope` ফাংশন কলের সময় নির্ধারিত সব state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। এগুলি কোনো কিছু দ্বারা [বাধাপ্রাপ্ত হবে না বা non-blocking](#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটর প্রদর্শন করবে না।](#preventing-unwanted-loading-indicators)
 
-#### Returns {/*starttransition-returns*/}
+#### রিটার্নস {/*starttransition-returns*/}
 
-`startTransition` does not return anything.
+`startTransition` কিছু রিটার্ন করে না।
 
-#### Caveats {/*starttransition-caveats*/}
+#### সতর্কতা {/*starttransition-caveats*/}
 
-* `useTransition` is a Hook, so it can only be called inside components or custom Hooks. If you need to start a Transition somewhere else (for example, from a data library), call the standalone [`startTransition`](/reference/react/startTransition) instead.
+* `useTransition` হল একটি হুক, তাই এটি কেবল কম্পোনেন্ট বা কাস্টম হুকের মধ্যে কল করা যেতে পারে। যদি অন্য কোনো স্থানে (যেমন, একটি ডেটা লাইব্রেরি থেকে) ট্রানজিশন শুরু করার প্রয়োজন হয়, তাহলে স্বতন্ত্র [`startTransition`](/reference/react/startTransition) কল করুন।
 
-* You can wrap an update into a Transition only if you have access to the `set` function of that state. If you want to start a Transition in response to some prop or a custom Hook value, try [`useDeferredValue`](/reference/react/useDeferredValue) instead.
+* যদি আপনি একটি স্টেটের `সেট` ফাংশনে অ্যাক্সেস পেয়ে থাকেন তবে আপনি একটি ট্রানজিশনে আপডেট  wrap করতে পারেন। কোনো প্রপ বা কাস্টম হুক ভ্যালুর রেসপন্সে ট্রানজিশন শুরু করতে চাইলে, [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করার চেষ্টা করুন।
 
-* The function you pass to `startTransition` must be synchronous. React immediately executes this function, marking all state updates that happen while it executes as Transitions. If you try to perform more state updates later (for example, in a timeout), they won't be marked as Transitions.
+* `startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই একই সময়ে হতে হবে। React এই ফাংশনটি তাৎক্ষণিকভাবে চালায়, এটি চালানোর সময় ঘটে যাওয়া সমস্ত state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। যদি আপনি পরে আরো state আপডেট করার চেষ্টা করেন (উদাহরণস্বরূপ, একটি timeout এ), তবে সেগুলি ট্রানজিশন হিসাবে চিহ্নিত হবে না।
 
-* A state update marked as a Transition will be interrupted by other state updates. For example, if you update a chart component inside a Transition, but then start typing into an input while the chart is in the middle of a re-render, React will restart the rendering work on the chart component after handling the input update.
+* একটি state আপডেট যদি ট্রানজিশন হিসাবে চিহ্নিত হয়, তাহলে অন্যান্য state আপডেট দ্বারা তা বাধাগ্রস্ত হবে। উদাহরণস্বরূপ, যদি আপনি একটি চার্ট কম্পোনেন্টে একটি ট্রানজিশনের মধ্যে আপডেট করেন, কিন্তু তারপর চার্টটি পুনরায় রেন্ডার হওয়ার মাঝখানে একটি input-এ টাইপ শুরু করেন, React ইনপুট আপডেট সম্পর্কিত কাজ সম্পন্ন করার পরে চার্ট কম্পোনেন্টে রেন্ডারিং কাজটি পুনরায় শুরু করবে।
 
-* Transition updates can't be used to control text inputs.
+* Transition আপডেটগুলি টেক্সট ইনপুটগুলি নিয়ন্ত্রণের জন্য ব্যবহৃত হতে পারে না।
 
-* If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that will likely be removed in a future release.
+* যদি একাধিক চলমান transitions থাকে, React বর্তমানে তাদেরকে একসাথে ব্যাচ করে। এটি একটি সীমাবদ্ধতা যা সম্ভবত ভবিষ্যতের কোনো রিলিজে সরানো হবে।
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহারবিধি {/*usage*/}
 
-### Marking a state update as a non-blocking Transition {/*marking-a-state-update-as-a-non-blocking-transition*/}
+### একটি state আপডেটকে নন-ব্লকিং ট্রানজিশন হিসাবে চিহ্নিত করা {/*marking-a-state-update-as-a-non-blocking-transition*/}
 
-Call `useTransition` at the top level of your component to mark state updates as non-blocking *Transitions*.
+কম্পোনেন্টের একেবারে উপরে `useTransition` কল করুন যাতে state আপডেটগুলি কোনো প্রকার বাধা ছাড়াই *ট্রানজিশন* হিসাবে চিহ্নিত করা যায়।
 
 ```js [[1, 4, "isPending"], [2, 4, "startTransition"]]
 import { useState, useTransition } from 'react';
@@ -103,12 +103,12 @@ function TabContainer() {
 }
 ```
 
-`useTransition` returns an array with exactly two items:
+`useTransition` ঠিক দুটি আইটেম সহ একটি array রিটার্ন করে:
 
-1. The <CodeStep step={1}>`isPending` flag</CodeStep> that tells you whether there is a pending Transition.
-2. The <CodeStep step={2}>`startTransition` function</CodeStep> that lets you mark a state update as a Transition.
+১. <CodeStep step={1}>`isPending` ফ্ল্যাগ</CodeStep> যা আপনাকে জানায় যে একটি পেন্ডিং ট্রানজিশন রয়েছে।
+২. <CodeStep step={2}>`startTransition` ফাংশন</CodeStep> যা আপনাকে একটি state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
 
-You can then mark a state update as a Transition like this:
+আপনি তখন একটি state আপডেটকে এইরকম একটি ট্রানজিশন হিসাবে চিহ্নিত করতে পারেন:
 
 ```js {6,8}
 function TabContainer() {
@@ -124,17 +124,17 @@ function TabContainer() {
 }
 ```
 
-Transitions let you keep the user interface updates responsive even on slow devices.
+ট্রানজিশন আপনাকে ইউজার ইন্টারফেস আপডেটগুলিকে এমনকি ধীরগতির ডিভাইসেও রেস্পন্সিভ রাখতে দেয়।
 
-With a Transition, your UI stays responsive in the middle of a re-render. For example, if the user clicks a tab but then change their mind and click another tab, they can do that without waiting for the first re-render to finish.
+একটি ট্রানজিশনের সাথে, আপনার UI রি-রেন্ডারের মাঝখানে রেসপন্সিভ থাকে। উদাহরণস্বরূপ, যদি ব্যবহারকারী একটি ট্যাবে ক্লিক করে কিন্তু তারপর তাদের মন পরিবর্তন করে এবং অন্য ট্যাবে ক্লিক করে, তারা প্রথম রি-রেন্ডার শেষ হওয়ার জন্য অপেক্ষা না করে এটি করতে পারে।
 
-<Recipes titleText="The difference between useTransition and regular state updates" titleId="examples">
+<Recipes titleText="useTransition এবং রেগুলার state আপডেটের মধ্যে পার্থক্য" titleId="examples">
 
-#### Updating the current tab in a Transition {/*updating-the-current-tab-in-a-transition*/}
+#### ট্রানজিশনের মাধ্যমে বর্তমান ট্যাবটি আপডেট করা হচ্ছে {/*updating-the-current-tab-in-a-transition*/}
 
-In this example, the "Posts" tab is **artificially slowed down** so that it takes at least a second to render.
+এই উদাহরণে, "Posts" ট্যাবটি **কৃত্রিমভাবে ধীর করা হয়েছে** যাতে এটি রেন্ডার করতে কমপক্ষে এক সেকেন্ড সময় নেয়।
 
-Click "Posts" and then immediately click "Contact". Notice that this interrupts the slow render of "Posts". The "Contact" tab shows immediately. Because this state update is marked as a Transition, a slow re-render did not freeze the user interface.
+"Posts" এ ক্লিক করুন এবং তারপর তাৎক্ষণিকভাবে "Contact" এ ক্লিক করুন। লক্ষ্য করুন যে এটি "Posts" এর ধীরগতির রেন্ডারকে বাধা দেয়। "Contact" ট্যাবটি তাৎক্ষণিকভাবে দেখায়। কারণ এই state আপডেটটি একটি transition হিসেবে চিহ্নিত হয়েছে, একটি ধীরগতির রি-রেন্ডার ইউজার ইন্টারফেসকে স্থির রাখতে পারেনি।
 
 <Sandpack>
 
@@ -269,11 +269,11 @@ b { display: inline-block; margin-right: 10px; }
 
 <Solution />
 
-#### Updating the current tab without a Transition {/*updating-the-current-tab-without-a-transition*/}
+#### ট্রানজিশন ছাড়াই বর্তমান ট্যাবটি আপডেট করা হচ্ছে {/*updating-the-current-tab-without-a-transition*/}
 
-In this example, the "Posts" tab is also **artificially slowed down** so that it takes at least a second to render. Unlike in the previous example, this state update is **not a Transition.**
+এই উদাহরণে, "Posts" ট্যাবটি **কৃত্রিমভাবে ধীর করা হয়েছে** যাতে এটি রেন্ডার হতে অন্তত এক সেকেন্ড সময় নেয়। আগের উদাহরণের মতো, এই state আপডেটটি কোনো **ট্রানজিশন নয়।**
 
-Click "Posts" and then immediately click "Contact". Notice that the app freezes while rendering the slowed down tab, and the UI becomes unresponsive. This state update is not a Transition, so a slow re-render freezed the user interface.
+"Posts" এ ক্লিক করুন এবং তারপর তাৎক্ষণিকভাবে "Contact" এ ক্লিক করুন। লক্ষ্য করুন যে অ্যাপটি ধীরগতির ট্যাব রেন্ডার করার সময় স্থির থাকে এবং ইউআই সাড়া দেয় না। এই state আপডেটটি কোনো ট্রানজিশন নয়, তাই ধীর রি-রেন্ডারের কারণে ইউজার ইন্টারফেস স্থির থাকে।
 
 <Sandpack>
 
@@ -409,9 +409,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Updating the parent component in a Transition {/*updating-the-parent-component-in-a-transition*/}
+### ট্রানজিশনে প্যারেন্ট কম্পোনেন্ট আপডেট করা {/*updating-the-parent-component-in-a-transition*/}
 
-You can update a parent component's state from the `useTransition` call, too. For example, this `TabButton` component wraps its `onClick` logic in a Transition:
+আপনি `useTransition` কল থেকে একটি প্যারেন্ট কম্পোনেন্টের state আপডেট করতে পারেন। উদাহরণস্বরূপ, এই `TabButton` কম্পোনেন্টটি এর `onClick` লজিককে একটি ট্রানজিশনে রাখে:
 
 ```js {8-10}
 export default function TabButton({ children, isActive, onClick }) {
@@ -431,7 +431,7 @@ export default function TabButton({ children, isActive, onClick }) {
 }
 ```
 
-Because the parent component updates its state inside the `onClick` event handler, that state update gets marked as a Transition. This is why, like in the earlier example, you can click on "Posts" and then immediately click "Contact". Updating the selected tab is marked as a Transition, so it does not block user interactions.
+কারণ প্যারেন্ট কম্পোনেন্ট তার state আপডেট করে `onClick` ইভেন্ট হ্যান্ডলারের মধ্যে, সেই state আপডেটটি একটি ট্রানজিশন হিসাবে বিবেচিত হয়। এই কারণে, আগের উদাহরণের মতো, আপনি "Posts" এ ক্লিক করতে পারেন এবং তারপর অবিলম্বে "Contact" এ ক্লিক করতে পারেন। নির্বাচিত ট্যাব আপডেট করা একটি ট্রানজিশন হিসাবে বিবেচিত হয়, তাই এটি ইউজার ইন্টারঅ্যাকশনগুলি বাধা দেয় না।
 
 <Sandpack>
 
@@ -560,9 +560,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Displaying a pending visual state during the Transition {/*displaying-a-pending-visual-state-during-the-transition*/}
+### ট্রানজিশনের সময় পেন্ডিং ভিজ্যুয়াল state প্রদর্শন করা {/*displaying-a-pending-visual-state-during-the-transition*/}
 
-You can use the `isPending` boolean value returned by `useTransition` to indicate to the user that a Transition is in progress. For example, the tab button can have a special "pending" visual state:
+আপনি `useTransition` হতে রিটার্ন আসা `isPending` বুলিয়ান মান ব্যবহার করে ব্যবহারকারীকে জানাতে পারেন যে একটি ট্রানজিশন চলছে। উদাহরণস্বরূপ, ট্যাব বোতামটি একটি বিশেষ "pending" ভিজ্যুয়াল state থাকতে পারে:
 
 ```js {4-6}
 function TabButton({ children, isActive, onClick }) {
@@ -574,7 +574,7 @@ function TabButton({ children, isActive, onClick }) {
   // ...
 ```
 
-Notice how clicking "Posts" now feels more responsive because the tab button itself updates right away:
+লক্ষ্য করুন যে "Posts" ক্লিক করা এখন কিভাবে আরও প্রতিক্রিয়াশীল মনে হয় কারণ ট্যাব বাটনটি নিজেই তাৎক্ষণিকভাবে আপডেট হয়:
 
 <Sandpack>
 
@@ -707,9 +707,9 @@ b { display: inline-block; margin-right: 10px; }
 
 ---
 
-### Preventing unwanted loading indicators {/*preventing-unwanted-loading-indicators*/}
+### অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটরগুলি প্রতিরোধ করা {/*preventing-unwanted-loading-indicators*/}
 
-In this example, the `PostsTab` component fetches some data using a [Suspense-enabled](/reference/react/Suspense) data source. When you click the "Posts" tab, the `PostsTab` component *suspends*, causing the closest loading fallback to appear:
+এই উদাহরণে, `PostsTab` কম্পোনেন্টটি একটি [Suspense-enabled](/reference/react/Suspense) ডেটা সোর্স ব্যবহার করে কিছু ডেটা আনয়ন করে। যখন আপনি "Posts" ট্যাবে ক্লিক করেন, তখন `PostsTab` কম্পোনেন্টটি *সাসপেন্ড* হয়, যা কাছাকাছি লোডিং ফলব্যাক প্রদর্শন করে:
 
 <Sandpack>
 
@@ -893,9 +893,9 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-Hiding the entire tab container to show a loading indicator leads to a jarring user experience. If you add `useTransition` to `TabButton`, you can instead indicate display the pending state in the tab button instead.
+পুরো ট্যাব কন্টেইনার লুকিয়ে একটি লোডিং ইন্ডিকেটর দেখানো ব্যবহারকারীর জন্য অস্বস্তিকর অভিজ্ঞতা তৈরি করে। যদি আপনি `TabButton` এ `useTransition` যোগ করেন, তাহলে আপনি ট্যাব বোতামে পেন্ডিং state দেখানোর জন্য নির্দেশ করতে পারেন।
 
-Notice that clicking "Posts" no longer replaces the entire tab container with a spinner:
+লক্ষ্য করুন যে "Posts" ক্লিক করলে আর পুরো ট্যাব কন্টেইনার একটি স্পিনার দিয়ে প্রতিস্থাপিত হয় না:
 
 <Sandpack>
 
@@ -1087,19 +1087,19 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-[Read more about using Transitions with Suspense.](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
+[Suspense এর সাথে transitions ব্যবহার সম্পর্কে আরও পড়ুন।](/reference/react/Suspense#preventing-already-revealed-content-from-hiding)
 
 <Note>
 
-Transitions will only "wait" long enough to avoid hiding *already revealed* content (like the tab container). If the Posts tab had a [nested `<Suspense>` boundary,](/reference/react/Suspense#revealing-nested-content-as-it-loads) the Transition would not "wait" for it.
+ট্রানজিশনগুলি কেবল *ইতিমধ্যে প্রকাশিত* কন্টেন্ট (যেমন ট্যাব কন্টেইনার) লুকানো এড়াতে যথেষ্ট দীর্ঘ সময় "অপেক্ষা" করবে। যদি Posts ট্যাবের মধ্যে একটি [নেস্টেড `<Suspense>` সীমানা](/reference/react/Suspense#revealing-nested-content-as-it-loads) থাকত, তবে ট্রানজিশনটি এর জন্য "অপেক্ষা" করত না।
 
 </Note>
 
 ---
 
-### Building a Suspense-enabled router {/*building-a-suspense-enabled-router*/}
+### Suspense-সংবলিত রাউটার তৈরি করা {/*building-a-suspense-enabled-router*/}
 
-If you're building a React framework or a router, we recommend marking page navigations as Transitions.
+যদি আপনি একটি React ফ্রেমওয়ার্ক অথবা রাউটার তৈরি করেন, আমরা পরামর্শ দিই আপনি আপনার নেভিগেশনগুলিকে ট্রানজিশন হিসেবে চিহ্নিত করুন।
 
 ```js {3,6,8}
 function Router() {
@@ -1114,12 +1114,12 @@ function Router() {
   // ...
 ```
 
-This is recommended for two reasons:
+এটি দুটি কারণে পরামর্শ দেয়া হয়:
 
-- [Transitions are interruptible,](#marking-a-state-update-as-a-non-blocking-transition) which lets the user click away without waiting for the re-render to complete.
-- [Transitions prevent unwanted loading indicators,](#preventing-unwanted-loading-indicators) which lets the user avoid jarring jumps on navigation.
+- [ট্রানজিশনগুলি বাধাগ্রস্ত হতে পারে,](#marking-a-state-update-as-a-non-blocking-transition) যা ইউজারকে রি-রেন্ডার সম্পূর্ণ হওয়ার অপেক্ষা না করে অন্য কিছুতে ক্লিক করতে দেয়।
+- [ট্রানজিশনগুলি অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটরগুলি প্রতিরোধ করে,](#preventing-unwanted-loading-indicators) যা ইউজারকে নেভিগেশনে বিভ্রান্তিকর লাফ এড়াতে সাহায্য করে।
 
-Here is a tiny simplified router example using Transitions for navigations.
+এখানে নেভিগেশনের জন্য ট্রানজিশন ব্যবহার করে একটি খুব সহজ রাউটার উদাহরণ দেওয়া হল।
 
 <Sandpack>
 
@@ -1495,21 +1495,21 @@ main {
 
 <Note>
 
-[Suspense-enabled](/reference/react/Suspense) routers are expected to wrap the navigation updates into Transitions by default.
+[Suspense-enabled](/reference/react/Suspense) রাউটারগুলি সাধারণত নেভিগেশন আপডেটগুলিকে ডিফল্টভাবে transitions এ মোড়ানোর আশা করা হয়।
 
 </Note>
 
 ---
 
-### Displaying an error to users with an error boundary {/*displaying-an-error-to-users-with-error-boundary*/}
+### ব্যবহারকারীদের কাছে ত্রুটি সীমানা ব্যবহার করে ত্রুটি প্রদর্শন করা {/*displaying-an-error-to-users-with-error-boundary*/}
 
 <Canary>
 
-Error Boundary for useTransition is currently only available in React's canary and experimental channels. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
+useTransition জন্য এরর বাউন্ডারি বর্তমানে কেবল React-এর canary এবং পরীক্ষামূলক চ্যানেলগুলিতে পাওয়া যায়। [এখানে React-এর রিলিজ চ্যানেলগুলি](/community/versioning-policy#all-release-channels) সম্পর্কে আরও জানুন।
 
 </Canary>
 
-If a function passed to `startTransition` throws an error, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
+যদি `startTransition` এ পাস করা কোনো ফাংশন কোনো ত্রুটি দেখায়, তাহলে আপনি আপনার ব্যবহারকারীকে সেই ত্রুটির বার্তাটি প্রদর্শন করতে পারেন একটি [এরর বাউন্ডারির](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) মাধ্যমে। এরর বাউন্ডারি ব্যবহার করতে, যে কম্পোনেন্টে আপনি `useTransition` কল করছেন তাকে একটি এরর বাউন্ডারির মধ্যে মোড়ান। একবার `startTransition` এ পাস করা ফাংশনে ত্রুটি ঘটলে, এরর বাউন্ডারির জন্য নির্ধারিত ফলব্যাক প্রদর্শিত হবে।
 
 <Sandpack>
 
@@ -1596,11 +1596,11 @@ root.render(
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## সমস্যা সমাধান {/*troubleshooting*/}
 
-### Updating an input in a Transition doesn't work {/*updating-an-input-in-a-transition-doesnt-work*/}
+### একটি ট্রানজিশনে ইনপুট আপডেট করা কাজ করে না {/*updating-an-input-in-a-transition-doesnt-work*/}
 
-You can't use a Transition for a state variable that controls an input:
+আপনি এমন একটি state ভেরিয়েবলের জন্য ট্রানজিশন ব্যবহার করতে পারবেন না যা একটি ইনপুট নিয়ন্ত্রণ করে:
 
 ```js {4,10}
 const [text, setText] = useState('');
@@ -1615,16 +1615,16 @@ function handleChange(e) {
 return <input value={text} onChange={handleChange} />;
 ```
 
-This is because Transitions are non-blocking, but updating an input in response to the change event should happen synchronously. If you want to run a Transition in response to typing, you have two options:
+এর কারণ হল ট্রানজিশনগুলি নন-ব্লকিং, কিন্তু change ইভেন্টের রেসপন্সে ইনপুট আপডেট করা অবশ্যই একই সময়ে হওয়া উচিত। যদি আপনি টাইপ করার সময় একটি ট্রানজিশন চালাতে চান, তাহলে আপনার দুটি বিকল্প উপায় রয়েছে:
 
-1. You can declare two separate state variables: one for the input state (which always updates synchronously), and one that you will update in a Transition. This lets you control the input using the synchronous state, and pass the Transition state variable (which will "lag behind" the input) to the rest of your rendering logic.
-2. Alternatively, you can have one state variable, and add [`useDeferredValue`](/reference/react/useDeferredValue) which will "lag behind" the real value. It will trigger non-blocking re-renders to "catch up" with the new value automatically.
+১. আপনি দুটি আলাদা state ভেরিয়েবল ঘোষণা করতে পারেন: একটি ইনপুট state এর জন্য (যা সর্বদা একই সময়ে আপডেট হয়), এবং একটি যা আপনি ট্রানজিশনে আপডেট করবেন। এটি আপনাকে একই সময়ে state ব্যবহার করে ইনপুট নিয়ন্ত্রণ করতে দেয়, এবং বাকি রেন্ডারিং লজিকে ট্রানজিশন state ভেরিয়েবল (যা ইনপুটের পিছনে "বিলম্বিত" হবে) পাস করতে দেয়।
+২. বিকল্প হিসেবে, আপনি একটি state ভেরিয়েবল রাখতে পারেন, এবং [`useDeferredValue`](/reference/react/useDeferredValue) যোগ করতে পারেন যা বাস্তব মানের পিছনে "বিলম্বিত" হবে। এটি নতুন মানের সাথে "মেলে যাওয়ার" জন্য নন-ব্লকিং রি-রেন্ডারগুলি স্বয়ংক্রিয়ভাবে ট্রিগার করবে।
 
 ---
 
-### React doesn't treat my state update as a Transition {/*react-doesnt-treat-my-state-update-as-a-transition*/}
+### React আমার state আপডেটকে ট্রানজিশন হিসেবে গ্রহণ করে না {/*react-doesnt-treat-my-state-update-as-a-transition*/}
 
-When you wrap a state update in a Transition, make sure that it happens *during* the `startTransition` call:
+যখন আপনি একটি state আপডেটকে ট্রানজিশনে মোড়ান, নিশ্চিত করুন যে এটি `startTransition` কলের *সময়* ঘটে:
 
 ```js
 startTransition(() => {
@@ -1633,9 +1633,9 @@ startTransition(() => {
 });
 ```
 
-The function you pass to `startTransition` must be synchronous.
+`startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই একই সময়ে হতে হবে।
 
-You can't mark an update as a Transition like this:
+আপনি এভাবে একটি আপডেটকে ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
 
 ```js
 startTransition(() => {
@@ -1646,7 +1646,7 @@ startTransition(() => {
 });
 ```
 
-Instead, you could do this:
+বরং, আপনি এটি করতে পারেন:
 
 ```js
 setTimeout(() => {
@@ -1657,7 +1657,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-Similarly, you can't mark an update as a Transition like this:
+একইভাবে, আপনি একটি আপডেটকে এইরকম ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
 
 ```js
 startTransition(async () => {
@@ -1667,7 +1667,7 @@ startTransition(async () => {
 });
 ```
 
-However, this works instead:
+তবে, এটি এর পরিবর্তে কাজ করে:
 
 ```js
 await someAsyncFunction();
@@ -1679,15 +1679,15 @@ startTransition(() => {
 
 ---
 
-### I want to call `useTransition` from outside a component {/*i-want-to-call-usetransition-from-outside-a-component*/}
+### আমি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে চাই {/*i-want-to-call-usetransition-from-outside-a-component*/}
 
-You can't call `useTransition` outside a component because it's a Hook. In this case, use the standalone [`startTransition`](/reference/react/startTransition) method instead. It works the same way, but it doesn't provide the `isPending` indicator.
+আপনি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে পারবেন না কারণ এটি একটি Hook। এই ক্ষেত্রে, এর পরিবর্তে standalone [`startTransition`](/reference/react/startTransition) পদ্ধতি ব্যবহার করুন। এটি একইভাবে কাজ করে, কিন্তু এটি `isPending` ইন্ডিকেটর প্রদান করে না।
 
 ---
 
-### The function I pass to `startTransition` executes immediately {/*the-function-i-pass-to-starttransition-executes-immediately*/}
+### আমি যে ফাংশন `startTransition`-এ পাস করি তা তাৎক্ষণিকভাবে কার্যকর হয় {/*the-function-i-pass-to-starttransition-executes-immediately*/}
 
-If you run this code, it will print 1, 2, 3:
+আপনি যদি এই কোডটি চালান, তা 1, 2, 3 প্রিন্ট করবে:
 
 ```js {1,3,6}
 console.log(1);
@@ -1698,7 +1698,7 @@ startTransition(() => {
 console.log(3);
 ```
 
-**It is expected to print 1, 2, 3.** The function you pass to `startTransition` does not get delayed. Unlike with the browser `setTimeout`, it does not run the callback later. React executes your function immediately, but any state updates scheduled *while it is running* are marked as Transitions. You can imagine that it works like this:
+**এটি 1, 2, 3 প্রিন্ট করার কথা।** `startTransition`-এ আপনি যে ফাংশন পাস করেন তা দেরি হয় না। ব্রাউজারের `setTimeout`-এর মতো, এটি পরে কলব্যাক চালায় না। React আপনার ফাংশনটি তাৎক্ষণিকভাবে কার্যকর করে, কিন্তু *এটি চালানোর সময়* নির্ধারিত কোনো state আপডেটগুলি ট্রানজিশন হিসাবে চিহ্নিত হয়। এটি এভাবে কাজ করে বলে আপনি কল্পনা করতে পারেন:
 
 ```js
 // A simplified version of how React works
