@@ -1154,7 +1154,7 @@ root.render(<App />);
 
 ---
 
-### I'm getting an error: "You passed a second argument to root.render" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
+### আমি একটি এরর পাচ্ছি: "You passed a second argument to root.render" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
 
 A common mistake is to pass the options for `createRoot` to `root.render(...)`:
 
@@ -1176,7 +1176,7 @@ root.render(<App />);
 
 ---
 
-### I'm getting an error: "Target container is not a DOM element" {/*im-getting-an-error-target-container-is-not-a-dom-element*/}
+### আমি একটি এরর পাচ্ছি: "Target container is not a DOM element" {/*im-getting-an-error-target-container-is-not-a-dom-element*/}
 
 এই এররের অর্থ হল, আপনি যা `createRoot`-এ পাঠাচ্ছেন তা DOM নোড না।
 
