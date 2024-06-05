@@ -10,7 +10,7 @@ title: useInsertionEffect
 
 <Intro>
 
-`useInsertionEffect` কোন লেআউট effect fire করার আগেই DOM এ বিভিন্ন এলিমেন্ট ইন্সার্ট করার সুযোগ দেয়।
+`useInsertionEffect` কোন লেআউট Effect fire করার আগেই DOM এ বিভিন্ন এলিমেন্ট ইন্সার্ট করার সুযোগ দেয়।
 
 ```js
 useInsertionEffect(setup, dependencies?)
@@ -26,7 +26,7 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-লেআউট রিড করতে হবে এমন কোন effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+লেআউট রিড করতে হবে এমন কোন Effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -88,7 +88,7 @@ function useCSS(rule) {
 
 প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
 
-কোন লেআউট effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
+কোন লেআউট Effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
 ```js {4-11}
 // আপনার CSS-in-JS লাইব্রেরির মধ্যে
