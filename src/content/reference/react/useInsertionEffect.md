@@ -26,11 +26,7 @@ useInsertionEffect(setup, dependencies?)
 
 ### `useInsertionEffect(setup, dependencies?)` {/*useinsertioneffect*/}
 
-<<<<<<<<< Temporary merge branch 1
 লেআউট রিড করতে হবে এমন কোন effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
-=========
-Call `useInsertionEffect` to insert styles before any Effects fire that may need to read layout:
->>>>>>>>> Temporary merge branch 2
 
 ```js
 import { useInsertionEffect } from 'react';
@@ -92,11 +88,7 @@ function useCSS(rule) {
 
 প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
 
-<<<<<<<<< Temporary merge branch 1
 কোন লেআউট effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
-=========
-Call `useInsertionEffect` to insert the styles before any layout Effects fire:
->>>>>>>>> Temporary merge branch 2
 
 ```js {4-11}
 // আপনার CSS-in-JS লাইব্রেরির মধ্যে
