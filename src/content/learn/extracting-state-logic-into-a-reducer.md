@@ -1,25 +1,25 @@
 ---
-title: Extracting State Logic into a Reducer
+title: State Logic কে একটি Reducer এ স্থানান্তর করা
 ---
 
 <Intro>
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called a _reducer._
+একাধিক event handler এ ছড়িয়ে থাকা একাধিক state update ওয়ালা কম্পোনেন্টগুলো দুঃসহ হয়ে যেতে পারে। এসব ক্ষেত্রে, আপনি সকল state update logic কে আপনার কম্পোনেন্টের বাইরে একটিমাত্র function এ একত্রিত করতে পারেন, যাকে বলা হয় _reducer।_
 
 </Intro>
 
 <YouWillLearn>
 
-- What a reducer function is
-- How to refactor `useState` to `useReducer`
-- When to use a reducer
-- How to write one well
+- reducer function বলতে কী বুঝায় 
+- কিভাবে `useState` কে গুছিয়ে `useReducer` এ পরিণত করা যায়
+- কখন reducer ব্যবহার করতে হয়
+- কীভাবে একে ভালভাবে লিখতে হয়
 
 </YouWillLearn>
 
-## Consolidate state logic with a reducer {/*consolidate-state-logic-with-a-reducer*/}
+## State logic কে একটি reducer এ একত্র করুন {/*consolidate-state-logic-with-a-reducer*/}
 
-As your components grow in complexity, it can get harder to see at a glance all the different ways in which a component's state gets updated. For example, the `TaskApp` component below holds an array of `tasks` in state and uses three different event handlers to add, remove, and edit tasks:
+ধীরে ধীরে যখন আপনার কম্পোনেন্টগুলোর জটিলতা বাড়তে থাকে, তখন এক নজর দেখে এটা বোঝা কঠিন হয়ে যেতে পারে যে কতোনা উপায়ে একটা কম্পোনেন্টের state আপডেট হতে পারে। উদাহরণস্বরূপ, নিচের `TaskApp` কম্পোনেন্টটি `tasks` নামক array কে state হিসেবে ধারণ করে, আর কোনো task কে add, edit, remove করার জন্য তিনটি ভিন্ন ভিন্ন event handler এর ব্যবহার করে:
 
 <Sandpack>
 
@@ -179,17 +179,17 @@ li {
 
 </Sandpack>
 
-Each of its event handlers calls `setTasks` in order to update the state. As this component grows, so does the amount of state logic sprinkled throughout it. To reduce this complexity and keep all your logic in one easy-to-access place, you can move that state logic into a single function outside your component, **called a "reducer".**
+এর প্রতিটি event handler state কে আপডেট করার জন্য `setTasks` কে call করে। ধীরে ধীরে যখন এ কম্পোনেন্টটি আকারে বাড়তে থাকবে, তখন সাথে সাথে এর ভিতরকার state logic ও বাড়তে থাকবে এবং জটিলতর হতে থাকবে। এই জটিলতা কমাতে এবং আপনার সব state logic একটি সহজে-পাওয়া-যায় এমন জায়গায় রাখতে, আপনি ঐসব state logic কে আপনার কম্পোনেন্টের বাইরে একটি function এ স্থানান্তর করতে পারেন, যে function টিকে বলা হয় **"reducer".**
 
-Reducers are a different way to handle state. You can migrate from `useState` to `useReducer` in three steps:
+Reducer হলো state হ্যান্ডেল করার একটি বিকল্প পদ্ধতি। আপনি `useState` থেকে `useReducer` এ তিনটি ধাপে স্থানান্তর করতে পারেন:
 
-1. **Move** from setting state to dispatching actions.
-2. **Write** a reducer function.
-3. **Use** the reducer from your component.
+1. state কে set করার বদলে action কে **dispatch করতে শুরু করুন**।
+2. একটি reducer function **লিখুন**।
+3. reducer টিকে আপনার কম্পোনেন্ট থেকে **ইউজ করুন**।
 
-### Step 1: Move from setting state to dispatching actions {/*step-1-move-from-setting-state-to-dispatching-actions*/}
+### ধাপ ১: State কে set করার বদলে action কে dispatch করতে শুরু করুন {/*step-1-move-from-setting-state-to-dispatching-actions*/}
 
-Your event handlers currently specify _what to do_ by setting state:
+State কে set করার মাধ্যমে আপনার event handler গুলো বর্তমানে নির্ধারণ করছে যে কী করতে হবে:
 
 ```js
 function handleAddTask(text) {
@@ -220,13 +220,13 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-Remove all the state setting logic. What you are left with are three event handlers:
+এখন সব state সেট করার logic দূর করে দিন। এখন আপনার কাছে যা বাকি থাকবে তা হলো:
 
-- `handleAddTask(text)` is called when the user presses "Add".
-- `handleChangeTask(task)` is called when the user toggles a task or presses "Save".
-- `handleDeleteTask(taskId)` is called when the user presses "Delete".
+- ইউজার যখন "Add" প্রেস করে তখন call করা হয় `handleAddTask(text)`।
+- ইউজার যখন "Save" প্রেস করে কিংবা কোনো task কে toggle (বা edit) করে তখন call করা হয় `handleChangeTask(task)`।
+- ইউজার যখন "Delete" প্রেস করে তখন call করা হয় `handleDeleteTask(taskId)`। 
 
-Managing state with reducers is slightly different from directly setting state. Instead of telling React "what to do" by setting state, you specify "what the user just did" by dispatching "actions" from your event handlers. (The state update logic will live elsewhere!) So instead of "setting `tasks`" via an event handler, you're dispatching an "added/changed/deleted a task" action. This is more descriptive of the user's intent.
+Reducer দিয়ে state ম্যানেজ করা, state সেট করা থেকে কিছুটা ভিন্ন জিনিস। React কে state সেট করার মাধ্যমে "কী করতে হবে" না বলে, আপনি আপনার event handler গুলো থেকে "action" গুলোকে dispatch করার মাধ্যমে ঠিক করে দেন "ইউজার এইমাত্র কী করলো"। (আর state update logic অন্য আরেক জায়গায় থাকবে!) তাই একটি event handler এর মাধ্যমে "`tasks` সেট করার" পরিবর্তে, আপনি "একটি task add/change/delete করার" action(কাজ) dispatch করবেন। আর এই পদ্ধতিটি ইউজারের আকাঙ্ক্ষাকে বেশি বর্ণনা করে। 
 
 ```js
 function handleAddTask(text) {
@@ -252,7 +252,7 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-The object you pass to `dispatch` is called an "action":
+আপনি `dispatch` এর কাছে যে object টি pass করেন, তাকে একটি "action" বলে:
 
 ```js {3-7}
 function handleDeleteTask(taskId) {
@@ -266,13 +266,13 @@ function handleDeleteTask(taskId) {
 }
 ```
 
-It is a regular JavaScript object. You decide what to put in it, but generally it should contain the minimal information about _what happened_. (You will add the `dispatch` function itself in a later step.)
+এটি একটি সাধারণ JavaScript object। এর মধ্যে কী রাখতে হবে সেটা আপনার উপর, তবে স্বাভাবিকভাবে এর মধ্যে _কী ঘটলো(what happened)_ সে ব্যপারে ন্যূনতম ইনফর্মেশন থাকতে হবে। (আর আপনি `dispatch` ফাংশনটিকে পরবর্তী একটি ধাপে যুক্ত করবেন।)
 
 <Note>
 
-An action object can have any shape.
+একটি object যেকোনো আকৃতির হতে পারে।
 
-By convention, it is common to give it a string `type` that describes what happened, and pass any additional information in other fields. The `type` is specific to a component, so in this example either `'added'` or `'added_task'` would be fine. Choose a name that says what happened!
+তবে নিয়ম হচ্ছে, এই object কে `type` হিসেবে একটি string পাস করা যে type টি ব্যাখ্যা করে "কি ঘটলো" তা, আর যেকোনো অতিরিক্ত ইনফর্রমেশন অন্যান্য ফিল্ড গুলোতে পাস করে দেয়াই সাধারণ প্রচলন। `type` একটি কম্পোনেন্টের জন্য নির্ধারিত, তাই এই উদাহরণে `'added'` অথবা `'added_task'` নাম দিলেই চলবে। এমন একটি নাম দেয়ার চেষ্টা করুন যে নামটি বলে দেয় কী ঘটলো!
 
 ```js
 dispatch({
@@ -284,9 +284,9 @@ dispatch({
 
 </Note>
 
-### Step 2: Write a reducer function {/*step-2-write-a-reducer-function*/}
+### ধাপ ২: একটি reducer function লিখুন {/*step-2-write-a-reducer-function*/}
 
-A reducer function is where you will put your state logic. It takes two arguments, the current state and the action object, and it returns the next state:
+একটি reducer function হলো যেখানে আপনি আপনার state লজিক রাখবেন। এটি দুটি argument নেয়, বর্তমান state এবং action অবজেক্ট, অতঃপর এটি পরবর্তী state কে return করেঃ
 
 ```js
 function yourReducer(state, action) {
@@ -294,15 +294,15 @@ function yourReducer(state, action) {
 }
 ```
 
-React will set the state to what you return from the reducer.
+আপনি reducer থেকে যা return করবেন, React সেটিকে state হিসেবে সেট করে দিবে। 
 
-To move your state setting logic from your event handlers to a reducer function in this example, you will:
+এই উদাহরণে, state সেট করার লজিককে event handlers থেকে একটি reducer function এ সরাতে, আপনার:
 
-1. Declare the current state (`tasks`) as the first argument.
-2. Declare the `action` object as the second argument.
-3. Return the _next_ state from the reducer (which React will set the state to).
+1. বর্তমান state (`tasks`) কে প্রথম argument হিসেবে declare করতে হবে।
+2. `action` অবজেক্টকে দ্বিতীয় argument হিসেবে declare করতে হবে।
+3. reducer থেকে _পরবর্তী_ state কে return করতে হবে। (যেটিকে React পরবর্তী state হিসেবে সেট করবে)
 
-Here is all the state setting logic migrated to a reducer function:
+সব state সেট করার লজিক reducer function এ সরানোর পর এমন দেখাবেঃ
 
 ```js
 function tasksReducer(tasks, action) {
@@ -331,13 +331,13 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-Because the reducer function takes state (`tasks`) as an argument, you can **declare it outside of your component.** This decreases the indentation level and can make your code easier to read.
+যেহেতু reducer function টি state (`tasks`) কে একটি argument হিসেবে নিচ্ছে, আপনি একে **আপনার কম্পোনেন্টের বাইরে declare করতে পারবেন।** এটা indentation level কমিয়ে আনে এবং আপনার কোডকে পড়তে সহজ করে।
 
 <Note>
 
-The code above uses if/else statements, but it's a convention to use [switch statements](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) inside reducers. The result is the same, but it can be easier to read switch statements at a glance.
+উপরের কোডে if/else স্টেটমেন্ট ব্যবহৃত হয়েছে, কিন্তু reducer এর ভিতর [switch স্টেটমেন্ট](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/switch) ব্যাবহার করাটা প্রচলিত। ফলাফল একই থাকবে, কিন্তু switch স্টেটমেন্ট একনজরে পরাটা আরো সহজতর।
 
-We'll be using them throughout the rest of this documentation like so:
+আমরা ডকুমেন্টেশনের বাকী অংশ জুড়ে এই প্রচলন অনুসারেই চালিয়ে যাবো:
 
 ```js
 function tasksReducer(tasks, action) {
@@ -371,19 +371,19 @@ function tasksReducer(tasks, action) {
 }
 ```
 
-We recommend wrapping each `case` block into the `{` and `}` curly braces so that variables declared inside of different `case`s don't clash with each other. Also, a `case` should usually end with a `return`. If you forget to `return`, the code will "fall through" to the next `case`, which can lead to mistakes!
+আমরা প্রত্যেক `case` ব্লককে `{` এবং `}` বক্র ব্র্যাকেটে আবদ্ধ করতে রিকমেন্ড করি যাতে ভিন্ন ভিন্ন `case` এর মধ্যে declare করা variable একে অপরের সাথে সাংঘর্ষিক না হয়। আর, একটি `case` সাধারণত একটি `return` দিয়ে শেষ হবে। যদি আপনি `return` করতে ভুলে যান, তাহলে (ঐ `case` এর) কোডটি "ভেদ করে" পরবর্তী `case` এ গিয়ে পড়বে, যেটা ত্রুটি ঘটাতে পারে!
 
-If you're not yet comfortable with switch statements, using if/else is completely fine.
+যদি আপনি switch স্টেটমেন্ট এর ব্যাপারে এখনো কমফোর্টেবল না হয়ে থাকেন, if/else ব্যাবহার করায় কোনো সমস্যা নেই।
 
 </Note>
 
 <DeepDive>
 
-#### Why are reducers called this way? {/*why-are-reducers-called-this-way*/}
+#### Reducer কে কেনো এভাবে call করা হয়? {/*why-are-reducers-called-this-way*/}
 
-Although reducers can "reduce" the amount of code inside your component, they are actually named after the [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) operation that you can perform on arrays.
+যদিও reducer আপনার কম্পোনেন্টের ভিতরে কোডের পরিমাণ কমাতে পারে, কিন্তু reducer নাম দেয়ার পিছনে আসল রহস্য হচ্ছে [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) অপারেশন, যেটি আপনি array এর উপর প্রয়োগ করতে পারেন।
 
-The `reduce()` operation lets you take an array and "accumulate" a single value out of many:
+`reduce()` অপারেশনটি আপনাকে একটি array এর একাধিক ভ্যালুকে "একত্র করে" একটি ভ্যালুতে নিয়ে আনার ক্ষমতা দেয়:
 
 ```
 const arr = [1, 2, 3, 4, 5];
@@ -392,9 +392,9 @@ const sum = arr.reduce(
 ); // 1 + 2 + 3 + 4 + 5
 ```
 
-The function you pass to `reduce` is known as a "reducer". It takes the _result so far_ and the _current item,_ then it returns the _next result._ React reducers are an example of the same idea: they take the _state so far_ and the _action_, and return the _next state._ In this way, they accumulate actions over time into state.
+`reduce` কে আপনি যে ফাংশনটি পাস করেন তাকে বলা হয় "reducer"। এটা গ্রহণ করে _এখন অবধি রেজাল্ট_ এবং _বর্তমান item,_ তারপর এটা return করে _পরবর্তী রেজাল্ট।_  React reducer ও এর অনুরূপ: গ্রহণ করে _এখন অবধি state_ এবং _action_, এবং return করে _পরবর্তী state।_ এমন করে, সময়ের সাথে সেটি action সমূহকে কে state হিসেবে একত্র করে।
 
-You could even use the `reduce()` method with an `initialState` and an array of `actions` to calculate the final state by passing your reducer function to it:
+এমনকি আপনি `reduce()` মেথডটি দিয়েও একটি `initialState` এবং একটি `actions` এর array থেকে সর্বশেষ state বের করতে পারবেন, তার জন্য মেথডটিকে আপনার reducer ফাংশনটি পাস করতে হবে:
 
 <Sandpack>
 
@@ -453,43 +453,43 @@ export default function tasksReducer(tasks, action) {
 
 </Sandpack>
 
-You probably won't need to do this yourself, but this is similar to what React does!
+আপনার নিজের এমনটা করার প্রয়োজন না হওয়ারই সম্ভাবনা বেশি, তবে এটা React যেভাবে করে দেয় তার মতোই!
 
 </DeepDive>
 
-### Step 3: Use the reducer from your component {/*step-3-use-the-reducer-from-your-component*/}
+### ধাপ ৩: আপনার কম্পোনেন্টে reducer টি ব্যাবহার করুন {/*step-3-use-the-reducer-from-your-component*/}
 
-Finally, you need to hook up the `tasksReducer` to your component. Import the `useReducer` Hook from React:
+সবশেষে, আপনার `tasksReducer` টিকে আপনার কম্পোনেন্টের সাথে সংযুক্ত করে দিতে হবে। React থেকে `useReducer` হুকটি import করুন:
 
 ```js
 import { useReducer } from 'react';
 ```
 
-Then you can replace `useState`:
+অতঃপর আপনি `useState` কে সরিয়ে দিতে পারেন:
 
 ```js
 const [tasks, setTasks] = useState(initialTasks);
 ```
 
-with `useReducer` like so:
+`useReducer` দিয়ে, ঠিক এভাবে:
 
 ```js
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 ```
 
-The `useReducer` Hook is similar to `useState`—you must pass it an initial state and it returns a stateful value and a way to set state (in this case, the dispatch function). But it's a little different.
+`useReducer` হুকটি অনেকটা `useState` মতো—আপনার অবশ্যই একে একটি initial state (স্টেটের প্রাথমিক ভ্যালু) পাস করতে হবে আর এটি return করে state এর ভ্যালু এবং state কে সেট করার একটি পদ্ধতি (এক্ষেত্রে, dispatch ফাংশন)। কিন্তু এটি (`useState` থেকে) একটু আলাদা।
 
-The `useReducer` Hook takes two arguments:
+`useReducer` হুকটি দুটি argument নেয়:
 
-1. A reducer function
-2. An initial state
+1. একটি reducer function
+2. একটি initial state
 
-And it returns:
+আর এটি return করে:
 
-1. A stateful value
-2. A dispatch function (to "dispatch" user actions to the reducer)
+1. একটি state ভ্যালু
+2. একটি dispatch function (ইউজার actions কে reducer এর নিকট "dispatch বা প্রেরণ" করার জন্য)
 
-Now it's fully wired up! Here, the reducer is declared at the bottom of the component file:
+এখন এটিকে পুরোপুরি সেট আপ করা হয়ে গেছে। এখানে, reducer টিকে component file এর নিচের দিকে declare করা হয়েছে:
 
 <Sandpack>
 
@@ -674,7 +674,7 @@ li {
 
 </Sandpack>
 
-If you want, you can even move the reducer to a different file:
+যদি চান, তাহলে আপনি reducer টিকে ভিন্ন আরেকটি ফাইলেও নিতে পারেন:
 
 <Sandpack>
 
@@ -862,19 +862,19 @@ li {
 
 </Sandpack>
 
-Component logic can be easier to read when you separate concerns like this. Now the event handlers only specify _what happened_ by dispatching actions, and the reducer function determines _how the state updates_ in response to them.
+যখন আপনি এমন করে separation of concern বজায় রাখবেন, কম্পোনেন্ট লজিক পড়াটা তখন সহজতর হবে। এখন event handler গুলো actions কে dispatch (প্রেরণ) করার মাধ্যমে শুধু _কি ঘটলো_ সেটা নির্ধারণ করে, আর তার জবাবে reducer function টি নির্ধারণ করে _কিভাবে state টি update হয়_।
 
-## Comparing `useState` and `useReducer` {/*comparing-usestate-and-usereducer*/}
+## `useState` এবং `useReducer` এর তুলনা {/*comparing-usestate-and-usereducer*/}
 
-Reducers are not without downsides! Here's a few ways you can compare them:
+Reducer এর যে একদম কোনো খারাপ দিক নেই এমনটি না! আপনি নিচের কয়েকটি উপায়ে উভয়ের মাঝে তুলনা করতে পারেনঃ
 
-- **Code size:** Generally, with `useState` you have to write less code upfront. With `useReducer`, you have to write both a reducer function _and_ dispatch actions. However, `useReducer` can help cut down on the code if many event handlers modify state in a similar way.
-- **Readability:** `useState` is very easy to read when the state updates are simple. When they get more complex, they can bloat your component's code and make it difficult to scan. In this case, `useReducer` lets you cleanly separate the _how_ of update logic from the _what happened_ of event handlers.
-- **Debugging:** When you have a bug with `useState`, it can be difficult to tell _where_ the state was set incorrectly, and _why_. With `useReducer`, you can add a console log into your reducer to see every state update, and _why_ it happened (due to which `action`). If each `action` is correct, you'll know that the mistake is in the reducer logic itself. However, you have to step through more code than with `useState`.
-- **Testing:** A reducer is a pure function that doesn't depend on your component. This means that you can export and test it separately in isolation. While generally it's best to test components in a more realistic environment, for complex state update logic it can be useful to assert that your reducer returns a particular state for a particular initial state and action.
-- **Personal preference:** Some people like reducers, others don't. That's okay. It's a matter of preference. You can always convert between `useState` and `useReducer` back and forth: they are equivalent!
+- **কোডের দৈর্ঘ্য (Code size):** সাধারণত, `useState` এর বেলায় আপনার শুরুতে কম কোড লেখা লাগে। আর `useReducer` এর বেলায়, আপনাকে একটি reducer function লেখা _এবং_ actions কে dispatch করা উভয়টিই করতে হয়। তবে, `useReducer` কোডের দৈর্ঘ্য কমাতে সহায়তা করতে পারে যদি কয়েকটি event handler একইভাবে state কে modify করে থাকে।
+- **পড়ার সহজতা (Readability):** `useState` পড়তে খুব সহজ যখন state update গুলো simple হয়। যখন তা জটিল হয়, তখন `useState` গুলো আপনার কম্পোনেটের কোডকে হিজিবিজি করে তোলে ও কোডে চোখ বুলানোটা কঠিনতর করে তোলে। এক্ষেত্রে, `useReducer` আপনাকে লজিক আপডেট _কিভাবে হলো (how)_ এবং event handler গুলোতে _কি ঘটলো (what happened_) পরিষ্কারভাবে আলাদা আলাদা রাখতে দেয়।
+- **বাগ দূর করা (Debugging):** যখন আপনার `useState` সংক্রান্ত কোনো bug থাকে, তখন _কোথায়_ এবং _কেনো_ স্টেটটিকে ভুলভাবে সেট করা হয়েছিলো এটা নির্ণয় করা কঠিন হয়ে উঠতে পারে। `useReducer` এর ক্ষেত্রে, আপনি প্রত্যেক স্টেট আপডেট এবং _কেনো_ (কোন `action` এর কারণে) তা ঘটলো সেটা দেখার জন্য reducer টিতে একটি console log যুক্ত করে দিতে পারেন। যদি প্রতিটি `action` সঠিক হয়ে থাকে, তখন আপনি বুঝে যাবেন যে ভুলটি আসলে reducer logic এর ভিতরে রয়েছে। তবে, আপনাকে এক্ষেত্রে `useState` এর থেকে বেশি কোড ঘাঁটাঘাঁটি করতে হবে।
+- **টেস্ট করা (Testing):** Reducer হলো একটি pure function যা আপনার কম্পোনেন্টের উপর নির্ভর করে না। এর মানে আপনি একে আলাদা ভাবে export করে test করতে পারবেন। যদিও স্বাভাবিকভাবে কম্পোনেন্টস কে আরো realistic environment এ টেস্ট করা উত্তম, তবে জটিল state update logic এর ক্ষেত্রে "নির্দিষ্ট initial state এবং action এর জন্য আপনার reducer নির্দিষ্ট state রিটার্ন করে" এ ব্যাপারে নিশ্চিত থাকা উপকারে আসতে পারে।
+- **ব্যাক্তিগত পছন্দ (Personal preference):** কেউ reducer পছন্দ করে, কেউ করেনা। এটা কোনো সমস্যা না। এটা একটা রুচির বিষয়। আপনি সর্বদাই `useState` এবং `useReducer` এর মাঝে অদল বদল করতে পারবেনঃ তারা উভয়ই সমান!
 
-We recommend using a reducer if you often encounter bugs due to incorrect state updates in some component, and want to introduce more structure to its code. You don't have to use reducers for everything: feel free to mix and match! You can even `useState` and `useReducer` in the same component.
+যদি আপনি কোনো কম্পোনেন্টে ভুলভাল স্টেট আপডেটের কারণে bug এর সম্মুখীন হন এবং এর কোডের কাঠামো আরো সুন্দর করতে চান, সেক্ষেত্রে আমরা একটি reducer ব্যাবহার করা রেকমেন্ড করি। আপনার সব কিছুর জন্য reducer ব্যাবহার করতে হবে এমন কোনো কথা নেই: আপনি বিনা বাধায় মিলিয়ে মিশিয়ে ব্যাবহার করতে পারেন! এমনকি আপনি একই কম্পোনেন্টে `useState` এবং `useReducer` ব্যাবহার করতে পারেন।
 
 ## Writing reducers well {/*writing-reducers-well*/}
 
