@@ -1,84 +1,84 @@
 ---
-title: 'Synchronizing with Effects'
+title: 'Effects দিয়ে Synchronizing'
 ---
 
 <Intro>
 
-Some components need to synchronize with external systems. For example, you might want to control a non-React component based on the React state, set up a server connection, or send an analytics log when a component appears on the screen. *Effects* let you run some code after rendering so that you can synchronize your component with some system outside of React.
+কিছু কম্পোনেন্ট কে বাইরের সিস্টেমের সাথে সিংক্রোনাইজ করতে হতে পারে। উদাহরণস্বরূপ, আপনি নন-রিয়েক্ট কম্পোনেন্টকে রিয়েক্ট state এর উপর নির্ভর করে নিয়ন্ত্রণ করতে চান,  একটি সার্ভার সংযোগ স্থাপন করতে চান, বা যখন একটি কম্পোনেন্ট স্ক্রিনে দেখা যায় তখন একটি বিশ্লেষণ লগ পাঠাতে চান। *Effects* আপনাকে রেন্ডার এর পর কিছু কোড রান করার সুযোগ দেয় যাতে আপনি আপনার কম্পোনেন্টটি রিয়েক্টের বাইরে কোন সিস্টেম এর সঙ্গে সিংক্রোনাইজ করতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-- What Effects are
-- How Effects are different from events
-- How to declare an Effect in your component
-- How to skip re-running an Effect unnecessarily
-- Why Effects run twice in development and how to fix them
+- Effects কী  
+- কীভাবে Effect গুলো events থেকে আলাদা 
+- কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লার করবেন 
+- কীভাবে অকারণে কোন Effect রি-রানিং এড়াবেন
+- কেন ডেভেলপমেন্টের সময় Effects দুইবার রান হয় এবং সেগুল কীভাবে ঠিক করবেন
 
 </YouWillLearn>
 
-## What are Effects and how are they different from events? {/*what-are-effects-and-how-are-they-different-from-events*/}
+## Effects কী এবং কীভাবে সেগুলো events থেকে আলাদা? {/*what-are-effects-and-how-are-they-different-from-events*/}
 
-Before getting to Effects, you need to be familiar with two types of logic inside React components:
+Effects সম্পর্কে শুরুর আগে, আপনার রিয়েক্ট কম্পোনেন্টের ভেতরের দুই প্রকার লজিকের সাথে পরিচিয় থাকতে হবে:
 
-- **Rendering code** (introduced in [Describing the UI](/learn/describing-the-ui)) lives at the top level of your component. This is where you take the props and state, transform them, and return the JSX you want to see on the screen. [Rendering code must be pure.](/learn/keeping-components-pure) Like a math formula, it should only _calculate_ the result, but not do anything else.
+- **Rendering code** (যা [UI এর বর্ণনা](/learn/describing-the-ui) অধ্যায়ে পরিচয় দেওয়া হয়েছে ) আপনার কম্পোনেন্টের টপ লেভেলে থাকে। এটি সেখানে থাকে, যেখানে আপনি props এবং state নেন, তাদের পরিবর্তন করেন, এবং আপনি যে JSX দেখতে চান তা রিটার্ন করেন।   [Rendering code অবশ্যই পিওর হতে হবে](/learn/keeping-components-pure) একটি গণিত সূত্র মতো, যে সূত্রটি শুধু ফলাফিল হিসাব করে, কিন্তু অন্য কিছু করে না।
 
-- **Event handlers** (introduced in [Adding Interactivity](/learn/adding-interactivity)) are nested functions inside your components that *do* things rather than just calculate them. An event handler might update an input field, submit an HTTP POST request to buy a product, or navigate the user to another screen. Event handlers contain ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) (they change the program's state) caused by a specific user action (for example, a button click or typing).
+- **Event handlers** (যা [Adding Interactivity](/learn/adding-interactivity) অধ্যায়ে পরিচয় দেওয়া হয়েছে) আপনার কম্পোনেন্টের ভিতরে একটি নেস্টেড ফাংশন যা কেবল সেগুলো গণনা করার পরিবর্তে অন্য কিছু *করে*।  এটি যে কাজগুলো করতে পারে সেগুলো হতে পারে একটি ইনপুট ফিল্ড আপডেট করা, একটি পণ্য কিনতে HTTP POST request দেওয়া, অথবা ব্যবহারকারীকে অন্য একটি স্ক্রিনে navigate করা। Event handler এ ["side effects"](https://en.wikipedia.org/wiki/Side_effect_(computer_science)) থাকে (এগুলো program এর অবস্থা পরিবর্তন করে) যা নির্দিষ্ট ব্যবহারকারীর ক্রিয়া (উদাহরণস্বরূপ  button click অথবা typing)।
 
-Sometimes this isn't enough. Consider a `ChatRoom` component that must connect to the chat server whenever it's visible on the screen. Connecting to a server is not a pure calculation (it's a side effect) so it can't happen during rendering. However, there is no single particular event like a click that causes `ChatRoom` to be displayed.
+কখনও কখনও এটা যথেষ্ট নয়।  একটি `ChatRoom` কম্পোনেন্ট চিন্তা করুন যখনই স্ক্রিনে দৃশ্যমান হয় তখন অবশ্যই চ্যাট সার্ভারের সাথে সংযোগ করতে হয়। সার্ভারে সংযোগ স্থাপন pure calculation নয় (এটি একটি side effect)  তাই এটি রেন্ডার এর সময় সম্পন্ন হয় না। যাইহোক, ক্লিক ইভেন্ট এর মত কোন নির্দিষ্ট ইভেন্ট নাই যা `ChatRoom` ডিসপ্লে করায়।
 
-***Effects* let you specify side effects that are caused by rendering itself, rather than by a particular event.** Sending a message in the chat is an *event* because it is directly caused by the user clicking a specific button. However, setting up a server connection is an *Effect* because it should happen no matter which interaction caused the component to appear. Effects run at the end of a [commit](/learn/render-and-commit) after the screen updates. This is a good time to synchronize the React components with some external system (like network or a third-party library).
+***Effect গুলো*  নির্দিষ্ট ইভেন্টের মাধ্যমে নয়, বরং স্বয়ংক্রিয় রেন্ডারিং দ্বারা সৃষ্ট side effect গুলো নির্দিষ্ট করতে দেয়।** চ্যাটে message পাঠানো একটি *event* কারণ এটি সরাসরি একজন ব্যবহারকারীর দ্বারা একটি নির্দিষ্ট বাটনে ক্লিক করার মাধ্যমে ঘটে। তবু, সার্ভারের সাথে সংযোগ স্থাপন একটি *Effect* কারণ এটা উপস্থিত কোম্পোনেন্টের প্রদর্শনের কোন ইন্টারেকশনের কারণে হয় না। Effect গুলো স্ক্রিন আপডেটের পরে একটি [commit](/learn/render-and-commit) এর শেষে চালানো হয়। কিছু external system (যেমন network অথবা একটি third-party library) এর সাথে React component গুলো synchronize করার জন্য এটি একটি ভাল সময় ।
 
 <Note>
 
-Here and later in this text, capitalized "Effect" refers to the React-specific definition above, i.e. a side effect caused by rendering. To refer to the broader programming concept, we'll say "side effect".
+এখানে এবং পরে এই পাঠটিতে, বড় হাতের "Effect" উপরের React-specific সংজ্ঞা বোঝায়, অর্থাৎ রেন্ডারিংয়ের ফলে সৃষ্ট side effect। বিস্তৃত এই প্রোগ্রামিং concept টি বুঝাতে, আমরা এটিকে "side effect" বলব।
 
 </Note>
 
+## আপনার কোন Effect প্রয়োজন নাও হতে পারে {/*you-might-not-need-an-effect*/}
 
-## You might not need an Effect {/*you-might-not-need-an-effect*/}
+**অপ্রয়োজনে আপনার component এ Effects অ্যাড করবেন না।** মনে রাখবেন যে Effect গুলো সাধারণত আপনার React কোডের "step out" করতে এবং কিছু *বাহ্যিক* সিস্টামের সাথে synchronize করতে ব্যবহৃত হয়। এর মধ্যে রয়েছে browser APIs, third-party widgets, network, এবং আরও অনেক কিছু। যদি আপনার Effect টি কেবল অন্য state এর উপর ভিত্তি করে কিছু state কে সামঞ্জস্য করে, [তবে আপনার কোন Effect প্রয়োজন নাও হতে পারে।](/learn/you-might-not-need-an-effect)
 
-**Don't rush to add Effects to your components.** Keep in mind that Effects are typically used to "step out" of your React code and synchronize with some *external* system. This includes browser APIs, third-party widgets, network, and so on. If your Effect only adjusts some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+## কিভাবে একটি Effect লিখবেন {/*how-to-write-an-effect*/}
 
-## How to write an Effect {/*how-to-write-an-effect*/}
+একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
 
-To write an Effect, follow these three steps:
+1. **Effect ডিক্লার** By default, প্রত্যেক বার রেন্ডারের সময় Effect রান হবে।
 
-1. **Declare an Effect.** By default, your Effect will run after every render.
-2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
-3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+2. **Effect এর dependenci গুলো specify করুন** বেশিরভাগ Effects প্রত্যেকবার রেন্ডার হওয়ার পরে re-run হওয়ার থেকে *যখন প্রয়োজন*  তখন re-run হওয়া উচিৎ। উদাহরণস্বরূপ, একটি fade-in animation কেবল তখনি টিগার করা উচিৎ যখন কোন একটি component দৃশ্যমান হয়। কোন chat room এর সাথে সংযোগ স্থাপন এবং বিচ্ছিন্ন তখনই ঘটে যখন component টি দৃশ্যমান এবং অদৃশ্যমান হয়ে যায় বা যখন chat room টি পরিবর্তন হয়। কীভাবে *dependencies* specifying এর মাধ্যমে  এটি কন্ট্রোল করবেন তা শিখবেন।
 
-Let's look at each of these steps in detail.
+3. **প্রয়োজনে cleanup অ্যাড করুন** কিছু Effects কিভাবে থামানো হবে, আন্ডু হবে বা এগুলো যা করছে তা clean up করতে হবে তা specify করে দিতে হয়। উধাহরণস্বরূপ, "connect" এর জন্য প্রয়োজন "disconnect", "subscribe" এর জন্য "unsubscribe", and "fetch" এর জন্য প্রয়োজন হয়ত "cancel" অথবা "ignore"। আপনি একটি *cleanup function* রিটার্ন করে কীভাবে এটি করবেন তা শিখবেন।
+আসুন, এবার প্রতিটি ধাপ বিস্তারিত দেখি।
 
-### Step 1: Declare an Effect {/*step-1-declare-an-effect*/}
+### ধাপ ১: একটি Effect ডিক্লার {/*step-1-declare-an-effect*/}
 
-To declare an Effect in your component, import the [`useEffect` Hook](/reference/react/useEffect) from React:
+আপনার component এ কোন Effect ডিক্লার করতে, [`useEffect` হুক](/reference/react/useEffect) React থেকে import করুন:
 
 ```js
 import { useEffect } from 'react';
 ```
 
-Then, call it at the top level of your component and put some code inside your Effect:
+এরপরে, এটিকে আপনার component এর top level এ call করুন এবং Effects এর মধ্যে কিছু code রাখুন।
 
 ```js {2-4}
 function MyComponent() {
   useEffect(() => {
-    // Code here will run after *every* render
+    // *প্রতিবার* রেন্ডারে এখানের code রান হবে
   });
   return <div />;
 }
 ```
 
-Every time your component renders, React will update the screen *and then* run the code inside `useEffect`. In other words, **`useEffect` "delays" a piece of code from running until that render is reflected on the screen.**
+প্রতিবার যখন component রেন্ডার করবে, React স্কিন আপডেট করবে *এবং এর পরে* `useEffect` এর ভিতরের কোড রান করবে। অর্থাৎ, **`useEffect` এক টুকরা কোড রান হতে " বিলম্ব করায় " যতক্ষণ না রেন্ডারটি স্কিনে reflected হয়।**
 
-Let's see how you can use an Effect to synchronize with an external system. Consider a `<VideoPlayer>` React component. It would be nice to control whether it's playing or paused by passing an `isPlaying` prop to it:
+চলুন দেখা যাক কিভাবে আপনি Effect ব্যবহার করে একটি external system এর সাথে synchronize করবেন। একটি `<VideoPlayer>` React component এর কথা চিন্তা করুন। এটি কন্ট্রল করতে ভাল হবে যদি এটিতে একটি `isPlaying` প্রপস পাঠানো হয় যে এটি চালু আছে অথবা বন্ধ:
 
 ```js
 <VideoPlayer isPlaying={isPlaying} />;
 ```
 
-Your custom `VideoPlayer` component renders the built-in browser [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag:
+আপনার কাস্টম `VideoPlayer` component টি ব্রাউজারের built-in [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) tag রেন্ডার করে:
 
 ```js
 function VideoPlayer({ src, isPlaying }) {
@@ -87,11 +87,11 @@ function VideoPlayer({ src, isPlaying }) {
 }
 ```
 
-However, the browser `<video>` tag does not have an `isPlaying` prop. The only way to control it is to manually call the [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) methods on the DOM element. **You need to synchronize the value of `isPlaying` prop, which tells whether the video _should_ currently be playing, with calls like `play()` and `pause()`.**
+তবে, browser এর `<video>` tag এ `isPlaying` প্রপ্স নাই। এটি নিয়ন্ত্রণের একমাত্র উপয় হলো DOM element টিতে ম্যানুয়ালি [`play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) এবং  [`pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause) call করা। **আপনাকে `isPlaying` প্রপ্স এর value টি synchronize করতে হবে, যা `play()` এবং `pause()`কে কল করে video টি বর্তমানে বাজানো উচিৎ কিনা তা নির্দেশ করে।**
 
-We'll need to first [get a ref](/learn/manipulating-the-dom-with-refs) to the `<video>` DOM node.
+আমাদের প্রথমে `<video>` DOM node এর একটি [ref পেতে হবে](/learn/manipulating-the-dom-with-refs)।
 
-You might be tempted to try to call `play()` or `pause()` during rendering, but that isn't correct:
+রেন্ডারিং এর সময় আপনি `play()` অথবা `pause()` কল করার চেষ্টা করতে পারেন, তবে এটি সঠিক নয়:
 
 <Sandpack>
 
@@ -133,11 +133,11 @@ video { width: 250px; }
 
 </Sandpack>
 
-The reason this code isn't correct is that it tries to do something with the DOM node during rendering. In React, [rendering should be a pure calculation](/learn/keeping-components-pure) of JSX and should not contain side effects like modifying the DOM.
+এই কোডটি সঠিক না হওয়ার কারণ হলো এটি রেন্ডারিং এর সময় DOM node এর সাথে কিছু একটা করার চেষ্টা করে। React এ, [রেন্ডারিং JSX এর pure calculation হওয়া উচিৎ](/learn/keeping-components-pure) এবং DOM কে modify করে এমন কোন side effects থাকা উচিৎ নয়।
 
-Moreover, when `VideoPlayer` is called for the first time, its DOM does not exist yet! There isn't a DOM node yet to call `play()` or `pause()` on, because React doesn't know what DOM to create until you return the JSX.
+উপরন্ত, যখন `VideoPlayer` কে প্রথমবারের জন্য call করা হয়, এটির DOM তখন exist করে না! `play()` বা `pause()` করার জন্য এখানে কোন DOM node নাই, কারণ React জানে না কি DOM তৈরি হবে যতক্ষণ না আপনি JSX রিটার্ন করেন। 
 
-The solution here is to **wrap the side effect with `useEffect` to move it out of the rendering calculation:**
+এখানে সমাধানটি হলো **রেন্ডারিং calculation এর বাইরে সরানোর জন্য `useEffect` এর দ্বারা side effect টি wrap করে রাখা:**
 
 ```js {6,12}
 import { useEffect, useRef } from 'react';
@@ -157,11 +157,11 @@ function VideoPlayer({ src, isPlaying }) {
 }
 ```
 
-By wrapping the DOM update in an Effect, you let React update the screen first. Then your Effect runs.
+DOM update কে একটি Effect দিয়ে wrap করার মাধ্যমে, আপনি প্রথমে React কে screen টি আপডেট করতে দিন। এরপরে আপনার Effect রান হবে।
 
-When your `VideoPlayer` component renders (either the first time or if it re-renders), a few things will happen. First, React will update the screen, ensuring the `<video>` tag is in the DOM with the right props. Then React will run your Effect. Finally, your Effect will call `play()` or `pause()` depending on the value of `isPlaying`.
+যখন আপনার `VideoPlayer` component টি রেন্ডার করে (হয় প্রথমবার বা যদি এটি পুনরায় রেন্ডার করে), কয়েকটি জিনিস ঘটবে। প্রথমে, React স্কিন আপডেট করবে, `<video>` tag টি সঠিক প্রপস সহ DOM এ আছে কিনা তা নিশ্চিত করবে । তারপরে React আপনার Effect চালাবে। অবশেষে, আপনার Effect টি `isPlaying` এর মানের উপর depend করে `play()` বা `pause()` কল করবে।
 
-Press Play/Pause multiple times and see how the video player stays synchronized to the `isPlaying` value:
+Play/Pause একাধিকবার চাপুন এবং দেখুন video player কিভাবে `isPlaying` এর value তে synchronize থাকে:
 
 <Sandpack>
 
@@ -205,14 +205,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-In this example, the "external system" you synchronized to React state was the browser media API. You can use a similar approach to wrap legacy non-React code (like jQuery plugins) into declarative React components.
+এই উদাহরণে, আপনি যে "external system" React state এর সাথে synchronize করেছেন তা হলো ব্রাউজার মিডিয়া API। আপনি legacy non-React code (যেমন jQuery plugins) থেকে declarative React component এ wrap করতে  অনুরূপ পদ্ধতি ব্যবহার করেতে পারেন। 
 
-Note that controlling a video player is much more complex in practice. Calling `play()` may fail, the user might play or pause using the built-in browser controls, and so on. This example is very simplified and incomplete.
+মনে রাখবেন যে কোন ভিডিও প্লেয়ার কন্ট্রল করা প্রাক্টিকালি আরও জটিল। `play()` কল fail হতে পারে, user built-in ব্রাউজার control গুলো ব্যবহার করে play বা pause করতে পারে, এবং আরও অনেক কিছু। এই উদাহরণটি খুবই সহজ এবং অসম্পূর্ণ।
 
 <Pitfall>
 
-By default, Effects run after *every* render. This is why code like this will **produce an infinite loop:**
-
+By default, Effect গুলো *প্রত্যেক* রেন্ডারের পরে run হয়। এ কারণেই এ জাতীয় কোড **infinite loop তৈরি করে:**
 ```js
 const [count, setCount] = useState(0);
 useEffect(() => {
@@ -220,20 +219,20 @@ useEffect(() => {
 });
 ```
 
-Effects run as a *result* of rendering. Setting state *triggers* rendering. Setting state immediately in an Effect is like plugging a power outlet into itself. The Effect runs, it sets the state, which causes a re-render, which causes the Effect to run, it sets the state again, this causes another re-render, and so on.
+রেন্ডারিং এর *ফলস্বরূপ*  Effect চলে। state সেট করা রেন্ডারিং টি *টিগার করে*। একটি Effect সিঙ্গে সঙ্গে state এ সেট করা  যেমন একটি পাওয়ার আউটলেটকে তার নিজেতেই প্লাগ করা। Effect run হয়, এটি state সেট করে, যা একটি re-render তৈরি করে, যার ফলে Effect টি run হয়, এটি আবার state টি সেট করে, এটি অন্য একটি re-render তৈরি করে, আর এভাবেই চলতে থাকে।
 
-Effects should usually synchronize your components with an *external* system. If there's no external system and you only want to adjust some state based on other state, [you might not need an Effect.](/learn/you-might-not-need-an-effect)
+Effect গুলো সাধারণত আপনার component গুলোকে একটি *external* system এর সাথে synchronize করে। যদি কোন external system না থাকে এবং আপনি কেবল অন্য state এর উপর ভিত্তি করে কিছু state এডজাস্ট করতে চান, [আপনার কোন Effect প্রয়োজন নাও হতে পারে।](/learn/you-might-not-need-an-effect)
 
 </Pitfall>
 
-### Step 2: Specify the Effect dependencies {/*step-2-specify-the-effect-dependencies*/}
+### ধাপ ২: Effect এর dependency গুলো নির্দিষ্ট করুন {/*step-2-specify-the-effect-dependencies*/}
 
-By default, Effects run after *every* render. Often, this is **not what you want:**
+By default,  Effect গুলো *প্রত্যেক* রেন্ডারের পরে run হয়। অনেক সময়, এটি **আপনি চান না:**
 
-- Sometimes, it's slow. Synchronizing with an external system is not always instant, so you might want to skip doing it unless it's necessary. For example, you don't want to reconnect to the chat server on every keystroke.
-- Sometimes, it's wrong. For example, you don't want to trigger a component fade-in animation on every keystroke. The animation should only play once when the component appears for the first time.
+- কখনো কখনো, এটি slow কাজ করে। একটি external system এর সাথে Synchroniz করা সর্বদা তাতক্ষণিক হয় না, সুতরং আপনি এটি প্রয়োজন না হলে এটি এড়িয়ে যেতে চাইতে পারেন। উদাহরণস্বরূপ, আপনি প্রতি keystoke এ চ্যাট সার্ভারের সাথে পুনরায় সংযোগ স্থাপন করতে চান না। 
+- কখনো কখনো, এটি ভুল।  উদাহরণস্বরূপ, আপনি প্রতিটি keystroke এ কোন component ফেড-ইন animation ট্রিগার করতে চান না। component টি প্রথমবারের মত appear হলে animation টি কেবল একবার play হওয়া উচিৎ।
 
-To demonstrate the issue, here is the previous example with a few `console.log` calls and a text input that updates the parent component's state. Notice how typing causes the Effect to re-run:
+সমস্যাটি প্রদর্শনের করতে, এখানে কয়েকটি `console.log` কল এবং একটি টেক্সট ইনপুট সহ পূর্ববর্তী উদাহরণটি যেটি parent component এর স্টেটকে update করে । খেয়াল করুন কিভাবে typing এর ফলে Effect টি re-run হয়:
 
 <Sandpack>
 
@@ -281,7 +280,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-You can tell React to **skip unnecessarily re-running the Effect** by specifying an array of *dependencies* as the second argument to the `useEffect` call. Start by adding an empty `[]` array to the above example on line 14:
+আপনি `useEffect` এর দ্বিতীয় আর্গুমেন্ট হিসাবে *dependency* এর একটি array specify করে React কে **অপ্রয়োজনীয়ভাবে Effect টি re-running এড়িয়ে** যেতে বলতে পারেন। উপরের উদাহরণের ১৪ লাইনে একটি খালি `[]` array যুক্ত করে শুরু করুন:
 
 ```js {3}
   useEffect(() => {
@@ -289,7 +288,7 @@ You can tell React to **skip unnecessarily re-running the Effect** by specifying
   }, []);
 ```
 
-You should see an error saying `React Hook useEffect has a missing dependency: 'isPlaying'`:
+আপনি একটি error দেখতে পাবেন যে `React Hook useEffect has a missing dependency: 'isPlaying'`:
 
 <Sandpack>
 
@@ -337,7 +336,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-The problem is that the code inside of your Effect *depends on* the `isPlaying` prop to decide what to do, but this dependency was not explicitly declared. To fix this issue, add `isPlaying` to the dependency array:
+সমস্যাটি হলো আপনার Effect এর মধ্যের কোড কি করবে তা সিদ্ধান্ত নেওয়ার জন্য `isPlaying` প্রপ্সের উপর *নির্ভর করে*, কিন্তু এই dependency টি স্পষ্টভাবে declare করা হয়নি। এই সমস্যাটির সমাধান করতে, dependency array তে `isPlaying` যুক্ত করুন:
 
 ```js {2,7}
   useEffect(() => {
@@ -349,7 +348,7 @@ The problem is that the code inside of your Effect *depends on* the `isPlaying` 
   }, [isPlaying]); // ...so it must be declared here!
 ```
 
-Now all dependencies are declared, so there is no error. Specifying `[isPlaying]` as the dependency array tells React that it should skip re-running your Effect if `isPlaying` is the same as it was during the previous render. With this change, typing into the input doesn't cause the Effect to re-run, but pressing Play/Pause does:
+এখন সকল dependency গুলো declar করা হয়ে গেছে, সুতারং কোন error নাই। `[isPlaying]` কে dependency array তে রাখার মানে হলো React কে বলা যে যদি `isPlaying` এর মান আগের রেন্ডারে যেমন ছিল তেমন থাকে তবে re-running স্কিপ করতে। এই পরিবর্তনের কারণে, ইনপুট ফিল্ডটিতে টাইপ করালেও Effect টি re-run হয় না, কিন্তু Play/Pause বাটনে press করলে হয়:
 
 <Sandpack>
 
@@ -397,13 +396,13 @@ video { width: 250px; }
 
 </Sandpack>
 
-The dependency array can contain multiple dependencies. React will only skip re-running the Effect if *all* of the dependencies you specify have exactly the same values as they had during the previous render. React compares the dependency values using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. See the [`useEffect` reference](/reference/react/useEffect#reference) for details.
+dependency array তে একাধিক dependency থাকতে পারে। যদি *সবগুলো* dependency এর value গুলো previous render এর মতই থাকে কেবল তখনই React Effect টি re-runn করবে না। React dependency value গুলোকে তুলনা করতে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে। বিস্তারির জানতে [`useEffect` reference](/reference/react/useEffect#reference) দেখুন। 
 
-**Notice that you can't "choose" your dependencies.** You will get a lint error if the dependencies you specified don't match what React expects based on the code inside your Effect. This helps catch many bugs in your code. If you don't want some code to re-run, [*edit the Effect code itself* to not "need" that dependency.](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
+**লক্ষ্য করুন যে আপনি আপনার dependency গুলো "choose" করতে পারছেন না।** আপনি যে dependecy গুলো specify করেছেন তা যদি আপনি Effect এর মধ্যে যে কোড রেখেছেন তার উপর base করে React এর expectation এর সাথে না মিলে তাহলে আপনি একটি lint error পাবেন। এটি আপনার কোডে অনেক bug খুজে পাতে সাহায্য করে । যদি আপনি কছু কোড re-run করতে না চান, [*Effect কোড edit করুন* যাতে ঐ  dependencyর "প্রয়োজন" না হয়।](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
 <Pitfall>
 
-The behaviors without the dependency array and with an *empty* `[]` dependency array are different:
+dependency array ছাড়া এবং একটি *empty* `[]` dependency array সহ এদের behavior আলাদা হয়ে থাকে:
 
 ```js {3,7,11}
 useEffect(() => {
@@ -419,15 +418,15 @@ useEffect(() => {
 }, [a, b]);
 ```
 
-We'll take a close look at what "mount" means in the next step.
+আমরা পরবর্তি step এ "mount" এর মানে কী তা ভালোভাবে দেখবো।
 
 </Pitfall>
 
 <DeepDive>
 
-#### Why was the ref omitted from the dependency array? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
+#### dependency array থেকে কেন ref বাদ দেওয়া হয়েছিল? {/*why-was-the-ref-omitted-from-the-dependency-array*/}
 
-This Effect uses _both_ `ref` and `isPlaying`, but only `isPlaying` is declared as a dependency:
+এই Effect টিতে `ref` এবং `isPlaying` উভয়ই ব্যবহার হচ্ছে, কিন্তু কেবল `isPlaying` কে dependency হিসাবে ডিক্লার করা হয়েছে:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -440,8 +439,7 @@ function VideoPlayer({ src, isPlaying }) {
     }
   }, [isPlaying]);
 ```
-
-This is because the `ref` object has a *stable identity:* React guarantees [you'll always get the same object](/reference/react/useRef#returns) from the same `useRef` call on every render. It never changes, so it will never by itself cause the Effect to re-run. Therefore, it does not matter whether you include it or not. Including it is fine too:
+এর কারণ হল `ref` object এর একটি *stable identity* রয়েছে: React গ্যারান্টি দেয় যে [প্রতি রেন্ডারে একই `useRef` কল থেকে সর্বদা একই object পাবেন](/reference/react/useRef#returns)। এটি কখনো পরিবর্তন হয় না, সুতারং  এটি নিজেই Effect টি re-run হওয়ার কারণ হতে পারেনা। অতএব, এটি বিবেচ্য বিষয় নয় যে আপনি এটি include করছেন কি করেন নাই।  এটি Includ করাও ঠিক আছে:
 
 ```js {9}
 function VideoPlayer({ src, isPlaying }) {
@@ -455,17 +453,17 @@ function VideoPlayer({ src, isPlaying }) {
   }, [isPlaying, ref]);
 ```
 
-The [`set` functions](/reference/react/useState#setstate) returned by `useState` also have stable identity, so you will often see them omitted from the dependencies too. If the linter lets you omit a dependency without errors, it is safe to do.
+`useState` দ্বারা রিটার্ন করা [`set` function গুলোরও](/reference/react/useState#setstate) stable identity রয়েছে, তাই আপনি প্রায়ই দেখতে পাবেন তাদের dependencie থেকে বাদ দেওয়া হয়েছে। যদি lint আপনাকে error ছাড়াই dependency বাদ দিতে দেয়, তবে এটি করা নিরাপদ।
 
-Omitting always-stable dependencies only works when the linter can "see" that the object is stable. For example, if `ref` was passed from a parent component, you would have to specify it in the dependency array. However, this is good because you can't know whether the parent component always passes the same ref, or passes one of several refs conditionally. So your Effect _would_ depend on which ref is passed.
+always-stable dependency বাদ দেওয়া তখনই কাজ করে যখন linter "দেখতে" পারে যা object টি stable। উদাহরণস্বরূপ, যদি কোন parent component থেকে `ref` pass করা হয়, আপনাকে একটি dependency array specify করতে হবে। যাইহোক, এটি ভাল কারণ আপনি জানতে পারবেন না যে parent component সবসময় একই রেফ পাস করে কিনা, অথবা শর্তসাপেক্ষে বেশ কয়েকটি রেফের একটি পাস করে কিনা। সুতারং আপনার Effect নির্ভর _করবে_ কোন ref pass করা হয়েছে তার উপর।
 
 </DeepDive>
 
-### Step 3: Add cleanup if needed {/*step-3-add-cleanup-if-needed*/}
+### ধাপ ৩: প্রয়োজনে cleanup যোগ করুন {/*step-3-add-cleanup-if-needed*/}
 
-Consider a different example. You're writing a `ChatRoom` component that needs to connect to the chat server when it appears. You are given a `createConnection()` API that returns an object with `connect()` and `disconnect()` methods. How do you keep the component connected while it is displayed to the user?
+একটি ভিন্ন উদাহরণ বিবেচনা করুন। আপনি একটি `ChatRoom` component লিখেছেন যা এটি প্রদর্শিত হওয়ার সময় chat server এর সাথে সংযোগ স্থাপন করা দরকার। আপনাকে একটি `createConnection()` API দেওয়া হয়েছে যেটি `connect()` এবং `disconnect()` method এর একটি object রিটার্ন করে। user এর কাছে প্রদর্শিত হওয়ার সময় আপনি কিভাবে component টিকে সংযুক্ত রাখবেন?
 
-Start by writing the Effect logic:
+Effect logic লিখে শুরু করুন:
 
 ```js
 useEffect(() => {
@@ -474,7 +472,7 @@ useEffect(() => {
 });
 ```
 
-It would be slow to connect to the chat after every re-render, so you add the dependency array:
+প্রত্যেকবার re-render এর পরে chat এর সাথে সংযোগ স্থাপন করা ধীর হবে, সুতারং আপনি dependency array যুক্ত করুন:
 
 ```js {4}
 useEffect(() => {
@@ -483,9 +481,9 @@ useEffect(() => {
 }, []);
 ```
 
-**The code inside the Effect does not use any props or state, so your dependency array is `[]` (empty). This tells React to only run this code when the component "mounts", i.e. appears on the screen for the first time.**
+**Effect এর ভিতরের কোড কোন props or state ব্যবহার করে না, সুতারং আপনার dependency array টি `[]` (empty)। এটি React কে শুধুমাত্র তখনই এই কোডটি চালাতে বলে যখন component টি "মাউন্ট" হয়, অর্থাৎ, প্রথমবারের জন্য স্কিনে উপস্থিত হয়।**
 
-Let's try running this code:
+আসুন code টি রান করার চেষ্টা করি:
 
 <Sandpack>
 
@@ -522,15 +520,15 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-This Effect only runs on mount, so you might expect `"✅ Connecting..."` to be printed once in the console. **However, if you check the console, `"✅ Connecting..."` gets printed twice. Why does it happen?**
+এই Effect টি কেবল মাউন্ট হওয়ার সময় চলে, সুতারং আপনি প্রত্যাশা করতে পারেন console একবার `"✅ Connecting..."` প্রিন্ট হবে। **তবে, আপনি যদি console চেক করেন, দেখবেন `"✅ Connecting..."` দুই বার প্রিন্ট হয়েছে। কেন এমন হচ্ছে?**
 
-Imagine the `ChatRoom` component is a part of a larger app with many different screens. The user starts their journey on the `ChatRoom` page. The component mounts and calls `connection.connect()`. Then imagine the user navigates to another screen--for example, to the Settings page. The `ChatRoom` component unmounts. Finally, the user clicks Back and `ChatRoom` mounts again. This would set up a second connection--but the first connection was never destroyed! As the user navigates across the app, the connections would keep piling up.
+কল্পনা করুন যে `ChatRoom` এর component টি অনেক গুলো ভিন্ন ভিন্ন স্কিন সহ একটি বৃহিত্তর app এর একটি অংশ। ব্যবহারকারী তাদের journey শুরু করে `ChatRoom` পেইজ দিয়ে। component টি মাউন্ট করে এবং `connection.connect()` কে কল করে। তারপরে কল্পনা করুন যে ব্যবহারকারী অন্য স্কিনে নেভিগেট করেছে --উদাহরণস্বরূপ, Settings পেইজে। এখন `ChatRoom` এর component আনমাউন্ট। অবশেষে, ব্যবহারকারী Back এ ক্লিক করে এবং `ChatRoom` টি আবার মাউন্ট করে। এটি একটি second connection স্থাপন করবে--তবে প্রথম connection টি কখনই বিচ্ছিন্ন হয়নি! ব্যবহারকারী অ্যাপ জুড়ে নেভিগেট করার সাথে সাথে সংযোগগুলি pulling হতে থাকবে।
 
-Bugs like this are easy to miss without extensive manual testing. To help you spot them quickly, in development React remounts every component once immediately after its initial mount.
+এই ধরনের বাগগুলি ব্যাপক ম্যানুয়াল পরীক্ষা ছাড়া সহজই মিস হয়ে যায়। আপনাকে দ্রুত সেগুলি সনাক্ত করতে সহায়তা করার জন্য, React development এ প্রতিটি component কে তার প্রাথমিক মাউন্টের পরপরই পুনরায় মাউন্ট করে।
 
-Seeing the `"✅ Connecting..."` log twice helps you notice the real issue: your code doesn't close the connection when the component unmounts.
+`"✅ Connecting..."` দু'বার log হচ্ছে দেখা আপনাকে আসল সমস্যাটি লক্ষ্য করতে সাহায্য করে: যখন component টি আনমিউট হয় আপনার কোড সংযোগটি বন্ধ করে না।
 
-To fix the issue, return a *cleanup function* from your Effect:
+সমস্যাটি সমাধান করেতে, আপনার Effect থেকে একটি *cleanup function* return করুন:
 
 ```js {4-6}
   useEffect(() => {
@@ -542,7 +540,7 @@ To fix the issue, return a *cleanup function* from your Effect:
   }, []);
 ```
 
-React will call your cleanup function each time before the Effect runs again, and one final time when the component unmounts (gets removed). Let's see what happens when the cleanup function is implemented:
+Effect পুনরায় run হওয়ার আগে প্রতিবার আপনার cleanup function কে কল করবে, এবং শেষ সময় যখন component টি আনমিউট করে (রিমুভ করা হয়)। আসুন দেখা যাক যখন cleanup function টি implemente করা হয় তখন কি ঘটে:
 
 <Sandpack>
 
@@ -580,27 +578,27 @@ input { display: block; margin-bottom: 20px; }
 
 </Sandpack>
 
-Now you get three console logs in development:
+এখন আপনি development এ তিনটি console log পাবেন:
 
 1. `"✅ Connecting..."`
 2. `"❌ Disconnected."`
 3. `"✅ Connecting..."`
 
-**This is the correct behavior in development.** By remounting your component, React verifies that navigating away and back would not break your code. Disconnecting and then connecting again is exactly what should happen! When you implement the cleanup well, there should be no user-visible difference between running the Effect once vs running it, cleaning it up, and running it again. There's an extra connect/disconnect call pair because React is probing your code for bugs in development. This is normal--don't try to make it go away!
+**এটি development এর সঠিক behavior।** আপনার component রিমাউন্টিং করে, React যাচাই করে যে নেভিগেট করে সামনে গিয়ে এবং পিছনে back করলে আপনার কোড ব্রেক করবে না। সংযোগ বিচ্ছিন্ন এবং তারপর আবার সংযোগ স্থাপন করলে ঠিক কি হওয়া উচিৎ! যখন আপনি cleanup টি ভালোভাবে implement করেন, Effect টি একবার run করা vs এটি চালাতে থাকা, এটি cleaning করা এবং পুনরায় run করার মধ্যে কোন ব্যবহারকারীর দৃশ্যমান পার্থক্য থাকা উচিত নয়। এখানে একটি অতিরিক্ত কানেক্ট/ডিসকানেক্ট কল পেয়ার আছে কারণ React ডেভেলপমেন্টে থাকা বাগগুলির জন্য আপনার কোড পরীক্ষা করছে। এটি স্বাভাবিক--এটিকে দুরে সরিয়ে দেওয়ার চেষ্টা করবেন না!
 
-**In production, you would only see `"✅ Connecting..."` printed once.** Remounting components only happens in development to help you find Effects that need cleanup. You can turn off [Strict Mode](/reference/react/StrictMode) to opt out of the development behavior, but we recommend keeping it on. This lets you find many bugs like the one above.
+**production এ, আপনি কেবল একবার `"✅ Connecting..."` প্রিন্ট হতে দেখতে পাবেন।** component গুলো রিমাউন্টং কেবল development এর ক্ষেত্রে ঘটে যা আপনাকে এমন Effect গুলো খুঁজে পেতে সাহায্য করে যা ক্লিনাপের প্রয়োজন। আপনি development behavior থেকে বেরিয়ে বেরিয়ে আসার জন্য [Strict Mode](/reference/react/StrictMode) অফ করতে পারেন, তবে আমরা এটি চালিয়ে যাওয়ার পরামর্শ দেই। এটি আপনাকে উপরের মত অনেক গুলো বাগ খুঁজে পেতে সাহায্য করবে।
 
 ## How to handle the Effect firing twice in development? {/*how-to-handle-the-effect-firing-twice-in-development*/}
 
-React intentionally remounts your components in development to find bugs like in the last example. **The right question isn't "how to run an Effect once", but "how to fix my Effect so that it works after remounting".**
+React ইচ্ছাকৃতভাবে আপনার কম্পোনেন্ট গুলোকে ডেভেলপমেন্টে রিমাউন্ট করে যাতে শেষ উদাহরণের মতো বাগ খুঁজে পাওয়া যায়। **প্রশ্ন ঠিক নয় "কীভাবে একটি Effect একবার চালাতে হয়", তবে "কিভাবে আমার Effect টি ঠিক করব যাতে এটি পুনরায় মাউন্ট করার পরে কাজ করে"।**
 
-Usually, the answer is to implement the cleanup function.  The cleanup function should stop or undo whatever the Effect was doing. The rule of thumb is that the user shouldn't be able to distinguish between the Effect running once (as in production) and a _setup → cleanup → setup_ sequence (as you'd see in development).
+সাধারণত, উত্তর হল ক্লিনআপ ফাংশন implement করা। ক্লিনআপ ফাংশনটির বন্ধ করা উচিৎ বা Effect যা কিছু করতেছল তা পূর্বাবস্থায় ফিরিয়ে আনা উচিৎ। rule of thumb হল যে ব্যবহারকারী একবার Effect run হওয়া (production এ)  এবং একটি _setup → cleanup → setup_ সিকোয়েন্সের (যেমন আপনি development এ দেখতে পাবেন) মধ্যে পার্থক্য করতে সক্ষম হবে না।
 
-Most of the Effects you'll write will fit into one of the common patterns below.
+আপনি যে Effect গুলো লিখবেন তার বেশিরভাগই নীচের সাধারণ প্যাটার্নগুলির মধ্যে একটিতে ফিট হবে৷
 
-### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+### non-React widget গুলো controll করা {/*controlling-non-react-widgets*/}
 
-Sometimes you need to add UI widgets that aren't written to React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+কখনো কখনো আপনাকে UI widget অ্যাড করতে হবে যা React দিয়ে লেখা হয়নি। উদাহরণস্বরূপ, আপনি আপনার পেইজে একটি ম্যাপ component অ্যাড করেছেন। এটিতে একটি `setZoomLevel()` method রয়েছে, এবং আপনি আপনার React কোডে `zoomLevel` স্টেট variable এর সাথে zoom level সিঙ্ক রাখতে চান। আপনার Effect এটির মত দেখতে হবে:
 
 ```js
 useEffect(() => {
@@ -609,9 +607,9 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-Note that there is no cleanup needed in this case. In development, React will call the Effect twice, but this is not a problem because calling `setZoomLevel` twice with the same value does not do anything. It may be slightly slower, but this doesn't matter because it won't remount needlessly in production.
+মনে রাখবেন যে এই ক্ষেত্রে কোন cleanup এর প্রয়োজন নেই। development এ, React দু'বার Effect কল করে, কিন্তু এটি কোন সমস্যা নয় কারণ একই value সহ `setZoomLevel` কে দু'বার কল করলে কিছুই হবে না। এটি কিছুটা স্লো হতে পারে, তবে ব্যাপার না কারণ এটি production এ অযথা রিমাউন্ট করবে না। 
 
-Some APIs may not allow you to call them twice in a row. For example, the [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) method of the built-in [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) element throws if you call it twice. Implement the cleanup function and make it close the dialog:
+কিছু API আপনাকে পরপর দুবার কল করার allow নাও দিতে পারে। উদাহরণস্বরূপ, বিল্ট-ইন [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) ইলিমেন্টটি [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ম্যাথোড থ্রো করে যদি আপনি এটিকে দুবার কল করেন। cleanup function টি ইমপ্লিমেন্ট করুন এবং ডায়লগটি close করুন:
 
 ```js {4}
 useEffect(() => {
@@ -621,11 +619,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `showModal()`, then immediately `close()`, and then `showModal()` again. This has the same user-visible behavior as calling `showModal()` once, as you would see in production.
+development এ, আপনার Effect `showModal()` কল করবে, তারপর immediately `close()` কল করবে, এবং এরপর আবার `showModal()` কল করবে। `showModal()` কে একবার কল করার মতই user-visible behavior এটির, যেমনটি আপনি production এ দেখতে পাবেন।
 
-### Subscribing to events {/*subscribing-to-events*/}
+### ইভেন্ট subscribing {/*subscribing-to-events*/}
 
-If your Effect subscribes to something, the cleanup function should unsubscribe:
+যদি আপনার Effect কোন কিছু সাবস্ক্রাইব করে, তবে ক্লিনআপ ফাংশনটির তা আনসাবস্ক্রাইব করা উচিৎ:
 
 ```js {6}
 useEffect(() => {
@@ -637,11 +635,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, your Effect will call `addEventListener()`, then immediately `removeEventListener()`, and then `addEventListener()` again with the same handler. So there would be only one active subscription at a time. This has the same user-visible behavior as calling `addEventListener()` once, as in production.
+development এ, আপনার Effect `addEventListener()` কে কল করবে, তারপর immediately `removeEventListener()` কে, এবং তারপরে আবার `addEventListener()` কে একই handler দিয়ে কল করবে। তাই এক সময়ে শুধুমাত্র একটি subscription এক্টিভ থাকবে। `addEventListener()` কে একবার কল করার মতই user-visible behavior এটির, যেমনটি আপনি production এ দেখতে পাবেন।
 
-### Triggering animations {/*triggering-animations*/}
+### animation টিগার করা {/*triggering-animations*/}
 
-If your Effect animates something in, the cleanup function should reset the animation to the initial values:
+যদি আপনার Effect টি কিছু animate করে, তবে আপনার ক্লিনাপ function টির উচিৎ initial value দিয়ে animation টি reset করা:
 
 ```js {4-6}
 useEffect(() => {
@@ -653,11 +651,11 @@ useEffect(() => {
 }, []);
 ```
 
-In development, opacity will be set to `1`, then to `0`, and then to `1` again. This should have the same user-visible behavior as setting it to `1` directly, which is what would happen in production. If you use a third-party animation library with support for tweening, your cleanup function should reset the timeline to its initial state.
+development এ, opacity সেট করা হবে `1`, এরপরে `0`, এবং তারপরে আবার `1` । এটি সরাসরি `1` এ সেট করার মতই user-visible behavior হওয়া উচিৎ, যা production এ ঘটবে। আপনি যদি tweening এর জন্য support সহ একটি third-party অ্যানিমেশন লাইব্রেরি ব্যবহার করেন, তবে আপনার ক্লিনআপ ফাংশনটি টাইমলাইনটিকে তার initial state পুনরায় সেট করা উচিৎ।
 
-### Fetching data {/*fetching-data*/}
+### ডাটা Fetch করা {/*fetching-data*/}
 
-If your Effect fetches something, the cleanup function should either [abort the fetch](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) or ignore its result:
+যদি আপনার Effect টি কিছু fetch করে, তবে আপনার ক্লিনাপ function টির উচিৎ হয়ত [fetch বাতিল করা](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) অথবা এর ফলাফল ignore করা:
 
 ```js {2,6,13-15}
 useEffect(() => {
@@ -678,11 +676,11 @@ useEffect(() => {
 }, [userId]);
 ```
 
-You can't "undo" a network request that already happened, but your cleanup function should ensure that the fetch that's _not relevant anymore_ does not keep affecting your application. If the `userId` changes from `'Alice'` to `'Bob'`, cleanup ensures that the `'Alice'` response is ignored even if it arrives after `'Bob'`.
+নেটওয়ার্ক রিকুয়েস্ট যা ইতিমধ্যে ঘটে দিয়েছেন, তা আপনি "বাতিল" করতে পারবেন না, তবে আপনার ক্লিন-আপ ফাংশনটির এটি নিশ্চিত করতে হবে যে, যে fetch গুলো _আর প্রাসঙ্গিক নয়_ সেগুলো আপনার অ্যাপ্লিকেশনে প্রভাব ফেলবে না। যদি `userId` `'Alice'` থেকে `'Bob'` পরিবর্তন করে, তবে ক্লিন-আপ নিশ্চিত করেবে যে `'Alice'` রেসপন্সটি `'Bob'` এর পরেও যদি আসে তাহলেও সেটি আপনার অ্যাপ্লিকেশনে প্রভাবিত করবে না।
 
-**In development, you will see two fetches in the Network tab.** There is nothing wrong with that. With the approach above, the first Effect will immediately get cleaned up so its copy of the `ignore` variable will be set to `true`. So even though there is an extra request, it won't affect the state thanks to the `if (!ignore)` check.
+**development এ, আপনি Network tab এ দুটি fetch দেখতে পাবেন।** এতে কোন সমস্যা নাই।  উপরের পদ্ধতিতে, প্রথম ইফেক্টটি তাৎক্ষণিকভাবে ক্লিন-আপ হবে তাই তার `ignore` ভেরিয়েবলের কপি `true` হবে। তাই, যদিও অতিরিক্ত একটি রিকুয়েস্ট আছে, সুতরাং অতিরিক্ত অনুরোধ থাকা সত্ত্বেও, এটি state কে প্রভাবিত করবে না  `if (!ignore)` চেক কে ধন্যবাদ।
 
-**In production, there will only be one request.** If the second request in development is bothering you, the best approach is to use a solution that deduplicates requests and caches their responses between components:
+**production এ, কেবল একটি request থাকবে।** যদি development এর দ্বিতীয় request টি আপনাকে বিরক্ত করে, তবে সর্বোত্তম পদ্ধতি হল এমন একটি সমাধান ব্যবহার করা যা request গুলিকে ডিডপ্লিকেট করেবে এবং component গুলো তাদের response গুলো ক্যাশ করেবে:
 
 ```js
 function TodoList() {
@@ -690,25 +688,26 @@ function TodoList() {
   // ...
 ```
 
-This will not only improve the development experience, but also make your application feel faster. For example, the user pressing the Back button won't have to wait for some data to load again because it will be cached. You can either build such a cache yourself or use one of the many alternatives to manual fetching in Effects.
+এটি শুধুমাত্র ডেভেলপমেন্ট experience ই  improve করবে না, বরং আপনার অ্যাপ্লিকেশনকে দ্রুত অনুভব করতে সাহায্য করবে।  উদাহরণস্বরূপ, ব্যবহারকারী যদি ব্যাক বোতাম চাপে, তাকে আবার কিছু ডেটা লোড করতে অপেক্ষা করতে হয় না কারণ সেটি ক্যাশ করা থাকবে। আপনি এমন একটি ক্যাশ নিজেই তৈরি করতে পারেন অথবা Effect এ ম্যানুয়াল ফেচিংয়ের জন্য অনেকগুলো alternative ব্যবহার করতে পারেন।
 
 <DeepDive>
 
-#### What are good alternatives to data fetching in Effects? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
+#### Effect ডেটা ফেচিংয়ের জন্য ভাল Alternatives কী? {/*what-are-good-alternatives-to-data-fetching-in-effects*/}
 
-Writing `fetch` calls inside Effects is a [popular way to fetch data](https://www.robinwieruch.de/react-hooks-fetch-data/), especially in fully client-side apps. This is, however, a very manual approach and it has significant downsides:
+Effect এ `fetch` কল লেখা [ডেটা ফেচিংর জন্য একটি জনপ্রিয় উপায়](https://www.robinwieruch.de/react-hooks-fetch-data/), বিশেষভাবে সম্পূর্ণ ক্লায়েন্ট-সাইড অ্যাপসগুলোতে। তবে, এটি একটি অনেকটাই ম্যানুয়াল পদ্ধতি এবং এটির কিছু উল্লেখযোগ্য downside রয়েছে:
 
-- **Effects don't run on the server.** This means that the initial server-rendered HTML will only include a loading state with no data. The client computer will have to download all JavaScript and render your app only to discover that now it needs to load the data. This is not very efficient.
-- **Fetching directly in Effects makes it easy to create "network waterfalls".** You render the parent component, it fetches some data, renders the child components, and then they start fetching their data. If the network is not very fast, this is significantly slower than fetching all data in parallel.
-- **Fetching directly in Effects usually means you don't preload or cache data.** For example, if the component unmounts and then mounts again, it would have to fetch the data again.
-- **It's not very ergonomic.** There's quite a bit of boilerplate code involved when writing `fetch` calls in a way that doesn't suffer from bugs like [race conditions.](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
+- **এফেক্টস সার্ভারে চলতে পারে না।** যার মানে, initial সার্ভার একটি লোডিং স্টেট সহ HTML রেন্ডার করবে কোনো ডেটা ছাড়াই। ক্লায়েন্ট কম্পিউটারকে সমস্ত জাভাস্ক্রিপ্ট ডাউনলোড করতে হবে এবং আপনার অ্যাপটি রেন্ডার করতে হবে শুধুমাত্র এটি discover করতে যে এটির এখন ডেটা লোড করতে হবে। এটি খুব একটা efficient না।
+- **Effects এ সরাসরি ডেটা ফেচিং "নেটওয়ার্ক ওয়াটারফল" তৈরি করতে সাহায্য করে।** আপনি parent কম্পোনেন্টটি রেন্ডার করেন, এটি কিছু ডেটা ফেচ করে, চাইল্ড কম্পোনেন্টগুলো রেন্ডার হয়, এবং তারপরে তারা তাদের ডেটা ফেচ করতে শুরু করে। যদি নেটওয়ার্ক খুব ফাস্ট না হয়, এটি সব ডেটা পারালেলভাবে ফেচ হইয়ার তুলনায় অনেকটাই ধীর।
 
-This list of downsides is not specific to React. It applies to fetching data on mount with any library. Like with routing, data fetching is not trivial to do well, so we recommend the following approaches:
+- **মূলত Effect এ সরাসরি ডেটা ফেচ করার মানে এই যে, আপনি ডেটা প্রিলোড বা ক্যাশ করতে পারবেন না।** উদাহরণস্বরূপ, যদি কোম্পোনেন্টটি আনমাউন্ট হয় এবং পুনরায় মাউন্ট হয়, এটিকে পুনরায় ডাটা ফেচ করতে হবে।
+- **এটা খুব একটা ইর্গোনমিক নয়।**  ফেচ কল লেখার সময়, যদি [রেস কন্ডিশন](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect) এর মতো বাগে ছাফার হতে না হয়, তার জন্য কিছু বয়লারপ্লেট কোড থাকে।
 
-- **If you use a [framework](/learn/start-a-new-react-project#production-grade-react-frameworks), use its built-in data fetching mechanism.** Modern React frameworks have integrated data fetching mechanisms that are efficient and don't suffer from the above pitfalls.
-- **Otherwise, consider using or building a client-side cache.** Popular open source solutions include [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), and [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) You can build your own solution too, in which case you would use Effects under the hood, but add logic for deduplicating requests, caching responses, and avoiding network waterfalls (by preloading data or hoisting data requirements to routes).
+ডাউনসাইডের এই তালিকাটি React জন্য নির্দিষ্ট নয়। এটি যে কোনো লাইব্রেরির মাধ্যমে মাউন্টে ডেটা ফেচের ক্ষেত্রে প্রযোজ্য। রাউটিংয়ের মতো, ডেটা ফেটচিং ভালভাবে করা সহজ নয়, তাই আমরা নিম্নলিখিত পদ্ধতির পরামর্শ দিই:
 
-You can continue fetching data directly in Effects if neither of these approaches suit you.
+- **আপনি যদি একটি [framework](/learn/start-a-new-react-project#production-grade-react-frameworks) ব্যবহার করেন, তার built-in ডেটা ফেটচিং প্রক্রিয়া ব্যবহার করুন।** আধুনিক রিয়্যাক্ট ফ্রেমওয়ার্কগুলির মধ্যে integrated ডেটা ফেটচিং প্রক্রিয়া রয়েছে যা কার্যকর এবং উপরের সমস্যা গুলো মুক্ত।
+- **অন্যথায়, একটি ক্লায়েন্ট-সাইড ক্যাশ ইউজ করুন বা বিল্ড করুন।** জনপ্রিয় ওপেন সোর্স সমাধানের মধ্যে [React Query](https://tanstack.com/query/latest), [useSWR](https://swr.vercel.app/), এবং [React Router 6.4+.](https://beta.reactrouter.com/en/main/start/overview) রয়েছে। আপনি একটি নিজস্ব সমাধানো তৈরি করতে পারেন এই ক্ষেত্রে আপনি Effect গুলো আন্ডার দ্যা হুডে ব্যবহার করতে পারেন, তবে request ডিডুপ্লিকেট করাতে, response ক্যাশ করতে, এবং নেটওয়ার্ক ওয়াটারফল এড়াতে লজ্যিক add করুন। (ডাটা প্রিলোডিং করে বা ডাটা requirement গুলো রাউটে hoisting করে)।
+
+যদি এই পদক্ষেপগুলোর মধ্যে কোনটিই আপনার জন্য প্রযোজ্য না হয়, তবে সরাসরি ইফেক্টে ডেটা ফেটচিং চালিয়ে যেতে পারেন।"
 
 </DeepDive>
 
