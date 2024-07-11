@@ -883,9 +883,9 @@ Reducer লেখার সময় এই দুটি টিপস মনে র
 - **Reducer কে অবশই pure হতে হবে।** [state updater ফাংশনের](/learn/queueing-a-series-of-state-updates) মতো, reducer সমূহ রেন্ডারের সময় run করে! (Action সমূহকে পরবর্তী রেন্ডার পর্যন্ত সারিবদ্ধ ভাবে দাঁড় করিয়ে রাখা হয়।) এর মানে, reducer সমূহ [অবশ্যই pure হতে হবে](/learn/keeping-components-pure)—একই input একই output দিবে। সেগুলো যেন কোনো request সেন্ড, timeout ঠিক করা, অথবা কোনো সাইড ইফেক্ট (এমন অপারেশন যেটা কম্পোনেন্টের বাইরের কোনো কিছুর উপর প্রভাব ফেলে) পারফর্ম না করে। সেগুলো যেন [objects](/learn/updating-objects-in-state) এবং [arrays](/learn/updating-arrays-in-state) mutations ছাড়াই আপডেট করে।
 - **প্রতিটি action একটি মাত্র user interaction এর বর্ণনা হবে, যদি তার কারণে ডেটাতে একাধিক পরিবর্তন হয় তবুও।** উদাহরণস্বরূপ, যদি একজন ইউজার একটি ফর্মে "Reset" প্রেস করে যে ফর্মের ৫ টি ফিল্ড আছে যেগুলো একটি reducer দ্বারা নিয়ন্ত্রিত, তখন একটি `reset_form` action কে dispatch করাটা পাঁচটি পৃথক `set_field` action dispatch করার থেকে যৌক্তিক। আপনি যদি একটি reducer এ প্রতিটি action log করেন, ঐ log গুলো আপনার জন্যও যথেষ্ট বোধগম্য হওয়ার কথা যাতে কি কি ইন্টার‍্যাকশন বা কি কি রেসপন্স কোনটার পরে কোনটা হয়েছে তা আন্দাজ করতে পারেন। এটা ডিবাগিং এর সময় সাহায্য করে!
 
-## Writing concise reducers with Immer {/*writing-concise-reducers-with-immer*/}
+## Immer দিয়ে সংক্ষেপে reducers লেখা {/*writing-concise-reducers-with-immer*/}
 
-Just like with [updating objects](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) and [arrays](/learn/updating-arrays-in-state#write-concise-update-logic-with-immer) in regular state, you can use the Immer library to make reducers more concise. Here, [`useImmerReducer`](https://github.com/immerjs/use-immer#useimmerreducer) lets you mutate the state with `push` or `arr[i] =` assignment:
+স্বাভাবিক স্টেটে [objects](/learn/updating-objects-in-state#write-concise-update-logic-with-immer) এবং [arrays](/learn/updating-arrays-in-state#write-concise-update-logic-with-immer) আপডেট করার মতই, আপনি reducer সমূহকে আরো সংক্ষেপ করতে আপনি Immer লাইব্রেরীটি ব্যাবহার করতে পারেন। এখানে, [`useImmerReducer`](https://github.com/immerjs/use-immer#useimmerreducer) আপনাকে `push` অথবা `arr[i] =` অ্যাসাইনমেন্ট দিয়ে স্টেট আপডেট করতে দিচ্ছে:
 
 <Sandpack>
 
@@ -1082,7 +1082,7 @@ li {
 
 </Sandpack>
 
-Reducers must be pure, so they shouldn't mutate state. But Immer provides you with a special `draft` object which is safe to mutate. Under the hood, Immer will create a copy of your state with the changes you made to the `draft`. This is why reducers managed by `useImmerReducer` can mutate their first argument and don't need to return state.
+Reducers কে অবশ্যই pure হতে হবে, যেন সেগুলো স্টেটকে mutate না করে। তবে Immer আপনাকে এখানে একটি স্পেশাল `draft` অবজেক্ট দিচ্ছে যেটিকে মিউটেট করা সম্পূর্ণ নিরাপদ। চোখের আড়ালে, Immer আপনার স্টেটের একটি কপি তৈরি করে নিবে যার মধ্যে `draft` এর মধ্যে আপনি যত কিছু পরিবর্তন করেছেন, সব বিদ্যমান থাকবে। এজন্যে `useImmerReducer` দ্বারা নিয়ন্ত্রিত reducers তাদের প্রথম আর্গুমেন্ট মিউটেট করতে পারে এবং তাদের স্টেট রিটার্ন করতে হয়না।
 
 <Recap>
 
