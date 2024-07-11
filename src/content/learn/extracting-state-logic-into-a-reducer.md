@@ -1086,14 +1086,14 @@ Reducers কে অবশ্যই pure হতে হবে, যেন সেগ
 
 <Recap>
 
-- To convert from `useState` to `useReducer`:
-  1. Dispatch actions from event handlers.
-  2. Write a reducer function that returns the next state for a given state and action.
-  3. Replace `useState` with `useReducer`.
-- Reducers require you to write a bit more code, but they help with debugging and testing.
-- Reducers must be pure.
-- Each action describes a single user interaction.
-- Use Immer if you want to write reducers in a mutating style.
+- `useState` কে `useReducer` এ পরিবর্তন করতে:
+  1. ইভেন্ট হ্যান্ডলারসমূহ থেকে actions ডিসপ্যাচ করুন।
+  2. একটি reducer function যেটি প্রদত্ত স্টেটের জন্য পরবর্তী স্টেট রিটার্ন করে এবং action সমূহ লিখুন।
+  3. `useState` এর জায়গায় `useReducer` ব্যবহার করুন।
+- Reducers এর জন্য আপনার একটু বাড়তি কোড লিখতে হয়, কিন্তু এরা ডিবাগিং এবং টেস্টিং এ সহায়ক।
+- Reducers অবশ্যই pure হতে হবে।
+- প্রতিটি action একটি মাত্র user interaction এর বর্ণনা হবে।
+- Immer ব্যবহার করুন যদি আপনি reducers কে mutating স্টাইলে লিখতে চান।
 
 </Recap>
 
