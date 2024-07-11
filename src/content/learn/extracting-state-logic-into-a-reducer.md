@@ -876,12 +876,12 @@ Reducer এর যে একদম কোনো খারাপ দিক নে
 
 যদি আপনি কোনো কম্পোনেন্টে ভুলভাল স্টেট আপডেটের কারণে bug এর সম্মুখীন হন এবং এর কোডের কাঠামো আরো সুন্দর করতে চান, সেক্ষেত্রে আমরা একটি reducer ব্যাবহার করা রেকমেন্ড করি। আপনার সব কিছুর জন্য reducer ব্যাবহার করতে হবে এমন কোনো কথা নেই: আপনি বিনা বাধায় মিলিয়ে মিশিয়ে ব্যাবহার করতে পারেন! এমনকি আপনি একই কম্পোনেন্টে `useState` এবং `useReducer` ব্যাবহার করতে পারেন।
 
-## Writing reducers well {/*writing-reducers-well*/}
+## যেভাবে ভালো reducer লেখবেন {/*writing-reducers-well*/}
 
-Keep these two tips in mind when writing reducers:
+Reducer লেখার সময় এই দুটি টিপস মনে রাখবেনঃ
 
-- **Reducers must be pure.** Similar to [state updater functions](/learn/queueing-a-series-of-state-updates), reducers run during rendering! (Actions are queued until the next render.) This means that reducers [must be pure](/learn/keeping-components-pure)—same inputs always result in the same output. They should not send requests, schedule timeouts, or perform any side effects (operations that impact things outside the component). They should update [objects](/learn/updating-objects-in-state) and [arrays](/learn/updating-arrays-in-state) without mutations.
-- **Each action describes a single user interaction, even if that leads to multiple changes in the data.** For example, if a user presses "Reset" on a form with five fields managed by a reducer, it makes more sense to dispatch one `reset_form` action rather than five separate `set_field` actions. If you log every action in a reducer, that log should be clear enough for you to reconstruct what interactions or responses happened in what order. This helps with debugging!
+- **Reducer কে অবশই pure হতে হবে।** [state updater ফাংশনের](/learn/queueing-a-series-of-state-updates) মতো, reducer সমূহ রেন্ডারের সময় run করে! (Action সমূহকে পরবর্তী রেন্ডার পর্যন্ত সারিবদ্ধ ভাবে দাঁড় করিয়ে রাখা হয়।) এর মানে, reducer সমূহ [অবশ্যই pure হতে হবে](/learn/keeping-components-pure)—একই input একই output দিবে। সেগুলো যেন কোনো request সেন্ড, timeout ঠিক করা, অথবা কোনো সাইড ইফেক্ট (এমন অপারেশন যেটা কম্পোনেন্টের বাইরের কোনো কিছুর উপর প্রভাব ফেলে) পারফর্ম না করে। সেগুলো যেন [objects](/learn/updating-objects-in-state) এবং [arrays](/learn/updating-arrays-in-state) mutations ছাড়াই আপডেট করে।
+- **প্রতিটি action একটি মাত্র user interaction এর বর্ণনা হবে, যদি তার কারণে ডেটাতে একাধিক পরিবর্তন হয় তবুও।** উদাহরণস্বরূপ, যদি একজন ইউজার একটি ফর্মে "Reset" প্রেস করে যে ফর্মের ৫ টি ফিল্ড আছে যেগুলো একটি reducer দ্বারা নিয়ন্ত্রিত, তখন একটি `reset_form` action কে dispatch করাটা পাঁচটি পৃথক `set_field` action dispatch করার থেকে যৌক্তিক। আপনি যদি একটি reducer এ প্রতিটি action log করেন, ঐ log গুলো আপনার জন্যও যথেষ্ট বোধগম্য হওয়ার কথা যাতে কি কি ইন্টার‍্যাকশন বা কি কি রেসপন্স কোনটার পরে কোনটা হয়েছে তা আন্দাজ করতে পারেন। এটা ডিবাগিং এর সময় সাহায্য করে!
 
 ## Writing concise reducers with Immer {/*writing-concise-reducers-with-immer*/}
 
