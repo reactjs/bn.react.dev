@@ -1703,7 +1703,7 @@ textarea {
 
 এটা কাজ করবে এবং আপনি যখন "Send" করবেন তখন ইনপুট ক্লিয়ার করে দিবে।
 
-However, _from the user's perspective_, sending a message is a different action than editing the field. To reflect that, you could instead create a _new_ action called `sent_message`, and handle it separately in the reducer:
+তবে, _ইউজার এর দৃষ্টিকোণ থেকে_, মেসেজ সেন্ড করাটা ইনপুট ফিল্ড এডিট করার থেকে ভিন্ন একটি action । সে অনুসারে, আপনি `sent_message` নামের একটি _নতুন_ action তৈরি করতে পারেন, এবং সেটিকে reducer এ আলাদাভাবে হ্যান্ডেল করতে পারেন।
 
 <Sandpack>
 
