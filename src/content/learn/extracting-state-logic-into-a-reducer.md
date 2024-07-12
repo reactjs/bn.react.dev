@@ -1099,17 +1099,17 @@ Reducers কে অবশ্যই pure হতে হবে, যেন সেগ
 
 <Challenges>
 
-#### Dispatch actions from event handlers {/*dispatch-actions-from-event-handlers*/}
+#### ইভেন্ট হ্যান্ডলারস থেকে actions কে dispatch করুন {/*dispatch-actions-from-event-handlers*/}
 
-Currently, the event handlers in `ContactList.js` and `Chat.js` have `// TODO` comments. This is why typing into the input doesn't work, and clicking on the buttons doesn't change the selected recipient.
+এখানে, `ContactList.js` এবং `Chat.js` এর ইভেন্ট হ্যান্ডলারগুলোতে `// TODO` কমেন্ট করা আছে। এজন্যেই ইনপুটটিতে টাইপ করলে কিছু হচ্ছে না, এবং পাশের বাটন গুলোতে ক্লিক করলে মেসেজ রিসিভার বদলাচ্ছেনা।
 
-Replace these two `// TODO`s with the code to `dispatch` the corresponding actions. To see the expected shape and the type of the actions, check the reducer in `messengerReducer.js`. The reducer is already written so you won't need to change it. You only need to dispatch the actions in `ContactList.js` and `Chat.js`.
+এই দুইটি `// TODO` এর জায়গায় নিজ নিজ action গুলো `dispatch` করার কোড লিখুন। action গুলোর কাঙ্ক্ষিত আকৃতি এবং টাইপ জানার জন্য, `messengerReducer.js` এর মধ্যের reducer টি দেখুন। Reducer টি অলরেডি লিখে দেয়া হয়েছে, তাই সেটিতে আপনার কোনো পরিবর্তন আনতে হবেনা। আপনার শুধু `ContactList.js` এবং `Chat.js` এ action গুলো dispatch করতে হবে।
 
 <Hint>
 
-The `dispatch` function is already available in both of these components because it was passed as a prop. So you need to call `dispatch` with the corresponding action object.
+`dispatch` ফাংশনটি অলরেডি উভয় কম্পোনেন্টের মধ্যে বিদ্যমান কারণ সেটিকে প্রপ হিসেবে পাঠিয়ে দেয়া হয়েছিলো। তাই আপনার শুধু `dispatch` এর মধ্যে উপযুক্ত অবজেক্ট দিয়ে কল করতে হবে।
 
-To check the action object shape, you can look at the reducer and see which `action` fields it expects to see. For example, the `changed_selection` case in the reducer looks like this:
+Action অবজেক্টটির আকৃতি চেক করার জন্য, আপনি reducer টির কোড দেখতে পারেন এবং বুঝতে পারেন কোন কোন `action` ফিল্ড সেটি পেতে পারে। যেমন, reducer এ `changed_selection` case টি এমন দেখা যাচ্ছেঃ
 
 ```js
 case 'changed_selection': {
@@ -1120,7 +1120,7 @@ case 'changed_selection': {
 }
 ```
 
-This means that your action object should have a `type: 'changed_selection'`. You also see the `action.contactId` being used, so you need to include a `contactId` property into your action.
+এর মানে হচ্ছে আপনার action অবজেক্ট এ `type: 'changed_selection'` থাকতে হবে। আপনি আরও দেখতে পাচ্ছেন যে `action.contactId` এখানে ব্যাবহৃত হচ্ছে, তাই আপনার action অবজেক্ট এ একটি `contactId` প্রপার্টি থাকতে হবে।
 
 </Hint>
 
@@ -1256,7 +1256,7 @@ textarea {
 
 <Solution>
 
-From the reducer code, you can infer that actions need to look like this:
+Reducer এর কোড দেখে, আপনি বুঝতে পারেন যে action গুলো দেখতে এমন হতে হবেঃ
 
 ```js
 // When the user presses "Alice"
@@ -1272,7 +1272,7 @@ dispatch({
 });
 ```
 
-Here is the example updated to dispatch the corresponding messages:
+এই হলো আগের উদাহরণের সমাধান। এখানের কোডে উপযুক্ত action গুলো dispatch করা হয়েছে।
 
 <Sandpack>
 
