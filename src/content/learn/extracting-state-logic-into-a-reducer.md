@@ -1101,7 +1101,7 @@ Reducers কে অবশ্যই pure হতে হবে, যেন সেগ
 
 #### ইভেন্ট হ্যান্ডলারস থেকে actions কে dispatch করুন {/*dispatch-actions-from-event-handlers*/}
 
-এখানে, `ContactList.js` এবং `Chat.js` এর ইভেন্ট হ্যান্ডলারগুলোতে `// TODO` কমেন্ট করা আছে। এজন্যেই ইনপুটটিতে টাইপ করলে কিছু হচ্ছে না, এবং পাশের বাটন গুলোতে ক্লিক করলে মেসেজ রিসিভার বদলাচ্ছেনা।
+এখানে, `ContactList.js` এবং `Chat.js` এর ইভেন্ট হ্যান্ডলারগুলোতে `// TODO` কমেন্ট করা আছে। এজন্যেই ইনপুটটিতে টাইপ করলে কিছু হচ্ছে না, এবং পাশের বাটন গুলোতে ক্লিক করলে মেসেজের প্রাপক বদলাচ্ছেনা।
 
 এই দুইটি `// TODO` এর জায়গায় নিজ নিজ action গুলো `dispatch` করার কোড লিখুন। action গুলোর কাঙ্ক্ষিত আকৃতি এবং টাইপ জানার জন্য, `messengerReducer.js` এর মধ্যের reducer টি দেখুন। Reducer টি অলরেডি লিখে দেয়া হয়েছে, তাই সেটিতে আপনার কোনো পরিবর্তন আনতে হবেনা। আপনার শুধু `ContactList.js` এবং `Chat.js` এ action গুলো dispatch করতে হবে।
 
@@ -1411,12 +1411,12 @@ textarea {
 
 </Solution>
 
-#### Clear the input on sending a message {/*clear-the-input-on-sending-a-message*/}
+#### Message সেন্ড করার সাথে সাথে ইনপুট ক্লিয়ার করে দিন {/*clear-the-input-on-sending-a-message*/}
 
-Currently, pressing "Send" doesn't do anything. Add an event handler to the "Send" button that will:
+এখানে, "Send" প্রেস করলে কিছু হচ্ছেনা। "Send" বাটনে একটি ইভেন্ট হ্যান্ডলার অ্যাড করুন যার মধ্যেঃ
 
-1. Show an `alert` with the recipient's email and the message.
-2. Clear the message input.
+1. একটি `alert` দেখান যাতে প্রাপকের ইমেইল এবং মেসেজ থাকবে।
+2. মেসেজ ইনপুট ক্লিয়ার করে দিন।
 
 <Sandpack>
 
@@ -1555,7 +1555,7 @@ textarea {
 
 <Solution>
 
-There are a couple of ways you could do it in the "Send" button event handler. One approach is to show an alert and then dispatch an `edited_message` action with an empty `message`:
+আপনি "Send" বাটন ইভেন্ট হ্যান্ডলারে এমনটা করার দুটি পদ্ধতি আছে। প্রথম পদ্ধতিটি হলো, একটি alert শো করার পরে, `edited_message` action dispatch করা যেখানে `message` এর ভ্যালু  হবে `''` বা ফাঁকা স্ট্রিংঃ
 
 <Sandpack>
 
@@ -1701,7 +1701,7 @@ textarea {
 
 </Sandpack>
 
-This works and clears the input when you hit "Send".
+এটা কাজ করবে এবং আপনি যখন "Send" করবেন তখন ইনপুট ক্লিয়ার করে দিবে।
 
 However, _from the user's perspective_, sending a message is a different action than editing the field. To reflect that, you could instead create a _new_ action called `sent_message`, and handle it separately in the reducer:
 
