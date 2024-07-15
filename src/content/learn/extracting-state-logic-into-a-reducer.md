@@ -1854,9 +1854,9 @@ textarea {
 
 </Sandpack>
 
-The resulting behavior is the same. But keep in mind that action types should ideally describe "what the user did" rather than "how you want the state to change". This makes it easier to later add more features.
+উভয় পদ্ধতির ফলাফল একই। তবে মনে রাখবেন, নিয়ম হচ্ছে action এর type যেন "আপনি ষ্টেটের পরিবর্তন কিভাবে চান" সেটা প্রকাশ না করে "ইউজার কি করলো" সেটা যেন প্রকাশ করে। এটা পরবর্তীতে আরো ফিচার যোগ করাটা সহজ করবে।
 
-With either solution, it's important that you **don't** place the `alert` inside a reducer. The reducer should be a pure function--it should only calculate the next state. It should not "do" anything, including displaying messages to the user. That should happen in the event handler. (To help catch mistakes like this, React will call your reducers multiple times in Strict Mode. This is why, if you put an alert in a reducer, it fires twice.)
+উভয় সমাধানের ক্ষেত্রেই, এটা গুরুত্বপূর্ণ বিষয় যে আপনি `alert` টি কোনো reducer এর ভিতর **রাখবেন না**। The reducer should be a pure function--it should only calculate the next state. It should not "do" anything, including displaying messages to the user. That should happen in the event handler. (To help catch mistakes like this, React will call your reducers multiple times in Strict Mode. This is why, if you put an alert in a reducer, it fires twice.)
 
 </Solution>
 
