@@ -1860,9 +1860,9 @@ textarea {
 
 </Solution>
 
-#### Restore input values when switching between tabs {/*restore-input-values-when-switching-between-tabs*/}
+#### ট্যাব বদলানোর সময় input ভ্যালু ফিরিয়ে আনুন {/*restore-input-values-when-switching-between-tabs*/}
 
-In this example, switching between different recipients always clears the text input:
+এই উদাহরণে, প্রাপক একজন থেকে আরেকজনে পরিবর্তন করলে টেক্সট ইনপুট প্রতিবার ফাঁকা হয়ে যায়:
 
 ```js
 case 'changed_selection': {
