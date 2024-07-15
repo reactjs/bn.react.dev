@@ -1856,7 +1856,7 @@ textarea {
 
 উভয় পদ্ধতির ফলাফল একই। তবে মনে রাখবেন, নিয়ম হচ্ছে action এর type যেন "আপনি ষ্টেটের পরিবর্তন কিভাবে চান" সেটা প্রকাশ না করে "ইউজার কি করলো" সেটা যেন প্রকাশ করে। এটা পরবর্তীতে আরো ফিচার যোগ করাটা সহজ করবে।
 
-উভয় সমাধানের ক্ষেত্রেই, এটা গুরুত্বপূর্ণ বিষয় যে আপনি `alert` টি কোনো reducer এর ভিতর **রাখবেন না**। The reducer should be a pure function--it should only calculate the next state. It should not "do" anything, including displaying messages to the user. That should happen in the event handler. (To help catch mistakes like this, React will call your reducers multiple times in Strict Mode. This is why, if you put an alert in a reducer, it fires twice.)
+উভয় সমাধানের ক্ষেত্রেই, এটা গুরুত্বপূর্ণ বিষয় যে আপনি `alert` টি কোনো reducer এর ভিতর **রাখবেন না**। Reducer হতে হবে একটি pure function--এটার কাজ  যেন হয় শুধুই পরবর্তী ষ্টেট নির্ণয় করে। এটা যেন আর কিছুই না "করে", যেমন ইউজার কে কোনো বিজ্ঞপ্তি দেখানো। এসব করতে হবে ইভেন্ট হ্যান্ডলারে। (এই ধরণের ভুল থেকে বাঁচার জন্য, রিয়েক্ট Strict Mode এ আপনার reducer গুলোকে একাধিক বার কল করবে। একারণেই, আপনি যদি reducer এর মধ্যে কোনো alert কল করেন, এটা দুইবার দেখায়।)
 
 </Solution>
 
