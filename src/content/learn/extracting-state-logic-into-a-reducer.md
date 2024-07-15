@@ -1875,7 +1875,7 @@ case 'changed_selection': {
 
 এটা এ কারণে যাতে আপনি একই ড্রাফট মেসেজ একাধিক প্রাপকের সাথে শেয়ার না করেন। তবে এটা আরো সুন্দর হতো যদি আপনার অ্যাপ আলাদা আলাদা করে প্রত্যেক কন্টাক্টের জন্য ড্রাফট "মনে রাখতে পারতো", আর যখন আপনি কন্টাক্ট পরিবর্তন করতেন তখন ড্রাফট ফিরিয়ে আনতো।
 
-Your task is to change the way the state is structured so that you remember a separate message draft _per contact_. You would need to make a few changes to the reducer, the initial state, and the components.
+আপনার কাজ হলো এখানে ষ্টেটকে যে গঠন দেয়া হয়েছে তা পরিবর্তন করা যাতে আপনি _পৃথক কন্টাক্টের_ জন্য পৃথক ড্রাফট মনে রাখতে পারেন। আপনার reducer, initial state এবং কম্পোনেন্টগুলোর কোডে কিছু পরিবর্তন আনতে হবে।
 
 <Hint>
 
