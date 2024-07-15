@@ -1879,7 +1879,7 @@ case 'changed_selection': {
 
 <Hint>
 
-You can structure your state like this:
+আপনার স্টেটের গঠনকে এমন করতে পারেন:
 
 ```js
 export const initialState = {
@@ -1891,7 +1891,7 @@ export const initialState = {
 };
 ```
 
-The `[key]: value` [computed property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names) syntax can help you update the `messages` object:
+এখানের `[key]: value` [computed property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names) সিনট্যাক্স আপনাকে `messages` অবজেক্টকে আপডেট করতে সাহায্য করতে পারে:
 
 ```js
 {
