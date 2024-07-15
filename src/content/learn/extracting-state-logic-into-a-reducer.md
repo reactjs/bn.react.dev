@@ -1873,7 +1873,7 @@ case 'changed_selection': {
   };
 ```
 
-This is because you don't want to share a single message draft between several recipients. But it would be better if your app "remembered" a draft for each contact separately, restoring them when you switch contacts.
+এটা এ কারণে যাতে আপনি একই ড্রাফট মেসেজ একাধিক প্রাপকের সাথে শেয়ার না করেন। তবে এটা আরো সুন্দর হতো যদি আপনার অ্যাপ আলাদা আলাদা করে প্রত্যেক কন্টাক্টের জন্য ড্রাফট "মনে রাখতে পারতো", আর যখন আপনি কন্টাক্ট পরিবর্তন করতেন তখন ড্রাফট ফিরিয়ে আনতো।
 
 Your task is to change the way the state is structured so that you remember a separate message draft _per contact_. You would need to make a few changes to the reducer, the initial state, and the components.
 
