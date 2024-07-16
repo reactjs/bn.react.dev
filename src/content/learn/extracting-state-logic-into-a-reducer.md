@@ -2439,7 +2439,7 @@ textarea {
 
 <Solution>
 
-Dispatching an action calls a reducer with the current state and the action, and stores the result as the next state. This is what it looks like in code:
+একটি action কে dispatch করলে তা বর্তমান স্টেট এবং action টি নিয়ে reducer কে কল করে, এবং প্রাপ্ত ফলাফলটিকে পরবর্তী স্টেট হিসেবে ব্যাবহার করে। কোডে এটা এমন দেখাবেঃ
 
 <Sandpack>
 
@@ -2614,7 +2614,7 @@ textarea {
 
 </Sandpack>
 
-Though it doesn't matter in most cases, a slightly more accurate implementation looks like this:
+যদিও অধিকাংশ ক্ষেত্রে তেমন কিছু আসে যায় না, তবে এর আরেকটু সঠিক সমাধান হবেঃ
 
 ```js
 function dispatch(action) {
@@ -2622,7 +2622,7 @@ function dispatch(action) {
 }
 ```
 
-This is because the dispatched actions are queued until the next render, [similar to the updater functions.](/learn/queueing-a-series-of-state-updates)
+এর কারণ dispatch করা action গুলো পরবর্তী রেন্ডার পর্যন্ত সারিবদ্ধভাবে দাঁড় করিয়ে রাখা হয়, [updater functions এর মতো।](/learn/queueing-a-series-of-state-updates)
 
 </Solution>
 
