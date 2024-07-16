@@ -2249,7 +2249,7 @@ textarea {
 
 <Hint>
 
-Here is a more detailed sketch of the implementation:
+এটা কিভাবে সমাধান করবেন তার নকশাটা দেখানো হলোঃ
 
 ```js
 export function useReducer(reducer, initialState) {
@@ -2263,7 +2263,7 @@ export function useReducer(reducer, initialState) {
 }
 ```
 
-Recall that a reducer function takes two arguments--the current state and the action object--and it returns the next state. What should your `dispatch` implementation do with it?
+মনে করার চেষ্টা করুন যে একটি reducer ফাংশন দুটি আর্গুমেন্ট গ্রহণ করে--বর্তমান স্টেট এবং action অবজেক্ট--এবং এটা পরবর্তী স্টেটকে রিটার্ন করে। আপনার তৈরি করা `dispatch` ফাংশন কিভাবে এটাকে কাজে লাগাতে পারে?
 
 </Hint>
 
