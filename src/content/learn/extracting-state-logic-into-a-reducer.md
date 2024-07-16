@@ -2053,7 +2053,7 @@ textarea {
 
 <Solution>
 
-You'll need to update the reducer to store and update a separate message draft per contact:
+আপনাকে reducer টিতে পরিবর্তন আনতে হবে যাতে আপনি আলাদা আলাদা কন্টাক্টের জন্য আলাদা আলাদা ভাবে ড্রাফট মেসেজ স্টোর এবং আপডেট করতে পারেনঃ
 
 ```js
 // When the input is edited
@@ -2071,13 +2071,13 @@ case 'edited_message': {
 }
 ```
 
-You would also update the `Messenger` component to read the message for the currently selected contact:
+আপনাকে আরো পরিবর্তন আনতে হবে `Messenger` কম্পোনেন্টটিতে যাতে আপনি বর্তমানে সিলেক্টেড কন্টাক্টটির মেসেজ রিড করতে পারেনঃ
 
 ```js
 const message = state.messages[state.selectedId];
 ```
 
-Here is the complete solution:
+এখানে পূর্ণাঙ্গ সমাধান দেয়া হলোঃ
 
 <Sandpack>
 
@@ -2237,7 +2237,7 @@ textarea {
 
 </Sandpack>
 
-Notably, you didn't need to change any of the event handlers to implement this different behavior. Without a reducer, you would have to change every event handler that updates the state.
+উল্লেখ্য, এই নতুন ফিচারটি বাস্তবায়ন করতে আপনাকে কোনো ইভেন্ট হ্যান্ডলারে পরিবর্তন আনতে হবে না। Reducer না হলে আপনাকে, স্টেট আপডেট করে এমন প্রতিটি ইভেন্ট হ্যান্ডলারে পরিবর্তন আনতে হতো।
 
 </Solution>
 
