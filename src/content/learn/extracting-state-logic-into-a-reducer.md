@@ -2241,11 +2241,11 @@ textarea {
 
 </Solution>
 
-#### Implement `useReducer` from scratch {/*implement-usereducer-from-scratch*/}
+#### একদম শূন্য থেকে `useReducer` ব্যাবহার করুন {/*implement-usereducer-from-scratch*/}
 
-In the earlier examples, you imported the `useReducer` Hook from React. This time, you will implement _the `useReducer` Hook itself!_ Here is a stub to get you started. It shouldn't take more than 10 lines of code.
+পূর্ববর্তী উদাহরণগুলোতে, আপনি React থেকে `useReducer` হুক ইমপোর্ট করেছিলেন। এবার, আপনি নিজেই _গোটা `useReducer` হুকটা_ তৈরি করবেন! নিচে আপনার শুরু করার জন্য কিছু কোড দেয়া হলো। এটা সমাধান করতে আপনার ১০ লাইনের বেশি কোড লাগার কথা না।
 
-To test your changes, try typing into the input or select a contact.
+আপনার সমাধান টেস্ট করতে, ইনপুটে টাইপ করার চেষ্টা করুন অথবা কোনো একটি কন্টাক্ট সিলেক্ট করুন।
 
 <Hint>
 
