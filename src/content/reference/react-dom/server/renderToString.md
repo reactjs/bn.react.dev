@@ -4,7 +4,7 @@ title: renderToString
 
 <Pitfall>
 
-`renderToString` does not support streaming or waiting for data. [See the alternatives.](#alternatives)
+`renderToString` streaming সাপোর্ট করে না এবং ডেটা (ফেচিং বা কোনো এসিংক্রোনাস কাজ) এর জন্য বিলম্ব করে না [বিকল্প সমূহ দেখুন।](#alternatives)
 
 </Pitfall>
 
