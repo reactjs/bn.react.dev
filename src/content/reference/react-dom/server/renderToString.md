@@ -53,7 +53,7 @@ const html = renderToString(<App />);
 
 * `renderToString` এর সীমিত Suspense সাপোর্ট রয়েছে। যদি কোনো কম্পোনেন্ট suspend করে, `renderToString` কোনো বিলম্ব ছাড়াই সেটির fallback কে HTML হিসেবে পাঠিয়ে দেয়।
 
-* `renderToString` works in the browser, but using it in the client code is [not recommended.](#removing-rendertostring-from-the-client-code)
+* `renderToString` ব্রাউজারে কাজ করে, কিন্তু ক্লায়েন্ট সাইডে এটির ব্যাবহার [রিকমেন্ডেড না।](#removing-rendertostring-from-the-client-code)
 
 ---
 
