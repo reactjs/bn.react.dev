@@ -45,7 +45,7 @@ const html = renderToString(<App />);
 * **অপশনাল** `options`: সার্ভার রেন্ডারের জন্য একটি অবজেক্ট।
   * **অপশনাল** `identifierPrefix`: একটি string prefix (উপসর্গ) যেটি React [`useId`](/reference/react/useId) এর দ্বারা জেনারেট করা id এর সঙ্গে ব্যবহার করে। একই পেজে একাধিক root ব্যবহারের সময় আইডির সাথে আইডির সংঘর্ষ এড়াতে এটি উপকারে আসে। এটি [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters) এর কাছে পাস করা prefix এর অবশ্যই অনুরূপ হতে হবে।
 
-#### Return করে {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
 একটি HTML স্ট্রিং।
 
