@@ -99,9 +99,9 @@ app.use('/', (request, response) => {
 
 ---
 
-### Removing `renderToString` from the client code {/*removing-rendertostring-from-the-client-code*/}
+### ক্লায়েন্ট কোড থেকে `renderToString` দূর করা {/*removing-rendertostring-from-the-client-code*/}
 
-Sometimes, `renderToString` is used on the client to convert some component to HTML.
+কখনো কখনো, কোনো কম্পোনেন্টকে HTML-এ রূপান্তর করতে ক্লায়েন্ট-সাইডে `renderToString` ব্যবহার করা হয়।
 
 ```js {1-2}
 // 🚩 Unnecessary: using renderToString on the client
@@ -111,7 +111,7 @@ const html = renderToString(<MyIcon />);
 console.log(html); // For example, "<svg>...</svg>"
 ```
 
-Importing `react-dom/server` **on the client** unnecessarily increases your bundle size and should be avoided. If you need to render some component to HTML in the browser, use [`createRoot`](/reference/react-dom/client/createRoot) and read HTML from the DOM:
+**ক্লায়েন্ট-সাইডে** `react-dom/server` ইমপোর্ট করা বিনা প্রয়োজনে আপনার বান্ডল সাইজ বাড়িয়ে দেয় এবং এটা এড়ানো উচিত। যদি আপনার ব্রাউজারে কোনো কম্পোনেন্টকে HTML-এ রেন্ডার করতে হয়, তাহলে [`createRoot`](/reference/react-dom/client/createRoot) ব্যবহার করুন এবং DOM থেকে HTML রিড করুনঃ
 
 ```js
 import { createRoot } from 'react-dom/client';
@@ -125,7 +125,7 @@ flushSync(() => {
 console.log(div.innerHTML); // For example, "<svg>...</svg>"
 ```
 
-The [`flushSync`](/reference/react-dom/flushSync) call is necessary so that the DOM is updated before reading its [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) property.
+এখানে [`flushSync`](/reference/react-dom/flushSync) কল করা জরুরী যাতে DOM তার [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) প্রোপার্টি read করার আগে আপডেট হয়।
 
 ---
 
