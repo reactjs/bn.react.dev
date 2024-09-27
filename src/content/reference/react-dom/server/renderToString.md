@@ -129,13 +129,13 @@ console.log(div.innerHTML); // For example, "<svg>...</svg>"
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশুটিং {/*troubleshooting*/}
 
-### When a component suspends, the HTML always contains a fallback {/*when-a-component-suspends-the-html-always-contains-a-fallback*/}
+### যখন একটি কম্পোনেন্ট Suspense এ থাকে, তখন HTML এর সর্বদা একটি ফলব্যাক থাকে {/*when-a-component-suspends-the-html-always-contains-a-fallback*/}
 
-`renderToString` does not fully support Suspense.
+`renderToString` পুরোপুরি ভাবে Suspense সাপোর্ট করে না।
 
-If some component suspends (for example, because it's defined with [`lazy`](/reference/react/lazy) or fetches data), `renderToString` will not wait for its content to resolve. Instead, `renderToString` will find the closest [`<Suspense>`](/reference/react/Suspense) boundary above it and render its `fallback` prop in the HTML. The content will not appear until the client code loads.
+যদি কোনো কম্পোনেন্ট সাসপেন্স অবস্থায় থাকে (যেমন, যদি এটাকে [`lazy`](/reference/react/lazy) করা হয় কিংবা এটা ডেটা ফেচ করে), তাহলে এর কন্টেন্ট resolve হওয়ার জন্য `renderToString` অপেক্ষা করবে না। পরিবর্তে, `renderToString` উপরের সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি খুঁজে বের করবে এবং HTML-এ এর `fallback` প্রপ রেন্ডার করবে। ক্লায়েন্ট কোড লোড না হওয়া পর্যন্ত ঐ কন্টেন্ট প্রদর্শিত হবে না।
 
-To solve this, use one of the [recommended streaming solutions.](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) They can stream content in chunks as it resolves on the server so that the user sees the page being progressively filled in before the client code loads.
+এই সমস্যা সমাধান করতে, [রেকমেন্ডেড স্ট্রিমিং সমাধানগুলোর](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) একটি ব্যবহার করুন। এ সমাধানগুলোর ক্ষেত্রে সার্ভারে resolve হওয়ার সাথে সাথে কন্টেন্ট ভাগে ভাগে স্ট্রিম হয়ে আসতে পারবে যাতে ইউজার ক্লায়েন্ট কোড লোড হওয়ার আগেই পৃষ্ঠাটি ক্রমে ক্রমে পূরণ হতে দেখতে পায়।
 
