@@ -84,18 +84,18 @@ app.use('/', (request, response) => {
 
 ---
 
-## Alternatives {/*alternatives*/}
+## বিকল্প সমূহ {/*alternatives*/}
 
-### Migrating from `renderToString` to a streaming method on the server {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
+### সার্ভারে `renderToString` এর বদলে একটি streaming মেথড ব্যাবহার করা {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
 
-`renderToString` returns a string immediately, so it does not support streaming or waiting for data.
+`renderToString` সঙ্গে সঙ্গেই একটি স্ট্রিং রিটার্ন করে, তাই এটি স্ট্রিমিং বা ডেটার জন্য অপেক্ষা করা সাপোর্ট করে না।
 
-When possible, we recommend using these fully-featured alternatives:
+যখন সম্ভব, আমরা এই fully-featured বিকল্পগুলো ব্যাবহার করা রেকমেন্ড করিঃ
 
-* If you use Node.js, use [`renderToPipeableStream`.](/reference/react-dom/server/renderToPipeableStream)
-* If you use Deno or a modern edge runtime with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), use [`renderToReadableStream`.](/reference/react-dom/server/renderToReadableStream)
+* আপনি যদি Node.js ব্যবহার করেন, তাহলে [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করুন।
+* আপনি যদি Deno বা [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) সহ একটি আধুনিক Edge রানটাইম ব্যবহার করেন, তাহলে [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) ব্যবহার করুন।
 
-You can continue using `renderToString` if your server environment does not support streams.
+আপনার সার্ভার environment যদি stream সাপোর্ট না করে, তাহলে আপনি `renderToString` ব্যবহার চালিয়ে যেতে পারেন।
 
 ---
 
