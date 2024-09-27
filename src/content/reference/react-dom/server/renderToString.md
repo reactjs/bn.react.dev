@@ -57,11 +57,11 @@ const html = renderToString(<App />);
 
 ---
 
-## Usage {/*usage*/}
+## ব্যাবহার {/*usage*/}
 
-### Rendering a React tree as HTML to a string {/*rendering-a-react-tree-as-html-to-a-string*/}
+### একটি React tree কে HTML হিসেবে একটি স্ট্রিং-এ রেন্ডার করা {/*rendering-a-react-tree-as-html-to-a-string*/}
 
-Call `renderToString` to render your app to an HTML string which you can send with your server response:
+আপনার সার্ভার রেসপন্সের সাথে পাঠানোর জন্য আপনার অ্যাপকে একটি HTML স্ট্রিং-এ রেন্ডার করতে `renderToString` কল করুনঃ
 
 ```js {5-6}
 import { renderToString } from 'react-dom/server';
@@ -73,7 +73,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-This will produce the initial non-interactive HTML output of your React components. On the client, you will need to call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to *hydrate* that server-generated HTML and make it interactive.
+এটি আপনার React কম্পোনেন্টগুলির প্রাথমিক নন-ইন্টারেক্টিভ HTML আউটপুট তৈরি করবে। ক্লায়েন্ট সাইডে, আপনাকে সেই সার্ভার-জেনারেটেড HTML কে *হাইড্রেট* এবং ইন্টারেক্টিভ করতে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করতে হবে।
 
 
 <Pitfall>
