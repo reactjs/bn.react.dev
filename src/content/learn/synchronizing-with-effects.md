@@ -723,7 +723,7 @@ useEffect(() => {
 
 ডেভেলপমেন্টের সময়, প্রতিটি URL-এর জন্য `logVisit` দুইবার কল করা হবে, এর জন্য আপনি এটি ফিক্স করতে তৎপর হয়ে উঠতে পারেন। **আমরা রেকমেন্ড করি এই কোডটি যেমন আছে তেমনই রাখতে।** আগের উদাহরণগুলোর মতো, একবার চালানো এবং দুইবার চালানোর মধ্যে কোনো *ইউজারের-কাছে-দৃশ্যমান* আচরণগত পার্থক্য নেই। বাস্তব দিক থেকে, `logVisit` ডেভেলপমেন্টের সময় কিছু করা উচিত নয় কারণ আপনি চান না যে ডেভেলপমেন্ট মেশিনগুলির লগ প্রোডাকশন মেট্রিক্সের সাথে হযবরল অবস্থা হোক। আপনার কম্পোনেন্টের ফাইল যতবার আপনি সেভ করেন ততবার কম্পোনেন্টটি রিমাউন্ট করে, তাই এটি এমনিতেও ডেভেলপমেন্টের সময় অনর্থক ভিজিট লগ করে।
 
-**In production, there will be no duplicate visit logs.**
+**প্রোডাকশনের সময়, কোনো ডুপ্লিকেট ভিজিট-লগ থাকবে না।**
 
 To debug the analytics events you're sending, you can deploy your app to a staging environment (which runs in production mode) or temporarily opt out of [Strict Mode](/reference/react/StrictMode) and its development-only remounting checks. You may also send analytics from the route change event handlers instead of Effects. For more precise analytics, [intersection observers](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) can help track which components are in the viewport and how long they remain visible.
 
