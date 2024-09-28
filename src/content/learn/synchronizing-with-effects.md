@@ -725,7 +725,7 @@ useEffect(() => {
 
 **প্রোডাকশনের সময়, কোনো ডুপ্লিকেট ভিজিট-লগ থাকবে না।**
 
-To debug the analytics events you're sending, you can deploy your app to a staging environment (which runs in production mode) or temporarily opt out of [Strict Mode](/reference/react/StrictMode) and its development-only remounting checks. You may also send analytics from the route change event handlers instead of Effects. For more precise analytics, [intersection observers](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) can help track which components are in the viewport and how long they remain visible.
+আপনি যে অ্যানালিটিক্স ইভেন্টগুলো সেন্ড করছেন তা ডিবাগ করতে, আপনি আপনার অ্যাপকে একটি staging environment-এ ডিপ্লয় করতে পারেন (যা প্রোডাকশন মোডে চলে) অথবা সাময়িকভাবে [Strict Mode](/reference/react/StrictMode) এবং এর development-only রিমাউন্টিং চেকগুলো থেকে opt-out করতে পারেন (বা বন্ধ করে রাখতে পারেন)। আপনি Effects এর পরিবর্তে route change ইভেন্ট হ্যান্ডলার থেকেও অ্যানালিটিক্স পাঠাতে পারেন। আরো সূক্ষ্ম অ্যানালিটিক্সের জন্য, [ইন্টারসেকশন অবজারভার](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) কোন কম্পোনেন্টগুলি viewport-এ আছে এবং সেগুলো কতক্ষণ দৃশ্যমান থাকে তা ট্র্যাক করতে সাহায্য করতে পারে।
 
 ### Not an Effect: Initializing the application {/*not-an-effect-initializing-the-application*/}
 
