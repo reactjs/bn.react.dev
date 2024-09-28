@@ -721,7 +721,7 @@ useEffect(() => {
 }, [url]);
 ```
 
-In development, `logVisit` will be called twice for every URL, so you might be tempted to try to fix that. **We recommend keeping this code as is.** Like with earlier examples, there is no *user-visible* behavior difference between running it once and running it twice. From a practical point of view, `logVisit` should not do anything in development because you don't want the logs from the development machines to skew the production metrics. Your component remounts every time you save its file, so it logs extra visits in development anyway.
+ডেভেলপমেন্টের সময়, প্রতিটি URL-এর জন্য `logVisit` দুইবার কল করা হবে, এর জন্য আপনি এটি ফিক্স করতে তৎপর হয়ে উঠতে পারেন। **আমরা রেকমেন্ড করি এই কোডটি যেমন আছে তেমনই রাখতে।** আগের উদাহরণগুলোর মতো, একবার চালানো এবং দুইবার চালানোর মধ্যে কোনো *ইউজারের-কাছে-দৃশ্যমান* আচরণগত পার্থক্য নেই। বাস্তব দিক থেকে, `logVisit` ডেভেলপমেন্টের সময় কিছু করা উচিত নয় কারণ আপনি চান না যে ডেভেলপমেন্ট মেশিনগুলির লগ প্রোডাকশন মেট্রিক্সের সাথে হযবরল অবস্থা হোক। আপনার কম্পোনেন্টের ফাইল যতবার আপনি সেভ করেন ততবার কম্পোনেন্টটি রিমাউন্ট করে, তাই এটি এমনিতেও ডেভেলপমেন্টের সময় অনর্থক ভিজিট লগ করে।
 
 **In production, there will be no duplicate visit logs.**
 
