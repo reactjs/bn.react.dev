@@ -711,9 +711,9 @@ Effect এ `fetch` কল লেখা [ডেটা ফেচিংর জন�
 
 </DeepDive>
 
-### Sending analytics {/*sending-analytics*/}
+### Analytics সেন্ড করা {/*sending-analytics*/}
 
-Consider this code that sends an analytics event on the page visit:
+এই কোডটি একটু দেখুন যেটি কোনো পেজ ভিজিট করা হলে একটি analytics event সেন্ড করেঃ
 
 ```js
 useEffect(() => {
