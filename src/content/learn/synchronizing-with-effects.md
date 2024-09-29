@@ -744,9 +744,9 @@ function App() {
 
 এটি নিশ্চিত করে যখন ব্রাউজার পেজটি লোড করবে তখন এই ধরনের লজিক শুধুমাত্র একবার রান করবে।
 
-### Not an Effect: Buying a product {/*not-an-effect-buying-a-product*/}
+### Effect হিসেবে গণ্য নয়: একটি প্রোডাক্ট কেনা {/*not-an-effect-buying-a-product*/}
 
-Sometimes, even if you write a cleanup function, there's no way to prevent user-visible consequences of running the Effect twice. For example, maybe your Effect sends a POST request like buying a product:
+কখনও কখনও, আপনি একটি ক্লিনআপ ফাংশন লিখলেও, ইফেক্টটি দুইবার চালানোর প্রভাব ইউজারের চোখে পড়া থেকে এড়ানোর কোনো উপায় থাকে না। উদাহরণস্বরূপ, হতে পারে আপনার ইফেক্ট একটি প্রোডাক্ট কেনার জন্য একটি POST রিকোয়েস্ট পাঠায়ঃ
 
 ```js {2-3}
 useEffect(() => {
