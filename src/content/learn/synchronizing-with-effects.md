@@ -766,7 +766,7 @@ Buying বা ক্রয় করা রেন্ডারিংয়ের দ্
   }
 ```
 
-**This illustrates that if remounting breaks the logic of your application, this usually uncovers existing bugs.** From a user's perspective, visiting a page shouldn't be different from visiting it, clicking a link, then pressing Back to view the page again. React verifies that your components abide by this principle by remounting them once in development.
+**এতে বুঝা যায় যে, যদি রিমাউন্টিংয়ের কারণে আপনার অ্যাপ্লিকেশনের লজিক ব্রেক করে, এটা সাধারণত এটা প্রকাশ করে যে আপনার কোডে বাগ রয়েছে।** একজন ইউজারের দৃষ্টিকোণ থেকে, একটি পেজ ভিজিট করার মধ্যে এবং সেই পেজ ভিজিট করে, একটি লিঙ্কে ক্লিক করে, তারপর ব্যাক টিপে আবার পেজ দেখার মধ্যে কোনো পার্থক্য থাকা উচিত নয়। React ডেভেলপমেন্টে একবার কম্পোনেন্টগুলিকে রিমাউন্ট করে যাচাই করে যে আপনার কম্পোনেন্টগুলি এই নীতি মেনে চলে কিনা।
 
 ## Putting it all together {/*putting-it-all-together*/}
 
