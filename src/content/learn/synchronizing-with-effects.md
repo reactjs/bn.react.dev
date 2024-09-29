@@ -757,7 +757,7 @@ useEffect(() => {
 
 আপনি প্রোডাক্টটি দুইবার কিনতে চাইবেন না। কিন্তু, আপনার এই ধরনের লজিককে কেনো একটি ইফেক্টটে রাখা উচিৎ না, এটাও তার একটা কারণ। কী হবে যদি ইউজার অন্য আরেকটি পেজে যায় তারপর Back বাটন চাপে? আপনার ইফেক্ট তখন আবার রান করবে। আপনি চান না যে ইউজার একটি পেজ *visit* করলেই প্রোডাক্ট কেনা হোক; আপনি চান যে ইউজার Buy বাটন *click* করলেই কেনা হোক।
 
-Buying is not caused by rendering; it's caused by a specific interaction. It should run only when the user presses the button. **Delete the Effect and move your `/api/buy` request into the Buy button event handler:**
+Buying বা ক্রয় করা রেন্ডারিংয়ের দ্বারা হবে না বরং এটা একটি নির্দিষ্ট ইন্টারেকশনের দ্বারা হবে। এটা শুধু তখনই হবে যখন ইউজার ঐ নির্দিষ্ট বাটনটি চাপবে। **ইফেক্টটি ডিলিট করে `/api/buy` রিকুয়েস্টটি Buy বাটনের ইভেন্ট হ্যান্ডলারে সরিয়ে ফেলুনঃ**
 
 ```js {2-3}
   function handleClick() {
