@@ -746,7 +746,7 @@ function App() {
 
 ### Effect হিসেবে গণ্য নয়: একটি প্রোডাক্ট কেনা {/*not-an-effect-buying-a-product*/}
 
-কখনও কখনও, আপনি একটি ক্লিনআপ ফাংশন লিখলেও, ইফেক্টটি দুইবার চালানোর প্রভাব ইউজারের চোখে পড়া থেকে এড়ানোর কোনো উপায় থাকে না। উদাহরণস্বরূপ, হতে পারে আপনার ইফেক্ট একটি প্রোডাক্ট কেনার জন্য একটি POST রিকোয়েস্ট পাঠায়ঃ
+কখনো কখনো, আপনি একটি ক্লিনআপ ফাংশন লিখলেও, ইফেক্টটি দুইবার চালানোর প্রভাব ইউজারের চোখে পড়া থেকে এড়ানোর কোনো উপায় থাকে না। উদাহরণস্বরূপ, হতে পারে আপনার ইফেক্ট একটি প্রোডাক্ট কেনার জন্য একটি POST রিকোয়েস্ট পাঠায়ঃ
 
 ```js {2-3}
 useEffect(() => {
@@ -755,7 +755,7 @@ useEffect(() => {
 }, []);
 ```
 
-You wouldn't want to buy the product twice. However, this is also why you shouldn't put this logic in an Effect. What if the user goes to another page and then presses Back? Your Effect would run again. You don't want to buy the product when the user *visits* a page; you want to buy it when the user *clicks* the Buy button.
+আপনি প্রোডাক্টটি দুইবার কিনতে চাইবেন না। কিন্তু, আপনার এই ধরনের লজিককে কেনো একটি ইফেক্টটে রাখা উচিৎ না, এটাও তার একটা কারণ। কী হবে যদি ইউজার অন্য আরেকটি পেজে যায় তারপর Back বাটন চাপে? আপনার ইফেক্ট তখন আবার রান করবে। আপনি চান না যে ইউজার একটি পেজ *visit* করলেই প্রোডাক্ট কেনা হোক; আপনি চান যে ইউজার Buy বাটন *click* করলেই কেনা হোক।
 
 Buying is not caused by rendering; it's caused by a specific interaction. It should run only when the user presses the button. **Delete the Effect and move your `/api/buy` request into the Buy button event handler:**
 
