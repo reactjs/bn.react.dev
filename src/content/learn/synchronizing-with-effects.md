@@ -769,11 +769,11 @@ Buying বা ক্রয় করা রেন্ডারিংয়ের দ্
 
 **এতে বুঝা যায় যে, যদি রিমাউন্টিংয়ের কারণে আপনার অ্যাপ্লিকেশনের লজিক ব্রেক করে, এটা সাধারণত এটা প্রকাশ করে যে আপনার কোডে বাগ রয়েছে।** একজন ইউজারের দৃষ্টিকোণ থেকে, একটি পেজ ভিজিট করার মধ্যে এবং সেই পেজ ভিজিট করে, একটি লিঙ্কে ক্লিক করে, তারপর ব্যাক টিপে আবার পেজ দেখার মধ্যে কোনো পার্থক্য থাকা উচিত নয়। React ডেভেলপমেন্টে একবার কম্পোনেন্টগুলিকে রিমাউন্ট করে যাচাই করে যে আপনার কম্পোনেন্টগুলি এই নীতি মেনে চলে কিনা।
 
-## Putting it all together {/*putting-it-all-together*/}
+## মূলকথা {/*putting-it-all-together*/}
 
-This playground can help you "get a feel" for how Effects work in practice.
+এই প্লেগ্রাউন্ডটি আপনাকে বাস্তবে ইফেক্ট কিভাবে কাজ করে তা "একটু অনুভব করতে" সাহায্য করতে পারে।
 
-This example uses [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) to schedule a console log with the input text to appear three seconds after the Effect runs. The cleanup function cancels the pending timeout. Start by pressing "Mount the component":
+এই উদাহরণটি ইফেক্ট রান করার তিন সেকেন্ড পর ইনপুটের টেক্সট নিয়ে একটি console log করার জন্য [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) ব্যাবহার করছে। ক্লিন-আপ ফাংশনটি অপেক্ষারত timeout কে বাদ করে দেয়। "Mount the component" বাটনটি চাপার মাধ্যমে শুরু করুনঃ
 
 <Sandpack>
 
