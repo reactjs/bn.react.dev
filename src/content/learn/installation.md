@@ -37,7 +37,11 @@ export default function App() {
 
 এটা আপনি সরাসরি এডিট করতে পারেন অথবা ডান পাশে উপরে কোণায় থাকা "ফর্ক" বাটন চেপে একটা নতুন ট্যাবে খুলতে পারেন। 
 
+<<<<<<< HEAD
 React ডকুমেন্টেশনের বেশির ভাগ পেইজেই এমন স্যান্ডবক্স রয়েছে। React ডকুমেন্টেশনের এর বাইরে এমন অনেক অনলাইন স্যান্ডবক্স আছে যেগুলো React ব্যবহার সমর্থন করঃ উদাহরণস্বরূপ, [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), অথবা [CodePen।](https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb)
+=======
+Most pages in the React documentation contain sandboxes like this. Outside of the React documentation, there are many online sandboxes that support React: for example, [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), or [CodePen.](https://codepen.io/pen?template=QWYVwWN)
+>>>>>>> fe37c42e0b51167d7f3c98593f50de997d666266
 
 ### নিজের কম্পিউটারে React চালিয়ে দেখুন {/*try-react-locally*/}
 
