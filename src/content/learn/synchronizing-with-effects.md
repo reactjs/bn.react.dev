@@ -827,7 +827,7 @@ export default function App() {
 
 </Sandpack>
 
-You will see three logs at first: `Schedule "a" log`, `Cancel "a" log`, and `Schedule "a" log` again. Three second later there will also be a log saying `a`. As you learned earlier, the extra schedule/cancel pair is because React remounts the component once in development to verify that you've implemented cleanup well.
+আপনি প্রথমে তিনটি লগ দেখতে পাবেন: `Schedule "a" log`, `Cancel "a" log`, এবং আবার `Schedule "a" log`। তিন সেকেন্ড পরে `a` লেখা আরো একটি লগ দেখা যাবে। আপনি আগে যা শিখেছেন সে অনুযায়ী, অতিরিক্ত schedule/cancel-দ্বয়ের কারণ React ডেভেলপমেন্টে একবার কম্পোনেন্টটি পুনরায় মাউন্ট করে যাচাই করে যে আপনি ক্লিন-আপ ভালভাবে বাস্তবায়ন করেছেন কিনা।
 
 Now edit the input to say `abc`. If you do it fast enough, you'll see `Schedule "ab" log` immediately followed by `Cancel "ab" log` and `Schedule "abc" log`. **React always cleans up the previous render's Effect before the next render's Effect.** This is why even if you type into the input fast, there is at most one timeout scheduled at a time. Edit the input a few times and watch the console to get a feel for how Effects get cleaned up.
 
