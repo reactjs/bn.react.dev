@@ -833,7 +833,7 @@ export default function App() {
 
 ইনপুটে কিছু টাইপ করুন তারপর সাথে সাথেই "Unmount the component" বাটনটি চাপুন। খেয়াল করুন কিভাবে আনমাউন্ট করলে শেষ রেন্ডারের ইফেক্টটি ক্লিনআপ হয়ে যায়। এক্ষেত্রে, এটি শেষ টাইমআউটটিকে রান করতে পারার আগেই ক্লিয়ার করে দেয়।
 
-Finally, edit the component above and comment out the cleanup function so that the timeouts don't get cancelled. Try typing `abcde` fast. What do you expect to happen in three seconds? Will `console.log(text)` inside the timeout print the *latest* `text` and produce five `abcde` logs? Give it a try to check your intuition!
+সবশেষে, উপরের কম্পোনেন্টটি এডিট করে ক্লিনআপ ফাংশনটিকে কমেন্ট আউট করে দিন যাতে টাইমআউটগুলো ক্যান্সেল না হয়। দ্রুত টাইপ করে `abcde` লেখার চেষ্টা করুন। তিন সেকেন্ডের মধ্যে কি ঘটবে বলে আপনি আশা করেন? টাইমআউটের ভিতরের `console.log(text)` কি *সর্বশেষ* `text` প্রিন্ট করবে এবং পাঁচটি `abcde` লগ তৈরি করবে? একটু ট্রাই করে দেখুন আপনি কতটুকু বুঝেছেন তা চেক করতে।
 
 Three seconds later, you should see a sequence of logs (`a`, `ab`, `abc`, `abcd`, and `abcde`) rather than five `abcde` logs. **Each Effect "captures" the `text` value from its corresponding render.**  It doesn't matter that the `text` state changed: an Effect from the render with `text = 'ab'` will always see `'ab'`. In other words, Effects from each render are isolated from each other. If you're curious how this works, you can read about [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
