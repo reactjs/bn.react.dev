@@ -835,7 +835,7 @@ export default function App() {
 
 সবশেষে, উপরের কম্পোনেন্টটি এডিট করে ক্লিনআপ ফাংশনটিকে কমেন্ট আউট করে দিন যাতে টাইমআউটগুলো ক্যান্সেল না হয়। দ্রুত টাইপ করে `abcde` লেখার চেষ্টা করুন। তিন সেকেন্ডের মধ্যে কি ঘটবে বলে আপনি আশা করেন? টাইমআউটের ভিতরের `console.log(text)` কি *সর্বশেষ* `text` প্রিন্ট করবে এবং পাঁচটি `abcde` লগ তৈরি করবে? একটু ট্রাই করে দেখুন আপনি কতটুকু বুঝেছেন তা চেক করতে।
 
-Three seconds later, you should see a sequence of logs (`a`, `ab`, `abc`, `abcd`, and `abcde`) rather than five `abcde` logs. **Each Effect "captures" the `text` value from its corresponding render.**  It doesn't matter that the `text` state changed: an Effect from the render with `text = 'ab'` will always see `'ab'`. In other words, Effects from each render are isolated from each other. If you're curious how this works, you can read about [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
+তিন সেকেন্ড পরে, আপনি পাঁচটি `abcde` লগের পরিবর্তে একটি লগের ধারা দেখতে পাবেন (`a`, `ab`, `abc`, `abcd`, এবং `abcde`)। **প্রত্যেক ইফেক্ট তার সংশ্লিষ্ট রেন্ডার থেকে `text` ভ্যালু "ক্যাপচার" করে।** `text` স্টেট পরিবর্তন হয়ে গেছে তাতে কিছু আসে যায়নাঃ `text = 'ab'` ওয়ালা একটি রেন্ডার থেকে একটি ইফেক্ট সর্বদা `'ab'`-ই দেখবে। অন্য কথায়, প্রত্যেক রেন্ডারের ইফেক্টগুলো একে অপরের থেকে বিচ্ছিন্ন। আপনি যদি এটা কীভাবে কাজ করে তা জানতে আগ্রহী হন, তাহলে আপনি [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) সম্পর্কে পড়তে পারেন।
 
 <DeepDive>
 
