@@ -829,7 +829,7 @@ export default function App() {
 
 আপনি প্রথমে তিনটি লগ দেখতে পাবেন: `Schedule "a" log`, `Cancel "a" log`, এবং আবার `Schedule "a" log`। তিন সেকেন্ড পরে `a` লেখা আরো একটি লগ দেখা যাবে। আপনি আগে যা শিখেছেন সে অনুযায়ী, অতিরিক্ত schedule/cancel-দ্বয়ের কারণ React ডেভেলপমেন্টে একবার কম্পোনেন্টটি পুনরায় মাউন্ট করে যাচাই করে যে আপনি ক্লিন-আপ ভালভাবে বাস্তবায়ন করেছেন কিনা।
 
-Now edit the input to say `abc`. If you do it fast enough, you'll see `Schedule "ab" log` immediately followed by `Cancel "ab" log` and `Schedule "abc" log`. **React always cleans up the previous render's Effect before the next render's Effect.** This is why even if you type into the input fast, there is at most one timeout scheduled at a time. Edit the input a few times and watch the console to get a feel for how Effects get cleaned up.
+এখন ইনপুটটি এডিট করে `abc` লিখুন। যদি আপনি যথেষ্ট দ্রুত টাইপ করেন, তাহলে আপনি দেখবেন `Schedule "ab" log` এর পর পরই `Cancel "ab" log` এবং `Schedule "abc" log`। **React সর্বদা পরবর্তী রেন্ডারের ইফেক্টের আগেই পূর্ববর্তী রেন্ডারের ইফেক্ট ক্লিন করে।** এই কারণে আপনি দ্রুত ইনপুটে টাইপ করলেও, একবারে সর্বাধিক একটি টাইমআউট শিডিউল করা হবে। ইনপুটটি কয়েকবার এডিট করুন এবং কনসোল দেখুন যাতে ইফেক্টগুলো কীভাবে ক্লিন হয় তা অনুধাবন করতে পারেন।
 
 Type something into the input and then immediately press "Unmount the component". Notice how unmounting cleans up the last render's Effect. Here, it clears the last timeout before it has a chance to fire.
 
