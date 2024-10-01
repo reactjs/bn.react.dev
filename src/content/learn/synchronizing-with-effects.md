@@ -831,7 +831,7 @@ export default function App() {
 
 এখন ইনপুটটি এডিট করে `abc` লিখুন। যদি আপনি যথেষ্ট দ্রুত টাইপ করেন, তাহলে আপনি দেখবেন `Schedule "ab" log` এর পর পরই `Cancel "ab" log` এবং `Schedule "abc" log`। **React সর্বদা পরবর্তী রেন্ডারের ইফেক্টের আগেই পূর্ববর্তী রেন্ডারের ইফেক্ট ক্লিন করে।** এই কারণে আপনি দ্রুত ইনপুটে টাইপ করলেও, একবারে সর্বাধিক একটি টাইমআউট শিডিউল করা হবে। ইনপুটটি কয়েকবার এডিট করুন এবং কনসোল দেখুন যাতে ইফেক্টগুলো কীভাবে ক্লিন হয় তা অনুধাবন করতে পারেন।
 
-Type something into the input and then immediately press "Unmount the component". Notice how unmounting cleans up the last render's Effect. Here, it clears the last timeout before it has a chance to fire.
+ইনপুটে কিছু টাইপ করুন তারপর সাথে সাথেই "Unmount the component" বাটনটি চাপুন। খেয়াল করুন কিভাবে আনমাউন্ট করলে শেষ রেন্ডারের ইফেক্টটি ক্লিনআপ হয়ে যায়। এক্ষেত্রে, এটি শেষ টাইমআউটটিকে রান করতে পারার আগেই ক্লিয়ার করে দেয়।
 
 Finally, edit the component above and comment out the cleanup function so that the timeouts don't get cancelled. Try typing `abcde` fast. What do you expect to happen in three seconds? Will `console.log(text)` inside the timeout print the *latest* `text` and produce five `abcde` logs? Give it a try to check your intuition!
 
