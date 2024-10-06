@@ -1564,7 +1564,7 @@ export async function fetchBio(person) {
 
 </Sandpack>
 
-Each render's Effect has its own `ignore` variable. Initially, the `ignore` variable is set to `false`. However, if an Effect gets cleaned up (such as when you select a different person), its `ignore` variable becomes `true`. So now it doesn't matter in which order the requests complete. Only the last person's Effect will have `ignore` set to `false`, so it will call `setBio(result)`. Past Effects have been cleaned up, so the `if (!ignore)` check will prevent them from calling `setBio`:
+প্রতিটি রেন্ডারের ইফেক্টের নিজস্ব `ignore` ভ্যারিয়েবল আছে। প্রাথমিকভাবে, `ignore` ভ্যারিয়েবলটি `false` সেট করা হয়। তবে, যদি একটি ইফেক্ট ক্লিন আপ করা হয় (যেমন যখন আপনি একটি ভিন্ন ব্যক্তি সিলেক্ট করেন), তার `ignore` ভ্যারিয়েবল `true` হয়ে যায়। তাই এখন রিকোয়েস্টগুলো কোন ক্রমে সম্পন্ন হয় তাতে কিছু যায় আসে না। শুধুমাত্র শেষ ব্যক্তির ইফেক্টের `ignore`-ই `false` সেট থাকবে, তাই এটি `setBio(result)` কল করবে। পূর্ববর্তী ইফেক্টগুলো ইতিমধ্যে ক্লিন আপ করা হয়ে গেছে, তাই `if (!ignore)` চেক সেগুলোকে `setBio` কল করা থেকে প্রতিরোধ করবেঃ
 
 - Selecting `'Bob'` triggers `fetchBio('Bob')`
 - Selecting `'Taylor'` triggers `fetchBio('Taylor')` **and cleans up the previous (Bob's) Effect**
