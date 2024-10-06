@@ -937,9 +937,9 @@ export default function ChatRoom({ roomId }) {
 
 এর পরে, রিয়েক্ট ৩য় রেন্ডারের ইফেক্ট রান করে এবং `'travel'` চ্যাট রুমের সাথে কানেক্ট করে।
 
-#### Unmount {/*unmount*/}
+#### আনমাউন্ট {/*unmount*/}
 
-Finally, let's say the user navigates away, and the `ChatRoom` component unmounts. React runs the last Effect's cleanup function. The last Effect was from the third render. The third render's cleanup destroys the `createConnection('travel')` connection. So the app disconnects from the `'travel'` room.
+সবশেষে, ধরুন ইউজার অন্য পেজে চলে গেল, এবং `ChatRoom` কম্পোনেন্টটি আনমাউন্ট হলো। রিয়েক্ট তখন সর্বশেষ ইফেক্টের ক্লিন-আপ ফাংশনটি রান করে। সর্বশেষ ইফেক্টটি ছিল তৃতীয় রেন্ডার থেকে। তৃতীয় রেন্ডারের ক্লিন-আপ `createConnection('travel')` কানেকশনটি কেটে দেয়। ফলে অ্যাপটি `'travel'` রুম থেকে ডিসকানেক্ট হয়ে যায়।
 
 #### Development-only behaviors {/*development-only-behaviors*/}
 
