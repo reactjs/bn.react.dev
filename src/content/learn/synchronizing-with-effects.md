@@ -963,7 +963,7 @@ export default function ChatRoom({ roomId }) {
 
 <Challenges>
 
-#### মাউন্ট হওয়ার সময় একটি ফিল্ডে ফোকাস করা {/*focus-a-field-on-mount*/}
+#### মাউন্ট হওয়ার সময় একটি ফিল্ডে ফোকাস করুন {/*focus-a-field-on-mount*/}
 
 এই উদাহরণে, ফর্মটি একটি `<MyInput />` কম্পোনেন্ট রেন্ডার করে।
 
@@ -1129,7 +1129,7 @@ body {
 
 </Solution>
 
-#### কন্ডিশনালি একটি ফিল্ডে ফোকাস করা {/*focus-a-field-conditionally*/}
+#### কন্ডিশনালি একটি ফিল্ডে ফোকাস করুন {/*focus-a-field-conditionally*/}
 
 এই ফর্মটি দুটি `<MyInput />` কম্পোনেন্ট রেন্ডার করে।
 
@@ -1435,7 +1435,7 @@ body {
 
 </Solution>
 
-#### Fix fetching inside an Effect {/*fix-fetching-inside-an-effect*/}
+#### একটি ইফেক্টের মধ্যে fetching ফিক্স করুন {/*fix-fetching-inside-an-effect*/}
 
 This component shows the biography for the selected person. It loads the biography by calling an asynchronous function `fetchBio(person)` on mount and whenever `person` changes. That asynchronous function returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which eventually resolves to a string. When fetching is done, it calls `setBio` to display that string under the select box.
 
