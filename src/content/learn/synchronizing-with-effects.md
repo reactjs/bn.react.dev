@@ -907,18 +907,18 @@ export default function ChatRoom({ roomId }) {
 
 রিয়েক্ট ২য় রেন্ডারের `['general']` এর সাথে ১ম রেন্ডারের `['general']` তুলনা করে। **যেহেতু সব dependecy একই আছে, তাই রিয়েক্ট ২য় রেন্ডারের ইফেক্টটিকে *ইগনোর* করে।** সেটিকে কখনোই কল করা হয়না।
 
-#### Re-render with different dependencies {/*re-render-with-different-dependencies*/}
+#### ভিন্ন dependencies নিয়ে রি-রেন্ডার {/*re-render-with-different-dependencies*/}
 
-Then, the user visits `<ChatRoom roomId="travel" />`. This time, the component returns different JSX:
+এরপর ধরুন, ইউজার `<ChatRoom roomId="travel" />` ভিজিট করলো। এইবার, কম্পোনেন্টটি অন্যরকম JSX রিটার্ন করেঃ
 
 ```js
   // JSX for the third render (roomId = "travel")
   return <h1>Welcome to travel!</h1>;
 ```
 
-React updates the DOM to change `"Welcome to general"` into `"Welcome to travel"`.
+রিয়েক্ট `"Welcome to general"` কে `"Welcome to travel"` এ বদলাতে DOM আপডেট করে।
 
-The Effect from the third render looks like this:
+৩য় রেন্ডারের ইফেক্ট দেখতে এমন দেখাবেঃ
 
 ```js
   // Effect for the third render (roomId = "travel")
@@ -931,7 +931,7 @@ The Effect from the third render looks like this:
   ['travel']
 ```
 
-React compares `['travel']` from the third render with `['general']` from the second render. One dependency is different: `Object.is('travel', 'general')` is `false`. The Effect can't be skipped.
+রিয়েক্ট ৩য় রেন্ডারের `['travel']` এর সাথে ২য় রেন্ডারের `['general']` এর তুলনা করে। দেখা যাচ্ছে একটি dependency বদলে গেছেঃ `Object.is('travel', 'general')` এর ফলাফল `false` হয়। তাই এই ইফেক্টটি স্কিপ করা যাবেনা।
 
 **Before React can apply the Effect from the third render, it needs to clean up the last Effect that _did_ run.** The second render's Effect was skipped, so React needs to clean up the first render's Effect. If you scroll up to the first render, you'll see that its cleanup calls `disconnect()` on the connection that was created with `createConnection('general')`. This disconnects the app from the `'general'` chat room.
 
