@@ -941,9 +941,9 @@ export default function ChatRoom({ roomId }) {
 
 সবশেষে, ধরুন ইউজার অন্য পেজে চলে গেল, এবং `ChatRoom` কম্পোনেন্টটি আনমাউন্ট হলো। রিয়েক্ট তখন সর্বশেষ ইফেক্টের ক্লিন-আপ ফাংশনটি রান করে। সর্বশেষ ইফেক্টটি ছিল তৃতীয় রেন্ডার থেকে। তৃতীয় রেন্ডারের ক্লিন-আপ `createConnection('travel')` কানেকশনটি কেটে দেয়। ফলে অ্যাপটি `'travel'` রুম থেকে ডিসকানেক্ট হয়ে যায়।
 
-#### Development-only behaviors {/*development-only-behaviors*/}
+#### শুধুমাত্র ডেভেলপমেন্টর সময় দেখা যায় এমন কিছু আচরণ {/*development-only-behaviors*/}
 
-When [Strict Mode](/reference/react/StrictMode) is on, React remounts every component once after mount (state and DOM are preserved). This [helps you find Effects that need cleanup](#step-3-add-cleanup-if-needed) and exposes bugs like race conditions early. Additionally, React will remount the Effects whenever you save a file in development. Both of these behaviors are development-only.
+যখন [স্ট্রিক্ট মোড](/reference/react/StrictMode) চালু থাকে, রিয়েক্ট প্রতিটি কম্পোনেন্টকে মাউন্ট হওয়ার পর একবার পুনঃ-মাউন্ট (remount) করে (স্টেট এবং DOM অপরিবর্তিত থাকে)। এটি আপনাকে [এমন ইফেক্ট খুঁজে বের করতে সাহায্য করে যেগুলোর ক্লিন-আপ প্রয়োজন](#step-3-add-cleanup-if-needed) এবং রেস কন্ডিশনের মতো বাগ আগের থেকেই প্রকাশ করে দেয়। এছাড়াও, ডেভেলপমেন্টে যখনই আপনি কোনো ফাইল সেভ করবেন, রিয়েক্ট ইফেক্টগুলোকে রি-মাউন্ট করবে। এই আচরণগুলো শুধুমাত্র ডেভেলপমেন্ট মোডেই দেখা যায়।
 
 </DeepDive>
 
