@@ -1135,7 +1135,7 @@ body {
 
 "Show form" চাপুন এবং লক্ষ্য করুন যে দ্বিতীয় ফিল্ডটি অটোম্যাটিকভাবে ফোকাস পাচ্ছে। এটা ঘটার কারণ উভয় `<MyInput />` কম্পোনেন্টই নিজেদের ফিল্ডে ফোকাস করার চেষ্টা করে। যখন আপনি পরপর দুটি ইনপুট ফিল্ডের জন্য `focus()` কল করেন, শেষেরটি সবসময় "জিতে" যায়।
 
-Let's say you want to focus the first field. The first `MyInput` component now receives a boolean `shouldFocus` prop set to `true`. Change the logic so that `focus()` is only called if the `shouldFocus` prop received by `MyInput` is `true`.
+ধরুন আপনি প্রথম ফিল্ডটিকে ফোকাস করতে চান। প্রথম `MyInput` কম্পোনেন্টটি এখন একটি বুলিয়ান `shouldFocus` প্রপ পায় যা `true` সেট করা আছে। লজিকে এমন পরিবর্তন আনুন যাতে `focus()` কেবল তখনই কল করা হয় যখন `MyInput` এ পাস করা `shouldFocus` প্রপটি `true` হয়।
 
 <Sandpack>
 
