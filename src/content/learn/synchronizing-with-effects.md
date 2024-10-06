@@ -1373,11 +1373,11 @@ body {
 
 <Solution>
 
-When [Strict Mode](/reference/react/StrictMode) is on (like in the sandboxes on this site), React remounts each component once in development. This causes the interval to be set up twice, and this is why each second the counter increments twice.
+যখন [স্ট্রিক্ট মোড](/reference/react/StrictMode) চালু থাকে (যেমন এই সাইটের স্যান্ডবক্সগুলিতে), React ডেভেলপমেন্টে প্রতিটি কম্পোনেন্টকে একবার রিমাউন্ট করে। এর ফলে ইন্টারভালটি দুইবার সেট আপ হয়, এবং এই কারণে প্রতি সেকেন্ডে কাউন্টার দুইবার বাড়ে।
 
-However, React's behavior is not the *cause* of the bug: the bug already exists in the code. React's behavior makes the bug more noticeable. The real cause is that this Effect starts a process but doesn't provide a way to clean it up.
+তবে, React-এর এই আচরণ বাগটির *কারণ* নয়: বাগটি ইতিমধ্যেই কোডে বিদ্যমান। React-এর আচরণ বাগটিকে আরও বেশি চোখে পড়ার মতো করে তোলে। আসল কারণ হল যে এই ইফেক্টটি একটি process শুরু করে কিন্তু এটি ক্লিন-আপ করার কোনো উপায় প্রদান করে না।
 
-To fix this code, save the interval ID returned by `setInterval`, and implement a cleanup function with [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval):
+এই কোডটি ফিক্স করতে, `setInterval` দ্বারা রিটার্ন করা interval ID স্টোর করুন, এবং [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) দিয়ে একটি ক্লিনআপ ফাংশন ইমপ্লেমেন্ট করুনঃ
 
 <Sandpack>
 
