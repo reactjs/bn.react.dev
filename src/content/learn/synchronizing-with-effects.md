@@ -1308,11 +1308,11 @@ body {
 
 </Solution>
 
-#### Fix an interval that fires twice {/*fix-an-interval-that-fires-twice*/}
+#### একটি interval ফিক্স করুন যেটি দুইবার ফায়ার করে {/*fix-an-interval-that-fires-twice*/}
 
-This `Counter` component displays a counter that should increment every second. On mount, it calls [`setInterval`.](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) This causes `onTick` to run every second. The `onTick` function increments the counter.
+এই `Counter` কম্পোনেন্টটি একটি কাউন্টার প্রদর্শন করে যা প্রতি সেকেন্ডে বৃদ্ধি পাওয়ার কথা। মাউন্ট হওয়ার সময়, এটি [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) কল করে। এটি প্রতি সেকেন্ডে `onTick` চালায়। `onTick` ফাংশনটি কাউন্টারকে বাড়ায়।
 
-However, instead of incrementing once per second, it increments twice. Why is that? Find the cause of the bug and fix it.
+তবে, প্রতি সেকেন্ডে একবার বাড়ানোর পরিবর্তে, এটি দুইবার বাড়ছে। কেন এমন হচ্ছে? বাগটির কারণ খুঁজে বের করুন এবং এটি ঠিক করুন।
 
 <Hint>
 
