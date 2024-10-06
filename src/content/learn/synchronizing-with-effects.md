@@ -839,9 +839,9 @@ export default function App() {
 
 <DeepDive>
 
-#### Each render has its own Effects {/*each-render-has-its-own-effects*/}
+#### প্রত্যেক রেন্ডারের নিজ নিজ ইফেক্ট আছে {/*each-render-has-its-own-effects*/}
 
-You can think of `useEffect` as "attaching" a piece of behavior to the render output. Consider this Effect:
+আপনি `useEffect` এর ব্যাপারে মনে করতে পারেন রেন্ডার আউটপুটের সাথে কোনো একটি ক্রিয়া "সম্পৃক্ত" করে দেয়া। এই ইফেক্টটি দেখুনঃ
 
 ```js
 export default function ChatRoom({ roomId }) {
@@ -855,7 +855,7 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-Let's see what exactly happens as the user navigates around the app.
+চলুন দেখি আসলে কি ঘটছে যখন ইউজার অ্যাপের মধ্যে ন্যাভিগেট করে।
 
 #### Initial render {/*initial-render*/}
 
