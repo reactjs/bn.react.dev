@@ -1225,7 +1225,7 @@ body {
 
 <Solution>
 
-Put the conditional logic inside the Effect. You will need to specify `shouldFocus` as a dependency because you are using it inside the Effect. (This means that if some input's `shouldFocus` changes from `false` to `true`, it will focus after mount.)
+কন্ডিশনাল লজিকটি ইফেক্টের ভিতরে রাখুন। আপনাকে `shouldFocus` কে একটি ডিপেন্ডেন্সি হিসেবে উল্লেখ করতে হবে কারণ আপনি এটি ইফেক্টের ভিতরে ব্যবহার করছেন। (এর মানে হল যে যদি কোনো ইনপুটের `shouldFocus` `false` থেকে `true` তে পরিবর্তিত হয়, তাহলে এটি মাউন্টের পরে ফোকাস পাবে।)
 
 <Sandpack>
 
