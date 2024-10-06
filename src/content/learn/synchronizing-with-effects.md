@@ -1045,7 +1045,7 @@ body {
 
 আপনার সমাধান কাজ করছে কিনা তা যাচাই করতে, "Show form" বাটনে ক্লিক করুন এবং নিশ্চিত করুন যে ইনপুটটি ফোকাস পাচ্ছে (হাইলাইট হচ্ছে এবং কার্সর এর ভিতরে যাচ্ছে)। "Hide form" ক্লিক করুন এবং আবার "Show form" এ ক্লিক করুন। যাচাই করুন যে ইনপুটটি আবার হাইলাইট হচ্ছে কিনা।
 
-`MyInput` should only focus _on mount_ rather than after every render. To verify that the behavior is right, press "Show form" and then repeatedly press the "Make it uppercase" checkbox. Clicking the checkbox should _not_ focus the input above it.
+`MyInput` শুধুমাত্র _মাউন্ট হওয়ার সময়_ ফোকাস পাবে, প্রতিটি রেন্ডারের পরে নয়। ইনপুট সঠিক আচরণ করছে কিনা তা যাচাই করতে, "Show form" এ ক্লিক করুন এবং তারপর বারবার "Make it uppercase" চেকবক্সে ক্লিক করুন। চেকবক্সে ক্লিক করলে এর উপরের ইনপুটটি ফোকাস _পাওয়ার কথা না_।
 
 <Solution>
 
