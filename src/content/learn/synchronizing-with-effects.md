@@ -1316,7 +1316,7 @@ body {
 
 <Hint>
 
-Keep in mind that `setInterval` returns an interval ID, which you can pass to [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) to stop the interval.
+মনে রাখবেন যে `setInterval` একটি ইন্টারভাল আইডি রিটার্ন করে, যা আপনি [`clearInterval`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) এ পাস করে ইন্টারভাল বন্ধ করতে পারেন।
 
 </Hint>
 
