@@ -857,16 +857,16 @@ export default function ChatRoom({ roomId }) {
 
 চলুন দেখি আসলে কি ঘটছে যখন ইউজার অ্যাপের মধ্যে ন্যাভিগেট করে।
 
-#### Initial render {/*initial-render*/}
+#### ইনিশিয়াল রেন্ডার {/*initial-render*/}
 
-The user visits `<ChatRoom roomId="general" />`. Let's [mentally substitute](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` with `'general'`:
+ইউজার `<ChatRoom roomId="general" />` করলো। আপাতত [মনেকরি](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) `roomId` হচ্ছে `'general'`:
 
 ```js
   // JSX for the first render (roomId = "general")
   return <h1>Welcome to general!</h1>;
 ```
 
-**The Effect is *also* a part of the rendering output.** The first render's Effect becomes:
+**উক্ত ইফেক্টটি রেন্ডারিং *আউটপুটেরও* একটি অংশ।** এখন তাহলে প্রথম রেন্ডারের ইফেক্ট হবেঃ
 
 ```js
   // Effect for the first render (roomId = "general")
@@ -879,7 +879,7 @@ The user visits `<ChatRoom roomId="general" />`. Let's [mentally substitute](/le
   ['general']
 ```
 
-React runs this Effect, which connects to the `'general'` chat room.
+রিয়েক্ট এই ইফেক্টটি রান করে, যা `'general'` চ্যাট রুমের সাথে কানেক্ট করে।
 
 #### Re-render with same dependencies {/*re-render-with-same-dependencies*/}
 
