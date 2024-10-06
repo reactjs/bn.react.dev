@@ -1219,7 +1219,7 @@ body {
 
 <Hint>
 
-You can't declare an Effect conditionally, but your Effect can include conditional logic.
+আপনি কন্ডিশনালি একটি ইফেক্ট ডিক্লেয়ার করতে পারবেন না, কিন্তু আপনার ইফেক্টের মধ্যে কন্ডিশনাল লজিক রাখতে পারেন।
 
 </Hint>
 
