@@ -1566,12 +1566,12 @@ export async function fetchBio(person) {
 
 প্রতিটি রেন্ডারের ইফেক্টের নিজস্ব `ignore` ভ্যারিয়েবল আছে। প্রাথমিকভাবে, `ignore` ভ্যারিয়েবলটি `false` সেট করা হয়। তবে, যদি একটি ইফেক্ট ক্লিন আপ করা হয় (যেমন যখন আপনি একটি ভিন্ন ব্যক্তি সিলেক্ট করেন), তার `ignore` ভ্যারিয়েবল `true` হয়ে যায়। তাই এখন রিকোয়েস্টগুলো কোন ক্রমে সম্পন্ন হয় তাতে কিছু যায় আসে না। শুধুমাত্র শেষ ব্যক্তির ইফেক্টের `ignore`-ই `false` সেট থাকবে, তাই এটি `setBio(result)` কল করবে। পূর্ববর্তী ইফেক্টগুলো ইতিমধ্যে ক্লিন আপ করা হয়ে গেছে, তাই `if (!ignore)` চেক সেগুলোকে `setBio` কল করা থেকে প্রতিরোধ করবেঃ
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')` **and cleans up the previous (Bob's) Effect**
-- Fetching `'Taylor'` completes *before* fetching `'Bob'`
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render **does not do anything because its `ignore` flag was set to `true`**
+- `'Bob'` সিলেক্ট করা `fetchBio('Bob')` ট্রিগার করে
+- `'Taylor'` সিলেক্ট করা `fetchBio('Taylor')` ট্রিগার করে **এবং পূর্ববর্তী (Bob-এর) ইফেক্ট ক্লিন আপ করে**
+- `'Taylor'` ফেচ করা `'Bob'` ফেচ করার *আগে* সম্পন্ন হয়
+- `'Taylor'` রেন্ডারের ইফেক্ট `setBio('This is Taylor's bio')` কল করে
+- `'Bob'` ফেচ করা সম্পন্ন হয়
+- `'Bob'` রেন্ডারের ইফেক্ট **কিছুই করে না কারণ এর `ignore` ফ্ল্যাগ `true` সেট করা হয়েছিল**
 
 In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problems.
 
