@@ -1051,7 +1051,7 @@ body {
 
 রেন্ডারের সময় `ref.current.focus()` কল করা ভুল, কারণ এটি একটি *সাইড ইফেক্ট*। সাইড ইফেক্ট হয় একটি ইভেন্ট হ্যান্ডলারের মধ্যে রাখা উচিত অথবা `useEffect` এর মধ্যে ডিক্লেয়ার করা উচিত। এই ক্ষেত্রে, সাইড ইফেক্টটি কোনো নির্দিষ্ট ইন্টার‍্যাকশনের কারণে নয়, বরং কম্পোনেন্টটি প্রদর্শিত হওয়ার কারণে ঘটে, তাই এটিকে একটি ইফেক্টে রাখাই যুক্তিযুক্ত।
 
-To fix the mistake, wrap the `ref.current.focus()` call into an Effect declaration. Then, to ensure that this Effect runs only on mount rather than after every render, add the empty `[]` dependencies to it.
+ভুলটি সংশোধন করতে, `ref.current.focus()` কলটিকে একটি ইফেক্ট ডিক্লেয়ারেশনের মধ্যে রাখুন। তারপর, এই ইফেক্টটি যাতে শুধুমাত্র মাউন্টের সময় চলে, প্রতিটি রেন্ডারের পরে নয়, তার জন্য খালি `[]` ডিপেন্ডেন্সি যোগ করুন।
 
 <Sandpack>
 
