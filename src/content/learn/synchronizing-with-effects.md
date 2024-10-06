@@ -1487,9 +1487,9 @@ export async function fetchBio(person) {
 </Sandpack>
 
 
-There is a bug in this code. Start by selecting "Alice". Then select "Bob" and then immediately after that select "Taylor". If you do this fast enough, you will notice that bug: Taylor is selected, but the paragraph below says "This is Bob's bio."
+এই কোডে একটি বাগ আছে। প্রথমে "Alice" সিলেক্ট করুন। তারপর "Bob" সিলেক্ট করুন এবং তার পরপরই "Taylor" সিলেক্ট করুন। আপনি যদি এটা দ্রুত করেন, তাহলে আপনি বাগটি লক্ষ্য করবেনঃ Taylor সিলেক্টেড হয়েছে, কিন্তু নিচের paragraph-এ লেখা আছে "This is Bob's bio."
 
-Why does this happen? Fix the bug inside this Effect.
+এটা কেনো হচ্ছে? ইফেক্টের মধ্যের বাগটি ফিক্স করুন।
 
 <Hint>
 
