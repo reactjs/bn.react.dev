@@ -1215,7 +1215,7 @@ body {
 
 </Sandpack>
 
-To verify your solution, press "Show form" and "Hide form" repeatedly. When the form appears, only the *first* input should get focused. This is because the parent component renders the first input with `shouldFocus={true}` and the second input with `shouldFocus={false}`. Also check that both inputs still work and you can type into both of them.
+আপনার সমাধান যাচাই করতে, বারবার "Show form" এবং "Hide form" বাটনে চাপ দিন। ফর্মটি প্রদর্শিত হলে, কেবল *প্রথম* ইনপুটটি ফোকাস পাওয়ার কথা। এর কারণ প্যারেন্ট কম্পোনেন্ট প্রথম ইনপুটটিকে `shouldFocus={true}` এবং দ্বিতীয় ইনপুটটিকে `shouldFocus={false}` দিয়ে রেন্ডার করে। এছাড়াও চেক করুন যে উভয় ইনপুটই এখনও কাজ করছে এবং আপনি উভয়টিতেই টাইপ করতে পারছেন।
 
 <Hint>
 
