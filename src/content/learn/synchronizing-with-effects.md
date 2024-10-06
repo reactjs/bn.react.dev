@@ -1493,20 +1493,20 @@ export async function fetchBio(person) {
 
 <Hint>
 
-If an Effect fetches something asynchronously, it usually needs cleanup.
+যদি একটি ইফেক্ট কিছু অ্যাসিঙ্ক্রোনাসভাবে ফেচ করে, তাহলে সাধারণত এটির ক্লিনআপের প্রয়োজন হয়।
 
 </Hint>
 
 <Solution>
 
-To trigger the bug, things need to happen in this order:
+বাগটি ট্রিগার করতে, জিনিসগুলো এই ক্রমে ঘটতে হবে:
 
-- Selecting `'Bob'` triggers `fetchBio('Bob')`
-- Selecting `'Taylor'` triggers `fetchBio('Taylor')`
-- **Fetching `'Taylor'` completes *before* fetching `'Bob'`**
-- The Effect from the `'Taylor'` render calls `setBio('This is Taylor’s bio')`
-- Fetching `'Bob'` completes
-- The Effect from the `'Bob'` render calls `setBio('This is Bob’s bio')`
+- `'Bob'` সিলেক্ট করা `fetchBio('Bob')` ট্রিগার করে
+- `'Taylor'` সিলেক্ট করা `fetchBio('Taylor')` ট্রিগার করে
+- **`'Taylor'` ফেচ করা `'Bob'` ফেচ করার *আগে* সম্পন্ন হয়**
+- `'Taylor'` রেন্ডারের ইফেক্ট `setBio('This is Taylor's bio')` কল করে
+- `'Bob'` ফেচ করা সম্পন্ন হয়
+- `'Bob'` রেন্ডারের ইফেক্ট `setBio('This is Bob's bio')` কল করে
 
 This is why you see Bob's bio even though Taylor is selected. Bugs like this are called [race conditions](https://en.wikipedia.org/wiki/Race_condition) because two asynchronous operations are "racing" with each other, and they might arrive in an unexpected order.
 
