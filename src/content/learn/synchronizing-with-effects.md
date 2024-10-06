@@ -955,9 +955,9 @@ When [Strict Mode](/reference/react/StrictMode) is on, React remounts every comp
 - যদি কোনো ইফেক্টের সকল dependecy সর্বশেষ রেন্ডারের অবিকল থাকে তাহলে রিয়েক্ট ইফেক্টটিকে স্কিপ করবে।
 - আপনি dependencies "বাছাই করতে" পারবেন না। সেগুলো ইফেক্টের ভিতরের কোড দ্বারা নির্ধারিত হয়ে থাকে।
 - খালি dependecy অ্যারে (`[]`) এর সম্পর্ক হলো কম্পোনেন্ট "mounting" এর সাথে অর্থাৎ, যখন সেটি স্ক্রিনে অ্যাড করা হয় তার সাথে।
-- In Strict Mode, React mounts components twice (in development only!) to stress-test your Effects.
-- If your Effect breaks because of remounting, you need to implement a cleanup function.
-- React will call your cleanup function before the Effect runs next time, and during the unmount.
+- Strict Mode-এ, রিয়েক্ট আপনার ইফেক্টসমূহকে ভালোভাবে পরীক্ষা করার জন্য কম্পোনেন্টসমূহকে দুইবার করে মাউন্ট করে (এটা শুধু ডেভেলপমেন্টের সময়ই!)।
+- যদি আপনার ইফেক্ট বারংবার মাউন্টিংয়ের ফলে ব্রেক করে, এতে বুঝা যায় আপনার একটি ক্লিন-আপ ফাংশন লিখতে হবে।
+- ইফেক্ট পরবর্তীবার রান করার পূর্বে এবং কম্পোনেন্ট আনমাউন্টিংয়ের এর সময় রিয়েক্ট আপনার ক্লিন-আপ ফাংশন কল করে।
 
 </Recap>
 
