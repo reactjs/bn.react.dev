@@ -1508,9 +1508,9 @@ export async function fetchBio(person) {
 - `'Bob'` ফেচ করা সম্পন্ন হয়
 - `'Bob'` রেন্ডারের ইফেক্ট `setBio('This is Bob's bio')` কল করে
 
-This is why you see Bob's bio even though Taylor is selected. Bugs like this are called [race conditions](https://en.wikipedia.org/wiki/Race_condition) because two asynchronous operations are "racing" with each other, and they might arrive in an unexpected order.
+এই কারণেই আপনি Taylor নির্বাচিত থাকা সত্ত্বেও Bob-এর bio দেখছেন। এই ধরনের বাগগুলোকে [race condition](https://en.wikipedia.org/wiki/Race_condition) বলা হয় কারণ দুটি অ্যাসিঙ্ক্রোনাস অপারেশন একে অপরের সাথে "race" (প্রতিযোগিতা) করছে, এবং তারা অপ্রত্যাশিত ক্রমে সম্পন্ন হতে পারে।
 
-To fix this race condition, add a cleanup function:
+এই রেস কন্ডিশন ফিক্স করতে, একটি ক্লিনআপ ফাংশন যোগ করুনঃ
 
 <Sandpack>
 
