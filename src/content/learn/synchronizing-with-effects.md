@@ -963,11 +963,11 @@ export default function ChatRoom({ roomId }) {
 
 <Challenges>
 
-#### Focus a field on mount {/*focus-a-field-on-mount*/}
+#### মাউন্ট হওয়ার সময় একটি ফিল্ডে ফোকাস করা {/*focus-a-field-on-mount*/}
 
-In this example, the form renders a `<MyInput />` component.
+এই উদাহরণে, ফর্মটি একটি `<MyInput />` কম্পোনেন্ট রেন্ডার করে।
 
-Use the input's [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) method to make `MyInput` automatically focus when it appears on the screen. There is already a commented out implementation, but it doesn't quite work. Figure out why it doesn't work, and fix it. (If you're familiar with the `autoFocus` attribute, pretend that it does not exist: we are reimplementing the same functionality from scratch.)
+ইনপুটের [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus) মেথড ব্যবহার করে `MyInput` স্ক্রিনে দেখা যাওয়ার সাথে সাথে অটোম্যাটিকভাবে ফোকাস করান। ইতিমধ্যে একটি কমেন্ট আউট করা ইমপ্লেমেন্টেশন রয়েছে, কিন্তু এটি ঠিকভাবে কাজ করছে না। এটি কেন কাজ করছে না তা বের করুন এবং সমস্যাটি ঠিক করুন। (যদি আপনি `autoFocus` অ্যাট্রিবিউট সম্পর্কে জেনে থাকেন, তাহলে ধরে নিন যে এটির কোনো অস্তিত্ব নেইঃ আমরা একই ফাংশনালিটি পুনরায় ইমপ্লেমেন্ট করছি।)
 
 <Sandpack>
 
