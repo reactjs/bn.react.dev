@@ -1437,7 +1437,7 @@ body {
 
 #### একটি ইফেক্টের মধ্যে fetching ফিক্স করুন {/*fix-fetching-inside-an-effect*/}
 
-This component shows the biography for the selected person. It loads the biography by calling an asynchronous function `fetchBio(person)` on mount and whenever `person` changes. That asynchronous function returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which eventually resolves to a string. When fetching is done, it calls `setBio` to display that string under the select box.
+এই কম্পোনেন্টটি সিলেক্ট করা ব্যক্তির bio দেখায়। এটি মাউন্টের সময় এবং যখনই `person` পরিবর্তিত হয় তখন `fetchBio(person)` নামক একটি অ্যাসিঙ্ক্রোনাস ফাংশন কল করে bio লোড করে। সেই অ্যাসিঙ্ক্রোনাস ফাংশনটি একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) রিটার্ন করে যা শেষ পর্যন্ত একটি স্ট্রিং-এ resolve হয়। ফেচিং শেষ হলে, এটি `setBio` কল করে সেই স্ট্রিংটি সিলেক্ট বক্সের নিচে প্রদর্শন করে।
 
 <Sandpack>
 
