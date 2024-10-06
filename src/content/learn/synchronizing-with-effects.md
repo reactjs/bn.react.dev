@@ -1129,11 +1129,11 @@ body {
 
 </Solution>
 
-#### Focus a field conditionally {/*focus-a-field-conditionally*/}
+#### কন্ডিশনালি একটি ফিল্ডে ফোকাস করা {/*focus-a-field-conditionally*/}
 
-This form renders two `<MyInput />` components.
+এই ফর্মটি দুটি `<MyInput />` কম্পোনেন্ট রেন্ডার করে।
 
-Press "Show form" and notice that the second field automatically gets focused. This is because both of the `<MyInput />` components try to focus the field inside. When you call `focus()` for two input fields in a row, the last one always "wins".
+"Show form" চাপুন এবং লক্ষ্য করুন যে দ্বিতীয় ফিল্ডটি অটোম্যাটিকভাবে ফোকাস পাচ্ছে। এটা ঘটার কারণ উভয় `<MyInput />` কম্পোনেন্টই নিজেদের ফিল্ডে ফোকাস করার চেষ্টা করে। যখন আপনি পরপর দুটি ইনপুট ফিল্ডের জন্য `focus()` কল করেন, শেষেরটি সবসময় "জিতে" যায়।
 
 Let's say you want to focus the first field. The first `MyInput` component now receives a boolean `shouldFocus` prop set to `true`. Change the logic so that `focus()` is only called if the `shouldFocus` prop received by `MyInput` is `true`.
 
