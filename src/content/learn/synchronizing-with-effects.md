@@ -933,9 +933,9 @@ export default function ChatRoom({ roomId }) {
 
 রিয়েক্ট ৩য় রেন্ডারের `['travel']` এর সাথে ২য় রেন্ডারের `['general']` এর তুলনা করে। দেখা যাচ্ছে একটি dependency বদলে গেছেঃ `Object.is('travel', 'general')` এর ফলাফল `false` হয়। তাই এই ইফেক্টটি স্কিপ করা যাবেনা।
 
-**Before React can apply the Effect from the third render, it needs to clean up the last Effect that _did_ run.** The second render's Effect was skipped, so React needs to clean up the first render's Effect. If you scroll up to the first render, you'll see that its cleanup calls `disconnect()` on the connection that was created with `createConnection('general')`. This disconnects the app from the `'general'` chat room.
+**তৃতীয় রেন্ডারের ইফেক্ট প্রয়োগ করার আগে, রিয়েক্টকে সর্বশেষ যে ইফেক্ট _রান করেছিলো_ তা ক্লিন-আপ করতে হবে।** ২য় রেন্ডারের ইফেক্টটি স্কিপ করা হয়েছিলো, তাই রিয়েক্টকে প্রথম রেন্ডারের ইফেক্ট ক্লিন-আপ করতে হবে। আপনি যদি উপরে স্ক্রল করে ১ম রেন্ডারের ওখানে যান, দেখবেন যে এর ক্লিন-আপ `createConnection('general')` দিয়ে তৈরি করা কানেকশনের উপর `disconnect()` কল করে। এটি অ্যাপকে `'general'` চ্যাট রুম থেকে ডিসকানেক্ট করে দেয়।
 
-After that, React runs the third render's Effect. It connects to the `'travel'` chat room.
+এর পরে, রিয়েক্ট ৩য় রেন্ডারের ইফেক্ট রান করে এবং `'travel'` চ্যাট রুমের সাথে কানেক্ট করে।
 
 #### Unmount {/*unmount*/}
 
