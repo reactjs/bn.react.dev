@@ -951,8 +951,8 @@ When [Strict Mode](/reference/react/StrictMode) is on, React remounts every comp
 
 - ইফেক্ট নিজের রেন্ডারের কারণেই ঘটে, ইভেন্টের মতো নির্দিষ্ট কোনো ইন্টার‍্যাকশনের কারণে ঘটে না।
 - ইফেক্ট আপনাকে একটি কম্পোনেন্টের সাথে বাইরের কোনো সিস্টেমের (থার্ড-পার্টি API, নেটওয়ার্ক ইত্যাদি) সামঞ্জস্য তৈরি করতে দেয়।
-- By default, Effects run after every render (including the initial one).
-- React will skip the Effect if all of its dependencies have the same values as during the last render.
+- ডিফল্ট অবস্থায়, ইফেক্ট প্রত্যেক রেন্ডারের (প্রথমটা সহ) পরে রান করে।
+- যদি কোনো ইফেক্টের সকল dependecy সর্বশেষ রেন্ডারের অবিকল থাকে তাহলে রিয়েক্ট ইফেক্টটিকে স্কিপ করবে।
 - You can't "choose" your dependencies. They are determined by the code inside the Effect.
 - Empty dependency array (`[]`) corresponds to the component "mounting", i.e. being added to the screen.
 - In Strict Mode, React mounts components twice (in development only!) to stress-test your Effects.
