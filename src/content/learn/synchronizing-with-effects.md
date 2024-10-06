@@ -949,8 +949,8 @@ When [Strict Mode](/reference/react/StrictMode) is on, React remounts every comp
 
 <Recap>
 
-- Unlike events, Effects are caused by rendering itself rather than a particular interaction.
-- Effects let you synchronize a component with some external system (third-party API, network, etc).
+- ইফেক্ট নিজের রেন্ডারের কারণেই ঘটে, ইভেন্টের মতো নির্দিষ্ট কোনো ইন্টার‍্যাকশনের কারণে ঘটে না।
+- ইফেক্ট আপনাকে একটি কম্পোনেন্টের সাথে বাইরের কোনো সিস্টেমের (থার্ড-পার্টি API, নেটওয়ার্ক ইত্যাদি) সামঞ্জস্য তৈরি করতে দেয়।
 - By default, Effects run after every render (including the initial one).
 - React will skip the Effect if all of its dependencies have the same values as during the last render.
 - You can't "choose" your dependencies. They are determined by the code inside the Effect.
