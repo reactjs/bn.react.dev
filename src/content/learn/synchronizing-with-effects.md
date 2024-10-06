@@ -1431,7 +1431,7 @@ body {
 
 </Sandpack>
 
-In development, React will still remount your component once to verify that you've implemented cleanup well. So there will be a `setInterval` call, immediately followed by `clearInterval`, and `setInterval` again. In production, there will be only one `setInterval` call. The user-visible behavior in both cases is the same: the counter increments once per second.
+ডেভেলপমেন্টে, React এখনও আপনার কম্পোনেন্টটিকে একবার রিমাউন্ট করবে এটা যাচাই করতে যে আপনি ক্লিনআপ ভালভাবে ইমপ্লেমেন্ট করেছেন কিনা। তাই একটি `setInterval` কল হবে, তারপর সাথে সাথে `clearInterval`, এবং আবার `setInterval`। প্রোডাকশনে, কেবল একটি `setInterval` কল হবে। উভয় ক্ষেত্রেই ইউজারের-কাছে-দৃশ্যমান আচরণ একই থাকবেঃ কাউন্টার প্রতি সেকেন্ডে একবার বাড়বে।
 
 </Solution>
 
