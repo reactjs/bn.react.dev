@@ -881,18 +881,18 @@ export default function ChatRoom({ roomId }) {
 
 রিয়েক্ট এই ইফেক্টটি রান করে, যা `'general'` চ্যাট রুমের সাথে কানেক্ট করে।
 
-#### Re-render with same dependencies {/*re-render-with-same-dependencies*/}
+#### একই dependency নিয়ে রি-রেন্ডার {/*re-render-with-same-dependencies*/}
 
-Let's say `<ChatRoom roomId="general" />` re-renders. The JSX output is the same:
+ধরুন `<ChatRoom roomId="general" />` রি-রেন্ডার করলো। JSX আউটপুট সেইম-ই আছেঃ
 
 ```js
   // JSX for the second render (roomId = "general")
   return <h1>Welcome to general!</h1>;
 ```
 
-React sees that the rendering output has not changed, so it doesn't update the DOM.
+রিয়েক্ট দেখে যে রেন্ডারিং আউটপুট একই আছে, তাই সে আর DOM আপডেট করে না।
 
-The Effect from the second render looks like this:
+দ্বিতীয় রেন্ডারের ইফেক্টটি দেখতে এমনঃ
 
 ```js
   // Effect for the second render (roomId = "general")
@@ -905,7 +905,7 @@ The Effect from the second render looks like this:
   ['general']
 ```
 
-React compares `['general']` from the second render with `['general']` from the first render. **Because all dependencies are the same, React *ignores* the Effect from the second render.** It never gets called.
+রিয়েক্ট ২য় রেন্ডারের `['general']` এর সাথে ১ম রেন্ডারের `['general']` তুলনা করে। **যেহেতু সব dependecy একই আছে, তাই রিয়েক্ট ২য় রেন্ডারের ইফেক্টটিকে *ইগনোর* করে।** সেটিকে কখনোই কল করা হয়না।
 
 #### Re-render with different dependencies {/*re-render-with-different-dependencies*/}
 
