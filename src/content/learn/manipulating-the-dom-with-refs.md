@@ -329,19 +329,11 @@ li {
   ref={node => {
     const map = getMap();
     if (node) {
-<<<<<<< HEAD
-      // ম্যাপে যোগ করুন
-      map.set(cat.id, node);
-    } else {
-      // ম্যাপ থেকে সরিয়ে ফেলুন
-      map.delete(cat.id);
-=======
       // Add to the Map
       map.set(cat, node);
     } else {
       // Remove from the Map
       map.delete(cat);
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
     }
   }}
 >
