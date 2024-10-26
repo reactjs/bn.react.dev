@@ -174,7 +174,6 @@ export function Page({
               )}>
               {!isHomePage && (
                 <div className="w-full px-5 pt-10 mx-auto sm:px-12 md:px-12 md:pt-12 lg:pt-10">
-<<<<<<< HEAD
                   {
                     <hr className="mx-auto max-w-7xl border-border dark:border-border-dark" />
                   }
@@ -202,9 +201,6 @@ export function Page({
                       <hr className="mx-auto max-w-7xl border-border dark:border-border-dark" />
                     </>
                   )}
-=======
-                  <hr className="mx-auto max-w-7xl border-border dark:border-border-dark" />
->>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
                 </div>
               )}
               <div
