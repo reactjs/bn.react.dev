@@ -1,38 +1,39 @@
 ---
-title: 'You Might Not Need an Effect'
+title: 'আপনার সম্ভবত Effect প্রয়োজন নাও হতে পারে'
 ---
 
 <Intro>
 
-Effects are an escape hatch from the React paradigm. They let you "step outside" of React and synchronize your components with some external system like a non-React widget, network, or the browser DOM. If there is no external system involved (for example, if you want to update a component's state when some props or state change), you shouldn't need an Effect. Removing unnecessary Effects will make your code easier to follow, faster to run, and less error-prone.
+এফেক্ট হল রিয়্যাক্ট প্যারাডাইম থেকে বেরিয়ে আসার একটি মাধ্যম। এগুলি আপনাকে রিয়্যাক্টের বাইরে গিয়ে কিছু বাহ্যিক সিস্টেম যেমন কোনো নন-রিয়্যাক্ট উইজেট, নেটওয়ার্ক বা ব্রাউজারের DOM-এর সাথে আপনার কম্পোনেন্টগুলোকে সিঙ্ক্রোনাইজ করতে দেয়। যদি কোনো বাহ্যিক সিস্টেমের প্রয়োজন না থাকে (যেমন, কিছু প্রপস বা স্টেট পরিবর্তিত হলে কম্পোনেন্টের স্টেট আপডেট করতে চান), তাহলে ইফেক্ট প্রয়োজন হবে না। অপ্রয়োজনীয় ইফেক্ট অপসারণ করলে আপনার কোড অনুসরণ করা সহজ হবে, দ্রুত চলবে এবং কম ত্রুটি প্রবণ হবে।
 
 </Intro>
 
 <YouWillLearn>
 
-* Why and how to remove unnecessary Effects from your components
-* How to cache expensive computations without Effects
-* How to reset and adjust component state without Effects
-* How to share logic between event handlers
-* Which logic should be moved to event handlers
-* How to notify parent components about changes
+* কেন এবং কীভাবে আপনার কম্পোনেন্ট থেকে অপ্রয়োজনীয় ইফেক্ট থেকে অপসারণ করবেন
+* ইফেক্ট ছাড়াই ভারি কম্পিউটেশন কীভাবে ক্যাশ করবেন
+* ইফেক্ট ছাড়াই কীভাবে কম্পোনেন্টের স্টেট রিসেট এবং সামঞ্জস্য করবেন
+* কীভাবে ইভেন্ট হ্যান্ডলারের মধ্যে লজিক ভাগ করবেন
+* কোন লজিক ইভেন্ট হ্যান্ডলারে স্থানান্তর করা উচিত
+* কীভাবে পরিবর্তন সম্পর্কে প্যারেন্ট কম্পোনেন্টকে জানাবেন
 
 </YouWillLearn>
 
-## How to remove unnecessary Effects {/*how-to-remove-unnecessary-effects*/}
+## অপ্রয়োজনীয় ইফেক্ট কীভাবে অপসারণ করবেন {/*how-to-remove-unnecessary-effects*/}
 
-There are two common cases in which you don't need Effects:
+এ দুটি সাধারণ ক্ষেত্রে ইফেক্টের প্রয়োজন হয় না:
 
-* **You don't need Effects to transform data for rendering.** For example, let's say you want to filter a list before displaying it. You might feel tempted to write an Effect that updates a state variable when the list changes. However, this is inefficient. When you update the state, React will first call your component functions to calculate what should be on the screen. Then React will ["commit"](/learn/render-and-commit) these changes to the DOM, updating the screen. Then React will run your Effects. If your Effect *also* immediately updates the state, this restarts the whole process from scratch! To avoid the unnecessary render passes, transform all the data at the top level of your components. That code will automatically re-run whenever your props or state change.
-* **You don't need Effects to handle user events.** For example, let's say you want to send an `/api/buy` POST request and show a notification when the user buys a product. In the Buy button click event handler, you know exactly what happened. By the time an Effect runs, you don't know *what* the user did (for example, which button was clicked). This is why you'll usually handle user events in the corresponding event handlers.
+* **রেন্ডার করার জন্য ডেটা ট্রান্সফার করতে ইফেক্টের প্রয়োজন নেই।** ধরুন, আপনি একটি তালিকা ফিল্টার করতে চান প্রদর্শনের আগে। এখানে তালিকা পরিবর্তিত হলে ইফেক্ট লিখে একটি স্টেট ভেরিয়েবল আপডেট করার চিন্তা আসতে পারে। তবে এটি অকার্যকর। স্টেট আপডেট হলে, React প্রথমে কম্পোনেন্ট ফাংশনগুলোকে কল করে ঠিক করে কী স্ক্রিনে দেখানো হবে। এরপর React সেই পরিবর্তনগুলো DOM-এ ["কমিট"](/learn/render-and-commit) করে স্ক্রিন আপডেট করে। তারপর React ইফেক্টগুলো চালায়। যদি ইফেক্ট তৎক্ষণাৎ স্টেট আপডেট করে, তাহলে পুরো প্রক্রিয়া আবার শুরু হবে! এই অপ্রয়োজনীয় রেন্ডার পাস এড়াতে, সব ডেটা কম্পোনেন্টের শীর্ষ স্তরে রূপান্তর করুন। আপনার প্রপস বা স্টেট পরিবর্তিত হলে এই কোড স্বয়ংক্রিয়ভাবে পুনরায় চলবে।
 
-You *do* need Effects to [synchronize](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) with external systems. For example, you can write an Effect that keeps a jQuery widget synchronized with the React state. You can also fetch data with Effects: for example, you can synchronize the search results with the current search query. Keep in mind that modern [frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) provide more efficient built-in data fetching mechanisms than writing Effects directly in your components.
+* **ইউজার ইভেন্ট হ্যান্ডল করতে ইফেক্টের প্রয়োজন নেই।** উদাহরণস্বরূপ, আপনি চাইছেন যে ইউজার কোনো পণ্য কিনলে একটি `/api/buy` POST রিকোয়েস্ট পাঠানো হবে এবং একটি নোটিফিকেশন দেখানো হবে। Buy বোতামের ক্লিক ইভেন্ট হ্যান্ডলারে, আপনি জানেন কী ঘটেছে। ইফেক্ট চালানোর সময়, আপনি জানেন না *ঠিক কী* ইউজার করেছেন (যেমন, কোন বোতামটি ক্লিক হয়েছে)। এ কারণেই সাধারণত ইউজার ইভেন্টগুলো সংশ্লিষ্ট ইভেন্ট হ্যান্ডলারে হ্যান্ডল করা হয়।
 
-To help you gain the right intuition, let's look at some common concrete examples!
+আপনাকে বাহ্যিক সিস্টেমের সাথে [সিঙ্ক্রোনাইজ](/learn/synchronizing-with-effects#what-are-effects-and-how-are-they-different-from-events) করতে ইফেক্টের প্রয়োজন। উদাহরণস্বরূপ, আপনি একটি ইফেক্ট লিখে একটি jQuery উইজেটকে React স্টেটের সাথে সিঙ্ক্রোনাইজ রাখতে পারেন। এছাড়াও, ইফেক্ট ব্যবহার করে ডেটা ফেচ করা যায়: উদাহরণস্বরূপ, বর্তমান সার্চ কুয়েরির সাথে সার্চ রেজাল্টকে সিঙ্ক্রোনাইজ করতে পারেন। মনে রাখবেন, আধুনিক [ফ্রেমওয়ার্কগুলো](/learn/start-a-new-react-project#production-grade-react-frameworks) সরাসরি কম্পোনেন্টে ইফেক্ট লেখার চেয়ে আরও এফিশিয়েন্ট বিল্ট-ইন ডেটা ফেচিং পদ্ধতি প্রদান করে।
 
-### Updating state based on props or state {/*updating-state-based-on-props-or-state*/}
+সঠিক ধারণা গড়ে তুলতে, আসুন কিছু সাধারণ উদাহরণ দেখি!
 
-Suppose you have a component with two state variables: `firstName` and `lastName`. You want to calculate a `fullName` from them by concatenating them. Moreover, you'd like `fullName` to update whenever `firstName` or `lastName` change. Your first instinct might be to add a `fullName` state variable and update it in an Effect:
+### প্রপস বা স্টেটের উপর ভিত্তি করে স্টেট আপডেট করা {/*updating-state-based-on-props-or-state*/}
+
+ধরুন, আপনার একটি কম্পোনেন্টে দুটি স্টেট ভেরিয়েবল রয়েছে: `firstName` এবং `lastName`। আপনি এগুলো যোগ করে একটি `fullName` তৈরি করতে চান। এর পাশাপাশি, `firstName` বা `lastName` পরিবর্তিত হলে `fullName` আপডেট হওয়া উচিত। আপনার প্রথম ধারণা হতে পারে একটি `fullName` স্টেট ভেরিয়েবল যোগ করা এবং একটি ইফেক্টে এটি আপডেট করা:
 
 ```js {5-9}
 function Form() {
@@ -48,7 +49,7 @@ function Form() {
 }
 ```
 
-This is more complicated than necessary. It is inefficient too: it does an entire render pass with a stale value for `fullName`, then immediately re-renders with the updated value. Remove the state variable and the Effect:
+এটি প্রয়োজনের তুলনায় বেশি জটিল এবং অকার্যকর: এটি `fullName` এর পুরনো মান দিয়ে একটি সম্পূর্ণ রেন্ডার পাস করে, তারপর আপডেট হওয়া মান নিয়ে পুনরায় রেন্ডার করে। স্টেট ভেরিয়েবল এবং ইফেক্টটি সরিয়ে দিন:
 
 ```js {4-5}
 function Form() {
@@ -60,11 +61,11 @@ function Form() {
 }
 ```
 
-**When something can be calculated from the existing props or state, [don't put it in state.](/learn/choosing-the-state-structure#avoid-redundant-state) Instead, calculate it during rendering.** This makes your code faster (you avoid the extra "cascading" updates), simpler (you remove some code), and less error-prone (you avoid bugs caused by different state variables getting out of sync with each other). If this approach feels new to you, [Thinking in React](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) explains what should go into state.
+**যখন কিছু বিদ্যমান প্রপস বা স্টেট থেকে ক্যাল্কুলেট করা যায়, তখন [স্টেটে এটি রাখবেন না.](/learn/choosing-the-state-structure#avoid-redundant-state) পরিবর্তে, এটি রেন্ডার করার সময় ক্যাল্কুলেট করুন।** এর ফলে আপনার কোড দ্রুততর হয় (আপনি অতিরিক্ত "ক্যাসকেডিং" আপডেট এড়িয়ে যান), সহজতর হয় (কিছু কোড অপসারণ করেন), এবং কম ত্রুটি প্রবণ হয় (ভিন্ন স্টেট ভেরিয়েবলের সাথে সিঙ্ক্রোনাইজেশন সমস্যা এড়ান)। যদি এই পদ্ধতি আপনার জন্য নতুন মনে হয়, তাহলে [Thinking in React](/learn/thinking-in-react#step-3-find-the-minimal-but-complete-representation-of-ui-state) ব্যাখ্যা করে কী কী স্টেটে থাকা উচিত।
 
-### Caching expensive calculations {/*caching-expensive-calculations*/}
+### ভারি ক্যাল্কুলেশনগুলি ক্যাশ করা {/*caching-expensive-calculations*/}
 
-This component computes `visibleTodos` by taking the `todos` it receives by props and filtering them according to the `filter` prop. You might feel tempted to store the result in state and update it from an Effect:
+এই কম্পোনেন্টটি `todos` প্রপস থেকে পাওয়া টাস্কগুলোকে নিয়ে `visibleTodos` গণনা করে এবং সেগুলোকে `filter` প্রপস অনুযায়ী ফিল্টার করে। আপনি মনে করতে পারেন যে ফলাফলটি স্টেটে সংরক্ষণ করা উচিত এবং একটি ইফেক্ট থেকে এটি আপডেট করা উচিত:
 
 ```js {4-8}
 function TodoList({ todos, filter }) {
@@ -80,7 +81,7 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Like in the earlier example, this is both unnecessary and inefficient. First, remove the state and the Effect:
+পূর্ববর্তী উদাহরণের মতো, এটি অপ্রয়োজনীয় এবং অকার্যকর। প্রথমে, স্টেট এবং ইফেক্টটি অপসারণ করুন:
 
 ```js {3-4}
 function TodoList({ todos, filter }) {
@@ -91,9 +92,9 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Usually, this code is fine! But maybe `getFilteredTodos()` is slow or you have a lot of `todos`. In that case you don't want to recalculate `getFilteredTodos()` if some unrelated state variable like `newTodo` has changed.
+সাধারণত, এই কোডটি ঠিক আছে! তবে হয়তো `getFilteredTodos()` ধীর গতির অথবা আপনার কাছে অনেক `todos` রয়েছে। এ ক্ষেত্রে, আপনি চান না যে কিছু অসম্পর্কিত স্টেট ভেরিয়েবল যেমন `newTodo` পরিবর্তিত হলে `getFilteredTodos()` পুনরায় গণনা করা হোক।
 
-You can cache (or ["memoize"](https://en.wikipedia.org/wiki/Memoization)) an expensive calculation by wrapping it in a [`useMemo`](/reference/react/useMemo) Hook:
+আপনি একটি ভারি ক্যাল্কুলেশন ক্যাশ (অথবা ["মেমোইজ"](https://en.wikipedia.org/wiki/Memoization)) করতে পারেন এটি [`useMemo`](/reference/react/useMemo) হুকের মধ্যে স্থাপন করে:
 
 ```js {5-8}
 import { useMemo, useState } from 'react';
@@ -108,7 +109,7 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-Or, written as a single line:
+অথবা, এক লাইনে লেখা:
 
 ```js {5-6}
 import { useMemo, useState } from 'react';
@@ -121,15 +122,15 @@ function TodoList({ todos, filter }) {
 }
 ```
 
-**This tells React that you don't want the inner function to re-run unless either `todos` or `filter` have changed.** React will remember the return value of `getFilteredTodos()` during the initial render. During the next renders, it will check if `todos` or `filter` are different. If they're the same as last time, `useMemo` will return the last result it has stored. But if they are different, React will call the inner function again (and store its result).
+**এটি React-কে জানায় যে আপনি চান না যে অভ্যন্তরীণ ফাংশনটি পুনরায় চলুক যতক্ষণ না `todos` অথবা `filter` পরিবর্তিত হয়।** React প্রথম রেন্ডারের সময় `getFilteredTodos()` এর রিটার্ন ভ্যালু মনে রাখবে। পরবর্তী রেন্ডারগুলিতে, এটি চেক করবে যে `todos` অথবা `filter` ভিন্ন কিনা। যদি সেগুলো আগের মতো একই থাকে, তবে `useMemo` সর্বশেষ ফলাফলটি ফিরিয়ে দেবে যা এটি সংরক্ষণ করেছে। কিন্তু যদি সেগুলো ভিন্ন হয়, তবে React আবার অভ্যন্তরীণ ফাংশনটিকে কল করবে (এবং এর ফলাফল সংরক্ষণ করবে)।
 
-The function you wrap in [`useMemo`](/reference/react/useMemo) runs during rendering, so this only works for [pure calculations.](/learn/keeping-components-pure)
+যে ফাংশনটি আপনি [`useMemo`](/reference/react/useMemo) এর মধ্যে রাখেন তা রেন্ডার করার সময় চলে, তাই এটি শুধুমাত্র [শুদ্ধ ক্যাল্কুলেশনের জন্য](/learn/keeping-components-pure) কাজ করে।
 
 <DeepDive>
 
-#### How to tell if a calculation is expensive? {/*how-to-tell-if-a-calculation-is-expensive*/}
+#### কীভাবে জানা যাবে যে ক্যাল্কুলেশনটি ভারি কিনা? {/*how-to-tell-if-a-calculation-is-expensive*/}
 
-In general, unless you're creating or looping over thousands of objects, it's probably not expensive. If you want to get more confidence, you can add a console log to measure the time spent in a piece of code:
+সাধারণভাবে, যতক্ষন না আপনি হাজার হাজার অবজেক্ট তৈরি করছেন বা লুপ করছেন, এটি সম্ভবত ভারি নয়। যদি আপনি আরও নিশ্চিত হতে চান, তাহলে একটি কনসোল লগ যোগ করতে পারেন কোডের একটি অংশে সময় পরিমাপ করতে:
 
 ```js {1,3}
 console.time('filter array');
@@ -137,7 +138,7 @@ const visibleTodos = getFilteredTodos(todos, filter);
 console.timeEnd('filter array');
 ```
 
-Perform the interaction you're measuring (for example, typing into the input). You will then see logs like `filter array: 0.15ms` in your console. If the overall logged time adds up to a significant amount (say, `1ms` or more), it might make sense to memoize that calculation. As an experiment, you can then wrap the calculation in `useMemo` to verify whether the total logged time has decreased for that interaction or not:
+আপনার পরিমাপ করা ইন্টারঅ্যাকশনটি সম্পাদন করুন(যেমন, ইনপুটে টাইপ করা)। এরপর কনসোলে `filter array: 0.15ms` এর মতো লগ দেখতে পাবেন। যদি সামগ্রিক লগ করা সময় একটি গুরুত্বপূর্ণ পরিমাণে (যেমন, `1ms` বা তার বেশি) হয়, তাহলে সেই ক্যাল্কুলেশটি মেমোইজ করা অর্থপূর্ণ হতে পারে। পরীক্ষা হিসেবে, আপনি তারপর ক্যাল্কুলেশটি `useMemo` এর মধ্যে আবৃত করতে পারেন এবং যাচাই করতে পারেন যে সেই ইন্টারঅ্যাকশনের জন্য মোট লগ করা সময় কমেছে কিনা:
 
 ```js
 console.time('filter array');
@@ -146,18 +147,17 @@ const visibleTodos = useMemo(() => {
 }, [todos, filter]);
 console.timeEnd('filter array');
 ```
+`useMemo` *প্রথম* রেন্ডারটি দ্রুত করবে না। এটি শুধুমাত্র আপডেটে অপ্রয়োজনীয় কাজ এড়াতে সাহায্য করে।
 
-`useMemo` won't make the *first* render faster. It only helps you skip unnecessary work on updates.
+মনে রাখবেন, আপনার মেশিন হয়তো আপনার ব্যবহারকারীদের তুলনায় দ্রুত, তাই পারফরম্যান্স পরীক্ষার জন্য কৃত্রিমভাবে ধীরগতিতে পরীক্ষা করা ভালো। উদাহরণস্বরূপ, Chrome এ একটি [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) অপশন প্রদান করে।
 
-Keep in mind that your machine is probably faster than your users' so it's a good idea to test the performance with an artificial slowdown. For example, Chrome offers a [CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling) option for this.
-
-Also note that measuring performance in development will not give you the most accurate results. (For example, when [Strict Mode](/reference/react/StrictMode) is on, you will see each component render twice rather than once.) To get the most accurate timings, build your app for production and test it on a device like your users have.
+এছাড়াও মনে রাখবেন যে ডেভেলপমেন্টে পারফরম্যান্স পরিমাপ করা সবচেয়ে সঠিক ফলাফল দেবে না। (যেমন, [Strict Mode](/reference/react/StrictMode) চালু থাকলে আপনি প্রতিটি কম্পোনেন্টের রেন্ডার একবারের পরিবর্তে দুইবার দেখবেন।) সবচেয়ে সঠিক টাইমিং পেতে আপনার অ্যাপটি প্রোডাকশনের জন্য তৈরি করুন এবং এটি ব্যবহারকারীদের মতো ডিভাইসে পরীক্ষা করুন।
 
 </DeepDive>
 
-### Resetting all state when a prop changes {/*resetting-all-state-when-a-prop-changes*/}
+### প্রপ পরিবর্তিত হলে সমস্ত স্টেট রিসেট করা {/*resetting-all-state-when-a-prop-changes*/}
 
-This `ProfilePage` component receives a `userId` prop. The page contains a comment input, and you use a `comment` state variable to hold its value. One day, you notice a problem: when you navigate from one profile to another, the `comment` state does not get reset. As a result, it's easy to accidentally post a comment on a wrong user's profile. To fix the issue, you want to clear out the `comment` state variable whenever the `userId` changes:
+এই `ProfilePage` কম্পোনেন্ট একটি `userId` প্রপ গ্রহণ করে। পেজটিতে একটি মন্তব্য ইনপুট রয়েছে, এবং আপনি এর মান সংরক্ষণের জন্য একটি `comment` স্টেট ভেরিয়েবল ব্যবহার করেন। একদিন, আপনি একটি সমস্যা লক্ষ্য করেন: যখন আপনি এক প্রোফাইল থেকে অন্য প্রোফাইলে যান, `comment` স্টেটটি রিসেট হয় না। ফলে, ভুল করে অন্য ব্যবহারকারীর প্রোফাইলে মন্তব্য পোস্ট করা সহজ হয়ে যায়। এই সমস্যাটি সমাধান করতে, আপনি চান যে `userId` পরিবর্তিত হলে `comment` স্টেট ভেরিয়েবলটি পরিষ্কার হয়ে যাক।
 
 ```js {4-7}
 export default function ProfilePage({ userId }) {
@@ -171,9 +171,9 @@ export default function ProfilePage({ userId }) {
 }
 ```
 
-This is inefficient because `ProfilePage` and its children will first render with the stale value, and then render again. It is also complicated because you'd need to do this in *every* component that has some state inside `ProfilePage`. For example, if the comment UI is nested, you'd want to clear out nested comment state too.
+এটি অকার্যকর কারণ `ProfilePage` এবং এর চাইল্ডরা প্রথমে পুরনো মান দিয়ে রেন্ডার হবে, এবং তারপর আবার রেন্ডার হবে। এটি জটিলও কারণ আপনাকে `ProfilePage`-এর ভিতরে থাকা প্রতিটি কম্পোনেন্টের স্টেটেও একই কাজ করতে হবে। উদাহরণস্বরূপ, যদি মন্তব্যের UIটি নেস্টেড থাকে, তবে আপনাকে নেস্টেড মন্তব্যের স্টেটও পরিষ্কার করতে হবে।
 
-Instead, you can tell React that each user's profile is conceptually a _different_ profile by giving it an explicit key. Split your component in two and pass a `key` attribute from the outer component to the inner one:
+এর পরিবর্তে, আপনি React-কে জানাতে পারেন যে প্রতিটি ব্যবহারকারীর প্রোফাইল ধারণাগতভাবে একটি _ভিন্ন_ প্রোফাইল, `key` প্রদান করে। আপনার কম্পোনেন্টটি দুটি ভাগে ভাগ করুন এবং বাইরের কম্পোনেন্ট থেকে ভিতরের কম্পোনেন্টে একটি `key` অ্যাট্রিবিউট পাস করুন:
 
 ```js {5,11-12}
 export default function ProfilePage({ userId }) {
@@ -192,15 +192,15 @@ function Profile({ userId }) {
 }
 ```
 
-Normally, React preserves the state when the same component is rendered in the same spot. **By passing `userId` as a `key` to the `Profile` component, you're asking React to treat two `Profile` components with different `userId` as two different components that should not share any state.** Whenever the key (which you've set to `userId`) changes, React will recreate the DOM and [reset the state](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key) of the `Profile` component and all of its children. Now the `comment` field will clear out automatically when navigating between profiles.
+সাধারণত, একই স্থানে একই কম্পোনেন্ট রেন্ডার হলে React স্টেট সংরক্ষণ করে। **`Profile` কম্পোনেন্টে `userId`-কে `key` হিসেবে পাস করলে, আপনি React-কে বলছেন যে বিভিন্ন `userId` সহ দুটি `Profile` কম্পোনেন্টকে আলাদা কম্পোনেন্ট হিসেবে বিবেচনা করতে, যেগুলোর স্টেট শেয়ার হওয়া উচিত নয়।** যখনই `key` (যেটি আপনি `userId` হিসেবে সেট করেছেন) পরিবর্তিত হয়, React `Profile` কম্পোনেন্ট এবং এর সব চাইল্ডের DOM পুনরায় তৈরি করবে এবং [স্টেট রিসেট করবে](/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key)। এখন প্রোফাইলের মধ্যে নেভিগেট করার সময় `comment` ফিল্ড স্বয়ংক্রিয়ভাবে সাফ হয়ে যাবে।
 
-Note that in this example, only the outer `ProfilePage` component is exported and visible to other files in the project. Components rendering `ProfilePage` don't need to pass the key to it: they pass `userId` as a regular prop. The fact `ProfilePage` passes it as a `key` to the inner `Profile` component is an implementation detail.
+এই উদাহরণে, শুধুমাত্র বাইরের `ProfilePage` কম্পোনেন্টটি প্রোজেক্টের অন্যান্য ফাইলের জন্য এক্সপোর্ট করা হয়েছে এবং দৃশ্যমান। `ProfilePage`-কে রেন্ডার করা কম্পোনেন্টগুলোর `key` পাস করার দরকার নেই: তারা `userId`-কে একটি সাধারণ প্রপ হিসেবে পাস করে। `ProfilePage` এটিকে `key` হিসেবে ভিতরের `Profile` কম্পোনেন্টে পাস করে, যা একটি ইমপ্লিমেন্টেশন ডিটেইল।
 
-### Adjusting some state when a prop changes {/*adjusting-some-state-when-a-prop-changes*/}
+### প্রপ পরিবর্তিত হলে কিছু স্টেট সামঞ্জস্য করা {/*adjusting-some-state-when-a-prop-changes*/}
 
-Sometimes, you might want to reset or adjust a part of the state on a prop change, but not all of it.
+কখনও কখনও, প্রপ পরিবর্তিত হলে আপনি স্টেটের একটি অংশ রিসেট বা সামঞ্জস্য করতে চাইতে পারেন, তবে পুরোটা নয়।
 
-This `List` component receives a list of `items` as a prop, and maintains the selected item in the `selection` state variable. You want to reset the `selection` to `null` whenever the `items` prop receives a different array:
+এই `List` কম্পোনেন্টটি একটি `items` এর তালিকা প্রপ হিসেবে গ্রহণ করে এবং নির্বাচিত আইটেমটি `selection` স্টেট ভেরিয়েবলে রাখে। আপনি চান যখনই `items` প্রপ একটি ভিন্ন অ্যারে গ্রহণ করবে, `selection` কে `null` এ রিসেট করতে:
 
 ```js {5-8}
 function List({ items }) {
@@ -215,9 +215,9 @@ function List({ items }) {
 }
 ```
 
-This, too, is not ideal. Every time the `items` change, the `List` and its child components will render with a stale `selection` value at first. Then React will update the DOM and run the Effects. Finally, the `setSelection(null)` call will cause another re-render of the `List` and its child components, restarting this whole process again.
+এটিও আদর্শ নয়। প্রতি বার `items` পরিবর্তিত হলে, প্রথমে `List` এবং এর চাইল্ড কম্পোনেন্টগুলো পুরনো `selection` মান নিয়ে রেন্ডার হবে। তারপর React DOM আপডেট করবে এবং Effects চালাবে। শেষে `setSelection(null)` কলটি `List` এবং এর চাইল্ড কম্পোনেন্টগুলোকে পুনরায় রেন্ডার করবে, যা পুরো প্রক্রিয়াটি আবার শুরু করবে।
 
-Start by deleting the Effect. Instead, adjust the state directly during rendering:
+Effect মুছে ফেলার মাধ্যমে শুরু করুন। এর পরিবর্তে, সরাসরি রেন্ডারিংয়ের সময় স্টেটটি সামঞ্জস্য করুন।
 
 ```js {5-11}
 function List({ items }) {
@@ -234,11 +234,11 @@ function List({ items }) {
 }
 ```
 
-[Storing information from previous renders](/reference/react/useState#storing-information-from-previous-renders) like this can be hard to understand, but it’s better than updating the same state in an Effect. In the above example, `setSelection` is called directly during a render. React will re-render the `List` *immediately* after it exits with a `return` statement. React has not rendered the `List` children or updated the DOM yet, so this lets the `List` children skip rendering the stale `selection` value.
+[আগের রেন্ডার থেকে তথ্য সংরক্ষণ করা](/reference/react/useState#storing-information-from-previous-renders) এভাবে বোঝা কঠিন হতে পারে, কিন্তু এটি একই স্টেটকে একটি Effect-এ আপডেট করার চেয়ে ভালো। উপরোক্ত উদাহরণে, `setSelection` সরাসরি রেন্ডার চলাকালীন কল করা হয়েছে। React `return` স্টেটমেন্টের পরে `List`-কে *তাৎক্ষণিকভাবে* পুনরায় রেন্ডার করবে। React এখনও `List`-এর চাইল্ডদের রেন্ডার করেনি বা DOM আপডেট করেনি, তাই এটি `List`-এর চাইল্ডদের পুরনো `selection` মান রেন্ডার করা এড়াতে সাহায্য করে।
 
-When you update a component during rendering, React throws away the returned JSX and immediately retries rendering. To avoid very slow cascading retries, React only lets you update the *same* component's state during a render. If you update another component's state during a render, you'll see an error. A condition like `items !== prevItems` is necessary to avoid loops. You may adjust state like this, but any other side effects (like changing the DOM or setting timeouts) should stay in event handlers or Effects to [keep components pure.](/learn/keeping-components-pure)
+যখন আপনি একটি রেন্ডারের সময় কম্পোনেন্ট আপডেট করেন, React রিটার্ন করা JSX ফেলে দেয় এবং তাৎক্ষণিকভাবে পুনরায় রেন্ডার করার চেষ্টা করে। খুব ধীর গতির পুনরাবৃত্তি এড়াতে, React কেবল রেন্ডারের সময় *একই* কম্পোনেন্টের স্টেট আপডেট করার অনুমতি দেয়। যদি আপনি রেন্ডারের সময় অন্য কোনো কম্পোনেন্টের স্টেট আপডেট করেন, তাহলে একটি ত্রুটি দেখতে পাবেন। একটি শর্ত যেমন `items !== prevItems` লুপ এড়ানোর জন্য প্রয়োজনীয়। আপনি এভাবে স্টেট সামঞ্জস্য করতে পারেন, তবে DOM পরিবর্তন করা বা টাইমআউট সেট করার মতো যেকোনো সাইড ইফেক্ট ইভেন্ট হ্যান্ডলার বা Effect-এ থাকা উচিত [কম্পোনেন্টকে পিওর রাখার জন্য।](/learn/keeping-components-pure)
 
-**Although this pattern is more efficient than an Effect, most components shouldn't need it either.** No matter how you do it, adjusting state based on props or other state makes your data flow more difficult to understand and debug. Always check whether you can [reset all state with a key](#resetting-all-state-when-a-prop-changes) or [calculate everything during rendering](#updating-state-based-on-props-or-state) instead. For example, instead of storing (and resetting) the selected *item*, you can store the selected *item ID:*
+**যদিও এই প্যাটার্নটি একটি Effect-এর চেয়ে আরও কার্যকর, বেশিরভাগ কম্পোনেন্টের এটিও প্রয়োজন হয় না।** যেভাবেই করুন না কেন, প্রপ বা অন্য কোনো স্টেটের ভিত্তিতে স্টেট সামঞ্জস্য করা আপনার ডেটা ফ্লো বুঝতে এবং ডিবাগ করতে আরও কঠিন করে তোলে। সর্বদা পরীক্ষা করুন যে আপনি [একটি key দিয়ে সমস্ত স্টেট রিসেট করতে পারেন কি না](#resetting-all-state-when-a-prop-changes) বা [রেন্ডারিংয়ের সময় সবকিছু গণনা করতে পারেন কি না](#updating-state-based-on-props-or-state)। উদাহরণস্বরূপ, নির্বাচিত *item* সংরক্ষণ এবং রিসেট করার পরিবর্তে আপনি নির্বাচিত *item ID* সংরক্ষণ করতে পারেন:
 
 ```js {3-5}
 function List({ items }) {
@@ -250,11 +250,11 @@ function List({ items }) {
 }
 ```
 
-Now there is no need to "adjust" the state at all. If the item with the selected ID is in the list, it remains selected. If it's not, the `selection` calculated during rendering will be `null` because no matching item was found. This behavior is different, but arguably better because most changes to `items` preserve the selection.
+এখন স্টেট "সামঞ্জস্য" করার প্রয়োজন নেই। নির্বাচিত ID সহ আইটেমটি তালিকায় থাকলে, এটি নির্বাচিত থাকবে। যদি এটি না থাকে, তবে রেন্ডারিংয়ের সময় গণনা করা `selection` হবে `null` কারণ কোনো মেলানো আইটেম পাওয়া যায়নি। এই আচরণটি ভিন্ন, কিন্তু এটি যুক্তিসঙ্গতভাবে ভালো, কারণ `items` এর বেশিরভাগ পরিবর্তন সিলেকশকে সংরক্ষণ করে।
 
-### Sharing logic between event handlers {/*sharing-logic-between-event-handlers*/}
+### ইভেন্ট হ্যান্ডলারগুলির মধ্যে লজিক শেয়ার করা {/*sharing-logic-between-event-handlers*/}
 
-Let's say you have a product page with two buttons (Buy and Checkout) that both let you buy that product. You want to show a notification whenever the user puts the product in the cart. Calling `showNotification()` in both buttons' click handlers feels repetitive so you might be tempted to place this logic in an Effect:
+ধরি, আপনার একটি পণ্য পৃষ্ঠা আছে যার দুইটি বোতাম (Buy এবং Checkout) আছে, যেগুলো উভয়েই সেই পণ্যটি কেনার সুযোগ দেয়। আপনি চান যে ব্যবহারকারী পণ্যটি কার্টে রাখলেই একটি নোটিফিকেশন দেখানো হোক। উভয় বোতামের ক্লিক হ্যান্ডলারগুলিতে `showNotification()` কল করা পুনরাবৃত্তির মতো মনে হতে পারে, তাই আপনি এই লজিকটি একটি Effect-এ রাখতে লোভিত হতে পারেন:
 
 ```js {2-7}
 function ProductPage({ product, addToCart }) {
@@ -277,9 +277,9 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This Effect is unnecessary. It will also most likely cause bugs. For example, let's say that your app "remembers" the shopping cart between the page reloads. If you add a product to the cart once and refresh the page, the notification will appear again. It will keep appearing every time you refresh that product's page. This is because `product.isInCart` will already be `true` on the page load, so the Effect above will call `showNotification()`.
+এই Effect অপ্রয়োজনীয়। এটি সম্ভবত বাগও সৃষ্টি করবে। উদাহরণস্বরূপ, ধরুন আপনার অ্যাপটি পৃষ্ঠা রিফ্রেশের মধ্যে শপিং কার্টটি "মনে রাখে"। যদি আপনি একবার একটি পণ্য কার্টে যোগ করেন এবং পৃষ্ঠা রিফ্রেশ করেন, তবে নোটিফিকেশন আবারও দেখা যাবে। এই পণ্যটির পৃষ্ঠাটি রিফ্রেশ করার সময় এটি প্রতিবার দেখা যাবে। এর কারণ হল `product.isInCart` পৃষ্ঠা লোডের সময় ইতিমধ্যেই `true` থাকবে, তাই উপরে উল্লেখিত Effect `showNotification()` কল করবে।
 
-**When you're not sure whether some code should be in an Effect or in an event handler, ask yourself *why* this code needs to run. Use Effects only for code that should run *because* the component was displayed to the user.** In this example, the notification should appear because the user *pressed the button*, not because the page was displayed! Delete the Effect and put the shared logic into a function called from both event handlers:
+**যখন আপনি নিশ্চিত না হন যে কোন কোডটি Effect-এ থাকা উচিত বা ইভেন্ট হ্যান্ডলারে, তখন নিজেকে জিজ্ঞাসা করুন *কেন* এই কোডটি চলতে হবে। শুধু সেই কোডের জন্য Effects ব্যবহার করুন যা *ব্যবহারকারীর জন্য* কম্পোনেন্টটি প্রদর্শিত হওয়ার কারণে চলতে হবে।** এই উদাহরণে, নোটিফিকেশনটি ব্যবহারকারী *বোতামটি চাপার* কারণে প্রদর্শিত হওয়া উচিত, পৃষ্ঠা প্রদর্শিত হওয়ার কারণে নয়! Effect টি মুছে ফেলুন এবং উভয় ইভেন্ট হ্যান্ডলারে কল করার জন্য একটি ফাংশনে শেয়ার করা লজিকটি রাখুন:
 
 ```js {2-6,9,13}
 function ProductPage({ product, addToCart }) {
@@ -301,11 +301,11 @@ function ProductPage({ product, addToCart }) {
 }
 ```
 
-This both removes the unnecessary Effect and fixes the bug.
+এটি অপ্রয়োজনীয় Effect টি মুছে ফেলে এবং বাগটিও ঠিক করে।
 
-### Sending a POST request {/*sending-a-post-request*/}
+### পোস্ট রিকোয়েস্ট পাঠানো {/*sending-a-post-request*/}
 
-This `Form` component sends two kinds of POST requests. It sends an analytics event when it mounts. When you fill in the form and click the Submit button, it will send a POST request to the `/api/register` endpoint:
+এই `Form` কম্পোনেন্টটি দুটি ধরনের POST অনুরোধ পাঠায়। এটি মাউন্ট হওয়ার সময় একটি অ্যানালিটিক্স ইভেন্ট পাঠায়। ফর্মটি পূরণ করে যখন আপনি সাবমিট বোতামটি ক্লিক করেন, এটি `/api/register` এন্ডপয়েন্টে একটি POST অনুরোধ পাঠাবে:
 
 ```js {5-8,10-16}
 function Form() {
@@ -333,11 +333,11 @@ function Form() {
 }
 ```
 
-Let's apply the same criteria as in the example before.
+আগের উদাহরণের মতো একই মানদণ্ড এখানে প্রয়োগ করা যাক।
 
-The analytics POST request should remain in an Effect. This is because the _reason_ to send the analytics event is that the form was displayed. (It would fire twice in development, but [see here](/learn/synchronizing-with-effects#sending-analytics) for how to deal with that.)
+অ্যানালিটিক্স POST অনুরোধটি Effect এ থাকা উচিত। এর কারণ হলো অ্যানালিটিক্স ইভেন্টটি পাঠানোর উদ্দেশ্য হল ফর্মটি প্রদর্শিত হয়েছে। (এটি ডেভেলপমেন্টে দুইবার চলবে, তবে কীভাবে এটি সামলাতে হয়, তা জানতে [এখানে দেখুন](/learn/synchronizing-with-effects#sending-analytics)।)
 
-However, the `/api/register` POST request is not caused by the form being _displayed_. You only want to send the request at one specific moment in time: when the user presses the button. It should only ever happen _on that particular interaction_. Delete the second Effect and move that POST request into the event handler:
+তবে, `/api/register` POST অনুরোধটি ফর্মটি _প্রদর্শিত_ হওয়ার কারণে হয় না। আপনি এটি শুধুমাত্র একটি নির্দিষ্ট মুহূর্তে পাঠাতে চান: যখন ব্যবহারকারী বোতামটি চাপেন। এটি শুধু _সেই নির্দিষ্ট ইন্টারঅ্যাকশনে_ ঘটবে। দ্বিতীয় Effect টি মুছে ফেলুন এবং সেই POST অনুরোধটি ইভেন্ট হ্যান্ডলারে সরিয়ে নিন।
 
 ```js {12-13}
 function Form() {
@@ -358,11 +358,11 @@ function Form() {
 }
 ```
 
-When you choose whether to put some logic into an event handler or an Effect, the main question you need to answer is _what kind of logic_ it is from the user's perspective. If this logic is caused by a particular interaction, keep it in the event handler. If it's caused by the user _seeing_ the component on the screen, keep it in the Effect.
+কোনো লজিক ইভেন্ট হ্যান্ডলার বা Effect-এ রাখবেন কি না তা নির্ধারণ করার সময় প্রধান প্রশ্নটি হলো এটি ব্যবহারকারীর দৃষ্টিকোণ থেকে _কিসের লজিক_। যদি এই লজিকটি নির্দিষ্ট একটি ইন্টারঅ্যাকশনের কারণে হয়, তাহলে এটি ইভেন্ট হ্যান্ডলারে রাখুন। আর যদি এটি ব্যবহারকারী কম্পোনেন্টটি স্ক্রিনে _দেখার_ কারণে হয়, তাহলে এটি Effect-এ রাখুন।
 
-### Chains of computations {/*chains-of-computations*/}
+### গাণিতিক ক্রম {/*chains-of-computations*/}
 
-Sometimes you might feel tempted to chain Effects that each adjust a piece of state based on other state:
+কখনো কখনো আপনি একাধিক Effect ব্যবহার করতে প্রলুব্ধ হতে পারেন, যেখানে প্রতিটি Effect অন্য কোনো state এর উপর ভিত্তি করে একটি state সামঞ্জস্য করে:
 
 ```js {7-29}
 function Game() {
@@ -406,13 +406,13 @@ function Game() {
   // ...
 ```
 
-There are two problems with this code.
+এই কোডে দুটি সমস্যা রয়েছে।
 
-One problem is that it is very inefficient: the component (and its children) have to re-render between each `set` call in the chain. In the example above, in the worst case (`setCard` → render → `setGoldCardCount` → render → `setRound` → render → `setIsGameOver` → render) there are three unnecessary re-renders of the tree below.
+প্রথম সমস্যা হলো এটি খুবই অকার্যকর; প্রতিটি `set` কলের মধ্যে কম্পোনেন্ট (এবং এর চাইল্ড কম্পোনেন্টগুলো) পুনরায় রেন্ডার হতে থাকে। উপরের উদাহরণে, সবচেয়ে খারাপ ক্ষেত্রে (`setCard` → রেন্ডার → `setGoldCardCount` → রেন্ডার → `setRound` → রেন্ডার → `setIsGameOver` → রেন্ডার) এই চেইনটি তিনবার অপ্রয়োজনীয়ভাবে পুনরায় রেন্ডার করে নিচের ট্রীটি।
 
-Even if it weren't slow, as your code evolves, you will run into cases where the "chain" you wrote doesn't fit the new requirements. Imagine you are adding a way to step through the history of the game moves. You'd do it by updating each state variable to a value from the past. However, setting the `card` state to a value from the past would trigger the Effect chain again and change the data you're showing. Such code is often rigid and fragile.
+এটি ধীর না হলেও, কোডটি যখন পরিবর্তিত হয়, তখন আপনি এমন পরিস্থিতিতে পড়বেন যেখানে এই "চেইন"টি নতুন চাহিদার সাথে সামঞ্জস্যপূর্ণ নয়। কল্পনা করুন আপনি গেমের মুভের ইতিহাসের মধ্য দিয়ে পর্যায়ক্রমে এগিয়ে যাওয়ার একটি উপায় যোগ করছেন। আপনি এটি প্রতিটি state ভেরিয়েবলকে অতীতের মানে আপডেট করে করবেন। তবে, অতীতের মানে `card` state সেট করলে Effect চেইনটি পুনরায় চালু হবে এবং আপনার প্রদর্শিত ডেটা পরিবর্তিত হবে। এ ধরনের কোড প্রায়শই কঠোর এবং ভঙ্গুর হয়।
 
-In this case, it's better to calculate what you can during rendering, and adjust the state in the event handler:
+এই ক্ষেত্রে, রেন্ডারিংয়ের সময় যা সম্ভব তা গণনা করাই ভালো এবং event handler এর মধ্যে state সামঞ্জস্য করা উচিত।
 
 ```js {6-7,14-26}
 function Game() {
@@ -446,17 +446,17 @@ function Game() {
   // ...
 ```
 
-This is a lot more efficient. Also, if you implement a way to view game history, now you will be able to set each state variable to a move from the past without triggering the Effect chain that adjusts every other value. If you need to reuse logic between several event handlers, you can [extract a function](#sharing-logic-between-event-handlers) and call it from those handlers.
+এটি অনেক বেশি কার্যকর। এছাড়াও, যদি আপনি গেমের ইতিহাস দেখার একটি উপায় বাস্তবায়ন করেন, তাহলে এখন আপনি প্রতিটি state ভেরিয়েবলকে অতীতের কোনো মুভে সেট করতে পারবেন এবং প্রতিটি মান পরিবর্তনের জন্য Trigger হওয়া Effect চেইনটি এড়াতে পারবেন। যদি একাধিক event handler-এ লজিক পুনঃব্যবহার করতে হয়, তাহলে আপনি একটি ফাংশন [প্রত্যাহার করে](#sharing-logic-between-event-handlers) সেই handler থেকে কল করতে পারেন।
 
-Remember that inside event handlers, [state behaves like a snapshot.](/learn/state-as-a-snapshot) For example, even after you call `setRound(round + 1)`, the `round` variable will reflect the value at the time the user clicked the button. If you need to use the next value for calculations, define it manually like `const nextRound = round + 1`.
+মনে রাখবেন যে event handler-এর মধ্যে, [state একটি snapshot-এর মতো আচরণ করে।](/learn/state-as-a-snapshot) উদাহরণস্বরূপ, `setRound(round + 1)` কল করার পরেও, `round` ভেরিয়েবলটি সেই মানকে প্রতিফলিত করবে যখন ব্যবহারকারী বোতামটি ক্লিক করেছিলেন। যদি গণনার জন্য পরবর্তী মানের প্রয়োজন হয়, তাহলে এটি ম্যানুয়ালি সংজ্ঞায়িত করুন যেমন `const nextRound = round + 1`।
 
-In some cases, you *can't* calculate the next state directly in the event handler. For example, imagine a form with multiple dropdowns where the options of the next dropdown depend on the selected value of the previous dropdown. Then, a chain of Effects is appropriate because you are synchronizing with network.
+কিছু ক্ষেত্রে, event handler-এ সরাসরি পরবর্তী state গণনা করা সম্ভব নয়। উদাহরণস্বরূপ, একটি ফর্মের কথা কল্পনা করুন যেখানে একাধিক dropdown রয়েছে এবং পরবর্তী dropdown-এর অপশন আগের dropdown-এর নির্বাচিত মানের উপর নির্ভর করে। তখন, Effects-এর একটি চেইন উপযুক্ত, কারণ আপনি নেটওয়ার্কের সাথে সিঙ্ক্রোনাইজ করছেন।
 
-### Initializing the application {/*initializing-the-application*/}
+### এপ্লিকেশন ইনিশিয়েলাইজ করা {/*initializing-the-application*/}
 
-Some logic should only run once when the app loads.
+আপনি হয়তো চাইবেন যে কিছু লজিক শুধুমাত্র অ্যাপটি লোড হলে একবারই রান হোক।
 
-You might be tempted to place it in an Effect in the top-level component:
+আপনি এই কোডটি অ্যাপের শীর্ষ স্তরের কম্পোনেন্টে একটি ইফেক্টে রাখার কথা ভাবতে পারেন।
 
 ```js {2-6}
 function App() {
@@ -469,9 +469,9 @@ function App() {
 }
 ```
 
-However, you'll quickly discover that it [runs twice in development.](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development) This can cause issues--for example, maybe it invalidates the authentication token because the function wasn't designed to be called twice. In general, your components should be resilient to being remounted. This includes your top-level `App` component.
+তবে, আপনি দ্রুত বুঝতে পারবেন যে এটি [ডেভেলপমেন্টে দুবার রান করে ](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)। এটি সমস্যার সৃষ্টি করতে পারে—যেমন, হয়তো এটি অথেনটিকেশন টোকেনকে অবৈধ করে ফেলছে কারণ ফাংশনটি দুবার কল করার জন্য ডিজাইন করা হয়নি। সাধারণভাবে, আপনার কম্পোনেন্টগুলো পুনরায় মাউন্ট হতে প্রতিরোধী হওয়া উচিত। এর মধ্যে আপনার শীর্ষ স্তরের `App` কম্পোনেন্টও অন্তর্ভুক্ত।
 
-Although it may not ever get remounted in practice in production, following the same constraints in all components makes it easier to move and reuse code. If some logic must run *once per app load* rather than *once per component mount*, add a top-level variable to track whether it has already executed:
+যদিও প্রোডাকশনে এটি পুনরায় মাউন্ট না-ও হতে পারে, সব কম্পোনেন্টে একই নিয়ম অনুসরণ করলে কোড সরানো এবং পুনঃব্যবহার করা সহজ হয়। যদি কোনো লজিক *অ্যাপ লোড প্রতি একবার* রান করতেই হয় এবং *কম্পোনেন্ট মাউন্ট প্রতি একবার* নয়, তাহলে ট্র্যাক করার জন্য একটি শীর্ষ স্তরের ভেরিয়েবল যোগ করুন যে এটি ইতোমধ্যেই একবার রান হয়েছে কি না।
 
 ```js {1,5-6,10}
 let didInit = false;
@@ -489,7 +489,7 @@ function App() {
 }
 ```
 
-You can also run it during module initialization and before the app renders:
+আপনি এটি মডিউল ইনিশিয়ালাইজেশনের সময় এবং অ্যাপ রেন্ডার হওয়ার আগে চালাতে পারেন:
 
 ```js {1,5}
 if (typeof window !== 'undefined') { // Check if we're running in the browser.
@@ -503,11 +503,11 @@ function App() {
 }
 ```
 
-Code at the top level runs once when your component is imported--even if it doesn't end up being rendered. To avoid slowdown or surprising behavior when importing arbitrary components, don't overuse this pattern. Keep app-wide initialization logic to root component modules like `App.js` or in your application's entry point.
+শীর্ষ স্তরের কোড একবার রান করে যখন আপনার কম্পোনেন্টটি আমদানি করা হয়—যদিও এটি রেন্ডার না-ও হতে পারে। বিভিন্ন কম্পোনেন্ট আমদানি করার সময় ধীরগতির বা বিস্ময়কর আচরণ এড়াতে, এই প্যাটার্নটি অতিরিক্ত ব্যবহার করবেন না। অ্যাপের সার্বজনীন ইনিশিয়ালাইজেশন লজিককে `App.js` এর মতো রুট কম্পোনেন্ট মডিউলগুলোতে বা আপনার অ্যাপ্লিকেশনের এন্ট্রি পয়েন্টে রাখুন।
 
-### Notifying parent components about state changes {/*notifying-parent-components-about-state-changes*/}
+### প্যারেন্ট কম্পোনেন্টগুলোকে স্টেট পরিবর্তন সম্পর্কে জানানো {/*notifying-parent-components-about-state-changes*/}
 
-Let's say you're writing a `Toggle` component with an internal `isOn` state which can be either `true` or `false`. There are a few different ways to toggle it (by clicking or dragging). You want to notify the parent component whenever the `Toggle` internal state changes, so you expose an `onChange` event and call it from an Effect:
+ধরি, আপনি একটি `Toggle` কম্পোনেন্ট লিখছেন যার একটি অভ্যন্তরীণ `isOn` স্টেট আছে যা `true` বা `false` হতে পারে। এটি টগল করার জন্য কিছু ভিন্ন উপায় আছে (ক্লিক করে বা ড্র্যাগ করে)। আপনি চান যে যখনই `Toggle` এর অভ্যন্তরীণ স্টেট পরিবর্তিত হয়, প্যারেন্ট কম্পোনেন্টকে জানানো হোক, তাই আপনি একটি `onChange` ইভেন্ট প্রকাশ করেন এবং একটি ইফেক্ট থেকে এটি কল করেন:
 
 ```js {4-7}
 function Toggle({ onChange }) {
@@ -534,9 +534,9 @@ function Toggle({ onChange }) {
 }
 ```
 
-Like earlier, this is not ideal. The `Toggle` updates its state first, and React updates the screen. Then React runs the Effect, which calls the `onChange` function passed from a parent component. Now the parent component will update its own state, starting another render pass. It would be better to do everything in a single pass.
+যেমন আগে বলা হয়েছিল, এটি আদর্শ নয়। `Toggle` প্রথমে তার স্টেট আপডেট করে, এবং তারপর React স্ক্রীনটি আপডেট করে। এর পরে React ইফেক্টটি রান করে, যা প্যারেন্ট কম্পোনেন্ট থেকে প্রাপ্ত `onChange` ফাংশনটি কল করে। এখন প্যারেন্ট কম্পোনেন্ট তার নিজের স্টেট আপডেট করবে, যা একটি নতুন রেন্ডার পাস শুরু করবে। সবকিছু একক পাসে করা আরও ভালো হবে।
 
-Delete the Effect and instead update the state of *both* components within the same event handler:
+ইফেক্টটি মুছে দিন এবং পরিবর্তে একই ইভেন্ট হ্যান্ডলারের মধ্যে *দুইটি* কম্পোনেন্টের স্টেট আপডেট করুন:
 
 ```js {5-7,11,16,18}
 function Toggle({ onChange }) {
@@ -564,9 +564,9 @@ function Toggle({ onChange }) {
 }
 ```
 
-With this approach, both the `Toggle` component and its parent component update their state during the event. React [batches updates](/learn/queueing-a-series-of-state-updates) from different components together, so there will only be one render pass.
+এই পদ্ধতির মাধ্যমে, `Toggle` কম্পোনেন্ট এবং এর প্যারেন্ট কম্পোনেন্ট উভয়ই ইভেন্টের সময় তাদের স্টেট আপডেট করে। React বিভিন্ন কম্পোনেন্ট থেকে [ব্যাচ আপডেট](/learn/queueing-a-series-of-state-updates) করে, তাই শুধুমাত্র একটি রেন্ডার পাস হবে।
 
-You might also be able to remove the state altogether, and instead receive `isOn` from the parent component:
+আপনি সম্ভবত সম্পূর্ণ স্টেটটি মুছেও দিতে পারেন, এবং পরিবর্তে প্যারেন্ট কম্পোনেন্ট থেকে `isOn` গ্রহণ করতে পারেন:
 
 ```js {1,2}
 // ✅ Also good: the component is fully controlled by its parent
@@ -587,11 +587,11 @@ function Toggle({ isOn, onChange }) {
 }
 ```
 
-["Lifting state up"](/learn/sharing-state-between-components) lets the parent component fully control the `Toggle` by toggling the parent's own state. This means the parent component will have to contain more logic, but there will be less state overall to worry about. Whenever you try to keep two different state variables synchronized, try lifting state up instead!
+["স্টেট উপরে তোলা"](/learn/sharing-state-between-components) প্যারেন্ট কম্পোনেন্টকে সম্পূর্ণরূপে `Toggle` নিয়ন্ত্রণ করার সুযোগ দেয় প্যারেন্টের নিজস্ব স্টেট টগল করে। এর মানে হলো প্যারেন্ট কম্পোনেন্টে আরও বেশি লজিক থাকতে হবে, তবে মোট স্টেট কম থাকবে যা নিয়ে চিন্তা করতে হবে। যখনই আপনি দুটি ভিন্ন স্টেট ভেরিয়েবলকে সমন্বয় করতে চেষ্টা করেন, তখন স্টেট উপরে তোলার চেষ্টা করুন!
 
-### Passing data to the parent {/*passing-data-to-the-parent*/}
+### পেরন্ট এ ডাটা পাস করা {/*passing-data-to-the-parent*/}
 
-This `Child` component fetches some data and then passes it to the `Parent` component in an Effect:
+এই `Child` কম্পোনেন্ট কিছু ডেটা Fetch করে এবং তারপর এটি একটি ইফেক্টের মাধ্যমে `Parent` কম্পোনেন্টে পাঠায়:
 
 ```js {9-14}
 function Parent() {
@@ -612,7 +612,7 @@ function Child({ onFetched }) {
 }
 ```
 
-In React, data flows from the parent components to their children. When you see something wrong on the screen, you can trace where the information comes from by going up the component chain until you find which component passes the wrong prop or has the wrong state. When child components update the state of their parent components in Effects, the data flow becomes very difficult to trace. Since both the child and the parent need the same data, let the parent component fetch that data, and *pass it down* to the child instead:
+React-এ, ডেটা প্যারেন্ট কম্পোনেন্ট থেকে তাদের সন্তানের দিকে প্রবাহিত হয়। যখন আপনি স্ক্রীনে কিছু ভুল দেখতে পান, আপনি কোন তথ্য কোথা থেকে এসেছে তা খুঁজে বের করার জন্য কম্পোনেন্ট চেইন উপরে উঠতে পারেন যতক্ষণ না আপনি খুঁজে পান কোন কম্পোনেন্টটি ভুল প্রপ্স পাস করছে বা ভুল স্টেট আছে। যখন সন্তানের কম্পোনেন্টগুলো তাদের প্যারেন্ট কম্পোনেন্টের স্টেট ইফেক্টে আপডেট করে, তখন ডেটার প্রবাহ অনুসরণ করা খুব কঠিন হয়ে পড়ে। যেহেতু সন্তানের এবং প্যারেন্টের উভয়েরই একই ডেটার প্রয়োজন, তাই প্যারেন্ট কম্পোনেন্টকে সেই ডেটা Fetch করতে দিন এবং *সন্তানের কাছে* পাস করুন:
 
 ```js {4-5}
 function Parent() {
@@ -627,11 +627,11 @@ function Child({ data }) {
 }
 ```
 
-This is simpler and keeps the data flow predictable: the data flows down from the parent to the child.
+এটি সহজ এবং ডেটার প্রবাহকে পূর্বানুমানযোগ্য রাখে: ডেটা প্যারেন্ট থেকে সন্তানের দিকে প্রবাহিত হয়।
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### এক্সটার্নাল স্টোরের জন্য সাবস্ক্রাইব করা {/*subscribing-to-an-external-store*/}
 
-Sometimes, your components may need to subscribe to some data outside of the React state. This data could be from a third-party library or a built-in browser API. Since this data can change without React's knowledge, you need to manually subscribe your components to it. This is often done with an Effect, for example:
+কখনও কখনও, আপনার কম্পোনেন্টগুলোকে React স্টেটের বাইরের কিছু ডেটার জন্য সাবস্ক্রাইব করতে হতে পারে। এই ডেটা একটি তৃতীয়-পক্ষ লাইব্রেরি বা একটি বিল্ট-ইন ব্রাউজার API থেকে আসতে পারে। যেহেতু এই ডেটা React এর জ্ঞানের বাইরে পরিবর্তিত হতে পারে, তাই আপনাকে হাতে হাতে আপনার কম্পোনেন্টগুলোকে এর সাথে সাবস্ক্রাইব করতে হবে। এটি প্রায়ই একটি ইফেক্টের মাধ্যমে করা হয়, উদাহরণস্বরূপ:
 
 ```js {2-17}
 function useOnlineStatus() {
@@ -660,9 +660,9 @@ function ChatIndicator() {
 }
 ```
 
-Here, the component subscribes to an external data store (in this case, the browser `navigator.onLine` API). Since this API does not exist on the server (so it can't be used for the initial HTML), initially the state is set to `true`. Whenever the value of that data store changes in the browser, the component updates its state.
+এখানে, কম্পোনেন্টটি একটি এক্সটার্নাল ডেটা স্টোরের জন্য সাবস্ক্রাইব করে (এই ক্ষেত্রে, ব্রাউজারের `navigator.onLine` API)। যেহেতু এই API সার্ভারে বিদ্যমান নেই (এটি প্রাথমিক HTML-এর জন্য ব্যবহার করা যায় না), শুরুতে স্টেট `true` সেট করা হয়। যখনই ব্রাউজারে সেই ডেটা স্টোরের মান পরিবর্তিত হয়, কম্পোনেন্ট তার স্টেট আপডেট করে।
 
-Although it's common to use Effects for this, React has a purpose-built Hook for subscribing to an external store that is preferred instead. Delete the Effect and replace it with a call to [`useSyncExternalStore`](/reference/react/useSyncExternalStore):
+যদিও এটি করার জন্য ইফেক্ট ব্যবহার করা সাধারণ, React-এ একটি বিশেষভাবে ডিজাইন করা হুক আছে যা একটি এক্সটার্নাল স্টোরের জন্য সাবস্ক্রাইব করতে ব্যবহার করা হয়, যা আরও পছন্দসই। ইফেক্টটি মুছে ফেলুন এবং [`useSyncExternalStore`](/reference/react/useSyncExternalStore) কলে প্রতিস্থাপন করুন:
 
 ```js {11-16}
 function subscribe(callback) {
@@ -689,11 +689,11 @@ function ChatIndicator() {
 }
 ```
 
-This approach is less error-prone than manually syncing mutable data to React state with an Effect. Typically, you'll write a custom Hook like `useOnlineStatus()` above so that you don't need to repeat this code in the individual components. [Read more about subscribing to external stores from React components.](/reference/react/useSyncExternalStore)
+এই পদ্ধতি ইফেক্টের মাধ্যমে মিউটেবল ডেটাকে React স্টেটের সাথে ম্যানুয়ালি সিঙ্ক করার চেয়ে কম ত্রুটিপূর্ণ। সাধারণত, আপনি উপরের মতো একটি কাস্টম হুক লিখবেন যেমন useOnlineStatus() যাতে আপনাকে পৃথক কম্পোনেন্টে এই কোডটি পুনরাবৃত্তি করতে না হয়। [এক্সটার্নাল স্টোরগুলোর জন্য React কম্পোনেন্ট থেকে সাবস্ক্রাইব করার বিষয়ে আরও পড়ুন।](/reference/react/useSyncExternalStore)
 
 ### Fetching data {/*fetching-data*/}
 
-Many apps use Effects to kick off data fetching. It is quite common to write a data fetching Effect like this:
+অনেক অ্যাপ্লিকেশন ডেটা Fetch করার জন্য ইফেক্ট ব্যবহার করে। একটি ডেটা Fetch করার ইফেক্ট এইভাবে লেখা খুব সাধারণ:
 
 ```js {5-10}
 function SearchResults({ query }) {
@@ -714,15 +714,15 @@ function SearchResults({ query }) {
 }
 ```
 
-You *don't* need to move this fetch to an event handler.
+আপনাকে এই ফেচটি একটি ইভেন্ট হ্যান্ডলারে স্থানান্তর করতে *হবেনা*।
 
-This might seem like a contradiction with the earlier examples where you needed to put the logic into the event handlers! However, consider that it's not *the typing event* that's the main reason to fetch. Search inputs are often prepopulated from the URL, and the user might navigate Back and Forward without touching the input.
+এটি প্রথম উদাহরণগুলোর সাথে একটি বৈপরীত্য মনে হতে পারে যেখানে আপনাকে লজিকটি ইভেন্ট হ্যান্ডলারগুলিতে রাখতে হয়েছে! তবে, মনে রাখবেন যে এটি *টাইপিং ইভেন্ট* নয় যা Fetch করার প্রধান কারণ। সার্চ ইনপুটগুলি প্রায়শই URL থেকে পূর্বনির্ধারিত হয়, এবং ব্যবহারকারী ইনপুটটি স্পর্শ না করেই ব্যাক এবং ফরোয়ার্ডে নেভিগেট করতে পারে।
 
-It doesn't matter where `page` and `query` come from. While this component is visible, you want to keep `results` [synchronized](/learn/synchronizing-with-effects) with data from the network for the current `page` and `query`. This is why it's an Effect.
+`page` এবং `query` কোথা থেকে আসছে তা গুরুত্বপূর্ণ নয়। যখন এই কম্পোনেন্টটি দৃশ্যমান থাকে, আপনি `results` কে বর্তমান `page` এবং `query` এর জন্য নেটওয়ার্কের ডেটার সাথে [সিঙ্ক্রোনাইজ](/learn/synchronizing-with-effects) রাখতে চান। এ কারণেই এটি একটি ইফেক্ট।
 
-However, the code above has a bug. Imagine you type `"hello"` fast. Then the `query` will change from `"h"`, to `"he"`, `"hel"`, `"hell"`, and `"hello"`. This will kick off separate fetches, but there is no guarantee about which order the responses will arrive in. For example, the `"hell"` response may arrive *after* the `"hello"` response. Since it will call `setResults()` last, you will be displaying the wrong search results. This is called a ["race condition"](https://en.wikipedia.org/wiki/Race_condition): two different requests "raced" against each other and came in a different order than you expected.
+তবে, উপরের কোডে একটি বাগ আছে। কল্পনা করুন আপনি দ্রুত `"hello"` টাইপ করছেন। তারপর `query` পরিবর্তিত হবে `"h"` থেকে `"he"`, `"hel"`, `"hell"` এবং `"hello"`-তে। এটি আলাদা ফেচগুলি শুরু করবে, কিন্তু প্রতিক্রিয়াগুলির কোন অর্ডারে আসবে তা নিশ্চিত নয়। উদাহরণস্বরূপ, `"hell"` প্রতিক্রিয়া আসতে পারে *এরপর* `"hello"` প্রতিক্রিয়ার। যেহেতু এটি শেষবার `setResults()` কল করবে, আপনি ভুল সার্চ ফলাফল প্রদর্শন করবেন। একে বলা হয় ["রেস কন্ডিশন"](https://en.wikipedia.org/wiki/Race_condition): দুটি ভিন্ন অনুরোধ "রেস" করেছে একে অপরের বিরুদ্ধে এবং প্রত্যাশিত অর্ডারের চেয়ে ভিন্ন অর্ডারে এসেছে।
 
-**To fix the race condition, you need to [add a cleanup function](/learn/synchronizing-with-effects#fetching-data) to ignore stale responses:**
+**রেস কন্ডিশনটি ঠিক করতে, আপনাকে [একটি ক্লিনআপ ফাংশন](/learn/synchronizing-with-effects#fetching-data) যোগ করতে হবে যাতে পুরানো প্রতিক্রিয়াগুলি উপেক্ষা করা হয়:**
 
 ```js {5,7,9,11-13}
 function SearchResults({ query }) {
@@ -747,13 +747,13 @@ function SearchResults({ query }) {
 }
 ```
 
-This ensures that when your Effect fetches data, all responses except the last requested one will be ignored.
+এটি নিশ্চিত করে যে যখন আপনার ইফেক্ট ডেটা ফেচ করে, তখন শেষ রিকোয়েস্ট করা রেসপন্স ছাড়া সব রিকোয়েস্ট উপেক্ষা করা হবে।
 
-Handling race conditions is not the only difficulty with implementing data fetching. You might also want to think about caching responses (so that the user can click Back and see the previous screen instantly), how to fetch data on the server (so that the initial server-rendered HTML contains the fetched content instead of a spinner), and how to avoid network waterfalls (so that a child can fetch data without waiting for every parent).
+ডেটা ফেচিং বাস্তবায়নের সাথে রেস কন্ডিশনগুলি পরিচালনা করা একমাত্র চ্যালেঞ্জ নয়। আপনি রেসপন্সগুলির ক্যাশিং সম্পর্কেও চিন্তা করতে চাইতে পারেন (যাতে ব্যবহারকারী ব্যাক ক্লিক করলে আগের স্ক্রিনটি তাত্ক্ষণিকভাবে দেখতে পারে), সার্ভারে ডেটা কীভাবে ফেচ করতে হবে (যাতে প্রাথমিক সার্ভার-রেন্ডার করা HTML-এ ফেচ করা কনটেন্ট থাকে স্পিনারের পরিবর্তে), এবং নেটওয়ার্ক ওয়াটারফলগুলি কীভাবে এড়ানো যায় (যাতে একটি সন্তান ডেটা ফেচ করতে পারে প্রতিটি প্যারেন্টের জন্য অপেক্ষা না করে)।
 
-**These issues apply to any UI library, not just React. Solving them is not trivial, which is why modern [frameworks](/learn/start-a-new-react-project#production-grade-react-frameworks) provide more efficient built-in data fetching mechanisms than fetching data in Effects.**
+**এই সমস্যাগুলি যেকোন UI লাইব্রেরিতে প্রযোজ্য, শুধু React নয়। এগুলি সমাধান করা সহজ নয়, এজন্য আধুনিক [ফ্রেমওয়ার্কগুলি](/learn/start-a-new-react-project#production-grade-react-frameworks) ইফেক্টে ডেটা ফেচ করার চেয়ে আরও কার্যকর বিল্ট-ইন ডেটা ফেচিং যান্ত্রিক সরবরাহ করে।**
 
-If you don't use a framework (and don't want to build your own) but would like to make data fetching from Effects more ergonomic, consider extracting your fetching logic into a custom Hook like in this example:
+যদি আপনি একটি ফ্রেমওয়ার্ক ব্যবহার না করেন (এবং আপনার নিজস্ব তৈরি করতে না চান) তবে ইফেক্ট থেকে ডেটা ফেচিংকে আরও ব্যবহারকারী বান্ধব করতে চান, তবে এই উদাহরণের মতো আপনার ফেচিং লজিকটিকে একটি কাস্টম হুকের মধ্যে নিষ্কাশন করতে বিবেচনা করুন:
 
 ```js {4}
 function SearchResults({ query }) {
@@ -786,30 +786,30 @@ function useData(url) {
 }
 ```
 
-You'll likely also want to add some logic for error handling and to track whether the content is loading. You can build a Hook like this yourself or use one of the many solutions already available in the React ecosystem. **Although this alone won't be as efficient as using a framework's built-in data fetching mechanism, moving the data fetching logic into a custom Hook will make it easier to adopt an efficient data fetching strategy later.**
+আপনি সম্ভবত ত্রুটি পরিচালনার জন্য কিছু লজিক যুক্ত করতে চান এবং কন্টেন্ট লোড হচ্ছে কিনা তা ট্র্যাক করতে চান। আপনি নিজেই এমন একটি হুক তৈরি করতে পারেন অথবা React ইকোসিস্টেমে ইতিমধ্যেই উপলব্ধ অনেক সমাধানের মধ্যে একটি ব্যবহার করতে পারেন। **যদিও এটি একা একটি ফ্রেমওয়ার্কের বিল্ট-ইন ডেটা ফেচিং যান্ত্রিকের চেয়ে ততটা কার্যকর হবে না, একটি কাস্টম হুকে ডেটা ফেচিং লজিকটি স্থানান্তর করা পরবর্তীতে একটি কার্যকর ডেটা ফেচিং কৌশল গ্রহণ করা সহজ করবে।**
 
-In general, whenever you have to resort to writing Effects, keep an eye out for when you can extract a piece of functionality into a custom Hook with a more declarative and purpose-built API like `useData` above. The fewer raw `useEffect` calls you have in your components, the easier you will find to maintain your application.
+সাধারণভাবে, যখনই আপনাকে ইফেক্ট লিখতে বাধ্য হতে হয়, তখন নজর রাখুন কখন আপনি একটি কাস্টম হুকে একটি কার্যকরী অংশ নিষ্কাশন করতে পারেন একটি আরও ঘোষণামূলক এবং উদ্দেশ্য-নির্মিত API এর সাথে যেমন উপরে `useData`। আপনার কম্পোনেন্টগুলিতে যত কম কাঁচা `useEffect` কল থাকবে, আপনার অ্যাপ্লিকেশনটি বজায় রাখা ততটাই সহজ হবে।
 
 <Recap>
 
-- If you can calculate something during render, you don't need an Effect.
-- To cache expensive calculations, add `useMemo` instead of `useEffect`.
-- To reset the state of an entire component tree, pass a different `key` to it.
-- To reset a particular bit of state in response to a prop change, set it during rendering.
-- Code that runs because a component was *displayed* should be in Effects, the rest should be in events.
-- If you need to update the state of several components, it's better to do it during a single event.
-- Whenever you try to synchronize state variables in different components, consider lifting state up.
-- You can fetch data with Effects, but you need to implement cleanup to avoid race conditions.
+- যদি আপনি রেন্ডার করার সময় কিছু হিসাব করতে পারেন, তবে আপনাকে একটি ইফেক্টের প্রয়োজন নেই।
+- ব্যয়বহুল গণনা ক্যাশ করার জন্য, `useEffect` এর পরিবর্তে `useMemo` যুক্ত করুন।
+- একটি সম্পূর্ণ কম্পোনেন্ট গাছের স্টেট রিসেট করতে, এর জন্য একটি ভিন্ন `key` পাস করুন।
+- একটি প্রোপ পরিবর্তনের প্রতিক্রিয়া হিসাবে একটি নির্দিষ্ট স্টেটের অংশ রিসেট করতে, এটি রেন্ডারিংয়ের সময় সেট করুন।
+- কোড যা একটি কম্পোনেন্ট প্রদর্শিত হওয়ার কারণে চালিত হয় তা ইফেক্টে থাকা উচিত, বাকি অংশ ইভেন্টে থাকা উচিত।
+- যদি আপনাকে কয়েকটি কম্পোনেন্টের স্টেট আপডেট করতে হয়, তবে এটি একটি একক ইভেন্টের মধ্যে করা ভালো।
+- যখনই আপনি বিভিন্ন কম্পোনেন্টে স্টেট ভেরিয়েবলগুলিকে সিঙ্ক্রোনাইজ করতে চেষ্টা করেন, তাহলে স্টেটকে আপ করতে বিবেচনা করুন।
+- আপনি ইফেক্টের মাধ্যমে ডেটা ফেচ করতে পারেন, তবে রেস কন্ডিশন এড়ানোর জন্য ক্লিনআপ বাস্তবায়ন করতে হবে।
 
 </Recap>
 
 <Challenges>
 
-#### Transform data without Effects {/*transform-data-without-effects*/}
+#### এফেক্ট ছাড়া ডাটা ট্রান্সফর্ম {/*transform-data-without-effects*/}
 
-The `TodoList` below displays a list of todos. When the "Show only active todos" checkbox is ticked, completed todos are not displayed in the list. Regardless of which todos are visible, the footer displays the count of todos that are not yet completed.
+নিচের `TodoList` একটি টোডোর তালিকা প্রদর্শন করে। যখন "শুধুমাত্র সক্রিয় টু-ডো দেখান" চেকবক্সটি টিক দেওয়া হয়, সম্পন্ন টোডোগুলি তালিকায় প্রদর্শিত হয় না। যে কোন টোডো দৃশ্যমান হোক না কেন, ফুটারে এখনও সম্পন্ন না হওয়া টোডোগুলির সংখ্যা প্রদর্শিত হয়।
 
-Simplify this component by removing all the unnecessary state and Effects.
+এই কম্পোনেন্টটি সমস্ত অপ্রয়োজনীয় স্টেট এবং ইফেক্ট মুছে ফেলে সরল করুন।
 
 <Sandpack>
 
@@ -909,15 +909,15 @@ input { margin-top: 10px; }
 
 <Hint>
 
-If you can calculate something during rendering, you don't need state or an Effect that updates it.
+যদি আপনি রেন্ডার করার সময় কিছু গণনা করতে পারেন, তবে আপনাকে এমন স্টেট বা একটি ইফেক্টের প্রয়োজন নেই যা এটি আপডেট করে।
 
 </Hint>
 
 <Solution>
 
-There are only two essential pieces of state in this example: the list of `todos` and the `showActive` state variable which represents whether the checkbox is ticked. All of the other state variables are [redundant](/learn/choosing-the-state-structure#avoid-redundant-state) and can be calculated during rendering instead. This includes the `footer` which you can move directly into the surrounding JSX.
+এই উদাহরণে দুটি মূল স্টেট রয়েছে: `todos` এর তালিকা এবং `showActive` স্টেট ভেরিয়েবল যা চেকবক্সটি টিক দেওয়া হয়েছে কিনা তা প্রতিনিধিত্ব করে। অন্যান্য সমস্ত স্টেট ভেরিয়েবল [অপ্রয়োজনীয়](/learn/choosing-the-state-structure#avoid-redundant-state) এবং রেন্ডার করার সময় গণনা করা যেতে পারে। এর মধ্যে `footer` অন্তর্ভুক্ত যা আপনি সরাসরি চারপাশের JSX-তে স্থানান্তর করতে পারেন।
 
-Your result should end up looking like this:
+আপনার ফলাফলটি এরকম হবে:
 
 <Sandpack>
 
@@ -1002,15 +1002,15 @@ input { margin-top: 10px; }
 
 </Solution>
 
-#### Cache a calculation without Effects {/*cache-a-calculation-without-effects*/}
+#### এফেক্ট ছড়া ক্যালকুলেশ ক্যাশ করা {/*cache-a-calculation-without-effects*/}
 
-In this example, filtering the todos was extracted into a separate function called `getVisibleTodos()`. This function contains a `console.log()` call inside of it which helps you notice when it's being called. Toggle "Show only active todos" and notice that it causes `getVisibleTodos()` to re-run. This is expected because visible todos change when you toggle which ones to display.
+এই উদাহরণে, টোডোগুলিকে ফিল্টার করার জন্য একটি পৃথক ফাংশন `getVisibleTodos()` এ স্থানান্তরিত করা হয়েছে। এই ফাংশনের মধ্যে একটি `console.log()` কল রয়েছে যা আপনাকে দেখাতে সাহায্য করে কখন এটি কল হচ্ছে। "শুধুমাত্র সক্রিয় টোডো দেখান" টগল করলে লক্ষ্য করুন যে এটি `getVisibleTodos()` পুনরায় চালানোর কারণ হয়। এটি প্রত্যাশিত কারণ আপনি কোন টোডোগুলি প্রদর্শন করবেন তা টগল করলে দৃশ্যমান টোডোগুলি পরিবর্তিত হয়।
 
-Your task is to remove the Effect that recomputes the `visibleTodos` list in the `TodoList` component. However, you need to make sure that `getVisibleTodos()` does *not* re-run (and so does not print any logs) when you type into the input.
+আপনার কাজ হল `TodoList` কম্পোনেন্টে `visibleTodos` তালিকা পুনঃগণনা করা ইফেক্টটি মুছে ফেলা। তবে, আপনাকে নিশ্চিত করতে হবে যে `getVisibleTodos()` *পুনরায় চালানো হয় না* (এবং তাই কোনও লগ মুদ্রণ করে না) যখন আপনি ইনপুটে টাইপ করেন।
 
 <Hint>
 
-One solution is to add a `useMemo` call to cache the visible todos. There is also another, less obvious solution.
+একটি সমাধান হল দৃশ্যমান টোডোগুলিকে ক্যাশ করার জন্য একটি `useMemo` কল যুক্ত করা। একটি অন্য, কম স্পষ্ট সমাধানও রয়েছে।
 
 </Hint>
 
@@ -1096,7 +1096,7 @@ input { margin-top: 10px; }
 
 <Solution>
 
-Remove the state variable and the Effect, and instead add a `useMemo` call to cache the result of calling `getVisibleTodos()`:
+স্টেট ভেরিয়েবল এবং ইফেক্টটি মুছে ফেলুন, এবং পরিবর্তে `getVisibleTodos()` কল করার ফলাফল ক্যাশ করার জন্য একটি `useMemo` কল যুক্ত করুন:
 
 <Sandpack>
 
@@ -1177,9 +1177,9 @@ input { margin-top: 10px; }
 
 </Sandpack>
 
-With this change, `getVisibleTodos()` will be called only if `todos` or `showActive` change. Typing into the input only changes the `text` state variable, so it does not trigger a call to `getVisibleTodos()`.
+এই পরিবর্তনের সাথে, `getVisibleTodos()` কেবল তখনই কল হবে যদি `todos` অথবা `showActive` পরিবর্তিত হয়। ইনপুটে টাইপ করা কেবল `text` স্টেট ভেরিয়েবল পরিবর্তন করে, তাই এটি `getVisibleTodos()` কে কল করতে ট্রিগার করে না।
 
-There is also another solution which does not need `useMemo`. Since the `text` state variable can't possibly affect the list of todos, you can extract the `NewTodo` form into a separate component, and move the `text` state variable inside of it:
+আরও একটি সমাধান রয়েছে যা `useMemo` এর প্রয়োজন নেই। যেহেতু `text` স্টেট ভেরিয়েবল সম্ভবত টোডোর তালিকাকে প্রভাবিত করতে পারে না, আপনি `NewTodo` ফর্মটিকে একটি পৃথক কম্পোনেন্টে স্থানান্তরিত করতে পারেন এবং `text` স্টেট ভেরিয়েবলটিকে এর ভিতরে নিয়ে যেতে পারেন:
 
 <Sandpack>
 
@@ -1266,15 +1266,15 @@ input { margin-top: 10px; }
 
 </Sandpack>
 
-This approach satisfies the requirements too. When you type into the input, only the `text` state variable updates. Since the `text` state variable is in the child `NewTodo` component, the parent `TodoList` component won't get re-rendered. This is why `getVisibleTodos()` doesn't get called when you type. (It would still be called if the `TodoList` re-renders for another reason.)
+এই পদ্ধতিটি প্রয়োজনীয়তা মেটায়। যখন আপনি ইনপুটে টাইপ করেন, কেবল `text` স্টেট ভেরিয়েবল আপডেট হয়। যেহেতু `text` স্টেট ভেরিয়েবলটি সন্তানের `NewTodo` কম্পোনেন্টে আছে, তাই অভিভাবক `TodoList` কম্পোনেন্টটি পুনরায় রেন্ডার হবে না। এ কারণেই আপনি টাইপ করার সময় `getVisibleTodos()` কল হয় না। (যদি `TodoList` অন্য কোনও কারণে পুনরায় রেন্ডার হয় তবে এটি এখনও কল হবে।)
 
 </Solution>
 
-#### Reset state without Effects {/*reset-state-without-effects*/}
+#### ইফেক্ট ছাড়া স্টেট রিসেট করা {/*reset-state-without-effects*/}
 
-This `EditContact` component receives a contact object shaped like `{ id, name, email }` as the `savedContact` prop. Try editing the name and email input fields. When you press Save, the contact's button above the form updates to the edited name. When you press Reset, any pending changes in the form are discarded. Play around with this UI to get a feel for it.
+এই `EditContact` কম্পোনেন্টটি `{ id, name, email }` আকারের একটি যোগাযোগ অবজেক্ট `savedContact` প্রপ হিসেবে গ্রহণ করে। নাম এবং ইমেইল ইনপুট ফিল্ডগুলি সম্পাদনা করার চেষ্টা করুন। আপনি যখন সেভ চাপেন, ফর্মের উপরে যোগাযোগের বাটনটি সম্পাদিত নামের সাথে আপডেট হয়। আপনি যখন রিসেট চাপেন, ফর্মে কোনও চলমান পরিবর্তন বাতিল হয়ে যায়। এটি অনুভব করার জন্য এই UI-তে খেলা করুন।
 
-When you select a contact with the buttons at the top, the form resets to reflect that contact's details. This is done with an Effect inside `EditContact.js`. Remove this Effect. Find another way to reset the form when `savedContact.id` changes.
+আপনি যখন উপরের বাটনগুলির সাহায্যে একটি যোগাযোগ নির্বাচন করেন, ফর্মটি সেই যোগাযোগের বিস্তারিত তথ্য প্রতিফলিত করতে রিসেট হয়। এটি `EditContact.js` এর মধ্যে একটি ইফেক্টের মাধ্যমে করা হয়। এই ইফেক্টটি মুছে ফেলুন। `savedContact.id` পরিবর্তিত হলে ফর্মটি রিসেট করার জন্য আরেকটি উপায় খুঁজুন।
 
 <Sandpack>
 
@@ -1432,13 +1432,13 @@ button {
 
 <Hint>
 
-It would be nice if there was a way to tell React that when `savedContact.id` is different, the `EditContact` form is conceptually a _different contact's form_ and should not preserve state. Do you recall any such way?
+এটি খুবই ভালো হবে যদি কোনও উপায় থাকত যা রিঅ্যাক্টকে বলতে পারে যে `savedContact.id` পরিবর্তিত হলে `EditContact` ফর্মটি ধারণাগতভাবে একটি _বিভিন্ন যোগাযোগের ফর্ম_ এবং এটি স্টেট সংরক্ষণ করা উচিত নয়। আপনি কি এমন কোনও উপায় মনে করতে পারেন?
 
 </Hint>
 
 <Solution>
 
-Split the `EditContact` component in two. Move all the form state into the inner `EditForm` component. Export the outer `EditContact` component, and make it pass `savedContact.id` as the `key` to the inner `EditForm` component. As a result, the inner `EditForm` component resets all of the form state and recreates the DOM whenever you select a different contact.
+`EditContact` কম্পোনেন্টটিকে দুটি অংশে ভাগ করুন। সমস্ত ফর্ম স্টেটকে অভ্যন্তরীণ `EditForm` কম্পোনেন্টে স্থানান্তরিত করুন। বাইরের `EditContact` কম্পোনেন্টটি এক্সপোর্ট করুন এবং এটি অভ্যন্তরীণ `EditForm` কম্পোনেন্টকে `savedContact.id` কে `key` হিসেবে পাঠাতে বলুন। এর ফলস্বরূপ, অভ্যন্তরীণ `EditForm` কম্পোনেন্টটি যখন আপনি একটি ভিন্ন যোগাযোগ নির্বাচন করেন, তখন সমস্ত ফর্ম স্টেট রিসেট করে এবং DOM পুনরায় তৈরি করে।
 
 <Sandpack>
 
@@ -1600,17 +1600,17 @@ button {
 
 </Solution>
 
-#### Submit a form without Effects {/*submit-a-form-without-effects*/}
+#### এফেক্ট ছাড়া ফর্ম সাবমিট করা {/*submit-a-form-without-effects*/}
 
-This `Form` component lets you send a message to a friend. When you submit the form, the `showForm` state variable is set to `false`. This triggers an Effect calling `sendMessage(message)`, which sends the message (you can see it in the console). After the message is sent, you see a "Thank you" dialog with an "Open chat" button that lets you get back to the form.
+এই `Form` উপাদানটি আপনাকে একটি বন্ধুদের কাছে বার্তা পাঠানোর সুযোগ দেয়। যখন আপনি ফর্মটি জমা দেন, `showForm` রাষ্ট্র পরিবর্তনশীলটি `false` সেট করা হয়। এটি একটি প্রভাবকে সক্রিয় করে যা `sendMessage(message)` কল করে, যা বার্তাটি পাঠায় (আপনি এটি কনসোলে দেখতে পাবেন)। বার্তা পাঠানোর পরে, আপনি একটি "ধন্যবাদ" সংলাপ দেখবেন যার একটি "চ্যাট খুলুন" বোতাম রয়েছে যা আপনাকে আবার ফর্মে ফিরিয়ে নিয়ে যায়।
 
-Your app's users are sending way too many messages. To make chatting a little bit more difficult, you've decided to show the "Thank you" dialog *first* rather than the form. Change the `showForm` state variable to initialize to `false` instead of `true`. As soon as you make that change, the console will show that an empty message was sent. Something in this logic is wrong!
+আপনার অ্যাপের ব্যবহারকারীরা অনেক বেশি বার্তা পাঠাচ্ছেন। চ্যাটিংকে কিছুটা আরও কঠিন করার জন্য, আপনি সিদ্ধান্ত নিয়েছেন যে "ধন্যবাদ" সংলাপটি *প্রথমে* প্রদর্শন করবেন ফর্মের পরিবর্তে। এই পরিবর্তনটি করার সাথে সাথেই `showForm` রাষ্ট্র পরিবর্তনশীলটিকে `true` থেকে `false`তে সেট করুন। যখন আপনি এই পরিবর্তনটি করবেন, কনসোলে একটি খালি বার্তা পাঠানো হয়েছে এমন একটি বার্তা প্রদর্শিত হবে। এই লজিকে কিছু ভুল রয়েছে!
 
-What's the root cause of this problem? And how can you fix it?
+সমস্যার মূল কারণ কী? এবং আপনি এটি কিভাবে ঠিক করতে পারেন?
 
 <Hint>
 
-Should the message be sent _because_ the user saw the "Thank you" dialog? Or is it the other way around?
+Should the message be sent _because_ the user saw the "Thank you" dialog? Or is it the other way around ব্যবহারকারী "ধন্যবাদ" দেখার _কারণে_ মেসেজটি পাঠানো উচিত কি? নাকি উল্টোটা?
 
 </Hint>
 
@@ -1675,7 +1675,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 <Solution>
 
-The `showForm` state variable determines whether to show the form or the "Thank you" dialog. However, you aren't sending the message because the "Thank you" dialog was _displayed_. You want to send the message because the user has _submitted the form._ Delete the misleading Effect and move the `sendMessage` call inside the `handleSubmit` event handler:
+`showForm` রাষ্ট্র পরিবর্তনশীলটি ফর্ম বা "ধন্যবাদ" সংলাপটি প্রদর্শন করা হবে কিনা তা নির্ধারণ করে। তবে, আপনি বার্তাটি পাঠাচ্ছেন না কারণ "ধন্যবাদ" সংলাপটি _প্রদর্শিত_ হয়েছে। আপনি বার্তা পাঠাতে চান কারণ ব্যবহারকারী _ফর্মটি জমা দিয়েছে।_ বিভ্রান্তিকর প্রভাবটি মুছে ফেলুন এবং `sendMessage` কলটিকে `handleSubmit` ইভেন্ট হ্যান্ডলারের ভিতরে স্থানান্তর করুন:
 
 <Sandpack>
 
@@ -1731,7 +1731,7 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-Notice how in this version, only _submitting the form_ (which is an event) causes the message to be sent. It works equally well regardless of whether `showForm` is initially set to `true` or `false`. (Set it to `false` and notice no extra console messages.)
+দেখুন, এই সংস্করণে, শুধুমাত্র _ফর্মটি জমা দেওয়া_ (যা একটি ইভেন্ট) বার্তা পাঠানোর কারণ হয়। এটি `showForm` যদি প্রাথমিকভাবে `true` বা `false` হিসাবে সেট করা হয়, উভয় ক্ষেত্রেই সমানভাবে কাজ করে। (এটি `false` এ সেট করুন এবং দেখুন অতিরিক্ত কনসোল বার্তা নেই।)
 
 </Solution>
 
