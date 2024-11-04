@@ -1742,7 +1742,11 @@ function Router() {
   // ...
 ```
 
+<<<<<<< HEAD
 এটা React কে বলে যে state ট্রান্সিশনটি এখনই জরুরী নয়, এবং ইতিমধ্যেই প্রকাশ হয়ে যাওয়া কোনো কন্টেন্ট লুকানোর চেয়ে আগের পেজটি দেখিয়ে রাখাই ভাল। এখন বাটনটি ক্লিক করা হলে এটি `Biography` লোড হওয়ার জন্য "অপেক্ষা" করবেঃ
+=======
+This tells React that the state transition is not urgent, and it's better to keep showing the previous page instead of hiding any already revealed content. Now clicking the button "waits" for the `Biography` to load:
+>>>>>>> 8201e7e9203321bd1648c3ab0b76ef943c9ec3ad
 
 <Sandpack>
 
