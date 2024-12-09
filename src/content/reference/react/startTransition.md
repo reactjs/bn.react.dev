@@ -4,10 +4,14 @@ title: startTransition
 
 <Intro>
 
+<<<<<<< HEAD
 `startTransition` আপনাকে UI ব্লক না করে state আপডেট করতে দিবে।
+=======
+`startTransition` lets you render a part of the UI in the background.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 ```js
-startTransition(scope)
+startTransition(action)
 ```
 
 </Intro>
@@ -18,7 +22,7 @@ startTransition(scope)
 
 ## রেফারেন্স {/*reference*/}
 
-### `startTransition(scope)` {/*starttransitionscope*/}
+### `startTransition(action)` {/*starttransition*/}
 
 `startTransition` ফাংশন আপনাকে একটি state update কে transition হিসেবে চিহ্নিত করতে দেবে।
 
@@ -41,7 +45,11 @@ function TabContainer() {
 
 #### প্যারামিটার {/*parameters*/}
 
+<<<<<<< HEAD
 * `scope`: একটি ফাংশন যেটা এক বা একাধিক [`set` functions.](/reference/react/useState#setstate) কল করার মাধ্যমে কোন state আপডেট করে। React তৎক্ষণাৎভাবে কোন প্যারামিটার ছাড়া `scope` কল করে এবং `scope` ফাংশন কল হবার সময়ে সিঙ্ক্রোনাসভাবে শিডিউল হওয়া সকল state update কে transition হিসেবে চিহ্নিত করে। এগুলো [non-blocking](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অবাঞ্ছিত কোন লোডিং ইনডিকেটর দেখাবে না।](/reference/react/useTransition#preventing-unwanted-loading-indicators)
+=======
+* `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls awaited in the `action` will be included in the transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators.](#preventing-unwanted-loading-indicators).
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 #### রিটার্ন {/*returns*/}
 
@@ -53,13 +61,23 @@ function TabContainer() {
 
 * আপনি একটি আপডেট একটি transition এ wrap করতে পারবেন কেবল যদি আপনার ওই state এর `set` ফাংশনে এক্সেস করার অনুমতি থাকে। যদি আপনি কোন prop বা কাস্টম হুকের রেসপন্স হিসেবে একটি transition শুরু করতে চান, বরং [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করুন। 
 
+<<<<<<< HEAD
 * আপনি `startTransition` এ যে ফাংশন পাস করবেন সেটা অবশ্যই সিঙ্ক্রোনাস হতে হবে। React সাথে সাথে এই ফাংশন এক্সিকিউট করে, এবং এটা এক্সিকিউট হবার সময়ে চলমান সকল state update কে transition হিসেবে চিহ্নিত করে। আপনি যদি আরো state update করতে চান (যেমন্, একটা টাইমআউটের মধ্যে), তাহলে সেগুলো transition হিসেবে চিহ্নিত হবে না।
+=======
+* The function you pass to the of `startTransition` is called immediately, marking all state updates that happen while it executes as Transitions. If you try to perform state updates in a `setTimeout`, for example, they won't be marked as Transitions.
+
+* You must wrap any state updates after any async requests in another `startTransition` to mark them as Transitions. This is a known limitation that we will fix in the future (see [Troubleshooting](#react-doesnt-treat-my-state-update-after-await-as-a-transition)).
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 * Transition হিসেবে চিহ্নিত একটি state আপডেট অন্যান্য state update দ্বারা বাধাপ্রাপ্ত হবে। উদাহরণস্বরূপ, আপনি যদি একটি transition এর মধ্যে একটি চার্ট component আপডেট করেন, কিন্তু তার পরি চার্ট re-render এর মধ্যে থাকা অবস্থায় একটি ইনপুট ফিল্ডে টাইপ করা শুরু করেন, React ইনপুট state আপডেট হ্যান্ডল করার পর চার্ট componenT এর রেন্ডারিং এর কাজ পুনরায় শুরু করবে।
 
 * Transition আপডেট টেক্সট ইনপুট নিয়ন্ত্রণ করার জন্য ব্যবহার করা যাবে না।
 
+<<<<<<< HEAD
 * যদি একাধিক transition চলমান থাকে, React সেগুলোকে একসাথে ব্যাচ করে। এটা একটা সীমাবদ্ধতা যা সম্ভবত ভবিষ্যতের কোন রিলিজে ঠিক করা হবে।
+=======
+* If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that may be removed in a future release.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 ---
 

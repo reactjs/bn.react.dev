@@ -2,6 +2,14 @@
 title: forwardRef
 ---
 
+<Deprecated>
+
+In React 19, `forwardRef` is no longer necessary. Pass `ref` as a prop instead.
+
+`forwardRef` will deprecated in a future release. Learn more [here](/blog/2024/04/25/react-19#ref-as-a-prop).
+
+</Deprecated>
+
 <Intro>
 
 `forwardRef` আপনার কম্পোনেন্টকে একটি DOM নোড একটি প্যারেন্ট কম্পোনেন্টে একটি [ref](/learn/manipulating-the-dom-with-refs) সহ এক্সপোজ করার সুযোগ দেয়।
