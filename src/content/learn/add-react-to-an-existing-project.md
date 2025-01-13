@@ -20,9 +20,15 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 এখানে আমরা যে ভাবে এটি সেট আপ করতে পরামর্শ দিচ্ছিঃ
 
+<<<<<<< HEAD
 ১. **আপনার অ্যাপ এর React অংশটি** [React-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) দিয়ে বিল্ড করুন।
 ২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 ৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
 
