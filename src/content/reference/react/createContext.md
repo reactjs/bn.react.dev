@@ -84,7 +84,11 @@ function Button() {
 }
 ```
 
+<<<<<<< HEAD
 যদিও এই পুরনো উপায়টি এখনো কাজ করে, তবে **নতুন করে লেখা কোডে কনটেক্সট read করার জন্য বরং [`useContext()`](/reference/react/useContext) ব্যবহার করা উচিতঃ**
+=======
+Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 ```js
 function Button() {
