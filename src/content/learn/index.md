@@ -5,7 +5,11 @@ title: দ্রুত শুরু
 
 <Intro>
 
+<<<<<<< HEAD
 React ডকুমেন্টেশনে স্বাগতম! এই পৃষ্ঠাটি আপনাকে ৮০% ভূমিকা দেবে React এর, যা আপনি প্রতিদিন ব্যবহার করবেন।
+=======
+Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
+>>>>>>> 91614a51a1be9078777bc337ba83fc62e606cc14
 
 </Intro>
 
