@@ -78,7 +78,7 @@ const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 <Suspense fallback={<Loading />}>
   <h2>Preview</h2>
   <MarkdownPreview />
- </Suspense>
+</Suspense>
 ```
 
 এই উদাহরণে, `MarkdownPreview` এর কোড ততক্ষণ লোড হবে না যতক্ষণ আপনি এটা রেন্ডারের চেষ্টা করেন। যদি `MarkdownPreview` লোড না হয়ে থাকে, `Loading` তার নিজের জায়গায় দেখাবে। চেকবক্স টিক করে দেখুনঃ
