@@ -124,35 +124,35 @@ export default function CatFriends() {
     <>
       <nav>
         <button onClick={handleScrollToFirstCat}>
-          Tom
+          Neo
         </button>
         <button onClick={handleScrollToSecondCat}>
-          Maru
+          Millie
         </button>
         <button onClick={handleScrollToThirdCat}>
-          Jellylorum
+          Bella
         </button>
       </nav>
       <div>
         <ul>
           <li>
             <img
-              src="https://placekitten.com/g/200/200"
-              alt="Tom"
+              src="https://placecats.com/neo/300/200"
+              alt="Neo"
               ref={firstCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/300/200"
-              alt="Maru"
+              src="https://placecats.com/millie/200/200"
+              alt="Millie"
               ref={secondCatRef}
             />
           </li>
           <li>
             <img
-              src="https://placekitten.com/g/250/200"
-              alt="Jellylorum"
+              src="https://placecats.com/bella/199/200"
+              alt="Bella"
               ref={thirdCatRef}
             />
           </li>
@@ -218,18 +218,19 @@ li {
 <Sandpack>
 
 ```js
-import { useRef } from 'react';
+import { useRef, useState } from "react";
 
 export default function CatFriends() {
   const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
 
-  function scrollToId(itemId) {
+  function scrollToCat(cat) {
     const map = getMap();
-    const node = map.get(itemId);
+    const node = map.get(cat);
     node.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center'
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
     });
   }
 
@@ -244,34 +245,25 @@ export default function CatFriends() {
   return (
     <>
       <nav>
-        <button onClick={() => scrollToId(0)}>
-          Tom
-        </button>
-        <button onClick={() => scrollToId(5)}>
-          Maru
-        </button>
-        <button onClick={() => scrollToId(9)}>
-          Jellylorum
-        </button>
+        <button onClick={() => scrollToCat(catList[0])}>Neo</button>
+        <button onClick={() => scrollToCat(catList[5])}>Millie</button>
+        <button onClick={() => scrollToCat(catList[9])}>Bella</button>
       </nav>
       <div>
         <ul>
-          {catList.map(cat => (
+          {catList.map((cat) => (
             <li
-              key={cat.id}
+              key={cat}
               ref={(node) => {
                 const map = getMap();
-                if (node) {
-                  map.set(cat.id, node);
-                } else {
-                  map.delete(cat.id);
-                }
+                map.set(cat, node);
+
+                return () => {
+                  map.delete(cat);
+                };
               }}
             >
-              <img
-                src={cat.imageUrl}
-                alt={'Cat #' + cat.id}
-              />
+              <img src={cat} />
             </li>
           ))}
         </ul>
@@ -280,12 +272,13 @@ export default function CatFriends() {
   );
 }
 
-const catList = [];
-for (let i = 0; i < 10; i++) {
-  catList.push({
-    id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
-  });
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push("https://loremflickr.com/320/240/cat?lock=" + i);
+  }
+
+  return catList;
 }
 
 ```
@@ -325,6 +318,7 @@ li {
   key={cat.id}
   ref={node => {
     const map = getMap();
+<<<<<<< HEAD
     if (node) {
       // ম্যাপে যোগ করুন
       map.set(cat.id, node);
@@ -332,27 +326,69 @@ li {
       // ম্যাপ থেকে সরিয়ে ফেলুন
       map.delete(cat.id);
     }
+=======
+    // Add to the Map
+    map.set(cat, node);
+
+    return () => {
+      // Remove from the Map
+      map.delete(cat);
+    };
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
   }}
 >
 ```
 
 এটা আপনাকে ম্যাপ থেকে DOM নোড পৃথকভাবে রিড করতে দেয়।
 
+<Note>
+
+When Strict Mode is enabled, ref callbacks will run twice in development.
+
+Read more about [how this helps find bugs](/reference/react/StrictMode#fixing-bugs-found-by-re-running-ref-callbacks-in-development) in callback refs.
+
+</Note>
+
 </DeepDive>
 
 ## অন্য একটি কম্পোনেন্টের DOM নোড অ্যাক্সেস করা {/*accessing-another-components-dom-nodes*/}
 
+<<<<<<< HEAD
 আপনি যখন এমন একটা বিল্ট-ইন কম্পোনেন্টে রেফ বসান যা `<input />` এর মত একটি ব্রাউজার এলিমেন্ট আউটপুট হিসেবে দেয়, React সেই ref এর  `current` হিসেবে প্রপার্টি সম্পর্কিত DOM নোড (যেমন ব্রাউজারের প্রকৃত `<input />`) সেট করে দেবে। 
 
 তবে, আপনি যদি **আপনার নিজের** কম্পোনেন্টে একটা ref বসাতে চান, যেমন `<MyInput />`, তাহলে স্বাভাবিকভাবে আপনি `null` পাবেন। এখানে বিষয়টা দেখায় এমন একটি উদাহরণ দেখানো হল। খেয়াল করুন বাটনে ক্লিক করলে ইনপুটে ফোকাস **হয় না।**
+=======
+<Pitfall>
+Refs are an escape hatch. Manually manipulating _another_ component's DOM nodes can make your code fragile.
+</Pitfall>
+
+You can pass refs from parent component to child components [just like any other prop](/learn/passing-props-to-a-component).
+
+```js {3-4,9}
+import { useRef } from 'react';
+
+function MyInput({ ref }) {
+  return <input ref={ref} />;
+}
+
+function MyForm() {
+  const inputRef = useRef(null);
+  return <MyInput ref={inputRef} />
+}
+```
+
+In the above example, a ref is created in the parent component, `MyForm`, and is passed to the child component, `MyInput`. `MyInput` then passes the ref to `<input>`. Because `<input>` is a [built-in component](/reference/react-dom/components/common) React sets the `.current` property of the ref to the `<input>` DOM element.
+
+The `inputRef` created in `MyForm` now points to the `<input>` DOM element returned by `MyInput`. A click handler created in `MyForm` can access `inputRef` and call `focus()` to set the focus on `<input>`.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 <Sandpack>
 
 ```js
 import { useRef } from 'react';
 
-function MyInput(props) {
-  return <input {...props} />;
+function MyInput({ ref }) {
+  return <input ref={ref} />;
 }
 
 export default function MyForm() {
@@ -375,6 +411,7 @@ export default function MyForm() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 আপনি যেন ঝামেলাটা খেয়াল করেন, সেজন্য React কনসোলে একটি এরর দেখিয়ে দেয়ঃ
 
 <ConsoleBlock level="error">
@@ -432,22 +469,24 @@ export default function Form() {
 
 সাধারণত ডিজাইন সিস্টেমে, বাটন, ইনপুট এবং এরকম কিছু অন্যান্য নিম্ন-স্তরের কম্পোনেন্টগুলির জন্য তাদের ref তাদের DOM নোডে ফরওয়ার্ড করা একটি সাধারণ প্যাটার্ন। অন্যদিকে, ফরম, তালিকা, বা পেইজের সেকশনের মতো উচ্চ-স্তরের কম্পোনেন্টগুলি সাধারণত DOM নোড প্রকাশ করবে না যাতে DOM  কাঠামোতে আকস্মিক নির্ভরতা কমে যায়।
 
+=======
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 <DeepDive>
 
 #### API এর একাংশ imperative handle এর সাহায্যে উন্মুক্ত করা {/*exposing-a-subset-of-the-api-with-an-imperative-handle*/}
 
+<<<<<<< HEAD
 উপরের উদাহরণে, `MyInput` মূল DOM ইনপুট এলিমেন্টটি প্রকাশ করে। এটি প্যারেন্ট কম্পোনেন্টকে এটির উপর `focus()` কল করার সুযোগ দেয়। যদিও, এটি প্যারেন্ট কম্পোনেন্টকে অন্য একটা কাজ সুযোগ করে দেয় - উদাহরণস্বরূপ, এর CSS স্টাইল পরিবর্তন করা। হঠাৎ হঠাৎ, আপনি হয়তো exposed functionality সীমাবদ্ধ করতে চাইবেন। আপনি এটি `useImperativeHandle` এর সাহায্যে করতে পারেনঃ
+=======
+In the above example, the ref passed to `MyInput` is passed on to the original DOM input element. This lets the parent component call `focus()` on it. However, this also lets the parent component do something else--for example, change its CSS styles. In uncommon cases, you may want to restrict the exposed functionality. You can do that with [`useImperativeHandle`](/reference/react/useImperativeHandle):
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 <Sandpack>
 
 ```js
-import {
-  forwardRef, 
-  useRef, 
-  useImperativeHandle
-} from 'react';
+import { useRef, useImperativeHandle } from "react";
 
-const MyInput = forwardRef((props, ref) => {
+function MyInput({ ref }) {
   const realInputRef = useRef(null);
   useImperativeHandle(ref, () => ({
     // শুধুমাত্র ফোকাস উন্মুক্ত করুন আর কিছু না
@@ -455,8 +494,8 @@ const MyInput = forwardRef((props, ref) => {
       realInputRef.current.focus();
     },
   }));
-  return <input {...props} ref={realInputRef} />;
-});
+  return <input ref={realInputRef} />;
+};
 
 export default function Form() {
   const inputRef = useRef(null);
@@ -468,9 +507,7 @@ export default function Form() {
   return (
     <>
       <MyInput ref={inputRef} />
-      <button onClick={handleClick}>
-        Focus the input
-      </button>
+      <button onClick={handleClick}>Focus the input</button>
     </>
   );
 }
@@ -478,7 +515,11 @@ export default function Form() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 এখানে, `MyInput` এর মধ্যে `realInputRef` আসল ইনপুট DOM নোডটি ধারণ করে। যদিও, `useImperativeHandle` React-কে বলে যেন প্যারেন্ট কম্পোনেন্টের জন্য ref এর মান হিসাবে আপনার নিজের বিশেষ একটা অবজেক্ট সরবরাহ করবে। তাই `Form` কম্পোনেন্টের ভেতরে `inputRef.current` শুধু মাত্র `focus` মেথডটি আছে। এই ক্ষেত্রে, ref "handle" DOM নোড নয়, বরং `useImperativeHandle` কলের ভেতরে আপনি যে কাস্টম অবজেক্ট তৈরি করেন সেটা।
+=======
+Here, `realInputRef` inside `MyInput` holds the actual input DOM node. However, [`useImperativeHandle`](/reference/react/useImperativeHandle) instructs React to provide your own special object as the value of a ref to the parent component. So `inputRef.current` inside the `Form` component will only have the `focus` method. In this case, the ref "handle" is not the DOM node, but the custom object you create inside [`useImperativeHandle`](/reference/react/useImperativeHandle) call.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 </DeepDive>
 
@@ -590,7 +631,7 @@ export default function TodoList() {
     const newTodo = { id: nextId++, text: text };
     flushSync(() => {
       setText('');
-      setTodos([ ...todos, newTodo]);      
+      setTodos([ ...todos, newTodo]);
     });
     listRef.current.lastChild.scrollIntoView({
       behavior: 'smooth',
@@ -687,12 +728,21 @@ button {
 
 <Recap>
 
+<<<<<<< HEAD
 - Ref একটি সাধারণ ধারণা, কিন্তু বেশিরভাগ সময় আপনি DOM এলিমেন্ট হোল্ড করার জন্য এর ব্যবহার করবেন।
 - আপনি `<div ref={myRef}>` পাস করার মাধ্যমে React কে নির্দেশ করবেন যেন `myRef.current` এর মধ্যে একটি DOM নোড ঢুকানো হয়। 
 - সাধারণত, আপনি ref ব্যবহার করবেন এমন কাজ করার জন্য যা ধ্বংসাত্মক না। যেমন ফোকাস করা, স্ক্রল করা বা DOM এলিমেন্টের measure করা।
 - একটা কম্পোনেন্ট এর DOM নোড স্বাভাবিকভাবে উন্মুক্ত করে না। আপনি `forwardRef` ব্যবহার করার মাধ্যমে এবং একটা নির্দিষ্ট নোডে দ্বিতীয় `ref` আর্গুমেন্ট পাঠিয়ে দেবার মাধ্যমে DOM নোড উন্মুক্ত করার সিদ্ধান্ত নিতে পারেন।
 - React পরিচালনা করে এমন DOM নোড পরিবর্তন করা এড়িয়ে চলুন।
 - আপনি যদি React এর পরিচালিত DOM নোড পরিবর্তন করে, তাহলে এমন অংশে পরিবর্তনটা আনেন যেটা React এর আপডেট করার কোন কারণ নেই। 
+=======
+- Refs are a generic concept, but most often you'll use them to hold DOM elements.
+- You instruct React to put a DOM node into `myRef.current` by passing `<div ref={myRef}>`.
+- Usually, you will use refs for non-destructive actions like focusing, scrolling, or measuring DOM elements.
+- A component doesn't expose its DOM nodes by default. You can opt into exposing a DOM node by using the `ref` prop.
+- Avoid changing DOM nodes managed by React.
+- If you do modify DOM nodes managed by React, modify parts that React has no reason to update.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 </Recap>
 
@@ -923,7 +973,7 @@ const catList = [];
 for (let i = 0; i < 10; i++) {
   catList.push({
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
+    imageUrl: 'https://loremflickr.com/250/200/cat?lock=' + i
   });
 }
 
@@ -1040,7 +1090,7 @@ const catList = [];
 for (let i = 0; i < 10; i++) {
   catList.push({
     id: i,
-    imageUrl: 'https://placekitten.com/250/200?image=' + i
+    imageUrl: 'https://loremflickr.com/250/200/cat?lock=' + i
   });
 }
 
@@ -1092,7 +1142,11 @@ img {
 
 <Hint>
 
+<<<<<<< HEAD
 `SearchInput` এর মত, আপনার নিজের কোন কম্পোনেন্ট থেকে একটি DOM নোড উন্মুক্ত করার জন্য আপনার প্রয়োজন হবে `forwardRef`
+=======
+You'll need to pass `ref` as a prop to opt into exposing a DOM node from your own component like `SearchInput`.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 </Hint>
 
@@ -1177,18 +1231,14 @@ export default function SearchButton({ onClick }) {
 ```
 
 ```js src/SearchInput.js
-import { forwardRef } from 'react';
-
-export default forwardRef(
-  function SearchInput(props, ref) {
-    return (
-      <input
-        ref={ref}
-        placeholder="Looking for something?"
-      />
-    );
-  }
-);
+export default function SearchInput({ ref }) {
+  return (
+    <input
+      ref={ref}
+      placeholder="Looking for something?"
+    />
+  );
+}
 ```
 
 ```css
