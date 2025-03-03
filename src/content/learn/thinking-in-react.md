@@ -265,11 +265,19 @@ Props এবং state আলাদা বটে, তবে এরা একই �
 
 এখন তাদের জন্য আমাদের পরিকল্পনা ঝালাই করে নিই। 
 
+<<<<<<< HEAD
 1. **state ব্যবহার করে এমন কম্পোনেন্টগুলো চিহ্নিত করুন**
     * `ProductTable`কে ওই state(সার্চ টেক্সট এবং চেকবক্স) ব্যবহার করে পণ্যের তালিকা বাছাই করতে হবে। 
     * `SearchBar` কে ওই state(সার্চ টেক্সট এবং চেকবক্স) দেখাতে হবে। 
 1. **তাদের সাধারণ parent খুঁজে বের করুন** প্রথম যেই কম্পোনেন্ট এদের দুজনেরই parent তা হল `FilterableProductTable`।
 2. **State কোথায় থাকবে সেটা সিদ্ধান্ত নিন**: আমরা বাছাই করা text এবং checked state ভ্যালুগুলো  `FilterableProductTable` -তে রাখব। 
+=======
+1. **Identify components that use state:**
+    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
+    * `SearchBar` needs to display that state (search text and checkbox value).
+2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
+3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 সুতরাং state ভ্যালুগুলো থাকবে `FilterableProductTable` এর মধ্যে।
 
