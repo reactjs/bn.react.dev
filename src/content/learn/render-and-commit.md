@@ -70,7 +70,7 @@ export default function Image() {
 কম্পোনেন্টের প্রাথমিক রেন্ডারের পরে আপনি [set ফাংশন](/reference/react/useState#setstate) দ্বারা কম্পোনেন্টের স্টেট আপডেট করে আরও রেন্ডার ট্রিগার করতে পারবেন। কম্পোনেন্টের স্টেট আপডেট হলে React একটি রেন্ডার স্বয়ংক্রিয়ভাবে কিউ করে রাখে। (রেস্তোরাঁয় গেস্টের প্রথম অর্ডারের পরে চা, ডেজার্ট এবং অন্যান্য ধরণের জিনিস অর্ডার দেওয়ার মতো কল্পনা করতে পারেন।)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
   <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
@@ -84,7 +84,11 @@ export default function Image() {
 
 এই প্রক্রিয়াটি রিকার্সিভঃ আপডেট করা কম্পোনেন্ট যদি অন্য কোনও কম্পোনেন্ট রিটার্ন করে, তবে React পরবর্তীতে সেই কম্পোনেন্টটি রেন্ডার করবে এবং যদি সেই কম্পোনেন্টটি আবার কোন কম্পোনেন্ট রিটার্ন করে, তবে ঐ কম্পোনেন্টটিও রেন্ডার করবে। রেন্ডারিং এভাবে চলতে থাকবে যতক্ষণ পর্যন্ত সব নেস্টেড কম্পোনেন্ট রেন্ডার না হয়। এরপরেই React স্ক্রীনে কি দেখাতে হবে তা স্পষ্টভাবে জানতে পারে।
 
+<<<<<<< HEAD
 নিচের উদাহরণে React কয়েকবার `Gallery()` এবং `Image()` কল করবেঃ
+=======
+In the following example, React will call `Gallery()` and `Image()` several times:
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
 
 <Sandpack>
 
@@ -148,10 +152,17 @@ img { margin: 0 10px 10px 0; }
 
 ## ধাপ ৩ঃ React DOM-এ পরিবর্তন কমিট করে {/*step-3-react-commits-changes-to-the-dom*/}
 
+<<<<<<< HEAD
 কম্পোনেন্টগুলো রেন্ডার(কল) করার পর React DOM-কে পরিবর্তন করবে।
 
 * **প্রাথমিক রেন্ডারের জন্য,** [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API ব্যবহার করে React সমস্ত DOM নোডগুলো স্ক্রীনে দেখাবে। 
 * **রি-রেন্ডারের জন্য,** DOM-কে সাম্প্রতিক রেন্ডারিং আউটপুটের সাথে মেলানোর জন্য React রেন্ডারিং-ধাপে ক্যালকুলেট করা পরিবর্তনগুলো ন্যূনতম দরকারি অপারেশনে সম্পন্ন করবে।
+=======
+After rendering (calling) your components, React will modify the DOM.
+
+* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen.
+* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
 
 **React শুধুমাত্র পাশাপাশি দুটি রেন্ডারের মধ্যে পার্থক্য থাকলেই DOM নোডগুলো উপডেট করে।** উদাহরণস্বরূপ, এখানে একটি কম্পোনেন্ট দেওয়া হলো যা প্রতি সেকেন্ডে নতুন props নিয়ে রি-রেন্ডার হয়। লক্ষ্য করুন কীভাবে `<input>` এ কিছু টেক্সট লিখে তার `value` পরিবর্তন করলেও রি-রেন্ডারে তা হারিয়ে যায় নাঃ
 
