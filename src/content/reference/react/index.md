@@ -10,11 +10,21 @@ React এর সাথে পরিচিত হবার জন্য [Learn](/
 React reference documentation কয়েকটি ফাংশনাল অংশে ভাগ করা হয়েছেঃ 
 
 ## React {/*react*/}
+<<<<<<< HEAD
 Programmatic React ফিচারঃ  
 * [Hooks](/reference/react/hooks) - আপনার কম্পোনেন্ট থেকে বিভিন্ন React ফিচার ব্যবহার করুন।
 * [Components](/reference/react/components) - যেসব বিল্ট-ইন কম্পোনেন্ট আপনার JSX এ ব্যবহার করতে পারেন।
 * [APIs](/reference/react/apis) - কম্পোনেন্ট ডিফাইন করার জন্য কার্যকরী API।
 * [Directives](/reference/react/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
+=======
+
+Programmatic React features:
+
+* [Hooks](/reference/react/hooks) - Use different React features from your components.
+* [Components](/reference/react/components) - Built-in components that you can use in your JSX.
+* [APIs](/reference/react/apis) - APIs that are useful for defining components.
+* [Directives](/reference/rsc/directives) - Provide instructions to bundlers compatible with React Server Components.
+>>>>>>> ab18d2f0f5151ab0c927a12eb0a64f8170762eff
 
 ## React DOM {/*react-dom*/}
 
