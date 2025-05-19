@@ -44,7 +44,7 @@ function ChatRoom({ roomId }) {
   return (
     <>
       <input value={message} onChange={e => setMessage(e.target.value)} />
-      <button onClick={handleSendClick}>Send</button>;
+      <button onClick={handleSendClick}>Send</button>
     </>
   );
 }
@@ -439,7 +439,7 @@ function ChatRoom({ roomId, theme }) {
   // ...
 ```
 
-This solves the problem. Note that you had to *remove* `onConnected` from the list of your Effect's dependencies. **Effect Events are not reactive and must be omitted from dependencies.**
+This solves the problem. Note that you had to *remove* `theme` from the list of your Effect's dependencies, because it's no longer used in the Effect. You also don't need to *add* `onConnected` to it, because **Effect Events are not reactive and must be omitted from dependencies.**
 
 Verify that the new behavior works as you would expect:
 
