@@ -25,17 +25,12 @@
       "path": "/learn/installation",
       "routes": [
         {
-<<<<<<< HEAD
-          "title": "একটি নতুন React প্রোজেক্ট শুরু করুন",
-          "path": "/learn/start-a-new-react-project"
-=======
           "title": "Creating a React App",
           "path": "/learn/creating-a-react-app"
         },
         {
           "title": "Build a React App from Scratch",
           "path": "/learn/build-a-react-app-from-scratch"
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
         },
         {
           "title": "Add React to an Existing Project",
