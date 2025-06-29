@@ -464,12 +464,7 @@ export default function Toggle() {
 
 #### Debouncing ঠিক করুন {/*fix-debouncing*/}
 
-<<<<<<< HEAD
-এই উদাহরণে, সকল বাটন click handlers-রা ["debounced".](https://redd.one/blog/debounce-vs-throttle) এর অর্থ বুঝার জন্য, একটা বাটনে চাপ দিন। খেয়াল করুন কীভাবে এক সেকেন্ড পর একটা মেসেজ দেখা যায়। আপনি যদি অপেক্ষার সময়ে বাটনে চাপ দিন, তাহলে timer রিসেট হয়ে যায়। সুতরাং আপনি যদি খুব কম সময়ের ব্যবধানে বার বার বাটনে ক্লিক দিতে থাকেন তাহলে আপনি ক্লিক করা বন্ধ করার এক সেকেন্ড *পর* পর্যন্ত মেসেজ দেখবেন না। "কেউ কিছু করা বন্ধ করা" পর্যন্ত কোন কাজ বিলম্ব করার জন্য debouncing সাহায্য কয়রে। 
-=======
-In this example, all button click handlers are ["debounced".](https://kettanaito.com/blog/debounce-vs-throttle) To see what this means, press one of the buttons. Notice how the message appears a second later. If you press the button while waiting for the message, the timer will reset. So if you keep clicking the same button fast many times, the message won't appear until a second *after* you stop clicking. Debouncing lets you delay some action until the user "stops doing things".
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
-
+এই উদাহরণে, সকল বাটন click handlers-রা ["debounced".](https://kettanaito.com/blog/debounce-vs-throttle) এর অর্থ বুঝার জন্য, একটা বাটনে চাপ দিন। খেয়াল করুন কীভাবে এক সেকেন্ড পর একটা মেসেজ দেখা যায়। আপনি যদি অপেক্ষার সময়ে বাটনে চাপ দিন, তাহলে timer রিসেট হয়ে যায়। সুতরাং আপনি যদি খুব কম সময়ের ব্যবধানে বার বার বাটনে ক্লিক দিতে থাকেন তাহলে আপনি ক্লিক করা বন্ধ করার এক সেকেন্ড *পর* পর্যন্ত মেসেজ দেখবেন না। "কেউ কিছু করা বন্ধ করা" পর্যন্ত কোন কাজ বিলম্ব করার জন্য debouncing সাহায্য করে।
 এই উদাহরণটা কাজ করছে, তবে যেভাবে করা উচিত ঠিক সেভাবে না। বাটনগুলো স্বাধীন না। সমস্যাটা দেখার জন্য, প্রথমে একটি বাটন ক্লিক করুন এবং খুব দ্ররুত আরেকটি বাটন ক্লিক করুন। আপনি আশা করবেন যে, একটু বিলম্বের পর দুটো বাটনের মেসেজই দেখা যাবে। কিন্তু শুধু শেষ বাটনের মেসেজ দেখা যায়। প্রথম বাটনের মেসেজ হারিয়ে যায়।
 
 বাটনগুলো নিজেদের মধ্যে ঝামেলা করছে কেন? সমস্যাটা খুঁজে বের করুন এবং ঠিক করুন।
