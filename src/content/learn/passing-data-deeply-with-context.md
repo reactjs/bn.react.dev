@@ -476,11 +476,7 @@ export default function Section({ level, children }) {
 }
 ```
 
-<<<<<<< HEAD
-এটা React কে বলে দেয় যে: "যদি এই `<Section>` এর ভিতরের কোনো কম্পোনেন্ট `LevelContext` তালাশ করে, তবে তাকে এই `level` দিয়ে দাও"। তখন কম্পোনেন্টটি UI ট্রি এর ভিতর এর সবচেয়ে কাছের `<LevelContext.Provider>` এর ভ্যালু ইউজ করবে।
-=======
-This tells React: "if any component inside this `<Section>` asks for `LevelContext`, give them this `level`." The component will use the value of the nearest `<LevelContext>` in the UI tree above it.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+এটা React কে বলে দেয় যে: "যদি এই `<Section>` এর ভিতরের কোনো কম্পোনেন্ট `LevelContext` তালাশ করে, তবে তাকে এই `level` দিয়ে দাও"। তখন কম্পোনেন্টটি UI ট্রি এর ভিতর এর উপরে থাকা সবচেয়ে কাছের `<LevelContext>` এর ভ্যালু ইউজ করবে।
 
 <Sandpack>
 
@@ -570,15 +566,9 @@ export const LevelContext = createContext(1);
 
 ফলস্বরূপ আমরা অরিজিনাল কোডের মতো হুবহু ফলাফল পেলাম, কিন্তু আপনার `level` প্রপটিকে প্রত্যেক `Heading` কম্পোনেন্টে পাস করতে হয়নি! তার পরিবর্তে `Heading` কম্পোনেন্টটি এর হেডিং লেভেল, উপরস্থ সবচেয়ে কাছের `Section` থেকে "বুঝে নিতে" পারছে:
 
-<<<<<<< HEAD
 1. আপনি `<Section>` কে `level` প্রপ পাস করলেন।
-2. `Section` এর চিলড্রেনকে `<LevelContext.Provider value={level}>` দিয়ে wrap করে নেয়।
-3. `useContext(LevelContext)` এর দ্বারা `Heading` এর উপরস্থ নিকটতম `levelContext` এর ভ্যালু তালাশ করে।
-=======
-1. You pass a `level` prop to the `<Section>`.
-2. `Section` wraps its children into `<LevelContext value={level}>`.
-3. `Heading` asks the closest value of `LevelContext` above with `useContext(LevelContext)`.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+2. `Section` এর চিলড্রেনকে `<LevelContext value={level}>` দিয়ে wrap করে নেয়।
+3. `useContext(LevelContext)` এর দ্বারা `Heading` এর উপরস্থ নিকটতম `LevelContext` এর ভ্যালু তালাশ করে।
 
 ## একই কম্পোনেন্ট থেকে কনটেক্সট Use এবং Provide করা {/*using-and-providing-context-from-the-same-component*/}
 
@@ -874,25 +864,14 @@ CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং
 
 <Recap>
 
-<<<<<<< HEAD
-* কনটেক্সট একটি কম্পোনেন্টকে এর নিম্নস্থ পুরো ট্রি কে কিছু ইনফর্মেশন প্রোভাইড করতে দেয়।
+* কনটেক্সট একটি কম্পোনেন্টকে এর নিম্নস্থ পুরো ট্রিকে কিছু ইনফর্মেশন প্রোভাইড করতে দেয়।
 * কনটেক্সট পাস করতে হলে:
   1. `export const MyContext = createContext(defaultValue)` দিয়ে কনটেক্সট create করে export করুন।
   2. `useContext(MyContext)` হুককে কনটেক্সটটি পাস করুন যাতে যেকোনো চাইল্ড কম্পোনেন্ট থেকে সেটিকে read করা যায়, তা যত গভীরেই হোক না কেনো।
-  3. চিলড্রেনকে `<MyContext.Provider value={...}>` দিয়ে wrap করুন যাতে একটি প্যারেন্ট থেকে কনটেক্সটটি প্রোভাইড করতে পারেন।
+  3. চিলড্রেনকে `<MyContext value={...}>` দিয়ে wrap করুন যাতে একটি প্যারেন্ট থেকে কনটেক্সটটি প্রোভাইড করতে পারেন।
 * কনটেক্সট মধ্যবর্তী যেকোনো কম্পোনেন্ট ভেদ করে যেতে পারে।
 * কনটেক্সট আপনাকে এমন কম্পোনেন্ট তৈরি করতে দেয় যেগুলো "তাদের আসে পাশের সাথে তাল মিলিয়ে চলতে পারে"।
 * কনটেক্সট ব্যবহার করার আগে, চেষ্টা করুন প্রপস পাস করতে বা JSX কে `children` হিসেবে পাস করতে।
-=======
-* Context lets a component provide some information to the entire tree below it.
-* To pass context:
-  1. Create and export it with `export const MyContext = createContext(defaultValue)`.
-  2. Pass it to the `useContext(MyContext)` Hook to read it in any child component, no matter how deep.
-  3. Wrap children into `<MyContext value={...}>` to provide it from a parent.
-* Context passes through any components in the middle.
-* Context lets you write components that "adapt to their surroundings".
-* Before you use context, try passing props or passing JSX as `children`.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 </Recap>
 
