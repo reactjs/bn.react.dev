@@ -1,26 +1,26 @@
 ---
-title: Passing Props to a Component
+title: কম্পোনেন্টে প্রপস পাস করা
 ---
 
 <Intro>
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
+React কম্পোনেন্টগুলো *props* ব্যবহার করে একে অপরের সাথে যোগাযোগ করে। প্রতিটি parent কম্পোনেন্ট তার child কম্পোনেন্টগুলোকে props দিয়ে কিছু তথ্য পাঠাতে পারে। Props HTML attributes-এর মত মনে হতে পারে, তবে আপনি এর মাধ্যমে object, array এবং function সহ যেকোনো JavaScript মান পাঠাতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass props to a component
-* How to read props from a component
-* How to specify default values for props
-* How to pass some JSX to a component
-* How props change over time
+* কীভাবে একটি কম্পোনেন্টে props পাঠাতে হয়
+* কীভাবে একটি কম্পোনেন্ট থেকে props পড়তে হয়
+* কীভাবে props-এর জন্য default মান নির্দিষ্ট করতে হয়
+* কীভাবে একটি কম্পোনেন্টে কিছু JSX পাঠাতে হয়
+* কীভাবে সময়ের সাথে সাথে props পরিবর্তিত হয়
 
 </YouWillLearn>
 
-## Familiar props {/*familiar-props*/}
+## সুপরিচিত props {/*familiar-props*/}
 
-Props are the information that you pass to a JSX tag. For example, `className`, `src`, `alt`, `width`, and `height` are some of the props you can pass to an `<img>`:
+প্রপস হলো সেই তথ্য যা আপনি একটি JSX ট্যাগে পাঠান। উদাহরণস্বরূপ, `className`, `src`, `alt`, `width`, এবং `height` হল কিছু প্রপস, যা আপনি একটি `<img>` ট্যাগে পাঠাতে পারেন।
 
 <Sandpack>
 
@@ -51,11 +51,11 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to *your own* components, such as `<Avatar>`, to customize them. Here's how!
+আপনি যে প্রপসগুলো `<img>` ট্যাগে পাঠাতে পারেন, সেগুলো পূর্বনির্ধারিত (ReactDOM [HTML স্ট্যান্ডার্ড](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)-এর সাথে সামঞ্জস্যপূর্ণ)। তবে আপনি *নিজের* কম্পোনেন্টগুলো, যেমন `<Avatar>`,-এ যেকোনো প্রপস পাঠাতে পারেন তাদের কাস্টমাইজ করার জন্য। এটি কীভাবে করবেন, দেখুন!
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## একটি কম্পোনেন্টে প্রপস পাঠানো {/*passing-props-to-a-component*/}
 
-In this code, the `Profile` component isn't passing any props to its child component, `Avatar`:
+এই কোডে, `Profile` কম্পোনেন্টটি এর চাইল্ড কম্পোনেন্ট `Avatar`-এ কোনো প্রপস পাঠাচ্ছে না:
 
 ```js
 export default function Profile() {
@@ -65,11 +65,11 @@ export default function Profile() {
 }
 ```
 
-You can give `Avatar` some props in two steps.
+আপনি দুটি ধাপে `Avatar`-এ কিছু props দিতে পারেন।
 
-### Step 1: Pass props to the child component {/*step-1-pass-props-to-the-child-component*/}
+### ধাপ ১: child কম্পোনেন্টে props পাঠানো {/*step-1-pass-props-to-the-child-component*/}
 
-First, pass some props to `Avatar`. For example, let's pass two props: `person` (an object), and `size` (a number):
+প্রথমে, কিছু প্রপস `Avatar`-এ পাঠান। উদাহরণস্বরূপ, দুটি প্রপস পাঠানো যাক: `person` (একটি অবজেক্ট), এবং `size` (একটি সংখ্যা):
 
 ```js
 export default function Profile() {
@@ -84,15 +84,15 @@ export default function Profile() {
 
 <Note>
 
-If double curly braces after `person=` confuse you, recall [they're merely an object](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) inside the JSX curlies.
+যদি `person=` এর পর ডাবল কার্লি ব্রেস আপনাকে বিভ্রান্ত করে, মনে রাখুন [এগুলো কেবল একটি অবজেক্ট](https://react.dev/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) JSX-এর কার্লি ব্রেসের ভিতরে।
 
 </Note>
 
-Now you can read these props inside the `Avatar` component.
+এখন আপনি এই props `Avatar` কম্পোনেন্টের ভিতরে পড়তে পারেন।
 
-### Step 2: Read props inside the child component {/*step-2-read-props-inside-the-child-component*/}
+### ধাপ ২: চাইল্ড কম্পোনেন্টের ভেতরে প্রপস পড়ুন {/*step-2-read-props-inside-the-child-component*/}
 
-You can read these props by listing their names `person, size` separated by the commas inside `({` and `})` directly after `function Avatar`. This lets you use them inside the `Avatar` code, like you would with a variable.
+আপনি `function Avatar`-এর ঠিক পরে `({` এবং `})` এর ভিতরে props-এর নামগুলো কমা দিয়ে আলাদা করে লিখে এই props পড়তে পারেন। এভাবে, আপনি সেগুলোকে ভেরিয়েবলের মত ব্যবহার করতে পারেন।
 
 ```js
 function Avatar({ person, size }) {
@@ -100,9 +100,9 @@ function Avatar({ person, size }) {
 }
 ```
 
-Add some logic to `Avatar` that uses the `person` and `size` props for rendering, and you're done.
+`person` এবং `size` props ব্যবহার করে `Avatar`-এ কিছু logic যোগ করুন, আর আপনার কাজ শেষ।
 
-Now you can configure `Avatar` to render in many different ways with different props. Try tweaking the values!
+এখন আপনি বিভিন্ন props-এর সাথে `Avatar`-কে বিভিন্ন উপায়ে রেন্ডার করতে পারেন। মান পরিবর্তন করে দেখুন!
 
 <Sandpack>
 
@@ -168,9 +168,9 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-Props let you think about parent and child components independently. For example, you can change the `person` or the `size` props inside `Profile` without having to think about how `Avatar` uses them. Similarly, you can change how the `Avatar` uses these props, without looking at the `Profile`.
+প্রপস আপনাকে প্যারেন্ট এবং চাইল্ড কম্পোনেন্টগুলোকে স্বাধীনভাবে ভাবতে সাহায্য করে। উদাহরণস্বরূপ, আপনি Profile-এর মধ্যে person বা size প্রপস পরিবর্তন করতে পারেন, Avatar কীভাবে সেগুলো ব্যবহার করে তা নিয়ে চিন্তা না করেই। একইভাবে, আপনি Avatar-এ প্রপসগুলো কীভাবে ব্যবহৃত হচ্ছে তা পরিবর্তন করতে পারেন, Profile-এর দিকে না তাকিয়েই।
 
-You can think of props like "knobs" that you can adjust. They serve the same role as arguments serve for functions—in fact, props _are_ the only argument to your component! React component functions accept a single argument, a `props` object:
+আপনি প্রপসকে “নব” বা নিয়ন্ত্রণ কাঁটা হিসেবে ভাবতে পারেন যা আপনি সামঞ্জস্য করতে পারেন। এগুলো আসলে ফাংশনের আর্গুমেন্টের মতো কাজ করে—আসলে, প্রপস হচ্ছে আপনার কম্পোনেন্টের একমাত্র আর্গুমেন্ট! React কম্পোনেন্ট ফাংশনগুলো একটি মাত্র আর্গুমেন্ট, অর্থাৎ একটি প্রপস অবজেক্ট গ্রহণ করে।
 
 ```js
 function Avatar(props) {
@@ -180,11 +180,11 @@ function Avatar(props) {
 }
 ```
 
-Usually you don't need the whole `props` object itself, so you destructure it into individual props.
+সাধারণত আপনাকে সম্পূর্ণ `props` object প্রয়োজন হয় না, তাই আপনি এটি আলাদা props এ ভেঙে ফেলেন।
 
 <Pitfall>
 
-**Don't miss the pair of `{` and `}` curlies** inside of `(` and `)` when declaring props:
+**প্রপস ডিক্লেয়ার করার সময় `{` এবং `}` জোড়া মিস করবেন না** `(` এবং `)` এর ভেতরে:
 
 ```js
 function Avatar({ person, size }) {
@@ -192,7 +192,7 @@ function Avatar({ person, size }) {
 }
 ```
 
-This syntax is called ["destructuring"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) and is equivalent to reading properties from a function parameter:
+এই সিনট্যাক্সটিকে ["ডিস্ট্রাকচারিং"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) বলা হয় এবং এটি ফাংশন প্যারামিটার থেকে প্রপার্টি পড়ার সমতুল্য।
 
 ```js
 function Avatar(props) {
@@ -204,9 +204,9 @@ function Avatar(props) {
 
 </Pitfall>
 
-## Specifying a default value for a prop {/*specifying-a-default-value-for-a-prop*/}
+## প্রপের জন্য একটি ডিফল্ট মান নির্ধারণ করা {/*specifying-a-default-value-for-a-prop*/}
 
-If you want to give a prop a default value to fall back on when no value is specified, you can do it with the destructuring by putting `=` and the default value right after the parameter:
+যদি আপনি কোনো প্রপের জন্য ডিফল্ট মান নির্ধারণ করতে চান, যাতে কোনো মান নির্দিষ্ট না থাকলে তা প্রযোজ্য হয়, তাহলে ডিস্ট্রাকচারিংয়ে প্যারামিটারের পরে `=` এবং ডিফল্ট মানটি যোগ করতে পারেন:
 
 ```js
 function Avatar({ person, size = 100 }) {
@@ -214,13 +214,13 @@ function Avatar({ person, size = 100 }) {
 }
 ```
 
-Now, if `<Avatar person={...} />` is rendered with no `size` prop, the `size` will be set to `100`.
+এখন, যদি `<Avatar person={...} />` কোনো `size` প্রপ ছাড়া রেন্ডার করা হয়, তাহলে `size` সেট হবে `100`।
 
-The default value is only used if the `size` prop is missing or if you pass `size={undefined}`. But if you pass `size={null}` or `size={0}`, the default value will **not** be used.
+ডিফল্ট মানটি কেবল তখনই ব্যবহৃত হবে যদি `size` প্রপটি অনুপস্থিত থাকে অথবা আপনি `size={undefined}` পাঠান। তবে, যদি আপনি `size={null}` বা `size={0}` পাঠান, তাহলে ডিফল্ট মান **ব্যবহৃত হবে না**।
 
-## Forwarding props with the JSX spread syntax {/*forwarding-props-with-the-jsx-spread-syntax*/}
+## JSX স্প্রেড syntax এর সাথে props ফরোয়ার্ড করা {/*forwarding-props-with-the-jsx-spread-syntax*/}
 
-Sometimes, passing props gets very repetitive:
+কখনও কখনও, props পাঠানো খুবই পুনরাবৃত্তিমূলক হতে পারে:
 
 ```js
 function Profile({ person, size, isSepia, thickBorder }) {
@@ -237,7 +237,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 }
 ```
 
-There's nothing wrong with repetitive code—it can be more legible. But at times you may value conciseness. Some components forward all of their props to their children, like how this `Profile` does with `Avatar`. Because they don't use any of their props directly, it can make sense to use a more concise "spread" syntax:
+পুনরাবৃত্তিমূলক কোডে কোনো সমস্যা নেই—এটি আরও বোধগম্য হতে পারে। কিন্তু কখনও কখনও আপনি সংক্ষিপ্ততা মূল্যায়ন করতে পারেন। কিছু কম্পোনেন্ট তাদের সমস্ত props child কম্পোনেন্টে ফরোয়ার্ড করে, যেমন `Profile` `Avatar`-এর সাথে করে। যেহেতু তারা কোনো props সরাসরি ব্যবহার করে না, তাই একটি সংক্ষিপ্ত "স্প্রেড" syntax ব্যবহার করা যেতে পারে:
 
 ```js
 function Profile(props) {
@@ -249,13 +249,13 @@ function Profile(props) {
 }
 ```
 
-This forwards all of `Profile`'s props to the `Avatar` without listing each of their names.
+এটি `Profile` এর সমস্ত props `Avatar` এ ফরোয়ার্ড করে কোনো নাম তালিকা ছাড়াই।
 
-**Use spread syntax with restraint.** If you're using it in every other component, something is wrong. Often, it indicates that you should split your components and pass children as JSX. More on that next!
+**স্প্রেড syntax নিয়ন্ত্রণের সাথে ব্যবহার করুন।** যদি আপনি এটি প্রতিটি কম্পোনেন্টে ব্যবহার করেন, তাহলে কিছু সমস্যা রয়েছে। সাধারণত, এটি নির্দেশ করে যে আপনাকে আপনার কম্পোনেন্টগুলো ভাগ করা উচিত এবং children JSX হিসেবে পাঠানো উচিত।
 
-## Passing JSX as children {/*passing-jsx-as-children*/}
+## children হিসেবে JSX পাঠানো {/*passing-jsx-as-children*/}
 
-It is common to nest built-in browser tags:
+বিল্ট-ইন ব্রাউজার ট্যাগ নেস্ট করা সাধারণ:
 
 ```js
 <div>
@@ -263,7 +263,7 @@ It is common to nest built-in browser tags:
 </div>
 ```
 
-Sometimes you'll want to nest your own components the same way:
+আপনার নিজস্ব কম্পোনেন্টগুলো একইভাবে নেস্ট করতে পারেন:
 
 ```js
 <Card>
@@ -271,7 +271,7 @@ Sometimes you'll want to nest your own components the same way:
 </Card>
 ```
 
-When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to `<Avatar />` and render it in a wrapper div:
+যখন আপনি একটি JSX ট্যাগের ভিতরে কন্টেন্ট নেস্ট করেন, parent কম্পোনেন্ট সেই কন্টেন্টকে একটি `children` prop-এ গ্রহণ করবে। উদাহরণস্বরূপ, নিচের `Card` কম্পোনেন্ট একটি `children` prop গ্রহণ করবে যেটি `<Avatar />` সেট করা আছে এবং এটি একটি wrapper div এ রেন্ডার করবে:
 
 <Sandpack>
 
@@ -347,17 +347,17 @@ export function getImageUrl(person, size = 's') {
 
 </Sandpack>
 
-Try replacing the `<Avatar>` inside `<Card>` with some text to see how the `Card` component can wrap any nested content. It doesn't need to "know" what's being rendered inside of it. You will see this flexible pattern in many places.
+`Card`-এর ভিতরে `<Avatar>` পরিবর্তন করে কিছু টেক্সট যোগানোর চেষ্টা করুন এবং দেখুন কীভাবে `Card` যেকোনো নেস্টেড কন্টেন্টকে র‍্যাপ করতে পারে। এটি জানে না যে এর ভিতরে কী রেন্ডার করা হচ্ছে। আপনি এই নমনীয় pattern অনেক জায়গায় দেখতে পাবেন।
 
-You can think of a component with a `children` prop as having a "hole" that can be "filled in" by its parent components with arbitrary JSX. You will often use the `children` prop for visual wrappers: panels, grids, etc.
+একটি `children` prop সহ কম্পোনেন্টকে এমন একটি "ছিদ্র" হিসেবে ভাবতে পারেন যা parent কম্পোনেন্টগুলো যেকোনো JSX দিয়ে "পূর্ণ" করতে পারে। আপনি ভিজ্যুয়াল wrapper-দের জন্য children prop প্রায়ই ব্যবহার করবেন: প্যানেল, গ্রিড ইত্যাদি।
 
 <Illustration src="/images/docs/illustrations/i_children-prop.png" alt='A puzzle-like Card tile with a slot for "children" pieces like text and Avatar' />
 
 ## How props change over time {/*how-props-change-over-time*/}
 
-The `Clock` component below receives two props from its parent component: `color` and `time`. (The parent component's code is omitted because it uses [state](/learn/state-a-components-memory), which we won't dive into just yet.)
+নিচের `Clock` কম্পোনেন্টটি parent কম্পোনেন্ট থেকে দুটি props গ্রহণ করে: `color` এবং `time`। (parent কম্পোনেন্টের কোডটি বাদ দেওয়া হয়েছে কারণ এটি [state](/learn/state-a-components-memory) ব্যবহার করে, যা আমরা এখনো আলোচনা করছি না।)
 
-Try changing the color in the select box below:
+নীচের সিলেক্ট বক্সে রং পরিবর্তন করার চেষ্টা করুন:
 
 <Sandpack>
 
@@ -407,21 +407,21 @@ export default function App() {
 
 </Sandpack>
 
-This example illustrates that **a component may receive different props over time.** Props are not always static! Here, the `time` prop changes every second, and the `color` prop changes when you select another color. Props reflect a component's data at any point in time, rather than only in the beginning.
+এই উদাহরণটি দেখায় যে **একটি কম্পোনেন্ট সময়ের সাথে সাথে বিভিন্ন প্রপস পেতে পারে।** প্রপস সর্বদা স্থির নয়! এখানে, `time` প্রপ প্রতি সেকেন্ডে পরিবর্তিত হয়, এবং `color` প্রপটি যখন আপনি অন্য রঙ নির্বাচন করেন তখন পরিবর্তিত হয়। প্রপস যেকোনো সময়ে একটি কম্পোনেন্টের ডেটা প্রতিফলিত করে, শুধুমাত্র শুরুতে নয়।
 
-However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)—a term from computer science meaning "unchangeable". When a component needs to change its props (for example, in response to a user interaction or new data), it will have to "ask" its parent component to pass it _different props_—a new object! Its old props will then be cast aside, and eventually the JavaScript engine will reclaim the memory taken by them.
+তবে, প্রপস [অপরিবর্তনীয়](https://en.wikipedia.org/wiki/Immutable_object)—এটি একটি কম্পিউটার বিজ্ঞান সম্পর্কিত শব্দ যার অর্থ "অপরিবর্তনীয়"। যখন একটি কম্পোনেন্ট তার প্রপস পরিবর্তন করতে চায় (যেমন, ব্যবহারকারীর একটি ক্রিয়ার প্রতিক্রিয়া হিসেবে বা নতুন ডেটার জন্য), তখন এটি তার প্যারেন্ট কম্পোনেন্টকে _বিভিন্ন প্রপস_—একটি নতুন অবজেক্ট পাঠানোর জন্য "বিনীত" করবে! তারপর তার পুরানো প্রপস বাদ দেওয়া হবে, এবং অবশেষে জাভাস্ক্রিপ্ট ইঞ্জিন তাদের দ্বারা নেওয়া মেমরি পুনরুদ্ধার করবে।
 
-**Don't try to "change props".** When you need to respond to the user input (like changing the selected color), you will need to "set state", which you can learn about in [State: A Component's Memory.](/learn/state-a-components-memory)
+**"প্রপস পরিবর্তন করার চেষ্টা করবেন না"।** যখন আপনাকে ব্যবহারকারীর ইনপুটের প্রতিক্রিয়া জানাতে হবে (যেমন নির্বাচিত রঙ পরিবর্তন করা), তখন আপনাকে "স্টেট সেট" করতে হবে, যা আপনি [স্টেট: একটি কম্পোনেন্টের মেমরি](/learn/state-a-components-memory) থেকে শিখতে পারেন।
 
 <Recap>
 
-* To pass props, add them to the JSX, just like you would with HTML attributes.
-* To read props, use the `function Avatar({ person, size })` destructuring syntax.
-* You can specify a default value like `size = 100`, which is used for missing and `undefined` props.
-* You can forward all props with `<Avatar {...props} />` JSX spread syntax, but don't overuse it!
-* Nested JSX like `<Card><Avatar /></Card>` will appear as `Card` component's `children` prop.
-* Props are read-only snapshots in time: every render receives a new version of props.
-* You can't change props. When you need interactivity, you'll need to set state.
+* প্রপস পাঠাতে, সেগুলো JSX-এ যুক্ত করুন, যেমন আপনি HTML অ্যাট্রিবিউটগুলোর সাথে করেন।
+* প্রপস পড়তে, `function Avatar({ person, size })` ডিস্ট্রাকচারিং সিনট্যাক্স ব্যবহার করুন।
+* আপনি একটি ডিফল্ট মান নির্ধারণ করতে পারেন যেমন `size = 100`, যা অনুপস্থিত এবং `undefined` প্রপসের জন্য ব্যবহৃত হয়।
+* আপনি সমস্ত প্রপসকে `<Avatar {...props} />` JSX স্প্রেড সিনট্যাক্সের মাধ্যমে ফরওয়ার্ড করতে পারেন, তবে এটিকে অতিরিক্ত ব্যবহার করবেন না!
+* নেস্টেড JSX যেমন `<Card><Avatar /></Card>` `Card` কম্পোনেন্টের `children` প্রপ হিসেবে উপস্থিত হবে।
+* প্রপস হল সময়ের একটি রিড-অনলি স্ন্যাপশট: প্রতিটি রেন্ডারে প্রপসের একটি নতুন সংস্করণ পাওয়া যায়।
+* আপনি প্রপস পরিবর্তন করতে পারবেন না। যখন আপনাকে ইন্টারঅ্যাকটিভিটি প্রয়োজন, তখন আপনাকে স্টেট সেট করতে হবে।
 
 </Recap>
 
@@ -429,9 +429,9 @@ However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)�
 
 <Challenges>
 
-#### Extract a component {/*extract-a-component*/}
+#### একটি কম্পোনেন্ট বের করুন {/*extract-a-component*/}
 
-This `Gallery` component contains some very similar markup for two profiles. Extract a `Profile` component out of it to reduce the duplication. You'll need to choose what props to pass to it.
+এই `Gallery` কম্পোনেন্টে দুটি প্রফাইলের জন্য কিছু খুব অনুরূপ মার্কআপ রয়েছে। ডুপ্লিকেশন কমানোর জন্য একটি `Profile` কম্পোনেন্ট বের করুন। আপনাকে এটি কী প্রপস পাঠাতে হবে তা নির্বাচন করতে হবে।
 
 <Sandpack>
 
@@ -524,15 +524,15 @@ li { margin: 5px; }
 
 <Hint>
 
-Start by extracting the markup for one of the scientists. Then find the pieces that don't match it in the second example, and make them configurable by props.
+একজন বিজ্ঞানীর জন্য মার্কআপ বের করার মাধ্যমে শুরু করুন। তারপর দ্বিতীয় উদাহরণে যা মেলে না তা খুঁজে বের করুন এবং সেগুলোকে প্রপস দ্বারা কনফিগারেবল করুন।
 
 </Hint>
 
 <Solution>
 
-In this solution, the `Profile` component accepts multiple props: `imageId` (a string), `name` (a string), `profession` (a string), `awards` (an array of strings), `discovery` (a string), and `imageSize` (a number).
+এই সমাধানে, `Profile` কম্পোনেন্টটি একাধিক প্রপ গ্রহণ করে: `imageId` (একটি স্ট্রিং), `name` (একটি স্ট্রিং), `profession` (একটি স্ট্রিং), `awards` (স্ট্রিংয়ের একটি অ্যারে), `discovery` (একটি স্ট্রিং), এবং `imageSize` (একটি সংখ্যা)।
 
-Note that the `imageSize` prop has a default value, which is why we don't pass it to the component.
+মনে রাখবেন যে `imageSize` প্রপের একটি ডিফল্ট মান রয়েছে, এই কারণে আমরা এটি কম্পোনেন্টে পাঠাচ্ছি না।
 
 <Sandpack>
 
@@ -630,9 +630,9 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Note how you don't need a separate `awardCount` prop if `awards` is an array. Then you can use `awards.length` to count the number of awards. Remember that props can take any values, and that includes arrays too!
+মনে রাখবেন যে যদি `awards` একটি অ্যারে হয় তবে আপনাকে আলাদা `awardCount` প্রপের প্রয়োজন নেই। আপনি `awards.length` ব্যবহার করে পুরস্কারের সংখ্যা গুণতে পারেন। মনে রাখবেন যে প্রপস যেকোনো মান নিতে পারে, এবং এর মধ্যে অ্যারেও রয়েছে!
 
-Another solution, which is more similar to the earlier examples on this page, is to group all information about a person in a single object, and pass that object as one prop:
+আরেকটি সমাধান, যা এই পৃষ্ঠায় আগের উদাহরণগুলির সাথে আরও সাদৃশ্যপূর্ণ, হল একটি ব্যক্তির সম্পর্কে সমস্ত তথ্য একটি একক অবজেক্টে গ্রুপ করা এবং সেই অবজেক্টটি একটি প্রপ হিসেবে পাঠানো:
 
 <Sandpack>
 
@@ -727,15 +727,15 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Although the syntax looks slightly different because you're describing properties of a JavaScript object rather than a collection of JSX attributes, these examples are mostly equivalent, and you can pick either approach.
+যদিও সিনট্যাক্সটি কিছুটা ভিন্ন দেখাচ্ছে কারণ আপনি একটি জাভাস্ক্রিপ্ট অবজেক্টের প্রপার্টি বর্ণনা করছেন, এটি JSX অ্যাট্রিবিউটগুলোর একটি সংগ্রহের পরিবর্তে, এই উদাহরণগুলি প্রধানত সমতুল্য, এবং আপনি যেকোনো একটি পদ্ধতি বেছে নিতে পারেন।
 
 </Solution>
 
-#### Adjust the image size based on a prop {/*adjust-the-image-size-based-on-a-prop*/}
+#### একটি প্রপের উপর ভিত্তি করে ইমেজের আকার সমন্বয় করুন {/*adjust-the-image-size-based-on-a-prop*/}
 
-In this example, `Avatar` receives a numeric `size` prop which determines the `<img>` width and height. The `size` prop is set to `40` in this example. However, if you open the image in a new tab, you'll notice that the image itself is larger (`160` pixels). The real image size is determined by which thumbnail size you're requesting.
+আপনার উদাহরণে, `Avatar` একটি সংখ্যাগত `size` প্রপ গ্রহণ করে যা `<img>` এর প্রস্থ এবং উচ্চতা নির্ধারণ করে। এই উদাহরণে, `size` প্রপটি `40` এ সেট করা হয়েছে। তবে, যদি আপনি নতুন ট্যাবে চিত্রটি খোলেন, আপনি লক্ষ্য করবেন যে চিত্রের আকার আসলে বড় (`160` পিক্সেল)। বাস্তব চিত্রের আকার নির্ধারণ করা হয় আপনি কোন থাম্বনেল আকারটি অনুরোধ করছেন তার দ্বারা।
 
-Change the `Avatar` component to request the closest image size based on the `size` prop. Specifically, if the `size` is less than `90`, pass `'s'` ("small") rather than `'b'` ("big") to the `getImageUrl` function. Verify that your changes work by rendering avatars with different values of the `size` prop and opening images in a new tab.
+`Avatar` উপাদানটি পরিবর্তন করুন যাতে `size` প্রপের উপর ভিত্তি করে সবচেয়ে কাছের চিত্রের আকার অনুরোধ করা হয়। বিশেষভাবে, যদি `size` `90` এর কম হয়, তাহলে `getImageUrl` ফাংশনে `'s'` ("ছোট") পাস করুন `'b'` ("বড়") এর পরিবর্তে। আপনার পরিবর্তনগুলি কার্যকর কিনা তা যাচাই করুন বিভিন্ন `size` প্রপ মান দিয়ে অ্যাভাটারগুলি রেন্ডার করে এবং নতুন ট্যাবে চিত্রগুলি খুলে।
 
 <Sandpack>
 
@@ -848,7 +848,7 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-You could also show a sharper image for high DPI screens by taking [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) into account:
+আপনি উচ্চ DPI স্ক্রীনের জন্য আরও তীক্ষ্ণ চিত্রও দেখাতে পারেন `window.devicePixelRatio` কে বিবেচনায় নিয়ে: [MDN ডোকুমেন্টেশন](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio)
 
 <Sandpack>
 
@@ -919,13 +919,13 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-Props let you encapsulate logic like this inside the `Avatar` component (and change it later if needed) so that everyone can use the `<Avatar>` component without thinking about how the images are requested and resized.
+প্রপগুলি আপনাকে `Avatar` উপাদানের ভিতরে এইরকম লজিক এনক্যাপসুলেট করতে দেয় (এবং প্রয়োজনে পরে এটি পরিবর্তন করতে) যাতে সবাই `<Avatar>` উপাদানটি ব্যবহার করতে পারে চিন্তা না করেই যে চিত্রগুলি কিভাবে অনুরোধ করা হয় এবং আকার পরিবর্তন করা হয়।
 
 </Solution>
 
-#### Passing JSX in a `children` prop {/*passing-jsx-in-a-children-prop*/}
+#### `children` প্রপে JSX পাস করা {/*passing-jsx-in-a-children-prop*/}
 
-Extract a `Card` component from the markup below, and use the `children` prop to pass different JSX to it:
+নিচের মার্কআপ থেকে একটি `Card` উপাদান বের করুন এবং `children` প্রপ ব্যবহার করে এতে ভিন্ন ভিন্ন JSX পাঠান:
 
 <Sandpack>
 
@@ -983,13 +983,13 @@ h1 {
 
 <Hint>
 
-Any JSX you put inside of a component's tag will be passed as the `children` prop to that component.
+আপনি একটি উপাদানের ট্যাগের ভিতরে যে কোনও JSX রাখলে সেটি সেই উপাদানের `children` প্রপ হিসেবে পাঠানো হবে।
 
 </Hint>
 
 <Solution>
 
-This is how you can use the `Card` component in both places:
+এভাবে আপনি উভয় স্থানে `Card` উপাদানটি ব্যবহার করতে পারেন:
 
 <Sandpack>
 
@@ -1051,7 +1051,7 @@ h1 {
 
 </Sandpack>
 
-You can also make `title` a separate prop if you want every `Card` to always have a title:
+আপনি যদি চান যে প্রতিটি `Card`-এ সব সময় একটি শিরোনাম থাকুক, তাহলে `title`-কে একটি পৃথক প্রপ হিসাবেও তৈরি করতে পারেন:
 
 <Sandpack>
 
