@@ -19,16 +19,16 @@ The `react-dom` প্যাকেজে যেসব মেথড রয়েছ�
 
 ## Resource Preloading APIs {/*resource-preloading-apis*/}
 
-These APIs can be used to make apps faster by pre-loading resources such as scripts, stylesheets, and fonts as soon as you know you need them, for example before navigating to another page where the resources will be used.
+এই API গুলো আপনার অ্যাপকে দ্রুততর করতে ব্যবহার করা যেতে পারে resource গুলো যেমন scripts, stylesheets, এবং fonts আগে থেকেই লোড করে রেখে যেগুলো আপনার প্রয়োজন হবে বলে জানেন, উদাহরণস্বরূপ অন্য পেজে নেভিগেট করার আগে যেখানে এই resource গুলো ব্যবহৃত হবে।
 
-[React-based frameworks](/learn/start-a-new-react-project) frequently handle resource loading for you, so you might not have to call these APIs yourself. Consult your framework's documentation for details.
+[React-based frameworks](/learn/start-a-new-react-project) প্রায়ই আপনার জন্য resource loading হ্যান্ডেল করে, তাই হয়ত আপনাকে এই API গুলো নিজে কল করতে হবে না। বিস্তারিত জানতে আপনার ফ্রেমওয়ার্কের ডকুমেন্টেশন দেখুন।
 
-* [`prefetchDNS`](/reference/react-dom/prefetchDNS) lets you prefetch the IP address of a DNS domain name that you expect to connect to.
-* [`preconnect`](/reference/react-dom/preconnect) lets you connect to a server you expect to request resources from, even if you don't know what resources you'll need yet.
-* [`preload`](/reference/react-dom/preload) lets you fetch a stylesheet, font, image, or external script that you expect to use.
-* [`preloadModule`](/reference/react-dom/preloadModule) lets you fetch an ESM module that you expect to use.
-* [`preinit`](/reference/react-dom/preinit) lets you fetch and evaluate an external script or fetch and insert a stylesheet.
-* [`preinitModule`](/reference/react-dom/preinitModule) lets you fetch and evaluate an ESM module.
+* [`prefetchDNS`](/reference/react-dom/prefetchDNS) আপনাকে একটি DNS ডোমেইন নামের IP ঠিকানা আগে থেকেই fetch করতে দেয় যেটার সাথে আপনি সংযোগ করার আশা করেন।
+* [`preconnect`](/reference/react-dom/preconnect) আপনাকে এমন একটি সার্ভারের সাথে সংযোগ করতে দেয় যেখান থেকে আপনি resource রিকোয়েস্ট করার আশা করেন, এমনকি যদি আপনি এখনো জানেন না যে কোন resource গুলো লাগবে।
+* [`preload`](/reference/react-dom/preload) আপনাকে stylesheet, font, image, বা external script fetch করতে দেয় যেগুলো আপনি ব্যবহার করার আশা করেন।
+* [`preloadModule`](/reference/react-dom/preloadModule) আপনাকে একটি ESM module fetch করতে দেয় যেটা আপনি ব্যবহার করার আশা করেন।
+* [`preinit`](/reference/react-dom/preinit) আপনাকে একটি external script fetch এবং evaluate করতে বা stylesheet fetch এবং insert করতে দেয়।
+* [`preinitModule`](/reference/react-dom/preinitModule) আপনাকে একটি ESM module fetch এবং evaluate করতে দেয়।
 
 ---
 
@@ -43,24 +43,11 @@ These APIs can be used to make apps faster by pre-loading resources such as scri
 
 ## Removed APIs {/*removed-apis*/}
 
-<<<<<<< HEAD
-<Deprecated>
+এই API গুলো React 19 এ সরিয়ে ফেলা হয়েছে:
 
-এই API গুলো React এর সামনের কোন বড় ভার্সনে ফেলে দেওয়া হবে।
-
-</Deprecated>
-
-* [`findDOMNode`](/reference/react-dom/findDOMNode) সবচেয়ে নিকটবর্তী সেই DOM নোডকে খুঁজে বের করে যেটা একটি ক্লাস কম্পোনেন্ট ইন্সট্যান্সের সাথে correspond করে।
-* [`hydrate`](/reference/react-dom/hydrate) সার্ভার HTML থেকে তৈরি করা DOM এর মধ্যে একটি ট্রি মাউন্ট করে।  [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) এর কারণে deprecated।
-* [`render`](/reference/react-dom/render) DOM এর মধ্যে একটি ট্রি মাউন্ট করে। [`createRoot`](/reference/react-dom/client/createRoot) এর কারণে deprecated।
-* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode) DOM থেকে ট্রি আনমাউন্ট করে। [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) এর কারণে deprecated।
-=======
-These APIs were removed in React 19:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
-
-* [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): see [alternatives](https://18.react.dev/reference/react-dom/findDOMNode#alternatives).
-* [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): use [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) instead.
-* [`render`](https://18.react.dev/reference/react-dom/render): use [`createRoot`](/reference/react-dom/client/createRoot) instead.
-* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode): use [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) instead.
-* [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
-* [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+* [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): [বিকল্প সমাধান](https://18.react.dev/reference/react-dom/findDOMNode#alternatives) দেখুন।
+* [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): এর পরিবর্তে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করুন।
+* [`render`](https://18.react.dev/reference/react-dom/render): এর পরিবর্তে [`createRoot`](/reference/react-dom/client/createRoot) ব্যবহার করুন।
+* [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode): এর পরিবর্তে [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) ব্যবহার করুন।
+* [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
+* [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
