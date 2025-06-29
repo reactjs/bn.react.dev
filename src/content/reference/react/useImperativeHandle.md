@@ -38,27 +38,19 @@ function MyInput({ ref }) {
 
 #### প্যারামিটার {/*parameters*/}
 
-<<<<<<< HEAD
-* `ref`: আপনি [`forwardRef` রেন্ডার ফাংশনের](/reference/react/forwardRef#render-function) দ্বিতীয় আর্গুমেন্ট হিসেবে যে `ref` পেয়েছিলেন সেটা।
-=======
-* `ref`: The `ref` you received as a prop to the `MyInput` component.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* `ref`: `MyInput` কম্পোনেন্টে prop হিসেবে যে `ref` আপনি পেয়েছিলেন সেটা।
 
-* `createHandle`: একটা ফাংশন যা কোন আর্গুমেন্ট নেয় না এবং আপনি যে ref হ্যান্ডল উন্মুক্ত করতে চান সেটা রিটার্ন করে। ওই ref হ্যান্ডলের যেকোন টাইপ থাকতে পারে। সাধারণত আপনি একটা অবজেক্ট রিটার্ন করবেন যেটার সাথে সেই মেথডগুলো থাকবে যেগুলো আপনি উন্মুক্ত করতে চান।
+* `createHandle`: একটা ফাংশন যা কোন আর্গুমেন্ট নেয় না এবং আপনি যে ref হ্যান্ডল উন্মুক্ত করতে চান সেটা রিটার্ন করে। ওই ref হ্যান্ডলের যেকোন টাইপ থাকতে পারে। সাধারণত আপনি একটা অবজেক্ট রিটার্ন করবেন যেটার সাথে সেই মেথডগুলো থাকবে যেগুলো আপনি উন্মুক্ত করতে চান।
 
-* **optional** `dependencies`: `createHandle` কোডের মধ্যে রেফারেন্স দেওয়া আছে এমন সকল reactive ভ্যালুর তালিকা। Reactive ভ্যালুর মধ্যে রয়েছে আপনার কম্পোনেন্টে সরাসরি declared সকল props, state এবং সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা দেখবে যে সকল reactive ভ্যালু সঠিক ভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত হয়েছে কি না। ডিপেন্ডেন্সির তালিকায় সব সময় ধ্রুব সংখ্যক আইটেম থাকবে এবং inline এ লেখা থাকবে এমন ভাবে, `[dep1, dep2, dep3]`। React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে সকল ডিপেন্ডেন্সি তার আগের মানের সাথে তুলনা করবে। যদি কোন ডিপেন্ডেন্সির পরিবর্তনের কারণে পুনরায় রেন্ডার হয়ে থাকে, অথবা আপনি যদি এই আর্গুমেন্টটি মুছে ফেলে থাকেন, তবে আপনার `createHandle` ফাংশন re-execute হবে, এবং নতুন করে তৈরী হওয়া হ্যান্ডেল ref এ এসাইন হয়ে যাবে। 
+* **optional** `dependencies`: `createHandle` কোডের মধ্যে রেফারেন্স দেওয়া আছে এমন সকল reactive ভ্যালুর তালিকা। Reactive ভ্যালুর মধ্যে রয়েছে আপনার কম্পোনেন্টে সরাসরি declared সকল props, state এবং সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা দেখবে যে সকল reactive ভ্যালু সঠিক ভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত হয়েছে কি না। ডিপেন্ডেন্সির তালিকায় সব সময় ধ্রুব সংখ্যক আইটেম থাকবে এবং inline এ লেখা থাকবে এমন ভাবে, `[dep1, dep2, dep3]`। React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে সকল ডিপেন্ডেন্সি তার আগের মানের সাথে তুলনা করবে। যদি কোন ডিপেন্ডেন্সির পরিবর্তনের কারণে পুনরায় রেন্ডার হয়ে থাকে, অথবা আপনি যদি এই আর্গুমেন্টটি মুছে ফেলে থাকেন, তবে আপনার `createHandle` ফাংশন re-execute হবে, এবং নতুন করে তৈরী হওয়া হ্যান্ডেল ref এ এসাইন হয়ে যাবে। 
 
-<<<<<<< HEAD
-#### রিটার্ন {/*returns*/}
-=======
 <Note>
 
-Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef) 
+React 19 থেকে শুরু করে, [`ref` একটি prop হিসেবে উপলব্ধ।](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 এবং তার আগের ভার্শনে, [`forwardRef`](/reference/react/forwardRef) থেকে `ref` পাওয়া প্রয়োজন ছিল।
 
 </Note>
 
-#### Returns {/*returns*/}
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+#### রিটার্ন {/*returns*/}
 
 `useImperativeHandle` রিটার্ন করে `undefined`.
 
@@ -68,11 +60,7 @@ Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-1
 
 ### প্যারেন্ট কম্পোণেন্টের একটি কাস্টম ref handle উন্মুক্ত করা {/*exposing-a-custom-ref-handle-to-the-parent-component*/}
 
-<<<<<<< HEAD
-ডিফল্ট ভাবে, কম্পোনেন্ট তাদের DOM নোড প্যারেন্ট কম্পোনেন্টে উন্মুক্ত করে না। উদাহরণস্বরূপ, আপনি যদি চান `MyInput` এর প্যারেন্ট কম্পোনেন্ট `<input>` DOM নোডের [অ্যাক্সেস পেয়ে যাক](/learn/manipulating-the-dom-with-refs), আপনাকে [`forwardRef`](/reference/react/forwardRef) ব্যবহার করতে হবেঃ
-=======
-To expose a DOM node to the parent element, pass in the `ref` prop to the node.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+প্যারেন্ট এলিমেন্টে একটি DOM নোড উন্মুক্ত করতে, নোডে `ref` prop পাস করুন।
 
 ```js {2}
 function MyInput({ ref }) {
@@ -80,11 +68,7 @@ function MyInput({ ref }) {
 };
 ```
 
-<<<<<<< HEAD
-উপরের কোডে, [`MyInput` এর ref `<input>` DOM নোড রিসিভ করবে।](/reference/react/forwardRef#exposing-a-dom-node-to-the-parent-component) কিন্তু, এর জায়গায় আপনি একটি কাস্টম ভ্যালু উন্মুক্ত করতে পারেন। উন্মুক্ত হওয়া হ্যান্ডেল কাস্টমাইজ করার জন্য, আপনার কম্পোনেন্টের সর্বোচ্চ স্তরে `useImperativeHandle` কল করুনঃ
-=======
-With the code above, [a ref to `MyInput` will receive the `<input>` DOM node.](/learn/manipulating-the-dom-with-refs) However, you can expose a custom value instead. To customize the exposed handle, call `useImperativeHandle` at the top level of your component:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+উপরের কোডে, [`MyInput` এর ref `<input>` DOM নোড পাবে।](/learn/manipulating-the-dom-with-refs) তবে, এর পরিবর্তে আপনি একটি কাস্টম মান উন্মুক্ত করতে পারেন। উন্মুক্ত হ্যান্ডল কাস্টমাইজ করতে, আপনার কম্পোনেন্টের সর্বোচ্চ স্তরে `useImperativeHandle` কল করুন:
 
 ```js {4-8}
 import { useImperativeHandle } from 'react';
@@ -100,11 +84,7 @@ function MyInput({ ref }) {
 };
 ```
 
-<<<<<<< HEAD
-উপরের কোডে লক্ষ্য করুণ, `ref` কে আর `<input>` এ ফরোয়ার্ড করা হচ্ছে না।
-=======
-Note that in the code above, the `ref` is no longer passed to the `<input>`.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+উপরের কোডে লক্ষ্য করুন, `ref` আর `<input>` এ পাস করা হচ্ছে না।
 
 উদাহরণস্বরূপ, ধরা যাক আপনি পুরো `<input>` ডম নোড উন্মুক্ত করতে চান না, কিন্তু আপনি এর দুটি মেথড উন্মুক্ত করতে চানঃ `focus` এবং `scrollIntoView`। এটা ্করতে হলে, প্রকৃত ব্রাউজার DOM আলাদা একটি ref এ রাখুন। তারপর প্যারেন্ট কম্পোনেন্ট যেই মেথডগুলো কল করবে বলে আপনি চান, সেগুলো সহ একটি হ্যান্ডেল উন্মুক্ত করতে `useImperativeHandle` ব্যবহার করুণঃ 
 
