@@ -34,11 +34,7 @@ React সকল প্রকার ব্রাউজার বিল্ট-ই�
 
 ## Resource and Metadata Components {/*resource-and-metadata-components*/}
 
-<<<<<<< HEAD
 এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলি আপনাকে বাহ্যিক রিসোর্স লোড করতে অথবা ডকুমেন্টে মেটাডেটা দিয়ে মার্ক করতে দেয়:
-=======
-These built-in browser components let you load external resources or annotate the document with metadata:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
