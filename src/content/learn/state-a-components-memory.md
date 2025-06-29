@@ -1451,12 +1451,7 @@ export default function FeedbackForm() {
 
 #### অপ্রয়োজনীয় state বাদ দিন {/*remove-unnecessary-state*/}
 
-<<<<<<< HEAD
-যখন বাটনটি ক্লিক করা হয়, এই উদাহরণটি ব্যবহারকারীর নাম জানতে চাইবার কথা এবং এর পরে অভিবাদন সহ একটি এলার্ট দেখানোর কথা। নামতই রাখবার জন্য আপনি state ব্যবহারের চেষ্টা করেছেন, কিন্তু কোন একটি কারণে এটি কেবল "Hello, !" দেখায়।
-=======
-When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason the first time it shows "Hello, !", and then "Hello, [name]!" with the previous input every time after.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
-
+যখন বাটনটি ক্লিক করা হয়, এই উদাহরণটি ব্যবহারকারীর নাম জানতে চাইবার কথা এবং এর পরে অভিবাদন সহ একটি এলার্ট দেখানোর কথা। নামতই রাখবার জন্য আপনি state ব্যবহারের চেষ্টা করেছেন, কিন্তু কোন একটি কারণে এটি প্রথমবার "Hello, !" দেখায় এবং তারপর প্রতিবার আগের ইনপুট দিয়ে "Hello, [name]!" দেখায়।
 এই কোড ঠিক করার জন্য, অপ্রয়োজনীয় state ভ্যারিয়েবল ফেলে দিন। ([এটা কেন কাজ করল না](/learn/state-as-a-snapshot) সেটা নিয়ে আমরা পরে আলোচনা করব।)
 
 আপনি ব্যাখ্যা করতে পারবেন কেন এই state ভ্যারিয়েবলটি অপ্রয়োজনীয়?
