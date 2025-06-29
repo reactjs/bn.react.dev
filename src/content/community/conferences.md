@@ -30,10 +30,6 @@ June 13, 2025. In-person in Oslo, Norway + remote (virtual event)
 
 [Website](https://reactnorway.com/) - [Twitter](https://x.com/ReactNorway)
 
-<<<<<<< HEAD
-### React Nexus 2024 {/*react-nexus-2024*/}
-July 04 & 05, 2024. Bangalore, India (In-person event)
-=======
 ### React Summit 2025 {/*react-summit-2025*/}
 June 13 - 17, 2025. In-person in Amsterdam, Netherlands + remote (hybrid event)
 
@@ -41,7 +37,6 @@ June 13 - 17, 2025. In-person in Amsterdam, Netherlands + remote (hybrid event)
 
 ### React Nexus 2025 {/*react-nexus-2025*/}
 July 03 - 05, 2025. In-person in Bangalore, India
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 [Website](https://reactnexus.com/) - [Twitter](https://x.com/ReactNexus) - [Bluesky](https://bsky.app/profile/reactnexus.com) - [Linkedin](https://www.linkedin.com/company/react-nexus) - [YouTube](https://www.youtube.com/reactify_in)
 
