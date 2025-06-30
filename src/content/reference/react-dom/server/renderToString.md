@@ -86,9 +86,15 @@ app.use('/', (request, response) => {
 
 ## বিকল্প সমূহ {/*alternatives*/}
 
+<<<<<<< HEAD
 ### সার্ভারে `renderToString` এর বদলে একটি streaming মেথড ব্যাবহার করা {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
 
 `renderToString` সঙ্গে সঙ্গেই একটি স্ট্রিং রিটার্ন করে, তাই এটি স্ট্রিমিং বা ডেটার জন্য অপেক্ষা করা সাপোর্ট করে না।
+=======
+### Migrating from `renderToString` to a streaming render on the server {/*migrating-from-rendertostring-to-a-streaming-method-on-the-server*/}
+
+`renderToString` returns a string immediately, so it does not support streaming content as it loads.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 যখন সম্ভব, আমরা এই fully-featured বিকল্পগুলো ব্যাবহার করা রেকমেন্ড করিঃ
 
@@ -99,7 +105,24 @@ app.use('/', (request, response) => {
 
 ---
 
+<<<<<<< HEAD
 ### ক্লায়েন্ট কোড থেকে `renderToString` দূর করা {/*removing-rendertostring-from-the-client-code*/}
+=======
+### Migrating from `renderToString` to a static prerender on the server {/*migrating-from-rendertostring-to-a-static-prerender-on-the-server*/}
+
+`renderToString` returns a string immediately, so it does not support waiting for data to load for static HTML generation.
+
+We recommend using these fully-featured alternatives:
+
+* If you use Node.js, use [`prerenderToNodeStream`.](/reference/react-dom/static/prerenderToNodeStream)
+* If you use Deno or a modern edge runtime with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), use [`prerender`.](/reference/react-dom/static/prerender)
+
+You can continue using `renderToString` if your static site generation environment does not support streams.
+
+---
+
+### Removing `renderToString` from the client code {/*removing-rendertostring-from-the-client-code*/}
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 কখনো কখনো, কোনো কম্পোনেন্টকে HTML-এ রূপান্তর করতে ক্লায়েন্ট-সাইডে `renderToString` ব্যবহার করা হয়।
 
@@ -137,5 +160,9 @@ console.log(div.innerHTML); // For example, "<svg>...</svg>"
 
 যদি কোনো কম্পোনেন্ট সাসপেন্স অবস্থায় থাকে (যেমন, যদি এটাকে [`lazy`](/reference/react/lazy) করা হয় কিংবা এটা ডেটা ফেচ করে), তাহলে এর কন্টেন্ট resolve হওয়ার জন্য `renderToString` অপেক্ষা করবে না। পরিবর্তে, `renderToString` উপরের সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি খুঁজে বের করবে এবং HTML-এ এর `fallback` প্রপ রেন্ডার করবে। ক্লায়েন্ট কোড লোড না হওয়া পর্যন্ত ঐ কন্টেন্ট প্রদর্শিত হবে না।
 
+<<<<<<< HEAD
 এই সমস্যা সমাধান করতে, [রেকমেন্ডেড স্ট্রিমিং সমাধানগুলোর](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) একটি ব্যবহার করুন। এ সমাধানগুলোর ক্ষেত্রে সার্ভারে resolve হওয়ার সাথে সাথে কন্টেন্ট ভাগে ভাগে স্ট্রিম হয়ে আসতে পারবে যাতে ইউজার ক্লায়েন্ট কোড লোড হওয়ার আগেই পৃষ্ঠাটি ক্রমে ক্রমে পূরণ হতে দেখতে পায়।
+=======
+To solve this, use one of the [recommended streaming solutions.](#alternatives) For server side rendering, they can stream content in chunks as it resolves on the server so that the user sees the page being progressively filled in before the client code loads. For static site generation, they can wait for all the content to resolve before generating the static HTML.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 

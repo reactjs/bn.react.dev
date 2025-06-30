@@ -45,9 +45,15 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 
 একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
 
+<<<<<<< HEAD
 1. **Effect ডিক্লেয়ার** By default, প্রত্যেক বার রেন্ডারের সময় Effect রান হবে।
 2. **Effect এর dependency গুলো specify করুন** বেশিরভাগ Effects প্রত্যেকবার রেন্ডার হওয়ার পরে re-run হওয়ার থেকে *যখন প্রয়োজন*  তখন re-run হওয়া উচিত। উদাহরণস্বরূপ, একটি fade-in animation কেবল তখনি ট্রিগার করা উচিত যখন কোন একটি component দৃশ্যমান হয়। কোন chat room এর সাথে সংযোগ স্থাপন এবং বিচ্ছিন্ন তখনই ঘটে যখন component টি দৃশ্যমান এবং অদৃশ্যমান হয়ে যায় বা যখন chat room টি পরিবর্তন হয়। কীভাবে *dependencies* specifying এর মাধ্যমে  এটি কন্ট্রোল করবেন তা শিখবেন।
 3. **প্রয়োজনে cleanup অ্যাড করুন** কিছু Effects কীভাবে থামানো হবে, undo হবে বা এগুলো যা করছে তা clean up করতে হবে তা specify করে দিতে হয়। উদাহরণস্বরূপ, "connect" এর জন্য প্রয়োজন "disconnect", "subscribe" এর জন্য "unsubscribe", and "fetch" এর জন্য প্রয়োজন হয়ত "cancel" অথবা "ignore"। আপনি একটি *cleanup function* রিটার্ন করে কীভাবে এটি করবেন তা শিখবেন।
+=======
+1. **Declare an Effect.** By default, your Effect will run after every [commit](/learn/render-and-commit).
+2. **Specify the Effect dependencies.** Most Effects should only re-run *when needed* rather than after every render. For example, a fade-in animation should only trigger when a component appears. Connecting and disconnecting to a chat room should only happen when the component appears and disappears, or when the chat room changes. You will learn how to control this by specifying *dependencies.*
+3. **Add cleanup if needed.** Some Effects need to specify how to stop, undo, or clean up whatever they were doing. For example, "connect" needs "disconnect", "subscribe" needs "unsubscribe", and "fetch" needs either "cancel" or "ignore". You will learn how to do this by returning a *cleanup function*.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 আসুন, এবার প্রতিটি ধাপ বিস্তারিত দেখি।
 
@@ -597,9 +603,42 @@ React ইচ্ছাকৃতভাবে আপনার কম্পোনে
 
 আপনি যে Effect গুলো লিখবেন তার বেশিরভাগই নীচের সাধারণ প্যাটার্নগুলির মধ্যে একটিতে ফিট হবে৷
 
+<<<<<<< HEAD
 ### non-React widget গুলো controll করা {/*controlling-non-react-widgets*/}
 
 কখনো কখনো আপনাকে UI widget অ্যাড করতে হবে যা React দিয়ে লেখা হয়নি। উদাহরণস্বরূপ, আপনি আপনার পেইজে একটি ম্যাপ component অ্যাড করেছেন। এটিতে একটি `setZoomLevel()` method রয়েছে, এবং আপনি আপনার React কোডে `zoomLevel` স্টেট variable এর সাথে zoom level সিঙ্ক রাখতে চান। আপনার Effect এটির মত দেখতে হবে:
+=======
+<Pitfall>
+
+#### Don't use refs to prevent Effects from firing {/*dont-use-refs-to-prevent-effects-from-firing*/}
+
+A common pitfall for preventing Effects firing twice in development is to use a `ref` to prevent the Effect from running more than once. For example, you could "fix" the above bug with a `useRef`:
+
+```js {1,3-4}
+  const connectionRef = useRef(null);
+  useEffect(() => {
+    // 🚩 This wont fix the bug!!!
+    if (!connectionRef.current) {
+      connectionRef.current = createConnection();
+      connectionRef.current.connect();
+    }
+  }, []);
+```
+
+This makes it so you only see `"✅ Connecting..."` once in development, but it doesn't fix the bug.
+
+When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix". 
+
+To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
+
+See the examples below for how to handle common patterns.
+
+</Pitfall>
+
+### Controlling non-React widgets {/*controlling-non-react-widgets*/}
+
+Sometimes you need to add UI widgets that aren't written in React. For example, let's say you're adding a map component to your page. It has a `setZoomLevel()` method, and you'd like to keep the zoom level in sync with a `zoomLevel` state variable in your React code. Your Effect would look similar to this:
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 ```js
 useEffect(() => {
@@ -1573,7 +1612,11 @@ export async function fetchBio(person) {
 - `'Bob'` ফেচ করা সম্পন্ন হয়
 - `'Bob'` রেন্ডারের Effect **কিছুই করে না কারণ এর `ignore` ফ্ল্যাগ `true` সেট করা হয়েছিল**
 
+<<<<<<< HEAD
 আউটডেটেড API কলের ফলাফল ignore করার পাশাপাশি, আপনি [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) ব্যবহার করে যেসব রিকোয়েস্টের আর প্রয়োজন নেই সেগুলো বাতিল করতে পারেন। তবে, শুধুমাত্র এটাই রেস কন্ডিশন থেকে রক্ষা করার জন্য যথেষ্ট নয়। ফেচের পরে আরও অ্যাসিঙ্ক্রোনাস ধাপ যুক্ত হতে পারে, তাই `ignore` এর মতো একটি স্পষ্ট ফ্ল্যাগ ব্যবহার করা এই ধরনের সমস্যা সমাধানের সবচেয়ে নির্ভরযোগ্য উপায়।
+=======
+In addition to ignoring the result of an outdated API call, you can also use [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) to cancel the requests that are no longer needed. However, by itself this is not enough to protect against race conditions. More asynchronous steps could be chained after the fetch, so using an explicit flag like `ignore` is the most reliable way to fix this type of problem.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 </Solution>
 

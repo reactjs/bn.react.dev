@@ -20,9 +20,15 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 এখানে আমরা যে ভাবে এটি সেট আপ করতে পরামর্শ দিচ্ছিঃ
 
+<<<<<<< HEAD
 ১. **আপনার অ্যাপ এর React অংশটি** [React-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) দিয়ে বিল্ড করুন।
 ২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 ৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
 
@@ -45,7 +51,11 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 * **যদি আপনার অ্যাপ ইতোমধ্যে import স্টেটমেন্ট ব্যবহার করে ফাইলে ভাগ করা থাকে**, তাহলে সেই সেটআপটি ব্যবহার করা চেষ্টা করুন। আপনার জাভাস্ক্রিপ্ট কোডে `<div />` লিখলে কী সিনট্যাক্স এরর হয় তা চেক করুন। যদি এটি সিনট্যাক্স এরর দেখায়, তবে আপনাকে [Babel দিয়ে আপনার জাভাস্ক্রিপ্ট কোড রূপান্তর করতে হতে পারে](<(https://babeljs.io/setup)>) এবং JSX ব্যবহার করতে [Babel React preset](https://babeljs.io/docs/babel-preset-react) সক্ষম করতে হতে পারে।
 
+<<<<<<< HEAD
 * **যদি আপনার অ্যাপে জাভাস্ক্রিপ্ট মডিউল কম্পাইল করার জন্য ইতিমধ্যে কোনও সেটআপ না থাকে**, তবে [Vite](https://vitejs.dev/) দিয়ে সেটআপ করুন। Vite কমিউনিটি Rails, Django এবং Laravel সহ [ব্যাকেন্ড ফ্রেমওয়ার্ক সহ অনেক ইন্টিগ্রেশন](https://github.com/vitejs/awesome-vite#integrations-with-backends) বজায় রাখে। যদি আপনার ব্যাকেন্ড ফ্রেমওয়ার্ক তালিকাভুক্ত না থাকে তবে [এই গাইড](https://vitejs.dev/guide/backend-integration.html) অনুসরণ করে ব্যাকেন্ডের সাথে Vite বিল্ড ইন্টিগ্রেট করতে পারেন।
+=======
+* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vite.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vite.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 আপনার সেটআপ কাজ করছে কি না তা চেক করতে, আপনার প্রজেক্ট ফোল্ডারে এই কমান্ডটি চালানঃ
 
@@ -57,12 +67,17 @@ npm install react react-dom
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
   <body>
+<<<<<<< HEAD
     <!-- ইতোমধ্যে আপনার পেইজে থাকা কনটেন্ট (এই উদাহরণে, এটি রিপ্লেস হয়ে যাবে) -->
+=======
+    <!-- Your existing page content (in this example, it gets replaced) -->
+    <div id="root"></div>
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
   </body>
 </html>
 ```
@@ -84,7 +99,11 @@ root.render(<h1>Hello, world</h1>);
 
 <Note>
 
+<<<<<<< HEAD
 একটি বিদ্যমান প্রজেক্টে একটি মডুলার জাভাস্ক্রিপ্ট এনভায়রনমেন্টকে যুক্ত করা প্রথমবার ভীতিজনক বোধ হতে পারে, কিন্তু এই পরিশ্রমটুকু এর প্রাপ্য! আপনি আটকে গেলে, আমাদের [কমিউনিটি রিসোর্স](/community) অথবা [Vite Chat](https://chat.vitejs.dev/) ব্যবহার করে দেখুন।
+=======
+Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vite.dev/).
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 </Note>
 
@@ -119,7 +138,7 @@ root.render(<h1>Hello, world</h1>);
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
