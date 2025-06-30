@@ -105,17 +105,13 @@ function SubmitButton({ submitAction }) {
 
 * `useTransition` হল একটি হুক, তাই এটি কেবল কম্পোনেন্ট বা কাস্টম হুকের মধ্যে কল করা যেতে পারে। যদি অন্য কোনো স্থানে (যেমন, একটি ডেটা লাইব্রেরি থেকে) ট্রানজিশন শুরু করার প্রয়োজন হয়, তাহলে স্বতন্ত্র [`startTransition`](/reference/react/startTransition) কল করুন।
 
-* যদি আপনি একটি স্টেটের `সেট` ফাংশনে অ্যাক্সেস পেয়ে থাকেন তবে আপনি একটি ট্রানজিশনে আপডেট  wrap করতে পারেন। কোনো প্রপ বা কাস্টম হুক ভ্যালুর রেসপন্সে ট্রানজিশন শুরু করতে চাইলে, [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করার চেষ্টা করুন।
+* যদি আপনি একটি স্টেটের `সেট` ফাংশনে অ্যাক্সেস পেয়ে থাকেন তবে আপনি একটি ট্রানজিশনে আপডেট wrap করতে পারেন। কোনো প্রপ বা কাস্টম হুক ভ্যালুর রেসপন্সে ট্রানজিশন শুরু করতে চাইলে, [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করার চেষ্টা করুন।
 
-<<<<<<< HEAD
-* `startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই একই সময়ে হতে হবে। React এই ফাংশনটি তাৎক্ষণিকভাবে চালায়, এটি চালানোর সময় ঘটে যাওয়া সমস্ত state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। যদি আপনি পরে আরো state আপডেট করার চেষ্টা করেন (উদাহরণস্বরূপ, একটি timeout এ), তবে সেগুলি ট্রানজিশন হিসাবে চিহ্নিত হবে না।
-=======
-* The function you pass to `startTransition` is called immediately, marking all state updates that happen while it executes as Transitions. If you try to perform state updates in a `setTimeout`, for example, they won't be marked as Transitions.
+* `startTransition` এ আপনি যে ফাংশন পাস করবেন তা তাৎক্ষণিকভাবে কল হবে, এবং এটি চালানোর সময় ঘটে যাওয়া সমস্ত state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করবে। যদি আপনি `setTimeout` এ state আপডেট করার চেষ্টা করেন, উদাহরণস্বরূপ, তবে সেগুলি ট্রানজিশন হিসাবে চিহ্নিত হবে না।
 
-* You must wrap any state updates after any async requests in another `startTransition` to mark them as Transitions. This is a known limitation that we will fix in the future (see [Troubleshooting](#react-doesnt-treat-my-state-update-after-await-as-a-transition)).
+* কোনো async request এর পরে state আপডেট করতে হলে আপনাকে সেগুলিকে আরেকটি `startTransition` এ wrap করতে হবে যাতে সেগুলি ট্রানজিশন হিসাবে চিহ্নিত হয়। এটি একটি পরিচিত সীমাবদ্ধতা যা আমরা ভবিষ্যতে ঠিক করব (দেখুন [সমস্যা সমাধান](#react-doesnt-treat-my-state-update-after-await-as-a-transition))।
 
-* The `startTransition` function has a stable identity, so you will often see it omitted from Effect dependencies, but including it will not cause the Effect to fire. If the linter lets you omit a dependency without errors, it is safe to do. [Learn more about removing Effect dependencies.](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* `startTransition` ফাংশনের একটি স্থিতিশীল identity আছে, তাই আপনি প্রায়ই এটিকে Effect dependencies থেকে বাদ দিতে দেখবেন, কিন্তু এটি অন্তর্ভুক্ত করলে Effect fire করবে না। যদি linter আপনাকে কোনো error ছাড়াই একটি dependency বাদ দিতে দেয়, তাহলে এটি নিরাপদ। [Effect dependencies অপসারণ সম্পর্কে আরো জানুন।](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
 
 * একটি state আপডেট যদি ট্রানজিশন হিসাবে চিহ্নিত হয়, তাহলে অন্যান্য state আপডেট দ্বারা তা বাধাগ্রস্ত হবে। উদাহরণস্বরূপ, যদি আপনি একটি চার্ট কম্পোনেন্টে একটি ট্রানজিশনের মধ্যে আপডেট করেন, কিন্তু তারপর চার্টটি পুনরায় রেন্ডার হওয়ার মাঝখানে একটি input-এ টাইপ শুরু করেন, React ইনপুট আপডেট সম্পর্কিত কাজ সম্পন্ন করার পরে চার্ট কম্পোনেন্টে রেন্ডারিং কাজটি পুনরায় শুরু করবে।
 
