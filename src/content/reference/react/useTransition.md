@@ -4,11 +4,7 @@ title: useTransition
 
 <Intro>
 
-<<<<<<< HEAD
-`useTransition` হলো একটি React হুক যা আপনাকে UI ব্লক না করেই স্টেট আপডেট করতে দেয়।
-=======
-`useTransition` is a React Hook that lets you render a part of the UI in the background.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+`useTransition` হলো একটি React হুক যা আপনাকে UI এর একটি অংশ ব্যাকগ্রাউন্ডে রেন্ডার করতে দেয়।
 
 ```js
 const [isPending, startTransition] = useTransition()
