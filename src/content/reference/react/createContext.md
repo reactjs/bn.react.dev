@@ -38,14 +38,22 @@ const ThemeContext = createContext('light');
 
 `createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে। 
 
+<<<<<<< HEAD
 **কনটেক্সট অবজেক্ট নিজে কোন তথ্য ধারণ করে না।** এটা _সেই_ কনটেক্সটকে রিপ্রেজেন্ট করে যেটা অন্যান্য কম্পোনেন্টগুলো read বা provide করে। সাধারণত, কনটেক্সট ভ্যালু নির্দিষ্ট করতে আপনি উপরের কম্পোনেন্টে [`SomeContext.Provider`](#provider) ব্যবহার করবেন, এবং এটাকে read করতে নিচের কম্পোনেন্টগুলোতে [`useContext(SomeContext)`](/reference/react/useContext) কল করবেন। কনটেক্সট অবজেক্টের কিছু প্রপার্টি আছেঃ
 
 * `SomeContext.Provider` আপনাকে কম্পোনেন্টে কনটেক্সট ভ্যালু দেয়ার সুযোগ দেয়।
 * `SomeContext.Consumer` একটি উপায়ান্তর যা কনটেক্সট ভ্যালু read করার জন্য বিরল ভাবে ব্যবহৃত হয়।
+=======
+**The context object itself does not hold any information.** It represents _which_ context other components read or provide. Typically, you will use [`SomeContext`](#provider) in components above to specify the context value, and call [`useContext(SomeContext)`](/reference/react/useContext) in components below to read it. The context object has a few properties:
+
+* `SomeContext` lets you provide the context value to components.
+* `SomeContext.Consumer` is an alternative and rarely used way to read the context value.
+* `SomeContext.Provider` is a legacy way to provide the context value before React 19.
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 ---
 
-### `SomeContext.Provider` {/*provider*/}
+### `SomeContext` Provider {/*provider*/}
 
 আপনার কম্পোনেন্টগুলোকে একটি কনটেক্সট প্রোভাইডারে wrap করে ফেলুন এবং এর মাধ্যমে এই সকল কম্পোনেন্টের জন্য এই কন্টেক্সটের মান নির্দিষ্ট করে দিনঃ
 
@@ -54,12 +62,20 @@ function App() {
   const [theme, setTheme] = useState('light');
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Page />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
+
+<Note>
+
+Starting in React 19, you can render `<SomeContext>` as a provider. 
+
+In older versions of React, use `<SomeContext.Provider>`.
+
+</Note>
 
 #### Props {/*provider-props*/}
 
@@ -84,7 +100,11 @@ function Button() {
 }
 ```
 
+<<<<<<< HEAD
 যদিও এই পুরনো উপায়টি এখনো কাজ করে, তবে **নতুন করে লেখা কোডে কনটেক্সট read করার জন্য বরং [`useContext()`](/reference/react/useContext) ব্যবহার করা উচিতঃ**
+=======
+Although this older way still works, **newly written code should read context with [`useContext()`](/reference/react/useContext) instead:**
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
 
 ```js
 function Button() {
@@ -141,11 +161,11 @@ function App() {
   // ...
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -187,11 +207,11 @@ import { ThemeContext, AuthContext } from './Contexts.js';
 function App() {
   // ...
   return (
-    <ThemeContext.Provider value={theme}>
-      <AuthContext.Provider value={currentUser}>
+    <ThemeContext value={theme}>
+      <AuthContext value={currentUser}>
         <Page />
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+      </AuthContext>
+    </ThemeContext>
   );
 }
 ```
@@ -213,5 +233,9 @@ const ThemeContext = createContext('light');
 
 এই ভ্যালু কখনো পরিবর্তিত হয় না। যদি React উপড়ে কোন matching provider না পায় তখন এই ভ্যালুটা কেবল মাত্র fallback হিসেবে ব্যবহার করে।
 
+<<<<<<< HEAD
 সময়ের সাথে সাথে কনটেক্সট চেঞ্জ করতে, [state যোগ করুন এবং কনটেক্সট প্রোভাইডারের মধ্যে components wrap করুন।](/reference/react/useContext#updating-data-passed-via-context)
 
+=======
+To make context change over time, [add state and wrap components in a context provider.](/reference/react/useContext#updating-data-passed-via-context)
+>>>>>>> c0c955ed1d1c4fe3bf3e18c06a8d121902a01619
