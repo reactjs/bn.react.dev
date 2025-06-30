@@ -41,25 +41,14 @@ function TabContainer() {
 
 `useTransition` একটি অ্যারে রিটার্ন করে যাতে ঠিক দুটি আইটেম থাকে:
 
-<<<<<<< HEAD
 ১. `isPending` ফ্ল্যাগ যা আপনাকে জানায় যে একটি পেন্ডিং ট্রানজিশন আছে।
-২. [`startTransition` ফাংশনটি](#starttransition) যা আপনাকে একটি স্টেট আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
-
----
-
-### `startTransition` ফাংশন {/*starttransition*/}
-
-`useTransition` দ্বারা রিটার্ন করা `startTransition` ফাংশনটি আপনাকে একটি state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
-=======
-1. The `isPending` flag that tells you whether there is a pending Transition.
-2. The [`startTransition` function](#starttransition) that lets you mark updates as a Transition.
+২. [`startTransition` ফাংশন](#starttransition) যা আপনাকে আপডেটগুলিকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
 
 ---
 
 ### `startTransition(action)` {/*starttransition*/}
 
-The `startTransition` function returned by `useTransition` lets you mark an update as a Transition.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+`useTransition` দ্বারা রিটার্ন করা `startTransition` ফাংশনটি আপনাকে একটি আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
 
 ```js {6,8}
 function TabContainer() {
