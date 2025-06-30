@@ -64,15 +64,10 @@ function TabContainer() {
 }
 ```
 
-<<<<<<< HEAD
-#### প্যারামিটারসমূহ {/*starttransition-parameters*/}
-
-* `scope`: একটি ফাংশন যা এক বা একাধিক [`set` ফাংশন](/reference/react/useState#setstate) কল করে কিছু state আপডেট করে। React কোনো প্রকার দেরি না করে `scope` কে কোনো প্যারামিটার ছাড়াই কল করে এবং `scope` ফাংশন কলের সময় নির্ধারিত সব state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। এগুলি কোনো কিছু দ্বারা [বাধাপ্রাপ্ত হবে না বা non-blocking](#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটর প্রদর্শন করবে না।](#preventing-unwanted-loading-indicators)
-=======
 <Note>
-#### Functions called in `startTransition` are called "Actions". {/*functions-called-in-starttransition-are-called-actions*/}
+#### `startTransition` এ কল করা ফাংশনগুলিকে "অ্যাকশন" বলা হয়। {/*functions-called-in-starttransition-are-called-actions*/}
 
-The function passed to `startTransition` is called an "Action". By convention, any callback called inside `startTransition` (such as a callback prop) should be named `action` or include the "Action" suffix:
+`startTransition` এ পাস করা ফাংশনটিকে "অ্যাকশন" বলা হয়। প্রথা অনুযায়ী, `startTransition` এর ভিতরে কল করা যেকোনো কলব্যাক (যেমন একটি কলব্যাক প্রপ) এর নাম `action` হওয়া উচিত অথবা "Action" সাফিক্স যুক্ত হওয়া উচিত:
 
 ```js {1,9}
 function SubmitButton({ submitAction }) {
@@ -98,10 +93,9 @@ function SubmitButton({ submitAction }) {
 
 
 
-#### Parameters {/*starttransition-parameters*/}
+#### প্যারামিটারসমূহ {/*starttransition-parameters*/}
 
-* `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls that are awaited in the `action` will be included in the Transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#marking-a-state-update-as-a-non-blocking-transition) and [will not display unwanted loading indicators](#preventing-unwanted-loading-indicators).
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* `action`: একটি ফাংশন যা এক বা একাধিক [`set` ফাংশন](/reference/react/useState#setstate) কল করে কিছু state আপডেট করে। React `action` কে কোনো প্যারামিটার ছাড়াই তাৎক্ষণিকভাবে কল করে এবং `action` ফাংশন কলের সময় সিনক্রোনাসভাবে নির্ধারিত সব state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। `action` এ যে কোনো অ্যাসিনক কলকে await করা হলে তা ট্রানজিশনে অন্তর্ভুক্ত হবে, তবে বর্তমানে `await` এর পরে যেকোনো `set` ফাংশনকে একটি অতিরিক্ত `startTransition` এ মোড়ানোর প্রয়োজন ([সমস্যা সমাধান](#react-doesnt-treat-my-state-update-after-await-as-a-transition) দেখুন)। ট্রানজিশন হিসাবে চিহ্নিত state আপডেটগুলি [নন-ব্লকিং](#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটর প্রদর্শন করবে না।](#preventing-unwanted-loading-indicators)
 
 #### রিটার্নস {/*starttransition-returns*/}
 
