@@ -42,16 +42,10 @@ root.render(
 
 স্ট্রিক্ট মোড নিম্নলিখিত development-only আচরণগুলি সক্রিয় করে:
 
-<<<<<<< HEAD
 - আপনার কম্পোনেন্টগুলি impure রেন্ডারিং এর কারণে সৃষ্ট বাগ খুঁজে পেতে [একটি অতিরিক্ত সময় রেন্ডার হবে](#fixing-bugs-found-by-double-rendering-in-development)।
 - আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
+- আপনার কম্পোনেন্টগুলি রেফ ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [রেফ কলব্যাকগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-ref-callbacks-in-development)।
 - আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
-=======
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [re-run refs callbacks an extra time](#fixing-bugs-found-by-re-running-ref-callbacks-in-development) to find bugs caused by missing ref cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 #### প্রপ্স {/*props*/}
 
@@ -92,16 +86,10 @@ root.render(
 
 স্ট্রিক্ট মোড নিম্নলিখিত চেক গুলো ডেভেলপমেন্টে সক্রিয় করে:
 
-<<<<<<< HEAD
 - আপনার কম্পোনেন্টগুলি impure রেন্ডারিং এর কারণে সৃষ্ট বাগ খুঁজে পেতে [একটি অতিরিক্ত সময় রেন্ডার হবে](#fixing-bugs-found-by-double-rendering-in-development)।
 - আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
+- আপনার কম্পোনেন্টগুলি রেফ ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [রেফ কলব্যাকগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-ref-callbacks-in-development)।
 - আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
-=======
-- Your components will [re-render an extra time](#fixing-bugs-found-by-double-rendering-in-development) to find bugs caused by impure rendering.
-- Your components will [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) to find bugs caused by missing Effect cleanup.
-- Your components will [re-run ref callbacks an extra time](#fixing-bugs-found-by-re-running-ref-callbacks-in-development) to find bugs caused by missing ref cleanup.
-- Your components will [be checked for usage of deprecated APIs.](#fixing-deprecation-warnings-enabled-by-strict-mode)
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
 
 **এই সকল চেক শুধুমাত্র ডেভেলপমেন্টেই কাজ করে এবং প্রডাকশন বিল্ডে কোন প্রভাব ফেলে না।**
 
@@ -845,18 +833,16 @@ button { margin-left: 10px; }
 [ইফেক্ট ক্লিনআপ বাস্তবায়ন সম্পর্কে আরও জানুন।](/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development)
 
 ---
-### Fixing bugs found by re-running ref callbacks in development {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
 
-<<<<<<< HEAD
-### স্ট্রিক্ট মোড দ্বারা সক্রিয় ডিপ্রিকেশন সতর্কতা সংশোধন করা {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
-=======
-Strict Mode can also help find bugs in [callbacks refs.](/learn/manipulating-the-dom-with-refs)
+### ডেভেলপমেন্টে রেফ কলব্যাক পুনরায় চালানোর মাধ্যমে পাওয়া বাগগুলি সংশোধন করা {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
 
-Every callback `ref` has some setup code and may have some cleanup code. Normally, React calls setup when the element is *created* (is added to the DOM) and calls cleanup when the element is *removed* (is removed from the DOM).
+স্ট্রিক্ট মোড [কলব্যাক রেফগুলিতে](/learn/manipulating-the-dom-with-refs) বাগ খুঁজে পেতেও সাহায্য করতে পারে।
 
-When Strict Mode is on, React will also run **one extra setup+cleanup cycle in development for every callback `ref`.** This may feel surprising, but it helps reveal subtle bugs that are hard to catch manually.
+প্রতিটি কলব্যাক `ref` এর কিছু সেটআপ কোড থাকে এবং কিছু ক্লিনআপ কোড থাকতে পারে। সাধারণত, React এলিমেন্ট *তৈরি* হলে (DOM-এ যোগ হলে) সেটআপ কল করে এবং এলিমেন্ট *সরানো* হলে (DOM থেকে সরানো হলে) ক্লিনআপ কল করে।
 
-Consider this example, which allows you to select an animal and then scroll to one of them. Notice when you switch from "Cats" to "Dogs", the console logs show that the number of animals in the list keeps growing, and the "Scroll to" buttons stop working:
+স্ট্রিক্ট মোড চালু থাকলে, React ডেভেলপমেন্টের জন্য প্রতিটি কলব্যাক `ref` এর জন্য **একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালাবে।** এটি হয়তো অবাক করে দিতে পারে, কিন্তু এটি সূক্ষ্ম বাগগুলি খুঁজে পেতে সাহায্য করে যা ম্যানুয়ালি ধরা কঠিন।
+
+এই উদাহরণটি বিবেচনা করুন, যা আপনাকে একটি প্রাণী নির্বাচন করতে এবং তারপর তাদের মধ্যে একটিতে স্ক্রোল করতে দেয়। লক্ষ্য করুন যখন আপনি "Cats" থেকে "Dogs" এ স্যুইচ করেন, কনসোল লগগুলি দেখায় যে তালিকায় প্রাণীর সংখ্যা ক্রমাগত বৃদ্ধি পাচ্ছে, এবং "Scroll to" বোতামগুলি কাজ করা বন্ধ করে দেয়:
 
 <Sandpack>
 
@@ -976,9 +962,9 @@ li {
 </Sandpack>
 
 
-**This is a production bug!** Since the ref callback doesn't remove animals from the list in the cleanup, the list of animals keeps growing. This is a memory leak that can cause performance problems in a real app, and breaks the behavior of the app.
+**এটি একটি প্রোডাকশন বাগ!** যেহেতু রেফ কলব্যাক ক্লিনআপে তালিকা থেকে প্রাণীগুলি সরায় না, প্রাণীদের তালিকা ক্রমাগত বৃদ্ধি পেতে থাকে। এটি একটি মেমরি লিক যা একটি প্রকৃত অ্যাপে পারফরম্যান্স সমস্যা সৃষ্টি করতে পারে এবং অ্যাপের আচরণ ভেঙে দিতে পারে।
 
-The issue is the ref callback doesn't cleanup after itself:
+সমস্যাটি হলো রেফ কলব্যাক নিজের পরে পরিষ্কার করে না:
 
 ```js {6-8}
 <li
@@ -993,7 +979,7 @@ The issue is the ref callback doesn't cleanup after itself:
 </li>
 ```
 
-Now let's wrap the original (buggy) code in `<StrictMode>`:
+এখন চলুন মূল (বাগযুক্ত) কোডটি `<StrictMode>`-এ মোড়ানো যাক:
 
 <Sandpack>
 
@@ -1117,9 +1103,9 @@ li {
 
 </Sandpack>
 
-**With Strict Mode, you immediately see that there is a problem**. Strict Mode runs an extra setup+cleanup cycle for every callback ref. This callback ref has no cleanup logic, so it adds refs but doesn't remove them. This is a hint that you're missing a cleanup function.
+**স্ট্রিক্ট মোডে, আপনি সঙ্গে সঙ্গে দেখতে পাবেন যে একটি সমস্যা আছে**। স্ট্রিক্ট মোড প্রতিটি কলব্যাক রেফের জন্য একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালায়। এই কলব্যাক রেফের কোনো ক্লিনআপ লজিক নেই, তাই এটি রেফ যোগ করে কিন্তু সেগুলি সরায় না। এটি একটি ইঙ্গিত যে আপনি একটি ক্লিনআপ ফাংশন মিস করছেন।
 
-Strict Mode lets you eagerly find mistakes in callback refs. When you fix your callback by adding a cleanup function in Strict Mode, you *also* fix many possible future production bugs like the "Scroll to" bug from before:
+স্ট্রিক্ট মোড আপনাকে কলব্যাক রেফগুলিতে ভুলগুলি আগ্রহের সাথে খুঁজে পেতে দেয়। আপনি যখন স্ট্রিক্ট মোডে একটি ক্লিনআপ ফাংশন যোগ করে আপনার কলব্যাক ঠিক করেন, আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগগুলি ঠিক করেন যেমন আগের "Scroll to" বাগ:
 
 <Sandpack>
 
@@ -1244,7 +1230,7 @@ li {
 
 </Sandpack>
 
-Now on inital mount in StrictMode, the ref callbacks are all setup, cleaned up, and setup again:
+এখন স্ট্রিক্ট মোডে প্রাথমিক মাউন্টে, রেফ কলব্যাকগুলি সব সেটআপ, ক্লিনআপ এবং আবার সেটআপ হয়:
 
 ```
 ...
@@ -1255,23 +1241,15 @@ Now on inital mount in StrictMode, the ref callbacks are all setup, cleaned up, 
 ✅ Adding animal to the map. Total animals: 10
 ```
 
-**This is expected.** Strict Mode confirms that the ref callbacks are cleaned up correctly, so the size never grows above the expected amount. After the fix, there are no memory leaks, and all the features work as expected.
+**এটি প্রত্যাশিত।** স্ট্রিক্ট মোড নিশ্চিত করে যে রেফ কলব্যাকগুলি সঠিকভাবে পরিষ্কার করা হয়েছে, তাই আকার কখনই প্রত্যাশিত পরিমাণের চেয়ে বেশি বৃদ্ধি পায় না। ফিক্সের পরে, কোনো মেমরি লিক নেই, এবং সমস্ত বৈশিষ্ট্য প্রত্যাশিত অনুযায়ী কাজ করে।
 
-Without Strict Mode, it was easy to miss the bug until you clicked around to app to notice broken features. Strict Mode made the bugs appear right away, before you push them to production.
+স্ট্রিক্ট মোড ছাড়া, আপনি অ্যাপে ক্লিক করে ভাঙা বৈশিষ্ট্যগুলি লক্ষ্য না করা পর্যন্ত বাগটি মিস করা সহজ ছিল। স্ট্রিক্ট মোড আপনি সেগুলি প্রোডাকশনে পুশ করার আগেই বাগগুলি সঙ্গে সঙ্গে প্রদর্শন করেছে।
 
---- 
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+---
+### স্ট্রিক্ট মোড দ্বারা সক্রিয় ডিপ্রিকেশন সতর্কতা সংশোধন করা {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
 React সতর্ক করে দেয় যদি কোনো কম্পোনেন্ট `<StrictMode>` ট্রির মধ্যে থাকে এবং সেটি এই পুরাতন APIগুলির যেকোনো একটি ব্যবহার করে:
 
-<<<<<<< HEAD
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [অল্টারনেটিভ দেখুন।](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [অল্টারনেটিভ দেখুন।](/reference/react/createContext)
-* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
-=======
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [See alternatives.](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [অল্টারনেটিভ দেখুন।](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
 
 এই APIগুলি প্রধানত পুরানো [ক্লাস কম্পোনেন্টস](/reference/react/Component) এ ব্যবহৃত হয়, তাই এগুলি আধুনিক অ্যাপসে হঠাত দেখা যায়।
