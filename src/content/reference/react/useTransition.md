@@ -1053,11 +1053,7 @@ b { display: inline-block; margin-right: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
-পুরো ট্যাব কন্টেইনার লুকিয়ে একটি লোডিং ইন্ডিকেটর দেখানো ব্যবহারকারীর জন্য অস্বস্তিকর অভিজ্ঞতা তৈরি করে। যদি আপনি `TabButton` এ `useTransition` যোগ করেন, তাহলে আপনি ট্যাব বোতামে পেন্ডিং state দেখানোর জন্য নির্দেশ করতে পারেন।
-=======
-Hiding the entire tab container to show a loading indicator leads to a jarring user experience. If you add `useTransition` to `TabButton`, you can instead display the pending state in the tab button instead.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+পুরো ট্যাব কন্টেইনার লুকিয়ে একটি লোডিং ইন্ডিকেটর দেখানো ব্যবহারকারীর জন্য অস্বস্তিকর অভিজ্ঞতা তৈরি করে। যদি আপনি `TabButton` এ `useTransition` যোগ করেন, তাহলে আপনি বরং ট্যাব বোতামেই পেন্ডিং state প্রদর্শন করতে পারেন।
 
 লক্ষ্য করুন যে "Posts" ক্লিক করলে আর পুরো ট্যাব কন্টেইনার একটি স্পিনার দিয়ে প্রতিস্থাপিত হয় না:
 
@@ -1225,11 +1221,7 @@ b { display: inline-block; margin-right: 10px; }
 
 <Note>
 
-<<<<<<< HEAD
-ট্রানজিশনগুলি কেবল *ইতিমধ্যে প্রকাশিত* কন্টেন্ট (যেমন ট্যাব কন্টেইনার) লুকানো এড়াতে যথেষ্ট দীর্ঘ সময় "অপেক্ষা" করবে। যদি Posts ট্যাবের মধ্যে একটি [নেস্টেড `<Suspense>` সীমানা](/reference/react/Suspense#revealing-nested-content-as-it-loads) থাকত, তবে ট্রানজিশনটি এর জন্য "অপেক্ষা" করত না।
-=======
-Transitions only "wait" long enough to avoid hiding *already revealed* content (like the tab container). If the Posts tab had a [nested `<Suspense>` boundary,](/reference/react/Suspense#revealing-nested-content-as-it-loads) the Transition would not "wait" for it.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+ট্রানজিশনগুলি কেবল *ইতিমধ্যে প্রকাশিত* কন্টেন্ট (যেমন ট্যাব কন্টেইনার) লুকানো এড়াতে যথেষ্ট দীর্ঘ সময় "অপেক্ষা" করবে। যদি Posts ট্যাবে একটি [নেস্টেড `<Suspense>` সীমানা](/reference/react/Suspense#revealing-nested-content-as-it-loads) থাকত, তবে ট্রানজিশনটি এর জন্য "অপেক্ষা" করত না।
 
 </Note>
 
