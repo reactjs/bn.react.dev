@@ -121,15 +121,9 @@ function SubmitButton({ submitAction }) {
 
 ## ব্যবহারবিধি {/*usage*/}
 
-<<<<<<< HEAD
-### একটি state আপডেটকে নন-ব্লকিং ট্রানজিশন হিসাবে চিহ্নিত করা {/*marking-a-state-update-as-a-non-blocking-transition*/}
+### Actions দিয়ে নন-ব্লকিং আপডেট সম্পাদন করুন {/*perform-non-blocking-updates-with-actions*/}
 
-কম্পোনেন্টের একেবারে উপরে `useTransition` কল করুন যাতে state আপডেটগুলি কোনো প্রকার বাধা ছাড়াই *ট্রানজিশন* হিসাবে চিহ্নিত করা যায়।
-=======
-### Perform non-blocking updates with Actions {/*perform-non-blocking-updates-with-actions*/}
-
-Call `useTransition` at the top of your component to create Actions, and access the pending state:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+Actions তৈরি করতে এবং পেন্ডিং state অ্যাক্সেস করতে আপনার কম্পোনেন্টের একেবারে উপরে `useTransition` কল করুন:
 
 ```js [[1, 4, "isPending"], [2, 4, "startTransition"]]
 import {useState, useTransition} from 'react';
