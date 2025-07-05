@@ -117,13 +117,7 @@ function SubmitButton({ submitAction }) {
 
 * Transition আপডেটগুলি টেক্সট ইনপুটগুলি নিয়ন্ত্রণের জন্য ব্যবহৃত হতে পারে না।
 
-<<<<<<< HEAD
-* যদি একাধিক চলমান transitions থাকে, React বর্তমানে তাদেরকে একসাথে ব্যাচ করে। এটি একটি সীমাবদ্ধতা যা সম্ভবত ভবিষ্যতের কোনো রিলিজে সরানো হবে।
-
----
-=======
-* If there are multiple ongoing Transitions, React currently batches them together. This is a limitation that may be removed in a future release.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+* যদি একাধিক চলমান Transitions থাকে, React বর্তমানে তাদেরকে একসাথে ব্যাচ করে। এটি একটি সীমাবদ্ধতা যা সম্ভবত ভবিষ্যতের কোনো রিলিজে সরানো হবে।
 
 ## ব্যবহারবিধি {/*usage*/}
 
