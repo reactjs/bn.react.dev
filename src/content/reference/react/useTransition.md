@@ -607,11 +607,7 @@ export default function TabButton({ action, children, isActive }) {
 }
 ```
 
-<<<<<<< HEAD
-কারণ প্যারেন্ট কম্পোনেন্ট তার state আপডেট করে `onClick` ইভেন্ট হ্যান্ডলারের মধ্যে, সেই state আপডেটটি একটি ট্রানজিশন হিসাবে বিবেচিত হয়। এই কারণে, আগের উদাহরণের মতো, আপনি "Posts" এ ক্লিক করতে পারেন এবং তারপর অবিলম্বে "Contact" এ ক্লিক করতে পারেন। নির্বাচিত ট্যাব আপডেট করা একটি ট্রানজিশন হিসাবে বিবেচিত হয়, তাই এটি ইউজার ইন্টারঅ্যাকশনগুলি বাধা দেয় না।
-=======
-Because the parent component updates its state inside the `action`, that state update gets marked as a Transition. This means you can click on "Posts" and then immediately click "Contact" and it does not block user interactions:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+কারণ প্যারেন্ট কম্পোনেন্ট তার state আপডেট করে `action` এর ভিতরে, সেই state আপডেটটি একটি Transition হিসাবে চিহ্নিত হয়। এর মানে আপনি "Posts" এ ক্লিক করতে পারেন এবং তারপর তাৎক্ষণিকভাবে "Contact" এ ক্লিক করতে পারেন এবং এটি ইউজার ইন্টারঅ্যাকশনগুলি বাধা দেয় না:
 
 <Sandpack>
 
@@ -754,11 +750,7 @@ This allows the `action` callback to be either synchronous or asynchronous witho
 
 ---
 
-<<<<<<< HEAD
-### ট্রানজিশনের সময় পেন্ডিং ভিজ্যুয়াল state প্রদর্শন করা {/*displaying-a-pending-visual-state-during-the-transition*/}
-=======
-### Displaying a pending visual state {/*displaying-a-pending-visual-state*/}
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+### পেন্ডিং ভিজ্যুয়াল state প্রদর্শন করা {/*displaying-a-pending-visual-state*/}
 
 আপনি `useTransition` হতে রিটার্ন আসা `isPending` বুলিয়ান মান ব্যবহার করে ব্যবহারকারীকে জানাতে পারেন যে একটি ট্রানজিশন চলছে। উদাহরণস্বরূপ, ট্যাব বোতামটি একটি বিশেষ "pending" ভিজ্যুয়াল state থাকতে পারে:
 
@@ -907,11 +899,7 @@ b { display: inline-block; margin-right: 10px; }
 
 ### অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটরগুলি প্রতিরোধ করা {/*preventing-unwanted-loading-indicators*/}
 
-<<<<<<< HEAD
-এই উদাহরণে, `PostsTab` কম্পোনেন্টটি একটি [Suspense-enabled](/reference/react/Suspense) ডেটা সোর্স ব্যবহার করে কিছু ডেটা আনয়ন করে। যখন আপনি "Posts" ট্যাবে ক্লিক করেন, তখন `PostsTab` কম্পোনেন্টটি *সাসপেন্ড* হয়, যা কাছাকাছি লোডিং ফলব্যাক প্রদর্শন করে:
-=======
-In this example, the `PostsTab` component fetches some data using [use](/reference/react/use). When you click the "Posts" tab, the `PostsTab` component *suspends*, causing the closest loading fallback to appear:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+এই উদাহরণে, `PostsTab` কম্পোনেন্টটি [use](/reference/react/use) ব্যবহার করে কিছু ডেটা আনয়ন করে। যখন আপনি "Posts" ট্যাবে ক্লিক করেন, তখন `PostsTab` কম্পোনেন্টটি *সাসপেন্ড* হয়, যা কাছাকাছি লোডিং ফলব্যাক প্রদর্শন করে:
 
 <Sandpack>
 
