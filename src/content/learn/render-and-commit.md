@@ -70,7 +70,7 @@ export default function Image() {
 কম্পোনেন্টের প্রাথমিক রেন্ডারের পরে আপনি [set ফাংশন](/reference/react/useState#setstate) দ্বারা কম্পোনেন্টের স্টেট আপডেট করে আরও রেন্ডার ট্রিগার করতে পারবেন। কম্পোনেন্টের স্টেট আপডেট হলে React একটি রেন্ডার স্বয়ংক্রিয়ভাবে কিউ করে রাখে। (রেস্তোরাঁয় গেস্টের প্রথম অর্ডারের পরে চা, ডেজার্ট এবং অন্যান্য ধরণের জিনিস অর্ডার দেওয়ার মতো কল্পনা করতে পারেন।)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
   <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>

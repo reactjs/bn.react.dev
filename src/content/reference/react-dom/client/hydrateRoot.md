@@ -41,8 +41,10 @@ const root = hydrateRoot(domNode, reactNode);
 
 * **optional** `options`: এই React root এর জন্য বিভিন্ন option সংবলিত একটি অবজেক্ট।
 
-  * **optional** `onRecoverableError`: যখন React স্বয়ংক্রিয় ভাবে কোন error থেকে নিজেকে recover করে তখন হওয়া কলব্যাক।
-  * **optional** `identifierPrefix`: [`useId`](/reference/react/useId) দিয়ে তৈরী হওয়া ID গুলোর জন্য React যে string prefix ব্যবহার করে। একই পেইজে যখন একাধিক rot থাকে তখন conflict এড়াতে এটা কাজে লাগে।
+  * **optional** `onCaughtError`: Error Boundary এ React কোন error ধরলে কল হওয়া callback। Error Boundary এর ধরা `error` এবং `componentStack` সংবলিত `errorInfo` অব্জেক্ট দিয়ে কল করা হয়।
+  * **optional** `onUncaughtError`: কোন error throw হয়ে Error Boundary এর মাধ্যমে ধরা না হলে কল হওয়া callback। Throw হওয়া `error` এবং `componentStack` সংবলিত `errorInfo` অব্জেক্ট দিয়ে কল করা হয়।
+  * **optional** `onRecoverableError`: যখন React স্বয়ংক্রিয়ভাবে error থেকে recover করে তখন কল হওয়া callback। React এর throw করা `error` এবং `componentStack` সংবলিত `errorInfo` অব্জেক্ট দিয়ে কল করা হয়। কিছু recoverable error এর মূল কারণ `error.cause` হিসেবে থাকতে পারে।
+  * **optional** `identifierPrefix`: [`useId`](/reference/react/useId) দিয়ে তৈরী হওয়া ID গুলোর জন্য React যে string prefix ব্যবহার করে। একই পেইজে যখন একাধিক root থাকে তখন conflict এড়াতে এটা কাজে লাগে। সার্ভারে ব্যবহৃত prefix এর সাথে একই হতে হবে।
 
 
 #### রিটার্ন {/*returns*/}
@@ -81,7 +83,7 @@ React hydrated `root` এর ভেতরে থাকা `<App />` আপডে
 
 #### সতর্কতা {/*root-render-caveats*/}
 
-* রুটের hydrating শেষ হবার আগে আপনি যদি  `root.render` কল করেন, তাহলে React সার্ভার-রেন্ডার্ড HTML মুছে ফেলবে এবং সম্পূর্ণ রুটটাকে ক্লায়েন্ট রেন্ডারিং এর জন্য তৈরী করে ফেলবে।
+* রুটের hydrating শেষ হবার আগে আপনি  `root.render` কল করার চেষ্টা করেন, তাহলে React সার্ভার-রেন্ডার্ড HTML মুছে ফেলবে এবং সম্পূর্ণ রুটটাকে ক্লায়েন্ট রেন্ডারিং এর জন্য তৈরী করবে।
 
 ---
 
@@ -102,7 +104,7 @@ root.unmount();
 
 #### প্যারামিটার {/*root-unmount-parameters*/}
 
-`root.unmount` does not accept any parameters.
+`root.unmount` কোন প্যারামিটার গ্রহণ করে না।
 
 
 #### রিটার্ন {/*root-unmount-returns*/}
@@ -370,4 +372,161 @@ export default function App({counter}) {
 
 </Sandpack>
 
-একটা hydrated রুটে  [`root.render`](#root-render) কল করার বিষয়টা বিরল। সাধারণত, আপনি এর বদলে কম্পোনেন্টগুলোর কোন একটির মধ্যে [state আপডেট](/reference/react/useState) করবেন। 
+একটা hydrated রুটে  [`root.render`](#root-render) কল করার বিষয়টা বিরল। সাধারণত, আপনি এর বদলে কম্পোনেন্টগুলোর কোন একটির মধ্যে [state আপডেট](/reference/react/useState) করবেন।
+
+### প্রোডাকশনে error logging {/*error-logging-in-production*/}
+
+ডিফল্ট অনুযায়ী, React সমস্ত error console এ log করে। নিজস্ব error reporting বাস্তবায়ন করতে, আপনি ঐচ্ছিক error handler root option `onUncaughtError`, `onCaughtError` এবং `onRecoverableError` প্রদান করতে পারেনঃ
+
+```js [[1, 7, "onCaughtError"], [2, 7, "error", 1], [3, 7, "errorInfo"], [4, 11, "componentStack", 15]]
+import { hydrateRoot } from "react-dom/client";
+import App from "./App.js";
+import { reportCaughtError } from "./reportError";
+
+const container = document.getElementById("root");
+const root = hydrateRoot(container, <App />, {
+  onCaughtError: (error, errorInfo) => {
+    if (error.message !== "Known error") {
+      reportCaughtError({
+        error,
+        componentStack: errorInfo.componentStack,
+      });
+    }
+  },
+});
+```
+
+<CodeStep step={1}>onCaughtError</CodeStep> option টি দুটি আর্গুমেন্ট সহ কল করা একটি function:
+
+1. <CodeStep step={2}>error</CodeStep> যা throw করা হয়েছিল।
+2. একটি <CodeStep step={3}>errorInfo</CodeStep> অব্জেক্ট যাতে error এর <CodeStep step={4}>componentStack</CodeStep> রয়েছে।
+
+`onUncaughtError` এবং `onRecoverableError` এর সাথে একত্রে, আপনি নিজের error reporting system বাস্তবায়ন করতে পারেনঃ
+
+<Sandpack>
+
+```js src/reportError.js
+function reportError({ type, error, errorInfo }) {
+  // নির্দিষ্ট বাস্তবায়ন আপনার উপর নির্ভর করে।
+  // `console.error()` শুধুমাত্র প্রদর্শনের উদ্দেশ্যে ব্যবহার করা হয়েছে।
+  console.error(type, error, "Component Stack: ");
+  console.error("Component Stack: ", errorInfo.componentStack);
+}
+
+export function onCaughtErrorProd(error, errorInfo) {
+  if (error.message !== "Known error") {
+    reportError({ type: "Caught", error, errorInfo });
+  }
+}
+
+export function onUncaughtErrorProd(error, errorInfo) {
+  reportError({ type: "Uncaught", error, errorInfo });
+}
+
+export function onRecoverableErrorProd(error, errorInfo) {
+  reportError({ type: "Recoverable", error, errorInfo });
+}
+```
+
+```js src/index.js active
+import { hydrateRoot } from "react-dom/client";
+import App from "./App.js";
+import {
+  onCaughtErrorProd,
+  onRecoverableErrorProd,
+  onUncaughtErrorProd,
+} from "./reportError";
+
+const container = document.getElementById("root");
+hydrateRoot(container, <App />, {
+  // মনে রাখবেন development এ React এর default handler ব্যবহার করতে বা
+  // development এর জন্য নিজস্ব overlay বাস্তবায়ন করতে এই option গুলো সরান।
+  // handler গুলো শুধুমাত্র প্রদর্শনের উদ্দেশ্যে নিঃশর্তভাবে নির্দিষ্ট করা হয়েছে।
+  onCaughtError: onCaughtErrorProd,
+  onRecoverableError: onRecoverableErrorProd,
+  onUncaughtError: onUncaughtErrorProd,
+});
+```
+
+```js src/App.js
+import { Component, useState } from "react";
+
+function Boom() {
+  foo.bar = "baz";
+}
+
+class ErrorBoundary extends Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
+}
+
+export default function App() {
+  const [triggerUncaughtError, settriggerUncaughtError] = useState(false);
+  const [triggerCaughtError, setTriggerCaughtError] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => settriggerUncaughtError(true)}>
+        Trigger uncaught error
+      </button>
+      {triggerUncaughtError && <Boom />}
+      <button onClick={() => setTriggerCaughtError(true)}>
+        Trigger caught error
+      </button>
+      {triggerCaughtError && (
+        <ErrorBoundary>
+          <Boom />
+        </ErrorBoundary>
+      )}
+    </>
+  );
+}
+```
+
+```html public/index.html hidden
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My app</title>
+</head>
+<body>
+<!--
+  Purposefully using HTML content that differs from the server-rendered content to trigger recoverable errors.
+-->
+<div id="root">Server content before hydration.</div>
+</body>
+</html>
+```
+</Sandpack>
+
+## সমস্যা সমাধান {/*troubleshooting*/}
+
+
+### আমি একটি error পাচ্ছি: "You passed a second argument to root.render" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
+
+একটি সাধারণ ভুল হল `hydrateRoot` এর option গুলো `root.render(...)` এ পাস করাঃ
+
+<ConsoleBlock level="error">
+
+Warning: You passed a second argument to root.render(...) but it only accepts one argument.
+
+</ConsoleBlock>
+
+ঠিক করতে, root option গুলো `hydrateRoot(...)` এ পাস করুন, `root.render(...)` এ নয়ঃ
+```js {2,5}
+// 🚩 ভুল: root.render শুধুমাত্র একটি আর্গুমেন্ট নেয়।
+root.render(App, {onUncaughtError});
+
+// ✅ সঠিক: option গুলো hydrateRoot এ পাস করুন।
+const root = hydrateRoot(container, <App />, {onUncaughtError});
+```

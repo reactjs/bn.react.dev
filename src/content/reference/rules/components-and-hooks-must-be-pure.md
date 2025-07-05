@@ -190,11 +190,11 @@ Side effects that are directly visible to the user are not allowed in the render
 
 ```js {2}
 function ProductDetailPage({ product }) {
-  document.window.title = product.title; // 🔴 Bad: Changes the DOM
+  document.title = product.title; // 🔴 Bad: Changes the DOM
 }
 ```
 
-One way to achieve the desired result of updating `window.title` outside of render is to [synchronize the component with `window`](/learn/synchronizing-with-effects).
+One way to achieve the desired result of updating `document.title` outside of render is to [synchronize the component with `document`](/learn/synchronizing-with-effects).
 
 As long as calling a component multiple times is safe and doesn’t affect the rendering of other components, React doesn’t care if it’s 100% pure in the strict functional programming sense of the word. It is more important that [components must be idempotent](/reference/rules/components-and-hooks-must-be-pure).
 
@@ -207,7 +207,7 @@ A component's props and state are immutable [snapshots](learn/state-as-a-snapsho
 You can think of the props and state values as snapshots that are updated after rendering. For this reason, you don't modify the props or state variables directly: instead you pass new props, or use the setter function provided to you to tell React that state needs to update the next time the component is rendered.
 
 ### Don't mutate Props {/*props*/}
-Props are immutable because if you mutate them, the application will produce inconsistent output, which can be hard to debug since it may or may not work depending on the circumstance.
+Props are immutable because if you mutate them, the application will produce inconsistent output, which can be hard to debug as it may or may not work depending on the circumstances.
 
 ```js {2}
 function Post({ item }) {
@@ -307,7 +307,7 @@ function useIconStyle(icon) {
 }
 ```
 
-If you were to mutate the Hooks arguments, the custom hook's memoization will become incorrect,  so it's important to avoid doing that.
+If you were to mutate the Hook's arguments, the custom hook's memoization will become incorrect,  so it's important to avoid doing that.
 
 ```js {4}
 style = useIconStyle(icon);         // `style` is memoized based on `icon`
@@ -327,7 +327,7 @@ Similarly, it's important to not modify the return values of Hooks, as they may 
 
 ## Values are immutable after being passed to JSX {/*values-are-immutable-after-being-passed-to-jsx*/}
 
-Don't mutate values after they've been used in JSX. Move the mutation before the JSX is created.
+Don't mutate values after they've been used in JSX. Move the mutation to before the JSX is created.
 
 When you use JSX in an expression, React may eagerly evaluate the JSX before the component finishes rendering. This means that mutating values after they've been passed to JSX can lead to outdated UIs, as React won't know to update the component's output.
 

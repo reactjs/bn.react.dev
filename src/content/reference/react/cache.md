@@ -3,12 +3,11 @@ title: cache
 canary: true
 ---
 
-<Canary>
-* `cache` is only for use with [React Server Components](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components). See [frameworks](https://react.dev/learn/start-a-new-react-project#bleeding-edge-react-frameworks) that support React Server Components.
+<RSC>
 
-* `cache` is only available in React’s [Canary](https://react.dev/community/versioning-policy#canary-channel) and [experimental](https://react.dev/community/versioning-policy#experimental-channel) channels. Please ensure you understand the limitations before using `cache` in production. Learn more about [React's release channels here](/community/versioning-policy#all-release-channels).
-</Canary>
+`cache` is only for use with [React Server Components](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components).
 
+</RSC>
 <Intro>
 
 `cache` lets you cache the result of a data fetch or computation.
@@ -226,7 +225,7 @@ By caching a long-running data fetch, you can kick off asynchronous work prior t
 ```jsx [[2, 6, "await getUser(id)"], [1, 17, "getUser(id)"]]
 const getUser = cache(async (id) => {
   return await db.user.query(id);
-}
+});
 
 async function Profile({id}) {
   const user = await getUser(id);
@@ -327,7 +326,7 @@ In general, you should use [`useMemo`](/reference/react/useMemo) for caching a e
 'use client';
 
 function WeatherReport({record}) {
-  const avgTemp = useMemo(() => calculateAvg(record)), record);
+  const avgTemp = useMemo(() => calculateAvg(record), record);
   // ...
 }
 

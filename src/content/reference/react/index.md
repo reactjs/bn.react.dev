@@ -14,7 +14,7 @@ Programmatic React ফিচারঃ
 * [Hooks](/reference/react/hooks) - আপনার কম্পোনেন্ট থেকে বিভিন্ন React ফিচার ব্যবহার করুন।
 * [Components](/reference/react/components) - যেসব বিল্ট-ইন কম্পোনেন্ট আপনার JSX এ ব্যবহার করতে পারেন।
 * [APIs](/reference/react/apis) - কম্পোনেন্ট ডিফাইন করার জন্য কার্যকরী API।
-* [Directives](/reference/react/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
+* [Directives](/reference/rsc/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
 
 ## React DOM {/*react-dom*/}
 

@@ -45,8 +45,10 @@ root.render(<App />);
 
 * **optional** `options`: এই React root এর জন্য বিভিন্ন option সংবলিত একটি অবজেক্ট।
 
-  * **optional** `onRecoverableError`: যখন React স্বয়ংক্রিয় ভাবে কোন error থেকে নিজেকে recover করে তখন হওয়া কলব্যাক।
-  * **optional** `identifierPrefix`: [`useId`](/reference/react/useId) দিয়ে তৈরী হওয়া ID গুলোর জন্য React যে string prefix ব্যবহার করে। একই পেইজে যখন একাধিক rot থাকে তখন conflict এড়াতে এটা কাজে লাগে। 
+  * **optional** `onCaughtError`: যখন React একটি Error Boundary-তে কোন error ধরে তখন কল হওয়া কলব্যাক। Error Boundary যে `error` ধরেছে এবং `componentStack` সংবলিত একটি `errorInfo` অবজেক্ট দিয়ে কল হয়।
+  * **optional** `onUncaughtError`: যখন কোন error throw হয় কিন্তু Error Boundary দিয়ে ধরা হয় না তখন কল হওয়া কলব্যাক। যে `error` throw হয়েছে এবং `componentStack` সংবলিত একটি `errorInfo` অবজেক্ট দিয়ে কল হয়।
+  * **optional** `onRecoverableError`: যখন React স্বয়ংক্রিয়ভাবে error থেকে recover করে তখন কল হওয়া কলব্যাক। React যে `error` throw করে এবং `componentStack` সংবলিত একটি `errorInfo` অবজেক্ট দিয়ে কল হয়। কিছু recoverable error-এ মূল error কারণ `error.cause` হিসেবে অন্তর্ভুক্ত থাকতে পারে।
+  * **optional** `identifierPrefix`: [`useId`](/reference/react/useId) দিয়ে তৈরী হওয়া ID গুলোর জন্য React যে string prefix ব্যবহার করে। একই পেইজে যখন একাধিক root থাকে তখন conflict এড়াতে এটা কাজে লাগে।
 
 #### রিটার্ন {/*returns*/}
 
@@ -87,6 +89,15 @@ React `root`-এ `<App />` দেখাবে, এবং এর মধ্যক�
 * যদি আপনার রুটের DOM নোডে এমন HTML থাকে যা React সার্ভারে তৈরি করেছে বা বিল্ডের সময় তৈরি করেছে, তাহলে বরং [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) ব্যবহার করুন, যা বিদ্যমান HTML এ ইভেন্ট হ্যান্ডলারগুলো যুক্ত করে দেয়।
 
 * আপনি যদি একি রুটে একাধিকবার  `render` কল করেন, তাহলে আপনার পাঠানো সর্বশেষ JSX দেখানোর খাতিরে React প্রয়োজনমত DOM আপডেট করে ফেলবে। React আগেরবার রেন্ডার হওয়া ট্রি এর সাথে ["মিলিয়ে দেখবে"](/learn/preserving-and-resetting-state) এবং সিদ্ধান্ত নিবে DOM এর কোণ অংশগুলো পুনর্ব্যবহার করা যায় আর কোনগুলো আবার বানাতে হবে। একই রুটে আবার `render` কল করা রুট কম্পোনেন্টে [`set` function](/reference/react/useState#setstate) কল করার মতঃ React অপ্রয়োজনীয় DOM আপডেট এড়ানোর চেষ্টা করে।
+
+* যদিও rendering শুরু হওয়ার পর synchronous, `root.render(...)` synchronous নয়। এর মানে হল `root.render()` এর পরের কোড ওই নির্দিষ্ট render এর কোন effects (`useLayoutEffect`, `useEffect`) fire হওয়ার আগেই রান হতে পারে। এটা সাধারণত ঠিক আছে এবং খুব কমই adjustment প্রয়োজন হয়। বিরল ক্ষেত্রে যেখানে effect timing গুরুত্বপূর্ণ, আপনি `root.render(...)` কে [`flushSync`](https://react.dev/reference/react-dom/client/flushSync) দিয়ে wrap করতে পারেন যাতে initial render সম্পূর্ণভাবে synchronously রান হয়।
+  
+  ```js
+  const root = createRoot(document.getElementById('root'));
+  root.render(<App />);
+  // 🚩 HTML এ এখনো rendered <App /> অন্তর্ভুক্ত হবে নাঃ
+  console.log(document.body.innerHTML);
+  ```
 
 ---
 
@@ -142,7 +153,7 @@ root.render(<App />);
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
@@ -204,7 +215,7 @@ function Counter() {
 
 <Pitfall>
 
-**যেসব অ্যাপ server rendering বা static generation ব্যবহার করে তাদেরকে অবশ্যই `createRoot` এর জায়গায় [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করতে হবে।** React তখন আপনার HTML থেকে DOM নোডগুলো ধ্বংস এবং পুনরায় তৈরি করার বদলে *hydrate* (পুনর্ব্যবহার) করবে।
+**যেসব অ্যাপ server rendering বা static generation ব্যবহার করে তাদেরকে অবশ্যই `createRoot` এর বদলে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করতে হবে।** React তখন আপনার HTML থেকে DOM নোডগুলো ধ্বংস এবং পুনরায় তৈরি করার বদলে *hydrate* (পুনর্ব্যবহার) করবে।
 
 </Pitfall>
 
@@ -342,8 +353,128 @@ export default function App({counter}) {
 
 সাধারণত `render` একাধিকবার কল করা হয় না, বরং আপনার কম্পোনেট গুলোই [state আপডেট](/reference/react/useState) করে।
 
----
-## ট্রাবলশ্যুট {/*troubleshooting*/}
+### প্রোডাকশনে Error logging {/*error-logging-in-production*/}
+
+ডিফল্টভাবে, React সকল error কনসোলে log করে। আপনার নিজস্ব error reporting implement করার জন্য, আপনি optional error handler root options `onUncaughtError`, `onCaughtError` এবং `onRecoverableError` প্রদান করতে পারেনঃ
+
+```js [[1, 6, "onCaughtError"], [2, 6, "error", 1], [3, 6, "errorInfo"], [4, 10, "componentStack", 15]]
+import { createRoot } from "react-dom/client";
+import { reportCaughtError } from "./reportError";
+
+const container = document.getElementById("root");
+const root = createRoot(container, {
+  onCaughtError: (error, errorInfo) => {
+    if (error.message !== "Known error") {
+      reportCaughtError({
+        error,
+        componentStack: errorInfo.componentStack,
+      });
+    }
+  },
+});
+```
+
+<CodeStep step={1}>onCaughtError</CodeStep> অপশন হল একটি ফাংশন যা দুটি argument দিয়ে কল হয়ঃ
+
+1. যে <CodeStep step={2}>error</CodeStep> throw হয়েছে।
+2. একটি <CodeStep step={3}>errorInfo</CodeStep> অবজেক্ট যাতে error এর <CodeStep step={4}>componentStack</CodeStep> রয়েছে।
+
+`onUncaughtError` এবং `onRecoverableError` এর সাথে একত্রে, আপনি আপনার নিজস্ব error reporting system implement করতে পারেনঃ
+
+<Sandpack>
+
+```js src/reportError.js
+function reportError({ type, error, errorInfo }) {
+  // নির্দিষ্ট implementation আপনার উপর নির্ভর করে।
+  // `console.error()` শুধুমাত্র demonstration উদ্দেশ্যে ব্যবহৃত হয়েছে।
+  console.error(type, error, "Component Stack: ");
+  console.error("Component Stack: ", errorInfo.componentStack);
+}
+
+export function onCaughtErrorProd(error, errorInfo) {
+  if (error.message !== "Known error") {
+    reportError({ type: "Caught", error, errorInfo });
+  }
+}
+
+export function onUncaughtErrorProd(error, errorInfo) {
+  reportError({ type: "Uncaught", error, errorInfo });
+}
+
+export function onRecoverableErrorProd(error, errorInfo) {
+  reportError({ type: "Recoverable", error, errorInfo });
+}
+```
+
+```js src/index.js active
+import { createRoot } from "react-dom/client";
+import App from "./App.js";
+import {
+  onCaughtErrorProd,
+  onRecoverableErrorProd,
+  onUncaughtErrorProd,
+} from "./reportError";
+
+const container = document.getElementById("root");
+const root = createRoot(container, {
+  // মনে রাখবেন development এ এই options গুলো সরিয়ে দিন যাতে
+  // React এর default handlers ব্যবহার করতে পারেন বা development এর জন্য আপনার নিজস্ব overlay implement করতে পারেন।
+  // handlers গুলো এখানে শুধুমাত্র demonstration উদ্দেশ্যে unconditionally specify করা হয়েছে।
+  onCaughtError: onCaughtErrorProd,
+  onRecoverableError: onRecoverableErrorProd,
+  onUncaughtError: onUncaughtErrorProd,
+});
+root.render(<App />);
+```
+
+```js src/App.js
+import { Component, useState } from "react";
+
+function Boom() {
+  foo.bar = "baz";
+}
+
+class ErrorBoundary extends Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
+}
+
+export default function App() {
+  const [triggerUncaughtError, settriggerUncaughtError] = useState(false);
+  const [triggerCaughtError, setTriggerCaughtError] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => settriggerUncaughtError(true)}>
+        Trigger uncaught error
+      </button>
+      {triggerUncaughtError && <Boom />}
+      <button onClick={() => setTriggerCaughtError(true)}>
+        Trigger caught error
+      </button>
+      {triggerCaughtError && (
+        <ErrorBoundary>
+          <Boom />
+        </ErrorBoundary>
+      )}
+    </>
+  );
+}
+```
+
+</Sandpack>
+
+## Troubleshooting {/*troubleshooting*/}
 
 ### একটা রুট তৈরী করবার পরও কিছুই দেখাচ্ছে না {/*ive-created-a-root-but-nothing-is-displayed*/}
 
@@ -358,6 +489,28 @@ root.render(<App />);
 ```
 
 আপনি এটা করার আগ পর্যন্ত কিছুই দেখা যাবে না।
+
+---
+
+### একটা এরর দেখাচ্ছেঃ "You passed a second argument to root.render" {/*im-getting-an-error-you-passed-a-second-argument-to-root-render*/}
+
+একটি সাধারণ ভুল হল `createRoot` এর options `root.render(...)` এ পাঠানোঃ
+
+<ConsoleBlock level="error">
+
+Warning: You passed a second argument to root.render(...) but it only accepts one argument.
+
+</ConsoleBlock>
+
+এটা ঠিক করতে, root options `root.render(...)` এ না দিয়ে `createRoot(...)` এ দিনঃ
+```js {2,5}
+// 🚩 ভুলঃ root.render শুধুমাত্র একটি argument নেয়।
+root.render(App, {onUncaughtError});
+
+// ✅ সঠিকঃ options createRoot এ দিন।
+const root = createRoot(container, {onUncaughtError}); 
+root.render(<App />);
+```
 
 ---
 
@@ -376,14 +529,14 @@ root.render(<App />);
 
 উদাহরণস্বরূপ, যদি `domNode` `null` হয়, এর অর্থ [`getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)`null` রিটার্ন করেছে। এটা হবে যদি আপনার কল করার সময়ে ডকুমেন্টে ওই ID এর কোন নোড না থাকে। এর কিছু কারণ হতে পারে এমনঃ
 
-1. হতে পারে আপনি যেই ID খুজছেন সেটা আপনার HTML এ ব্যবহার করা ID থেকে আলাদা। টাইপিং এ ভুল হয়েছে কি না নিশ্চিত হন!
+1. হতে পারে আপনার যেই ID খুজছেন সেটা আপনার HTML এ ব্যবহার করা ID থেকে আলাদা। টাইপিং এ ভুল হয়েছে কি নিশ্চিত হন!
 2. হয়ত আপনার বান্ডলের `<script>` ট্যাগ HTML-এ *এর পরে* কোন DOM নোড "দেখতে" পারছে না। 
 
 এই এরর পাবার আরেকটি কমন কারণ হল `createRoot(domNode)` এর বদলে `createRoot(<App />)` লেখা।
 
 ---
 
-### একটা এরর দেখাচ্ছেঃ "Functions are not valid as a React child." {/*im-getting-an-error-functions-are-not-valid-as-a-react-child*/}
+### I'm getting an error: "Functions are not valid as a React child." {/*im-getting-an-error-functions-are-not-valid-as-a-react-child*/}
 
 এই এররের অর্থ হল, আপনি যা `root.render` এ পাঠাচ্ছেন তা React কম্পোনেন্ট নয়।
 
@@ -411,7 +564,7 @@ root.render(createApp());
 
 ### সার্ভার থেকে রেন্ডার হওয়া HTML একদম শুরু থেকে তৈরী হচ্ছে {/*my-server-rendered-html-gets-re-created-from-scratch*/}
 
-যদি আপনার অ্যাপ সার্ভার থেকে রেন্ডার হয়ে থাকে এবং React এর তৈরী করা ইনিশিয়াল HTML থাকে ওতে, আপনি খেয়াল করবেন যে `root.render` কল করলে সব HTML মুছে যায়, এবং একদম শুরু থেকে সব DOM নোড তৈরী হয়। এটা ধীরতর হতে পারে, ফোকাস এবং স্ক্রল পজিশন রিসেট হয়ে যায়, এবং ব্যবহারকারীর ইনপুটও হারিয়ে যেতে পারে।
+যদি আপনার অ্যাপ সার্ভার থেকে রেন্ডার হয়ে থাকে এবং React এর তৈরী করা ইনিশিয়াল HTML থাকে ওতে, আপনি খেয়াল করবেন যে `root.render` কল করলে সব HTML মুছে যায়, এবং একদম শুরু থেকে সব DOM নোড তৈরি হয়। এটা ধীরতর হতে পারে, ফোকাস এবং স্ক্রল পজিশন রিসেট হয়ে যায়, এবং ব্যবহারকারীর ইনপুটও হারিয়ে যেতে পারে।
 
 সার্ভার থেকে রেন্ডার হওয়া অ্যাপের ক্ষেত্রে অবশ্যই `createRoot` এর বদলে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) এর ব্যবহার করতে হবেঃ
 
