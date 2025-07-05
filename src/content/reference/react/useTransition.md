@@ -316,19 +316,11 @@ These solutions handle request ordering for you. When using Transitions to build
 
 <Solution />
 
-<<<<<<< HEAD
-#### ট্রানজিশন ছাড়াই বর্তমান ট্যাবটি আপডেট করা হচ্ছে {/*updating-the-current-tab-without-a-transition*/}
+#### Action ছাড়াই quantity আপডেট করা {/*updating-the-users-name-without-an-action*/}
 
-এই উদাহরণে, "Posts" ট্যাবটি **কৃত্রিমভাবে ধীর করা হয়েছে** যাতে এটি রেন্ডার হতে অন্তত এক সেকেন্ড সময় নেয়। আগের উদাহরণের মতো, এই state আপডেটটি কোনো **ট্রানজিশন নয়।**
+এই উদাহরণে, `updateQuantity` ফাংশনটি কার্টে আইটেমের quantity আপডেট করার জন্য সার্ভারে একটি অনুরোধ অনুকরণ করে। এই ফাংশনটি *কৃত্রিমভাবে ধীর করা হয়েছে* যাতে অনুরোধটি সম্পূর্ণ করতে কমপক্ষে এক সেকেন্ড সময় লাগে।
 
-"Posts" এ ক্লিক করুন এবং তারপর তাৎক্ষণিকভাবে "Contact" এ ক্লিক করুন। লক্ষ্য করুন যে অ্যাপটি ধীরগতির ট্যাব রেন্ডার করার সময় স্থির থাকে এবং ইউআই সাড়া দেয় না। এই state আপডেটটি কোনো ট্রানজিশন নয়, তাই ধীর রি-রেন্ডারের কারণে ইউজার ইন্টারফেস স্থির থাকে।
-=======
-#### Updating the quantity without an Action {/*updating-the-users-name-without-an-action*/}
-
-In this example, the `updateQuantity` function also simulates a request to the server to update the item's quantity in the cart. This function is *artificially slowed down* so that it takes at least a second to complete the request.
-
-Update the quantity multiple times quickly. Notice that the pending "Total" state is shown while any requests is in progress, but the "Total" updates multiple times for each time the "quantity" was clicked:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+দ্রুত একাধিকবার quantity আপডেট করুন। লক্ষ্য করুন যে কোনো অনুরোধ চলমান থাকার সময় pending "Total" state দেখানো হয়, কিন্তু "quantity" এ প্রতিবার ক্লিক করার জন্য "Total" একাধিকবার আপডেট হয়:
 
 <Sandpack>
 
