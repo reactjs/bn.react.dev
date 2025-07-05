@@ -136,17 +136,10 @@ function CheckoutForm() {
 
 `useTransition` ঠিক দুটি আইটেম সহ একটি array রিটার্ন করে:
 
-<<<<<<< HEAD
-১. <CodeStep step={1}>`isPending` ফ্ল্যাগ</CodeStep> যা আপনাকে জানায় যে একটি পেন্ডিং ট্রানজিশন রয়েছে।
-২. <CodeStep step={2}>`startTransition` ফাংশন</CodeStep> যা আপনাকে একটি state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করতে দেয়।
+1. <CodeStep step={1}>`isPending` ফ্ল্যাগ</CodeStep> যা আপনাকে জানায় যে একটি পেন্ডিং Transition রয়েছে।
+2. <CodeStep step={2}>`startTransition` ফাংশন</CodeStep> যা আপনাকে একটি Action তৈরি করতে দেয়।
 
-আপনি তখন একটি state আপডেটকে এইরকম একটি ট্রানজিশন হিসাবে চিহ্নিত করতে পারেন:
-=======
-1. The <CodeStep step={1}>`isPending` flag</CodeStep> that tells you whether there is a pending Transition.
-2. The <CodeStep step={2}>`startTransition` function</CodeStep> that lets you create an Action.
-
-To start a Transition, pass a function to `startTransition` like this:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+একটি Transition শুরু করতে, `startTransition`-এ এইরকম একটি ফাংশন পাস করুন:
 
 ```js
 import {useState, useTransition} from 'react';
