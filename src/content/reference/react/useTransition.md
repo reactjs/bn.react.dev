@@ -1676,13 +1676,7 @@ startTransition(() => {
 });
 ```
 
-<<<<<<< HEAD
-`startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই একই সময়ে হতে হবে।
-
-আপনি এভাবে একটি আপডেটকে ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
-=======
-The function you pass to `startTransition` must be synchronous. You can't mark an update as a Transition like this:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+`startTransition` এ আপনি যে ফাংশন পাস করবেন তা অবশ্যই সিঙ্ক্রোনাস হতে হবে। আপনি এভাবে একটি আপডেটকে ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
 
 ```js
 startTransition(() => {
@@ -1704,15 +1698,11 @@ setTimeout(() => {
 }, 1000);
 ```
 
-<<<<<<< HEAD
-একইভাবে, আপনি একটি আপডেটকে এইরকম ট্রানজিশন হিসেবে চিহ্নিত করতে পারবেন না:
-=======
 ---
 
-### React doesn't treat my state update after `await` as a Transition {/*react-doesnt-treat-my-state-update-after-await-as-a-transition*/}
+### React আমার `await` এর পরে state update কে ট্রানজিশন হিসেবে বিবেচনা করছে না {/*react-doesnt-treat-my-state-update-after-await-as-a-transition*/}
 
-When you use `await` inside a `startTransition` function, the state updates that happen after the `await` are not marked as Transitions. You must wrap state updates after each `await` in a `startTransition` call:
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+যখন আপনি `startTransition` ফাংশনের মধ্যে `await` ব্যবহার করেন, তখন `await` এর পরে ঘটে যাওয়া state update গুলো ট্রানজিশন হিসেবে চিহ্নিত হয় না। আপনাকে প্রতিটি `await` এর পরে state update গুলোকে একটি `startTransition` কলের মধ্যে মোড়াতে হবে:
 
 ```js
 startTransition(async () => {
