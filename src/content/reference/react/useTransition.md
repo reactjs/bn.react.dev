@@ -581,15 +581,9 @@ This solution makes the app feel slow, because the user must wait each time they
 
 ---
 
-<<<<<<< HEAD
-### ট্রানজিশনে প্যারেন্ট কম্পোনেন্ট আপডেট করা {/*updating-the-parent-component-in-a-transition*/}
+### কম্পোনেন্ট থেকে `action` prop expose করা {/*exposing-action-props-from-components*/}
 
-আপনি `useTransition` কল থেকে একটি প্যারেন্ট কম্পোনেন্টের state আপডেট করতে পারেন। উদাহরণস্বরূপ, এই `TabButton` কম্পোনেন্টটি এর `onClick` লজিককে একটি ট্রানজিশনে রাখে:
-=======
-### Exposing `action` prop from components {/*exposing-action-props-from-components*/}
-
-You can expose an `action` prop from a component to allow a parent to call an Action.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+আপনি একটি কম্পোনেন্ট থেকে একটি `action` prop expose করতে পারেন যাতে একটি parent একটি Action কল করতে পারে।
 
 For example, this `TabButton` component wraps its `onClick` logic in an `action` prop:
 
