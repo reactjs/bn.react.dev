@@ -161,31 +161,17 @@ function CheckoutForm() {
 }
 ```
 
-<<<<<<< HEAD
-ট্রানজিশন আপনাকে ইউজার ইন্টারফেস আপডেটগুলিকে এমনকি ধীরগতির ডিভাইসেও রেস্পন্সিভ রাখতে দেয়।
+`startTransition` এ পাস করা ফাংশনটিকে "Action" বলা হয়। আপনি একটি Action এর মধ্যে state আপডেট করতে এবং (ঐচ্ছিকভাবে) side effects সম্পাদন করতে পারেন, এবং পৃষ্ঠায় ব্যবহারকারীর ইন্টারঅ্যাকশনগুলি ব্লক না করে এই কাজটি ব্যাকগ্রাউন্ডে করা হবে। একটি Transition একাধিক Actions অন্তর্ভুক্ত করতে পারে, এবং যখন একটি Transition চলমান থাকে, আপনার UI রেস্পন্সিভ থাকে। উদাহরণস্বরূপ, যদি ব্যবহারকারী একটি ট্যাবে ক্লিক করে কিন্তু তারপর তাদের মন পরিবর্তন করে এবং অন্য ট্যাবে ক্লিক করে, তাহলে প্রথম আপডেট শেষ হওয়ার জন্য অপেক্ষা না করে দ্বিতীয় ক্লিকটি তাৎক্ষণিকভাবে পরিচালনা করা হবে।
 
-একটি ট্রানজিশনের সাথে, আপনার UI রি-রেন্ডারের মাঝখানে রেসপন্সিভ থাকে। উদাহরণস্বরূপ, যদি ব্যবহারকারী একটি ট্যাবে ক্লিক করে কিন্তু তারপর তাদের মন পরিবর্তন করে এবং অন্য ট্যাবে ক্লিক করে, তারা প্রথম রি-রেন্ডার শেষ হওয়ার জন্য অপেক্ষা না করে এটি করতে পারে।
+চলমান Transitions সম্পর্কে ব্যবহারকারীকে ফিডব্যাক দিতে, `isPending` state `startTransition` এর প্রথম কল এ `true` হয়ে যায়, এবং সমস্ত Actions সম্পূর্ণ হওয়া এবং চূড়ান্ত state ব্যবহারকারীকে দেখানো পর্যন্ত `true` থাকে। Transitions [অবাঞ্ছিত লোডিং ইন্ডিকেটর প্রতিরোধ করতে](#preventing-unwanted-loading-indicators) Actions এর side effects ক্রমানুসারে সম্পূর্ণ করা নিশ্চিত করে, এবং আপনি `useOptimistic` দিয়ে Transition চলাকালীন তাৎক্ষণিক ফিডব্যাক প্রদান করতে পারেন।
 
-<Recipes titleText="useTransition এবং রেগুলার state আপডেটের মধ্যে পার্থক্য" titleId="examples">
+<Recipes titleText="Actions এবং নিয়মিত event handling এর মধ্যে পার্থক্য">
 
-#### ট্রানজিশনের মাধ্যমে বর্তমান ট্যাবটি আপডেট করা হচ্ছে {/*updating-the-current-tab-in-a-transition*/}
+#### একটি Action এ quantity আপডেট করা {/*updating-the-quantity-in-an-action*/}
 
-এই উদাহরণে, "Posts" ট্যাবটি **কৃত্রিমভাবে ধীর করা হয়েছে** যাতে এটি রেন্ডার করতে কমপক্ষে এক সেকেন্ড সময় নেয়।
+এই উদাহরণে, `updateQuantity` ফাংশনটি কার্টে আইটেমের quantity আপডেট করার জন্য সার্ভারে একটি অনুরোধ অনুকরণ করে। এই ফাংশনটি *কৃত্রিমভাবে ধীর করা হয়েছে* যাতে অনুরোধটি সম্পূর্ণ করতে কমপক্ষে এক সেকেন্ড সময় লাগে।
 
-"Posts" এ ক্লিক করুন এবং তারপর তাৎক্ষণিকভাবে "Contact" এ ক্লিক করুন। লক্ষ্য করুন যে এটি "Posts" এর ধীরগতির রেন্ডারকে বাধা দেয়। "Contact" ট্যাবটি তাৎক্ষণিকভাবে দেখায়। কারণ এই state আপডেটটি একটি transition হিসেবে চিহ্নিত হয়েছে, একটি ধীরগতির রি-রেন্ডার ইউজার ইন্টারফেসকে স্থির রাখতে পারেনি।
-=======
-The function passed to `startTransition` is called the "Action". You can update state and (optionally) perform side effects within an Action, and the work will be done in the background without blocking user interactions on the page. A Transition can include multiple Actions, and while a Transition is in progress, your UI stays responsive. For example, if the user clicks a tab but then changes their mind and clicks another tab, the second click will be immediately handled without waiting for the first update to finish. 
-
-To give the user feedback about in-progress Transitions, the `isPending` state switches to `true` at the first call to `startTransition`, and stays `true` until all Actions complete and the final state is shown to the user. Transitions ensure side effects in Actions to complete in order to [prevent unwanted loading indicators](#preventing-unwanted-loading-indicators), and you can provide immediate feedback while the Transition is in progress with `useOptimistic`.
-
-<Recipes titleText="The difference between Actions and regular event handling">
-
-#### Updating the quantity in an Action {/*updating-the-quantity-in-an-action*/}
-
-In this example, the `updateQuantity` function simulates a request to the server to update the item's quantity in the cart. This function is *artificially slowed down* so that it takes at least a second to complete the request.
-
-Update the quantity multiple times quickly. Notice that the pending "Total" state is shown while any requests are in progress, and the "Total" updates only after the final request is complete. Because the update is in an Action, the "quantity" can continue to be updated while the request is in progress.
->>>>>>> 50d6991ca6652f4bc4c985cf0c0e593864f2cc91
+দ্রুত একাধিকবার quantity আপডেট করুন। লক্ষ্য করুন যে কোনো অনুরোধ চলমান থাকার সময় pending "Total" state দেখানো হয়, এবং চূড়ান্ত অনুরোধ সম্পূর্ণ হওয়ার পরেই "Total" আপডেট হয়। যেহেতু আপডেটটি একটি Action এ রয়েছে, তাই অনুরোধ চলমান থাকার সময় "quantity" আপডেট করা অব্যাহত থাকতে পারে।
 
 <Sandpack>
 
