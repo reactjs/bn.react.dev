@@ -99,6 +99,19 @@ app.use('/', (request, response) => {
 
 ---
 
+### সার্ভারে `renderToString` থেকে static prerender এ migration {/*migrating-from-rendertostring-to-a-static-prerender-on-the-server*/}
+
+`renderToString` সাথে সাথেই একটি string return করে, তাই এটি static HTML generation এর জন্য data load হওয়ার জন্য অপেক্ষা করাকে support করে না।
+
+আমরা নিচের fully-featured বিকল্পগুলো ব্যবহার করতে recommend করি:
+
+* যদি আপনি Node.js ব্যবহার করেন, [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) ব্যবহার করুন।
+* যদি আপনি Deno অথবা [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) সহ একটি মডার্ন edge runtime ব্যবহার করেন, [`prerender`](/reference/react-dom/static/prerender) ব্যবহার করুন।
+
+যদি আপনার static site generation environment streams support না করে তাহলে আপনি `renderToString` ব্যবহার করতে থাকতে পারেন।
+
+---
+
 ### ক্লায়েন্ট কোড থেকে `renderToString` দূর করা {/*removing-rendertostring-from-the-client-code*/}
 
 কখনো কখনো, কোনো কম্পোনেন্টকে HTML-এ রূপান্তর করতে ক্লায়েন্ট-সাইডে `renderToString` ব্যবহার করা হয়।
@@ -137,5 +150,4 @@ console.log(div.innerHTML); // For example, "<svg>...</svg>"
 
 যদি কোনো কম্পোনেন্ট সাসপেন্স অবস্থায় থাকে (যেমন, যদি এটাকে [`lazy`](/reference/react/lazy) করা হয় কিংবা এটা ডেটা ফেচ করে), তাহলে এর কন্টেন্ট resolve হওয়ার জন্য `renderToString` অপেক্ষা করবে না। পরিবর্তে, `renderToString` উপরের সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি খুঁজে বের করবে এবং HTML-এ এর `fallback` প্রপ রেন্ডার করবে। ক্লায়েন্ট কোড লোড না হওয়া পর্যন্ত ঐ কন্টেন্ট প্রদর্শিত হবে না।
 
-এই সমস্যা সমাধান করতে, [রেকমেন্ডেড স্ট্রিমিং সমাধানগুলোর](#migrating-from-rendertostring-to-a-streaming-method-on-the-server) একটি ব্যবহার করুন। এ সমাধানগুলোর ক্ষেত্রে সার্ভারে resolve হওয়ার সাথে সাথে কন্টেন্ট ভাগে ভাগে স্ট্রিম হয়ে আসতে পারবে যাতে ইউজার ক্লায়েন্ট কোড লোড হওয়ার আগেই পৃষ্ঠাটি ক্রমে ক্রমে পূরণ হতে দেখতে পায়।
-
+এটি সমাধান করতে, [প্রস্তাবিত streaming solution গুলোর](#alternatives) যেকোনো একটি ব্যবহার করুন। Server side rendering এর জন্য, এগুলো content কে chunks আকারে stream করতে পারে যখন সেগুলো server এ resolve হয়, যাতে user client code load হওয়ার আগেই page টি ধীরে ধীরে পূর্ণ হতে দেখে। Static site generation এর জন্য, এগুলো static HTML generate করার আগে সমস্ত content resolve হওয়ার জন্য অপেক্ষা করতে পারে।

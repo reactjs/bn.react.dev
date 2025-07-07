@@ -4,7 +4,7 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 <Intro>
 
-আপনি যদি আপনার Existing প্রজেক্ট কিছু ইন্টারেক্টিভিটি যুক্ত করতে চান তবে আপনাকে তা React-এ নতুনভাবে লেখার প্রয়োজন নেই। আপনার Existing স্ট্যাকে React যোগ করুন এবং যে কোনো জায়গায় ইন্টারেক্টিভ React কম্পোনেন্ট রেন্ডার করুন।
+আপনি যদি আপনার Existing প্রজেক্ট কিছু ইন্টারেক্টিভিটি যুক্ত করতে চান তবে আপনাকে তা React-এ নতুনভাবে লেখার প্রয়োজন নেই। আপনার Existing স্ট্যাকে React যোগ করুন এবং যে কোনো জায়গায় ইন্টারেক্টিভ React কম্পোনেন্ট রেন্ডার করুন।
 
 </Intro>
 
@@ -20,13 +20,13 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 এখানে আমরা যে ভাবে এটি সেট আপ করতে পরামর্শ দিচ্ছিঃ
 
-১. **আপনার অ্যাপ এর React অংশটি** [React-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) দিয়ে বিল্ড করুন।
-২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
+১. **আপনার অ্যাপ এর React অংশটি** [React-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) দিয়ে বিল্ড করুন।
+২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 ৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
 
 এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
 
-অনেক React ভিত্তিক ফ্রেমওয়ার্ক full-stack এবং আপনার React অ্যাপটিকে সার্ভারের সুবিধা নিতে দেয়। তবে আপনি যদি সার্ভারে জাভাস্ক্রিপ্ট রান করার সুযোগ না পান অথবা না চান, সে ক্ষেত্রেও একই পদক্ষেপটি নিতে পারেন। সে ক্ষেত্রে, `/some-app/` এর পরিবর্তে HTML/CSS/JS এক্সপোর্ট করুন (Next.js এর জন্য [`next export` output](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby এর জন্য ডিফল্ট )।
+অনেক React ভিত্তিক ফ্রেমওয়ার্ক full-stack এবং আপনার React অ্যাপটিকে সার্ভারের সুবিধা নিতে দেয়। তবে আপনি যদি সার্ভারে জাভাস্ক্রিপ্ট রান করার সুযোগ না পান অথবা না চান, সে ক্ষেত্রেও একই পদক্ষেপটি নিতে পারেন। সে ক্ষেত্রে, `/some-app/` এর পরিবর্তে HTML/CSS/JS এক্সপোর্ট করুন (Next.js এর জন্য [`next export` output](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby এর জন্য ডিফল্ট )।
 
 ## আগে থেকে বিদ্যমান একটি পেইজে React ব্যবহার {/*using-react-for-a-part-of-your-existing-page*/}
 
@@ -39,13 +39,13 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 সঠিক পদক্ষেপটি আপনার বর্তমান পেইজ সেটআপের উপর নির্ভর করে, তাই আসুন কিছু বিস্তারিত দেখে নেই।
 
-### ধাপ ১: একটি মডিউলার জাভাস্ক্রিপ্ট এনভায়রনমেন্ট সেট আপ করুন" {/*step-1-set-up-a-modular-javascript-environment*/}
+### ধাপ ১: একটি মডিউলার জাভাস্ক্রিপ্ট এনভায়রনমেন্ট সেট আপ করুন" {/*step-1-set-up-a-modular-javascript-environment*/}
 
-একটি মডিউলার জাভাস্ক্রিপ্ট এনভায়রনমেন্ট আপনাকে একটি ফাইলে আপনার সমস্ত কোড লেখার বিপরীতে আলাদা আলাদা ফাইলগুলিতে আপনার React উপাদানগুলি লিখতে দেয়। এটি আপনাকে React সহ অন্যান্য ডেভেলপারদের [npm](https://www.npmjs.com/) রেজিস্ট্রির উপর প্রকাশিত সমস্ত অসাধারণ প্যাকেজগুলি ব্যবহার করতে দেয়। এখন এটি আপনি কিভাবে করতে চান তা আপনার বর্তমান সেটআপের উপর নির্ভর করে।
+একটি মডিউলার জাভাস্ক্রিপ্ট এনভায়রনমেন্ট আপনাকে একটি ফাইলে আপনার সমস্ত কোড লেখার বিপরীতে আলাদা আলাদা ফাইলগুলিতে আপনার React উপাদানগুলি লিখতে দেয়। এটি আপনাকে React সহ অন্যান্য ডেভেলপারদের [npm](https://www.npmjs.com/) রেজিস্ট্রির উপর প্রকাশিত সমস্ত অসাধারণ প্যাকেজগুলি ব্যবহার করতে দেয়। এখন এটি আপনি কিভাবে করতে চান তা আপনার বর্তমান সেটআপের উপর নির্ভর করে।
 
 * **যদি আপনার অ্যাপ ইতোমধ্যে import স্টেটমেন্ট ব্যবহার করে ফাইলে ভাগ করা থাকে**, তাহলে সেই সেটআপটি ব্যবহার করা চেষ্টা করুন। আপনার জাভাস্ক্রিপ্ট কোডে `<div />` লিখলে কী সিনট্যাক্স এরর হয় তা চেক করুন। যদি এটি সিনট্যাক্স এরর দেখায়, তবে আপনাকে [Babel দিয়ে আপনার জাভাস্ক্রিপ্ট কোড রূপান্তর করতে হতে পারে](<(https://babeljs.io/setup)>) এবং JSX ব্যবহার করতে [Babel React preset](https://babeljs.io/docs/babel-preset-react) সক্ষম করতে হতে পারে।
 
-* **যদি আপনার অ্যাপে জাভাস্ক্রিপ্ট মডিউল কম্পাইল করার জন্য ইতিমধ্যে কোনও সেটআপ না থাকে**, তবে [Vite](https://vitejs.dev/) দিয়ে সেটআপ করুন। Vite কমিউনিটি Rails, Django এবং Laravel সহ [ব্যাকেন্ড ফ্রেমওয়ার্ক সহ অনেক ইন্টিগ্রেশন](https://github.com/vitejs/awesome-vite#integrations-with-backends) বজায় রাখে। যদি আপনার ব্যাকেন্ড ফ্রেমওয়ার্ক তালিকাভুক্ত না থাকে তবে [এই গাইড](https://vitejs.dev/guide/backend-integration.html) অনুসরণ করে ব্যাকেন্ডের সাথে Vite বিল্ড ইন্টিগ্রেট করতে পারেন।
+* **যদি আপনার অ্যাপে জাভাস্ক্রিপ্ট মডিউল কম্পাইল করার জন্য ইতিমধ্যে কোনও সেটআপ না থাকে**, তবে [Vite](https://vite.dev/) দিয়ে সেটআপ করুন। Vite কমিউনিটি Rails, Django এবং Laravel সহ [ব্যাকেন্ড ফ্রেমওয়ার্ক সহ অনেক ইন্টিগ্রেশন](https://github.com/vitejs/awesome-vite#integrations-with-backends) বজায় রাখে। যদি আপনার ব্যাকেন্ড ফ্রেমওয়ার্ক তালিকাভুক্ত না থাকে তবে [এই গাইড](https://vite.dev/guide/backend-integration.html) অনুসরণ করে ব্যাকেন্ডের সাথে Vite বিল্ড ইন্টিগ্রেট করতে পারেন।
 
 আপনার সেটআপ কাজ করছে কি না তা চেক করতে, আপনার প্রজেক্ট ফোল্ডারে এই কমান্ডটি চালানঃ
 
@@ -57,12 +57,13 @@ npm install react react-dom
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
   <body>
-    <!-- ইতোমধ্যে আপনার পেইজে থাকা কনটেন্ট (এই উদাহরণে, এটি রিপ্লেস হয়ে যাবে) -->
+    <!-- Your existing page content (in this example, it gets replaced) -->
+    <div id="root"></div>
   </body>
 </html>
 ```
@@ -70,21 +71,21 @@ npm install react react-dom
 ```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
-// আগে থেকে বিদ্যমান HTML কনটেন্ট সরিয়ে ফেলুন
+// আগে থেকে বিদ্যমান HTML কনটেন্ট সরিয়ে ফেলুন
 document.body.innerHTML = '<div id="app"></div>';
 
-// এর জায়গায় আপনার React কম্পোনেন্ট রেন্ডার করুন
+// এর জায়গায় আপনার React কম্পোনেন্ট রেন্ডার করুন
 const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
 
 </Sandpack>
 
-যদি আপনার পেইজের সম্পূর্ণ কনটেন্ট "Hello, world!" দ্বারা প্রতিস্থাপিত হয়ে যায়, তবে সবকিছু কাজ করছে! পড়তে থাকুন।
+যদি আপনার পেইজের সম্পূর্ণ কনটেন্ট "Hello, world!" দ্বারা প্রতিস্থাপিত হয়ে যায়, তবে সবকিছু কাজ করছে! পড়তে থাকুন।
 
 <Note>
 
-একটি বিদ্যমান প্রজেক্টে একটি মডুলার জাভাস্ক্রিপ্ট এনভায়রনমেন্টকে যুক্ত করা প্রথমবার ভীতিজনক বোধ হতে পারে, কিন্তু এই পরিশ্রমটুকু এর প্রাপ্য! আপনি আটকে গেলে, আমাদের [কমিউনিটি রিসোর্স](/community) অথবা [Vite Chat](https://chat.vitejs.dev/) ব্যবহার করে দেখুন।
+একটি বিদ্যমান প্রজেক্টে একটি মডুলার জাভাস্ক্রিপ্ট এনভায়রনমেন্টকে যুক্ত করা প্রথমবার ভীতিজনক বোধ হতে পারে, কিন্তু এই পরিশ্রমটুকু এর প্রাপ্য! আপনি আটকে গেলে, আমাদের [কমিউনিটি রিসোর্স](/community) অথবা [Vite Chat](https://chat.vite.dev/) ব্যবহার করে দেখুন।
 
 </Note>
 
@@ -94,10 +95,10 @@ root.render(<h1>Hello, world</h1>);
 ```js
 import { createRoot } from 'react-dom/client';
 
-// আগে থেকে বিদ্যমান HTML কনটেন্ট সরিয়ে ফেলুন
+// আগে থেকে বিদ্যমান HTML কনটেন্ট সরিয়ে ফেলুন
 document.body.innerHTML = '<div id="app"></div>';
 
-// এর জায়গায় আপনার React কম্পোনেন্ট রেন্ডার করুন
+// এর জায়গায় আপনার React কম্পোনেন্ট রেন্ডার করুন
 const root = createRoot(document.getElementById('app'));
 root.render(<h1>Hello, world</h1>);
 ```
@@ -107,11 +108,11 @@ root.render(<h1>Hello, world</h1>);
 
 এই কোডটি মুছে ফেলুন।
 
-বরং, আপনি সম্ভবত আপনার HTML এ React কম্পোনেন্টগুলি নির্দিষ্ট জায়গায় রেন্ডার করতে চান। এখন আপনার HTML পেইজটি খুলুন
+বরং, আপনি সম্ভবত আপনার HTML এ React কম্পোনেন্টগুলি নির্দিষ্ট জায়গায় রেন্ডার করতে চান। এখন আপনার HTML পেইজটি খুলুন
 (অথবা সার্ভার টেমপ্লেটগুলি যা একে তৈরি করে) এবং কোনও ট্যাগে একটি ইউনিক [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) এট্রিবিউট যুক্ত করুন, যেমনঃ
 
 ```html
-<!-- ... আপনার HTML এর কোন এক জায়গায় ... -->
+<!-- ... আপনার HTML এর কোন এক জায়গায় ... -->
 <nav id="navigation"></nav>
 <!-- ... আরো HTML ... -->
 ```
@@ -119,7 +120,7 @@ root.render(<h1>Hello, world</h1>);
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
@@ -148,7 +149,7 @@ root.render(<NavigationBar />);
 
 লক্ষ্য করুন যে index.html ফাইলের মূল HTML কন্টেন্টটি সংরক্ষিত আছে এবং আপনার নিজের NavigationBar React কম্পোনেন্টটি এখন আপনার HTML এর মধ্যে প্রদর্শিত হয় যেটি `<nav id="navigation">` এর ভিতরে অবস্থিত। React কম্পোনেন্টগুলি অবশ্যই বিদ্যমান HTML পৃষ্ঠার ভিতরে রেন্ডার করা সম্ভব হবে। বিস্তারিত জানতে, [createRoot usage documentation](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) পড়ুন।
 
-যখন আপনি একটি বিদ্যমান প্রকল্পে React অনুমোদন করবেন, তখন সাধারণত ছোট ইন্টারেক্টিভ কম্পোনেন্টগুলি দিয়ে শুরু করা হয় (যেমন বাটন), এবং পরে ধীরে ধীরে "উপরের দিকে" যাওয়া হয় এবং আপনার পুরো পেইজ এক সময় React দিয়ে বিল্ড হয়। আপনি যদি ঐ পর্যায়ে চলে আসেন, আমাদের উপদেশ থাকবে এর ঠিক পরই একটি [React ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করবেন যেন React এর সুবিধাদি পূর্ণরূপে ব্যবহার করতে পারেন।
+যখন আপনি একটি বিদ্যমান প্রকল্পে React অনুমোদন করবেন, তখন সাধারণত ছোট ইন্টারেক্টিভ কম্পোনেন্টগুলি দিয়ে শুরু করা হয় (যেমন বাটন), এবং পরে ধীরে ধীরে "উপরের দিকে" যাওয়া হয় এবং আপনার পুরো পেইজ এক সময় React দিয়ে বিল্ড হয়। আপনি যদি ঐ পর্যায়ে চলে আসেন, আমাদের উপদেশ থাকবে এর ঠিক পরই একটি [React ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করবেন যেন React এর সুবিধাদি পূর্ণরূপে ব্যবহার করতে পারেন।
 
 ## একটি বিদ্যমান নেটিভ মোবাইল অ্যাপ এ React Native ব্যবহার করা {/*using-react-native-in-an-existing-native-mobile-app*/}
 
