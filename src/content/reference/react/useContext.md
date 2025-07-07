@@ -38,13 +38,23 @@ function MyComponent() {
 
 #### রিটার্নস {/*returns*/}
 
+<<<<<<< HEAD
 যে কম্পোনেন্টে `useContext` কল করা হয় তার জন্য context এর ভ্যালু রিটার্ন করে। যে কম্পোনেন্ট কল করা হয়েছে তার উপরে কম্পোনেন্ট ট্রির সব থেকে কাছের `SomeContext.Provider` দ্বারা নির্ধারিত হয় যা `value` হিসাবে পাঠানো হয়। যদি এমন কোন provider না থাকে, তাহলে তার রিটার্ন করা মান হবে `defaultValue`  যা আপনি context এর জন্য [`createContext`](/reference/react/createContext) এ পাঠিয়েছিলেন। রিটার্ন্ড মান সবসময় আপ টু ডেট হবে। যদি context এ কোন পরিবর্তন হয়, তাহলে context ব্যবহারকৃত কম্পোনেন্টগুলোকে React স্বয়ংক্রিয়ভাবে পুনরায় রেন্ডার করবে।
+=======
+`useContext` returns the context value for the calling component. It is determined as the `value` passed to the closest `SomeContext` above the calling component in the tree. If there is no such provider, then the returned value will be the `defaultValue` you have passed to [`createContext`](/reference/react/createContext) for that context. The returned value is always up-to-date. React automatically re-renders components that read some context if it changes.
+>>>>>>> 341c312916e1b657262bbe14b134a6f1779fecf1
 
 #### সতর্কতা {/*caveats*/}
 
+<<<<<<< HEAD
 * একটি কম্পোনেন্টের ভিতর `useContext()` কল করা হলে সেই *একই* কম্পোনেন্ট থেকে রিটার্নড হওয়া providers দিয়ে এটি প্রভাবিত হবে না। যে কম্পোনেন্ট থেকে `useContext()` কল করা হয়েছে, সংশ্লিষ্ট `<Context.Provider>` কে সেই কম্পোনেন্টের ***উপরে* থাকতে হবে**
 * provider এর শুরু থেকে যেসব চিলড্রেন একটি নির্দিষ্ট context ব্যবহার করে সেটি যখন ভিন্ন `মান` গ্রহণ করে তখন React সেসব চিলড্রেনকে **স্বয়ংক্রিয়ভাবে পুনরায় রেন্ডার** করে। আগের এবং পরের মান [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) এর মাধ্যমে তুলনা করা হয়। পুনরায় রেন্ডার এড়িয়ে যেতে যেসব চিলড্রেনে [`memo`](/reference/react/memo) ব্যবহার করা হয়, সেখানে context এর নতুন মান পেতে বাধা দেওয়া হয় না।
 * যদি আপনার বিল্ড সিস্টেম আউটপুটে ডুপ্লিকেট মডিউল উৎপাদন করে (যা symlinks দ্বারা তৈরি হয়), তাহলে সেটা আপনার context কে ব্রেক করতে পারে। কোন কিছু যখন context এর মাধ্যমে পাঠানো হয়, সেটি শুধুমাত্র তখনই কাজ করবে যখন আপনার context প্রদান করার জন্য ব্যবহারকৃত `SomeContext` এবং রিড করার জন্য ব্যবহারকৃত `SomeContext` ***হুবহু* একই object** হবে, যা `===` এর মাধ্যমে তুলনা করে নির্ধারিত হয়।
+=======
+* `useContext()` call in a component is not affected by providers returned from the *same* component. The corresponding `<Context>` **needs to be *above*** the component doing the `useContext()` call.
+* React **automatically re-renders** all the children that use a particular context starting from the provider that receives a different `value`. The previous and the next values are compared with the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison. Skipping re-renders with [`memo`](/reference/react/memo) does not prevent the children receiving fresh context values.
+* If your build system produces duplicates modules in the output (which can happen with symlinks), this can break context. Passing something via context only works if `SomeContext` that you use to provide context and `SomeContext` that you use to read it are ***exactly* the same object**, as determined by a `===` comparison.
+>>>>>>> 341c312916e1b657262bbe14b134a6f1779fecf1
 
 ---
 
@@ -70,9 +80,9 @@ function Button() {
 ```js [[1, 3, "ThemeContext"], [2, 3, "\\"dark\\""], [1, 5, "ThemeContext"]]
 function MyPage() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 
@@ -98,9 +108,9 @@ const ThemeContext = createContext(null);
 
 export default function MyApp() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -183,14 +193,14 @@ function Button({ children }) {
 function MyPage() {
   const [theme, setTheme] = useState('dark');
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Form />
       <Button onClick={() => {
         setTheme('light');
       }}>
         Switch to light theme
       </Button>
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 ```
@@ -213,7 +223,7 @@ const ThemeContext = createContext(null);
 export default function MyApp() {
   const [theme, setTheme] = useState('light');
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext value={theme}>
       <Form />
       <label>
         <input
@@ -225,7 +235,7 @@ export default function MyApp() {
         />
         Use dark mode
       </label>
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -317,14 +327,14 @@ const CurrentUserContext = createContext(null);
 export default function MyApp() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <CurrentUserContext.Provider
+    <CurrentUserContext
       value={{
         currentUser,
         setCurrentUser
       }}
     >
       <Form />
-    </CurrentUserContext.Provider>
+    </CurrentUserContext>
   );
 }
 
@@ -411,8 +421,8 @@ export default function MyApp() {
   const [theme, setTheme] = useState('light');
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <ThemeContext.Provider value={theme}>
-      <CurrentUserContext.Provider
+    <ThemeContext value={theme}>
+      <CurrentUserContext
         value={{
           currentUser,
           setCurrentUser
@@ -429,8 +439,8 @@ export default function MyApp() {
           />
           Use dark mode
         </label>
-      </CurrentUserContext.Provider>
-    </ThemeContext.Provider>
+      </CurrentUserContext>
+    </ThemeContext>
   )
 }
 
@@ -596,16 +606,16 @@ export default function MyApp() {
 function MyProviders({ children, theme, setTheme }) {
   const [currentUser, setCurrentUser] = useState(null);
   return (
-    <ThemeContext.Provider value={theme}>
-      <CurrentUserContext.Provider
+    <ThemeContext value={theme}>
+      <CurrentUserContext
         value={{
           currentUser,
           setCurrentUser
         }}
       >
         {children}
-      </CurrentUserContext.Provider>
-    </ThemeContext.Provider>
+      </CurrentUserContext>
+    </ThemeContext>
   );
 }
 
@@ -775,11 +785,11 @@ export function TasksProvider({ children }) {
   );
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
+    <TasksContext value={tasks}>
+      <TasksDispatchContext value={dispatch}>
         {children}
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+      </TasksDispatchContext>
+    </TasksContext>
   );
 }
 
@@ -978,9 +988,9 @@ export default function MyApp() {
   const [theme, setTheme] = useState('light');
   return (
     <>
-      <ThemeContext.Provider value={theme}>
+      <ThemeContext value={theme}>
         <Form />
-      </ThemeContext.Provider>
+      </ThemeContext>
       <Button onClick={() => {
         setTheme(theme === 'dark' ? 'light' : 'dark');
       }}>
@@ -1067,13 +1077,13 @@ function Button({ children, onClick }) {
 আপনি ট্রির একটি অংশকে একটি ভিন্ন মান সহ একটি provider দিয়ে wrap করার মাধ্যমে সেই অংশের জন্য context টি ওভাররাইড করতে পারেন।
 
 ```js {3,5}
-<ThemeContext.Provider value="dark">
+<ThemeContext value="dark">
   ...
-  <ThemeContext.Provider value="light">
+  <ThemeContext value="light">
     <Footer />
-  </ThemeContext.Provider>
+  </ThemeContext>
   ...
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
 আপনি যতবার প্রয়োজন ততবার provider গুলিকে নেস্ট এবং ওভাররাইড করতে পারেন।
@@ -1093,9 +1103,9 @@ const ThemeContext = createContext(null);
 
 export default function MyApp() {
   return (
-    <ThemeContext.Provider value="dark">
+    <ThemeContext value="dark">
       <Form />
-    </ThemeContext.Provider>
+    </ThemeContext>
   )
 }
 
@@ -1104,9 +1114,9 @@ function Form() {
     <Panel title="Welcome">
       <Button>Sign up</Button>
       <Button>Log in</Button>
-      <ThemeContext.Provider value="light">
+      <ThemeContext value="light">
         <Footer />
-      </ThemeContext.Provider>
+      </ThemeContext>
     </Panel>
   );
 }
@@ -1230,9 +1240,9 @@ export default function Section({ children }) {
   const level = useContext(LevelContext);
   return (
     <section className="section">
-      <LevelContext.Provider value={level + 1}>
+      <LevelContext value={level + 1}>
         {children}
-      </LevelContext.Provider>
+      </LevelContext>
     </section>
   );
 }
@@ -1302,9 +1312,9 @@ function MyApp() {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, login }}>
+    <AuthContext value={{ currentUser, login }}>
       <Page />
-    </AuthContext.Provider>
+    </AuthContext>
   );
 }
 ```
@@ -1330,9 +1340,9 @@ function MyApp() {
   }), [currentUser, login]);
 
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext value={contextValue}>
       <Page />
-    </AuthContext.Provider>
+    </AuthContext>
   );
 }
 ```
@@ -1349,9 +1359,15 @@ function MyApp() {
 
 কিছু সাধারণ কারণে এমনটি ঘটতে পারে:
 
+<<<<<<< HEAD
 1. আপনি যেখানে `useContext()` কল করছেন সেই কম্পোনেন্টে (অথবা  নিচে) `<SomeContext.Provider>` রেন্ডার করেছেন। যে কম্পোনেন্টে `useContext()` কল হচ্ছে তার *উপরে এবং বাইরে* `<SomeContext.Provider>` কে সরিয়ে ফেলুন।
 2. আপনি হয়ত `<SomeContext.Provider>` দিয়ে আপনার কম্পোনেন্টকে wrap করতে ভুলে গেছেন, অথবা আপনি এটিকে ট্রির যেখানে রাখার কথা ভেবেছিলেন তার থেকে হয়ত ভিন্ন কোথাও রেখেছেন। [React DevTools](/learn/react-developer-tools) ব্যবহার করে hierarchy টি সঠিক কি না তা পরীক্ষা করুন।
 3. আপনি হয়ত আপনার টুলিং সম্পর্কিত কিছু বিল্ড সমস্যার ভিতর দিয়ে যাচ্ছেন যার ফলে প্রোভাইডিং কম্পোনেন্ট থেকে `SomeContext` এবং রিডিং কম্পোনেন্ট থেকে `SomeContext` ভিন্ন object হিসাবে দেখাচ্ছে। উদাহরণস্বরূপ, আপনি যদি symlink ব্যবহার করেন, আপনি এগুলোকে গ্লোবালে যুক্ত করে (যেমন `window.SomeContext1` এবং `window.SomeContext2`) এবং তারপর কনসোলে `window.SomeContext1 === window.SomeContext2` কি না তা পরীক্ষা করে এটি যাচাই করতে পারেন। যদি তারা একই না হয়, তাহলে বিল্ড টুল স্তরে সেই সমস্যাটি ঠিক করুন।
+=======
+1. You're rendering `<SomeContext>` in the same component (or below) as where you're calling `useContext()`. Move `<SomeContext>` *above and outside* the component calling `useContext()`.
+2. You may have forgotten to wrap your component with `<SomeContext>`, or you might have put it in a different part of the tree than you thought. Check whether the hierarchy is right using [React DevTools.](/learn/react-developer-tools)
+3. You might be running into some build issue with your tooling that causes `SomeContext` as seen from the providing component and `SomeContext` as seen by the reading component to be two different objects. This can happen if you use symlinks, for example. You can verify this by assigning them to globals like `window.SomeContext1` and `window.SomeContext2` and then checking whether `window.SomeContext1 === window.SomeContext2` in the console. If they're not the same, fix that issue on the build tool level.
+>>>>>>> 341c312916e1b657262bbe14b134a6f1779fecf1
 
 ### আমি সব সময় আমার context থেকে `undefined` পাচ্ছি যদিও ডিফল্ট মান ভিন্ন {/*i-am-always-getting-undefined-from-my-context-although-the-default-value-is-different*/}
 
@@ -1359,9 +1375,9 @@ function MyApp() {
 
 ```js {1,2}
 // 🚩 Doesn't work: no value prop
-<ThemeContext.Provider>
+<ThemeContext>
    <Button />
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
 আপনি যদি `value` উল্লেখ করতে ভুলে যান, তাহলে এটি `value={undefined}` এরকম কিছু পাস করে।
@@ -1370,18 +1386,22 @@ function MyApp() {
 
 ```js {1,2}
 // 🚩 Doesn't work: prop should be called "value"
-<ThemeContext.Provider theme={theme}>
+<ThemeContext theme={theme}>
    <Button />
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
 উভয় ক্ষেত্রেই আপনি কনসোলে React থেকে একটি ওয়ার্নিং দেখতে পাবেন। তাদের ঠিক করতে, প্রপ হিসাবে `value` কল করুন:
 
 ```js {1,2}
 // ✅ Passing the value prop
-<ThemeContext.Provider value={theme}>
+<ThemeContext value={theme}>
    <Button />
-</ThemeContext.Provider>
+</ThemeContext>
 ```
 
+<<<<<<< HEAD
 মনে রাখবেন যে আপনার [`createContext(defaultValue)` কল থেকে ডিফল্ট মানটি](#specifying-a-fallback-default-value) শুধুমাত্র তখনই ব্যবহার করা হয় **যদি উপরে কোন provider এর সাথে মিল না পায়।** যদি প্যারেন্ট ট্রিতে কোথাও একটি `<SomeContext.Provider value={undefined}>` কম্পোনেন্ট থাকে, তাহলে যে কম্পোনেন্ট `useContext(SomeContext)` কল করছে সে context এর মান হিসাবে `undefined` পাবে।
+=======
+Note that the [default value from your `createContext(defaultValue)` call](#specifying-a-fallback-default-value) is only used **if there is no matching provider above at all.** If there is a `<SomeContext value={undefined}>` component somewhere in the parent tree, the component calling `useContext(SomeContext)` *will* receive `undefined` as the context value.
+>>>>>>> 341c312916e1b657262bbe14b134a6f1779fecf1
