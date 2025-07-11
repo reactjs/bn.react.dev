@@ -4,7 +4,7 @@ title: renderToPipeableStream
 
 <Intro>
 
-`renderToPipeableStream` renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
+`renderToPipeableStream` একটি React tree কে একটি pipeable [Node.js Stream.](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
 
 ```js
 const { pipe, abort } = renderToPipeableStream(reactNode, options?)
@@ -16,7 +16,7 @@ const { pipe, abort } = renderToPipeableStream(reactNode, options?)
 
 <Note>
 
-This API is specific to Node.js. Environments with [Web Streams,](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) like Deno and modern edge runtimes, should use [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) instead.
+এই API শুধুমাত্র Node.js এর জন্য। [Web Streams,](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) এর মতো environment, যেমন Deno এবং আধুনিক Edge রানটাইমে, [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) ব্যবহার করা উচিত।
 
 </Note>
 
