@@ -685,11 +685,7 @@ ul, li { margin: 0; padding: 0; }
 </TasksContext>
 ```
 
-<<<<<<< HEAD
-এর পরিবর্তে যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে পড়তে পারবে।
-=======
-Instead, any component that needs the task list can read it from the `TasksContext`:
->>>>>>> 84a56968d92b9a9e9bbac1ca13011e159e815dc1
+এর পরিবর্তে, যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে read করতে পারবে।
 
 ```js {2}
 export default function TaskList() {
