@@ -685,7 +685,7 @@ ul, li { margin: 0; padding: 0; }
 </TasksContext>
 ```
 
-এর পরিবর্তে যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে পড়তে পারবে।
+এর পরিবর্তে, যেকোনো কম্পোনেন্ট যার task তালিকা দরকার হবে সে তা `TaskContext` থেকে read করতে পারবে।
 
 ```js {2}
 export default function TaskList() {
