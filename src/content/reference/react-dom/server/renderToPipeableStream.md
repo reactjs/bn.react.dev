@@ -284,17 +284,17 @@ Streaming এর React নিজে browser এ load হওয়ার জন�
 
 <Note>
 
-**Only Suspense-enabled data sources will activate the Suspense component.** They include:
+**শুধুমাত্র Suspense-enabled ডাটা সোর্সগুলো Suspense component কে activate করবে।** এগুলোর মধ্যে রয়েছে:
 
-- Data fetching with Suspense-enabled frameworks like [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) and [Next.js](https://nextjs.org/docs/getting-started/react-essentials)
-- Lazy-loading component code with [`lazy`](/reference/react/lazy)
-- Reading the value of a Promise with [`use`](/reference/react/use)
+- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/getting-started/react-essentials) এর মতো Suspense-enabled ফ্রেমওয়ার্ক দিয়ে ডাটা ফেচিং
+- [`lazy`](/reference/react/lazy) দিয়ে কম্পোনেন্ট কোড lazy-load করা
+- [`use`](/reference/react/use) দিয়ে Promise এর value read করা
 
-Suspense **does not** detect when data is fetched inside an Effect or event handler.
+যদি ডাটা একটি Effect অথবা event handler এর ভিতরে fetch করা হয় তবে Suspense তা **ডিটেক্ট করবে না**।
 
-The exact way you would load data in the `Posts` component above depends on your framework. If you use a Suspense-enabled framework, you'll find the details in its data fetching documentation.
+উপরের `Posts` component এ আপনি ঠিক কিভাবে data load করবেন তা আপনার framework এর উপর নির্ভর করে। যদি আপনি একটি Suspense-enabled framework ব্যবহার করেন, তাহলে আপনি তার data fetching documentation এ বিস্তারিত তথ্য পাবেন।
 
-Suspense-enabled data fetching without the use of an opinionated framework is not yet supported. The requirements for implementing a Suspense-enabled data source are unstable and undocumented. An official API for integrating data sources with Suspense will be released in a future version of React. 
+Opinionated framework ব্যবহার ছাড়া Suspense-enabled ডাটা ফেচিং এখনো সাপোর্টেড না। Suspense-enabled ডাটা সোর্স implement করার requirement গুলো unstable এবং undocumented। Suspense এর সাথে ডাটা সোর্স integrate করার জন্য একটি official API রিয়েক্টের ভবিষ্যৎ ভার্সনে রিলিজ হবে।
 
 </Note>
 
