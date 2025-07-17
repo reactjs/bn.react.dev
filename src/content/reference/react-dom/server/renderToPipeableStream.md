@@ -71,11 +71,11 @@ Client-side এ, server-generated HTML কে ইন্টার‍্যাক�
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering a React tree as HTML to a Node.js Stream {/*rendering-a-react-tree-as-html-to-a-nodejs-stream*/}
+### React tree কে Node.js Stream এ HTML হিসেবে render করা {/*rendering-a-react-tree-as-html-to-a-nodejs-stream*/}
 
-Call `renderToPipeableStream` to render your React tree as HTML into a [Node.js Stream:](https://nodejs.org/api/stream.html#writable-streams)
+আপনার React tree কে একটি [Node.js Stream](https://nodejs.org/api/stream.html#writable-streams) এ HTML হিসেবে render করতে `renderToPipeableStream` কল করুন:
 
 ```js [[1, 5, "<App />"], [2, 6, "['/main.js']"]]
 import { renderToPipeableStream } from 'react-dom/server';
@@ -92,9 +92,9 @@ app.use('/', (request, response) => {
 });
 ```
 
-Along with the <CodeStep step={1}>root component</CodeStep>, you need to provide a list of <CodeStep step={2}>bootstrap `<script>` paths</CodeStep>. Your root component should return **the entire document including the root `<html>` tag.**
+<CodeStep step={1}>root component</CodeStep> এর সাথে, আপনাকে <CodeStep step={2}>bootstrap `<script>` path গুলোর</CodeStep> একটি list প্রদান করতে হবে। আপনার root component টি যেন **root `<html>` tag সহ পুরো document return করে।**
 
-For example, it might look like this:
+উদাহরণস্বরূপ, এটি এরকম দেখতে হতে পারে:
 
 ```js [[1, 1, "App"]]
 export default function App() {
@@ -114,7 +114,7 @@ export default function App() {
 }
 ```
 
-React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) and your <CodeStep step={2}>bootstrap `<script>` tags</CodeStep> into the resulting HTML stream:
+React [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>bootstrap `<script>` tag গুলো</CodeStep> HTML stream এ inject করবে:
 
 ```html [[2, 5, "/main.js"]]
 <!DOCTYPE html>
@@ -124,7 +124,7 @@ React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossar
 <script src="/main.js" async=""></script>
 ```
 
-On the client, your bootstrap script should [hydrate the entire `document` with a call to `hydrateRoot`:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
+Client এ, আপনার bootstrap script যেন [`hydrateRoot` কল করে পুরো `document` hydrate করে:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
@@ -133,7 +133,7 @@ import App from './App.js';
 hydrateRoot(document, <App />);
 ```
 
-This will attach event listeners to the server-generated HTML and make it interactive.
+এটি server-generated HTML এ event listener attach করবে এবং এটিকে interactive করে তুলবে।
 
 <DeepDive>
 
