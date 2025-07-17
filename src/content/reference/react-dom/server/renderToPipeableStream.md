@@ -137,11 +137,11 @@ hydrateRoot(document, <App />);
 
 <DeepDive>
 
-#### Reading CSS and JS asset paths from the build output {/*reading-css-and-js-asset-paths-from-the-build-output*/}
+#### Build output থেকে CSS এবং JS asset path read করা {/*reading-css-and-js-asset-paths-from-the-build-output*/}
 
-The final asset URLs (like JavaScript and CSS files) are often hashed after the build. For example, instead of `styles.css` you might end up with `styles.123456.css`. Hashing static asset filenames guarantees that every distinct build of the same asset will have a different filename. This is useful because it lets you safely enable long-term caching for static assets: a file with a certain name would never change content.
+Final asset URL গুলো (যেমন JavaScript এবং CSS file) প্রায়ই build এর পর hash করা হয়। উদাহরণস্বরূপ, `styles.css` এর পরিবর্তে আপনি `styles.123456.css` পেতে পারেন। Static asset filename hash করা নিশ্চিত করে যে একই asset এর প্রতিটি আলাদা build এর আলাদা filename থাকবে। এটি উপকারী কারণ এটি আপনাকে static asset এর জন্য safely long-term caching enable করতে দেয়: একটি নির্দিষ্ট নামের file এর content কখনো পরিবর্তন হবে না।
 
-However, if you don't know the asset URLs until after the build, there's no way for you to put them in the source code. For example, hardcoding `"/styles.css"` into JSX like earlier wouldn't work. To keep them out of your source code, your root component can read the real filenames from a map passed as a prop:
+তবে, build এর পর পর্যন্ত যদি আপনি asset URL গুলো না জানেন, তাহলে source code এ সেগুলো রাখার কোনো উপায় নেই। উদাহরণস্বরূপ, আগের মতো JSX এ `"/styles.css"` hardcode করা কাজ করবে না। এগুলো আপনার source code থেকে দূরে রাখতে, আপনার root component একটি prop হিসেবে পাস করা map থেকে আসল filename গুলো read করতে পারে:
 
 ```js {1,6}
 export default function App({ assetMap }) {
@@ -158,7 +158,7 @@ export default function App({ assetMap }) {
 }
 ```
 
-On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` with the asset URLs:
+Server এ, `<App assetMap={assetMap} />` render করুন এবং asset URL গুলো সহ আপনার `assetMap` পাস করুন:
 
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
@@ -178,7 +178,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-Since your server is now rendering `<App assetMap={assetMap} />`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
+যেহেতু আপনার server এখন `<App assetMap={assetMap} />` render করছে, hydration error এড়াতে client এও `assetMap` সহ এটি render করতে হবে। আপনি এইভাবে `assetMap` serialize করে client এ পাস করতে পারেন:
 
 ```js {9-10}
 // You'd need to get this JSON from your build tooling.
@@ -200,7 +200,7 @@ app.use('/', (request, response) => {
 });
 ```
 
-In the example above, the `bootstrapScriptContent` option adds an extra inline `<script>` tag that sets the global `window.assetMap` variable on the client. This lets the client code read the same `assetMap`:
+উপরের উদাহরণে, `bootstrapScriptContent` option একটি অতিরিক্ত inline `<script>` tag যোগ করে যেটি client এ global `window.assetMap` variable সেট করে। এটি client code কে একই `assetMap` read করতে দেয়:
 
 ```js {4}
 import { hydrateRoot } from 'react-dom/client';
@@ -209,7 +209,7 @@ import App from './App.js';
 hydrateRoot(document, <App assetMap={window.assetMap} />);
 ```
 
-Both client and server render `App` with the same `assetMap` prop, so there are no hydration errors.
+Client এবং server উভয়েই একই `assetMap` prop সহ `App` render করে, তাই কোনো hydration error থাকবে না।
 
 </DeepDive>
 
