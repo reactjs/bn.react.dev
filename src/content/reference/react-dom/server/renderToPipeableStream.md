@@ -234,7 +234,7 @@ function ProfilePage() {
 }
 ```
 
-ধরুন যে `<Posts />` এর জন্য data লোড হতে কিছু সময় লাগে। স্বাভাবিকভাবে, আপনি post এর জন্য অপেক্ষা না করে user কে profile page এর বাকি content দেখাতে চাইবেন। এটি করতে, [`Posts` কে একটি `<Suspense>` boundary তে wrap করুন:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
+ধরুন যে `<Posts />` এর জন্য data লোড হতে কিছু সময় লাগে। স্বাভাবিকভাবে, আপনি post এর জন্য অপেক্ষা না করে user কে profile page এর বাকি content দেখাতে চাইবেন। এটি করতে, [`Posts` কে একটি `<Suspense>` boundary তে wrap করুনঃ](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
 
 ```js {9,11}
 function ProfilePage() {
@@ -255,7 +255,7 @@ function ProfilePage() {
 
 এটি React কে `Posts` এর data লোড হওয়ার আগেই HTML streaming শুরু করতে বলে। React প্রথমে loading fallback (`PostsGlimmer`) এর জন্য HTML পাঠাবে, এবং তারপর, যখন `Posts` এর data লোডিং শেষ হবে, React বাকি HTML পাঠাবে একটি inline `<script>` tag সহ যেটি লোডিং fallback কে সেই HTML দিয়ে replace করবে। ইউজারের দৃষ্টিকোণ থেকে, page প্রথমে `PostsGlimmer` নিয়ে দেখাবে, পরে `Posts` দিয়ে রিপ্লেস হবে।
 
-আরও granular loading sequence তৈরি করতে আপনি আরও [nested `<Suspense>` boundary](/reference/react/Suspense#revealing-nested-content-as-it-loads) যোগ করতে পারেন:
+আরও granular loading sequence তৈরি করতে আপনি আরও [nested `<Suspense>` boundary](/reference/react/Suspense#revealing-nested-content-as-it-loads) যোগ করতে পারেনঃ
 
 ```js {5,13}
 function ProfilePage() {
@@ -300,9 +300,9 @@ Opinionated framework ব্যবহার ছাড়া Suspense-enabled ড
 
 ---
 
-### Specifying what goes into the shell {/*specifying-what-goes-into-the-shell*/}
+### Shell এ কী যাবে তা নির্দিষ্ট করা {/*specifying-what-goes-into-the-shell*/}
 
-The part of your app outside of any `<Suspense>` boundaries is called *the shell:*
+আপনার app এর `<Suspense>` boundary এর বাইরের যেকোনো অংশকে বলা হয় *shell:*
 
 ```js {3-5,13,14}
 function ProfilePage() {
@@ -323,7 +323,7 @@ function ProfilePage() {
 }
 ```
 
-It determines the earliest loading state that the user may see:
+এটা ঠিক করে দেয় যে ইউজার প্রথমে কোন loading state টি দেখতে পারেঃ
 
 ```js {3-5,13
 <ProfileLayout>
@@ -332,9 +332,9 @@ It determines the earliest loading state that the user may see:
 </ProfileLayout>
 ```
 
-If you wrap the whole app into a `<Suspense>` boundary at the root, the shell will only contain that spinner. However, that's not a pleasant user experience because seeing a big spinner on the screen can feel slower and more annoying than waiting a bit more and seeing the real layout. This is why usually you'll want to place the `<Suspense>` boundaries so that the shell feels *minimal but complete*--like a skeleton of the entire page layout.
+যদি আপনি root এ পুরো app কে একটি `<Suspense>` boundary তে wrap করেন, shell এ শুধু সেই spinner থাকবে। তবে, এটি একটি সুন্দর user experience না কারণ screen এ একটি বড় spinner দেখা আরো slow এবং বিরক্তিকর মনে হতে পারে একটু বেশি অপেক্ষা করে আসল layout দেখার চেয়ে। এই কারণেই সাধারণত আপনি `<Suspense>` boundary গুলো এমনভাবে রাখবেন যাতে shell *নুন্যতম কিন্তু সম্পূর্ণ* মনে হয়--পুরো page layout এর একটি skeleton এর মতো।
 
-The `onShellReady` callback fires when the entire shell has been rendered. Usually, you'll start streaming then:
+`onShellReady` callback পুরো shell render হওয়ার পর ফায়ার হয়। সাধারণত, আপনি তখনই streaming শুরু করবেনঃ
 
 ```js {3-6}
 const { pipe } = renderToPipeableStream(<App />, {
@@ -346,7 +346,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-By the time `onShellReady` fires, components in nested `<Suspense>` boundaries might still be loading data.
+`onShellReady` ফায়ার হওয়ার সময়ে, নেস্টেড `<Suspense>` boundary এর component গুলো তখনো data load করতে থাকতে পারে।
 
 ---
 
