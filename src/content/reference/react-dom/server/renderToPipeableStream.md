@@ -234,7 +234,7 @@ function ProfilePage() {
 }
 ```
 
-Imagine that loading data for `<Posts />` takes some time. Ideally, you'd want to show the rest of the profile page content to the user without waiting for the posts. To do this, [wrap `Posts` in a `<Suspense>` boundary:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
+ধরুন যে `<Posts />` এর জন্য data লোড হতে কিছু সময় লাগে। স্বাভাবিকভাবে, আপনি post এর জন্য অপেক্ষা না করে user কে profile page এর বাকি content দেখাতে চাইবেন। এটি করতে, [`Posts` কে একটি `<Suspense>` boundary তে wrap করুন:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
 
 ```js {9,11}
 function ProfilePage() {
@@ -253,9 +253,9 @@ function ProfilePage() {
 }
 ```
 
-This tells React to start streaming the HTML before `Posts` loads its data. React will send the HTML for the loading fallback (`PostsGlimmer`) first, and then, when `Posts` finishes loading its data, React will send the remaining HTML along with an inline `<script>` tag that replaces the loading fallback with that HTML. From the user's perspective, the page will first appear with the `PostsGlimmer`, later replaced by the `Posts`.
+এটি React কে `Posts` এর data লোড হওয়ার আগেই HTML streaming শুরু করতে বলে। React প্রথমে loading fallback (`PostsGlimmer`) এর জন্য HTML পাঠাবে, এবং তারপর, যখন `Posts` এর data লোডিং শেষ হবে, React বাকি HTML পাঠাবে একটি inline `<script>` tag সহ যেটি লোডিং fallback কে সেই HTML দিয়ে replace করবে। ইউজারের দৃষ্টিকোণ থেকে, page প্রথমে `PostsGlimmer` নিয়ে দেখাবে, পরে `Posts` দিয়ে রিপ্লেস হবে।
 
-You can further [nest `<Suspense>` boundaries](/reference/react/Suspense#revealing-nested-content-as-it-loads) to create a more granular loading sequence:
+আরও granular loading sequence তৈরি করতে আপনি আরও [nested `<Suspense>` boundary](/reference/react/Suspense#revealing-nested-content-as-it-loads) যোগ করতে পারেন:
 
 ```js {5,13}
 function ProfilePage() {
