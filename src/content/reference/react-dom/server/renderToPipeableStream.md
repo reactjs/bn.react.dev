@@ -276,11 +276,11 @@ function ProfilePage() {
 }
 ```
 
-In this example, React can start streaming the page even earlier. Only `ProfileLayout` and `ProfileCover` must finish rendering first because they are not wrapped in any `<Suspense>` boundary. However, if `Sidebar`, `Friends`, or `Photos` need to load some data, React will send the HTML for the `BigSpinner` fallback instead. Then, as more data becomes available, more content will continue to be revealed until all of it becomes visible.
+এই উদাহরণে, React আরো আগে page streaming শুরু করতে পারে। শুধুমাত্র `ProfileLayout` এবং `ProfileCover` এর প্রথমে rendering শেষ করতে হবে কারণ তারা কোনো `<Suspense>` boundary তে wrap করা নেই। তবে, যদি `Sidebar`, `Friends`, অথবা `Photos` এর কিছু data load করতে হয়, React তার পরিবর্তে `BigSpinner` fallback এর HTML পাঠাবে। তারপর, যত বেশি data লোড হবে, ততবেশি content প্রকাশিত হতে থাকবে যতক্ষণ না সবকিছু দৃশ্যমান হয়।
 
-Streaming does not need to wait for React itself to load in the browser, or for your app to become interactive. The HTML content from the server will get progressively revealed before any of the `<script>` tags load.
+Streaming এর React নিজে browser এ load হওয়ার জন্য অথবা আপনার app interactive হওয়ার জন্য অপেক্ষা করার প্রয়োজন নেই। Server থেকে HTML content কোনো `<script>` tag load হওয়ার আগেই একে একে প্রকাশিত হতে থাকবে।
 
-[Read more about how streaming HTML works.](https://github.com/reactwg/react-18/discussions/37)
+[HTML Streaming কিভাবে কাজ করে সে সম্পর্কে আরো পড়ুন।](https://github.com/reactwg/react-18/discussions/37)
 
 <Note>
 
