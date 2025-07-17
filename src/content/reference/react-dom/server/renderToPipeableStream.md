@@ -62,12 +62,12 @@ Client-side এ, server-generated HTML কে ইন্টার‍্যাক�
   * **optional** `progressiveChunkSize`: একটি chunk এ byte এর সংখ্যা। [default heuristic সম্পর্কে আরো পড়ুন।](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
 
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-`renderToPipeableStream` returns an object with two methods:
+`renderToPipeableStream` দুইটি method ওয়ালা একটি object return করে:
 
-* `pipe` outputs the HTML into the provided [Writable Node.js Stream.](https://nodejs.org/api/stream.html#writable-streams) Call `pipe` in `onShellReady` if you want to enable streaming, or in `onAllReady` for crawlers and static generation.
-* `abort` lets you [abort server rendering](#aborting-server-rendering) and render the rest on the client.
+* `pipe` প্রদত্ত [Writable Node.js Stream](https://nodejs.org/api/stream.html#writable-streams) এ HTML output করে। streaming enable করতে চাইলে `onShellReady` তে `pipe` কল করুন, অথবা crawler এবং static generation এর জন্য `onAllReady` তে কল করুন।
+* `abort` আপনাকে [server rendering abort করতে](#aborting-server-rendering) এবং বাকিটা client এ render করতে দেয়।
 
 ---
 
