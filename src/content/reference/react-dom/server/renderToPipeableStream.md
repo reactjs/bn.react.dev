@@ -64,7 +64,7 @@ Client-side এ, server-generated HTML কে ইন্টার‍্যাক�
 
 #### রিটার্নস {/*returns*/}
 
-`renderToPipeableStream` দুইটি method ওয়ালা একটি object return করে:
+`renderToPipeableStream` দুইটি method ওয়ালা একটি object return করেঃ
 
 * `pipe` প্রদত্ত [Writable Node.js Stream](https://nodejs.org/api/stream.html#writable-streams) এ HTML output করে। streaming enable করতে চাইলে `onShellReady` তে `pipe` কল করুন, অথবা crawler এবং static generation এর জন্য `onAllReady` তে কল করুন।
 * `abort` আপনাকে [server rendering abort করতে](#aborting-server-rendering) এবং বাকিটা client এ render করতে দেয়।
@@ -75,7 +75,7 @@ Client-side এ, server-generated HTML কে ইন্টার‍্যাক�
 
 ### React tree কে Node.js Stream এ HTML হিসেবে render করা {/*rendering-a-react-tree-as-html-to-a-nodejs-stream*/}
 
-আপনার React tree কে একটি [Node.js Stream](https://nodejs.org/api/stream.html#writable-streams) এ HTML হিসেবে render করতে `renderToPipeableStream` কল করুন:
+আপনার React tree কে একটি [Node.js Stream](https://nodejs.org/api/stream.html#writable-streams) এ HTML হিসেবে render করতে `renderToPipeableStream` কল করুনঃ
 
 ```js [[1, 5, "<App />"], [2, 6, "['/main.js']"]]
 import { renderToPipeableStream } from 'react-dom/server';
@@ -94,7 +94,7 @@ app.use('/', (request, response) => {
 
 <CodeStep step={1}>root component</CodeStep> এর সাথে, আপনাকে <CodeStep step={2}>bootstrap `<script>` path গুলোর</CodeStep> একটি list প্রদান করতে হবে। আপনার root component টি যেন **root `<html>` tag সহ পুরো document return করে।**
 
-উদাহরণস্বরূপ, এটি এরকম দেখতে হতে পারে:
+উদাহরণস্বরূপ, এটি এরকম দেখতে হতে পারেঃ
 
 ```js [[1, 1, "App"]]
 export default function App() {
@@ -114,7 +114,7 @@ export default function App() {
 }
 ```
 
-React [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>bootstrap `<script>` tag গুলো</CodeStep> HTML stream এ inject করবে:
+React [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>bootstrap `<script>` tag গুলো</CodeStep> HTML stream এ inject করবেঃ
 
 ```html [[2, 5, "/main.js"]]
 <!DOCTYPE html>
@@ -124,7 +124,7 @@ React [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এ�
 <script src="/main.js" async=""></script>
 ```
 
-Client এ, আপনার bootstrap script যেন [`hydrateRoot` কল করে পুরো `document` hydrate করে:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
+Client এ, আপনার bootstrap script যেন [`hydrateRoot` কল করে পুরো `document` hydrate করেঃ](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
@@ -158,7 +158,7 @@ export default function App({ assetMap }) {
 }
 ```
 
-Server এ, `<App assetMap={assetMap} />` render করুন এবং asset URL গুলো সহ আপনার `assetMap` পাস করুন:
+Server এ, `<App assetMap={assetMap} />` render করুন এবং asset URL গুলো সহ আপনার `assetMap` পাস করুনঃ
 
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
@@ -215,9 +215,9 @@ Client এবং server উভয়েই একই `assetMap` prop সহ `App
 
 ---
 
-### Streaming more content as it loads {/*streaming-more-content-as-it-loads*/}
+### Load হতে হতে আরো content stream করা {/*streaming-more-content-as-it-loads*/}
 
-Streaming allows the user to start seeing the content even before all the data has loaded on the server. For example, consider a profile page that shows a cover, a sidebar with friends and photos, and a list of posts:
+Streaming ইউজারকে সকল ডাটা সার্ভারে লোড হওয়ার আগেই কন্টেন্ট দেখতে দেয়। উদাহরণস্বরূপ, একটি profile page এর কথা ভাবুন যেটি একটি cover, friend এবং photo সহ একটি sidebar, এবং post এর একটি লিস্ট দেখায়ঃ
 
 ```js
 function ProfilePage() {
