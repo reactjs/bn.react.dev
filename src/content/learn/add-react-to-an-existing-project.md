@@ -20,11 +20,19 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 
 এখানে আমরা যে ভাবে এটি সেট আপ করতে পরামর্শ দিচ্ছিঃ
 
+<<<<<<< HEAD
 ১. **আপনার অ্যাপ এর React অংশটি** [React-ভিত্তিক ফ্রেমওয়ার্ক](/learn/start-a-new-react-project) দিয়ে বিল্ড করুন।
 ২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 ৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
 
 এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/creating-a-react-app).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+
+This ensures the React part of your app can [benefit from the best practices](/learn/creating-a-react-app#full-stack-frameworks) baked into those frameworks.
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 অনেক React ভিত্তিক ফ্রেমওয়ার্ক full-stack এবং আপনার React অ্যাপটিকে সার্ভারের সুবিধা নিতে দেয়। তবে আপনি যদি সার্ভারে জাভাস্ক্রিপ্ট রান করার সুযোগ না পান অথবা না চান, সে ক্ষেত্রেও একই পদক্ষেপটি নিতে পারেন। সে ক্ষেত্রে, `/some-app/` এর পরিবর্তে HTML/CSS/JS এক্সপোর্ট করুন (Next.js এর জন্য [`next export` output](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby এর জন্য ডিফল্ট )।
 
@@ -149,7 +157,11 @@ root.render(<NavigationBar />);
 
 লক্ষ্য করুন যে index.html ফাইলের মূল HTML কন্টেন্টটি সংরক্ষিত আছে এবং আপনার নিজের NavigationBar React কম্পোনেন্টটি এখন আপনার HTML এর মধ্যে প্রদর্শিত হয় যেটি `<nav id="navigation">` এর ভিতরে অবস্থিত। React কম্পোনেন্টগুলি অবশ্যই বিদ্যমান HTML পৃষ্ঠার ভিতরে রেন্ডার করা সম্ভব হবে। বিস্তারিত জানতে, [createRoot usage documentation](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) পড়ুন।
 
+<<<<<<< HEAD
 যখন আপনি একটি বিদ্যমান প্রকল্পে React অনুমোদন করবেন, তখন সাধারণত ছোট ইন্টারেক্টিভ কম্পোনেন্টগুলি দিয়ে শুরু করা হয় (যেমন বাটন), এবং পরে ধীরে ধীরে "উপরের দিকে" যাওয়া হয় এবং আপনার পুরো পেইজ এক সময় React দিয়ে বিল্ড হয়। আপনি যদি ঐ পর্যায়ে চলে আসেন, আমাদের উপদেশ থাকবে এর ঠিক পরই একটি [React ফ্রেমওয়ার্কে](/learn/start-a-new-react-project) মাইগ্রেট করবেন যেন React এর সুবিধাদি পূর্ণরূপে ব্যবহার করতে পারেন।
+=======
+When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/creating-a-react-app) right after to get the most out of React.
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 ## একটি বিদ্যমান নেটিভ মোবাইল অ্যাপ এ React Native ব্যবহার করা {/*using-react-native-in-an-existing-native-mobile-app*/}
 
