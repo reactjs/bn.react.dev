@@ -350,9 +350,9 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 ---
 
-### Logging crashes on the server {/*logging-crashes-on-the-server*/}
+### Server এ crash log করা {/*logging-crashes-on-the-server*/}
 
-By default, all errors on the server are logged to console. You can override this behavior to log crash reports:
+স্বাভাবিকভাবে, সার্ভারের সকল error console এ log হয়। আপনি ক্র্যাশ রিপোর্ট log করতে এই আচরণ পরিবর্তন করতে পারেন:
 
 ```js {7-10}
 const { pipe } = renderToPipeableStream(<App />, {
@@ -368,13 +368,13 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-If you provide a custom `onError` implementation, don't forget to also log errors to the console like above.
+যদি আপনি একটি custom `onError` implementation প্রদান করেন, উপরের মতো console এ error log করতে ভুলবেন না।
 
 ---
 
-### Recovering from errors inside the shell {/*recovering-from-errors-inside-the-shell*/}
+### Shell এর ভিতরের error থেকে রিকভার করা {/*recovering-from-errors-inside-the-shell*/}
 
-In this example, the shell contains `ProfileLayout`, `ProfileCover`, and `PostsGlimmer`:
+এই উদাহরণে, shell এ `ProfileLayout`, `ProfileCover`, এবং `PostsGlimmer` রয়েছেঃ
 
 ```js {3-5,7-8}
 function ProfilePage() {
@@ -389,7 +389,7 @@ function ProfilePage() {
 }
 ```
 
-If an error occurs while rendering those components, React won't have any meaningful HTML to send to the client. Override `onShellError` to send a fallback HTML that doesn't rely on server rendering as the last resort:
+যদি এই component গুলো render করার সময় error হয়, React এর client এ পাঠানোর জন্য কোনো বোধগম্য HTML থাকবে না। শেষ অবলম্বন হিসেবে server rendering এ নির্ভর করে না এমন একটি fallback HTML পাঠাতে `onShellError` override করুনঃ
 
 ```js {7-11}
 const { pipe } = renderToPipeableStream(<App />, {
@@ -410,7 +410,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-If there is an error while generating the shell, both `onError` and `onShellError` will fire. Use `onError` for error reporting and use `onShellError` to send the fallback HTML document. Your fallback HTML does not have to be an error page. Instead, you may include an alternative shell that renders your app on the client only.
+যদি shell generate করার সময় error হয়, `onError` এবং `onShellError` উভয়ই ফায়ার করবে। Error reporting এর জন্য `onError` ব্যবহার করুন এবং fallback HTML document পাঠানোর জন্য `onShellError` ব্যবহার করুন। আপনার fallback HTML একটি error page হতে হবে এমন না। বরং, আপনি একটি বিকল্প shell z যুক্ত করতে পারেন যেটি শুধু client এ আপনার অ্যাপ রেন্ডার করে।
 
 ---
 
