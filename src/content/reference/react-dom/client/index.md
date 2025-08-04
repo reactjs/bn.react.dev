@@ -4,7 +4,11 @@ title: ক্লায়েন্ট React DOM API
 
 <Intro>
 
+<<<<<<< HEAD
 `react-dom/client` API গুলো ক্লায়েন্টে (ব্রাউজারের মধ্যে) React কম্পোনেন্ট রেন্ডার করতে দেয়। এই API গুলো সাধারণত আপনার অ্যাপের একদম উপরের স্তরে React ট্রি ইনিশিয়ালাইজ করার কাজে ব্যবহৃত হয়। আপনার জন্য কল দিয়ে দিতে পারে একটি [framework](/learn/start-a-new-react-project#production-grade-react-frameworks)। আপনার বেশিরভাগ কম্পোনেন্টের সেগুলো ইমপোর্ট বা ব্যবহারের প্রয়োজন পড়বে না। 
+=======
+The `react-dom/client` APIs let you render React components on the client (in the browser). These APIs are typically used at the top level of your app to initialize your React tree. A [framework](/learn/start-a-new-react-project#full-stack-frameworks) may call them for you. Most of your components don't need to import or use them.
+>>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
 
 </Intro>
 
