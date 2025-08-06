@@ -414,9 +414,9 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 ---
 
-### Recovering from errors outside the shell {/*recovering-from-errors-outside-the-shell*/}
+### Shell এর বাইরের error থেকে রিকভার করা {/*recovering-from-errors-outside-the-shell*/}
 
-In this example, the `<Posts />` component is wrapped in `<Suspense>` so it is *not* a part of the shell:
+এই উদাহরণে, `<Posts />` component টি `<Suspense>` এর মধ্যে রয়েছে তাই এটি shell এর *অংশ নয়*:
 
 ```js {6}
 function ProfilePage() {
@@ -431,15 +431,15 @@ function ProfilePage() {
 }
 ```
 
-If an error happens in the `Posts` component or somewhere inside it, React will [try to recover from it:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
+যদি `Posts` component বা এর ভিতরে কোথাও একটি error ঘটে, React [এর থেকে রিকভার করার চেষ্টা করবেঃ](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
 
-1. It will emit the loading fallback for the closest `<Suspense>` boundary (`PostsGlimmer`) into the HTML.
-2. It will "give up" on trying to render the `Posts` content on the server anymore.
-3. When the JavaScript code loads on the client, React will *retry* rendering `Posts` on the client.
+1. এটি নিকটতম `<Suspense>` boundary (`PostsGlimmer`) এর জন্য loading fallback HTML এ emit করবে।
+2. এটি আর সার্ভারে `Posts` কনটেন্ট রেন্ডার করার চেষ্টা করবে না।
+3. যখন JavaScript কোড ক্লায়েন্টে লোড হয়, React ক্লায়েন্টে `Posts` রেন্ডার করার জন্য *পুনরায় চেষ্টা করবে*।
 
-If retrying rendering `Posts` on the client *also* fails, React will throw the error on the client. As with all the errors thrown during rendering, the [closest parent error boundary](/reference/react/Component#static-getderivedstatefromerror) determines how to present the error to the user. In practice, this means that the user will see a loading indicator until it is certain that the error is not recoverable.
+যদি `Posts` ক্লায়েন্টে রেন্ডার করার জন্য পুনরায় চেষ্টা করাও ব্যর্থ হয়, React ক্লায়েন্টে error টি throw করবে। রেন্ডারিংয়ের সময় throw হওয়া সব error এর মতো, [closest parent error boundary](/reference/react/Component#static-getderivedstatefromerror) নির্ধারণ করে কিভাবে ইউজারের কাছে error টি উপস্থাপন করতে হবে। বাস্তবে, এর মানে হল যে ইউজার একটি লোডিং ইন্ডিকেটর দেখতে পাবে যতক্ষণ না এটি নিশ্চিত হয় যে error টি recoverable না।
 
-If retrying rendering `Posts` on the client succeeds, the loading fallback from the server will be replaced with the client rendering output. The user will not know that there was a server error. However, the server `onError` callback and the client [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) callbacks will fire so that you can get notified about the error.
+যদি retrying এর সময় client এ `Posts` render করা সফল হয়, সার্ভারের loading fallback টি client এ রেন্ডার করা আউটপুট দিয়ে replace হবে। User জানবে না যে server error হয়েছিল। তবে, server `onError` callback এবং client [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) callback গুলো ফায়ার হবে যাতে আপনি error সম্পর্কে notified হতে পারেন।
 
 ---
 
