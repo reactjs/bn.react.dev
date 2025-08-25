@@ -209,7 +209,11 @@ function Counter() {
 <div id="root"></div>
 ```
 
+<<<<<<< HEAD
 বিষয়টা খুব ধীর রকম অনুভূত হতে পারে! এটা সমাধানের জন্য, আপনি [বিল্ডের সময় বা সার্ভারে](/reference/react-dom/server) আপনার কম্পোনেন্ট গুলো থেকে প্রাথমিক HTML তৈরি করে ফেলতে পারেন। এর পরে আপনার ভিজিটররা জাভাস্ক্রিপ্ট লোড হবার আগেই টেক্সট পড়তে, ছবি দেখতে এবং লিঙ্ক ক্লিক করতে পারবে। আমাদের উপদেশ থাকবে যে আপনি এর জন্য একটা [ফ্রেমওয়ার্ক ব্যবহার করুন](/learn/start-a-new-react-project#production-grade-react-frameworks) যা নিজেই এই অপটিমাইজেশনটুকু করে দেবে। কখন এটা রান করছে তার উপর নির্ভর করে একে বলা হয়, *server-side rendering (SSR)* অথবা *static site generation (SSG)।*
+=======
+This can feel very slow! To solve this, you can generate the initial HTML from your components [on the server or during the build.](/reference/react-dom/server) Then your visitors can read text, see images, and click links before any of the JavaScript code loads. We recommend [using a framework](/learn/start-a-new-react-project#full-stack-frameworks) that does this optimization out of the box. Depending on when it runs, this is called *server-side rendering (SSR)* or *static site generation (SSG).*
+>>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
 
 </Note>
 
