@@ -26,6 +26,14 @@ React-dom contains features that are only supported for web applications (which 
 * [Client APIs](/reference/react-dom/client) - `react-dom/client` API গুলো আপনাকে ক্লায়েন্টে (ব্রাউজারে) React কম্পোনেন্ট রেন্ডার করার সুযোগ দেয়। 
 * [Server APIs](/reference/react-dom/server) - `react-dom/server` API গুলো আপনাকে সার্ভারে React কম্পোনেন্ট থেকে HTML এ রেন্ডারের সুযোগ দেয়।
 
+## React Compiler {/*react-compiler*/}
+
+The React Compiler is a build-time optimization tool that automatically memoizes your React components and values:
+
+* [Configuration](/reference/react-compiler/configuration) - Configuration options for React Compiler.
+* [Directives](/reference/react-compiler/directives) - Function-level directives to control compilation.
+* [Compiling Libraries](/reference/react-compiler/compiling-libraries) - Guide for shipping pre-compiled library code.
+
 ## Rules of React {/*rules-of-react*/}
 
 React has idioms — or rules — for how to express patterns in a way that is easy to understand and yields high-quality applications:
