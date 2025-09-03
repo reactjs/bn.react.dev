@@ -133,11 +133,7 @@ function useCSS(rule) {
 
 #### Rendering বা useLayoutEffect এর সময় স্টাইল ইঞ্জেক্ট করবার চেয়ে এটা কীভাবে আরো ভাল? {/*how-is-this-better-than-injecting-styles-during-rendering-or-uselayouteffect*/}
 
-<<<<<<< HEAD
-আপনি যদি রেন্ডারিং এর সময় স্টাইল ইনসার্ট করেন যখন React একটি [নন-ব্লকিং আপডেট,](/reference/react/useTransition#marking-a-state-update-as-a-non-blocking-transition) প্রসেস করছে, ব্রাউজার একটি কম্পোনেন্ট ট্রি রেন্ডার করতে করতে প্রতিটা ফ্রেমে স্টাইলগুলো আবার হিসেব করে, যেটা **অত্যন্ত ধীরগতির হতে পারে।** 
-=======
-If you insert styles during rendering and React is processing a [non-blocking update,](/reference/react/useTransition#perform-non-blocking-updates-with-actions) the browser will recalculate the styles every single frame while rendering a component tree, which can be **extremely slow.**
->>>>>>> e07ac94bc2c1ffd817b13930977be93325e5bea9
+আপনি যদি রেন্ডারিং এর সময় স্টাইল ইনসার্ট করেন যখন React একটি [নন-ব্লকিং আপডেট,](/reference/react/useTransition#perform-non-blocking-updates-with-actions) প্রসেস করছে, ব্রাউজার একটি কম্পোনেন্ট ট্রি রেন্ডার করতে করতে প্রতিটা ফ্রেমে স্টাইলগুলো আবার হিসেব করে, যেটা **অত্যন্ত ধীরগতির হতে পারে।** 
 
 [`useLayoutEffect`](/reference/react/useLayoutEffect) বা [`useEffect`](/reference/react/useEffect) এর সময় স্টাইল ইনসার্ট করার চেয়ে `useInsertionEffect` ভাল, কারণ এটা নিশ্চিত করে যে যতক্ষণে আপনার কম্পোনেন্টে অন্যান্য Effect রান করছে, ততক্ষণে সকল `<style>` ট্যাগ ইনসার্ট করা হয়ে গেছে। অন্যথায়, পুরনো স্টাইলের কারণে সাধারণ Effect এ লেআউটের হিসেব ভুল হবে।
 
