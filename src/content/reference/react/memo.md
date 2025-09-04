@@ -432,9 +432,7 @@ function Parent() {
 React Compiler স্বয়ংক্রিয়ভাবে:
 1. ট্র্যাক করে যে `ExpensiveChild`-এ পাঠানো `name` prop বদলায়নি
 2. `<ExpensiveChild name="John" />`-এর জন্য আগে তৈরি করা JSX-টাই পুনঃব্যবহার করে
- 3. `ExpensiveChild`-কে পুরোপুরি re-render করা স্কিপ করে
-
-
+3. `ExpensiveChild`-কে পুরোপুরি re-render করা স্কিপ করে
 
 এর মানে হলো **React Compiler ব্যবহার করলে নির্ভয়ে কম্পোনেন্টগুলো থেকে `React.memo` সরিয়ে দিতে পারেন**। কম্পাইলার একই অপ্টিমাইজেশন স্বয়ংক্রিয়ভাবে দেয়, ফলে কোড আরও পরিচ্ছন্ন হয় এবং মেইনটেইন করাও সহজ হয়।
 
