@@ -24,11 +24,7 @@ title: ইতোমধ্যে বানানো প্রজেক্টে R
 ২. **ফ্রেমওয়ার্কের কনফিগারেশন অংশে `/some-app` _base path_ হিসেবে সেট করুন** (এখানে কিভাবে করবেন তা দেখুনঃ [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/))।
 ৩. **আপনার সার্ভার বা প্রক্সি কনফিগার করুন** যাতে `/some-app/` এর সমস্ত request আপনার React অ্যাপ দ্বারা হ্যান্ডেল করা হয়।
 
-<<<<<<< HEAD
-এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/start-a-new-react-project#can-i-use-react-without-a-framework)
-=======
-This ensures the React part of your app can [benefit from the best practices](/learn/build-a-react-app-from-scratch#consider-using-a-framework) baked into those frameworks.
->>>>>>> e9a7cb1b6ca1659b42d81555ecef0cd554b7a983
+এটি নিশ্চিত করে যে আপনার অ্যাপের React অংশ [এই ফ্রেমওয়ার্কগুলির উন্নয়নগুলির উপর ভিত্তি করে](/learn/build-a-react-app-from-scratch#consider-using-a-framework)
 
 অনেক React ভিত্তিক ফ্রেমওয়ার্ক full-stack এবং আপনার React অ্যাপটিকে সার্ভারের সুবিধা নিতে দেয়। তবে আপনি যদি সার্ভারে জাভাস্ক্রিপ্ট রান করার সুযোগ না পান অথবা না চান, সে ক্ষেত্রেও একই পদক্ষেপটি নিতে পারেন। সে ক্ষেত্রে, `/some-app/` এর পরিবর্তে HTML/CSS/JS এক্সপোর্ট করুন (Next.js এর জন্য [`next export` output](https://nextjs.org/docs/advanced-features/static-html-export), Gatsby এর জন্য ডিফল্ট )।
 
