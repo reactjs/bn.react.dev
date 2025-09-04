@@ -734,7 +734,7 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 - `useLayoutEffect` এর পরিবর্তে [`useEffect`](/reference/react/useEffect) ব্যবহার করুন। এটি React-কে বলে পেইন্ট ব্লক না করে যে এটি প্রাথমিক রেন্ডার ফলাফল প্রদর্শন করতে পারে (কারণ আসল HTML আপনার Effect রান করার আগে দৃশ্যমান হয়ে যাবে)।
 
-- বিকল্পভাবে, [আপনার কম্পোনেন্টকে ক্লায়েন্ট-অনলি হিসেবে বিবেচিত করুন।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) এটি React-কে বলে যে সার্ভার রেন্ডারিংয়ের সময় এটি এর কন্টেন্টকে সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি পর্যন্ত একটি লোডিং ফলব্যাক (উদাহরণস্বরূপ, একটি স্পিনার বা একটি গ্লিমার) দিয়ে বদল করবে ।
+- বিকল্পভাবে, [আপনার কম্পোনেন্টকে ক্লায়েন্ট-অনলি হিসেবে বিবেচিত করুন।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) এটি React-কে বলে যে সার্ভার রেন্ডারিংয়ের সময় এটি এর কন্টেন্টকে সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি পর্যন্ত একটি লোডিং ফলব্যাক (উদাহরণস্বরূপ, একটি স্পিনার বা একটি গ্লিমার) দিয়ে বদল করবে ।
 
 - বিকল্পভাবে, আপনি হাইড্রেশনের পরে শুধুমাত্র `useLayoutEffect` সহ একটি কম্পোনেন্ট রেন্ডার করতে পারেন। একটি বুলিয়ান `isMounted` স্টেট রাখুন যা শুরুতে `false` দিয়ে আরম্ভ করা হয় এবং এটিকে একটি `useEffect` কলের ভিতরে `true` তে সেট করুন। আপনার রেন্ডারিং লজিকটি তখন এইরকম হতে পারে: `return isMounted ? <RealContent /> : <FallbackContent />`। সার্ভার এবং হাইড্রেশনের সময়, ব্যবহারকারী `FallbackContent` দেখবে যা `useLayoutEffect` কল করবে না। তারপর React এটিকে `RealContent` দিয়ে বদলে দিবে যা শুধুমাত্র ক্লায়েন্টে রান করবে এবং `useLayoutEffect` কল করতে পারে।
 
