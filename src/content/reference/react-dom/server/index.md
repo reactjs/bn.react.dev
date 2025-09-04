@@ -4,11 +4,7 @@ title: Server React DOM API
 
 <Intro>
 
-<<<<<<< HEAD
-`react-dom/server` API গুলো আপনাকে সার্ভারে React কম্পোনেন্টকে HTML এ রেন্ডার করার সুযোগ দেয়। প্রাথমিক HTML তৈরীর জন্য এই API গুলো কেবল মাত্র সার্ভারে আপনার অ্যাপের একদম উপরের লেভেলে ব্যবহৃত হয়। আপনার হয়ে একটা [ফ্রেমওয়ার্ক](/learn/start-a-new-react-project#production-grade-react-frameworks) এই API গুলোকে কল দিতে পারে। আপনার বেশিরভাগ কম্পোনেন্টের এগুলোকে ব্যবহারের দরকার পড়বে না।
-=======
-The `react-dom/server` APIs let you server-side render React components to HTML. These APIs are only used on the server at the top level of your app to generate the initial HTML. A [framework](/learn/start-a-new-react-project#full-stack-frameworks) may call them for you. Most of your components don't need to import or use them.
->>>>>>> 27d86ffe6ec82e3642c6490d2187bae2271020a4
+`react-dom/server` API গুলো আপনাকে সার্ভারে React কম্পোনেন্টকে HTML এ রেন্ডার করার সুযোগ দেয়। প্রাথমিক HTML তৈরীর জন্য এই API গুলো কেবল মাত্র সার্ভারে আপনার অ্যাপের একদম উপরের লেভেলে ব্যবহৃত হয়। আপনার হয়ে একটা [ফ্রেমওয়ার্ক](/learn/start-a-new-react-project#full-stack-frameworks) এই API গুলোকে কল দিতে পারে। আপনার বেশিরভাগ কম্পোনেন্টের এগুলোকে ব্যবহারের দরকার পড়বে না।
 
 </Intro>
 
