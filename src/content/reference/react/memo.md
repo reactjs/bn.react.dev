@@ -363,17 +363,13 @@ function arePropsEqual(oldProps, newProps) {
 
 ---
 
-<<<<<<< HEAD
-## ট্রাবলশুটিং {/*troubleshooting*/}
-### আমার কম্পোনেন্ট পুনরায় রেন্ডার হয় যখন একটি প্রপ অবজেক্ট, অ্যারে, অথবা ফাংশন হয় {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
-=======
-### Do I still need React.memo if I use React Compiler? {/*react-compiler-memo*/}
+### যদি আমি React কম্পাইলার ব্যবহার করি তাও কি আমার কি React.memo লাগবে? {/*react-compiler-memo*/}
 
-When you enable [React Compiler](/learn/react-compiler), you typically don't need `React.memo` anymore. The compiler automatically optimizes component re-rendering for you.
+যখন আপনি [React Compiler](/learn/react-compiler) এনাবল করেন, তখন সাধারণত `React.memo` এর প্রয়োজন হয় না আর। কম্পাইলার স্বয়ংক্রিয়ভাবে আপনার কম্পোনেন্ট রি-রেন্ডারিং অপ্টিমাইজ করে দেয়।
 
-Here's how it works:
+এটা এভাবে কাজ করে:
 
-**Without React Compiler**, you need `React.memo` to prevent unnecessary re-renders:
+**React কম্পাইলার ব্যতীত**, অপ্রয়োজনীয় রি-রেন্ডার ঠেকাতে আপনার `React.memo` এর প্রয়োজন পড়বে:
 
 ```js
 // Parent re-renders every second
@@ -402,7 +398,7 @@ const ExpensiveChild = memo(function ExpensiveChild({ name }) {
 });
 ```
 
-**With React Compiler enabled**, the same optimization happens automatically:
+**React কম্পাইলার সক্রিয় অবস্থায়**, একই অপটিমাইজেশন স্বয়ংক্রিয় ভাবে হবে:
 
 ```js
 // No memo needed - compiler prevents re-renders automatically
@@ -412,7 +408,7 @@ function ExpensiveChild({ name }) {
 }
 ```
 
-Here's the key part of what the React Compiler generates:
+React কম্পাইলার যা তৈরি করে তার মূল অংশ হল এটা:
 
 ```js {6-12}
 function Parent() {
@@ -431,25 +427,26 @@ function Parent() {
 }
 ```
 
-Notice the highlighted lines: The compiler wraps `<ExpensiveChild name="John" />` in a cache check. Since the `name` prop is always `"John"`, this JSX is created once and reused on every parent re-render. This is exactly what `React.memo` does - it prevents the child from re-rendering when its props haven't changed.
+হাইলাইট করা লাইনগুলো খেয়াল করুন: কম্পাইলার `<ExpensiveChild name="John" />`-কে একটি cache check দিয়ে ঘিরে রাখে। যেহেতু `name` prop সবসময় `"John"`, এই JSX একবারই তৈরি হয় এবং প্রতিটি parent re-render-এর সময় পুনরায় ব্যবহার হয়। ঠিক এটাই `React.memo` করে—props না বদলালে child re-render হওয়া থামিয়ে দেয়।
 
-The React Compiler automatically:
-1. Tracks that the `name` prop passed to `ExpensiveChild` hasn't changed
-2. Reuses the previously created JSX for `<ExpensiveChild name="John" />`
-3. Skips re-rendering `ExpensiveChild` entirely
+React Compiler স্বয়ংক্রিয়ভাবে:
+1. ট্র্যাক করে যে `ExpensiveChild`-এ পাঠানো `name` prop বদলায়নি
+2. `<ExpensiveChild name="John" />`-এর জন্য আগে তৈরি করা JSX-টাই পুনঃব্যবহার করে
+ 3. `ExpensiveChild`-কে পুরোপুরি re-render করা স্কিপ করে
 
-This means **you can safely remove `React.memo` from your components when using React Compiler**. The compiler provides the same optimization automatically, making your code cleaner and easier to maintain.
+
+
+এর মানে হলো **React Compiler ব্যবহার করলে নির্ভয়ে কম্পোনেন্টগুলো থেকে `React.memo` সরিয়ে দিতে পারেন**। কম্পাইলার একই অপ্টিমাইজেশন স্বয়ংক্রিয়ভাবে দেয়, ফলে কোড আরও পরিচ্ছন্ন হয় এবং মেইনটেইন করাও সহজ হয়।
 
 <Note>
 
-The compiler's optimization is actually more comprehensive than `React.memo`. It also memoizes intermediate values and expensive computations within your components, similar to combining `React.memo` with `useMemo` throughout your component tree.
+কম্পাইলারের অপ্টিমাইজেশন আসলে `React.memo`-এর থেকেও বেশি বিস্তৃত। এটি কম্পোনেন্টের ভেতরের মধ্যবর্তী মান (intermediate values) ও ব্যয়বহুল গণনাগুলোও memoize করে, যা পুরো কম্পোনেন্ট ট্রি জুড়ে `React.memo` এবং `useMemo` একসাথে ব্যবহারের মতো ফল দেয়।
 
 </Note>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
-### My component re-renders when a prop is an object, array, or function {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
->>>>>>> e9a7cb1b6ca1659b42d81555ecef0cd554b7a983
+## ট্রাবলশুটিং {/*troubleshooting*/}
+### আমার কম্পোনেন্ট পুনরায় রেন্ডার হয় যখন একটি প্রপ অবজেক্ট, অ্যারে, অথবা ফাংশন হয় {/*my-component-rerenders-when-a-prop-is-an-object-or-array*/}
 
 React পুরানো এবং নতুন প্রপসগুলি shallow equality দ্বারা তুলনা করেঃ অর্থাৎ, এটি বিবেচনা করে যে প্রতিটি নতুন প্রপ পুরানো প্রপের সাথে রেফারেন্স-সমান কিনা। যদি আপনি প্রতি বার প্যারেন্ট পুনরায় রেন্ডার হলে একটি নতুন অবজেক্ট বা অ্যারে তৈরি করেন, এমনকি যদি প্রতিটি উপাদান একই হয়, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে। একই ভাবে, যদি আপনি প্যারেন্ট কম্পোনেন্ট রেন্ডার করার সময় একটি নতুন ফাংশন তৈরি করেন, React এটিকে পরিবর্তিত হিসেবে বিবেচনা করবে, এমনকি যদি ফাংশনের ডেফিনিশন একই হয়। এটি এড়াতে, [প্রপসগুলি সরল করুন অথবা প্যারেন্ট কম্পোনেন্টে প্রপসগুলি মেমোয়াইজ করুন](#minimizing-props-changes)।
