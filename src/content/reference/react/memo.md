@@ -365,9 +365,9 @@ function arePropsEqual(oldProps, newProps) {
 
 ### যদি আমি React কম্পাইলার ব্যবহার করি তাও কি আমার কি React.memo লাগবে? {/*react-compiler-memo*/}
 
-When you enable [React Compiler](/learn/react-compiler), you typically don't need `React.memo` anymore. The compiler automatically optimizes component re-rendering for you.
+যখন আপনি [React Compiler](/learn/react-compiler) এনাবল করেন, তখন সাধারণত `React.memo` এর প্রয়োজন হয় না আর। কম্পাইলার স্বয়ংক্রিয়ভাবে আপনার কম্পোনেন্ট রি-রেন্ডারিং অপ্টিমাইজ করে দেয়।
 
-Here's how it works:
+এটা এভাবে কাজ করে:
 
 **React কম্পাইলার ব্যতীত**, অপ্রয়োজনীয় রি-রেন্ডার ঠেকাতে আপনার `React.memo` এর প্রয়োজন পড়বে:
 
