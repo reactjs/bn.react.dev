@@ -118,11 +118,7 @@ label {
 
 #### আপনি কি সর্বত্র `memo` যোগ করবেন? {/*should-you-add-memo-everywhere*/}
 
-<<<<<<< HEAD
 যদি আপনার অ্যাপ এই সাইটের মতো হয়, এবং বেশিরভাগ ইন্টারেকশন ভারী (যেমন একটি পৃষ্ঠা বা পুরো অংশ প্রতিস্থাপন করা) হয়, তাহলে মেমোয়াইজেশন সাধারণত অপ্রয়োজনীয়। অন্যদিকে, যদি আপনার অ্যাপ একটি ড্রয়িং এডিটরের মতো হয়, এবং বেশিরভাগ ইন্টারেকশন সূক্ষ্ম (যেমন shape সরানো), তাহলে মেমোয়াইজেশন আপনার কাছে খুব উপকারী মনে হতে পারে।
-=======
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
->>>>>>> e9a7cb1b6ca1659b42d81555ecef0cd554b7a983
 
 `memo` দ্বারা অপ্টিমাইজেশন তখনই মূল্যবান যখন আপনার কম্পোনেন্ট একই নির্দিষ্ট প্রপসের সাথে প্রায়শই পুনরায় রেন্ডার হয়, এবং এর পুনরায় রেন্ডার লজিক খরচবহুল। যদি আপনার কম্পোনেন্ট পুনরায় রেন্ডার হওয়ার সময় কোনো লক্ষণীয় ধীরতা না থাকে, তাহলে `memo` অপ্রয়োজনীয়। মনে রাখবেন, যদি আপনার কম্পোনেন্টের পাস করা প্রপস *সর্বদা আলাদা* হয়, যেমন যদি আপনি একটি অবজেক্ট বা রেন্ডারিং সময় ডিফাইন করা একটি সাধারণ ফাংশন পাস করেন। এই কারণে আপনার প্রায়শই [`useMemo`](/reference/react/useMemo#skipping-re-rendering-of-components) এবং [`useCallback`](/reference/react/useCallback#skipping-re-rendering-of-components) এর সাথে `memo` ব্যবহার করা প্রয়োজন হবে।
 
