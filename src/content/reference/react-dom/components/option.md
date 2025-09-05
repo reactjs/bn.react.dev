@@ -36,11 +36,7 @@ title: "<option>"
 
 #### প্রপ {/*props*/}
 
-<<<<<<< HEAD
-`<option>` সকল [কমন এলিমেন্ট প্রপের](/reference/react-dom/components/common#props) সাপোর্ট দেয়।
-=======
-`<option>` supports all [common element props.](/reference/react-dom/components/common#common-props)
->>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
+`<option>` সকল [কমন এলিমেন্ট প্রপের](/reference/react-dom/components/common#common-props) সাপোর্ট দেয়।
 
 সাথে সাথে, `<option>` এই প্রপগুলোর সাপোর্ট দেয়ঃ
 
