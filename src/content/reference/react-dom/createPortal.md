@@ -50,11 +50,7 @@ import { createPortal } from 'react-dom';
 
 * `domNode`: কিছু DOM নোড, যেমন `document.getElementById()` দ্বারা ফেরত আসা নোডগুলি। নোডটি ইতোমধ্যে বিদ্যমান থাকতে হবে। আপডেটের সময় ভিন্ন DOM নোড পাস করা হলে পোর্টাল কন্টেন্ট পুনরায় তৈরি করা হবে।
 
-<<<<<<< HEAD
-* **ঐচ্ছিক** `key`: পোর্টালের [কী](/learn/rendering-lists/#keeping-list-items-in-order-with-key) হিসাবে ব্যবহার করার জন্য একটি অনন্য স্ট্রিং বা সংখ্যা।
-=======
-* **optional** `key`: A unique string or number to be used as the portal's [key.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
->>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
+* **ঐচ্ছিক** `key`: পোর্টালের [কী](/learn/rendering-lists#keeping-list-items-in-order-with-key) হিসাবে ব্যবহার করার জন্য একটি অনন্য স্ট্রিং বা সংখ্যা।
 
 #### রিটার্নস {/*returns*/}
 
