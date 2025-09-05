@@ -162,38 +162,31 @@ React সকল বিল্ট-ইন ব্রাউজার HTML কম্�
 
 ### কাস্টম HTML এলিমেন্ট {/*custom-html-elements*/}
 
-<<<<<<< HEAD
-আপনি যদি dash আছে এমন একটি ট্যাগ রেন্ডার করেন, like `<my-element>`, React ধরে নেবে যে আপনি একটি [কাস্টম HTML এলিমেন্ট](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) রেন্ডার করতে চান।  React এর ক্ষেত্রে, কাস্টম এলিমেন্ট রেন্ডার করা এবং বিল্ট-ইন ব্রাউজার ট্যাগ রেন্ডার করা ভিন্ন ভাবে কাজ করে।
-
-- সকল কাস্টম এলিমেন্ট প্রপ স্ট্রিং এ সিরিয়ালাইজ করা হয় এবং সব সময় এট্রিবিউট ব্যবহার করে সেট করা হয়।
-- কাস্টম এলিমেন্ট এর জায়গায় `class` গ্রহণ করে, এবং `htmlFor` এর জায়গায় `for`।
-=======
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
->>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
+আপনি যদি dash সহ একটি ট্যাগ রেন্ডার করেন, যেমন `<my-element>`, React ধরবে আপনি একটি [custom HTML element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) রেন্ডার করতে চাইছেন।
 
 আপনি যদি [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) এট্রিবিউট সহ একটি ব্রাউজার বিল্ট-ইন HTML এলিমেন্ট রেন্ডার করেন, তবে এটিকে একটি কাস্টম এলিমেন্ট হিসাবে গণ্য করা হবে।
 
-#### Setting values on custom elements {/*attributes-vs-properties*/}
+#### কাস্টম এলিমেন্টে ভ্যালু সেট করা {/*attributes-vs-properties*/}
 
-Custom elements have two methods of passing data into them:
+কাস্টম এলিমেন্টে ডেটা পাঠানোর দুটি উপায় আছে:
 
-1) Attributes: Which are displayed in markup and can only be set to string values
-2) Properties: Which are not displayed in markup and can be set to arbitrary JavaScript values
+1) Attributes: যেগুলো markup-এ দেখা যায় এবং কেবল string মানেই সেট করা যায়  
+2) Properties: যেগুলো markup-এ দেখা যায় না এবং যেকোনো JavaScript মানে সেট করা যায়
 
-By default, React will pass values bound in JSX as attributes:
+ডিফল্টভাবে, React JSX-এ bind করা মানগুলোকে attributes হিসেবে পাঠায়:
 
 ```jsx
 <my-element value="Hello, world!"></my-element>
 ```
 
-Non-string JavaScript values passed to custom elements will be serialized by default:
+স্ট্রিং নয় এমন জাভাস্ক্রিপ্ট ভ্যালু কাস্টম এলিমেন্টসে পাঠালে ডিফল্টভাবে সেগুলো সিরিয়ালাইজ করা হবে:
 
 ```jsx
 // Will be passed as `"1,2,3"` as the output of `[1,2,3].toString()`
 <my-element value={[1,2,3]}></my-element>
 ```
 
-React will, however, recognize an custom element's property as one that it may pass arbitrary values to if the property name shows up on the class during construction:
+তবে, কোনো কাস্টম এলিমেন্টের ক্লাস কন্সট্রাকশন চলাকালে যদি কোনো প্রপার্টির নাম দৃশ্যমান থাকে, React সেটিকে প্রপার্টি হিসেবে চিনে নিয়ে সেখানে arbitrary মান পাঠাতে পারে:
 
 <Sandpack>
 
@@ -231,9 +224,9 @@ export function App() {
 
 </Sandpack>
 
-#### Listening for events on custom elements {/*custom-element-events*/}
+#### কাস্টম এলিমেন্টসে ইভেন্ট লিসেনিং {/*custom-element-events*/}
 
-A common pattern when using custom elements is that they may dispatch [`CustomEvent`s](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) rather than accept a function to call when an event occur. You can listen for these events using an `on` prefix when binding to the event via JSX.
+কাস্টম এলিমেন্ট ব্যবহার করার সময় একটি সাধারণ প্যাটার্ন হলো—এগুলো কোন ইভেন্ট হলে কল করার জন্য ফাংশন নেয়ার বদলে [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) dispatch করতে পারে। JSX-এর মাধ্যমে bind করার সময় ইভেন্ট নামের আগে `on` প্রিফিক্স দিয়ে এগুলোর ইভেন্ট শোনা যাবে।
 
 <Sandpack>
 
@@ -292,17 +285,7 @@ export function App() {
 
 <Note>
 
-<<<<<<< HEAD
-[ভবিষ্যতে React এর একটি ভার্শনে কাস্টম এলিমেন্টের জন্য আরো বিস্তারিত সাপোর্ট থাকবে।](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
-
-React প্যাকেজগুলো সর্বশেষ পরীক্ষামূলক ভার্শনে আপগ্রেড করার মাধ্যমে আপনি এগুলো ব্যবহার করে দেখতে পারেনঃ
-
-- `react@experimental`
-- `react-dom@experimental`
-
-React  এর পরীক্ষামূলক ভার্শনগুলোতে বাগ থাকতে পারে। প্রোডাকশনে এই ভার্শঙ্গুলো ব্যবহার করবেন না।
-=======
-Events are case-sensitive and support dashes (`-`). Preserve the casing of the event and include all dashes when listening for custom element's events:
+ইভেন্টগুলোর ক্ষেত্রে casing সংবেদনশীল এবং dashes (`-`) সাপোর্ট করে। custom element-এর ইভেন্ট শোনার সময় ইভেন্টের casing ঠিক রাখুন এবং সব dashes অন্তর্ভুক্ত করুন:
 
 ```jsx
 // Listens for `say-hi` events
@@ -310,7 +293,6 @@ Events are case-sensitive and support dashes (`-`). Preserve the casing of the e
 // Listens for `sayHi` events
 <my-element onsayHi={console.log}></my-element>
 ```
->>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf
 
 </Note>
 ---
