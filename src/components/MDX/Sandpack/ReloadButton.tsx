@@ -15,12 +15,8 @@ export function ReloadButton({onReload}: ReloadButtonProps) {
       onClick={onReload}
       title="Keep your edits and reload sandbox"
       type="button">
-<<<<<<< HEAD:src/components/MDX/Sandpack/ResetButton.tsx
-      <IconRestart className="inline mx-1 relative" /> রিসেট
-=======
       <IconRestart className="inline mx-1 relative" />
       <span className="hidden md:block">Reload</span>
->>>>>>> 2774ddfa0c39b8c2f0563b987dcb90a01ee723cf:src/components/MDX/Sandpack/ReloadButton.tsx
     </button>
   );
 }
