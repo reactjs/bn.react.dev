@@ -4,10 +4,13 @@ This repo contains the source code and documentation powering [bn.react.dev](htt
 
 ## Getting started
 
+### Join the Bengali discord community
+Hi dev, We are Bengali React doc translation community welcome you to join the discord server - https://github.com/reactjs/bn.react.dev/issues/26
+
 ### Prerequisites
 
 1. Git
-1. Node: any 12.x version starting with v12.0.0 or greater
+1. Node: any version starting with v16.8.0 or greater
 1. Yarn: See [Yarn website for installation instructions](https://yarnpkg.com/lang/en/docs/install/)
 1. A fork of the repo (for any contributions)
 1. A clone of the [bn.react.dev repo](https://github.com/reactjs/bn.react.dev) on your local machine

@@ -1,41 +1,41 @@
 ---
-title: Keeping Components Pure
+title: কম্পোনেন্টকে বিশুদ্ধ রাখা
 ---
 
 <Intro>
 
-Some JavaScript functions are *pure.* Pure functions only perform a calculation and nothing more. By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. To get these benefits, though, there are a few rules you must follow.
+কিছু জাভাস্ক্রিপ্ট ফাংশন *বিশুদ্ধ।* বিশুদ্ধ ফাংশনগুলো শুধুমাত্র একটি হিসাব করে, অন্য কিছু নয়। আপনি যথাযথভাবে আপনার কম্পোনেন্টগুলোকে বিশুদ্ধ ফাংশন হিসাবে লিখার মাধ্যমে আপনার কোডবেইজ বাড়ার সাথে সাথে অনেক বিভ্রান্তিকর বাগ এবং অনিশ্চিত আচরণ এড়িয়ে যেতে পারবেন। এই সুবিধাগুলো পাওয়ার জন্য আপনার নির্দিষ্ট কিছু নিয়ম মেনে চলতে হবে।
 
 </Intro>
 
 <YouWillLearn>
 
-* What purity is and how it helps you avoid bugs
-* How to keep components pure by keeping changes out of the render phase
-* How to use Strict Mode to find mistakes in your components
+* বিশুদ্ধতা কি এবং এটি কিভাবে আপনাকে বাগ এড়িয়ে যেতে সাহায্য করে
+* কম্পোনেন্টকে কিভাবে বিশুদ্ধ রাখা যায় পরিবর্তনগুলোকে রেন্ডারের ধাপের বাইরে রেখে
+* কিভাবে Strict Mode ব্যবহার করে আপনার কম্পোনেন্টের ভুলগুলো ধরতে পারবেন
 
 </YouWillLearn>
 
-## Purity: Components as formulas {/*purity-components-as-formulas*/}
+## বিশুদ্ধতাঃ সূত্র হিসেবে কম্পোনেন্ট {/*purity-components-as-formulas*/}
 
-In computer science (and especially the world of functional programming), [a pure function](https://wikipedia.org/wiki/Pure_function) is a function with the following characteristics:
+কম্পিউটার সায়েন্সে (বিশেষ করে ফাংশনাল প্রোগ্রামিং-এ), [একটি বিশুদ্ধ ফাংশন](https://wikipedia.org/wiki/Pure_function) হল এমন একটি ফাংশন যার নিচের বৈশিষ্ট্যগুলো রয়েছেঃ
 
-* **It minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **নিজের কাজ নিয়েই ব্যস্ত।** এটি কল করার আগের কোন অবজেক্ট বা ভ্যারিয়েবল পরিবর্তন করেনা।
+* **একই ইনপুট, একই আউটপুট।** একই ইনপুটের জন্য একটি বিশুদ্ধ ফাংশন সবসময় একই আউটপুট রিটার্ন করে।
 
-You might already be familiar with one example of pure functions: formulas in math.
+আপনি হয়তো এরই মধ্যে বিশুদ্ধ ফাংশনের একটি উদাহরণের সাথে পরিচিতঃ গণিতের সূত্র।
 
-Consider this math formula: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
+এই গণিতের সূত্রটিই ধরুনঃ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always. 
+যদি <Math><MathI>x</MathI> = 2</Math> হয়, তাহলে <Math><MathI>y</MathI> = 4</Math> হবে। সবসময়। 
 
-If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always. 
+যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <Math><MathI>y</MathI> = 6</Math> হবে। সবসময়। 
 
-If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market. 
+যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <MathI>y</MathI> কখনো কখনো <Math>9</Math> অথবা <Math>–1</Math> অথবা <Math>2.5</Math> হবেনা, দিনের কোন সময় বা স্টক মার্কেটের অবস্থার উপর নির্ভর করে।
 
-If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>. 
+যদি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এবং <Math><MathI>x</MathI> = 3</Math> হয়, <MathI>y</MathI> তাহলে _সবসময়_ <Math>6</Math> হবে। 
 
-If we made this into a JavaScript function, it would look like this:
+আমরা যদি এটিকে একটি জাভাস্ক্রিপ্ট ফাংশনে রুপ দেই, তাহলে এটি এমন দেখাবেঃ
 
 ```js
 function double(number) {
@@ -43,13 +43,13 @@ function double(number) {
 }
 ```
 
-In the above example, `double` is a **pure function.** If you pass it `3`, it will return `6`. Always.
+উপরের উদাহরণে, `double` একটি **বিশুদ্ধ ফাংশন।** আপনি যদি এটিতে `3` পাস করেন এটি `6` রিটার্ন করবে। সবসময়।
 
-React is designed around this concept. **React assumes that every component you write is a pure function.** This means that React components you write must always return the same JSX given the same inputs:
+React এই ধারণার উপর ভিত্তি করেই তৈরি করা হয়েছে। **React ধরে নেয় আপনার লেখা সব কম্পোনেন্টই বিশুদ্ধ ফাংশন।** তার মানে আপনার লিখা React কম্পোনেন্টগুলোর অবশ্যই একই ইনপুটের জন্য একই JSX রিটার্ন করতে হবেঃ
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Recipe({ drinkers }) {
   return (
     <ol>    
@@ -75,21 +75,21 @@ export default function App() {
 
 </Sandpack>
 
-When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always. 
+আপনি যখন `Recipe` তে `drinkers={2}` পাস করবেন, এটি JSX রিটার্ন করবে যাতে `2 cups of water` থাকবে। সবসময়। 
 
-If you pass `drinkers={4}`, it will return JSX containing `4 cups of water`. Always.
+যদি আপনি `drinkers={4}` পাস করেন, এটি JSX রিটার্ন করবে যাতে `4 cups of water` থাকবে। সবসময়।
 
-Just like a math formula. 
+ঠিক একটি গণিতের সূত্রের মত।
 
-You could think of your components as recipes: if you follow them and don't introduce new ingredients during the cooking process, you will get the same dish every time. That "dish" is the JSX that the component serves to React to [render.](/learn/render-and-commit)
+আপনি আপনার কম্পোনেন্টকে একটি রেসিপি হিসেবে চিন্তা করতে পারেনঃ যদি আপনি এগুলো অনুসরণ করেন এবং রান্নার সময়ে নতুন কোন উপাদান না আনেন তাহলে আপনি সবসময় একই খাবার পাবেন। এই "খাবার" হল JSX যা আপনার কম্পোনেন্ট React কে [রেন্ডার](/learn/render-and-commit) করার জন্য পরিবেশন করে।
 
 <Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 
-## Side Effects: (un)intended consequences {/*side-effects-unintended-consequences*/}
+## পার্শ্ব-প্রতিক্রিয়াঃ (অন)ইচ্ছাকৃত প্রভাব {/*side-effects-unintended-consequences*/}
 
-React's rendering process must always be pure. Components should only *return* their JSX, and not *change* any objects or variables that existed before rendering—that would make them impure!
+React এর রেন্ডারিং প্রসেস সবসময় বিশুদ্ধ হতে হবে। কম্পোনেন্টগুলোর শুধুমাত্র তাদের JSX *রিটার্ন* করা উচিত, এবং রেন্ডারিং এর আগের কোন অবজেক্ট বা ভ্যারিয়েবলে পরিবর্তন আনা উচিত নয়-যা এগুলোকে অবিশুদ্ধ করে দেবে!
 
-Here is a component that breaks this rule:
+এই কম্পোনেন্টটি এই নিয়ম ভঙ্গ করেঃ
 
 <Sandpack>
 
@@ -115,11 +115,11 @@ export default function TeaSet() {
 
 </Sandpack>
 
-This component is reading and writing a `guest` variable declared outside of it. This means that **calling this component multiple times will produce different JSX!** And what's more, if _other_ components read `guest`, they will produce different JSX, too, depending on when they were rendered! That's not predictable.
+এই কম্পোনেন্টটি এর বাইরে ডিক্লেয়ার করা `guest` ভ্যারিয়েবল রিড এবং রাইট করছে। তার মানে **এই কম্পোনেন্ট বারবার কল করলে ভিন্ন ভিন্ন JSX রিটার্ন করবে!** তার উপর, যদি _অন্য_ কম্পোনেন্ট `guest` থেকে রিড করে, তারাও ভিন্ন JSX রিটার্ন করবে, তারা কখন রেন্ডার হয়েছিল এর উপর ভিত্তি করে! এটি মোটেও অনুমানযোগ্য নয়।
 
-Going back to our formula <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>, now even if <Math><MathI>x</MathI> = 2</Math>, we cannot trust that <Math><MathI>y</MathI> = 4</Math>. Our tests could fail, our users would be baffled, planes would fall out of the sky—you can see how this would lead to confusing bugs!
+আমরা যদি আমাদের সূত্রে ফিরে যাই, <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>, এখন <Math><MathI>x</MathI> = 2</Math> হওয়ার পরেও, আমরা নিশ্চিত হতে পারবনা <Math><MathI>y</MathI> = 4</Math> হবে। আমাদের টেস্ট ফেইল করতে পারে, আমাদের ইউজার বিস্মিত হতে পারে, প্লেইন আকাশ থেকে পড়ে যেতে পারে-দেখতেই পাচ্ছেন এটি কিভাবে বিভিন্ন বিভ্রান্তিকর বাগ তৈরি করতে পারে!
 
-You can fix this component by [passing `guest` as a prop instead](/learn/passing-props-to-a-component):
+আপনি এই কম্পোনেন্টে [`guest` একটি prop হিসেবে পাস করার মাধ্যমে](/learn/passing-props-to-a-component) এটি ঠিক করতে পারেনঃ
 
 <Sandpack>
 
@@ -141,9 +141,9 @@ export default function TeaSet() {
 
 </Sandpack>
 
-Now your component is pure, as the JSX it returns only depends on the `guest` prop.
+এখন আপনার কম্পোনেন্টটি বিশুদ্ধ, যেহেতু এর দ্বারা রিটার্নকৃত JSX শুধুমাত্র `guest` prop এর উপর নির্ভর করে।
 
-In general, you should not expect your components to be rendered in any particular order. It doesn't matter if you call <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> before or after <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>: both formulas will resolve independently of each other. In the same way, each component should only "think for itself", and not attempt to coordinate with or depend upon others during rendering. Rendering is like a school exam: each component should calculate JSX on their own!
+সাধারণত, আপনার কম্পোনেন্টকে নির্দিষ্ট কোন ক্রমে রেন্ডার করতে হবে এমন আশা করা উচিত নয়। এটি কোন ব্যাপার না আপনি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এর আগে অথবা পরে  <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math> কল করলেনঃ উভয় সূত্রই স্বাধীনভাবে সমাধান হবে। একইভাবে, প্রতিটা ক্মপোনেন্টেরই "নিজের জন্য চিন্তা করা" উচিত, এবং রেন্ডারিং এর সময় অন্যের সাথে সমন্বয়ের চেষ্টা অথবা অন্যের উপর নির্ভর করা উচিত নয়। রেন্ডারিং হল স্কুলের পরীক্ষার মতঃ প্রতিটা কম্পোনেন্টেরই তাদের নিজেদের JSX হিসাব করা উচিত!
 
 <DeepDive>
 
@@ -175,7 +175,7 @@ function Cup({ guest }) {
 }
 
 export default function TeaGathering() {
-  let cups = [];
+  const cups = [];
   for (let i = 1; i <= 12; i++) {
     cups.push(<Cup key={i} guest={i} />);
   }
@@ -243,9 +243,9 @@ Rendering is a *calculation*, it shouldn't try to "do" things. Can you express t
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
-  let hours = time.getHours();
+  const hours = time.getHours();
   if (hours >= 0 && hours <= 6) {
     document.getElementById('time').className = 'night';
   } else {
@@ -259,7 +259,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -305,9 +305,9 @@ You can fix this component by calculating the `className` and including it in th
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
-  let hours = time.getHours();
+  const hours = time.getHours();
   let className;
   if (hours >= 0 && hours <= 6) {
     className = 'night';
@@ -322,7 +322,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -380,7 +380,7 @@ The buggy code is in `Profile.js`. Make sure you read it all from top to bottom!
 
 <Sandpack>
 
-```js Profile.js
+```js src/Profile.js
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -413,7 +413,7 @@ function Avatar() {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -429,7 +429,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -448,7 +448,7 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -481,7 +481,7 @@ To fix the bug, remove the `currentPerson` variable. Instead, pass all informati
 
 <Sandpack>
 
-```js Profile.js active
+```js src/Profile.js active
 import Panel from './Panel.js';
 import { getImageUrl } from './utils.js';
 
@@ -511,7 +511,7 @@ function Avatar({ person }) {
 }
 ```
 
-```js Panel.js hidden
+```js src/Panel.js hidden
 import { useState } from 'react';
 
 export default function Panel({ children }) {
@@ -527,7 +527,7 @@ export default function Panel({ children }) {
 }
 ```
 
-```js App.js
+```js src/App.js
 import Profile from './Profile.js';
 
 export default function App() {
@@ -546,7 +546,7 @@ export default function App() {
 }
 ```
 
-```js utils.js hidden
+```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -583,7 +583,7 @@ You implemented the "Create Story" placeholder by pushing one more fake story at
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   stories.push({
     id: 'create',
@@ -602,18 +602,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.
@@ -683,7 +683,7 @@ The simplest fix is to not touch the array at all, and render "Create Story" sep
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   return (
     <ul>
@@ -698,18 +698,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.
@@ -767,10 +767,10 @@ Alternatively, you could create a _new_ array (by copying the existing one) befo
 
 <Sandpack>
 
-```js StoryTray.js active
+```js src/StoryTray.js active
 export default function StoryTray({ stories }) {
   // Copy the array!
-  let storiesToDisplay = stories.slice();
+  const storiesToDisplay = stories.slice();
 
   // Does not affect the original array:
   storiesToDisplay.push({
@@ -790,18 +790,18 @@ export default function StoryTray({ stories }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import StoryTray from './StoryTray.js';
 
-let initialStories = [
+const initialStories = [
   {id: 0, label: "Ankit's Story" },
   {id: 1, label: "Taylor's Story" },
 ];
 
 export default function App() {
-  let [stories, setStories] = useState([...initialStories])
-  let time = useTime();
+  const [stories, setStories] = useState([...initialStories])
+  const time = useTime();
 
   // HACK: Prevent the memory from growing forever while you read docs.
   // We're breaking our own rules here.

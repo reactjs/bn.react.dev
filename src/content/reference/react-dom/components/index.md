@@ -4,37 +4,51 @@ title: "React DOM Components"
 
 <Intro>
 
-React supports all of the browser built-in [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) and [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) components.
+React সকল প্রকার ব্রাউজার বিল্ট-ইন [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) এবং [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) কম্পোনেন্ট সাপোর্ট করে।
 
 </Intro>
 
 ---
 
-## Common components {/*common-components*/}
+## সাধারণ কম্পোনেন্ট {/*common-components*/}
 
-All of the built-in browser components support some props and events.
+সকল বিল্ট-ইন ব্রাউজার কম্পোনেন্ট কিছু প্রপ এবং ইভেন্ট সাপোর্ট করে।
 
-* [Common components (e.g. `<div>`)](/reference/react-dom/components/common)
+* [সাধারণ component (e.g. `<div>`)](/reference/react-dom/components/common)
 
-This includes React-specific props like `ref` and `dangerouslySetInnerHTML`.
+এর মধ্যে রয়েছে React-specific প্রপ যেমন `ref` এবং `dangerouslySetInnerHTML`।
 
 ---
 
-## Form components {/*form-components*/}
+## ফর্ম কম্পোনেন্ট {/*form-components*/}
 
-These built-in browser components accept user input:
+এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলো ইউজার ইনপুট গ্রহণ করে।
 
 * [`<input>`](/reference/react-dom/components/input)
 * [`<select>`](/reference/react-dom/components/select)
 * [`<textarea>`](/reference/react-dom/components/textarea)
 
-They are special in React because passing the `value` prop to them makes them *[controlled.](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)*
+তারা React এর মধ্যে বিশেষ কারণ তাদের কাছে `value` প্রপ পাঠানোর বিষয়টা তাদেরকে *[নিয়ন্ত্রিত](/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)* বানায়।
 
 ---
 
-## All HTML components {/*all-html-components*/}
+## Resource and Metadata Components {/*resource-and-metadata-components*/}
 
-React supports all built-in browser HTML components. This includes:
+এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলি আপনাকে বাহ্যিক রিসোর্স লোড করতে অথবা ডকুমেন্টে মেটাডেটা দিয়ে মার্ক করতে দেয়:
+
+* [`<link>`](/reference/react-dom/components/link)
+* [`<meta>`](/reference/react-dom/components/meta)
+* [`<script>`](/reference/react-dom/components/script)
+* [`<style>`](/reference/react-dom/components/style)
+* [`<title>`](/reference/react-dom/components/title)
+
+React-এ এগুলি বিশেষ কারণ React এগুলিকে ডকুমেন্টের হেডে রেন্ডার করতে পারে, রিসোর্স লোড হওয়া অবধি সাসপেন্ড করতে পারে, এবং প্রতিটি বিশেষ কম্পোনেন্টের জন্য রেফারেন্স পেজে বর্ণিত অন্যান্য আচরণ সম্পাদন করতে পারে।
+
+---
+
+## সকল HTML কম্পোনেন্ট {/*all-html-components*/}
+
+React সকল বিল্ট-ইন ব্রাউজার HTML কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
 * [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside)
 * [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
@@ -140,38 +154,152 @@ React supports all built-in browser HTML components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing HTML to JSX with an [online converter.](https://transform.tools/html-to-jsx)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান HTML কে JSX এ রূপান্তরিত করতে পারবেন।
 
 </Note>
 
 ---
 
-### Custom HTML elements {/*custom-html-elements*/}
+### কাস্টম HTML এলিমেন্ট {/*custom-html-elements*/}
 
-If you render a tag with a dash, like `<my-element>`, React will assume you want to render a [custom HTML element.](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) In React, rendering custom elements works differently from rendering built-in browser tags:
+আপনি যদি dash সহ একটি ট্যাগ রেন্ডার করেন, যেমন `<my-element>`, React ধরবে আপনি একটি [custom HTML element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) রেন্ডার করতে চাইছেন।
 
-- All custom element props are serialized to strings and are always set using attributes.
-- Custom elements accept `class` rather than `className`, and `for` rather than `htmlFor`.
+আপনি যদি [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) এট্রিবিউট সহ একটি ব্রাউজার বিল্ট-ইন HTML এলিমেন্ট রেন্ডার করেন, তবে এটিকে একটি কাস্টম এলিমেন্ট হিসাবে গণ্য করা হবে।
 
-If you render a built-in browser HTML element with an [`is`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) attribute, it will also be treated as a custom element.
+#### কাস্টম এলিমেন্টে ভ্যালু সেট করা {/*attributes-vs-properties*/}
+
+কাস্টম এলিমেন্টে ডেটা পাঠানোর দুটি উপায় আছে:
+
+1) Attributes: যেগুলো markup-এ দেখা যায় এবং কেবল string মানেই সেট করা যায়  
+2) Properties: যেগুলো markup-এ দেখা যায় না এবং যেকোনো JavaScript মানে সেট করা যায়
+
+ডিফল্টভাবে, React JSX-এ bind করা মানগুলোকে attributes হিসেবে পাঠায়:
+
+```jsx
+<my-element value="Hello, world!"></my-element>
+```
+
+স্ট্রিং নয় এমন জাভাস্ক্রিপ্ট ভ্যালু কাস্টম এলিমেন্টসে পাঠালে ডিফল্টভাবে সেগুলো সিরিয়ালাইজ করা হবে:
+
+```jsx
+// Will be passed as `"1,2,3"` as the output of `[1,2,3].toString()`
+<my-element value={[1,2,3]}></my-element>
+```
+
+তবে, কোনো কাস্টম এলিমেন্টের ক্লাস কন্সট্রাকশন চলাকালে যদি কোনো প্রপার্টির নাম দৃশ্যমান থাকে, React সেটিকে প্রপার্টি হিসেবে চিনে নিয়ে সেখানে arbitrary মান পাঠাতে পারে:
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```js src/MyElement.js active
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    // The value here will be overwritten by React 
+    // when initialized as an element
+    this.value = undefined;
+  }
+
+  connectedCallback() {
+    this.innerHTML = this.value.join(", ");
+  }
+}
+```
+
+```js src/App.js
+export function App() {
+  return <my-element value={[1,2,3]}></my-element>
+}
+```
+
+</Sandpack>
+
+#### কাস্টম এলিমেন্টসে ইভেন্ট লিসেনিং {/*custom-element-events*/}
+
+কাস্টম এলিমেন্ট ব্যবহার করার সময় একটি সাধারণ প্যাটার্ন হলো—এগুলো কোন ইভেন্ট হলে কল করার জন্য ফাংশন নেয়ার বদলে [`CustomEvent`](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) dispatch করতে পারে। JSX-এর মাধ্যমে bind করার সময় ইভেন্ট নামের আগে `on` প্রিফিক্স দিয়ে এগুলোর ইভেন্ট শোনা যাবে।
+
+<Sandpack>
+
+```js src/index.js hidden
+import {MyElement} from './MyElement.js';
+import { createRoot } from 'react-dom/client';
+import {App} from "./App.js";
+
+customElements.define('my-element', MyElement);
+
+const root = createRoot(document.getElementById('root'))
+root.render(<App />);
+```
+
+```javascript src/MyElement.js
+export class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this.test = undefined;
+    this.emitEvent = this._emitEvent.bind(this);
+  }
+
+  _emitEvent() {
+    const event = new CustomEvent('speak', {
+      detail: {
+        message: 'Hello, world!',
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  connectedCallback() {
+    this.el = document.createElement('button');
+    this.el.innerText = 'Say hi';
+    this.el.addEventListener('click', this.emitEvent);
+    this.appendChild(this.el);
+  }
+
+  disconnectedCallback() {
+    this.el.removeEventListener('click', this.emitEvent);
+  }
+}
+```
+
+```jsx src/App.js active
+export function App() {
+  return (
+    <my-element
+      onspeak={e => console.log(e.detail.message)}
+    ></my-element>
+  )
+}
+```
+
+</Sandpack>
 
 <Note>
 
-[A future version of React will include more comprehensive support for custom elements.](https://github.com/facebook/react/issues/11347#issuecomment-1122275286)
+ইভেন্টগুলোর ক্ষেত্রে casing সংবেদনশীল এবং dashes (`-`) সাপোর্ট করে। custom element-এর ইভেন্ট শোনার সময় ইভেন্টের casing ঠিক রাখুন এবং সব dashes অন্তর্ভুক্ত করুন:
 
-You can try it by upgrading React packages to the most recent experimental version:
-
-- `react@experimental`
-- `react-dom@experimental`
-
-Experimental versions of React may contain bugs. Don't use them in production.
+```jsx
+// Listens for `say-hi` events
+<my-element onsay-hi={console.log}></my-element>
+// Listens for `sayHi` events
+<my-element onsayHi={console.log}></my-element>
+```
 
 </Note>
 ---
 
-## All SVG components {/*all-svg-components*/}
+## সকল SVG কম্পোনেন্ট {/*all-svg-components*/}
 
-React supports all built-in browser SVG components. This includes:
+React ব্রাউজারে থাকা সকল বিল্ট-ইন SVG কম্পোনেন্ট সাপোর্ট করে। এর মধ্যে রয়েছেঃ
 
 * [`<a>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/a)
 * [`<animate>`](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/animate)
@@ -242,9 +370,9 @@ React supports all built-in browser SVG components. This includes:
 
 <Note>
 
-Similar to the [DOM standard,](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) React uses a `camelCase` convention for prop names. For example, you'll write `tabIndex` instead of `tabindex`. You can convert existing SVG to JSX with an [online converter.](https://transform.tools/)
+[DOM স্ট্যান্ডার্ড](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) এর মতোই React প্রপের নামের জন্য `camelCase` রীতি অনুসরণ করে। উদাহরণস্বরূপ, আপনি `tabindex` এর জায়গায় লিখবেন `tabIndex`। আপনি [online converter](https://transform.tools/html-to-jsx) ব্যবহার করে বিদ্যমান SVG কে JSX এ রূপান্তরিত করতে পারবেন।
 
-Namespaced attributes also have to be written without the colon:
+Namespaced অ্যাট্রিবিউটগুলো কোলন ছাড়া লিখতে হবেঃ
 
 * `xlink:actuate` becomes `xlinkActuate`.
 * `xlink:arcrole` becomes `xlinkArcrole`.

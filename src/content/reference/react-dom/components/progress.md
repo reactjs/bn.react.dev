@@ -30,12 +30,12 @@ To display a progress indicator, render the [built-in browser `<progress>`](http
 
 #### Props {/*props*/}
 
-`<progress>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<progress>` supports all [common element props.](/reference/react-dom/components/common#common-props)
 
 Additionally, `<progress>` supports these props:
 
-* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-max): A number. Specifies the maximum `value`. Defaults to `1`.
-* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#attr-value): A number between `0` and `max`, or `null` for intermedinate progress. Specifies how much was done.
+* [`max`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#max): A number. Specifies the maximum `value`. Defaults to `1`.
+* [`value`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress#value): A number between `0` and `max`, or `null` for indeterminate progress. Specifies how much was done.
 
 ---
 

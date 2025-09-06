@@ -42,7 +42,7 @@ title: রেন্ডার এবং কমিট
 
 <Sandpack>
 
-```js index.js active
+```js src/index.js active
 import Image from './Image.js';
 import { createRoot } from 'react-dom/client';
 
@@ -50,7 +50,7 @@ const root = createRoot(document.getElementById('root'))
 root.render(<Image />);
 ```
 
-```js Image.js
+```js src/Image.js
 export default function Image() {
   return (
     <img
@@ -70,7 +70,7 @@ export default function Image() {
 কম্পোনেন্টের প্রাথমিক রেন্ডারের পরে আপনি [set ফাংশন](/reference/react/useState#setstate) দ্বারা কম্পোনেন্টের স্টেট আপডেট করে আরও রেন্ডার ট্রিগার করতে পারবেন। কম্পোনেন্টের স্টেট আপডেট হলে React একটি রেন্ডার স্বয়ংক্রিয়ভাবে কিউ করে রাখে। (রেস্তোরাঁয় গেস্টের প্রথম অর্ডারের পরে চা, ডেজার্ট এবং অন্যান্য ধরণের জিনিস অর্ডার দেওয়ার মতো কল্পনা করতে পারেন।)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
   <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
@@ -88,7 +88,7 @@ export default function Image() {
 
 <Sandpack>
 
-```js Gallery.js active
+```js src/Gallery.js active
 export default function Gallery() {
   return (
     <section>
@@ -110,7 +110,7 @@ function Image() {
 }
 ```
 
-```js index.js
+```js src/index.js
 import Gallery from './Gallery.js';
 import { createRoot } from 'react-dom/client';
 
@@ -157,7 +157,7 @@ img { margin: 0 10px 10px 0; }
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ time }) {
   return (
     <>
@@ -168,7 +168,7 @@ export default function Clock({ time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 

@@ -12,6 +12,12 @@ const cachedFn = useCallback(fn, dependencies)
 
 </Intro>
 
+<Note>
+
+[React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useCallback` calls. You can use the compiler to handle memoization automatically.
+
+</Note>
+
 <InlineToc />
 
 ---
@@ -251,7 +257,7 @@ Next, try toggling the theme. **Thanks to `useCallback` together with [`memo`](/
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ProductPage from './ProductPage.js';
 
@@ -278,7 +284,7 @@ export default function App() {
 }
 ```
 
-```js ProductPage.js active
+```js src/ProductPage.js active
 import { useCallback } from 'react';
 import ShippingForm from './ShippingForm.js';
 
@@ -304,7 +310,7 @@ function post(url, data) {
 }
 ```
 
-```js ShippingForm.js
+```js src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -391,7 +397,7 @@ Unlike in the previous example, toggling the theme is also slow now! This is bec
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ProductPage from './ProductPage.js';
 
@@ -418,7 +424,7 @@ export default function App() {
 }
 ```
 
-```js ProductPage.js active
+```js src/ProductPage.js active
 import ShippingForm from './ShippingForm.js';
 
 export default function ProductPage({ productId, referrer, theme }) {
@@ -443,7 +449,7 @@ function post(url, data) {
 }
 ```
 
-```js ShippingForm.js
+```js src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -525,7 +531,7 @@ However, here is the same code **with the artificial slowdown removed.** Does th
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import ProductPage from './ProductPage.js';
 
@@ -552,7 +558,7 @@ export default function App() {
 }
 ```
 
-```js ProductPage.js active
+```js src/ProductPage.js active
 import ShippingForm from './ShippingForm.js';
 
 export default function ProductPage({ productId, referrer, theme }) {
@@ -577,7 +583,7 @@ function post(url, data) {
 }
 ```
 
-```js ShippingForm.js
+```js src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -711,7 +717,7 @@ function ChatRoom({ roomId }) {
 
   useEffect(() => {
     const options = createOptions();
-    const connection = createConnection();
+    const connection = createConnection(options);
     connection.connect();
     // ...
 ```
@@ -722,7 +728,7 @@ This creates a problem. [Every reactive value must be declared as a dependency o
 ```js {6}
   useEffect(() => {
     const options = createOptions();
-    const connection = createConnection();
+    const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
   }, [createOptions]); // 🔴 Problem: This dependency changes on every render
@@ -744,7 +750,7 @@ function ChatRoom({ roomId }) {
 
   useEffect(() => {
     const options = createOptions();
-    const connection = createConnection();
+    const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
   }, [createOptions]); // ✅ Only changes when createOptions changes
@@ -766,7 +772,7 @@ function ChatRoom({ roomId }) {
     }
 
     const options = createOptions();
-    const connection = createConnection();
+    const connection = createConnection(options);
     connection.connect();
     return () => connection.disconnect();
   }, [roomId]); // ✅ Only changes when roomId changes

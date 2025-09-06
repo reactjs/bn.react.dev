@@ -1,5 +1,5 @@
 {
-  "title": "Learn React",
+  "title": "React শিখুন",
   "path": "/learn",
   "routes": [
     {
@@ -15,30 +15,67 @@
           "path": "/learn/tutorial-tic-tac-toe"
         },
         {
-          "title": "Thinking in React",
+          "title": "React এর আলোকে চিন্তা করা",
           "path": "/learn/thinking-in-react"
         }
       ]
     },
     {
-      "title": "Installation",
+      "title": "ইনস্টলেশন",
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Start a New React Project",
-          "path": "/learn/start-a-new-react-project"
+          "title": "Creating a React App",
+          "path": "/learn/creating-a-react-app"
+        },
+        {
+          "title": "Build a React App from Scratch",
+          "path": "/learn/build-a-react-app-from-scratch"
         },
         {
           "title": "Add React to an Existing Project",
           "path": "/learn/add-react-to-an-existing-project"
+        }
+      ]
+    },
+    {
+      "title": "Setup",
+      "path": "/learn/setup",
+      "routes": [
+        {
+          "title": "এডিটর সেটাপ",
+          "path": "/learn/editor-setup"
         },
         {
-          "title": "Editor Setup",
-          "path": "/learn/editor-setup"
+          "title": "Using TypeScript",
+          "path": "/learn/typescript"
         },
         {
           "title": "React Developer Tools",
           "path": "/learn/react-developer-tools"
+        }
+      ]
+    },
+    {
+      "title": "React Compiler",
+      "path": "/learn/react-compiler",
+      "canary": true,
+      "routes": [
+        {
+          "title": "Introduction",
+          "path": "/learn/react-compiler/introduction"
+        },
+        {
+          "title": "Installation",
+          "path": "/learn/react-compiler/installation"
+        },
+        {
+          "title": "Incremental Adoption",
+          "path": "/learn/react-compiler/incremental-adoption"
+        },
+        {
+          "title": "Debugging and Troubleshooting",
+          "path": "/learn/react-compiler/debugging"
         }
       ]
     },
@@ -80,8 +117,12 @@
           "path": "/learn/rendering-lists"
         },
         {
-          "title": "Keeping Components Pure",
+          "title": "কম্পোনেন্টকে বিশুদ্ধ রাখা",
           "path": "/learn/keeping-components-pure"
+        },
+        {
+          "title": "Your UI as a Tree",
+          "path": "/learn/understanding-your-ui-as-a-tree"
         }
       ]
     },
@@ -161,11 +202,11 @@
       "tags": ["advanced"],
       "routes": [
         {
-          "title": "Referencing Values with Refs",
+          "title": "Ref এর সাহায্যে ভ্যালু রেফারেন্সিং",
           "path": "/learn/referencing-values-with-refs"
         },
         {
-          "title": "Manipulating the DOM with Refs",
+          "title": "Ref ব্যবহার করে DOM ম্যানিপুলেশন",
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
@@ -186,7 +227,7 @@
         },
         {
           "title": "Removing Effect Dependencies",
-          "path": "/learn/removing-effect-dependencies"              
+          "path": "/learn/removing-effect-dependencies"
         },
         {
           "title": "Reusing Logic with Custom Hooks",

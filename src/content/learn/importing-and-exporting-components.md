@@ -52,7 +52,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-এই উদাহরণ টি বর্তমানে রয়েছে **রুট কম্পোনেন্ট ফাইলে**, যার নাম `App.js`। [Create React App](https://create-react-app.dev/) এ আপনার অ্যাপ্লিকেশন টি `src/App.js` ফাইলে থাকে। যদিও আপনার সেটআপ এর উপর নির্ভর করে আপনার রুট কম্পোনেন্ট অন্য ফাইলেও থাকতে পারে। যদি আপনি ফাইল ভিত্তিক রাউটিং সহ কোন ফ্রেমওয়ার্ক ব্যবহার করেন, যেমন Next.js, তাহলে প্রতিটি পৃষ্ঠার জন্য আপনার রুট কম্পোনেন্ট ভিন্ন হবে।
+এই উদাহরণ টি বর্তমানে রয়েছে **রুট কম্পোনেন্ট ফাইলে**, যার নাম `App.js`। যদিও আপনার সেটআপ এর উপর নির্ভর করে আপনার রুট কম্পোনেন্ট অন্য ফাইলেও থাকতে পারে। যদি আপনি ফাইল ভিত্তিক রাউটিং সহ কোন ফ্রেমওয়ার্ক ব্যবহার করেন, যেমন Next.js, তাহলে প্রতিটি পৃষ্ঠার জন্য আপনার রুট কম্পোনেন্ট ভিন্ন হবে।
 
 ## কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা {/*exporting-and-importing-a-component*/}
 
@@ -66,7 +66,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 
 export default function App() {
@@ -76,7 +76,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 function Profile() {
   return (
     <img
@@ -183,7 +183,7 @@ export default function App() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Gallery.js';
 
@@ -194,7 +194,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 export function Profile() {
   return (
     <img
@@ -268,7 +268,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Gallery.js';
 
@@ -281,7 +281,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js active
+```js src/Gallery.js active
 // Move me to Profile.js!
 export function Profile() {
   return (
@@ -304,7 +304,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 ```
 
 ```css
@@ -321,7 +321,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import { Profile } from './Profile.js';
 
@@ -335,7 +335,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import { Profile } from './Profile.js';
 
 export default function Gallery() {
@@ -350,7 +350,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export function Profile() {
   return (
     <img
@@ -371,7 +371,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Gallery from './Gallery.js';
 import Profile from './Profile.js';
 
@@ -385,7 +385,7 @@ export default function App() {
 }
 ```
 
-```js Gallery.js
+```js src/Gallery.js
 import Profile from './Profile.js';
 
 export default function Gallery() {
@@ -400,7 +400,7 @@ export default function Gallery() {
 }
 ```
 
-```js Profile.js
+```js src/Profile.js
 export default function Profile() {
   return (
     <img

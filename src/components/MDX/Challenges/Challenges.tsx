@@ -40,7 +40,10 @@ const parseChallengeContents = (
   let challenge: Partial<ChallengeContents> = {};
   let content: React.ReactElement[] = [];
   Children.forEach(children, (child) => {
-    const {props, type} = child;
+    const {props, type} = child as React.ReactElement<{
+      children?: string;
+      id?: string;
+    }>;
     switch ((type as any).mdxName) {
       case 'Solution': {
         challenge.solution = child;
@@ -78,7 +81,9 @@ export function Challenges({
   children,
   isRecipes,
   noTitle,
-  titleText = isRecipes ? 'Try out some examples' : 'Try out some challenges',
+  titleText = isRecipes
+    ? 'কিছু উদাহরণ চর্চা করুন'
+    : 'কিছু চ্যালেঞ্জ চর্চা করুন',
   titleId = isRecipes ? 'examples' : 'challenges',
 }: ChallengesProps) {
   const challenges = parseChallengeContents(children);
