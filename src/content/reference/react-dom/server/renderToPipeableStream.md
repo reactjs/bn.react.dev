@@ -471,7 +471,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 যদি shell এর *বাইরের* (অর্থাৎ কোনো `<Suspense>` boundary এর ভিতরে থাকা) কোনো component একটি error throw করে, React রেন্ডারিং থামাবে না। এর মানে `onError` callback ফায়ার হবে, কিন্তু তারপরও আপনি `onShellError` এর বদলে `onShellReady` পাবেন। কারণ React ওই error থেকে client এ রিকভার করার চেষ্টা করবে, [উপরে যেমন ব্যাখ্যা করা হয়েছে।](#recovering-from-errors-outside-the-shell)
 
-তবে চাইলে, কোনো কিছু error হয়েছে—এই তথ্যটি ব্যবহার করে আপনি status code সেট করতে পারেন:
+তবে চাইলে, কোনো কিছু error হয়েছে—এই তথ্যটি ব্যবহার করে আপনি স্ট্যাটাস কোড সেট করতে পারেন :
 
 ```js {1,6,16}
 let didError = false;
