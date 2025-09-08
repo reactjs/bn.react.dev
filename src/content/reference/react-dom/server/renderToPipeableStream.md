@@ -346,7 +346,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-`onShellReady` ফায়ার হওয়ার সময়ে, নেস্টেড `<Suspense>` boundary এর component গুলো তখনো data load করতে থাকতে পারে।
+`onShellReady` ফায়ার হওয়ার সময়ে, নেস্টেড `<Suspense>` বাউন্ডারি এর কম্পোনেন্টগুলো তখনো ডাটা লোড করতে থাকতে পারে।
 
 ---
 
