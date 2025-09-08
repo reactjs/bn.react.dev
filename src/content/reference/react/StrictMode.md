@@ -224,11 +224,7 @@ li {
 
 উপরের কোডে একটি ভুল রয়েছে। তবে, এটি লক্ষ্য করা সহজ নয় কারণ প্রাথমিক আউটপুট সঠিক মনে হয়।
 
-<<<<<<< HEAD
 এই ভুলটি আরও প্রকট হবে যদি `StoryTray` কম্পোনেন্টটি একাধিকবার রি-রেন্ডার হয়। উদাহরণস্বরূপ, চলুন দেখি যদি `StoryTray` আপনি এর উপরে মাউস নিয়ে গেলে ব্যাকগ্রাউন্ডের রঙ পরিবর্তন হয়ে পুনরায় রেন্ডার হয়:
-=======
-This mistake will become more noticeable if the `StoryTray` component re-renders multiple times. For example, let's make the `StoryTray` re-render with a different background color whenever you hover over it:
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 <Sandpack>
 
@@ -1247,11 +1243,7 @@ li {
 স্ট্রিক্ট মোড ছাড়া, আপনি অ্যাপে ক্লিক করে ভাঙা বৈশিষ্ট্যগুলি লক্ষ্য না করা পর্যন্ত বাগটি মিস করা সহজ ছিল। স্ট্রিক্ট মোড আপনি সেগুলি প্রোডাকশনে পুশ করার আগেই বাগগুলি সঙ্গে সঙ্গে প্রদর্শন করেছে।
 
 ---
-<<<<<<< HEAD
 ### স্ট্রিক্ট মোড দ্বারা সক্রিয় ডিপ্রিকেশন সতর্কতা সংশোধন করা {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
-=======
-### Fixing deprecation warnings enabled by Strict Mode {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
->>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 React সতর্ক করে দেয় যদি কোনো কম্পোনেন্ট `<StrictMode>` ট্রির মধ্যে থাকে এবং সেটি এই পুরাতন APIগুলির যেকোনো একটি ব্যবহার করে:
 
