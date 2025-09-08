@@ -541,7 +541,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-মনে রাখবেন, একবার shell emit হয়ে এবং streaming শুরু হয়ে গেলে আপনি আর status code পরিবর্তন করতে পারবেন না।
+মনে রাখবেন, একবার shell emit হয়ে এবং streaming শুরু হয়ে গেলে আপনি আর স্ট্যাটাস কোড পরিবর্তন করতে পারবেন না।
 
 ---
 
