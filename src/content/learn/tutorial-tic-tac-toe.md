@@ -283,11 +283,17 @@ CodeSandbox-এ আপনি তিনটি প্রধান section দে�
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
+<<<<<<< HEAD
 1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন   
 2. _Code Editor_ যেখানে আপনি যে file-টি select করেছেন সেটির source code দেখতে পাবেন 
 3. _Browser_ section যেখানে আপনি যে code-টি লিখেছেন সেটি browser-এ কেমন দেখাবে তা দেখতে পাবেন 
 
 Files section-এ `App.js` file-টি selected থাকা উচিত | _Code editor_-এ এই ফাইলটির content হলো:
+=======
+1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` in `src` folder and a folder called `public`
+1. The _code editor_ where you'll see the source code of your selected file
+1. The _browser_ section where you'll see how the code you've written will be displayed
+>>>>>>> d34c6a2c6fa49fc6f64b07aa4fa979d86d41c4e8
 
 
 ```jsx
