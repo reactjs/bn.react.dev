@@ -593,7 +593,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 ### Server rendering বাতিল করা {/*aborting-server-rendering*/}
 
-একটি নির্দিষ্ট সময় (timeout) পর আপনি server rendering কে জোর করে "হাল ছেড়ে দিতে" বাধ্য করতে পারেন:
+একটি নির্দিষ্ট সময় (timeout) পর আপনি সার্ভার রেন্ডারিং-কে জোর করে "হাল ছেড়ে দিতে" বাধ্য করতে পারেন:
 
 ```js {1,5-7}
 const { pipe, abort } = renderToPipeableStream(<App />, {
