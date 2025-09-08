@@ -545,13 +545,13 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 ---
 
-### Waiting for all content to load for crawlers and static generation {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
+### Crawlers এবং static generation এর জন্য সব কনটেন্ট লোড হওয়া পর্যন্ত অপেক্ষা করা {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
 
-Streaming offers a better user experience because the user can see the content as it becomes available.
+Streaming একটি ভালো user experience দেয় কারণ ইউজার কনটেন্ট প্রস্তুত হওয়ার সাথে সাথে তা দেখতে পারে।
 
-However, when a crawler visits your page, or if you're generating the pages at the build time, you might want to let all of the content load first and then produce the final HTML output instead of revealing it progressively.
+তবে, যখন কোনো crawler আপনার পেজ ভিজিট করে, অথবা আপনি build time এ পেজগুলো pre-generate করছেন, তখন আপনি ধাপে ধাপে দেখানোর বদলে আগে সব data লোড হতে দিয়ে সম্পূর্ণ final HTML একবারে তৈরি করতে চাইতে পারেন।
 
-You can wait for all the content to load using the `onAllReady` callback:
+`onAllReady` callback ব্যবহার করে আপনি সব কনটেন্ট লোড হওয়া পর্যন্ত অপেক্ষা করতে পারেন:
 
 
 ```js {2,7,11,18-24}
@@ -587,7 +587,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-A regular visitor will get a stream of progressively loaded content. A crawler will receive the final HTML output after all the data loads. However, this also means that the crawler will have to wait for *all* data, some of which might be slow to load or error. Depending on your app, you could choose to send the shell to the crawlers too.
+একজন সাধারণ ভিজিটর ধাপে ধাপে (progressively) লোড হওয়া কনটেন্টের stream পাবে। একটি crawler সব data লোড হওয়ার পর পুরো final HTML পাবে। তবে এর মানে crawler-কে *সব* data এর জন্য অপেক্ষা করতে হবে—এর কিছু হয়তো ধীরগতির বা error-প্রবণ হতে পারে। আপনার অ্যাপের ধরন অনুযায়ী চাইলে আপনি crawlers এর জন্যও শুধু shell পাঠাতে পারেন।
 
 ---
 
