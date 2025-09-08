@@ -443,11 +443,11 @@ function ProfilePage() {
 
 ---
 
-### Setting the status code {/*setting-the-status-code*/}
+### Status code সেট করা {/*setting-the-status-code*/}
 
-Streaming introduces a tradeoff. You want to start streaming the page as early as possible so that the user can see the content sooner. However, once you start streaming, you can no longer set the response status code.
+Streaming একটি tradeoff নিয়ে আসে। আপনি যত তাড়াতাড়ি সম্ভব পেজ streaming শুরু করতে চান যাতে ইউজার তাড়াতাড়ি কন্টেন্ট দেখতে পায়। তবে, একবার streaming শুরু করলে, আপনি আর response status code সেট করতে পারবেন না।
 
-By [dividing your app](#specifying-what-goes-into-the-shell) into the shell (above all `<Suspense>` boundaries) and the rest of the content, you've already solved a part of this problem. If the shell errors, you'll get the `onShellError` callback which lets you set the error status code. Otherwise, you know that the app may recover on the client, so you can send "OK".
+আপনার app কে [shell](#specifying-what-goes-into-the-shell) (সকল `<Suspense>` boundary এর উপরে) এবং বাকি content এ ভাগ করে, আপনি ইতিমধ্যে এই সমস্যার একটি অংশ সমাধান করেছেন। যদি shell এ error হয়, আপনি `onShellError` callback পাবেন যা আপনাকে error status code সেট করতে দেয়। অন্যথায়, আপনি জানেন যে app client এ recover হতে পারে, তাই আপনি "OK" পাঠাতে পারেন।
 
 ```js {4}
 const { pipe } = renderToPipeableStream(<App />, {
