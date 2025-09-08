@@ -368,7 +368,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-যদি আপনি একটি custom `onError` implementation প্রদান করেন, উপরের মতো console এ error log করতে ভুলবেন না।
+যদি আপনি একটি custom `onError` implementation প্রদান করেন, উপরের মতো কনসোল-এ error log করতে ভুলবেন না।
 
 ---
 
