@@ -445,7 +445,7 @@ function ProfilePage() {
 
 ### স্ট্যাটাস কোড সেট করা {/*setting-the-status-code*/}
 
-Streaming একটি tradeoff নিয়ে আসে। আপনি যত তাড়াতাড়ি সম্ভব পেজ streaming শুরু করতে চান যাতে ইউজার তাড়াতাড়ি কন্টেন্ট দেখতে পায়। তবে, একবার streaming শুরু করলে, আপনি আর response status code সেট করতে পারবেন না।
+Streaming একটি tradeoff নিয়ে আসে। আপনি যত তাড়াতাড়ি সম্ভব পেজ streaming শুরু করতে চান যাতে ইউজার তাড়াতাড়ি কন্টেন্ট দেখতে পায়। তবে, একবার streaming শুরু করলে, আপনি আর রেসপন্স স্ট্যাটাস কোড সেট করতে পারবেন না।
 
 আপনার app কে [shell](#specifying-what-goes-into-the-shell) (সকল `<Suspense>` boundary এর উপরে) এবং বাকি content এ ভাগ করে, আপনি ইতিমধ্যে এই সমস্যার একটি অংশ সমাধান করেছেন। যদি shell এ error হয়, আপনি `onShellError` callback পাবেন যা আপনাকে error status code সেট করতে দেয়। অন্যথায়, আপনি জানেন যে app client এ recover হতে পারে, তাই আপনি "OK" পাঠাতে পারেন।
 
