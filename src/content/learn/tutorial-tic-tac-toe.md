@@ -289,7 +289,6 @@ CodeSandbox-এ আপনি তিনটি প্রধান section দে�
 
 Files section-এ `App.js` file-টি selected থাকা উচিত | _Code editor_-এ এই ফাইলটির content হলো:
 
-
 ```jsx
 export default function Square() {
   return <button className="square">X</button>;
