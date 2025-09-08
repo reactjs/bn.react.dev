@@ -500,9 +500,9 @@ const { pipe } = renderToPipeableStream(<App />, {
 
 ---
 
-### Handling different errors in different ways {/*handling-different-errors-in-different-ways*/}
+### বিভিন্ন ধরনের error বিভিন্ন ভাবে হ্যান্ডেল করা {/*handling-different-errors-in-different-ways*/}
 
-You can [create your own `Error` subclasses](https://javascript.info/custom-errors) and use the [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) operator to check which error is thrown. For example, you can define a custom `NotFoundError` and throw it from your component. Then your `onError`, `onShellReady`, and `onShellError` callbacks can do something different depending on the error type:
+আপনি [নিজস্ব `Error` subclasses তৈরি করতে পারেন](https://javascript.info/custom-errors) এবং কোন error throw হয়েছে তা যাচাই করতে [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) অপারেটর ব্যবহার করতে পারেন। উদাহরণ হিসেবে, আপনি একটি custom `NotFoundError` ডিফাইন করে আপনার component থেকে throw করতে পারেন। তারপর আপনার `onError`, `onShellReady`, এবং `onShellError` callback গুলো error এর টাইপ অনুযায়ী ভিন্ন ভিন্ন কাজ করতে পারে:
 
 ```js {2,4-14,19,24,30}
 let didError = false;
@@ -541,7 +541,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-Keep in mind that once you emit the shell and start streaming, you can't change the status code.
+মনে রাখবেন, একবার shell emit হয়ে এবং streaming শুরু হয়ে গেলে আপনি আর status code পরিবর্তন করতে পারবেন না।
 
 ---
 
