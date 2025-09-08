@@ -443,7 +443,7 @@ function ProfilePage() {
 
 ---
 
-### Status code সেট করা {/*setting-the-status-code*/}
+### স্ট্যাটাস কোড সেট করা {/*setting-the-status-code*/}
 
 Streaming একটি tradeoff নিয়ে আসে। আপনি যত তাড়াতাড়ি সম্ভব পেজ streaming শুরু করতে চান যাতে ইউজার তাড়াতাড়ি কন্টেন্ট দেখতে পায়। তবে, একবার streaming শুরু করলে, আপনি আর response status code সেট করতে পারবেন না।
 
