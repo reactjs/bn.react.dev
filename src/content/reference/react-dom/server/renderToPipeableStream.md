@@ -469,9 +469,9 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-If a component *outside* the shell (i.e. inside a `<Suspense>` boundary) throws an error, React will not stop rendering. This means that the `onError` callback will fire, but you will still get `onShellReady` instead of `onShellError`. This is because React will try to recover from that error on the client, [as described above.](#recovering-from-errors-outside-the-shell)
+যদি shell এর *বাইরের* (অর্থাৎ কোনো `<Suspense>` boundary এর ভিতরে থাকা) কোনো component একটি error throw করে, React রেন্ডারিং থামাবে না। এর মানে `onError` callback ফায়ার হবে, কিন্তু তারপরও আপনি `onShellError` এর বদলে `onShellReady` পাবেন। কারণ React ওই error থেকে client এ রিকভার করার চেষ্টা করবে, [উপরে যেমন ব্যাখ্যা করা হয়েছে।](#recovering-from-errors-outside-the-shell)
 
-However, if you'd like, you can use the fact that something has errored to set the status code:
+তবে চাইলে, কোনো কিছু error হয়েছে—এই তথ্যটি ব্যবহার করে আপনি status code সেট করতে পারেন:
 
 ```js {1,6,16}
 let didError = false;
@@ -496,7 +496,7 @@ const { pipe } = renderToPipeableStream(<App />, {
 });
 ```
 
-This will only catch errors outside the shell that happened while generating the initial shell content, so it's not exhaustive. If knowing whether an error occurred for some content is critical, you can move it up into the shell.
+এটি শুধুমাত্র initial shell কনটেন্ট তৈরি হওয়ার সময় shell-এর *বাইরে* ঘটে যাওয়া error গুলো ধরবে, তাই এটি পূর্ণাঙ্গ (exhaustive) নয়। যদি কোনো নির্দিষ্ট কনটেন্টে error হয়েছে কি না জানা অত্যন্ত গুরুত্বপূর্ণ হয়, তাহলে সেই কনটেন্টকে shell-এর ভেতরে নিয়ে আসুন।
 
 ---
 
