@@ -4,7 +4,7 @@ title: useSyncExternalStore
 
 <Intro>
 
-`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
+`useSyncExternalStore` একটি রিয়েক্ট হুক যা আপনাকে একটি এক্সটার্নাল স্টোরে সাবস্ক্রাইব করতে দেয়।
 
 ```js
 const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
