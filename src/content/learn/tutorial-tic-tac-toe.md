@@ -1,31 +1,31 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'টিউটোরিয়াল: টিক-ট্যাক-টো'
 ---
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+এই টিউটোরিয়ালের সময় আপনি একটি ছোট টিক-ট্যাক-টো গেম তৈরি করবেন। এই টিউটোরিয়ালটি কোন পূর্বের  React জ্ঞান অনুমান করে না। টিউটোরিয়ালে আপনি যে কৌশলগুলি শিখবেন তা যেকোন React অ্যাপ তৈরির জন্য অপরিহার্য, এবং এটি সম্পূর্ণরূপে বোঝা আপনাকে React সম্পর্কে গভীর ধারণা দেবে।
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+এই টিউটোরিয়ালটি এমন লোকদের জন্য ডিজাইন করা হয়েছে যারা **কাজ করে শিখতে** পছন্দ করেন এবং দ্রুত কিছু তৈরি করার চেষ্টা করতে চান। আপনি যদি প্রতিটি ধারণা ধাপে ধাপে শিখতে পছন্দ করেন, তাহলে [Describing the UI.](/learn/describing-the-ui) দিয়ে শুরু করুন।
 
 </Note>
 
-The tutorial is divided into several sections:
+টিউটোরিয়ালটি কয়েকটি বিভাগে বিভক্ত:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [টিউটোরিয়ালের জন্য সেটআপ](#setup-for-the-tutorial) আপনাকে টিউটোরিয়ালটি অনুসরণ করার জন্য **একটি শুরুর ধাপ** দেবে।
+- [সংক্ষিপ্ত বিবরণ](#overview) আপনাকে React-এর **মৌলিক বিষয়গুলি** যথা: components, props এবং state সম্পর্কে শেখাবে|
+- [গেমটি সম্পূর্ণ করা](#completing-the-game) আপনাকে React Development-এর **সবচেয়ে সাধারণ কৌশলগুলি** শেখাবে।
+- [সময়ে ভ্রমন্ করা](#adding-time-travel) আপনাকে React-এর অনন্য শক্তিসমূহ সম্পর্কে **গভীর দৃষ্টি** দেবে ।
 
-### What are you building? {/*what-are-you-building*/}
+### আপনি কি বানাবেন? {/*what-are-you-building*/}
 
-In this tutorial, you'll build an interactive tic-tac-toe game with React.
+এই টিউটোরিয়ালে, আপনি React-এর সাহায্যে একটি ইন্টারেক্টিভ টিক-ট্যাক-টো গেম তৈরি করবেন।
 
-You can see what it will look like when you're finished here:
+গেমটির অন্তিম রূপ আপনি এখানে দেখতে পাচ্ছেন:
 
 <Sandpack>
 
@@ -194,15 +194,15 @@ body {
 
 </Sandpack>
 
-If the code doesn't make sense to you yet, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+যদি কোডটি এখনও আপনার কাছে বোধগম্য না হয়, বা আপনি যদি কোডের syntax সাথে অপরিচিত হন তবে চিন্তা করবেন না! এই টিউটোরিয়ালের লক্ষ্য হল আপনাকে React এবং এর syntax বুঝতে সাহায্য করা।
 
-We recommend that you check out the tic-tac-toe game above before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+আমরা সুপারিশ করছি যে আপনি টিউটোরিয়ালটি শুরু করার আগে উপরের টিক-ট্যাক-টো গেমটি দেখুন। আপনি যে বৈশিষ্ট্যগুলি লক্ষ্য করবেন তাদের মধ্যে একটি হল গেমের বোর্ডের ডানদিকে একটি সংখ্যাযুক্ত তালিকা রয়েছে। এই তালিকাটি আপনাকে গেমটিতে ঘটে যাওয়া সমস্ত পদক্ষেপের একটি ইতিহাস দেয় এবং গেমটি অগ্রসর হওয়ার সাথে সাথে এটি update হয়।
 
-Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+আপনার একবার টিকে-টাক-টো গেমটি খেলা হয় গেলে আপনি পরবর্তী পর্যায়ে স্ক্রল করুন । আপনি এই টিউটোরিয়াল একটি সহজ টেমপ্লেট দিয়ে শুরু করবেন। আমাদের পরবর্তী পদক্ষেপ হল আপনাকে সেট আপ করা যাতে আপনি গেমটি তৈরি করা শুরু করতে পারেন।
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## টিউটোরিয়ালের জন্য সেটআপ {/*setup-for-the-tutorial*/}
 
-In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
+নীচের লাইভ কোড এডিটরে, CodeSandbox ওয়েবসাইট ব্যবহার করে সম্পাদকটিকে একটি নতুন ট্যাবে খুলতে উপরের-ডানদিকের কোণায় **Fork**-এ ক্লিক করুন। CodeSandbox আপনাকে আপনার Browser-এ কোড লিখতে দেয় এবং আপনার তৈরি করা অ্যাপটি কীভাবে দেখাবে তার preview দেখতে দেয়। নতুন ট্যাবে এই টিউটোরিয়ালের জন্য একটি খালি বর্গক্ষেত্র এবং starter code প্রদর্শন করা উচিত।
 
 <Sandpack>
 
@@ -261,7 +261,7 @@ body {
 
 <Note>
 
-You can also follow this tutorial using your local development environment. To do this, you need to:
+আপনি এই টিউটোরিয়ালটি নিজের local development environment ব্যবহার করে ও follow করতে পারেন। এর জন্য আপনাকে নিচের steps-গুলো follow করতে হবে:
 
 1. Install [Node.js](https://nodejs.org/en/)
 1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **Download Sandbox** in that menu to download an archive of the files locally
@@ -269,25 +269,25 @@ You can also follow this tutorial using your local development environment. To d
 1. Install the dependencies with `npm install`
 1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
 
-If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
+আপনি আটকে গেলে, এটি আপনাকে থামাতে দেবেন না! পরিবর্তে online follow করুন এবং পরে আবার একটি local setup চেষ্টা করুন।
 
 </Note>
 
 ## Overview {/*overview*/}
 
-Now that you're set up, let's get an overview of React!
+আপনার সেটআপ সম্পূর্ণ হয়েছে, চলুন react  সম্পর্কে ধারণা লাভ করি!
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### Starter Code পরিদর্শন {/*inspecting-the-starter-code*/}
 
-In CodeSandbox you'll see three main sections:
+CodeSandbox-এ আপনি তিনটি প্রধান section দেখতে পাবেন:
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` and a folder called `public`
-1. The _code editor_ where you'll see the source code of your selected file
-1. The _browser_ section where you'll see how the code you've written will be displayed
+1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন   
+2. _Code Editor_ যেখানে আপনি যে file-টি select করেছেন সেটির source code দেখতে পাবেন 
+3. _Browser_ section যেখানে আপনি যে code-টি লিখেছেন সেটি browser-এ কেমন দেখাবে তা দেখতে পাবেন 
 
-The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
+Files section-এ `App.js` file-টি selected থাকা উচিত | _Code editor_-এ এই ফাইলটির content হলো:
 
 ```jsx
 export default function Square() {
@@ -299,11 +299,11 @@ The _browser_ section should be displaying a square with an X in it like this:
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
-Now let's have a look at the files in the starter code.
+এখন starter code-এ উপস্থিত file-গুলোকে দেখে নেওয়া যাক।     
 
 #### `App.js` {/*appjs*/}
 
-The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+`App.js` file-এ উপস্থিত code একটি _component_ তৈরী করে| React-এ component হলো পুনরায় ব্যবহারযোগ্য code যা user  interface-এর একটি অংশকে নির্দেশ করে| আপনার Application-এর UI elements-গুলোকে render, manage, এবং update করতে components ব্যবহার করা হয়| Component-টির মধ্যে কি হচ্ছে বুঝতে component-টির এক এক করে প্রতিটি লাইন দেখে নেওয়া যাক:  
 
 ```js {1}
 export default function Square() {
@@ -311,7 +311,7 @@ export default function Square() {
 }
 ```
 
-The first line defines a function called `Square`. The `export` JavaScript keyword makes this function accessible outside of this file. The `default` keyword tells other files using your code that it's the main function in your file.
+প্রথম লাইনটি `Square` নামক function define করছে| JavaScript-এর `export` keyword-টি এই function-টিকে এই file-এর বাইরে অর্থাৎ অন্য file-এ accessible করে| default কীওয়ার্ডটি অন্যান্য ফাইলগুলিকে আপনার কোডে বলে দেয় যে এটি আপনার ফাইলের main function।
 
 ```js {2}
 export default function Square() {
@@ -319,15 +319,15 @@ export default function Square() {
 }
 ```
 
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+দ্বিতীয় লাইনটি একটি button return করে। JavaScript-এর `return` কীওয়ার্ডটি বোঝায় যে এর পরে যা আসবে, তা function caller-এর value হিসাবে return করা হয়। `<button>` হল একটি *JSX element*। JSX element হল JavaScript code এবং HTML tag-গুলির সমন্বয়, যা বর্ণনা করে আপনি প্রদর্শনের জন্য কি দেখাতে চান। `className="square"` হল একটি button property বা *prop*, যা CSS-কে বলে button-টিকে কিভাবে style করতে হবে। `X` হল বাটনের ভিতরে প্রদর্শিত text এবং `</button>` JSX element-টিকে বন্ধ করে, এবং এর থেকে বোঝা যায় যে পরবর্তী কোনো component button-এর ভিতরে রাখা হবে না।
 
 #### `styles.css` {/*stylescss*/}
 
-Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+CodeSandbox-এর _Files_ section-এ চিহ্নিত `styles.css` নামক ফাইলটিতে ক্লিক করুন। এই ফাইলটি আপনার React app-এর জন্য styles বর্ণনা করে। প্রথম দুটি _CSS selectors_ (`*` এবং `body`) আপনার অ্যাপের বড় অংশের স্টাইল বর্ণনা করে, যেখানে যেকোনো component-এ যেখানে যেখানে `className` property-টি সেট করা হয়েছে `square`, সেখানকার style `.square` selector দ্বারা বর্ণনা করা হয়। আপনার কোডে, এটি `App.js` file-এর আপনার Square component-এর button-এর style-এর সাথে মিলে যাবে।
 
 #### `index.js` {/*indexjs*/}
 
-Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+CodeSandbox-এর _Files_ section-এ চিহ্নিত `index.js` নামক ফাইলটিতে ক্লিক করুন। টিউটোরিয়ালের সময়ে আপনি এই ফাইলটি edit করবেন না, কিন্তু এটি আপনার `App.js` ফাইলে তৈরি করা component এবং web browser-এর মধ্যে মধ্যস্থতা করে।
 
 ```jsx
 import { StrictMode } from 'react';

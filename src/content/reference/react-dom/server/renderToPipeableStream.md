@@ -431,7 +431,7 @@ function ProfilePage() {
 }
 ```
 
-যদি `Posts` component বা এর ভিতরে কোথাও একটি error ঘটে, React [এর থেকে রিকভার করার চেষ্টা করবেঃ](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content)
+যদি `Posts` component বা এর ভিতরে কোথাও একটি error ঘটে, React [এর থেকে রিকভার করার চেষ্টা করবেঃ](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
 
 1. এটি নিকটতম `<Suspense>` boundary (`PostsGlimmer`) এর জন্য loading fallback HTML এ emit করবে।
 2. এটি আর সার্ভারে `Posts` কনটেন্ট রেন্ডার করার চেষ্টা করবে না।
