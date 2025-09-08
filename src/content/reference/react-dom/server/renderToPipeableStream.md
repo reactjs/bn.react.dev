@@ -605,4 +605,4 @@ setTimeout(() => {
 }, 10000);
 ```
 
-React বাকি যেসব loading fallback আছে সেগুলোকে HTML আকারে flush করবে এবং বাকিটা client এ render করার চেষ্টা করবে।
+React বাকি যেসব loading fallback আছে সেগুলোকে HTML আকারে flush করবে এবং বাকিটা ক্লায়েন্ট-এ রেন্ডার করার চেষ্টা করবে।
