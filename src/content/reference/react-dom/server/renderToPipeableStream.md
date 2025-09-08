@@ -389,7 +389,7 @@ function ProfilePage() {
 }
 ```
 
-যদি এই component গুলো render করার সময় error হয়, React এর client এ পাঠানোর জন্য কোনো বোধগম্য HTML থাকবে না। শেষ অবলম্বন হিসেবে server rendering এ নির্ভর করে না এমন একটি fallback HTML পাঠাতে `onShellError` override করুনঃ
+যদি এই কম্পোনেন্টগুলো রেন্ডার করার সময় error হয়, React এর ক্লায়েন্ট-এ পাঠানোর জন্য কোনো বোধগম্য HTML থাকবে না। শেষ অবলম্বন হিসেবে সার্ভার রেন্ডারিং-এ নির্ভর করে না এমন একটি fallback HTML পাঠাতে `onShellError` override করুনঃ
 
 ```js {7-11}
 const { pipe } = renderToPipeableStream(<App />, {
