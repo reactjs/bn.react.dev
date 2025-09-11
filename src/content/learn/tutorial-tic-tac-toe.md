@@ -338,20 +338,20 @@ import './styles.css';
 import App from './App';
 ```
 
-Lines 1-5 bring all the necessary pieces together: 
+লাইন ১-৫ প্রয়োজনীয় সবকিছু একত্রিত করে:  
 
 * React
-* React's library to talk to web browsers (React DOM)
-* the styles for your components
-* the component you created in `App.js`.
+* ওয়েব ব্রাউজারের সাথে কথা বলার জন্য React-এর লাইব্রেরি (React DOM)  
+* আপনার কম্পোনেন্টগুলির জন্য স্টাইলস  
+* আপনি `App.js`-এ যে কম্পোনেন্ট তৈরি করেছেন।
 
-The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
+ফাইলের বাকি অংশ সবকিছু একত্রিত করে এবং `public` ফোল্ডারের `index.html`-এ ফাইনাল প্রোডাক্ট ইনজেক্ট করে।  
 
-### Building the board {/*building-the-board*/}
+### বোর্ড তৈরি করা {/*building-the-board*/}
 
-Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
+চলুন আবার `App.js`-এ ফিরে যাই। এখানেই আপনি টিউটোরিয়ালের বাকি অংশ কাটাবেন। 
 
-Currently the board is only a single square, but you need nine! If you just try and copy paste your square to make two squares like this:
+বর্তমানে বোর্ডটি কেবল একটি স্কোয়ার, কিন্তু আপনার নয়টি দরকার! যদি আপনি শুধু আপনার স্কোয়ারটি কপি-পেস্ট করে দুটি স্কোয়ার তৈরি করার চেষ্টা করেন, যেমন:  
 
 ```js {2}
 export default function Square() {
@@ -359,15 +359,15 @@ export default function Square() {
 }
 ```
 
-You'll get this error:
+আপনি এই এররটি পাবেন:
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
+/src/App.js: Adjacent JSX এলিমেন্ট অবশ্যই enclosing ট্যাগ এ wrap করা থাকতে হবে। আপনি কি একটি JSX Fragment `<>...</>` চান?
 
 </ConsoleBlock>
 
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+React কম্পোনেন্টগুলিকে অবশ্যই একটি একক JSX এলিমেন্ট ফেরত দিতে হবে, একাধিক পাশাপাশি JSX এলিমেন্ট (যেমন দুটি বাটন) নয়। এটি ঠিক করতে আপনি *Fragments* (`<>` এবং `</>`) ব্যবহার করতে পারেন একাধিক পাশাপাশি JSX এলিমেন্ট মোড়ানোর জন্য, যেমন:
 
 ```js {3-6}
 export default function Square() {
@@ -380,17 +380,17 @@ export default function Square() {
 }
 ```
 
-Now you should see:
+এখন আপনি দেখবেন:
 
 ![two x-filled squares](../images/tutorial/two-x-filled-squares.png)
 
-Great! Now you just need to copy-paste a few times to add nine squares and...
+দারুণ! এখন আপনাকে শুধু কয়েকবার কপি-পেস্ট করতে হবে নয়টি স্কোয়ার যোগ করার জন্য এবং...
 
 ![nine x-filled squares in a line](../images/tutorial/nine-x-filled-squares.png)
 
-Oh no! The squares are all in a single line, not in a grid like you need for our board. To fix this you'll need to group your squares into rows with `div`s and add some CSS classes. While you're at it, you'll give each square a number to make sure you know where each square is displayed.
+ওহ না! সব স্কোয়ার এক লাইনে রয়েছে, আমাদের বোর্ডের মতো গ্রিড আকারে নয়। এটি ঠিক করতে হলে আপনাকে আপনার স্কোয়ারগুলোকে `div` দিয়ে রো-তে গ্রুপ করতে হবে এবং কিছু CSS ক্লাস যোগ করতে হবে। এই সময়ে, আপনি প্রতিটি স্কোয়ারকে একটি নাম্বার দেবেন যাতে আপনি নিশ্চিত হতে পারেন প্রতিটি স্কোয়ার কোথায় প্রদর্শিত হচ্ছে।
 
-In the `App.js` file, update the `Square` component to look like this:
+`App.js` ফাইলে, `Square` কম্পোনেন্ট আপডেট করুন এভাবে দেখানোর জন্য:
 
 ```js {3-19}
 export default function Square() {
