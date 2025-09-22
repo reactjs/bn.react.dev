@@ -161,7 +161,11 @@ function CheckoutForm() {
 }
 ```
 
+<<<<<<< HEAD
 `startTransition` এ পাস করা ফাংশনটিকে "Action" বলা হয়। আপনি একটি Action এর মধ্যে state আপডেট করতে এবং (ঐচ্ছিকভাবে) side effects সম্পাদন করতে পারেন, এবং পৃষ্ঠায় ব্যবহারকারীর ইন্টারঅ্যাকশনগুলি ব্লক না করে এই কাজটি ব্যাকগ্রাউন্ডে করা হবে। একটি Transition একাধিক Actions অন্তর্ভুক্ত করতে পারে, এবং যখন একটি Transition চলমান থাকে, আপনার UI রেস্পন্সিভ থাকে। উদাহরণস্বরূপ, যদি ব্যবহারকারী একটি ট্যাবে ক্লিক করে কিন্তু তারপর তাদের মন পরিবর্তন করে এবং অন্য ট্যাবে ক্লিক করে, তাহলে প্রথম আপডেট শেষ হওয়ার জন্য অপেক্ষা না করে দ্বিতীয় ক্লিকটি তাৎক্ষণিকভাবে পরিচালনা করা হবে।
+=======
+The function passed to `startTransition` is called the "Action". You can update state and (optionally) perform side effects within an Action, and the work will be done in the background without blocking user interactions on the page. A Transition can include multiple Actions, and while a Transition is in progress, your UI stays responsive. For example, if the user clicks a tab but then changes their mind and clicks another tab, the second click will be immediately handled without waiting for the first update to finish.
+>>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 চলমান Transitions সম্পর্কে ব্যবহারকারীকে ফিডব্যাক দিতে, `isPending` state `startTransition` এর প্রথম কল এ `true` হয়ে যায়, এবং সমস্ত Actions সম্পূর্ণ হওয়া এবং চূড়ান্ত state ব্যবহারকারীকে দেখানো পর্যন্ত `true` থাকে। Transitions [অবাঞ্ছিত লোডিং ইন্ডিকেটর প্রতিরোধ করতে](#preventing-unwanted-loading-indicators) Actions এর side effects ক্রমানুসারে সম্পূর্ণ করা নিশ্চিত করে, এবং আপনি `useOptimistic` দিয়ে Transition চলাকালীন তাৎক্ষণিক ফিডব্যাক প্রদান করতে পারেন।
 
@@ -597,7 +601,7 @@ export default function TabButton({ action, children, isActive }) {
     <button onClick={() => {
       startTransition(async () => {
         // await the action that's passed in.
-        // This allows it to be either sync or async. 
+        // This allows it to be either sync or async.
         await action();
       });
     }}>
@@ -664,7 +668,7 @@ export default function TabButton({ action, children, isActive }) {
     <button onClick={async () => {
       startTransition(async () => {
         // await the action that's passed in.
-        // This allows it to be either sync or async. 
+        // This allows it to be either sync or async.
         await action();
       });
     }}>
@@ -682,7 +686,7 @@ export default function AboutTab() {
 }
 ```
 
-```js src/PostsTab.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -742,7 +746,7 @@ b { display: inline-block; margin-right: 10px; }
 
 <Note>
 
-When exposing an `action` prop from a component, you should `await` it inside the transition. 
+When exposing an `action` prop from a component, you should `await` it inside the transition.
 
 This allows the `action` callback to be either synchronous or asynchronous without requiring an additional `startTransition` to wrap the `await` in the action.
 
@@ -837,7 +841,7 @@ export default function AboutTab() {
 }
 ```
 
-```js src/PostsTab.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -1805,7 +1809,7 @@ export default function App({}) {
   const [isPending, startTransition] = useTransition();
   // Store the actual quantity in separate state to show the mismatch.
   const [clientQuantity, setClientQuantity] = useState(1);
-  
+
   const updateQuantityAction = newQuantity => {
     setClientQuantity(newQuantity);
 
@@ -1840,7 +1844,7 @@ export default function Item({action}) {
     startTransition(async () => {
       await action(e.target.value);
     });
-  }  
+  }
   return (
     <div className="item">
       <span>Eras Tour Tickets</span>
@@ -2006,7 +2010,7 @@ export default function Item({action}) {
     startTransition(() => {
       action(e.target.value);
     });
-  }  
+  }
   return (
     <div className="item">
       <span>Eras Tour Tickets</span>
