@@ -149,11 +149,7 @@ console.timeEnd('filter array');
 
 #### আপনি কি সর্বত্র useMemo যোগ করবেন? {/*should-you-add-usememo-everywhere*/}
 
-<<<<<<< HEAD
 আপনার অ্যাপ যদি এই সাইটের মতো হয়, এবং বেশিরভাগ ইন্টার‌্যাকশন স্থূল (যেমন একটি পৃষ্ঠা বা একটি পুরো সেকশন রিপ্লেস করা) হয়, তাহলে সাধারণত মেমোইজেশন অপ্রয়োজনীয়। অন্যদিকে, যদি আপনার অ্যাপ একটি ড্রয়িং এডিটরের মতো হয়, এবং বেশিরভাগ ইন্টার‌্যাকশন সূক্ষ্ম (যেমন আকৃতি সরানো) হয়, তাহলে আপনি মেমোইজেশনকে খুবই উপকারী মনে করতে পারেন।
-=======
-If your app is like this site, and most interactions are coarse (like replacing a page or an entire section), memoization is usually unnecessary. On the other hand, if your app is more like a drawing editor, and most interactions are granular (like moving shapes), then you might find memoization very helpful.
->>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 `useMemo` এর মাধ্যমে অপ্টিমাইজেশন কেবল কয়েকটি ক্ষেত্রে মূল্যবান:
 
