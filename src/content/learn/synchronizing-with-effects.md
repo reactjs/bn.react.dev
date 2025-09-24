@@ -618,17 +618,9 @@ React ইচ্ছাকৃতভাবে আপনার কম্পোনে
   
 যখন ইউজার navigate করে চলে যায়, connection তখনও বন্ধ হয়না এবং যখন তারা আবার ফিরে আসে, একটি নতুন connection তৈরি হয়। User যখন app জুড়ে navigate করে, connection গুলো জমতে থাকবে, ঠিক যেমনটি এই "fix" এর আগে জমতে থাকতো।
 
-<<<<<<< HEAD
 Bug টি fix করতে, শুধুমাত্র Effect কে একবার run করানোই যথেষ্ট নয়। Effect কে re-mounting এর পর কাজ করতে হবে, যার মানে হলো connection কে উপরের solution এর মতো clean up করতে হবে।
   
 কমন pattern গুলো কীভাবে handle করতে হয় তার জন্য নিচের উদাহরণগুলো দেখুন।
-=======
-When the user navigates away, the connection still isn't closed and when they navigate back, a new connection is created. As the user navigates across the app, the connections would keep piling up, the same as it would before the "fix".
-
-To fix the bug, it is not enough to just make the Effect run once. The effect needs to work after re-mounting, which means the connection needs to be cleaned up like in the solution above.
-
-See the examples below for how to handle common patterns.
->>>>>>> 366b5fbdadefecbbf9f6ef36c0342c083248c691
 
 </Pitfall>
 
