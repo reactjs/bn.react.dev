@@ -201,7 +201,7 @@ Effect হল React এর জগত থেকে একটি escape hatch। �
 
 উদাহরণস্বরূপ, একটা state এর উপর নির্ভর করে আরেকটা state পরিবর্তন করতে আপনার Effect এর প্রয়োজন নেইঃ
 
-```js {5-9}
+```js {expectedErrors: {'react-compiler': [8]}} {5-9}
 function Form() {
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');

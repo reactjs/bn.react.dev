@@ -49,7 +49,7 @@ function Tooltip() {
 
 * `setup`: যা আপনার Effect এর লজিক সহ ফাংশন। আপনার এই setup ফাংশন প্রয়োজনে একটি *cleanup* ফাংশন রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM-এ যোগ করার আগে, React আপনার setup ফাংশন চালাবে। প্রতিটি রি-রেন্ডার করার পর যেখানে ডিপেন্ডেন্সিগুলি পরিবর্তিত হয়েছে, React প্রথমে পুরোনো মানগুলির সাথে cleanup ফাংশন চালাবে (যদি আপনি তা প্রদান করেন), এবং তারপর নতুন মানগুলির সাথে setup ফাংশন চালাবে। DOM থেকে আপনার কম্পোনেন্ট সরানোর আগে, React আপনার cleanup ফাংশন চালাবে।
 
-* **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিঅ্যাক্টিভ ভ্যালুর তালিকা। রিঅ্যাক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিঅ্যাক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে উল্লেখ করা আছে। ডিপেন্ডেন্সিগুলির তালিকায় অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং এটি `[dep1, dep2, dep3]` এর মতো ইনলাইনে থাকতে হবে। React প্রতিটি ডিপেন্ডেন্সিকে এর পূর্ববর্তী মানের সাথে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) কোম্পারিসন অ্যালগরিদম ব্যবহার করে তুলনা করবে। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তবে কম্পোনেন্টের প্রতিটি রি-রেন্ডার করার পর আপনার Effect পুনরায় চালু হবে।
+* **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিঅ্যাক্টিভ ভ্যালুর তালিকা। রিঅ্যাক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিঅ্যাক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে উল্লেখ করা আছে। ডিপেন্ডেন্সিগুলির তালিকায় অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং এটি `[dep1, dep2, dep3]` এর মতো ইনলাইনে থাকতে হবে। React প্রতিটি ডিপেন্ডেন্সিকে এর পূর্ববর্তী মানের সাথে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm ব্যবহার করে তুলনা করবে। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তবে কম্পোনেন্টের প্রতিটি রি-রেন্ডার করার পর আপনার Effect পুনরায় চালু হবে।
 
 #### রিটার্নস {/*returns*/}
 
@@ -87,7 +87,8 @@ function Tooltip() {
 
 **এই সবকিছু ব্রাউজারের স্ক্রিন পুনরায় পেইন্ট হওয়ার আগে ঘটতে হবে।** আপনি নিশ্চয়ই চান না যে ব্যবহারকারী টুলটিপটি সরতে দেখুক। তাই ব্রাউজারের স্ক্রিন পুনরায় পেইন্ট হওয়ার আগে লেআউটের মাপজোক সম্পন্ন করতে `useLayoutEffect` কল করুন।
 
-```js {5-8}
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [7]}} {5-8}
 function Tooltip() {
   const ref = useRef(null);
   const [tooltipHeight, setTooltipHeight] = useState(0); // You don't know real height yet
@@ -187,7 +188,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -337,7 +339,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -484,7 +487,8 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+{/* TODO(@poteto) - fixed by https://github.com/facebook/react/pull/34462. need a new release */}
+```js {expectedErrors: {'react-compiler': [11]}} src/Tooltip.js active
 import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
@@ -627,7 +631,7 @@ export default function ButtonWithTooltip({ tooltipContent, ...rest }) {
 }
 ```
 
-```js src/Tooltip.js active
+```js {expectedErrors: {'react-compiler': [10, 11]}} src/Tooltip.js active
 import { useRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import TooltipContainer from './TooltipContainer.js';
