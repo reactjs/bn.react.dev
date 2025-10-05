@@ -50,7 +50,7 @@ import { createPortal } from 'react-dom';
 
 * `domNode`: কিছু DOM নোড, যেমন `document.getElementById()` দ্বারা ফেরত আসা নোডগুলি। নোডটি ইতোমধ্যে বিদ্যমান থাকতে হবে। আপডেটের সময় ভিন্ন DOM নোড পাস করা হলে পোর্টাল কন্টেন্ট পুনরায় তৈরি করা হবে।
 
-* **ঐচ্ছিক** `key`: পোর্টালের [কী](/learn/rendering-lists/#keeping-list-items-in-order-with-key) হিসাবে ব্যবহার করার জন্য একটি অনন্য স্ট্রিং বা সংখ্যা।
+* **ঐচ্ছিক** `key`: পোর্টালের [কী](/learn/rendering-lists#keeping-list-items-in-order-with-key) হিসাবে ব্যবহার করার জন্য একটি অনন্য স্ট্রিং বা সংখ্যা।
 
 #### রিটার্নস {/*returns*/}
 
@@ -240,8 +240,7 @@ export default function ModalContent({ onClose }) {
 
 পোর্টাল ব্যবহার করার সময় আপনার অ্যাপটি অ্যাক্সেসিবল হওয়া নিশ্চিত করা গুরুত্বপূর্ণ। উদাহরণস্বরূপ, আপনাকে কীবোর্ড ফোকাস পরিচালনা করতে হতে পারে যাতে ব্যবহারকারী স্বাভাবিকভাবে পোর্টালের ভিতরে এবং বাইরে ফোকাস নড়াতে পারে।
 
-মডাল তৈরি করার সময় [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/#dialog_modal) অনুসরণ করুন। যদি আপনি কোনো কমিউনিটি প্যাকেজ ব্যবহার করেন, নিশ্চিত করুন যে এটি অ্যাক্সেসিবল এবং এই নির্দেশিকাগুলি অনুসরণ করে।
-
+মডাল তৈরি করার সময় [WAI-ARIA Modal Authoring Practices](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal) অনুসরণ করুন। যদি আপনি কোনো কমিউনিটি প্যাকেজ ব্যবহার করেন, নিশ্চিত করুন যে এটি অ্যাক্সেসিবল এবং এই নির্দেশিকাগুলি অনুসরণ করে।
 </Pitfall>
 
 ---
@@ -252,7 +251,7 @@ export default function ModalContent({ onClose }) {
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>

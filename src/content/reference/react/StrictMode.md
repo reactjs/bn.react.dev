@@ -44,6 +44,7 @@ root.render(
 
 - আপনার কম্পোনেন্টগুলি impure রেন্ডারিং এর কারণে সৃষ্ট বাগ খুঁজে পেতে [একটি অতিরিক্ত সময় রেন্ডার হবে](#fixing-bugs-found-by-double-rendering-in-development)।
 - আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
+- আপনার কম্পোনেন্টগুলি রেফ ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [রেফ কলব্যাকগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-ref-callbacks-in-development)।
 - আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
 
 #### প্রপ্স {/*props*/}
@@ -87,6 +88,7 @@ root.render(
 
 - আপনার কম্পোনেন্টগুলি impure রেন্ডারিং এর কারণে সৃষ্ট বাগ খুঁজে পেতে [একটি অতিরিক্ত সময় রেন্ডার হবে](#fixing-bugs-found-by-double-rendering-in-development)।
 - আপনার কম্পোনেন্টগুলি ইফেক্ট ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [ইফেক্টগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-effects-in-development)।
+- আপনার কম্পোনেন্টগুলি রেফ ক্লিনআপ মিস হবার কারণে সৃষ্ট বাগ খুঁজে পেতে [রেফ কলব্যাকগুলি একটি অতিরিক্ত সময় চালাবে](#fixing-bugs-found-by-re-running-ref-callbacks-in-development)।
 - আপনার কম্পোনেন্টগুলি [deprecated এপিআই ব্যবহারের জন্য পরীক্ষা করা হবে](#fixing-deprecation-warnings-enabled-by-strict-mode)।
 
 **এই সকল চেক শুধুমাত্র ডেভেলপমেন্টেই কাজ করে এবং প্রডাকশন বিল্ডে কোন প্রভাব ফেলে না।**
@@ -119,6 +121,12 @@ function App() {
 ```
 
 এই উদাহরণে, Strict Mode চেকগুলি `Header` এবং `Footer` কম্পোনেন্টগুলির বিরুদ্ধে চালানো হবে না। তবে, `Sidebar` এবং `Content`, সেই সাথে তাদের ভেতরে থাকা সমস্ত কম্পোনেন্টগুলিতে, যত গভীরেই হোক না কেন, চেকগুলি চালানো হবে।
+
+<Note>
+
+When `StrictMode` is enabled for a part of the app, React will only enable behaviors that are possible in production. For example, if `<StrictMode>` is not enabled at the root of the app, it will not [re-run Effects an extra time](#fixing-bugs-found-by-re-running-effects-in-development) on initial mount, since this would cause child effects to double fire without the parent effects, which cannot happen in production.
+
+</Note>
 
 ---
 
@@ -826,13 +834,419 @@ button { margin-left: 10px; }
 
 ---
 
+### ডেভেলপমেন্টে রেফ কলব্যাক পুনরায় চালানোর মাধ্যমে পাওয়া বাগগুলি সংশোধন করা {/*fixing-bugs-found-by-re-running-ref-callbacks-in-development*/}
+
+স্ট্রিক্ট মোড [কলব্যাক রেফগুলিতে](/learn/manipulating-the-dom-with-refs) বাগ খুঁজে পেতেও সাহায্য করতে পারে।
+
+প্রতিটি কলব্যাক `ref` এর কিছু সেটআপ কোড থাকে এবং কিছু ক্লিনআপ কোড থাকতে পারে। সাধারণত, React এলিমেন্ট *তৈরি* হলে (DOM-এ যোগ হলে) সেটআপ কল করে এবং এলিমেন্ট *সরানো* হলে (DOM থেকে সরানো হলে) ক্লিনআপ কল করে।
+
+স্ট্রিক্ট মোড চালু থাকলে, React ডেভেলপমেন্টের জন্য প্রতিটি কলব্যাক `ref` এর জন্য **একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালাবে।** এটি হয়তো অবাক করে দিতে পারে, কিন্তু এটি সূক্ষ্ম বাগগুলি খুঁজে পেতে সাহায্য করে যা ম্যানুয়ালি ধরা কঠিন।
+
+এই উদাহরণটি বিবেচনা করুন, যা আপনাকে একটি প্রাণী নির্বাচন করতে এবং তারপর তাদের মধ্যে একটিতে স্ক্রোল করতে দেয়। লক্ষ্য করুন যখন আপনি "Cats" থেকে "Dogs" এ স্যুইচ করেন, কনসোল লগগুলি দেখায় যে তালিকায় প্রাণীর সংখ্যা ক্রমাগত বৃদ্ধি পাচ্ছে, এবং "Scroll to" বোতামগুলি কাজ করা বন্ধ করে দেয়:
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ❌ Not using StrictMode.
+root.render(<App />);
+```
+
+```js src/App.js active
+import { useRef, useState } from "react";
+
+export default function CatFriends() {
+  const itemsRef = useRef([]);
+  const [catList, setCatList] = useState(setupCatList);
+  const [cat, setCat] = useState('neo');
+
+  function scrollToCat(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  const cats = catList.filter(c => c.type === cat)
+
+  return (
+    <>
+      <nav>
+        <button onClick={() => setCat('neo')}>Neo</button>
+        <button onClick={() => setCat('millie')}>Millie</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{cats.map((cat, index) => (
+          <button key={cat.src} onClick={() => scrollToCat(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {cats.map((cat) => (
+            <li
+              key={cat.src}
+              ref={(node) => {
+                const list = itemsRef.current;
+                const item = {cat: cat, node};
+                list.push(item);
+                console.log(`✅ Adding cat to the map. Total cats: ${list.length}`);
+                if (list.length > 10) {
+                  console.log('❌ Too many cats in the list!');
+                }
+                return () => {
+                  // 🚩 No cleanup, this is a bug!
+                }
+              }}
+            >
+              <img src={cat.src} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'neo', src: "https://placecats.com/neo/320/240?" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'millie', src: "https://placecats.com/millie/320/240?" + i});
+  }
+
+  return catList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+
+**এটি একটি প্রোডাকশন বাগ!** যেহেতু রেফ কলব্যাক ক্লিনআপে তালিকা থেকে প্রাণীগুলি সরায় না, প্রাণীদের তালিকা ক্রমাগত বৃদ্ধি পেতে থাকে। এটি একটি মেমরি লিক যা একটি প্রকৃত অ্যাপে পারফরম্যান্স সমস্যা সৃষ্টি করতে পারে এবং অ্যাপের আচরণ ভেঙে দিতে পারে।
+
+সমস্যাটি হলো রেফ কলব্যাক নিজের পরে পরিষ্কার করে না:
+
+```js {6-8}
+<li
+  ref={node => {
+    const list = itemsRef.current;
+    const item = {animal, node};
+    list.push(item);
+    return () => {
+      // 🚩 No cleanup, this is a bug!
+    }
+  }}
+</li>
+```
+
+এখন চলুন মূল (বাগযুক্ত) কোডটি `<StrictMode>`-এ মোড়ানো যাক:
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ✅ Using StrictMode.
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```js src/App.js active
+import { useRef, useState } from "react";
+
+export default function CatFriends() {
+  const itemsRef = useRef([]);
+  const [catList, setCatList] = useState(setupCatList);
+  const [cat, setCat] = useState('neo');
+
+  function scrollToCat(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  const cats = catList.filter(c => c.type === cat)
+
+  return (
+    <>
+      <nav>
+        <button onClick={() => setCat('neo')}>Neo</button>
+        <button onClick={() => setCat('millie')}>Millie</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{cats.map((cat, index) => (
+          <button key={cat.src} onClick={() => scrollToCat(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {cats.map((cat) => (
+            <li
+              key={cat.src}
+              ref={(node) => {
+                const list = itemsRef.current;
+                const item = {cat: cat, node};
+                list.push(item);
+                console.log(`✅ Adding cat to the map. Total cats: ${list.length}`);
+                if (list.length > 10) {
+                  console.log('❌ Too many cats in the list!');
+                }
+                return () => {
+                  // 🚩 No cleanup, this is a bug!
+                }
+              }}
+            >
+              <img src={cat.src} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'neo', src: "https://placecats.com/neo/320/240?" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'millie', src: "https://placecats.com/millie/320/240?" + i});
+  }
+
+  return catList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+**স্ট্রিক্ট মোডে, আপনি সঙ্গে সঙ্গে দেখতে পাবেন যে একটি সমস্যা আছে**। স্ট্রিক্ট মোড প্রতিটি কলব্যাক রেফের জন্য একটি অতিরিক্ত সেটআপ+ক্লিনআপ চক্র চালায়। এই কলব্যাক রেফের কোনো ক্লিনআপ লজিক নেই, তাই এটি রেফ যোগ করে কিন্তু সেগুলি সরায় না। এটি একটি ইঙ্গিত যে আপনি একটি ক্লিনআপ ফাংশন মিস করছেন।
+
+স্ট্রিক্ট মোড আপনাকে কলব্যাক রেফগুলিতে ভুলগুলি আগ্রহের সাথে খুঁজে পেতে দেয়। আপনি যখন স্ট্রিক্ট মোডে একটি ক্লিনআপ ফাংশন যোগ করে আপনার কলব্যাক ঠিক করেন, আপনি *এছাড়াও* অনেক সম্ভাব্য ভবিষ্যতের প্রোডাকশন বাগগুলি ঠিক করেন যেমন আগের "Scroll to" বাগ:
+
+<Sandpack>
+
+```js src/index.js
+import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
+import './styles.css';
+
+import App from './App';
+
+const root = createRoot(document.getElementById("root"));
+// ✅ Using StrictMode.
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```js src/App.js active
+import { useRef, useState } from "react";
+
+export default function CatFriends() {
+  const itemsRef = useRef([]);
+  const [catList, setCatList] = useState(setupCatList);
+  const [cat, setCat] = useState('neo');
+
+  function scrollToCat(index) {
+    const list = itemsRef.current;
+    const {node} = list[index];
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  const cats = catList.filter(c => c.type === cat)
+
+  return (
+    <>
+      <nav>
+        <button onClick={() => setCat('neo')}>Neo</button>
+        <button onClick={() => setCat('millie')}>Millie</button>
+      </nav>
+      <hr />
+      <nav>
+        <span>Scroll to:</span>{cats.map((cat, index) => (
+          <button key={cat.src} onClick={() => scrollToCat(index)}>
+            {index}
+          </button>
+        ))}
+      </nav>
+      <div>
+        <ul>
+          {cats.map((cat) => (
+            <li
+              key={cat.src}
+              ref={(node) => {
+                const list = itemsRef.current;
+                const item = {cat: cat, node};
+                list.push(item);
+                console.log(`✅ Adding cat to the map. Total cats: ${list.length}`);
+                if (list.length > 10) {
+                  console.log('❌ Too many cats in the list!');
+                }
+                return () => {
+                  list.splice(list.indexOf(item));
+                  console.log(`❌ Removing cat from the map. Total cats: ${itemsRef.current.length}`);
+                }
+              }}
+            >
+              <img src={cat.src} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupCatList() {
+  const catList = [];
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'neo', src: "https://placecats.com/neo/320/240?" + i});
+  }
+  for (let i = 0; i < 10; i++) {
+    catList.push({type: 'millie', src: "https://placecats.com/millie/320/240?" + i});
+  }
+
+  return catList;
+}
+
+```
+
+```css
+div {
+  width: 100%;
+  overflow: hidden;
+}
+
+nav {
+  text-align: center;
+}
+
+button {
+  margin: .25rem;
+}
+
+ul,
+li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+li {
+  display: inline;
+  padding: 0.5rem;
+}
+```
+
+</Sandpack>
+
+এখন স্ট্রিক্ট মোডে প্রাথমিক মাউন্টে, রেফ কলব্যাকগুলি সব সেটআপ, ক্লিনআপ এবং আবার সেটআপ হয়:
+
+```
+...
+✅ Adding animal to the map. Total animals: 10
+...
+❌ Removing animal from the map. Total animals: 0
+...
+✅ Adding animal to the map. Total animals: 10
+```
+
+**এটি প্রত্যাশিত।** স্ট্রিক্ট মোড নিশ্চিত করে যে রেফ কলব্যাকগুলি সঠিকভাবে পরিষ্কার করা হয়েছে, তাই আকার কখনই প্রত্যাশিত পরিমাণের চেয়ে বেশি বৃদ্ধি পায় না। ফিক্সের পরে, কোনো মেমরি লিক নেই, এবং সমস্ত বৈশিষ্ট্য প্রত্যাশিত অনুযায়ী কাজ করে।
+
+স্ট্রিক্ট মোড ছাড়া, আপনি অ্যাপে ক্লিক করে ভাঙা বৈশিষ্ট্যগুলি লক্ষ্য না করা পর্যন্ত বাগটি মিস করা সহজ ছিল। স্ট্রিক্ট মোড আপনি সেগুলি প্রোডাকশনে পুশ করার আগেই বাগগুলি সঙ্গে সঙ্গে প্রদর্শন করেছে।
+
+---
 ### স্ট্রিক্ট মোড দ্বারা সক্রিয় ডিপ্রিকেশন সতর্কতা সংশোধন করা {/*fixing-deprecation-warnings-enabled-by-strict-mode*/}
 
 React সতর্ক করে দেয় যদি কোনো কম্পোনেন্ট `<StrictMode>` ট্রির মধ্যে থাকে এবং সেটি এই পুরাতন APIগুলির যেকোনো একটি ব্যবহার করে:
 
-* [`findDOMNode`](/reference/react-dom/findDOMNode). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage)
-* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [অল্টারনেটিভ দেখুন।](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles) 
-* Legacy context ([`childContextTypes`](/reference/react/Component#static-childcontexttypes), [`contextTypes`](/reference/react/Component#static-contexttypes), and [`getChildContext`](/reference/react/Component#getchildcontext)). [অল্টারনেটিভ দেখুন।](/reference/react/createContext)
-* Legacy string refs ([`this.refs`](/reference/react/Component#refs)). [অল্টারনেটিভ দেখুন।](https://reactjs.org/docs/strict-mode.html#warning-about-legacy-string-ref-api-usage)
+* `UNSAFE_` class lifecycle methods like [`UNSAFE_componentWillMount`](/reference/react/Component#unsafe_componentwillmount). [অল্টারনেটিভ দেখুন।](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#migrating-from-legacy-lifecycles)
 
 এই APIগুলি প্রধানত পুরানো [ক্লাস কম্পোনেন্টস](/reference/react/Component) এ ব্যবহৃত হয়, তাই এগুলি আধুনিক অ্যাপসে হঠাত দেখা যায়।

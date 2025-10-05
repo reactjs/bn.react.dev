@@ -12,6 +12,12 @@ const cachedValue = useMemo(calculateValue, dependencies)
 
 </Intro>
 
+<Note>
+
+[React Compiler](/learn/react-compiler) automatically memoizes values and functions, reducing the need for manual `useMemo` calls. You can use the compiler to handle memoization automatically.
+
+</Note>
+
 <InlineToc />
 
 ---
@@ -151,7 +157,7 @@ console.timeEnd('filter array');
 - আপনি এটি একটি কম্পোনেন্টকে প্রপ হিসেবে পাস করেন যা [`memo`.](/reference/react/memo). দ্বারা মোড়ানো। মান যদি অপরিবর্তিত থাকে তাহলে আপনি কি-রেন্ডারিং এড়াতে চান। মেমোইজেশন আপনার কম্পোনেন্টকে শুধুমাত্র তখন রি-রেন্ডার করতে দেয় যখন ডিপেন্ডেন্সিসগুলি একই নয়।
 - আপনি যে মানটি পাস করছেন তা পরবর্তীতে কোনো হুকের নির্ভরতা হিসেবে ব্যবহৃত হয়। উদাহরণস্বরূপ, হয়তো অন্য একটি `useMemo` calculation এর মান এটির উপর নির্ভর করে। অথবা হয়তো আপনি এই মানটির উপর [`useEffect.`](/reference/react/useEffect). থেকে নির্ভর করছেন।
 
-অন্য ক্ষেত্রে, `useMemo` ব্যবহার করে কোনো calculation মোড়ানোর কোনো সুবিধা নেই। তবে করার ফলে কোনো গুরুতর ক্ষতি হয় না, তাই কিছু টিম প্রতিটি ক্ষেত্রে আলাদাভাবে চিন্তা না করে যতটা সম্ভব মেমোইজ করে। এই পদ্ধতির অসুবিধা হল কোড কম পাঠযোগ্য হয়। এছাড়া, সব মেমোইজেশন কার্যকর নয়: “সর্বদা নতুন” একটি একক মান পুরো কম্পোনেন্টের জন্য মেমোইজেশন ব্যর্থ করতে পারে।
+অন্য ক্ষেত্রে, `useMemo` ব্যবহার করে কোনো calculation মোড়ানোর কোনো সুবিধা নেই। তবে করার ফলে কোনো গুরুতর ক্ষতি হয় না, তাই কিছু টিম প্রতিটি ক্ষেত্রে আলাদাভাবে চিন্তা না করে যতটা সম্ভব মেমোইজ করে। এই পদ্ধতির অসুবিধা হল কোড কম পাঠযোগ্য হয়। এছাড়া, সব মেমোইজেশন কার্যকর নয়: "সর্বদা নতুন" একটি একক মান পুরো কম্পোনেন্টের জন্য মেমোইজেশন ব্যর্থ করতে পারে।
 
 **বাস্তবে, কিছু নীতি অনুসরণ করে আপনি অনেক মেমোইজেশন অপ্রয়োজনীয় করে তুলতে পারেন:**
 
@@ -1056,6 +1062,80 @@ label {
 
 ---
 
+### Effect এর অত্যধিক ফায়ার করা প্রতিরোধ করা {/*preventing-an-effect-from-firing-too-often*/}
+
+কখনও কখনও, আপনি একটি [Effect](/learn/synchronizing-with-effects) এর ভিতরে একটি value ব্যবহার করতে চাইতে পারেন:
+
+```js {4-7,10}
+function ChatRoom({ roomId }) {
+  const [message, setMessage] = useState('');
+
+  const options = {
+    serverUrl: 'https://localhost:1234',
+    roomId: roomId
+  }
+
+  useEffect(() => {
+    const connection = createConnection(options);
+    connection.connect();
+    // ...
+```
+
+এটি একটি সমস্যা তৈরি করে। [আপনার Effect এর প্রতিটি reactive value অবশ্যই dependency হিসেবে ঘোষণা করতে হবে।](/learn/lifecycle-of-reactive-effects#react-verifies-that-you-specified-every-reactive-value-as-a-dependency) তবে, যদি আপনি `options` কে dependency হিসেবে ঘোষণা করেন, তাহলে এটি আপনার Effect কে ক্রমাগত চ্যাট রুমে পুনরায় সংযোগ করতে বাধ্য করবে:
+
+```js {5}
+  useEffect(() => {
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]); // 🔴 সমস্যা: এই dependency প্রতিটি রেন্ডারে পরিবর্তিত হয়
+  // ...
+```
+
+এটি সমাধান করতে, আপনি Effect থেকে কল করার জন্য প্রয়োজনীয় object কে `useMemo` এ wrap করতে পারেন:
+
+```js {4-9,16}
+function ChatRoom({ roomId }) {
+  const [message, setMessage] = useState('');
+
+  const options = useMemo(() => {
+    return {
+      serverUrl: 'https://localhost:1234',
+      roomId: roomId
+    };
+  }, [roomId]); // ✅ শুধুমাত্র roomId পরিবর্তিত হলে পরিবর্তিত হয়
+
+  useEffect(() => {
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]); // ✅ শুধুমাত্র options পরিবর্তিত হলে পরিবর্তিত হয়
+  // ...
+```
+
+এটি নিশ্চিত করে যে `useMemo` cached object রিটার্ন করলে `options` object রি-রেন্ডারের মধ্যে একই থাকে।
+
+তবে, যেহেতু `useMemo` একটি performance optimization, semantic guarantee নয়, React cached value পরিত্যাগ করতে পারে যদি [এটি করার একটি নির্দিষ্ট কারণ থাকে](#caveats)। এটি effect কে পুনরায় fire করতে বাধ্য করবে, **তাই আপনার object কে Effect এর *ভিতরে* সরিয়ে function dependency এর প্রয়োজন সম্পূর্ণভাবে সরানো আরও ভাল**:
+
+```js {5-8,13}
+function ChatRoom({ roomId }) {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const options = { // ✅ useMemo বা object dependencies এর প্রয়োজন নেই!
+      serverUrl: 'https://localhost:1234',
+      roomId: roomId
+    }
+    
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId]); // ✅ শুধুমাত্র roomId পরিবর্তিত হলে পরিবর্তিত হয়
+  // ...
+```
+
+এখন আপনার কোড সহজ এবং `useMemo` এর প্রয়োজন নেই। [Effect dependencies সরানো সম্পর্কে আরও জানুন।](/learn/removing-effect-dependencies#move-dynamic-objects-and-functions-inside-your-effect)
+
 ### অন্য হুকের ডিপেন্ডেন্সিস মেমোইজ করা {/*memoizing-a-dependency-of-another-hook*/}
 
 ধরুন আপনি এমন একটি calculation করছেন যা কম্পোনেন্ট বডির মধ্যে সরাসরি তৈরি করা একটি অবজেক্টের উপর নির্ভর করে:
@@ -1097,7 +1177,7 @@ function Dropdown({ allItems, text }) {
   // ...
 ```
 
-এখন আপনার calculation `text` এর উপর সরাসরি নির্ভর করে (যা একটি string এবং “আকস্মিকভাবে” পরিবর্তিত হতে পারবে না)।
+এখন আপনার calculation `text` এর উপর সরাসরি নির্ভর করে (যা একটি string এবং "আকস্মিকভাবে" পরিবর্তিত হতে পারবে না)।
 
 ---
 
@@ -1273,7 +1353,7 @@ function TodoList({ todos, tab }) {
   console.log([todos, tab]);
 ```
 
-তারপর আপনি কনসোলে ভিন্ন রি-রেন্ডারের array গুলির উপর রাইট-ক্লিক করে `“Store as a global variable”` নির্বাচন করতে পারেন উভয়ের জন্য। ধরুন প্রথমটি `temp1` হিসেবে এবং দ্বিতীয়টি `temp2` হিসেবে সংরক্ষিত হয়েছে, তাহলে আপনি browser এর কনসোল ব্যবহার করে পরীক্ষা করতে পারেন যে উভয় array প্রতিটি ডিপেন্ডেন্সিস একই কিনা:
+তারপর আপনি কনসোলে ভিন্ন রি-রেন্ডারের array গুলির উপর রাইট-ক্লিক করে `"Store as a global variable"` নির্বাচন করতে পারেন উভয়ের জন্য। ধরুন প্রথমটি `temp1` হিসেবে এবং দ্বিতীয়টি `temp2` হিসেবে সংরক্ষিত হয়েছে, তাহলে আপনি browser এর কনসোল ব্যবহার করে পরীক্ষা করতে পারেন যে উভয় array প্রতিটি ডিপেন্ডেন্সিস একই কিনা:
 
 ```js
 Object.is(temp1[0], temp2[0]); // Is the first dependency the same between the arrays?

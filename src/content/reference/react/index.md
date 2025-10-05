@@ -14,7 +14,7 @@ Programmatic React ফিচারঃ
 * [Hooks](/reference/react/hooks) - আপনার কম্পোনেন্ট থেকে বিভিন্ন React ফিচার ব্যবহার করুন।
 * [Components](/reference/react/components) - যেসব বিল্ট-ইন কম্পোনেন্ট আপনার JSX এ ব্যবহার করতে পারেন।
 * [APIs](/reference/react/apis) - কম্পোনেন্ট ডিফাইন করার জন্য কার্যকরী API।
-* [Directives](/reference/react/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
+* [Directives](/reference/rsc/directives) - সার্ভার কম্পোনেন্টের সাথে যেসব bundlers ব্যবহারোপযোগী তাদের কার্যপ্রণালী।
 
 ## React DOM {/*react-dom*/}
 
@@ -25,6 +25,14 @@ React-dom contains features that are only supported for web applications (which 
 * [APIs](/reference/react-dom) - `react-dom` প্যাকেজে সেই সব মেথড রয়েছে যার শুধু মাত্র ওয়েব এপ্লিকেশনে সাপোর্ট আছে।
 * [Client APIs](/reference/react-dom/client) - `react-dom/client` API গুলো আপনাকে ক্লায়েন্টে (ব্রাউজারে) React কম্পোনেন্ট রেন্ডার করার সুযোগ দেয়। 
 * [Server APIs](/reference/react-dom/server) - `react-dom/server` API গুলো আপনাকে সার্ভারে React কম্পোনেন্ট থেকে HTML এ রেন্ডারের সুযোগ দেয়।
+
+## React Compiler {/*react-compiler*/}
+
+The React Compiler is a build-time optimization tool that automatically memoizes your React components and values:
+
+* [Configuration](/reference/react-compiler/configuration) - Configuration options for React Compiler.
+* [Directives](/reference/react-compiler/directives) - Function-level directives to control compilation.
+* [Compiling Libraries](/reference/react-compiler/compiling-libraries) - Guide for shipping pre-compiled library code.
 
 ## Rules of React {/*rules-of-react*/}
 

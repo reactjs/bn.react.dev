@@ -36,7 +36,7 @@ title: "<option>"
 
 #### প্রপ {/*props*/}
 
-`<option>` সকল [কমন এলিমেন্ট প্রপের](/reference/react-dom/components/common#props) সাপোর্ট দেয়।
+`<option>` সকল [কমন এলিমেন্ট প্রপের](/reference/react-dom/components/common#common-props) সাপোর্ট দেয়।
 
 সাথে সাথে, `<option>` এই প্রপগুলোর সাপোর্ট দেয়ঃ
 
