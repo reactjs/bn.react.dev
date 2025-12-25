@@ -16,7 +16,7 @@ Calling `setState` during render triggers another render before the current one 
 
 ### Invalid {/*invalid*/}
 
-```js {expectedErrors: {'react-compiler': [4]}}
+```js
 // ❌ setState directly in render
 function Component({value}) {
   const [count, setCount] = useState(0);

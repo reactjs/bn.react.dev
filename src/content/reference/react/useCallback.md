@@ -207,7 +207,7 @@ The difference is in *what* they're letting you cache:
 
 If you're already familiar with [`useMemo`,](/reference/react/useMemo) you might find it helpful to think of `useCallback` as this:
 
-```js {expectedErrors: {'react-compiler': [3]}}
+```js
 // Simplified implementation (inside React)
 function useCallback(fn, dependencies) {
   return useMemo(() => fn, dependencies);
@@ -310,7 +310,7 @@ function post(url, data) {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [7, 8]}} src/ShippingForm.js
+```js src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -449,7 +449,7 @@ function post(url, data) {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [7, 8]}} src/ShippingForm.js
+```js src/ShippingForm.js
 import { memo, useState } from 'react';
 
 const ShippingForm = memo(function ShippingForm({ onSubmit }) {
@@ -868,7 +868,7 @@ When you find which dependency is breaking memoization, either find a way to rem
 
 Suppose the `Chart` component is wrapped in [`memo`](/reference/react/memo). You want to skip re-rendering every `Chart` in the list when the `ReportList` component re-renders. However, you can't call `useCallback` in a loop:
 
-```js {expectedErrors: {'react-compiler': [6]}} {5-14}
+```js {5-14}
 function ReportList({ items }) {
   return (
     <article>

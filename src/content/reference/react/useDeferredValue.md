@@ -669,7 +669,7 @@ export default function App() {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
+```js src/SlowList.js
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {
@@ -746,7 +746,7 @@ export default function App() {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [19, 20]}} src/SlowList.js
+```js src/SlowList.js
 import { memo } from 'react';
 
 const SlowList = memo(function SlowList({ text }) {

@@ -211,7 +211,7 @@ export default function Counter() {
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [13]}}
+```js
 import { useRef } from 'react';
 
 export default function Counter() {
@@ -313,7 +313,7 @@ console.log(ref.current); // 5
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [10]}}
+```js
 import { useState } from 'react';
 
 export default function Chat() {
@@ -418,7 +418,7 @@ export default function Chat() {
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [10]}}
+```js
 import { useRef } from 'react';
 
 export default function Toggle() {
