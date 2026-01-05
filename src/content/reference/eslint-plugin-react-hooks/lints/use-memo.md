@@ -16,7 +16,7 @@ Validates usage of the `useMemo` hook without a return value. See [`useMemo` doc
 
 Examples of incorrect code for this rule:
 
-```js {expectedErrors: {'react-compiler': [3]}}
+```js
 // ❌ No return value
 function Component({ data }) {
   const processed = useMemo(() => {
@@ -50,7 +50,7 @@ function Component({ data }) {
 You might try to use `useMemo` for side effects:
 
 {/* TODO(@poteto) fix compiler validation to check for unassigned useMemos */}
-```js {expectedErrors: {'react-compiler': [4]}}
+```js
 // ❌ Wrong: Side effects in useMemo
 function Component({user}) {
   // No return value, just side effect

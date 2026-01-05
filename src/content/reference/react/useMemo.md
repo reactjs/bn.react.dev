@@ -226,7 +226,7 @@ export default function App() {
 ```
 
 {/* TODO(@poteto) - investigate potential false positives in react compiler validation */}
-```js {expectedErrors: {'react-compiler': [5]}} src/TodoList.js active
+```js src/TodoList.js active
 import { useMemo } from 'react';
 import { filterTodos } from './utils.js'
 
@@ -718,7 +718,7 @@ export default function TodoList({ todos, theme, tab }) {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [5, 6]}} src/List.js
+```js src/List.js
 import { memo } from 'react';
 
 const List = memo(function List({ items }) {
@@ -856,7 +856,7 @@ export default function TodoList({ todos, theme, tab }) {
 }
 ```
 
-```js {expectedErrors: {'react-compiler': [5, 6]}} src/List.js
+```js src/List.js
 import { memo } from 'react';
 
 const List = memo(function List({ items }) {
@@ -1370,7 +1370,7 @@ Object.is(temp1[2], temp2[2]); // ... and so on for every dependency ...
 
 ধরুন `Chart` কম্পোনেন্টটি [`memo`](/reference/react/memo)-এ মোড়ানো। আপনি চান `ReportList` কম্পোনেন্ট পুনরায় রেন্ডার হলে লিস্টে প্রতিটি `Chart` রি-রেন্ডারিং না হক। তবে, আপনি একটি লুপে মদ্ধে `useMemo` কল করতে পারবেন না: 
 
-```js {expectedErrors: {'react-compiler': [6]}} {5-11}
+```js {5-11}
 function ReportList({ items }) {
   return (
     <article>

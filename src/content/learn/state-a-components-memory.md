@@ -23,7 +23,7 @@ title: "State: কম্পোনেন্ট এর মেমোরি"
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [7]}}
+```js
 import { sculptureList } from './data.js';
 
 export default function Gallery() {
@@ -1228,7 +1228,7 @@ img { width: 120px; height: 120px; }
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [6]}}
+```js
 export default function Form() {
   let firstName = '';
   let lastName = '';
@@ -1336,7 +1336,7 @@ _কোথায়_ হুক কল করা যাবে, সেটার ক�
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [9]}}
+```js
 import { useState } from 'react';
 
 export default function FeedbackForm() {

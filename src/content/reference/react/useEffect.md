@@ -929,7 +929,7 @@ Note the `ignore` variable which is initialized to `false`, and is set to `true`
 <Sandpack>
 
 {/* TODO(@poteto) - investigate potential false positives in react compiler validation */}
-```js {expectedErrors: {'react-compiler': [9]}} src/App.js
+```js src/App.js
 import { useState, useEffect } from 'react';
 import { fetchBio } from './api.js';
 
@@ -1740,7 +1740,7 @@ In rare cases, you might need to display different content on the client. For ex
 
 
 {/* TODO(@poteto) - investigate potential false positives in react compiler validation */}
-```js {expectedErrors: {'react-compiler': [5]}}
+```js
 function MyComponent() {
   const [didMount, setDidMount] = useState(false);
 
