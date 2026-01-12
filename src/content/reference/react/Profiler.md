@@ -37,7 +37,11 @@ title: <Profiler>
 
 #### সতর্কতা {/*caveats*/}
 
+<<<<<<< HEAD
 * প্রোফাইলিং কিছু অতিরিক্ত কাজ বাড়ায়, তাই এটা **প্রোডাকশন বিল্ডে স্বাভাবিকভাবে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং করতে, আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) চালু করতে হবে।
+=======
+* Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](/reference/dev-tools/react-performance-tracks#using-profiling-builds)
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 ---
 
@@ -81,13 +85,20 @@ function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime
 
 <Pitfall>
 
+<<<<<<< HEAD
 প্রোফাইলিং কিছু অতিরিক্ত overhead যুক্ত করে, তাই **বাই ডিফল্ট এটা প্রোডাকশন বিল্ডে বন্ধ থাকে।** প্রোডাকশন প্রোফাইলিং চালু করার জন্য আপনাকে [প্রোফাইলিং সক্রিয় আছে এমন একটি বিশেষ প্রোডাকশন বিল্ড](https://fb.me/react-profiling) enable করতে হবে।
+=======
+Profiling adds some additional overhead, so **it is disabled in the production build by default.** To opt into production profiling, you need to enable a [special production build with profiling enabled.](/reference/dev-tools/react-performance-tracks#using-profiling-builds)
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 </Pitfall>
 
 <Note>
 
 `<Profiler>` আপনাকে প্রোগ্রামেটিকালি পরিমাপ জানতে সাহায্য করে। আপনি যদি interactive প্রোফাইলার চান, তাহলে [React ডেভেলপার টুলসের](/learn/react-developer-tools) Profiler ট্যাবটা ব্যবহার করে দেখতে পারেন। এটা ব্রাউজার এক্সটেনশন হিসেবে কাছাকাছি রকম কাজ করে।
+
+Components wrapped in `<Profiler>` will also be marked in the [Component tracks](/reference/dev-tools/react-performance-tracks#components) of React Performance tracks even in profiling builds.
+In development builds, all components are marked in the Components track regardless of whether they're wrapped in `<Profiler>`.
 
 </Note>
 

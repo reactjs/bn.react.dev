@@ -95,7 +95,11 @@ function SubmitButton({ submitAction }) {
 
 #### প্যারামিটারসমূহ {/*starttransition-parameters*/}
 
+<<<<<<< HEAD
 * `action`: একটি ফাংশন যা এক বা একাধিক [`set` ফাংশন](/reference/react/useState#setstate) কল করে কিছু state আপডেট করে। React `action` কে কোনো প্যারামিটার ছাড়াই তাৎক্ষণিকভাবে কল করে এবং `action` ফাংশন কলের সময় সিনক্রোনাসভাবে নির্ধারিত সব state আপডেটকে ট্রানজিশন হিসাবে চিহ্নিত করে। `action` এ যে কোনো অ্যাসিনক কলকে await করা হলে তা ট্রানজিশনে অন্তর্ভুক্ত হবে, তবে বর্তমানে `await` এর পরে যেকোনো `set` ফাংশনকে একটি অতিরিক্ত `startTransition` এ মোড়ানোর প্রয়োজন ([সমস্যা সমাধান](#react-doesnt-treat-my-state-update-after-await-as-a-transition) দেখুন)। ট্রানজিশন হিসাবে চিহ্নিত state আপডেটগুলি [নন-ব্লকিং](#marking-a-state-update-as-a-non-blocking-transition) হবে এবং [অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটর প্রদর্শন করবে না।](#preventing-unwanted-loading-indicators)
+=======
+* `action`: A function that updates some state by calling one or more [`set` functions](/reference/react/useState#setstate). React calls `action` immediately with no parameters and marks all state updates scheduled synchronously during the `action` function call as Transitions. Any async calls that are awaited in the `action` will be included in the Transition, but currently require wrapping any `set` functions after the `await` in an additional `startTransition` (see [Troubleshooting](#react-doesnt-treat-my-state-update-after-await-as-a-transition)). State updates marked as Transitions will be [non-blocking](#perform-non-blocking-updates-with-actions) and [will not display unwanted loading indicators](#preventing-unwanted-loading-indicators).
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 #### রিটার্নস {/*starttransition-returns*/}
 
@@ -161,7 +165,11 @@ function CheckoutForm() {
 }
 ```
 
+<<<<<<< HEAD
 `startTransition` এ পাস করা ফাংশনটিকে "Action" বলা হয়। আপনি একটি Action এর মধ্যে state আপডেট করতে এবং (ঐচ্ছিকভাবে) side effects সম্পাদন করতে পারেন, এবং পৃষ্ঠায় ব্যবহারকারীর ইন্টারঅ্যাকশনগুলি ব্লক না করে এই কাজটি ব্যাকগ্রাউন্ডে করা হবে। একটি Transition একাধিক Actions অন্তর্ভুক্ত করতে পারে, এবং যখন একটি Transition চলমান থাকে, আপনার UI রেস্পন্সিভ থাকে। উদাহরণস্বরূপ, যদি ব্যবহারকারী একটি ট্যাবে ক্লিক করে কিন্তু তারপর তাদের মন পরিবর্তন করে এবং অন্য ট্যাবে ক্লিক করে, তাহলে প্রথম আপডেট শেষ হওয়ার জন্য অপেক্ষা না করে দ্বিতীয় ক্লিকটি তাৎক্ষণিকভাবে পরিচালনা করা হবে।
+=======
+The function passed to `startTransition` is called the "Action". You can update state and (optionally) perform side effects within an Action, and the work will be done in the background without blocking user interactions on the page. A Transition can include multiple Actions, and while a Transition is in progress, your UI stays responsive. For example, if the user clicks a tab but then changes their mind and clicks another tab, the second click will be immediately handled without waiting for the first update to finish.
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 চলমান Transitions সম্পর্কে ব্যবহারকারীকে ফিডব্যাক দিতে, `isPending` state `startTransition` এর প্রথম কল এ `true` হয়ে যায়, এবং সমস্ত Actions সম্পূর্ণ হওয়া এবং চূড়ান্ত state ব্যবহারকারীকে দেখানো পর্যন্ত `true` থাকে। Transitions [অবাঞ্ছিত লোডিং ইন্ডিকেটর প্রতিরোধ করতে](#preventing-unwanted-loading-indicators) Actions এর side effects ক্রমানুসারে সম্পূর্ণ করা নিশ্চিত করে, এবং আপনি `useOptimistic` দিয়ে Transition চলাকালীন তাৎক্ষণিক ফিডব্যাক প্রদান করতে পারেন।
 
@@ -597,7 +605,7 @@ export default function TabButton({ action, children, isActive }) {
     <button onClick={() => {
       startTransition(async () => {
         // await the action that's passed in.
-        // This allows it to be either sync or async. 
+        // This allows it to be either sync or async.
         await action();
       });
     }}>
@@ -664,7 +672,7 @@ export default function TabButton({ action, children, isActive }) {
     <button onClick={async () => {
       startTransition(async () => {
         // await the action that's passed in.
-        // This allows it to be either sync or async. 
+        // This allows it to be either sync or async.
         await action();
       });
     }}>
@@ -682,7 +690,7 @@ export default function AboutTab() {
 }
 ```
 
-```js src/PostsTab.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -742,7 +750,7 @@ b { display: inline-block; margin-right: 10px; }
 
 <Note>
 
-When exposing an `action` prop from a component, you should `await` it inside the transition. 
+When exposing an `action` prop from a component, you should `await` it inside the transition.
 
 This allows the `action` callback to be either synchronous or asynchronous without requiring an additional `startTransition` to wrap the `await` in the action.
 
@@ -837,7 +845,7 @@ export default function AboutTab() {
 }
 ```
 
-```js src/PostsTab.js
+```js {expectedErrors: {'react-compiler': [19, 20]}} src/PostsTab.js
 import { memo } from 'react';
 
 const PostsTab = memo(function PostsTab() {
@@ -1246,9 +1254,15 @@ function Router() {
 
 এটি তিনটি কারণে পরামর্শ দেয়া হয়:
 
+<<<<<<< HEAD
 - [ট্রানজিশনগুলি বাধাগ্রস্ত হতে পারে,](#marking-a-state-update-as-a-non-blocking-transition) যা ইউজারকে রি-রেন্ডার সম্পূর্ণ হওয়ার অপেক্ষা না করে অন্য কিছুতে ক্লিক করতে দেয়।
 - [ট্রানজিশনগুলি অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটরগুলি প্রতিরোধ করে,](#preventing-unwanted-loading-indicators) যা ইউজারকে নেভিগেশনে বিভ্রান্তিকর লাফ এড়াতে সাহায্য করে।
 - [ট্রানজিশনগুলি সমস্ত pending actions এর জন্য অপেক্ষা করে](#perform-non-blocking-updates-with-actions) যা ইউজারকে নতুন পৃষ্ঠা দেখানোর আগে side effects সম্পূর্ণ হওয়ার জন্য অপেক্ষা করতে দেয়।
+=======
+- [Transitions are interruptible,](#perform-non-blocking-updates-with-actions) which lets the user click away without waiting for the re-render to complete.
+- [Transitions prevent unwanted loading indicators,](#preventing-unwanted-loading-indicators) which lets the user avoid jarring jumps on navigation.
+- [Transitions wait for all pending actions](#perform-non-blocking-updates-with-actions) which lets the user wait for side effects to complete before the new page is shown.
+>>>>>>> 2da4f7fbd90ddc09835c9f85d61fd5644a271abc
 
 এখানে নেভিগেশনের জন্য ট্রানজিশন ব্যবহার করে একটি খুব সহজ রাউটার উদাহরণ দেওয়া হল।
 
@@ -1805,7 +1819,7 @@ export default function App({}) {
   const [isPending, startTransition] = useTransition();
   // Store the actual quantity in separate state to show the mismatch.
   const [clientQuantity, setClientQuantity] = useState(1);
-  
+
   const updateQuantityAction = newQuantity => {
     setClientQuantity(newQuantity);
 
@@ -1840,7 +1854,7 @@ export default function Item({action}) {
     startTransition(async () => {
       await action(e.target.value);
     });
-  }  
+  }
   return (
     <div className="item">
       <span>Eras Tour Tickets</span>
@@ -2006,7 +2020,7 @@ export default function Item({action}) {
     startTransition(() => {
       action(e.target.value);
     });
-  }  
+  }
   return (
     <div className="item">
       <span>Eras Tour Tickets</span>
