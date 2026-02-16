@@ -404,6 +404,7 @@ label { display: block; margin-top: 10px; }
 
 ### একটি Effect Event ডিক্লেয়ার করা {/*declaring-an-effect-event*/}
 
+<<<<<<< HEAD
 <Wip>
 
 এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
@@ -411,6 +412,9 @@ label { display: block; margin-top: 10px; }
 </Wip>
 
 [`useEffectEvent`](/reference/react/experimental_useEffectEvent) নামক একটি বিশেষ Hook ব্যবহার করুন আপনার Effect থেকে এই non-reactive logic বের করতে:
+=======
+Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -453,8 +457,8 @@ function ChatRoom({ roomId, theme }) {
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -469,7 +473,7 @@ function ChatRoom({ roomId, theme }) {
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -579,10 +583,15 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 আপনি Effect Event কে event handler এর খুব অনুরূপ হিসাবে ভাবতে পারেন। প্রধান পার্থক্য হল যে event handler user interaction এর প্রতিক্রিয়ায় চালু হয়, যেখানে Effect Event আপনার দ্বারা Effect থেকে trigger করা হয়। Effect Event আপনাকে Effect এর reactivity এবং যে কোড reactive হওয়া উচিত নয় তার মধ্যে "chain ভাঙতে" দেয়।
+=======
+You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 ### Effect Event দিয়ে সর্বশেষ props এবং state পড়া {/*reading-latest-props-and-state-with-effect-events*/}
 
+<<<<<<< HEAD
 <Wip>
 
 এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
@@ -590,6 +599,9 @@ label { display: block; margin-top: 10px; }
 </Wip>
 
 Effect Event আপনাকে অনেক pattern ঠিক করতে দেয় যেখানে আপনি dependency linter suppress করতে প্রলুব্ধ হতে পারেন।
+=======
+Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 উদাহরণস্বরূপ, ধরুন আপনার একটি Effect আছে page visit log করার জন্য:
 
@@ -717,7 +729,7 @@ function Page({ url }) {
 
 বিদ্যমান codebase গুলিতে, আপনি কখনও কখনও এইভাবে lint rule suppress করা দেখতে পারেন:
 
-```js {7-9}
+```js {expectedErrors: {'react-compiler': [8]}} {7-9}
 function Page({ url }) {
   const { items } = useContext(ShoppingCartContext);
   const numberOfItems = items.length;
@@ -731,7 +743,11 @@ function Page({ url }) {
 }
 ```
 
+<<<<<<< HEAD
 `useEffectEvent` React এর একটি stable অংশ হয়ে গেলে, আমরা সুপারিশ করি **কখনও linter suppress করবেন না**।
+=======
+We recommend **never suppressing the linter**.
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 Rule suppress করার প্রথম অসুবিধা হল যে React আর আপনাকে সতর্ক করবে না যখন আপনার Effect কে একটি নতুন reactive dependency এর প্রতি "react" করতে হবে যা আপনি আপনার কোডে introduce করেছেন। আগের উদাহরণে, আপনি dependency তে `url` যোগ করেছিলেন *কারণ* React আপনাকে এটি করতে মনে করিয়ে দিয়েছিল। আপনি linter disable করলে সেই Effect এ ভবিষ্যতের কোনো edit এর জন্য আর এই ধরনের reminder পাবেন না। এটি bug এর দিকে নিয়ে যায়।
 
@@ -742,7 +758,7 @@ Rule suppress করার প্রথম অসুবিধা হল যে R
 
 <Sandpack>
 
-```js
+```js {expectedErrors: {'react-compiler': [16]}}
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -806,25 +822,9 @@ body {
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -884,6 +884,7 @@ body {
 
 ### Effect Event এর সীমাবদ্ধতা {/*limitations-of-effect-events*/}
 
+<<<<<<< HEAD
 <Wip>
 
 এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
@@ -891,6 +892,9 @@ body {
 </Wip>
 
 Effect Event আপনি কিভাবে ব্যবহার করতে পারেন তাতে খুবই সীমিত:
+=======
+Effect Events are very limited in how you can use them:
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 * **শুধুমাত্র Effect এর ভিতর থেকে তাদের কল করুন।**
 * **কখনও তাদের অন্য কম্পোনেন্ট বা Hook এ pass করবেন না।**
@@ -980,24 +984,7 @@ Effect Event হল আপনার Effect কোডের non-reactive "pieces"
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
-
-```js
+```js {expectedErrors: {'react-compiler': [14]}}
 import { useState, useEffect } from 'react';
 
 export default function Timer() {
@@ -1049,22 +1036,6 @@ button { margin: 10px; }
 যদি আপনি suppression comment সরান, React আপনাকে বলবে যে এই Effect এর কোড `increment` এর উপর নির্ভর করে, কিন্তু আপনি React কে "মিথ্যা বলেছেন" যে এই Effect কোনো reactive value এর উপর নির্ভর করে না (`[]`)। dependency array তে `increment` যোগ করুন:
 
 <Sandpack>
-
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
 
 ```js
 import { useState, useEffect } from 'react';
@@ -1128,25 +1099,9 @@ button { margin: 10px; }
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1197,25 +1152,9 @@ button { margin: 10px; }
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1279,25 +1218,9 @@ Effect Event এর ভিতরের কোড reactive নয়। এমন
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1366,25 +1289,9 @@ button { margin: 10px; }
 
 <Sandpack>
 
-```json package.json hidden
-{
-  "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
-    "react-scripts": "latest"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
-}
-```
-
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 
 export default function Timer() {
   const [count, setCount] = useState(0);
@@ -1465,8 +1372,8 @@ button { margin: 10px; }
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1481,7 +1388,7 @@ button { margin: 10px; }
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1606,8 +1513,8 @@ label { display: block; margin-top: 10px; }
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1622,7 +1529,7 @@ label { display: block; margin-top: 10px; }
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
@@ -1743,8 +1650,8 @@ label { display: block; margin-top: 10px; }
 ```json package.json hidden
 {
   "dependencies": {
-    "react": "experimental",
-    "react-dom": "experimental",
+    "react": "latest",
+    "react-dom": "latest",
     "react-scripts": "latest",
     "toastify-js": "1.12.0"
   },
@@ -1759,7 +1666,7 @@ label { display: block; margin-top: 10px; }
 
 ```js
 import { useState, useEffect } from 'react';
-import { experimental_useEffectEvent as useEffectEvent } from 'react';
+import { useEffectEvent } from 'react';
 import { createConnection, sendMessage } from './chat.js';
 import { showNotification } from './notifications.js';
 
