@@ -4,7 +4,11 @@ title: "বিল্ট-ইন React API"
 
 <Intro>
 
+<<<<<<< HEAD
 [হুক](/reference/react) এবং [কম্পোনেন্ট](/reference/react/components) এর সাথে সাথে, `react` প্যাকেজ আরো কিছু API এক্সপোর্ট করে যা কম্পোনেন্ট ডিফাইন করতে কাজে লাগে। এই পেইজে বাকি সকল আধুনিক React API এর তালিকা আছে।
+=======
+In addition to [Hooks](/reference/react/hooks) and [Components](/reference/react/components), the `react` package exports a few other APIs that are useful for defining components. This page lists all the remaining modern React APIs.
+>>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 </Intro>
 
