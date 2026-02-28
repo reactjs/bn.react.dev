@@ -404,17 +404,7 @@ label { display: block; margin-top: 10px; }
 
 ### একটি Effect Event ডিক্লেয়ার করা {/*declaring-an-effect-event*/}
 
-<<<<<<< HEAD
-<Wip>
-
-এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
-
-</Wip>
-
-[`useEffectEvent`](/reference/react/experimental_useEffectEvent) নামক একটি বিশেষ Hook ব্যবহার করুন আপনার Effect থেকে এই non-reactive logic বের করতে:
-=======
-Use a special Hook called [`useEffectEvent`](/reference/react/useEffectEvent) to extract this non-reactive logic out of your Effect:
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
+[`useEffectEvent`](/reference/react/useEffectEvent) নামক একটি বিশেষ Hook ব্যবহার করুন আপনার Effect থেকে এই non-reactive logic বের করতে:
 
 ```js {1,4-6}
 import { useEffect, useEffectEvent } from 'react';
@@ -583,25 +573,11 @@ label { display: block; margin-top: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
 আপনি Effect Event কে event handler এর খুব অনুরূপ হিসাবে ভাবতে পারেন। প্রধান পার্থক্য হল যে event handler user interaction এর প্রতিক্রিয়ায় চালু হয়, যেখানে Effect Event আপনার দ্বারা Effect থেকে trigger করা হয়। Effect Event আপনাকে Effect এর reactivity এবং যে কোড reactive হওয়া উচিত নয় তার মধ্যে "chain ভাঙতে" দেয়।
-=======
-You can think of Effect Events as being very similar to event handlers. The main difference is that event handlers run in response to user interactions, whereas Effect Events are triggered by you from Effects. Effect Events let you "break the chain" between the reactivity of Effects and code that should not be reactive.
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 ### Effect Event দিয়ে সর্বশেষ props এবং state পড়া {/*reading-latest-props-and-state-with-effect-events*/}
 
-<<<<<<< HEAD
-<Wip>
-
-এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
-
-</Wip>
-
 Effect Event আপনাকে অনেক pattern ঠিক করতে দেয় যেখানে আপনি dependency linter suppress করতে প্রলুব্ধ হতে পারেন।
-=======
-Effect Events let you fix many patterns where you might be tempted to suppress the dependency linter.
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 উদাহরণস্বরূপ, ধরুন আপনার একটি Effect আছে page visit log করার জন্য:
 
@@ -743,11 +719,7 @@ function Page({ url }) {
 }
 ```
 
-<<<<<<< HEAD
-`useEffectEvent` React এর একটি stable অংশ হয়ে গেলে, আমরা সুপারিশ করি **কখনও linter suppress করবেন না**।
-=======
-We recommend **never suppressing the linter**.
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
+আমরা সুপারিশ করি **কখনও linter suppress করবেন না**।
 
 Rule suppress করার প্রথম অসুবিধা হল যে React আর আপনাকে সতর্ক করবে না যখন আপনার Effect কে একটি নতুন reactive dependency এর প্রতি "react" করতে হবে যা আপনি আপনার কোডে introduce করেছেন। আগের উদাহরণে, আপনি dependency তে `url` যোগ করেছিলেন *কারণ* React আপনাকে এটি করতে মনে করিয়ে দিয়েছিল। আপনি linter disable করলে সেই Effect এ ভবিষ্যতের কোনো edit এর জন্য আর এই ধরনের reminder পাবেন না। এটি bug এর দিকে নিয়ে যায়।
 
@@ -884,17 +856,7 @@ body {
 
 ### Effect Event এর সীমাবদ্ধতা {/*limitations-of-effect-events*/}
 
-<<<<<<< HEAD
-<Wip>
-
-এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release হয়নি।**
-
-</Wip>
-
 Effect Event আপনি কিভাবে ব্যবহার করতে পারেন তাতে খুবই সীমিত:
-=======
-Effect Events are very limited in how you can use them:
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 * **শুধুমাত্র Effect এর ভিতর থেকে তাদের কল করুন।**
 * **কখনও তাদের অন্য কম্পোনেন্ট বা Hook এ pass করবেন না।**
