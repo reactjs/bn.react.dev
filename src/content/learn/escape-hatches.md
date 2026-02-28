@@ -312,17 +312,7 @@ React একটি linter rule দেয় যা লক্ষ্য করে য
 
 ## Events থেকে Effects আলাদা করা {/*separating-events-from-effects*/}
 
-<<<<<<< HEAD
-<Wip>
-
-এই সেকশনে একটি **গবেষণামূলক API** নিয়ে বিবরণ দেওয়া হয়েছে **যা এখনো React এর কোন স্টেবল ভার্শনে উন্মুক্ত করা হয়নি**।
-
-</Wip>
-
-Event handler-গুলি তখনি পুনরায় চালানো হয় যখন আপনি একই interaction আবার করেন। Event handler এর বিপরীতে, Effects পুনরায় সিঙ্ক্রোনাইজ করে যদি তারা এমন কোন মান read করে যা আগের রেন্ডার থেকে আলাদা, যেমন props বা state এর মান। মাঝে মাঝে, আপনি দুটি আচরণের মিশ্রণ চান: এমন একটি Effect যা কিছু মানের Response এ আবার চলে, কিন্তু অন্যান্যগুলোর বিষয়ে re-run করে না। 
-=======
 Event handlers only re-run when you perform the same interaction again. Unlike event handlers, Effects re-synchronize if any of the values they read, like props or state, are different than during last render. Sometimes, you want a mix of both behaviors: an Effect that re-runs in response to some values but not others.
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 Effect এর মধ্য থাকা সব কোড *reactive.* এটা আবার চলবে যদি এটা re-render এর কারণে পরিবর্তিত কোন মান read করে। উদাহরণস্বরূপ, এই Effect টা চ্যাটের সাথে পুনরায় সংযোগ স্থাপন করবে যদি `roomId` অথবা `theme` এর মান পরিবর্তিত হয়।
 
