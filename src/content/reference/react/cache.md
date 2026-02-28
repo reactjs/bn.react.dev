@@ -64,11 +64,7 @@ The optimization of caching return values based on inputs is known as [_memoizat
 - React will invalidate the cache for all memoized functions for each server request.
 - Each call to `cache` creates a new function. This means that calling `cache` with the same function multiple times will return different memoized functions that do not share the same cache.
 - `cachedFn` will also cache errors. If `fn` throws an error for certain arguments, it will be cached, and the same error is re-thrown when `cachedFn` is called with those same arguments.
-<<<<<<< HEAD
-- `cache` is for use in [Server Components](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components) only.
-=======
 - `cache` is for use in [Server Components](/reference/rsc/server-components) only.
->>>>>>> a1cc2ab4bf06b530f86a7049923c402baf86aca1
 
 ---
 
