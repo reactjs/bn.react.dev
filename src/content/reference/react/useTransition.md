@@ -1254,15 +1254,9 @@ function Router() {
 
 এটি তিনটি কারণে পরামর্শ দেয়া হয়:
 
-<<<<<<< HEAD
-- [ট্রানজিশনগুলি বাধাগ্রস্ত হতে পারে,](#marking-a-state-update-as-a-non-blocking-transition) যা ইউজারকে রি-রেন্ডার সম্পূর্ণ হওয়ার অপেক্ষা না করে অন্য কিছুতে ক্লিক করতে দেয়।
+- [ট্রানজিশনগুলি বাধাগ্রস্ত হতে পারে,](#perform-non-blocking-updates-with-actions) যা ইউজারকে রি-রেন্ডার সম্পূর্ণ হওয়ার অপেক্ষা না করে অন্য কিছুতে ক্লিক করতে দেয়।
 - [ট্রানজিশনগুলি অনাকাঙ্ক্ষিত লোডিং ইন্ডিকেটরগুলি প্রতিরোধ করে,](#preventing-unwanted-loading-indicators) যা ইউজারকে নেভিগেশনে বিভ্রান্তিকর লাফ এড়াতে সাহায্য করে।
 - [ট্রানজিশনগুলি সমস্ত pending actions এর জন্য অপেক্ষা করে](#perform-non-blocking-updates-with-actions) যা ইউজারকে নতুন পৃষ্ঠা দেখানোর আগে side effects সম্পূর্ণ হওয়ার জন্য অপেক্ষা করতে দেয়।
-=======
-- [Transitions are interruptible,](#perform-non-blocking-updates-with-actions) which lets the user click away without waiting for the re-render to complete.
-- [Transitions prevent unwanted loading indicators,](#preventing-unwanted-loading-indicators) which lets the user avoid jarring jumps on navigation.
-- [Transitions wait for all pending actions](#perform-non-blocking-updates-with-actions) which lets the user wait for side effects to complete before the new page is shown.
->>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 এখানে নেভিগেশনের জন্য ট্রানজিশন ব্যবহার করে একটি খুব সহজ রাউটার উদাহরণ দেওয়া হল।
 
