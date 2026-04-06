@@ -8,16 +8,6 @@ title: Server React DOM API
 
 </Intro>
 
----
-
-## Node.js Stream জন্য Server API {/*server-apis-for-nodejs-streams*/}
-
-[Node.js Streams](https://nodejs.org/api/stream.html) সহ এনভায়রনমেন্ট গুলোতে কেবল এই মেথডগুলো পাওয়া যাবেঃ 
-
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটা React ট্রি কে একটা pipeable [Node.js Stream](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
-
----
-
 ## Web Stream এর জন্য Server APIs {/*server-apis-for-web-streams*/}
 
 [Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) সহ এনভায়রনমেন্ট গুলোতে (যার মধ্যে রয়েছে ব্রাউজার, Deno এবং কিছু আধুনিক Edge runtime) কেবল এই মেথডগুলো পাওয়া যাবেঃ
@@ -33,11 +23,11 @@ Node.js also includes these methods for compatibility, but they are not recommen
 </Note>
 ---
 
-## Server APIs for Node.js Streams {/*server-apis-for-nodejs-streams*/}
+## Node.js Stream জন্য Server API {/*server-apis-for-nodejs-streams*/}
 
-These methods are only available in the environments with [Node.js Streams:](https://nodejs.org/api/stream.html)
+[Node.js Streams](https://nodejs.org/api/stream.html) সহ এনভায়রনমেন্ট গুলোতে কেবল এই মেথডগুলো পাওয়া যাবেঃ 
 
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
+* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটা React ট্রি কে একটা pipeable [Node.js Stream](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
 * [`resumeToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) resumes [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
 
 ---
