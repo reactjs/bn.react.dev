@@ -4,10 +4,10 @@
   "routes": [
     {
       "hasSectionHeader": true,
-      "sectionHeader": "GET STARTED"
+      "sectionHeader": "শুরু করুন"
     },
     {
-      "title": "Quick Start",
+      "title": "দ্রুত শুরু",
       "path": "/learn",
       "routes": [
         {
@@ -25,21 +25,21 @@
       "path": "/learn/installation",
       "routes": [
         {
-          "title": "Creating a React App",
+          "title": "একটি React অ্যাপ তৈরি করা",
           "path": "/learn/creating-a-react-app"
         },
         {
-          "title": "Build a React App from Scratch",
+          "title": "শুরু থেকে একটি React অ্যাপ তৈরি করুন",
           "path": "/learn/build-a-react-app-from-scratch"
         },
         {
-          "title": "Add React to an Existing Project",
+          "title": "বিদ্যমান প্রজেক্টে React যোগ করুন",
           "path": "/learn/add-react-to-an-existing-project"
         }
       ]
     },
     {
-      "title": "Setup",
+      "title": "সেটআপ",
       "path": "/learn/setup",
       "routes": [
         {
@@ -47,11 +47,11 @@
           "path": "/learn/editor-setup"
         },
         {
-          "title": "Using TypeScript",
+          "title": "TypeScript ব্যবহার করা",
           "path": "/learn/typescript"
         },
         {
-          "title": "React Developer Tools",
+          "title": "React Developer টুলস",
           "path": "/learn/react-developer-tools"
         }
       ]
@@ -62,58 +62,58 @@
       "canary": true,
       "routes": [
         {
-          "title": "Introduction",
+          "title": "পরিচিতি",
           "path": "/learn/react-compiler/introduction"
         },
         {
-          "title": "Installation",
+          "title": "ইনস্টলেশন",
           "path": "/learn/react-compiler/installation"
         },
         {
-          "title": "Incremental Adoption",
+          "title": "ক্রমবর্ধমান গ্রহণ",
           "path": "/learn/react-compiler/incremental-adoption"
         },
         {
-          "title": "Debugging and Troubleshooting",
+          "title": "ডিবাগিং এবং সমস্যা সমাধান",
           "path": "/learn/react-compiler/debugging"
         }
       ]
     },
     {
       "hasSectionHeader": true,
-      "sectionHeader": "LEARN REACT"
+      "sectionHeader": "REACT শিখুন"
     },
     {
-      "title": "Describing the UI",
+      "title": "UI বর্ণনা করা",
       "tags": [],
       "path": "/learn/describing-the-ui",
       "routes": [
         {
-          "title": "Your First Component",
+          "title": "আপনার প্রথম কম্পোনেন্ট",
           "path": "/learn/your-first-component"
         },
         {
-          "title": "Importing and Exporting Components",
+          "title": "কম্পোনেন্ট Import এবং Export করা",
           "path": "/learn/importing-and-exporting-components"
         },
         {
-          "title": "Writing Markup with JSX",
+          "title": "JSX দিয়ে মার্কআপ লেখা",
           "path": "/learn/writing-markup-with-jsx"
         },
         {
-          "title": "JavaScript in JSX with Curly Braces",
+          "title": "কার্লি ব্রেসের সাথে JSX এ JavaScript",
           "path": "/learn/javascript-in-jsx-with-curly-braces"
         },
         {
-          "title": "Passing Props to a Component",
+          "title": "একটি কম্পোনেন্টে Props পাস করা",
           "path": "/learn/passing-props-to-a-component"
         },
         {
-          "title": "Conditional Rendering",
+          "title": "শর্তসাপেক্ষ রেন্ডারিং",
           "path": "/learn/conditional-rendering"
         },
         {
-          "title": "Rendering Lists",
+          "title": "তালিকা রেন্ডার করা",
           "path": "/learn/rendering-lists"
         },
         {
@@ -121,83 +121,83 @@
           "path": "/learn/keeping-components-pure"
         },
         {
-          "title": "Your UI as a Tree",
+          "title": "একটি Tree হিসাবে আপনার UI",
           "path": "/learn/understanding-your-ui-as-a-tree"
         }
       ]
     },
     {
-      "title": "Adding Interactivity",
+      "title": "ইন্টারঅ্যাক্টিভিটি যোগ করা",
       "path": "/learn/adding-interactivity",
       "tags": [],
       "routes": [
         {
-          "title": "Responding to Events",
+          "title": "Event এ সাড়া দেওয়া",
           "path": "/learn/responding-to-events"
         },
         {
-          "title": "State: A Component's Memory",
+          "title": "State: একটি কম্পোনেন্টের মেমরি",
           "path": "/learn/state-a-components-memory"
         },
         {
-          "title": "Render and Commit",
+          "title": "রেন্ডার এবং Commit",
           "path": "/learn/render-and-commit"
         },
         {
-          "title": "State as a Snapshot",
+          "title": "একটি Snapshot হিসাবে State",
           "path": "/learn/state-as-a-snapshot"
         },
         {
-          "title": "Queueing a Series of State Updates",
+          "title": "State আপডেটের একটি সিরিজ সারিবদ্ধ করা",
           "path": "/learn/queueing-a-series-of-state-updates"
         },
         {
-          "title": "Updating Objects in State",
+          "title": "State এ Object আপডেট করা",
           "path": "/learn/updating-objects-in-state"
         },
         {
-          "title": "Updating Arrays in State",
+          "title": "State এ Array আপডেট করা",
           "path": "/learn/updating-arrays-in-state"
         }
       ]
     },
     {
-      "title": "Managing State",
+      "title": "State পরিচালনা করা",
       "path": "/learn/managing-state",
       "tags": ["intermediate"],
       "routes": [
         {
-          "title": "Reacting to Input with State",
+          "title": "State দিয়ে Input এ সাড়া দেওয়া",
           "path": "/learn/reacting-to-input-with-state"
         },
         {
-          "title": "Choosing the State Structure",
+          "title": "State কাঠামো নির্বাচন করা",
           "path": "/learn/choosing-the-state-structure"
         },
         {
-          "title": "Sharing State Between Components",
+          "title": "কম্পোনেন্টের মধ্যে State শেয়ার করা",
           "path": "/learn/sharing-state-between-components"
         },
         {
-          "title": "Preserving and Resetting State",
+          "title": "State সংরক্ষণ এবং রিসেট করা",
           "path": "/learn/preserving-and-resetting-state"
         },
         {
-          "title": "Extracting State Logic into a Reducer",
+          "title": "State লজিক একটি Reducer এ পৃথক করা",
           "path": "/learn/extracting-state-logic-into-a-reducer"
         },
         {
-          "title": "Passing Data Deeply with Context",
+          "title": "Context দিয়ে গভীরভাবে Data পাস করা",
           "path": "/learn/passing-data-deeply-with-context"
         },
         {
-          "title": "Scaling Up with Reducer and Context",
+          "title": "Reducer এবং Context দিয়ে স্কেল আপ করা",
           "path": "/learn/scaling-up-with-reducer-and-context"
         }
       ]
     },
     {
-      "title": "Escape Hatches",
+      "title": "Escape Hatch সমূহ",
       "path": "/learn/escape-hatches",
       "tags": ["advanced"],
       "routes": [
@@ -210,15 +210,15 @@
           "path": "/learn/manipulating-the-dom-with-refs"
         },
         {
-          "title": "Synchronizing with Effects",
+          "title": "Effect এর সাথে সিঙ্ক্রোনাইজ করা",
           "path": "/learn/synchronizing-with-effects"
         },
         {
-          "title": "You Might Not Need an Effect",
+          "title": "আপনার Effect এর প্রয়োজন নাও হতে পারে",
           "path": "/learn/you-might-not-need-an-effect"
         },
         {
-          "title": "Lifecycle of Reactive Effects",
+          "title": "Reactive Effect এর জীবনচক্র",
           "path": "/learn/lifecycle-of-reactive-effects"
         },
         {

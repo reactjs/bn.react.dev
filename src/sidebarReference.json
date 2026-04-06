@@ -426,7 +426,7 @@
       "sectionHeader": "Legacy APIs"
     },
     {
-      "title": "Legacy React APIs",
+      "title": "পুরাতন React API সমূহ",
       "path": "/reference/react/legacy",
       "routes": [
         {
