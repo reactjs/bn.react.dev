@@ -612,17 +612,7 @@ function ChatRoom({ roomId }) {
 
 ### আপনি কি একটি মান পড়তে চান এর পরিবর্তনের প্রতি "react" না করে? {/*do-you-want-to-read-a-value-without-reacting-to-its-changes*/}
 
-<<<<<<< HEAD
-<Wip>
-
-এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনও React এর একটি stable version এ release** হয়নি।
-
-</Wip>
-
 ধরুন আপনি একটি sound play করতে চান যখন ব্যবহারকারী একটি নতুন message পায় যদি না `isMuted` `true` হয়:
-=======
-Suppose that you want to play a sound when the user receives a new message unless `isMuted` is `true`:
->>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
 
 ```js {3,10-12}
 function ChatRoom({ roomId }) {
