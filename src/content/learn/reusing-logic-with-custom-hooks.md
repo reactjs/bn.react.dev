@@ -1,30 +1,30 @@
 ---
-title: 'Reusing Logic with Custom Hooks'
+title: 'Custom Hook দিয়ে লজিক পুনরায় ব্যবহার করা'
 ---
 
 <Intro>
 
-React comes with several built-in Hooks like `useState`, `useContext`, and `useEffect`. Sometimes, you'll wish that there was a Hook for some more specific purpose: for example, to fetch data, to keep track of whether the user is online, or to connect to a chat room. You might not find these Hooks in React, but you can create your own Hooks for your application's needs.
+React এর সাথে বেশ কিছু built-in Hook আসে যেমন `useState`, `useContext`, এবং `useEffect`। কখনো কখনো, আপনি চাইবেন যে আরো কিছু নির্দিষ্ট উদ্দেশ্যের জন্য একটি Hook থাকুক: উদাহরণস্বরূপ, ডেটা fetch করার জন্য, ইউজার অনলাইন আছে কিনা তা ট্র্যাক করার জন্য, অথবা একটি chat room এ কানেক্ট করার জন্য। আপনি হয়তো React এ এই Hook গুলো খুঁজে পাবেন না, কিন্তু আপনি আপনার অ্যাপ্লিকেশনের প্রয়োজন অনুযায়ী নিজের Hook তৈরি করতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-- What custom Hooks are, and how to write your own
-- How to reuse logic between components
-- How to name and structure your custom Hooks
-- When and why to extract custom Hooks
+- Custom Hook কি, এবং কিভাবে আপনার নিজের লিখবেন
+- কিভাবে কম্পোনেন্টগুলোর মধ্যে লজিক পুনরায় ব্যবহার করবেন
+- কিভাবে আপনার custom Hook এর নাম এবং স্ট্রাকচার করবেন
+- কখন এবং কেন custom Hook extract করবেন
 
 </YouWillLearn>
 
-## Custom Hooks: Sharing logic between components {/*custom-hooks-sharing-logic-between-components*/}
+## Custom Hooks: কম্পোনেন্টগুলোর মধ্যে লজিক শেয়ার করা {/*custom-hooks-sharing-logic-between-components*/}
 
-Imagine you're developing an app that heavily relies on the network (as most apps do). You want to warn the user if their network connection has accidentally gone off while they were using your app. How would you go about it? It seems like you'll need two things in your component:
+কল্পনা করুন আপনি এমন একটি অ্যাপ ডেভেলপ করছেন যা নেটওয়ার্কের উপর অনেক বেশি নির্ভরশীল (যেমন বেশিরভাগ অ্যাপ করে)। আপনি ইউজারকে সতর্ক করতে চান যদি তাদের নেটওয়ার্ক কানেকশন দুর্ঘটনাক্রমে বন্ধ হয়ে যায় যখন তারা আপনার অ্যাপ ব্যবহার করছিল। আপনি এটা কিভাবে করবেন? মনে হচ্ছে আপনার কম্পোনেন্টে দুটি জিনিস প্রয়োজন হবে:
 
-1. A piece of state that tracks whether the network is online.
-2. An Effect that subscribes to the global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events, and updates that state.
+1. একটি state যা ট্র্যাক করে নেটওয়ার্ক অনলাইন আছে কিনা।
+2. একটি Effect যা global [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) এবং [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) event এ সাবস্ক্রাইব করে, এবং সেই state আপডেট করে।
 
-This will keep your component [synchronized](/learn/synchronizing-with-effects) with the network status. You might start with something like this:
+এটি আপনার কম্পোনেন্টকে নেটওয়ার্ক স্ট্যাটাসের সাথে [synchronized](/learn/synchronizing-with-effects) রাখবে। আপনি এরকম কিছু দিয়ে শুরু করতে পারেন:
 
 <Sandpack>
 
@@ -54,11 +54,11 @@ export default function StatusBar() {
 
 </Sandpack>
 
-Try turning your network on and off, and notice how this `StatusBar` updates in response to your actions.
+আপনার নেটওয়ার্ক অন এবং অফ করার চেষ্টা করুন, এবং লক্ষ্য করুন কিভাবে এই `StatusBar` আপনার action এর প্রতিক্রিয়ায় আপডেট হয়।
 
-Now imagine you *also* want to use the same logic in a different component. You want to implement a Save button that will become disabled and show "Reconnecting..." instead of "Save" while the network is off.
+এখন কল্পনা করুন আপনি একটি ভিন্ন কম্পোনেন্টেও একই লজিক ব্যবহার করতে চান। আপনি একটি Save বাটন implement করতে চান যা disabled হয়ে যাবে এবং নেটওয়ার্ক অফ থাকাকালীন "Save" এর পরিবর্তে "Reconnecting..." দেখাবে।
 
-To start, you can copy and paste the `isOnline` state and the Effect into `SaveButton`:
+শুরু করতে, আপনি `isOnline` state এবং Effect টি `SaveButton` এ কপি এবং পেস্ট করতে পারেন:
 
 <Sandpack>
 
@@ -96,13 +96,13 @@ export default function SaveButton() {
 
 </Sandpack>
 
-Verify that, if you turn off the network, the button will change its appearance.
+যাচাই করুন যে, যদি আপনি নেটওয়ার্ক বন্ধ করেন, বাটনটি তার appearance পরিবর্তন করবে।
 
-These two components work fine, but the duplication in logic between them is unfortunate. It seems like even though they have different *visual appearance,* you want to reuse the logic between them.
+এই দুটি কম্পোনেন্ট ঠিকভাবে কাজ করে, কিন্তু তাদের মধ্যে লজিকের duplication দুর্ভাগ্যজনক। মনে হচ্ছে যদিও তাদের ভিন্ন *visual appearance* আছে, আপনি তাদের মধ্যে লজিক পুনরায় ব্যবহার করতে চান।
 
-### Extracting your own custom Hook from a component {/*extracting-your-own-custom-hook-from-a-component*/}
+### একটি কম্পোনেন্ট থেকে আপনার নিজের custom Hook extract করা {/*extracting-your-own-custom-hook-from-a-component*/}
 
-Imagine for a moment that, similar to [`useState`](/reference/react/useState) and [`useEffect`](/reference/react/useEffect), there was a built-in `useOnlineStatus` Hook. Then both of these components could be simplified and you could remove the duplication between them:
+এক মুহূর্তের জন্য কল্পনা করুন যে, [`useState`](/reference/react/useState) এবং [`useEffect`](/reference/react/useEffect) এর মতো, একটি built-in `useOnlineStatus` Hook ছিল। তাহলে এই দুটি কম্পোনেন্টই সরলীকৃত হতে পারত এবং আপনি তাদের মধ্যে duplication সরাতে পারতেন:
 
 ```js {2,7}
 function StatusBar() {
@@ -125,7 +125,7 @@ function SaveButton() {
 }
 ```
 
-Although there is no such built-in Hook, you can write it yourself. Declare a function called `useOnlineStatus` and move all the duplicated code into it from the components you wrote earlier:
+যদিও এরকম কোনো built-in Hook নেই, আপনি নিজেই এটি লিখতে পারেন। `useOnlineStatus` নামে একটি ফাংশন ডিক্লেয়ার করুন এবং আপনার আগে লেখা কম্পোনেন্টগুলো থেকে সমস্ত duplicated কোড এতে সরিয়ে নিন:
 
 ```js {2-16}
 function useOnlineStatus() {
@@ -148,7 +148,8 @@ function useOnlineStatus() {
 }
 ```
 
-At the end of the function, return `isOnline`. This lets your components read that value:
+ফাংশনের শেষে, `isOnline` রিটার্ন করুন। এটি আপনার কম্পোনেন্টগুলোকে সেই value পড়তে দেয়:
+
 
 <Sandpack>
 
@@ -209,89 +210,89 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Verify that switching the network on and off updates both components.
+যাচাই করুন যে নেটওয়ার্ক অন এবং অফ করলে উভয় কম্পোনেন্ট আপডেট হয়।
 
-Now your components don't have as much repetitive logic. **More importantly, the code inside them describes *what they want to do* (use the online status!) rather than *how to do it* (by subscribing to the browser events).**
+এখন আপনার কম্পোনেন্টগুলোতে আর তেমন repetitive লজিক নেই। **আরো গুরুত্বপূর্ণভাবে, তাদের ভিতরের কোড বর্ণনা করে *তারা কি করতে চায়* (অনলাইন স্ট্যাটাস ব্যবহার করুন!) বরং *কিভাবে এটি করতে হবে* (ব্রাউজার event এ সাবস্ক্রাইব করে) তার পরিবর্তে।**
 
-When you extract logic into custom Hooks, you can hide the gnarly details of how you deal with some external system or a browser API. The code of your components expresses your intent, not the implementation.
+যখন আপনি লজিক custom Hook এ extract করেন, আপনি কিছু external system বা browser API এর সাথে কিভাবে ডিল করেন তার জটিল বিস্তারিত লুকিয়ে রাখতে পারেন। আপনার কম্পোনেন্টের কোড আপনার intent প্রকাশ করে, implementation নয়।
 
-### Hook names always start with `use` {/*hook-names-always-start-with-use*/}
+### Hook এর নাম সবসময় `use` দিয়ে শুরু হয় {/*hook-names-always-start-with-use*/}
 
-React applications are built from components. Components are built from Hooks, whether built-in or custom. You'll likely often use custom Hooks created by others, but occasionally you might write one yourself!
+React অ্যাপ্লিকেশনগুলো কম্পোনেন্ট থেকে তৈরি হয়। কম্পোনেন্টগুলো Hook থেকে তৈরি হয়, built-in হোক বা custom। আপনি সম্ভবত প্রায়ই অন্যদের তৈরি custom Hook ব্যবহার করবেন, কিন্তু মাঝে মাঝে আপনি নিজেও একটি লিখতে পারেন!
 
-You must follow these naming conventions:
+আপনাকে অবশ্যই এই naming convention গুলো অনুসরণ করতে হবে:
 
-1. **React component names must start with a capital letter,** like `StatusBar` and `SaveButton`. React components also need to return something that React knows how to display, like a piece of JSX.
-2. **Hook names must start with `use` followed by a capital letter,** like [`useState`](/reference/react/useState) (built-in) or `useOnlineStatus` (custom, like earlier on the page). Hooks may return arbitrary values.
+1. **React কম্পোনেন্টের নাম অবশ্যই একটি capital letter দিয়ে শুরু হতে হবে,** যেমন `StatusBar` এবং `SaveButton`। React কম্পোনেন্টগুলোকে এমন কিছু রিটার্ন করতে হবে যা React প্রদর্শন করতে জানে, যেমন JSX এর একটি অংশ।
+2. **Hook এর নাম অবশ্যই `use` দিয়ে শুরু হতে হবে এবং তারপর একটি capital letter,** যেমন [`useState`](/reference/react/useState) (built-in) বা `useOnlineStatus` (custom, যেমন পৃষ্ঠার আগে)। Hook যেকোনো arbitrary value রিটার্ন করতে পারে।
 
-This convention guarantees that you can always look at a component and know where its state, Effects, and other React features might "hide". For example, if you see a `getColor()` function call inside your component, you can be sure that it can't possibly contain React state inside because its name doesn't start with `use`. However, a function call like `useOnlineStatus()` will most likely contain calls to other Hooks inside!
+এই convention গ্যারান্টি দেয় যে আপনি সবসময় একটি কম্পোনেন্টের দিকে তাকিয়ে জানতে পারবেন কোথায় এর state, Effect, এবং অন্যান্য React ফিচার "লুকিয়ে" থাকতে পারে। উদাহরণস্বরূপ, যদি আপনি আপনার কম্পোনেন্টের ভিতরে একটি `getColor()` ফাংশন কল দেখেন, আপনি নিশ্চিত হতে পারেন যে এটির ভিতরে React state থাকতে পারে না কারণ এর নাম `use` দিয়ে শুরু হয় না। তবে, একটি ফাংশন কল যেমন `useOnlineStatus()` সম্ভবত ভিতরে অন্যান্য Hook এর কল ধারণ করবে!
 
 <Note>
 
-If your linter is [configured for React,](/learn/editor-setup#linting) it will enforce this naming convention. Scroll up to the sandbox above and rename `useOnlineStatus` to `getOnlineStatus`. Notice that the linter won't allow you to call `useState` or `useEffect` inside of it anymore. Only Hooks and components can call other Hooks!
+যদি আপনার linter [React এর জন্য configured](/learn/editor-setup#linting) থাকে, এটি এই naming convention enforce করবে। উপরের sandbox এ স্ক্রল করুন এবং `useOnlineStatus` কে `getOnlineStatus` এ rename করুন। লক্ষ্য করুন যে linter আপনাকে আর এর ভিতরে `useState` বা `useEffect` কল করতে দেবে না। শুধুমাত্র Hook এবং কম্পোনেন্ট অন্যান্য Hook কল করতে পারে!
 
 </Note>
 
 <DeepDive>
 
-#### Should all functions called during rendering start with the use prefix? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
+#### rendering এর সময় কল করা সমস্ত ফাংশন কি use prefix দিয়ে শুরু হওয়া উচিত? {/*should-all-functions-called-during-rendering-start-with-the-use-prefix*/}
 
-No. Functions that don't *call* Hooks don't need to *be* Hooks.
+না। যে ফাংশনগুলো Hook *কল করে না* তাদের Hook *হতে হবে না*।
 
-If your function doesn't call any Hooks, avoid the `use` prefix. Instead, write it as a regular function *without* the `use` prefix. For example, `useSorted` below doesn't call Hooks, so call it `getSorted` instead:
+যদি আপনার ফাংশন কোনো Hook কল না করে, `use` prefix এড়িয়ে চলুন। পরিবর্তে, এটিকে একটি regular ফাংশন হিসাবে লিখুন `use` prefix *ছাড়া*। উদাহরণস্বরূপ, নিচের `useSorted` Hook কল করে না, তাই এটিকে `getSorted` বলুন:
 
 ```js
-// 🔴 Avoid: A Hook that doesn't use Hooks
+// 🔴 এড়িয়ে চলুন: একটি Hook যা Hook ব্যবহার করে না
 function useSorted(items) {
   return items.slice().sort();
 }
 
-// ✅ Good: A regular function that doesn't use Hooks
+// ✅ ভালো: একটি regular ফাংশন যা Hook ব্যবহার করে না
 function getSorted(items) {
   return items.slice().sort();
 }
 ```
 
-This ensures that your code can call this regular function anywhere, including conditions:
+এটি নিশ্চিত করে যে আপনার কোড এই regular ফাংশনকে যেকোনো জায়গায় কল করতে পারে, condition সহ:
 
 ```js
 function List({ items, shouldSort }) {
   let displayedItems = items;
   if (shouldSort) {
-    // ✅ It's ok to call getSorted() conditionally because it's not a Hook
+    // ✅ conditionally getSorted() কল করা ঠিক আছে কারণ এটি একটি Hook নয়
     displayedItems = getSorted(items);
   }
   // ...
 }
 ```
 
-You should give `use` prefix to a function (and thus make it a Hook) if it uses at least one Hook inside of it:
+আপনার একটি ফাংশনকে `use` prefix দেওয়া উচিত (এবং এইভাবে এটিকে একটি Hook বানানো উচিত) যদি এটি ভিতরে অন্তত একটি Hook ব্যবহার করে:
 
 ```js
-// ✅ Good: A Hook that uses other Hooks
+// ✅ ভালো: একটি Hook যা অন্যান্য Hook ব্যবহার করে
 function useAuth() {
   return useContext(Auth);
 }
 ```
 
-Technically, this isn't enforced by React. In principle, you could make a Hook that doesn't call other Hooks. This is often confusing and limiting so it's best to avoid that pattern. However, there may be rare cases where it is helpful. For example, maybe your function doesn't use any Hooks right now, but you plan to add some Hook calls to it in the future. Then it makes sense to name it with the `use` prefix:
+প্রযুক্তিগতভাবে, এটি React দ্বারা enforce করা হয় না। নীতিগতভাবে, আপনি এমন একটি Hook তৈরি করতে পারেন যা অন্যান্য Hook কল করে না। এটি প্রায়ই বিভ্রান্তিকর এবং সীমাবদ্ধ তাই সেই pattern এড়ানো ভালো। তবে, এমন বিরল ক্ষেত্রে থাকতে পারে যেখানে এটি সহায়ক। উদাহরণস্বরূপ, হয়তো আপনার ফাংশন এখন কোনো Hook ব্যবহার করে না, কিন্তু আপনি ভবিষ্যতে এতে কিছু Hook কল যোগ করার পরিকল্পনা করছেন। তাহলে এটিকে `use` prefix দিয়ে নাম দেওয়া অর্থপূর্ণ:
 
 ```js {3-4}
-// ✅ Good: A Hook that will likely use some other Hooks later
+// ✅ ভালো: একটি Hook যা সম্ভবত পরে কিছু অন্যান্য Hook ব্যবহার করবে
 function useAuth() {
-  // TODO: Replace with this line when authentication is implemented:
+  // TODO: authentication implement হলে এই লাইন দিয়ে প্রতিস্থাপন করুন:
   // return useContext(Auth);
   return TEST_USER;
 }
 ```
 
-Then components won't be able to call it conditionally. This will become important when you actually add Hook calls inside. If you don't plan to use Hooks inside it (now or later), don't make it a Hook.
+তাহলে কম্পোনেন্টগুলো এটিকে conditionally কল করতে পারবে না। এটি গুরুত্বপূর্ণ হয়ে উঠবে যখন আপনি আসলে ভিতরে Hook কল যোগ করবেন। যদি আপনি এর ভিতরে Hook ব্যবহার করার পরিকল্পনা না করেন (এখন বা পরে), এটিকে একটি Hook বানাবেন না।
 
 </DeepDive>
 
-### Custom Hooks let you share stateful logic, not state itself {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
+### Custom Hook আপনাকে stateful লজিক শেয়ার করতে দেয়, state নিজেই নয় {/*custom-hooks-let-you-share-stateful-logic-not-state-itself*/}
 
-In the earlier example, when you turned the network on and off, both components updated together. However, it's wrong to think that a single `isOnline` state variable is shared between them. Look at this code:
+আগের উদাহরণে, যখন আপনি নেটওয়ার্ক অন এবং অফ করেছিলেন, উভয় কম্পোনেন্ট একসাথে আপডেট হয়েছিল। তবে, এটি ভাবা ভুল যে একটি একক `isOnline` state variable তাদের মধ্যে শেয়ার করা হয়। এই কোডটি দেখুন:
 
 ```js {2,7}
 function StatusBar() {
@@ -305,7 +306,7 @@ function SaveButton() {
 }
 ```
 
-It works the same way as before you extracted the duplication:
+এটি আগের মতোই কাজ করে যেভাবে আপনি duplication extract করার আগে করেছিলেন:
 
 ```js {2-5,10-13}
 function StatusBar() {
@@ -325,9 +326,9 @@ function SaveButton() {
 }
 ```
 
-These are two completely independent state variables and Effects! They happened to have the same value at the same time because you synchronized them with the same external value (whether the network is on).
+এগুলো দুটি সম্পূর্ণ স্বাধীন state variable এবং Effect! তারা একই সময়ে একই value পেয়েছিল কারণ আপনি তাদের একই external value (নেটওয়ার্ক অন আছে কিনা) এর সাথে synchronized করেছিলেন।
 
-To better illustrate this, we'll need a different example. Consider this `Form` component:
+এটি আরো ভালোভাবে ব্যাখ্যা করতে, আমাদের একটি ভিন্ন উদাহরণ প্রয়োজন। এই `Form` কম্পোনেন্টটি বিবেচনা করুন:
 
 <Sandpack>
 
@@ -369,13 +370,13 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-There's some repetitive logic for each form field:
+প্রতিটি form field এর জন্য কিছু repetitive লজিক আছে:
 
-1. There's a piece of state (`firstName` and `lastName`).
-1. There's a change handler (`handleFirstNameChange` and `handleLastNameChange`).
-1. There's a piece of JSX that specifies the `value` and `onChange` attributes for that input.
+1. একটি state আছে (`firstName` এবং `lastName`)।
+1. একটি change handler আছে (`handleFirstNameChange` এবং `handleLastNameChange`)।
+1. JSX এর একটি অংশ আছে যা সেই input এর জন্য `value` এবং `onChange` attribute নির্দিষ্ট করে।
 
-You can extract the repetitive logic into this `useFormInput` custom Hook:
+আপনি repetitive লজিক এই `useFormInput` custom Hook এ extract করতে পারেন:
 
 <Sandpack>
 
@@ -428,9 +429,9 @@ input { margin-left: 10px; }
 
 </Sandpack>
 
-Notice that it only declares *one* state variable called `value`.
+লক্ষ্য করুন এটি শুধুমাত্র `value` নামে *একটি* state variable ডিক্লেয়ার করে।
 
-However, the `Form` component calls `useFormInput` *two times:*
+তবে, `Form` কম্পোনেন্ট `useFormInput` কে *দুইবার* কল করে:
 
 ```js
 function Form() {
@@ -439,17 +440,18 @@ function Form() {
   // ...
 ```
 
-This is why it works like declaring two separate state variables!
+এই কারণেই এটি দুটি আলাদা state variable ডিক্লেয়ার করার মতো কাজ করে!
 
-**Custom Hooks let you share *stateful logic* but not *state itself.* Each call to a Hook is completely independent from every other call to the same Hook.** This is why the two sandboxes above are completely equivalent. If you'd like, scroll back up and compare them. The behavior before and after extracting a custom Hook is identical.
+**Custom Hook আপনাকে *stateful লজিক* শেয়ার করতে দেয় কিন্তু *state নিজেই* নয়। একটি Hook এর প্রতিটি কল একই Hook এর অন্য প্রতিটি কল থেকে সম্পূর্ণ স্বাধীন।** এই কারণেই উপরের দুটি sandbox সম্পূর্ণ সমতুল্য। যদি চান, উপরে স্ক্রল করে তাদের তুলনা করুন। custom Hook extract করার আগে এবং পরে আচরণ অভিন্ন।
 
-When you need to share the state itself between multiple components, [lift it up and pass it down](/learn/sharing-state-between-components) instead.
+যখন আপনার একাধিক কম্পোনেন্টের মধ্যে state নিজেই শেয়ার করার প্রয়োজন হয়, পরিবর্তে [এটি উপরে তুলুন এবং নিচে পাস করুন](/learn/sharing-state-between-components)।
 
-## Passing reactive values between Hooks {/*passing-reactive-values-between-hooks*/}
 
-The code inside your custom Hooks will re-run during every re-render of your component. This is why, like components, custom Hooks [need to be pure.](/learn/keeping-components-pure) Think of custom Hooks' code as part of your component's body!
+## Hook এর মধ্যে reactive value পাস করা {/*passing-reactive-values-between-hooks*/}
 
-Because custom Hooks re-render together with your component, they always receive the latest props and state. To see what this means, consider this chat room example. Change the server URL or the chat room:
+আপনার custom Hook এর ভিতরের কোড আপনার কম্পোনেন্টের প্রতিটি re-render এর সময় পুনরায় চলবে। এই কারণেই, কম্পোনেন্টের মতো, custom Hook [pure হতে হবে।](/learn/keeping-components-pure) custom Hook এর কোডকে আপনার কম্পোনেন্টের body এর অংশ হিসাবে ভাবুন!
+
+যেহেতু custom Hook আপনার কম্পোনেন্টের সাথে একসাথে re-render হয়, তারা সবসময় সর্বশেষ props এবং state পায়। এর অর্থ কি তা দেখতে, এই chat room উদাহরণটি বিবেচনা করুন। server URL বা chat room পরিবর্তন করুন:
 
 <Sandpack>
 
@@ -599,9 +601,9 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-When you change `serverUrl` or `roomId`, the Effect ["reacts" to your changes](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) and re-synchronizes. You can tell by the console messages that the chat re-connects every time that you change your Effect's dependencies.
+যখন আপনি `serverUrl` বা `roomId` পরিবর্তন করেন, Effect আপনার পরিবর্তনের প্রতি ["react" করে](/learn/lifecycle-of-reactive-effects#effects-react-to-reactive-values) এবং re-synchronize হয়। আপনি console message দ্বারা বলতে পারেন যে chat প্রতিবার re-connect হয় যখন আপনি আপনার Effect এর dependency পরিবর্তন করেন।
 
-Now move the Effect's code into a custom Hook:
+এখন Effect এর কোড একটি custom Hook এ সরান:
 
 ```js {2-13}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -620,7 +622,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-This lets your `ChatRoom` component call your custom Hook without worrying about how it works inside:
+এটি আপনার `ChatRoom` কম্পোনেন্টকে আপনার custom Hook কল করতে দেয় এটি ভিতরে কিভাবে কাজ করে তা নিয়ে চিন্তা না করে:
 
 ```js {4-7}
 export default function ChatRoom({ roomId }) {
@@ -643,9 +645,9 @@ export default function ChatRoom({ roomId }) {
 }
 ```
 
-This looks much simpler! (But it does the same thing.)
+এটি অনেক সহজ দেখাচ্ছে! (কিন্তু এটি একই কাজ করে।)
 
-Notice that the logic *still responds* to prop and state changes. Try editing the server URL or the selected room:
+লক্ষ্য করুন যে লজিক *এখনও prop এবং state পরিবর্তনের প্রতি সাড়া দেয়*। server URL বা selected room edit করার চেষ্টা করুন:
 
 <Sandpack>
 
@@ -807,7 +809,7 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how you're taking the return value of one Hook:
+লক্ষ্য করুন কিভাবে আপনি একটি Hook এর return value নিচ্ছেন:
 
 ```js {2}
 export default function ChatRoom({ roomId }) {
@@ -820,7 +822,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-and passing it as an input to another Hook:
+এবং এটি অন্য একটি Hook এ input হিসাবে পাস করছেন:
 
 ```js {6}
 export default function ChatRoom({ roomId }) {
@@ -833,17 +835,17 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-Every time your `ChatRoom` component re-renders, it passes the latest `roomId` and `serverUrl` to your Hook. This is why your Effect re-connects to the chat whenever their values are different after a re-render. (If you ever worked with audio or video processing software, chaining Hooks like this might remind you of chaining visual or audio effects. It's as if the output of `useState` "feeds into" the input of the `useChatRoom`.)
+প্রতিবার আপনার `ChatRoom` কম্পোনেন্ট re-render হয়, এটি সর্বশেষ `roomId` এবং `serverUrl` আপনার Hook এ পাস করে। এই কারণেই আপনার Effect chat এ re-connect হয় যখনই তাদের value একটি re-render এর পরে ভিন্ন হয়। (যদি আপনি কখনো audio বা video processing software এর সাথে কাজ করে থাকেন, এভাবে Hook chain করা আপনাকে visual বা audio effect chain করার কথা মনে করিয়ে দিতে পারে। এটি যেন `useState` এর output `useChatRoom` এর input এ "feeds into" করে।)
 
-### Passing event handlers to custom Hooks {/*passing-event-handlers-to-custom-hooks*/}
+### custom Hook এ event handler পাস করা {/*passing-event-handlers-to-custom-hooks*/}
 
 <Wip>
 
-This section describes an **experimental API that has not yet been released** in a stable version of React.
+এই অনুচ্ছেদটি একটি **experimental API বর্ণনা করে যা এখনো React এর stable version এ release** হয়নি।
 
 </Wip>
 
-As you start using `useChatRoom` in more components, you might want to let components customize its behavior. For example, currently, the logic for what to do when a message arrives is hardcoded inside the Hook:
+যখন আপনি আরো কম্পোনেন্টে `useChatRoom` ব্যবহার করা শুরু করবেন, আপনি হয়তো কম্পোনেন্টগুলোকে এর আচরণ customize করতে দিতে চাইবেন। উদাহরণস্বরূপ, বর্তমানে, একটি message আসলে কি করতে হবে তার লজিক Hook এর ভিতরে hardcoded আছে:
 
 ```js {9-11}
 export function useChatRoom({ serverUrl, roomId }) {
@@ -862,7 +864,7 @@ export function useChatRoom({ serverUrl, roomId }) {
 }
 ```
 
-Let's say you want to move this logic back to your component:
+ধরা যাক আপনি এই লজিক আপনার কম্পোনেন্টে ফিরিয়ে নিতে চান:
 
 ```js {7-9}
 export default function ChatRoom({ roomId }) {
@@ -878,7 +880,7 @@ export default function ChatRoom({ roomId }) {
   // ...
 ```
 
-To make this work, change your custom Hook to take `onReceiveMessage` as one of its named options:
+এটি কাজ করানোর জন্য, আপনার custom Hook কে `onReceiveMessage` কে এর named option গুলোর একটি হিসাবে নিতে পরিবর্তন করুন:
 
 ```js {1,10,13}
 export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
@@ -893,13 +895,13 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onReceiveMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl, onReceiveMessage]); // ✅ All dependencies declared
+  }, [roomId, serverUrl, onReceiveMessage]); // ✅ সমস্ত dependency ডিক্লেয়ার করা হয়েছে
 }
 ```
 
-This will work, but there's one more improvement you can do when your custom Hook accepts event handlers.
+এটি কাজ করবে, কিন্তু আরো একটি উন্নতি আছে যা আপনি করতে পারেন যখন আপনার custom Hook event handler গ্রহণ করে।
 
-Adding a dependency on `onReceiveMessage` is not ideal because it will cause the chat to re-connect every time the component re-renders. [Wrap this event handler into an Effect Event to remove it from the dependencies:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
+`onReceiveMessage` এ একটি dependency যোগ করা আদর্শ নয় কারণ এটি প্রতিবার কম্পোনেন্ট re-render হলে chat কে re-connect করবে। [এই event handler কে একটি Effect Event এ wrap করুন এটি dependency থেকে সরাতে:](/learn/removing-effect-dependencies#wrapping-an-event-handler-from-the-props)
 
 ```js {1,4,5,15,18}
 import { useEffect, useEffectEvent } from 'react';
@@ -919,11 +921,12 @@ export function useChatRoom({ serverUrl, roomId, onReceiveMessage }) {
       onMessage(msg);
     });
     return () => connection.disconnect();
-  }, [roomId, serverUrl]); // ✅ All dependencies declared
+  }, [roomId, serverUrl]); // ✅ সমস্ত dependency ডিক্লেয়ার করা হয়েছে
 }
 ```
 
-Now the chat won't re-connect every time that the `ChatRoom` component re-renders. Here is a fully working demo of passing an event handler to a custom Hook that you can play with:
+এখন `ChatRoom` কম্পোনেন্ট প্রতিবার re-render হলে chat re-connect হবে না। এখানে একটি custom Hook এ event handler পাস করার একটি সম্পূর্ণ কার্যকর demo আছে যা আপনি নিয়ে খেলতে পারেন:
+
 
 <Sandpack>
 
@@ -1091,20 +1094,20 @@ button { margin-left: 10px; }
 
 </Sandpack>
 
-Notice how you no longer need to know *how* `useChatRoom` works in order to use it. You could add it to any other component, pass any other options, and it would work the same way. That's the power of custom Hooks.
+লক্ষ্য করুন কিভাবে আপনার আর জানার প্রয়োজন নেই *কিভাবে* `useChatRoom` কাজ করে এটি ব্যবহার করার জন্য। আপনি এটি অন্য যেকোনো কম্পোনেন্টে যোগ করতে পারেন, অন্য যেকোনো option পাস করতে পারেন, এবং এটি একইভাবে কাজ করবে। এটাই custom Hook এর শক্তি।
 
-## When to use custom Hooks {/*when-to-use-custom-hooks*/}
+## কখন custom Hook ব্যবহার করবেন {/*when-to-use-custom-hooks*/}
 
-You don't need to extract a custom Hook for every little duplicated bit of code. Some duplication is fine. For example, extracting a `useFormInput` Hook to wrap a single `useState` call like earlier is probably unnecessary.
+আপনার প্রতিটি ছোট duplicated কোডের জন্য একটি custom Hook extract করার প্রয়োজন নেই। কিছু duplication ঠিক আছে। উদাহরণস্বরূপ, আগের মতো একটি একক `useState` কল wrap করার জন্য একটি `useFormInput` Hook extract করা সম্ভবত অপ্রয়োজনীয়।
 
-However, whenever you write an Effect, consider whether it would be clearer to also wrap it in a custom Hook. [You shouldn't need Effects very often,](/learn/you-might-not-need-an-effect) so if you're writing one, it means that you need to "step outside React" to synchronize with some external system or to do something that React doesn't have a built-in API for. Wrapping it into a custom Hook lets you precisely communicate your intent and how the data flows through it.
+তবে, যখনই আপনি একটি Effect লিখেন, বিবেচনা করুন এটি একটি custom Hook এ wrap করাও কি আরো পরিষ্কার হবে। [আপনার খুব বেশি Effect এর প্রয়োজন হওয়া উচিত নয়,](/learn/you-might-not-need-an-effect) তাই যদি আপনি একটি লিখছেন, এর মানে হল আপনার "React এর বাইরে পা রাখতে" হবে কোনো external system এর সাথে synchronize করতে বা এমন কিছু করতে যার জন্য React এর কোনো built-in API নেই। এটি একটি custom Hook এ wrap করা আপনাকে সুনির্দিষ্টভাবে আপনার intent এবং কিভাবে ডেটা এর মধ্য দিয়ে প্রবাহিত হয় তা communicate করতে দেয়।
 
-For example, consider a `ShippingForm` component that displays two dropdowns: one shows the list of cities, and another shows the list of areas in the selected city. You might start with some code that looks like this:
+উদাহরণস্বরূপ, একটি `ShippingForm` কম্পোনেন্ট বিবেচনা করুন যা দুটি dropdown প্রদর্শন করে: একটি city এর তালিকা দেখায়, এবং অন্যটি selected city এর area এর তালিকা দেখায়। আপনি এরকম কিছু কোড দিয়ে শুরু করতে পারেন:
 
 ```js {3-16,20-35}
 function ShippingForm({ country }) {
   const [cities, setCities] = useState(null);
-  // This Effect fetches cities for a country
+  // এই Effect একটি country এর জন্য city fetch করে
   useEffect(() => {
     let ignore = false;
     fetch(`/api/cities?country=${country}`)
@@ -1121,7 +1124,7 @@ function ShippingForm({ country }) {
 
   const [city, setCity] = useState(null);
   const [areas, setAreas] = useState(null);
-  // This Effect fetches areas for the selected city
+  // এই Effect selected city এর জন্য area fetch করে
   useEffect(() => {
     if (city) {
       let ignore = false;
@@ -1141,7 +1144,7 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Although this code is quite repetitive, [it's correct to keep these Effects separate from each other.](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) They synchronize two different things, so you shouldn't merge them into one Effect. Instead, you can simplify the `ShippingForm` component above by extracting the common logic between them into your own `useData` Hook:
+যদিও এই কোড বেশ repetitive, [এই Effect গুলো একে অপর থেকে আলাদা রাখা সঠিক।](/learn/removing-effect-dependencies#is-your-effect-doing-several-unrelated-things) তারা দুটি ভিন্ন জিনিস synchronize করে, তাই আপনার তাদের একটি Effect এ merge করা উচিত নয়। পরিবর্তে, আপনি উপরের `ShippingForm` কম্পোনেন্ট সরলীকৃত করতে পারেন তাদের মধ্যে common লজিক আপনার নিজের `useData` Hook এ extract করে:
 
 ```js {2-18}
 function useData(url) {
@@ -1165,7 +1168,7 @@ function useData(url) {
 }
 ```
 
-Now you can replace both Effects in the `ShippingForm` components with calls to `useData`:
+এখন আপনি `ShippingForm` কম্পোনেন্টে উভয় Effect কে `useData` এর কল দিয়ে প্রতিস্থাপন করতে পারেন:
 
 ```js {2,4}
 function ShippingForm({ country }) {
@@ -1175,39 +1178,39 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-Extracting a custom Hook makes the data flow explicit. You feed the `url` in and you get the `data` out. By "hiding" your Effect inside `useData`, you also prevent someone working on the `ShippingForm` component from adding [unnecessary dependencies](/learn/removing-effect-dependencies) to it. With time, most of your app's Effects will be in custom Hooks.
+একটি custom Hook extract করা data flow কে explicit করে তোলে। আপনি `url` feed করেন এবং আপনি `data` পান। আপনার Effect কে `useData` এর ভিতরে "লুকিয়ে" রেখে, আপনি `ShippingForm` কম্পোনেন্টে কাজ করা কাউকে এতে [অপ্রয়োজনীয় dependency](/learn/removing-effect-dependencies) যোগ করা থেকেও বিরত রাখেন। সময়ের সাথে সাথে, আপনার অ্যাপের বেশিরভাগ Effect custom Hook এ থাকবে।
 
 <DeepDive>
 
-#### Keep your custom Hooks focused on concrete high-level use cases {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
+#### আপনার custom Hook কে concrete high-level use case এ focused রাখুন {/*keep-your-custom-hooks-focused-on-concrete-high-level-use-cases*/}
 
-Start by choosing your custom Hook's name. If you struggle to pick a clear name, it might mean that your Effect is too coupled to the rest of your component's logic, and is not yet ready to be extracted.
+আপনার custom Hook এর নাম বেছে নেওয়া দিয়ে শুরু করুন। যদি আপনি একটি পরিষ্কার নাম বাছাই করতে সংগ্রাম করেন, এর মানে হতে পারে যে আপনার Effect আপনার কম্পোনেন্টের বাকি লজিকের সাথে খুব বেশি coupled, এবং এখনো extract করার জন্য প্রস্তুত নয়।
 
-Ideally, your custom Hook's name should be clear enough that even a person who doesn't write code often could have a good guess about what your custom Hook does, what it takes, and what it returns:
+আদর্শভাবে, আপনার custom Hook এর নাম যথেষ্ট পরিষ্কার হওয়া উচিত যাতে এমন একজন ব্যক্তি যিনি প্রায়ই কোড লিখেন না তিনিও আপনার custom Hook কি করে, কি নেয়, এবং কি রিটার্ন করে সে সম্পর্কে একটি ভালো অনুমান করতে পারেন:
 
 * ✅ `useData(url)`
 * ✅ `useImpressionLog(eventName, extraData)`
 * ✅ `useChatRoom(options)`
 
-When you synchronize with an external system, your custom Hook name may be more technical and use jargon specific to that system. It's good as long as it would be clear to a person familiar with that system:
+যখন আপনি একটি external system এর সাথে synchronize করেন, আপনার custom Hook এর নাম আরো technical হতে পারে এবং সেই system এর নির্দিষ্ট jargon ব্যবহার করতে পারে। এটি ভালো যতক্ষণ এটি সেই system এর সাথে পরিচিত একজন ব্যক্তির কাছে পরিষ্কার হবে:
 
 * ✅ `useMediaQuery(query)`
 * ✅ `useSocket(url)`
 * ✅ `useIntersectionObserver(ref, options)`
 
-**Keep custom Hooks focused on concrete high-level use cases.** Avoid creating and using custom "lifecycle" Hooks that act as alternatives and convenience wrappers for the `useEffect` API itself:
+**custom Hook কে concrete high-level use case এ focused রাখুন।** custom "lifecycle" Hook তৈরি এবং ব্যবহার করা এড়িয়ে চলুন যা `useEffect` API নিজেই এর বিকল্প এবং convenience wrapper হিসাবে কাজ করে:
 
 * 🔴 `useMount(fn)`
 * 🔴 `useEffectOnce(fn)`
 * 🔴 `useUpdateEffect(fn)`
 
-For example, this `useMount` Hook tries to ensure some code only runs "on mount":
+উদাহরণস্বরূপ, এই `useMount` Hook নিশ্চিত করার চেষ্টা করে যে কিছু কোড শুধুমাত্র "on mount" এ চলে:
 
 ```js {4-5,14-15}
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // 🔴 Avoid: using custom "lifecycle" Hooks
+  // 🔴 এড়িয়ে চলুন: custom "lifecycle" Hook ব্যবহার করা
   useMount(() => {
     const connection = createConnection({ roomId, serverUrl });
     connection.connect();
@@ -1217,7 +1220,7 @@ function ChatRoom({ roomId }) {
   // ...
 }
 
-// 🔴 Avoid: creating custom "lifecycle" Hooks
+// 🔴 এড়িয়ে চলুন: custom "lifecycle" Hook তৈরি করা
 function useMount(fn) {
   useEffect(() => {
     fn();
@@ -1225,15 +1228,15 @@ function useMount(fn) {
 }
 ```
 
-**Custom "lifecycle" Hooks like `useMount` don't fit well into the React paradigm.** For example, this code example has a mistake (it doesn't "react" to `roomId` or `serverUrl` changes), but the linter won't warn you about it because the linter only checks direct `useEffect` calls. It won't know about your Hook.
+**custom "lifecycle" Hook যেমন `useMount` React paradigm এ ভালোভাবে fit করে না।** উদাহরণস্বরূপ, এই কোড উদাহরণে একটি ভুল আছে (এটি `roomId` বা `serverUrl` পরিবর্তনের প্রতি "react" করে না), কিন্তু linter আপনাকে এ সম্পর্কে সতর্ক করবে না কারণ linter শুধুমাত্র সরাসরি `useEffect` কল চেক করে। এটি আপনার Hook সম্পর্কে জানবে না।
 
-If you're writing an Effect, start by using the React API directly:
+যদি আপনি একটি Effect লিখছেন, React API সরাসরি ব্যবহার করে শুরু করুন:
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Good: two raw Effects separated by purpose
+  // ✅ ভালো: উদ্দেশ্য অনুযায়ী আলাদা করা দুটি raw Effect
 
   useEffect(() => {
     const connection = createConnection({ serverUrl, roomId });
@@ -1249,28 +1252,29 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-Then, you can (but don't have to) extract custom Hooks for different high-level use cases:
+তারপর, আপনি (কিন্তু করতে হবে না) বিভিন্ন high-level use case এর জন্য custom Hook extract করতে পারেন:
 
 ```js
 function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
 
-  // ✅ Great: custom Hooks named after their purpose
+  // ✅ দুর্দান্ত: তাদের উদ্দেশ্য অনুযায়ী নামকরণ করা custom Hook
   useChatRoom({ serverUrl, roomId });
   useImpressionLog('visit_chat', { roomId });
   // ...
 }
 ```
 
-**A good custom Hook makes the calling code more declarative by constraining what it does.** For example, `useChatRoom(options)` can only connect to the chat room, while `useImpressionLog(eventName, extraData)` can only send an impression log to the analytics. If your custom Hook API doesn't constrain the use cases and is very abstract, in the long run it's likely to introduce more problems than it solves.
+**একটি ভালো custom Hook calling কোডকে আরো declarative করে তোলে এটি কি করে তা সীমাবদ্ধ করে।** উদাহরণস্বরূপ, `useChatRoom(options)` শুধুমাত্র chat room এ connect করতে পারে, যখন `useImpressionLog(eventName, extraData)` শুধুমাত্র analytics এ একটি impression log পাঠাতে পারে। যদি আপনার custom Hook API use case সীমাবদ্ধ না করে এবং খুব abstract হয়, দীর্ঘমেয়াদে এটি সম্ভবত যত সমস্যা সমাধান করে তার চেয়ে বেশি সমস্যা তৈরি করবে।
 
 </DeepDive>
 
-### Custom Hooks help you migrate to better patterns {/*custom-hooks-help-you-migrate-to-better-patterns*/}
+### Custom Hook আপনাকে better pattern এ migrate করতে সাহায্য করে {/*custom-hooks-help-you-migrate-to-better-patterns*/}
 
-Effects are an ["escape hatch"](/learn/escape-hatches): you use them when you need to "step outside React" and when there is no better built-in solution for your use case. With time, the React team's goal is to reduce the number of the Effects in your app to the minimum by providing more specific solutions to more specific problems. Wrapping your Effects in custom Hooks makes it easier to upgrade your code when these solutions become available.
+Effect একটি ["escape hatch"](/learn/escape-hatches): আপনি তাদের ব্যবহার করেন যখন আপনার "React এর বাইরে পা রাখতে" হয় এবং যখন আপনার use case এর জন্য কোনো better built-in solution নেই। সময়ের সাথে সাথে, React টিমের লক্ষ্য হল আপনার অ্যাপে Effect এর সংখ্যা minimum এ কমিয়ে আনা আরো নির্দিষ্ট সমস্যার জন্য আরো নির্দিষ্ট solution প্রদান করে। আপনার Effect গুলো custom Hook এ wrap করা আপনার কোড upgrade করা সহজ করে তোলে যখন এই solution উপলব্ধ হয়।
 
-Let's return to this example:
+এই উদাহরণে ফিরে যাই:
+
 
 <Sandpack>
 
@@ -1331,9 +1335,9 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-In the above example, `useOnlineStatus` is implemented with a pair of [`useState`](/reference/react/useState) and [`useEffect`.](/reference/react/useEffect) However, this isn't the best possible solution. There is a number of edge cases it doesn't consider. For example, it assumes that when the component mounts, `isOnline` is already `true`, but this may be wrong if the network already went offline. You can use the browser [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API to check for that, but using it directly would not work on the server for generating the initial HTML. In short, this code could be improved.
+উপরের উদাহরণে, `useOnlineStatus` একজোড়া [`useState`](/reference/react/useState) এবং [`useEffect`](/reference/react/useEffect) দিয়ে implement করা হয়েছে। তবে, এটি সর্বোত্তম সম্ভাব্য solution নয়। এটি বেশ কিছু edge case বিবেচনা করে না। উদাহরণস্বরূপ, এটি ধরে নেয় যে যখন কম্পোনেন্ট mount হয়, `isOnline` ইতিমধ্যে `true`, কিন্তু এটি ভুল হতে পারে যদি নেটওয়ার্ক ইতিমধ্যে offline চলে গিয়ে থাকে। আপনি এটি চেক করতে browser [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) API ব্যবহার করতে পারেন, কিন্তু এটি সরাসরি ব্যবহার করা server এ initial HTML generate করার জন্য কাজ করবে না। সংক্ষেপে, এই কোড উন্নত করা যেতে পারে।
 
-React includes a dedicated API called [`useSyncExternalStore`](/reference/react/useSyncExternalStore) which takes care of all of these problems for you. Here is your `useOnlineStatus` Hook, rewritten to take advantage of this new API:
+React এ একটি dedicated API আছে যার নাম [`useSyncExternalStore`](/reference/react/useSyncExternalStore) যা আপনার জন্য এই সমস্ত সমস্যার যত্ন নেয়। এখানে আপনার `useOnlineStatus` Hook, এই নতুন API এর সুবিধা নিতে পুনরায় লেখা হয়েছে:
 
 <Sandpack>
 
@@ -1393,7 +1397,7 @@ export function useOnlineStatus() {
 
 </Sandpack>
 
-Notice how **you didn't need to change any of the components** to make this migration:
+লক্ষ্য করুন কিভাবে **আপনার এই migration করতে কোনো কম্পোনেন্ট পরিবর্তন করার প্রয়োজন হয়নি:**
 
 ```js {2,7}
 function StatusBar() {
@@ -1407,19 +1411,19 @@ function SaveButton() {
 }
 ```
 
-This is another reason for why wrapping Effects in custom Hooks is often beneficial:
+এটি আরেকটি কারণ কেন Effect গুলো custom Hook এ wrap করা প্রায়ই উপকারী:
 
-1. You make the data flow to and from your Effects very explicit.
-2. You let your components focus on the intent rather than on the exact implementation of your Effects.
-3. When React adds new features, you can remove those Effects without changing any of your components.
+1. আপনি আপনার Effect এ এবং থেকে data flow খুব explicit করে তোলেন।
+2. আপনি আপনার কম্পোনেন্টগুলোকে আপনার Effect এর সঠিক implementation এর পরিবর্তে intent এ focus করতে দেন।
+3. যখন React নতুন ফিচার যোগ করে, আপনি আপনার কোনো কম্পোনেন্ট পরিবর্তন না করেই সেই Effect গুলো সরাতে পারেন।
 
-Similar to a [design system,](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) you might find it helpful to start extracting common idioms from your app's components into custom Hooks. This will keep your components' code focused on the intent, and let you avoid writing raw Effects very often. Many excellent custom Hooks are maintained by the React community.
+একটি [design system](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969) এর মতো, আপনি আপনার অ্যাপের কম্পোনেন্ট থেকে common idiom custom Hook এ extract করা শুরু করা সহায়ক মনে করতে পারেন। এটি আপনার কম্পোনেন্টের কোড intent এ focused রাখবে, এবং আপনাকে খুব বেশি raw Effect লেখা এড়াতে দেবে। React community দ্বারা অনেক চমৎকার custom Hook রক্ষণাবেক্ষণ করা হয়।
 
 <DeepDive>
 
-#### Will React provide any built-in solution for data fetching? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
+#### React কি data fetching এর জন্য কোনো built-in solution প্রদান করবে? {/*will-react-provide-any-built-in-solution-for-data-fetching*/}
 
-Today, with the [`use`](/reference/react/use#streaming-data-from-server-to-client) API, data can be read in render by passing a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) to `use`:
+আজকে, [`use`](/reference/react/use#streaming-data-from-server-to-client) API এর সাথে, render এ data পড়া যায় একটি [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) `use` তে পাস করে:
 
 ```js {1,4,11}
 import { use, Suspense } from "react";
@@ -1438,7 +1442,7 @@ export function MessageContainer({ messagePromise }) {
 }
 ```
 
-We're still working out the details, but we expect that in the future, you'll write data fetching like this:
+আমরা এখনো বিস্তারিত কাজ করছি, কিন্তু আমরা আশা করি যে ভবিষ্যতে, আপনি এভাবে data fetching লিখবেন:
 
 ```js {1,4,6}
 import { use } from 'react';
@@ -1450,13 +1454,13 @@ function ShippingForm({ country }) {
   // ...
 ```
 
-If you use custom Hooks like `useData` above in your app, it will require fewer changes to migrate to the eventually recommended approach than if you write raw Effects in every component manually. However, the old approach will still work fine, so if you feel happy writing raw Effects, you can continue to do that.
+যদি আপনি আপনার অ্যাপে উপরের মতো `useData` এর মতো custom Hook ব্যবহার করেন, প্রতিটি কম্পোনেন্টে manually raw Effect লেখার চেয়ে eventually recommended approach এ migrate করতে কম পরিবর্তন প্রয়োজন হবে। তবে, পুরানো approach এখনো ঠিকভাবে কাজ করবে, তাই যদি আপনি raw Effect লিখতে খুশি থাকেন, আপনি তা চালিয়ে যেতে পারেন।
 
 </DeepDive>
 
-### There is more than one way to do it {/*there-is-more-than-one-way-to-do-it*/}
+### এটি করার একাধিক উপায় আছে {/*there-is-more-than-one-way-to-do-it*/}
 
-Let's say you want to implement a fade-in animation *from scratch* using the browser [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API. You might start with an Effect that sets up an animation loop. During each frame of the animation, you could change the opacity of the DOM node you [hold in a ref](/learn/manipulating-the-dom-with-refs) until it reaches `1`. Your code might start like this:
+ধরা যাক আপনি browser [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) API ব্যবহার করে *scratch থেকে* একটি fade-in animation implement করতে চান। আপনি একটি Effect দিয়ে শুরু করতে পারেন যা একটি animation loop সেটআপ করে। animation এর প্রতিটি frame এর সময়, আপনি DOM node এর opacity পরিবর্তন করতে পারেন যা আপনি [একটি ref এ ধরে রাখেন](/learn/manipulating-the-dom-with-refs) যতক্ষণ না এটি `1` এ পৌঁছায়। আপনার কোড এরকম শুরু হতে পারে:
 
 <Sandpack>
 
@@ -1539,7 +1543,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-To make the component more readable, you might extract the logic into a `useFadeIn` custom Hook:
+কম্পোনেন্টকে আরো readable করতে, আপনি লজিক একটি `useFadeIn` custom Hook এ extract করতে পারেন:
 
 <Sandpack>
 
@@ -1630,7 +1634,8 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-You could keep the `useFadeIn` code as is, but you could also refactor it more. For example, you could extract the logic for setting up the animation loop out of `useFadeIn` into a custom `useAnimationLoop` Hook:
+আপনি `useFadeIn` কোড যেমন আছে তেমন রাখতে পারেন, কিন্তু আপনি এটি আরো refactor করতে পারেন। উদাহরণস্বরূপ, আপনি animation loop সেটআপ করার লজিক `useFadeIn` থেকে একটি custom `useAnimationLoop` Hook এ extract করতে পারেন:
+
 
 <Sandpack>
 
@@ -1734,7 +1739,7 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-However, you didn't *have to* do that. As with regular functions, ultimately you decide where to draw the boundaries between different parts of your code. You could also take a very different approach. Instead of keeping the logic in the Effect, you could move most of the imperative logic inside a JavaScript [class:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+তবে, আপনার এটি করতে *হবে না*। regular ফাংশনের মতো, শেষ পর্যন্ত আপনি সিদ্ধান্ত নেন আপনার কোডের বিভিন্ন অংশের মধ্যে কোথায় সীমানা টানবেন। আপনি একটি খুব ভিন্ন approach ও নিতে পারেন। Effect এ লজিক রাখার পরিবর্তে, আপনি বেশিরভাগ imperative লজিক একটি JavaScript [class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) এর ভিতরে সরাতে পারেন:
 
 <Sandpack>
 
@@ -1832,9 +1837,9 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Effects let you connect React to external systems. The more coordination between Effects is needed (for example, to chain multiple animations), the more it makes sense to extract that logic out of Effects and Hooks *completely* like in the sandbox above. Then, the code you extracted *becomes* the "external system". This lets your Effects stay simple because they only need to send messages to the system you've moved outside React.
+Effect আপনাকে React কে external system এর সাথে connect করতে দেয়। Effect এর মধ্যে যত বেশি coordination প্রয়োজন (উদাহরণস্বরূপ, একাধিক animation chain করতে), উপরের sandbox এর মতো সেই লজিক Effect এবং Hook থেকে *সম্পূর্ণভাবে* extract করা তত বেশি অর্থপূর্ণ। তারপর, আপনার extract করা কোড *হয়ে যায়* "external system"। এটি আপনার Effect গুলোকে সহজ থাকতে দেয় কারণ তাদের শুধুমাত্র আপনার React এর বাইরে সরানো system এ message পাঠাতে হবে।
 
-The examples above assume that the fade-in logic needs to be written in JavaScript. However, this particular fade-in animation is both simpler and much more efficient to implement with a plain [CSS Animation:](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+উপরের উদাহরণগুলো ধরে নেয় যে fade-in লজিক JavaScript এ লিখতে হবে। তবে, এই নির্দিষ্ট fade-in animation একটি plain [CSS Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) দিয়ে implement করা অনেক সহজ এবং অনেক বেশি efficient:
 
 <Sandpack>
 
@@ -1889,27 +1894,27 @@ html, body { min-height: 300px; }
 
 </Sandpack>
 
-Sometimes, you don't even need a Hook!
+কখনো কখনো, আপনার একটি Hook এরও প্রয়োজন নেই!
 
 <Recap>
 
-- Custom Hooks let you share logic between components.
-- Custom Hooks must be named starting with `use` followed by a capital letter.
-- Custom Hooks only share stateful logic, not state itself.
-- You can pass reactive values from one Hook to another, and they stay up-to-date.
-- All Hooks re-run every time your component re-renders.
-- The code of your custom Hooks should be pure, like your component's code.
-- Wrap event handlers received by custom Hooks into Effect Events.
-- Don't create custom Hooks like `useMount`. Keep their purpose specific.
-- It's up to you how and where to choose the boundaries of your code.
+- Custom Hook আপনাকে কম্পোনেন্টগুলোর মধ্যে লজিক শেয়ার করতে দেয়।
+- Custom Hook এর নাম অবশ্যই `use` দিয়ে শুরু হতে হবে এবং তারপর একটি capital letter।
+- Custom Hook শুধুমাত্র stateful লজিক শেয়ার করে, state নিজেই নয়।
+- আপনি একটি Hook থেকে অন্য Hook এ reactive value পাস করতে পারেন, এবং তারা up-to-date থাকে।
+- সমস্ত Hook প্রতিবার আপনার কম্পোনেন্ট re-render হলে পুনরায় চলে।
+- আপনার custom Hook এর কোড আপনার কম্পোনেন্টের কোডের মতো pure হওয়া উচিত।
+- custom Hook দ্বারা প্রাপ্ত event handler গুলো Effect Event এ wrap করুন।
+- `useMount` এর মতো custom Hook তৈরি করবেন না। তাদের উদ্দেশ্য নির্দিষ্ট রাখুন।
+- আপনার কোডের সীমানা কিভাবে এবং কোথায় বেছে নেবেন তা আপনার উপর নির্ভর করে।
 
 </Recap>
 
 <Challenges>
 
-#### Extract a `useCounter` Hook {/*extract-a-usecounter-hook*/}
+#### একটি `useCounter` Hook extract করুন {/*extract-a-usecounter-hook*/}
 
-This component uses a state variable and an Effect to display a number that increments every second. Extract this logic into a custom Hook called `useCounter`. Your goal is to make the `Counter` component implementation look exactly like this:
+এই কম্পোনেন্ট একটি state variable এবং একটি Effect ব্যবহার করে একটি সংখ্যা প্রদর্শন করে যা প্রতি সেকেন্ডে বৃদ্ধি পায়। এই লজিক একটি custom Hook এ extract করুন যার নাম `useCounter`। আপনার লক্ষ্য হল `Counter` কম্পোনেন্ট implementation ঠিক এরকম দেখতে করা:
 
 ```js
 export default function Counter() {
@@ -1918,7 +1923,7 @@ export default function Counter() {
 }
 ```
 
-You'll need to write your custom Hook in `useCounter.js` and import it into the `App.js` file.
+আপনাকে আপনার custom Hook `useCounter.js` এ লিখতে হবে এবং এটি `App.js` ফাইলে import করতে হবে।
 
 <Sandpack>
 
@@ -1938,14 +1943,14 @@ export default function Counter() {
 ```
 
 ```js src/useCounter.js
-// Write your custom Hook in this file!
+// এখানে আপনার custom Hook লিখুন!
 ```
 
 </Sandpack>
 
 <Solution>
 
-Your code should look like this:
+আপনার কোড এরকম দেখতে হওয়া উচিত:
 
 <Sandpack>
 
@@ -1975,13 +1980,13 @@ export function useCounter() {
 
 </Sandpack>
 
-Notice that `App.js` doesn't need to import `useState` or `useEffect` anymore.
+লক্ষ্য করুন যে `App.js` এ আর `useState` বা `useEffect` import করার প্রয়োজন নেই।
 
 </Solution>
 
-#### Make the counter delay configurable {/*make-the-counter-delay-configurable*/}
+#### counter delay configurable করুন {/*make-the-counter-delay-configurable*/}
 
-In this example, there is a `delay` state variable controlled by a slider, but its value is not used. Pass the `delay` value to your custom `useCounter` Hook, and change the `useCounter` Hook to use the passed `delay` instead of hardcoding `1000` ms.
+এই উদাহরণে, একটি `delay` state variable আছে যা একটি slider দ্বারা নিয়ন্ত্রিত, কিন্তু এর value ব্যবহার করা হয় না। `delay` value আপনার custom `useCounter` Hook এ পাস করুন, এবং `useCounter` Hook পরিবর্তন করুন hardcoded `1000` ms এর পরিবর্তে passed `delay` ব্যবহার করতে।
 
 <Sandpack>
 
@@ -2031,7 +2036,7 @@ export function useCounter() {
 
 <Solution>
 
-Pass the `delay` to your Hook with `useCounter(delay)`. Then, inside the Hook, use `delay` instead of the hardcoded `1000` value. You'll need to add `delay` to your Effect's dependencies. This ensures that a change in `delay` will reset the interval.
+`useCounter(delay)` দিয়ে আপনার Hook এ `delay` পাস করুন। তারপর, Hook এর ভিতরে, hardcoded `1000` value এর পরিবর্তে `delay` ব্যবহার করুন। আপনাকে আপনার Effect এর dependency তে `delay` যোগ করতে হবে। এটি নিশ্চিত করে যে `delay` এর একটি পরিবর্তন interval reset করবে।
 
 <Sandpack>
 
@@ -2081,9 +2086,10 @@ export function useCounter(delay) {
 
 </Solution>
 
-#### Extract `useInterval` out of `useCounter` {/*extract-useinterval-out-of-usecounter*/}
 
-Currently, your `useCounter` Hook does two things. It sets up an interval, and it also increments a state variable on every interval tick. Split out the logic that sets up the interval into a separate Hook called `useInterval`. It should take two arguments: the `onTick` callback, and the `delay`. After this change, your `useCounter` implementation should look like this:
+#### `useCounter` থেকে `useInterval` extract করুন {/*extract-useinterval-out-of-usecounter*/}
+
+বর্তমানে, আপনার `useCounter` Hook দুটি কাজ করে। এটি একটি interval সেটআপ করে, এবং এটি প্রতিটি interval tick এ একটি state variable বৃদ্ধি করে। interval সেটআপ করার লজিক একটি আলাদা Hook এ আলাদা করুন যার নাম `useInterval`। এটি দুটি argument নেওয়া উচিত: `onTick` callback, এবং `delay`। এই পরিবর্তনের পরে, আপনার `useCounter` implementation এরকম দেখতে হওয়া উচিত:
 
 ```js
 export function useCounter(delay) {
@@ -2095,7 +2101,7 @@ export function useCounter(delay) {
 }
 ```
 
-Write `useInterval` in the `useInterval.js` file and import it into the `useCounter.js` file.
+`useInterval.js` ফাইলে `useInterval` লিখুন এবং এটি `useCounter.js` ফাইলে import করুন।
 
 <Sandpack>
 
@@ -2124,14 +2130,14 @@ export function useCounter(delay) {
 ```
 
 ```js src/useInterval.js
-// Write your Hook here!
+// এখানে আপনার Hook লিখুন!
 ```
 
 </Sandpack>
 
 <Solution>
 
-The logic inside `useInterval` should set up and clear the interval. It doesn't need to do anything else.
+`useInterval` এর ভিতরের লজিক interval সেটআপ এবং clear করা উচিত। এটি অন্য কিছু করার প্রয়োজন নেই।
 
 <Sandpack>
 
@@ -2170,17 +2176,17 @@ export function useInterval(onTick, delay) {
 
 </Sandpack>
 
-Note that there is a bit of a problem with this solution, which you'll solve in the next challenge.
+লক্ষ্য করুন যে এই solution এর সাথে একটু সমস্যা আছে, যা আপনি পরবর্তী challenge এ সমাধান করবেন।
 
 </Solution>
 
-#### Fix a resetting interval {/*fix-a-resetting-interval*/}
+#### একটি resetting interval ঠিক করুন {/*fix-a-resetting-interval*/}
 
-In this example, there are *two* separate intervals.
+এই উদাহরণে, *দুটি* আলাদা interval আছে।
 
-The `App` component calls `useCounter`, which calls `useInterval` to update the counter every second. But the `App` component *also* calls `useInterval` to randomly update the page background color every two seconds.
+`App` কম্পোনেন্ট `useCounter` কল করে, যা প্রতি সেকেন্ডে counter আপডেট করতে `useInterval` কল করে। কিন্তু `App` কম্পোনেন্ট *এছাড়াও* প্রতি দুই সেকেন্ডে randomly পৃষ্ঠার background color আপডেট করতে `useInterval` কল করে।
 
-For some reason, the callback that updates the page background never runs. Add some logs inside `useInterval`:
+কোনো কারণে, callback যা পৃষ্ঠার background আপডেট করে তা কখনো চলে না। `useInterval` এর ভিতরে কিছু log যোগ করুন:
 
 ```js {2,5}
   useEffect(() => {
@@ -2193,13 +2199,13 @@ For some reason, the callback that updates the page background never runs. Add s
   }, [onTick, delay]);
 ```
 
-Do the logs match what you expect to happen? If some of your Effects seem to re-synchronize unnecessarily, can you guess which dependency is causing that to happen? Is there some way to [remove that dependency](/learn/removing-effect-dependencies) from your Effect?
+log গুলো কি আপনার প্রত্যাশা অনুযায়ী মিলছে? যদি আপনার কিছু Effect অপ্রয়োজনীয়ভাবে re-synchronize হচ্ছে বলে মনে হয়, আপনি কি অনুমান করতে পারেন কোন dependency এটি ঘটাচ্ছে? আপনার Effect থেকে সেই dependency [সরানোর](/learn/removing-effect-dependencies) কোনো উপায় আছে কি?
 
-After you fix the issue, you should expect the page background to update every two seconds.
+সমস্যা ঠিক করার পরে, আপনার প্রত্যাশা করা উচিত যে পৃষ্ঠার background প্রতি দুই সেকেন্ডে আপডেট হবে।
 
 <Hint>
 
-It looks like your `useInterval` Hook accepts an event listener as an argument. Can you think of some way to wrap that event listener so that it doesn't need to be a dependency of your Effect?
+মনে হচ্ছে আপনার `useInterval` Hook একটি event listener argument হিসাবে গ্রহণ করে। আপনি কি সেই event listener wrap করার কোনো উপায় ভাবতে পারেন যাতে এটি আপনার Effect এর dependency হতে না হয়?
 
 </Hint>
 
@@ -2268,11 +2274,11 @@ export function useInterval(onTick, delay) {
 
 <Solution>
 
-Inside `useInterval`, wrap the tick callback into an Effect Event, as you did [earlier on this page.](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks)
+`useInterval` এর ভিতরে, tick callback কে একটি Effect Event এ wrap করুন, যেমন আপনি [এই পৃষ্ঠায় আগে করেছিলেন।](/learn/reusing-logic-with-custom-hooks#passing-event-handlers-to-custom-hooks)
 
-This will allow you to omit `onTick` from dependencies of your Effect. The Effect won't re-synchronize on every re-render of the component, so the page background color change interval won't get reset every second before it has a chance to fire.
+এটি আপনাকে আপনার Effect এর dependency থেকে `onTick` বাদ দিতে দেবে। Effect কম্পোনেন্টের প্রতিটি re-render এ re-synchronize হবে না, তাই পৃষ্ঠার background color পরিবর্তন interval প্রতি সেকেন্ডে reset হবে না এটি fire করার সুযোগ পাওয়ার আগে।
 
-With this change, both intervals work as expected and don't interfere with each other:
+এই পরিবর্তনের সাথে, উভয় interval প্রত্যাশিত হিসাবে কাজ করে এবং একে অপরের সাথে হস্তক্ষেপ করে না:
 
 <Sandpack>
 
@@ -2339,21 +2345,21 @@ export function useInterval(callback, delay) {
 
 </Solution>
 
-#### Implement a staggering movement {/*implement-a-staggering-movement*/}
+#### একটি staggering movement implement করুন {/*implement-a-staggering-movement*/}
 
-In this example, the `usePointerPosition()` Hook tracks the current pointer position. Try moving your cursor or your finger over the preview area and see the red dot follow your movement. Its position is saved in the `pos1` variable.
+এই উদাহরণে, `usePointerPosition()` Hook বর্তমান pointer position ট্র্যাক করে। preview area এর উপর আপনার cursor বা আপনার আঙুল সরানোর চেষ্টা করুন এবং দেখুন লাল dot আপনার movement অনুসরণ করে। এর position `pos1` variable এ সংরক্ষিত।
 
-In fact, there are five (!) different red dots being rendered. You don't see them because currently they all appear at the same position. This is what you need to fix. What you want to implement instead is a "staggered" movement: each dot should "follow" the previous dot's path. For example, if you quickly move your cursor, the first dot should follow it immediately, the second dot should follow the first dot with a small delay, the third dot should follow the second dot, and so on.
+আসলে, পাঁচটি (!) ভিন্ন লাল dot render করা হচ্ছে। আপনি তাদের দেখতে পাচ্ছেন না কারণ বর্তমানে তারা সবাই একই position এ প্রদর্শিত হয়। এটাই আপনার ঠিক করতে হবে। আপনি যা implement করতে চান তা হল একটি "staggered" movement: প্রতিটি dot আগের dot এর path "অনুসরণ" করা উচিত। উদাহরণস্বরূপ, যদি আপনি দ্রুত আপনার cursor সরান, প্রথম dot অবিলম্বে এটি অনুসরণ করা উচিত, দ্বিতীয় dot প্রথম dot কে একটি ছোট delay সহ অনুসরণ করা উচিত, তৃতীয় dot দ্বিতীয় dot কে অনুসরণ করা উচিত, এবং আরো।
 
-You need to implement the `useDelayedValue` custom Hook. Its current implementation returns the `value` provided to it. Instead, you want to return the value back from `delay` milliseconds ago. You might need some state and an Effect to do this.
+আপনাকে `useDelayedValue` custom Hook implement করতে হবে। এর বর্তমান implementation এটিকে প্রদত্ত `value` রিটার্ন করে। পরিবর্তে, আপনি `delay` millisecond আগের value রিটার্ন করতে চান। এটি করতে আপনার কিছু state এবং একটি Effect প্রয়োজন হতে পারে।
 
-After you implement `useDelayedValue`, you should see the dots move following one another.
+`useDelayedValue` implement করার পরে, আপনার dot গুলো একে অপরকে অনুসরণ করে চলতে দেখা উচিত।
 
 <Hint>
 
-You'll need to store the `delayedValue` as a state variable inside your custom Hook. When the `value` changes, you'll want to run an Effect. This Effect should update `delayedValue` after the `delay`. You might find it helpful to call `setTimeout`.
+আপনাকে আপনার custom Hook এর ভিতরে `delayedValue` কে একটি state variable হিসাবে সংরক্ষণ করতে হবে। যখন `value` পরিবর্তিত হয়, আপনি একটি Effect চালাতে চাইবেন। এই Effect `delay` এর পরে `delayedValue` আপডেট করা উচিত। আপনি `setTimeout` কল করা সহায়ক মনে করতে পারেন।
 
-Does this Effect need cleanup? Why or why not?
+এই Effect এর কি cleanup প্রয়োজন? কেন বা কেন নয়?
 
 </Hint>
 
@@ -2363,7 +2369,7 @@ Does this Effect need cleanup? Why or why not?
 import { usePointerPosition } from './usePointerPosition.js';
 
 function useDelayedValue(value, delay) {
-  // TODO: Implement this Hook
+  // TODO: এই Hook implement করুন
   return value;
 }
 
@@ -2426,7 +2432,7 @@ body { min-height: 300px; }
 
 <Solution>
 
-Here is a working version. You keep the `delayedValue` as a state variable. When `value` updates, your Effect schedules a timeout to update the `delayedValue`. This is why the `delayedValue` always "lags behind" the actual `value`.
+এখানে একটি কার্যকর version আছে। আপনি `delayedValue` কে একটি state variable হিসাবে রাখেন। যখন `value` আপডেট হয়, আপনার Effect `delayedValue` আপডেট করতে একটি timeout schedule করে। এই কারণেই `delayedValue` সবসময় আসল `value` এর "পিছনে থাকে"।
 
 <Sandpack>
 
@@ -2503,7 +2509,7 @@ body { min-height: 300px; }
 
 </Sandpack>
 
-Note that this Effect *does not* need cleanup. If you called `clearTimeout` in the cleanup function, then each time the `value` changes, it would reset the already scheduled timeout. To keep the movement continuous, you want all the timeouts to fire.
+লক্ষ্য করুন যে এই Effect এর cleanup এর প্রয়োজন *নেই*। যদি আপনি cleanup ফাংশনে `clearTimeout` কল করেন, তাহলে প্রতিবার `value` পরিবর্তিত হলে, এটি ইতিমধ্যে scheduled timeout reset করবে। movement continuous রাখতে, আপনি সমস্ত timeout fire হতে চান।
 
 </Solution>
 
