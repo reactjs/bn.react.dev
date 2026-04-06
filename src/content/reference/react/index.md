@@ -18,13 +18,14 @@ Programmatic React ফিচারঃ
 
 ## React DOM {/*react-dom*/}
 
-React-dom contains features that are only supported for web applications (which run in the browser DOM environment). This section is broken into the following:
+React DOM contains features that are only supported for web applications (which run in the browser DOM environment). This section is broken into the following:
 
 * [Hooks](/reference/react-dom/hooks) - ওয়েব এপ্লিকেশনের জন্য hooks যা ব্রাউজারের DOM এনভায়রনমেন্টে চলে।
 * [Components](/reference/react-dom/components) - React ব্রাউজারের সকল বিল্ট-ইন HTML এবং SVG কম্পোনেন্ট সাপোর্ট করে।
 * [APIs](/reference/react-dom) - `react-dom` প্যাকেজে সেই সব মেথড রয়েছে যার শুধু মাত্র ওয়েব এপ্লিকেশনে সাপোর্ট আছে।
 * [Client APIs](/reference/react-dom/client) - `react-dom/client` API গুলো আপনাকে ক্লায়েন্টে (ব্রাউজারে) React কম্পোনেন্ট রেন্ডার করার সুযোগ দেয়। 
 * [Server APIs](/reference/react-dom/server) - `react-dom/server` API গুলো আপনাকে সার্ভারে React কম্পোনেন্ট থেকে HTML এ রেন্ডারের সুযোগ দেয়।
+* [Static APIs](/reference/react-dom/static) - `react-dom/static` API-গুলো আপনাকে রিঅ্যাক্ট কম্পোনেন্ট থেকে স্ট্যাটিক HTML জেনারেট বা তৈরি করার সুবিধা দেয়।
 
 ## React Compiler {/*react-compiler*/}
 
@@ -33,6 +34,12 @@ The React Compiler is a build-time optimization tool that automatically memoizes
 * [Configuration](/reference/react-compiler/configuration) - Configuration options for React Compiler.
 * [Directives](/reference/react-compiler/directives) - Function-level directives to control compilation.
 * [Compiling Libraries](/reference/react-compiler/compiling-libraries) - Guide for shipping pre-compiled library code.
+
+## ESLint Plugin React Hooks {/*eslint-plugin-react-hooks*/}
+
+The [ESLint plugin for React Hooks](/reference/eslint-plugin-react-hooks) helps enforce the Rules of React:
+
+* [Lints](/reference/eslint-plugin-react-hooks) - Detailed documentation for each lint with examples.
 
 ## Rules of React {/*rules-of-react*/}
 
