@@ -39,17 +39,17 @@ function TodosApp() {
 
 [নিচে আরও উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটারস {/*parameters*/}
 
-* `subscribe`: A function that takes a single `callback` argument and subscribes it to the store. When the store changes, it should invoke the provided `callback`, which will cause React to re-call `getSnapshot` and (if needed) re-render the component. The `subscribe` function should return a function that cleans up the subscription.
+* `subscribe`: একটি ফাংশন যা একটিমাত্র `callback` আর্গুমেন্ট নেয় এবং এটিকে স্টোরটিতে সাবস্ক্রাইব করে। যখন স্টোরে কোনো পরিবর্তন হয়, তখন এটিকে প্রদানকৃত `callback` ফাংশনটিকে ইনভোক বা কল করতে হবে, যার ফলে রিয়েক্ট `getSnapshot` কে পুনরায় কল করবে এবং (প্রয়োজন হলে) কম্পোনেন্টটিকে রি-রেন্ডার করবে। `subscribe` ফাংশনটিকে এমন একটি ফাংশন রিটার্ন করতে হবে যা এই সাবস্ক্রিপশনটিকে ক্লিন আপ (clean up) করে দেয়।
 
-* `getSnapshot`: A function that returns a snapshot of the data in the store that's needed by the component. While the store has not changed, repeated calls to `getSnapshot` must return the same value. If the store changes and the returned value is different (as compared by [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)), React re-renders the component.
+* `getSnapshot`: একটি ফাংশন যা স্টোরে থাকা ডেটার একটি স্ন্যাপশট রিটার্ন করে যা কম্পোনেন্টের জন্য প্রয়োজন। যতদিন স্টোরে কোনো পরিবর্তন না আসে, ততদিন `getSnapshot` কে বারবার কল করলেও এটি একই ভ্যালু রিটার্ন করবে। যদি স্টোরটি পরিবর্তিত হয় এবং রিটার্নকৃত ভ্যালুটি ভিন্ন হয় (যা [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) দিয়ে তুলনা করে দেখা হয়), তখন রিয়েক্ট কম্পোনেন্টটিকে রি-রেন্ডার করে।
 
-* **optional** `getServerSnapshot`: A function that returns the initial snapshot of the data in the store. It will be used only during server rendering and during hydration of server-rendered content on the client. The server snapshot must be the same between the client and the server, and is usually serialized and passed from the server to the client. If you omit this argument, rendering the component on the server will throw an error.
+* **optional** `getServerSnapshot`: একটি ফাংশন যা স্টোরে থাকা ডেটার ইনিশিয়াল স্ন্যাপশট রিটার্ন করে। এটি শুধুমাত্র সার্ভার রেন্ডারিংয়ের সময় এবং ক্লায়েন্টে সার্ভার-রেন্ডার করা কনটেন্টের হাইড্রেশনের (hydration) সময় ব্যবহৃত হয়। সার্ভার স্ন্যাপশটটি অবশ্যই ক্লায়েন্ট এবং সার্ভারের মধ্যে একই হতে হবে, এবং এটি সাধারণত সিরিয়ালাইজ (serialize) করে সার্ভার থেকে ক্লায়েন্টে পাস করা হয়। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তবে সার্ভারে কম্পোনেন্টটি রেন্ডার করার সময় একটি error থ্রো (throw) হবে।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-The current snapshot of the store which you can use in your rendering logic.
+স্টোরের বর্তমান স্ন্যাপশট যা আপনি আপনার রেন্ডারিং লজিকে ব্যবহার করতে পারবেন।
 
 #### Caveats {/*caveats*/}
 
