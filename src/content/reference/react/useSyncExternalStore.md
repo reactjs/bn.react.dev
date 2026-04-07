@@ -241,11 +241,11 @@ function subscribe(callback) {
 
 ---
 
-### Extracting the logic to a custom Hook {/*extracting-the-logic-to-a-custom-hook*/}
+### কোনো কাস্টম হুকে লজিক এক্সট্র্যাক্ট করা {/*extracting-the-logic-to-a-custom-hook*/}
 
-Usually you won't write `useSyncExternalStore` directly in your components. Instead, you'll typically call it from your own custom Hook. This lets you use the same external store from different components.
+সাধারণত আপনি আপনার কম্পোনেন্টে সরাসরি `useSyncExternalStore` লিখবেন না। এর পরিবর্তে, আপনার নিজস্ব কাস্টম হুক থেকে এটি কল করাটাই সচরাচর ব্যবহৃত হয়। এটি আপনাকে বিভিন্ন কম্পোনেন্টে একই এক্সটার্নাল স্টোর ব্যবহার করতে দেয়। 
 
-For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
+উদাহরণস্বরূপ, এই কাস্টম `useOnlineStatus` হুকটি ট্র্যাক করে যে নেটওয়ার্কটি অনলাইনে আছে কি না:
 
 ```js {3,6}
 import { useSyncExternalStore } from 'react';
@@ -264,7 +264,7 @@ function subscribe(callback) {
 }
 ```
 
-Now different components can call `useOnlineStatus` without repeating the underlying implementation:
+এখন বিভিন্ন কম্পোনেন্ট কোনো ভেতরের ইমপ্লিমেন্টেশনের পুনরাবৃত্তি ছাড়াই `useOnlineStatus` কে কল করতে পারবে:
 
 <Sandpack>
 
