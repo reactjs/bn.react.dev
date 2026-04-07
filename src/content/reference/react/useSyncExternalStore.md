@@ -371,11 +371,11 @@ function subscribe(callback) {
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশুটিং {/*troubleshooting*/}
 
-### I'm getting an error: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
+### আমি একটি এরর পাচ্ছি: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
 
-This error means your `getSnapshot` function returns a new object every time it's called, for example:
+এই এররটির মানে হলো আপনার `getSnapshot` ফাংশনটি প্রতিবার কল করার সময় একটি নতুন অবজেক্ট রিটার্ন করছে, উদাহরণস্বরূপ:
 
 ```js {2-5}
 function getSnapshot() {
@@ -386,9 +386,9 @@ function getSnapshot() {
 }
 ```
 
-React will re-render the component if `getSnapshot` return value is different from the last time. This is why, if you always return a different value, you will enter an infinite loop and get this error.
+যদি `getSnapshot` এর রিটার্ন ভ্যালু আগের বারের চেয়ে ভিন্ন হয় তবে রিয়েক্ট কম্পোনেন্টটিকে রি-রেন্ডার করবে। এই কারণে, যদি আপনি সবসময় একটি ভিন্ন ভ্যালু রিটার্ন করেন, তবে আপনি একটি ইনফিনাইট লুপে প্রবেশ করবেন এবং এই এররটি পাবেন।
 
-Your `getSnapshot` object should only return a different object if something has actually changed. If your store contains immutable data, you can return that data directly:
+আপনার `getSnapshot` অবজেক্টটির উচিত কেবল তখনই একটি ভিন্ন অবজেক্ট রিটার্ন করা যখন আসলেই কোনো কিছু পরিবর্তন হয়েছে। যদি আপনার স্টোরে ইমিউটেবল ডেটা থাকে, তবে আপনি সরাসরি সেই ডেটাটিকেই রিটার্ন করতে পারেন:
 
 ```js {2-3}
 function getSnapshot() {
@@ -397,7 +397,7 @@ function getSnapshot() {
 }
 ```
 
-If your store data is mutable, your `getSnapshot` function should return an immutable snapshot of it. This means it *does* need to create new objects, but it shouldn't do this for every single call. Instead, it should store the last calculated snapshot, and return the same snapshot as the last time if the data in the store has not changed. How you determine whether mutable data has changed depends on your mutable store.
+যদি আপনার স্টোরের ডেটা মিউটেবল (mutable) হয়, তবে আপনার `getSnapshot` ফাংশনটির উচিত সেটার একটি ইমিউটেবল স্ন্যাপশট রিটার্ন করা। এর মানে হলো এটিকে নতুন অবজেক্ট তৈরি *করতেই* হবে, তবে প্রতিবার কল করার জন্যই এটি করা উচিত নয়। এর পরিবর্তে, এটিকে সর্বশেষ ক্যালকুলেট করা স্ন্যাপশটটি স্টোর করে রাখা উচিত, এবং স্টোরের ডেটায় যদি কোনো পরিবর্তন না এসে থাকে তবে গতবার যে স্ন্যাপশটটি রিটার্ন করেছিল সেটাই পুনরায় রিটার্ন করা উচিত। মিউটেবল ডেটা পরিবর্তন হয়েছে কি না সেটা কীভাবে নির্ধারণ করবেন তা নির্ভর করে আপনার মিউটেবল স্টোরটির উপর।
 
 ---
 
