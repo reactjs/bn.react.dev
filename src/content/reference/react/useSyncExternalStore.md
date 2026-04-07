@@ -401,9 +401,9 @@ function getSnapshot() {
 
 ---
 
-### My `subscribe` function gets called after every re-render {/*my-subscribe-function-gets-called-after-every-re-render*/}
+### আমার `subscribe` ফাংশনটি প্রতিটি রি-রেন্ডারের পরে কল হচ্ছে {/*my-subscribe-function-gets-called-after-every-re-render*/}
 
-This `subscribe` function is defined *inside* a component so it is different on every re-render:
+নিচের `subscribe` ফাংশনটি একটি কম্পোনেন্টের *ভেতরে* ডিক্লেয়ার করা হয়েছে তাই এটি প্রতিটি রি-রেন্ডারের সময়ই ভিন্ন:
 
 ```js {2-5}
 function ChatIndicator() {
@@ -418,7 +418,7 @@ function ChatIndicator() {
 }
 ```
   
-React will resubscribe to your store if you pass a different `subscribe` function between re-renders. If this causes performance issues and you'd like to avoid resubscribing, move the `subscribe` function outside:
+আপনি যদি রি-রেন্ডারের সময় একটি ভিন্ন `subscribe` ফাংশন পাস করেন তবে রিয়েক্ট আপনার স্টোরে পুনরায় সাবস্ক্রাইব করবে। এটি যদি পারফরম্যান্সে সমস্যা তৈরি করে এবং আপনি এই পুনরায় সাবস্ক্রাইব হওয়া এড়াতে চান, তবে `subscribe` ফাংশনটিকে কম্পোনেন্টের বাইরে নিয়ে যান:
 
 ```js {1-4}
 // ✅ Always the same function, so React won't need to resubscribe
@@ -432,7 +432,7 @@ function ChatIndicator() {
 }
 ```
 
-Alternatively, wrap `subscribe` into [`useCallback`](/reference/react/useCallback) to only resubscribe when some argument changes:
+বিকল্প হিসেবে, `subscribe` কে [`useCallback`](/reference/react/useCallback) এর ভেতরে র‍্যাপ (wrap) করতে পারেন যাতে এটি শুধুমাত্র তখনই রি-সাবস্ক্রাইব করে যখন কোনো আর্গুমেন্ট পরিবর্তন হয়:
 
 ```js {2-5}
 function ChatIndicator({ userId }) {
