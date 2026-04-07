@@ -175,11 +175,11 @@ function emitChange() {
 
 ---
 
-### Subscribing to a browser API {/*subscribing-to-a-browser-api*/}
+### একটি ব্রাউজার API তে সাবস্ক্রাইব করা {/*subscribing-to-a-browser-api*/}
 
-Another reason to add `useSyncExternalStore` is when you want to subscribe to some value exposed by the browser that changes over time. For example, suppose that you want your component to display whether the network connection is active. The browser exposes this information via a property called [`navigator.onLine`.](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine)
+`useSyncExternalStore` যোগ করার আরও একটি কারণ হলো যখন আপনি ব্রাউজার কর্তৃক সরবরাহকৃত এমন কোনো ভ্যালুতে সাবস্ক্রাইব করতে চান যা সময়ের সাথে সাথে পরিবর্তিত হয়। উদাহরণস্বরূপ, ধরুন আপনি আপনার কম্পোনেন্টে ডিসপ্লে করতে চান যে নেটওয়ার্ক কানেকশনটি অ্যাক্টিভ আছে কি না। ব্রাউজার এই তথ্যটি [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) নামের একটি প্রপার্টির মাধ্যমে প্রদান করে।
 
-This value can change without React's knowledge, so you should read it with `useSyncExternalStore`.
+এই ভ্যালুটি রিয়েক্টের অগোচরে পরিবর্তিত হতে পারে, তাই আপনার উচিত `useSyncExternalStore` এর মাধ্যমে এটি রিড করা।
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -190,7 +190,7 @@ function ChatIndicator() {
 }
 ```
 
-To implement the `getSnapshot` function, read the current value from the browser API:
+`getSnapshot` ফাংশনটিকে ইমপ্লিমেন্ট করার জন্য ব্রাউজার API থেকে বর্তমান ভ্যালুটি রিড করুন:
 
 ```js
 function getSnapshot() {
@@ -198,7 +198,7 @@ function getSnapshot() {
 }
 ```
 
-Next, you need to implement the `subscribe` function. For example, when `navigator.onLine` changes, the browser fires the [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events on the `window` object. You need to subscribe the `callback` argument to the corresponding events, and then return a function that cleans up the subscriptions:
+এরপরে, আপনাকে `subscribe` ফাংশনটি ইমপ্লিমেন্ট করতে হবে। উদাহরণস্বরূপ, যখন `navigator.onLine` পরিবর্তিত হয়, তখন ব্রাউজার `window` অবজেক্টের ওপর [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) এবং [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) ইভেন্টগুলো ফায়ার (fire) করে। আপনাকে ঐ নির্দিষ্ট ইভেন্টগুলোর কারেসপন্ডিং `callback` আর্গুমেন্টটিকে সাবস্ক্রাইব করতে হবে, এবং এরপর একটি ফাংশন রিটার্ন করতে হবে যা এই সাবস্ক্রিপশনগুলোকে ক্লিন আপ (clean up) করবে:
 
 ```js
 function subscribe(callback) {
@@ -211,7 +211,7 @@ function subscribe(callback) {
 }
 ```
 
-Now React knows how to read the value from the external `navigator.onLine` API and how to subscribe to its changes. Disconnect your device from the network and notice that the component re-renders in response:
+এখন রিয়েক্ট জানে কীভাবে এক্সটার্নাল `navigator.onLine` API থেকে ভ্যালুটি রিড করতে হবে এবং কীভাবে এর পরিবর্তনগুলোতে সাবস্ক্রাইব করতে হবে। আপনার ডিভাইসটিকে নেটওয়ার্ক থেকে ডিসকানেক্ট করুন এবং খেয়াল করুন কীভাবে কম্পোনেন্টটি রেসপন্সে রি-রেন্ডার হয়:
 
 <Sandpack>
 
