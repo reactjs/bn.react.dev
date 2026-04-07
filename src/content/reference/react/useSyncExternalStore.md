@@ -51,17 +51,17 @@ function TodosApp() {
 
 স্টোরের বর্তমান স্ন্যাপশট যা আপনি আপনার রেন্ডারিং লজিকে ব্যবহার করতে পারবেন।
 
-#### Caveats {/*caveats*/}
+#### লক্ষ্যনীয় {/*caveats*/}
 
-* The store snapshot returned by `getSnapshot` must be immutable. If the underlying store has mutable data, return a new immutable snapshot if the data has changed. Otherwise, return a cached last snapshot.
+* `getSnapshot` দ্বারা রিটার্নকৃত স্টোর স্ন্যাপশট অবশ্যই ইমিউটেবল (immutable) হতে হবে। আন্ডারলায়িং স্টোরটিতে মিউটেবল (mutable) ডেটা থাকলে, ডেটা পরিবর্তিত হওয়ার পর একটি নতুন ইমিউটেবল স্ন্যাপশট রিটার্ন করুন। নাহলে, ক্যাশ (cache) করা সর্বশেষ স্ন্যাপশটটি রিটার্ন করুন।
 
-* If a different `subscribe` function is passed during a re-render, React will re-subscribe to the store using the newly passed `subscribe` function. You can prevent this by declaring `subscribe` outside the component.
+* যদি কোনো রি-রেন্ডারের সময় সম্পূর্ণ ভিন্ন একটি `subscribe` ফাংশন পাস করা হয়, তাহলে রিয়েক্ট নতুন পাস করা `subscribe` ফাংশনটি ব্যবহার করে স্টোরে রি-সাবস্ক্রাইব করবে। আপনি `subscribe` ফাংশনটি কম্পোনেন্টের বাইরে ডিক্লেয়ার করে এটি এড়াতে পারেন।
 
-* If the store is mutated during a [non-blocking Transition update](/reference/react/useTransition), React will fall back to performing that update as blocking. Specifically, for every Transition update, React will call `getSnapshot` a second time just before applying changes to the DOM. If it returns a different value than when it was called originally, React will restart the update from scratch, this time applying it as a blocking update, to ensure that every component on screen is reflecting the same version of the store.
+* যদি কোনো [নন-ব্লকিং ট্রানজিশন আপডেটের (non-blocking Transition update)](/reference/react/useTransition) সময় স্টোরটি মিউটেট (mutate) হয়, রিয়েক্ট তখন ফলব্যাক হিসেবে এই আপডেটটি ব্লকিং (blocking) হিসেবে সম্পন্ন করবে। নির্দিষ্ট করে বললে, প্রতিটি ট্রানজিশন আপডেটের ক্ষেত্রে, DOM-এ পরিবর্তন অ্যাপ্লাই করার ঠিক আগে রিয়েক্ট `getSnapshot` কে দ্বিতীয়বারের মতো কল করবে। যদি এটি প্রথমবার কল করার সময়ের চেয়ে ভিন্ন কোনো ভ্যালু রিটার্ন করে, তবে রিয়েক্ট আপডেটটি একদম শুরু থেকে আবার রিস্টার্ট করবে, এবার এটিকে ব্লকিং আপডেট হিসেবে অ্যাপ্লাই করবে, যাতে নিশ্চিত হওয়া যায় যে স্ক্রিনের প্রতিটা কম্পোনেন্ট স্টোরের একই সংস্করণ প্রতিফলিত করছে।
 
-* It's not recommended to _suspend_ a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be marked as [non-blocking Transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
+* `useSyncExternalStore` থেকে রিটার্ন করা কোনো স্টোর ভ্যালুর ওপর ভিত্তি করে কোনো রেন্ডার _সাসপেন্ড (suspend)_ করা রিকমেন্ডেড নয়। এর কারণ হলো এক্সটার্নাল স্টোরে হওয়া মিউটেশনগুলোকে [নন-ব্লকিং ট্রানজিশন আপডেট](/reference/react/useTransition) হিসেবে মার্ক করা যায় না, তাই এগুলো নিকটবর্তী [`Suspense` ফলব্যাক](/reference/react/Suspense) কে ট্রিগার করবে, যা স্ক্রিনে ইতিমধ্যে রেন্ডার করা কনটেন্টকে একটি লোডিং স্পিনার দিয়ে রিপ্লেস করে ফেলবে, যা সাধারণত একটি দুর্বল ইউজার এক্সপেরিয়েন্স তৈরি করে।
 
-  For example, the following are discouraged:
+  উদাহরণস্বরূপ, নিচে দেখানো কাজগুলো নিরুৎসাহিত করা হয়:
 
   ```js
   const LazyProductDetailPage = lazy(() => import('./ProductDetailPage.js'));
