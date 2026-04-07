@@ -16,11 +16,11 @@ const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)` {/*usesyncexternalstore*/}
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+একটি এক্সটার্নাল ডেটা স্টোর থেকে কোনো ভ্যালু রিড করতে আপনার কম্পোনেন্টের টপ লেভেলে `useSyncExternalStore` কল করুন।
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -32,12 +32,12 @@ function TodosApp() {
 }
 ```
 
-It returns the snapshot of the data in the store. You need to pass two functions as arguments:
+এটি স্টোরে থাকা ডেটার স্ন্যাপশট (snapshot) রিটার্ন করে। আপনাকে এর আর্গুমেন্ট হিসেবে দুটি ফাংশন পাস করতে হবে:
 
-1. The `subscribe` function should subscribe to the store and return a function that unsubscribes.
-2. The `getSnapshot` function should read a snapshot of the data from the store.
+1. `subscribe` ফাংশনটি স্টোরে সাবস্ক্রাইব করবে এবং এমন একটি ফাংশন রিটার্ন করবে যা সাবস্ক্রিপশনটি আনসাবস্ক্রাইব করে।
+2. `getSnapshot` ফাংশনটি স্টোর থেকে ডেটার স্ন্যাপশট রিড করবে।
 
-[See more examples below.](#usage)
+[নিচে আরও উদাহরণ দেখুন।](#usage)
 
 #### Parameters {/*parameters*/}
 
