@@ -326,14 +326,14 @@ function subscribe(callback) {
 
 ---
 
-### Adding support for server rendering {/*adding-support-for-server-rendering*/}
+### সার্ভার রেন্ডারিংয়ের সাপোর্ট যুক্ত করা {/*adding-support-for-server-rendering*/}
 
-If your React app uses [server rendering,](/reference/react-dom/server) your React components will also run outside the browser environment to generate the initial HTML. This creates a few challenges when connecting to an external store:
+যদি আপনার রিয়েক্ট অ্যাপ্লিকেশনটি [সার্ভার রেন্ডারিং](/reference/react-dom/server) ব্যবহার করে, তবে আপনার রিয়েক্ট কম্পোনেন্ট ব্রাউজার এনভায়রনমেন্টের বাইরেও রান করবে যাতে ইনিশিয়াল (প্রাথমিক) HTML তৈরি করা যায়। এক্সটার্নাল স্টোরের সাথে সংযুক্ত থাকতে এটি বেশ কয়েকটি চ্যালেঞ্জ তৈরি করে:
 
-- If you're connecting to a browser-only API, it won't work because it does not exist on the server.
-- If you're connecting to a third-party data store, you'll need its data to match between the server and client.
+- আপনি যদি কোনো ব্রাউজার-অনলি API এর সাথে কানেক্ট করতে চান, তবে সেটি কাজ করবে না কারণ সার্ভারে এর কোনো অস্তিত্ব নেই।
+- যদি আপনি কোনো থার্ড-পার্টি ডেটা স্টোরের সাথে কানেক্ট করেন, আপনাকে লক্ষ্য রাখতে হবে যেন এর ডেটা সার্ভার এবং ক্লায়েন্টের মধ্যে মিলে যায় (match)।
 
-To solve these issues, pass a `getServerSnapshot` function as the third argument to `useSyncExternalStore`:
+এই সমস্যাগুলোর সমাধান করতে, `useSyncExternalStore`-এর তৃতীয় আর্গুমেন্ট হিসেবে একটি `getServerSnapshot` ফাংশন পাস করুন:
 
 ```js {4,12-14}
 import { useSyncExternalStore } from 'react';
@@ -356,16 +356,16 @@ function subscribe(callback) {
 }
 ```
 
-The `getServerSnapshot` function is similar to `getSnapshot`, but it runs only in two situations:
+`getServerSnapshot` ফাংশনটি `getSnapshot` এর মতোই, কিন্তু এটি শুধু দুটি পরিস্থিতিতে রান করে:
 
-- It runs on the server when generating the HTML.
-- It runs on the client during [hydration](/reference/react-dom/client/hydrateRoot), i.e. when React takes the server HTML and makes it interactive.
+- এটি HTML জেনারেট করার সময় সার্ভারে রান করে।
+- এটি [হাইড্রেশনের (hydration)](/reference/react-dom/client/hydrateRoot) সময় ক্লায়েন্টে রান করে, অর্থাৎ যখন রিয়েক্ট সার্ভারের HTML কে ইন্টারঅ্যাক্টিভ করে তোলে।
 
-This lets you provide the initial snapshot value which will be used before the app becomes interactive. If there is no meaningful initial value for the server rendering, omit this argument to [force rendering on the client.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
+এটি আপনাকে ইনিশিয়াল স্ন্যাপশট ভ্যালু প্রদান করার সুযোগ দেয় যা অ্যাপটি পুরোপুরি ইন্টারঅ্যাক্টিভ হওয়ার আগে ব্যবহৃত হবে। সার্ভার রেন্ডারিংয়ের জন্য যদি কোনো অর্থপূর্ণ ইনিশিয়াল ভ্যালু না থাকে, তবে এই আর্গুমেন্টটি বাদ দিন যাতে করে শুধুমাত্র [ক্লায়েন্টে রেন্ডার করতে বাধ্য করা যায়।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
 
 <Note>
 
-Make sure that `getServerSnapshot` returns the same exact data on the initial client render as it returned on the server. For example, if `getServerSnapshot` returned some prepopulated store content on the server, you need to transfer this content to the client. One way to do this is to emit a `<script>` tag during server rendering that sets a global like `window.MY_STORE_DATA`, and read from that global on the client in `getServerSnapshot`. Your external store should provide instructions on how to do that.
+নিশ্চিত করুন যে `getServerSnapshot` ইনিশিয়াল ক্লায়েন্ট রেন্ডারের সময় হুবহু একই ডেটা রিটার্ন করে যা এটি সার্ভারে রিটার্ন করেছিল। উদাহরণস্বরূপ, যদি `getServerSnapshot` সার্ভারে আগে থেকে পপুলেট (populate) করা কিছু স্টোর কনটেন্ট রিটার্ন করে থাকে, তবে আপনাকে এই কনটেন্ট ক্লায়েন্টে ট্রান্সফার করতে হবে। এটি করার একটি উপায় হলো সার্ভার রেন্ডারিংয়ের সময় একটি `<script>` ট্যাগ এমিট করা যা `window.MY_STORE_DATA` এর মতো কোনো গ্লোবাল সেট করবে, এবং ক্লায়েন্টের `getServerSnapshot` এ ওই গ্লোবালটি রিড করা। আপনার এক্সটার্নাল স্টোরটির সাধারণত এটি কীভাবে করতে হবে সেই বিষয়ে নির্দেশনা দেওয়া উচিত।
 
 </Note>
 
