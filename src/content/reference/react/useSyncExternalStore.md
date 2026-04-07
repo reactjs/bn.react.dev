@@ -79,16 +79,16 @@ function TodosApp() {
 
 ---
 
-## Usage {/*usage*/}
+### ব্যবহার {/*usage*/}
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### এক্সটার্নাল স্টোরে সাবস্ক্রাইব করা {/*subscribing-to-an-external-store*/}
 
-Most of your React components will only read data from their [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) and [context.](/reference/react/useContext) However, sometimes a component needs to read some data from some store outside of React that changes over time. This includes:
+আপনার বেশিরভাগ রিয়েক্ট কম্পোনেন্ট শুধুমাত্র তাদের [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) এবং [context](/reference/react/useContext) থেকে ডেটা রিড করবে। তবে, মাঝে মাঝে এমন কোনো রিয়েক্ট কম্পোনেন্টের প্রয়োজন হতে পারে রিয়েক্টের বাইরে কোনো এক্সটার্নাল স্টোর থেকে ডেটা রিড করার — যা সময়ের সাথে সাথে পরিবর্তিত হয়। এর মধ্যে রয়েছে:
 
-* Third-party state management libraries that hold state outside of React.
-* Browser APIs that expose a mutable value and events to subscribe to its changes.
+* থার্ড-পার্টি স্টেট ম্যানেজমেন্ট লাইব্রেরি যা রিয়েক্টের বাইরে স্টেট ধরে রাখে।
+* ব্রাউজার API যা মিউটেবল ভ্যালু প্রকাশ করে এবং এর পরিবর্তনে সাবস্ক্রাইব করার জন্য ইভেন্ট সরবরাহ করে।
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+একটি এক্সটার্নাল ডেটা স্টোর থেকে ভ্যালু রিড করতে আপনার কম্পোনেন্টের টপ লেভেলে `useSyncExternalStore` কল করুন।
 
 ```js [[1, 5, "todosStore.subscribe"], [2, 5, "todosStore.getSnapshot"], [3, 5, "todos", 0]]
 import { useSyncExternalStore } from 'react';
@@ -100,14 +100,14 @@ function TodosApp() {
 }
 ```
 
-It returns the <CodeStep step={3}>snapshot</CodeStep> of the data in the store. You need to pass two functions as arguments:
+এটি স্টোরে থাকা ডেটার <CodeStep step={3}>স্ন্যাপশট (snapshot)</CodeStep> রিটার্ন করে। আপনাকে এর আর্গুমেন্ট হিসেবে দুটি ফাংশন পাস করতে হবে:
 
-1. The <CodeStep step={1}>`subscribe` function</CodeStep> should subscribe to the store and return a function that unsubscribes.
-2. The <CodeStep step={2}>`getSnapshot` function</CodeStep> should read a snapshot of the data from the store.
+1. <CodeStep step={1}>`subscribe` ফাংশনটি</CodeStep> স্টোরে সাবস্ক্রাইব করবে এবং এমন একটি ফাংশন রিটার্ন করবে যা এই সাবস্ক্রিপশনটি আনসাবস্ক্রাইব করে।
+2. <CodeStep step={2}>`getSnapshot` ফাংশনটি</CodeStep> স্টোর থেকে ডেটার স্ন্যাপশট রিড করবে।
 
-React will use these functions to keep your component subscribed to the store and re-render it on changes.
+রিয়েক্ট এই ফাংশনগুলি ব্যবহার করবে আপনার কম্পোনেন্টটিকে স্টোরে সাবস্ক্রাইব করে রাখার জন্য এবং কোনো পরিবর্তন এলে সেটিকে রি-রেন্ডার করার জন্য।
 
-For example, in the sandbox below, `todosStore` is implemented as an external store that stores data outside of React. The `TodosApp` component connects to that external store with the `useSyncExternalStore` Hook. 
+উদাহরণস্বরূপ, নিচের স্যান্ডবক্সে, `todosStore` কে এমন একটি এক্সটার্নাল স্টোর হিসেবে ইমপ্লিমেন্ট করা হয়েছে যা রিয়েক্টের বাইরে ডেটা স্টোর করে। `TodosApp` কম্পোনেন্টটি ঐ এক্সটার্নাল স্টোরের সাথে `useSyncExternalStore` হুক দিয়ে সংযুক্ত।
 
 <Sandpack>
 
@@ -169,7 +169,7 @@ function emitChange() {
 
 <Note>
 
-When possible, we recommend using built-in React state with [`useState`](/reference/react/useState) and [`useReducer`](/reference/react/useReducer) instead. The `useSyncExternalStore` API is mostly useful if you need to integrate with existing non-React code.
+যখন সম্ভব হবে, আমরা এর বদলে রিয়েক্টের বিল্ট-ইন স্টেট [`useState`](/reference/react/useState) এবং [`useReducer`](/reference/react/useReducer) ব্যবহারের পরামর্শ দিই। `useSyncExternalStore` API বেশিরভাগ তখনই উপকারী যখন আপনাকে বিদ্যমান নন-রিয়েক্ট কোডের সাথে ইন্টিগ্রেট করতে হবে।
 
 </Note>
 
