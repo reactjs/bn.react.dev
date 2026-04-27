@@ -177,7 +177,11 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 | "`5` দিয়ে প্রতিস্থাপন" | `0` (অব্যবহৃত) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
+<<<<<<< HEAD
 চূড়ান্ত ফলাফল হিসাবে React `6` সঞ্চয় করে এবং `useState` এ রিটার্ন করে।
+=======
+React stores `6` as the final result and returns it from `useState`.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Note>
 
@@ -305,7 +309,7 @@ export default function RequestTracker() {
         Completed: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Buy
       </button>
     </>
   );
@@ -349,7 +353,7 @@ export default function RequestTracker() {
         Completed: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Buy
       </button>
     </>
   );
