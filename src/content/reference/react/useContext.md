@@ -60,7 +60,7 @@ import { useContext } from 'react';
 
 function Button() {
   const theme = useContext(ThemeContext);
-  // ... 
+  // ...
 ```
 
 `useContext` আপনার পাস করা <CodeStep step={1}>context</CodeStep> এর জন্য <CodeStep step={2}>context এর মান</CodeStep> রিটার্ন করে। context এর মান নির্ধারণ করার জন্য, React কম্পোনেন্ট ট্রিতে সার্চ করে এবং এই নির্দিষ্ট context এর জন্য **উপরের দিকে সব থেকে কাছের context provider** কে খুঁজে বের করে।
@@ -845,7 +845,7 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
-        }); 
+        });
       }}>Add</button>
     </>
   );
@@ -1292,7 +1292,7 @@ export const LevelContext = createContext(0);
 
 আপনি object এবং function সহ যেকোনো মান context এর মাধ্যমে পাস করতে পারেন।
 
-```js [[2, 10, "{ currentUser, login }"]] 
+```js [[2, 10, "{ currentUser, login }"]]
 function MyApp() {
   const [currentUser, setCurrentUser] = useState(null);
 
