@@ -1,25 +1,25 @@
 ---
-title: JavaScript in JSX with Curly Braces
+title: Curly Braces দিয়ে JSX-এ জাভাস্ক্রিপ্ট
 ---
 
 <Intro>
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to open a window to JavaScript.
+JSX আপনাকে একটি জাভাস্ক্রিপ্ট ফাইলের ভিতরে HTML-এর মতো মার্কআপ লিখতে দেয়, logic এবং content একই জায়গায় রেন্ডার করে। কখনও কখনও মার্কআপের ভিতরে জাভাস্ক্রিপ্ট logic বা dynamic property লেখার প্রয়োজন পরে। এই পরিস্থিতিতে, আপনি JSX-এ curly braces ব্যবহার করে জাভাস্ক্রিপ্ট লিখতে পারেন।
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass strings with quotes
-* How to reference a JavaScript variable inside JSX with curly braces
-* How to call a JavaScript function inside JSX with curly braces
-* How to use a JavaScript object inside JSX with curly braces
+* Quotes দিয়ে স্ট্রিং কিভাবে পাস করবেন
+* Curly braces দিয়ে JSX এর ভিতরে একটি জাভাস্ক্রিপ্ট ভেরিয়েবলকে কীভাবে reference করবেন
+* Curly braces দিয়ে JSX-এর ভিতরে একটি জাভাস্ক্রিপ্ট ফাংশনকে কীভাবে কল করবেন
+* Curly braces দিয়ে JSX এর ভিতরে একটি জাভাস্ক্রিপ্ট অবজেক্ট কীভাবে ব্যবহার করবেন
 
 </YouWillLearn>
 
-## Passing strings with quotes {/*passing-strings-with-quotes*/}
+## Quotes এর সাথে স্ট্রিং পাসিং {/*passing-strings-with-quotes*/}
 
-When you want to pass a string attribute to JSX, you put it in single or double quotes:
+আপনি যখন JSX-এ একটি স্ট্রিং attribute পাস করতে চান, তখন আপনাকে এটি single বা double quotes এ রাখতে হবে:
 
 <Sandpack>
 
@@ -41,9 +41,9 @@ export default function Avatar() {
 
 </Sandpack>
 
-Here, `"https://i.imgur.com/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
+এখানে, `"https://i.imgur.com/7vQD0fPs.jpg"` এবং `"Gregorio Y. Zara"` কে স্ট্রিং হিসেবে পাস করা হয়েছে ।
 
-But what if you want to dynamically specify the `src` or `alt` text? You could **use a value from JavaScript by replacing `"` and `"` with `{` and `}`**:
+কিন্তু যদি আপনি dynamic ভাবে `src` বা `alt` টেক্সট ব্যবহার করতে চান? তাহলে আপনি **জাভাস্ক্রিপ্ট থেকে একটি value ব্যবহার করে `"`and`"` কে curly braces `{`and`}`** দিয়ে পরিবর্তন করতে পারেন:
 
 <Sandpack>
 
@@ -67,11 +67,11 @@ export default function Avatar() {
 
 </Sandpack>
 
-Notice the difference between `className="avatar"`, which specifies an `"avatar"` CSS class name that makes the image round, and `src={avatar}` that reads the value of the JavaScript variable called `avatar`. That's because curly braces let you work with JavaScript right there in your markup!
+`className="avatar"` এবং `src={avatar}` এর মধ্যে পার্থক্য লক্ষ্য করুন। `className="avatar"` একটি `"avatar"` নামের CSS ক্লাসকে নির্দিষ্ট করে ও ইমেজকে গোলাকার করে অপরদিকে, `src={avatar}`, `avatar` নামের জাভাস্ক্রিপ্ট ভেরিয়েবলের value পড়ে। এর কারণ হচ্ছে, curly braces আপনাকে আপনার মার্কআপ এর ভিতরে জাভাস্ক্রিপ্ট এর কাজ করতে দেয়!
 
-## Using curly braces: A window into the JavaScript world {/*using-curly-braces-a-window-into-the-javascript-world*/}
+## Curly braces এর ব্যবহার: জাভাস্ক্রিপ্ট জগতের একটি উইন্ডো {/*using-curly-braces-a-window-into-the-javascript-world*/}
 
-JSX is a special way of writing JavaScript. That means it’s possible to use JavaScript inside it—with curly braces `{ }`. The example below first declares a name for the scientist, `name`, then embeds it with curly braces inside the `<h1>`:
+JSX হল জাভাস্ক্রিপ্ট লেখার একটি বিশেষ উপায়। তার মানে curly braces `{ }` দিয়ে JSX এর ভিতরে জাভাস্ক্রিপ্ট ব্যবহার করা সম্ভব। নীচের উদাহরণটিতে প্রথমে বিজ্ঞানীর জন্য একটি নাম ঘোষণা করা হয়েছে, `name`, তারপর এটিকে `<h1>` এর ভিতরে curly braces দিয়ে embeds করা হয়েছে:
 
 <Sandpack>
 
@@ -86,9 +86,9 @@ export default function TodoList() {
 
 </Sandpack>
 
-Try changing the `name`'s value from `'Gregorio Y. Zara'` to `'Hedy Lamarr'`. See how the list title changes?
+নামের value `'Gregorio Y. Zara'` থেকে `'Hedy Lamarr'`-এ পরিবর্তন করার চেষ্টা করুন। দেখুন কিভাবে list title পরিবর্তন হয়?
 
-Any JavaScript expression will work between curly braces, including function calls like `formatDate()`:
+যেকোন জাভাস্ক্রিপ্ট এক্সপ্রেশন curly braces মধ্যে কাজ করবে, যেমন `formatDate()` এর মতো function calls:
 
 <Sandpack>
 
@@ -111,18 +111,20 @@ export default function TodoList() {
 
 </Sandpack>
 
-### Where to use curly braces {/*where-to-use-curly-braces*/}
+### কোথায় curly braces ব্যবহার করবেন {/*where-to-use-curly-braces*/}
 
-You can only use curly braces in two ways inside JSX:
+আপনি JSX এর ভিতরে শুধুমাত্র দুটি উপায়ে curly braces ব্যবহার করতে পারেন:
 
-1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
-2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
+1. সরাসরি JSX ট্যাগের ভিতরে **text হিসাবে**: `<h1>{name}'s To Do List</h1>` এভাবে কাজ করে, কিন্তু `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` এভাবে করবে না৷
 
-## Using "double curlies": CSS and other objects in JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
+2. **Attributes হিসেবে** সরাসরি `=` চিহ্ন ব্যবহার করে: `src={avatar}` এখানে `avatar` ভেরিয়েবল নিবে, কিন্তু এটি `src="{avatar}"` স্ট্রিং হিসেবে পাস করবে `"{avatar}"`
 
-In addition to strings, numbers, and other JavaScript expressions, you can even pass objects in JSX. Objects are also denoted with curly braces, like `{ name: "Hedy Lamarr", inventions: 5 }`. Therefore, to pass a JS object in JSX, you must wrap the object in another pair of curly braces: `person={{ name: "Hedy Lamarr", inventions: 5 }}`.
+## "Double curlies" এর ব্যবহার: JSX-এ CSS এবং অন্যান্য অবজেক্ট {/*using-double-curlies-css-and-other-objects-in-jsx*/}
 
-You may see this with inline CSS styles in JSX. React does not require you to use inline styles (CSS classes work great for most cases). But when you need an inline style, you pass an object to the `style` attribute:
+
+স্ট্রিং, নাম্বার এবং অন্যান্য জাভাস্ক্রিপ্ট এক্সপ্রেশন ছাড়াও, আপনি JSX এ অবজেক্টও পাস করতে পারেন। জাভাস্ক্রিপ্ট এ অবজেক্টকে curly braces দিয়ে লেখা হয়, যেমন `{ name: "Hedy Lamarr", inventions: 5 }`। অতএব, JSX-এ একটি JS অবজেক্ট পাস করতে হলে, অবশ্যই অবজেক্টকে অন্য আরেকটি curly braces এর ভিতরে দিয়ে দিতে হবে: `person={{ name: "Hedy Lamarr", inventions: 5 }}`।
+
+আপনি JSX এ ইনলাইন CSS styles এ এটি দেখতে পারেন। React জন্য আপনাকে ইনলাইন styles ব্যবহার করতেই হবে তা না (প্রায় ক্ষেত্রেই CSS ক্লাসগুলি ভালো কাজ করে)। কিন্তু যখন আপনার একটি ইনলাইন style এর প্রয়োজন হবে, তখন আপনি একটি অবজেক্টকে `style` attribute এ পাস করতে পারেন:
 
 <Sandpack>
 
@@ -148,9 +150,9 @@ ul { padding: 20px 20px 20px 40px; margin: 0; }
 
 </Sandpack>
 
-Try changing the values of `backgroundColor` and `color`.
+`backgroundColor` এবং `color` এর মান পরিবর্তন করার চেষ্টা করুন।
 
-You can really see the JavaScript object inside the curly braces when you write it like this:
+curly braces এর ভিতরে জাভাস্ক্রিপ্ট অবজেক্ট দেখতে পাবেন যখন আপনি এটি এভাবে লিখবেন:
 
 ```js {2-5}
 <ul style={
@@ -161,17 +163,17 @@ You can really see the JavaScript object inside the curly braces when you write 
 }>
 ```
 
-The next time you see `{{` and `}}` in JSX, know that it's nothing more than an object inside the JSX curlies!
+পরবর্তীতে যখন আপনি JSX-এ `{{` and `}}` দেখবেন, তখন আপনি বুঝে নিবেন যে এটি JSX curlies এর ভিতরে একটি অবজেক্ট ছাড়া আর কিছুই নয়! 
 
 <Pitfall>
 
-Inline `style` properties are written in camelCase. For example, HTML `<ul style="background-color: black">` would be written as `<ul style={{ backgroundColor: 'black' }}>`  in your component.
+ইনলাইন `style` এ property গুলোকে camelCase ব্যবহার করে লেখা হয়. উদাহরণস্বরূপ, এই HTML `<ul style="background-color: black">` আপনার কম্পোনেন্টের মধ্যে `<ul style={{ backgroundColor: 'black' }}>` এভাবে লিখতে হবে।
 
 </Pitfall>
 
-## More fun with JavaScript objects and curly braces {/*more-fun-with-javascript-objects-and-curly-braces*/}
+## জাভাস্ক্রিপ্ট অবজেক্ট এবং curly braces সঙ্গে আরো কাজ {/*more-fun-with-javascript-objects-and-curly-braces*/}
 
-You can move several expressions into one object, and reference them in your JSX inside curly braces:
+আপনি একটি অবজেক্ট এ বেশ কয়েকটি এক্সপ্রেশন রেখে, পরে সেটিকে curly braces এর ভিতরে JSX-এ ব্যবহার করতে পারেন:
 
 <Sandpack>
 
@@ -211,7 +213,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-In this example, the `person` JavaScript object contains a `name` string and a `theme` object:
+এই উদাহরণটিতে, `person` জাভাস্ক্রিপ্ট অবজেক্ট এ একটি `name` স্ট্রিং এবং একটি `theme` অবজেক্ট রয়েছে:
 
 ```js
 const person = {
@@ -223,31 +225,31 @@ const person = {
 };
 ```
 
-The component can use these values from `person` like so:
+এই কম্পোনেন্ট 'person' অবজেক্ট থেকে value গুলি ব্যবহার করতে পারে:
 
 ```js
 <div style={person.theme}>
-  <h1>{person.name}'s Todos</h1>
+<h1>{person.name}'s Todos</h1>
 ```
 
-JSX is very minimal as a templating language because it lets you organize data and logic using JavaScript.
+JSX হল একটি খুবই সাধারণ টেমপ্লেটিং ল্যাংগুয়েজ, কারণ এটি আপনাকে জাভাস্ক্রিপ্ট ব্যবহার করে data এবং logic একই ফাইলে সংগঠিত করতে দেয়।
 
 <Recap>
 
-Now you know almost everything about JSX:
+এখন আপনি JSX সম্পর্কে প্রায় সবকিছু জানেন:
 
-* JSX attributes inside quotes are passed as strings.
-* Curly braces let you bring JavaScript logic and variables into your markup.
-* They work inside the JSX tag content or immediately after `=` in attributes.
-* `{{` and `}}` is not special syntax: it's a JavaScript object tucked inside JSX curly braces.
+* JSX attribute এর ভিতরে quote দিয়ে স্ট্রিং হিসাবে পাস করা হয়।
+* Curly braces আপনাকে আপনার মার্কআপে জাভাস্ক্রিপ্ট লজিক এবং ভেরিয়েবল লিখতে দেয়।
+* Curly braces JSX ট্যাগ কন্টেন্টের ভিতরে কাজ করে অথবা attributes `=` এর পরপরই কাজ করে।
+* `{{` and `}}` এটি কোন বিশেষ সিনট্যাক্স নয়: এটি একটি জাভাস্ক্রিপ্ট অবজেক্ট যা JSX এ curly braces এর ভিতরে ব্যবহার করা হয়।
 
 </Recap>
 
 <Challenges>
 
-#### Fix the mistake {/*fix-the-mistake*/}
+#### ভুলটা ঠিক করুন {/*fix-the-mistake*/}
 
-This code crashes with an error saying `Objects are not valid as a React child`:
+এই কোডটি একটি ত্রুটির কারণে ক্র্যাশ হয়েছে যে `অবজেক্টগুলি React child হিসাবে বৈধ নয়`:
 
 <Sandpack>
 
@@ -287,15 +289,15 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Can you find the problem?
+আপনি কি সমস্যা খুঁজে পেতে পারেন?
 
-<Hint>Look for what's inside the curly braces. Are we putting the right thing there?</Hint>
+<Hint>curly braces ভিতরে কি আছে দেখুন। আমরা কি সেখানে সঠিক জিনিস রাখছি?</Hint>
 
 <Solution>
 
-This is happening because this example renders *an object itself* into the markup rather than a string: `<h1>{person}'s Todos</h1>` is trying to render the entire `person` object! Including raw objects as text content throws an error because React doesn't know how you want to display them.
+এটি ঘটছে কারণ এই উদাহরণটি একটি স্ট্রিংয়ের পরিবর্তে একটি অবজেক্ট নিজেই মার্কআপে রেন্ডার করে: `<h1>{person}'s Todos</h1>` সম্পূর্ণ person অবজেক্ট কে রেন্ডার করার চেষ্টা করছে! সম্পূর্ণ অবজেক্ট কে ব্যবহার করার ফলে এখানে একটি error হয়েছে কারণ React জানে না আপনি কীভাবে সেগুলি প্রদর্শন করতে চান।
 
-To fix it, replace `<h1>{person}'s Todos</h1>` with `<h1>{person.name}'s Todos</h1>`:
+এটি ঠিক করতে, `<h1>{person}'s Todos</h1>` কে `<h1>{person.name}'s Todos</h1>` দিয়ে পরিবর্তন করুন:
 
 <Sandpack>
 
@@ -337,9 +339,9 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-#### Extract information into an object {/*extract-information-into-an-object*/}
+#### একটি অবজেক্ট এর মধ্যে ইনফরমেশন বের করুন {/*extract-information-into-an-object*/}
 
-Extract the image URL into the `person` object.
+'person' অবজেক্টে ছবির URLটি বের করুন।
 
 <Sandpack>
 
@@ -381,7 +383,7 @@ body > div > div { padding: 20px; }
 
 <Solution>
 
-Move the image URL into a property called `person.imageUrl` and read it from the `<img>` tag using the curlies:
+ছবির URLটিকে `person.imageUrl` নামক একটি property তে সরান এবং curlies ব্যবহার করে `<img>` ট্যাগ এর মধ্যে লিখুন:
 
 <Sandpack>
 
@@ -424,13 +426,13 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-#### Write an expression inside JSX curly braces {/*write-an-expression-inside-jsx-curly-braces*/}
+#### JSX curly braces এর ভিতরে একটি expression লিখুন {/*write-an-expression-inside-jsx-curly-braces*/}
 
-In the object below, the full image URL is split into four parts: base URL, `imageId`, `imageSize`, and file extension.
+নীচের অবজেক্ট এ, সম্পূর্ণ ছবির URL চারটি ভাগে বিভক্ত আছে: বেস URL, `imageId`, `imageSize` এবং ফাইল extension।
 
-We want the image URL to combine these attributes together: base URL (always `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), and file extension (always `'.jpg'`). However, something is wrong with how the `<img>` tag specifies its `src`.
+আমরা চাই ছবির URL এই attributes গুলিকে একত্রিত করুক: বেস URL (সর্বদা `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s') `), এবং ফাইল এক্সটেনশন (সর্বদা `'.jpg'`)। যাইহোক, `<img>` ট্যাগের `src` তে কিছু ভুল আছে।
 
-Can you fix it?
+আপনি কি এটা ঠিক করতে পারবনে?
 
 <Sandpack>
 
@@ -474,15 +476,15 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-To check that your fix worked, try changing the value of `imageSize` to `'b'`. The image should resize after your edit.
+আপনার ফিক্স কাজ করেছে কিনা তা পরীক্ষা করতে, `imageSize` এর মান `b'` এ পরিবর্তন করার চেষ্টা করুন। আপনার এডিটের পর image size পরিবর্তন হওয়া উচিত।
 
 <Solution>
 
-You can write it as `src={baseUrl + person.imageId + person.imageSize + '.jpg'}`.
+আপনি এটিকে `src={baseUrl + person.imageId + person.imageSize + '.jpg'}` হিসেবে লিখতে পারেন।
 
-1. `{` opens the JavaScript expression
-2. `baseUrl + person.imageId + person.imageSize + '.jpg'` produces the correct URL string
-3. `}` closes the JavaScript expression
+1. `{` জাভাস্ক্রিপ্ট এক্সপ্রেশন খোলে
+2. `baseUrl + person.imageId + person.imageSize + '.jpg'` সঠিক URL স্ট্রিং তৈরি করে
+3. `}` জাভাস্ক্রিপ্ট এক্সপ্রেশন বন্ধ করে
 
 <Sandpack>
 
@@ -525,7 +527,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-You can also move this expression into a separate function like `getImageUrl` below:
+আপনি নীচের `getImageUrl` এর মতো একটি পৃথক function এ এই এক্সপ্রেশন সরাতে পারেন:
 
 <Sandpack>
 
@@ -580,7 +582,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Variables and functions can help you keep the markup simple!
+Variables এবং functions আপনাকে মার্কআপ simple রাখতে সাহায্য করে!
 
 </Solution>
 
