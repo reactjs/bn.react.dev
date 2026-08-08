@@ -4,7 +4,7 @@ title: useState
 
 <Intro>
 
-`useState` is a React Hook that lets you add a [state variable](/learn/state-a-components-memory) to your component.
+`useState` হলো একটি React হুক যা আপনাকে আপনার কম্পোনেন্টে [state variable](/learn/state-a-components-memory) যোগ করতে দেয় ।
 
 ```js
 const [state, setState] = useState(initialState)
@@ -20,7 +20,7 @@ const [state, setState] = useState(initialState)
 
 ### `useState(initialState)` {/*usestate*/}
 
-Call `useState` at the top level of your component to declare a [state variable.](/learn/state-a-components-memory)
+একটি [state variable](/learn/state-a-components-memory) ডিক্লেয়ার করার জন্য আপনার কম্পোনেন্টের একদম উপরে `useState`কল করুন:
 
 ```js
 import { useState } from 'react';
@@ -32,14 +32,14 @@ function MyComponent() {
   // ...
 ```
 
-The convention is to name state variables like `[something, setSomething]` using [array destructuring.](https://javascript.info/destructuring-assignment)
+State ভ্যারিয়েবলগুলির নামকরণের রীতি হলো `[something, setSomething]` এই ধরনের [অ্যারে ডিস্ট্রাকচারিং](https://javascript.info/destructuring-assignment) ব্যবহার করে।
 
-[See more examples below.](#usage)
+[নিচে আরো উদাহরণ দেখুনঃ](#usage)
 
 #### Parameters {/*parameters*/}
 
-* `initialState`: The value you want the state to be initially. It can be a value of any type, but there is a special behavior for functions. This argument is ignored after the initial render.
-  * If you pass a function as `initialState`, it will be treated as an _initializer function_. It should be pure, should take no arguments, and should return a value of any type. React will call your initializer function when initializing the component, and store its return value as the initial state. [See an example below.](#avoiding-recreating-the-initial-state)
+* `initialState`: আপনি শুরুতে state হিসাবে কি মান রাখতে চান তা। এটি যেকোনো টাইপের মান হতে পারে, কিন্তু ফাংশনের জন্য একটি বিশেষ আচরণ আছে। এই আর্গুমেন্টটি প্রথম রেন্ডারের পরে অবহেলা করা হয়।
+  *আপনি যদি একটি ফাংশনকে `initialState` হিসেবে পাঠিয়ে দেন, তাহলে এটি _initializer function_ হিসেবে গণ্য করা হবে । এটি নির্ভুল হওয়া উচিত, কোনো আর্গুমেন্ট গ্রহণ করা উচিত নয় এবং যে কোনো ধরনের মান রিটার্ন দেওয়া উচিত | React আপনার initializer ফাংশনকে কম্পোনেন্টটি ইনিশিয়ালাইজ করার সময় কল করবে এবং এর রিটার্ন ভ্যালুকে initial state হিসেবে সংরক্ষণ করবে। [নিচে একটি উদাহরণ দেখুন:](#avoiding-recreating-the-initial-state)
 
 #### Returns {/*returns*/}
 
