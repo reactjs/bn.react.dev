@@ -1,26 +1,28 @@
 ---
-title: Passing Props to a Component
+title: কম্পোনেন্টে props পাঠানো
+
 ---
 
 <Intro>
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
+React এর কম্পোনেন্টগুলো একে অপরের সাথে যোগাযোগ করতে *props (প্রপ্‌স)* ব্যবহার করে। প্রতিটি প্যারেন্ট কম্পোনেন্ট তার চাইল্ড কম্পোনেন্টদের props প্রদান করার মাধ্যমে কিছু তথ্য পাঠাতে পারে। Props হয়তো আপনার HTML Attributes এর মতো লাগতে পারে, কিন্তু এগুলোর মাধ্যমে আপনি অবজেক্ট, অ্যারে এবং ফাংশন এর পাশাপাশি যে কোন JavaScript ভ্যালু পাঠাতে পারবেন।
+
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass props to a component
-* How to read props from a component
-* How to specify default values for props
-* How to pass some JSX to a component
-* How props change over time
+* কীভাবে একটি কম্পোনেন্টে props পাঠাতে হয়
+* কীভাবে একটি কম্পোনেন্ট থেকে props রিড করতে হয়
+* কীভাবে props-গুলোর ডিফল্ট মান সুনির্দিষ্ট করতে হয়
+* কীভাবে একটি কম্পোনেন্টে কোন JSX পাঠাতে হয়
+* কীভাবে সময়ের সাথে props পরিবর্তিত হয়
 
 </YouWillLearn>
 
-## Familiar props {/*familiar-props*/}
+## পরিচিত props {/*familiar-props*/}
 
-Props are the information that you pass to a JSX tag. For example, `className`, `src`, `alt`, `width`, and `height` are some of the props you can pass to an `<img>`:
+Props হল সেই তথ্য যা আপনি একটি JSX ট্যাগ-এ যে তথ্যগুলো পাঠিয়ে দেন। উদাহরণ হিসেবে, `className`, `src`, `alt`, `width`, এবং `height` হল কিছু props যেগুলো আপনি  একটি `<img>` ট্যাগ-এ পাঠাতে পারেন:
 
 <Sandpack>
 
@@ -51,11 +53,11 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to *your own* components, such as `<Avatar>`, to customize them. Here's how!
+একটি `<img>` ট্যাগ-এ আপনি যেসব props পাঠাতে পারবেন সেটি পূর্বনির্ধারিত ([HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)-কে ReactDOM মেনে চলে)। কিন্তু আপনি `<Avatar>` এর মতো *আপনার নিজস্ব*  কম্পোনেন্টগুলোকে কাস্টমাইজ করতে চাইলে যেকোন props পাঠাতে পারবেন। কীভাবে করবেন দেখুন! 
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## কম্পোনেন্টে props পাঠানো {/*passing-props-to-a-component*/}
 
-In this code, the `Profile` component isn't passing any props to its child component, `Avatar`:
+এই কোডে, `Profile` কম্পোনেন্টটি তার চাইল্ড কম্পোনেন্ট `Avatar`-এ কোন props পাঠাচ্ছে না:
 
 ```js
 export default function Profile() {
@@ -65,11 +67,11 @@ export default function Profile() {
 }
 ```
 
-You can give `Avatar` some props in two steps.
+আপনি দুই ধাপে `Avatar`-কে কিছু props দিতে পারবেন।
 
-### Step 1: Pass props to the child component {/*step-1-pass-props-to-the-child-component*/}
+### ধাপ ১: চাইল্ড কম্পোনেন্টটিতে props পাঠান {/*step-1-pass-props-to-the-child-component*/}
 
-First, pass some props to `Avatar`. For example, let's pass two props: `person` (an object), and `size` (a number):
+প্রথমে, `Avatar`-এ কিছু props পাঠান। উদাহরণ হিসেবে, চলুন দুইটি props পাঠানো হোক: `person` (একটি অবজেক্ট), এবং `size` (একটি নাম্বার):
 
 ```js
 export default function Profile() {
@@ -84,15 +86,15 @@ export default function Profile() {
 
 <Note>
 
-If double curly braces after `person=` confuse you, recall [they're merely an object](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) inside the JSX curlies.
+যদি `person=` এর পরের ডাবল curly ব্র্যাকেটগুলো (`{{}}`) আপনার কাছে বিভ্রান্তিকর মনে হয়, মনে রাখবেন যে JSX curly-গলোর মধ্যে [এগুলো কেবলমাত্র একটি অবজেক্ট](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx)। 
 
 </Note>
 
-Now you can read these props inside the `Avatar` component.
+এখন আপনি `Avatar` কম্পোনেন্টটির মধ্যে এই props-গুলো রিড করতে পারবেন।
 
-### Step 2: Read props inside the child component {/*step-2-read-props-inside-the-child-component*/}
+### ধাপ ২: চাইল্ড কম্পোনেন্টের মধ্যে props রিড করুন {/*step-2-read-props-inside-the-child-component*/}
 
-You can read these props by listing their names `person, size` separated by the commas inside `({` and `})` directly after `function Avatar`. This lets you use them inside the `Avatar` code, like you would with a variable.
+আপনি এই props-গুলো রিড করতে পারবেন `function Avatar` এর পরে সরাসরি `({` এবং `})` মধ্যে `person, size` নামগুলো কমা দিয়ে ভাগ করে তালিকাভুক্ত করার মাধ্যমে। এটি আপনাকে `Avatar` কোডটির মধ্যে ওগুলোকে ব্যাবহার করতে দিবে, যেমন আপনি একটি ভ্যারিয়েবল এর সাথে করতে পারতেন।
 
 ```js
 function Avatar({ person, size }) {
@@ -100,9 +102,9 @@ function Avatar({ person, size }) {
 }
 ```
 
-Add some logic to `Avatar` that uses the `person` and `size` props for rendering, and you're done.
+ Render করার জন্য `person` এবং `size` props ব্যবহার করে এমন কিছু লজিক `Avatar` এর মধ্যে যোগ করুন, এখন আপনার কাজ শেষ।
 
-Now you can configure `Avatar` to render in many different ways with different props. Try tweaking the values!
+এখন আপনি অসংখ্য ভিন্ন ভিন্ন উপায়ে বিভিন্ন props দিয়ে render করার জন্য `Avatar`-কে কনফিগার করতে পারবেন। মানগুলো পরিবর্তন করে দেখুন!
 
 <Sandpack>
 
