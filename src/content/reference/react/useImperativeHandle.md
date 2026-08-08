@@ -46,7 +46,11 @@ function MyInput({ ref }) {
 
 <Note>
 
+<<<<<<< HEAD
 React 19 থেকে শুরু করে, [`ref` একটি prop হিসেবে উপলব্ধ।](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 এবং তার আগের ভার্শনে, [`forwardRef`](/reference/react/forwardRef) থেকে `ref` পাওয়া প্রয়োজন ছিল।
+=======
+Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef)
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 </Note>
 

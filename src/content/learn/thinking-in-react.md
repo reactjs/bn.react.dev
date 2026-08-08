@@ -37,9 +37,15 @@ React এ একটি UI ইমপ্লিমেন্ট করতে আপ�
 
 একটি ডিজাইনের কম্পোনেন্ট গুলোকে আপনি বিভিন্ন ভাবে ভাগ করতে পারেন। কীভাবে করবেন সেটা নির্ভর করবে আপনার কাজের ক্ষেত্রের উপর।
 
+<<<<<<< HEAD
 * **Programming**--একটি নতুন function বা object তৈরী করবেন কি না এই সিদ্ধান্তটি যেভাবে নিতেন, ঠিক একই পদ্ধতিতে সিদ্ধান্ত নিন। এমন একটি পদ্ধতি হচ্ছে [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), যা অনুসারে, একটা কম্পোনেন্ট আদর্শত কেবল একটি কাজই করবে। যদি সেটা বড় হয়ে যায় তাহলে ছোট ছোট সাবকম্পোনেন্ট এ ভাগ করে ফেলতে হবে। 
 * **CSS**--আপনি class selector কীসের জন্য তৈরী করতেন সেটা বিবেচনায় রাখুন (যদিও কম্পোনেন্ট আরেকটু কম granular)।
 * **Design**--চিন্তা করুন আপনি আপনার ডিজাইনের layer গুলো কীভাবে বিন্যস্ত করতেন।
+=======
+* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), that is, a component should ideally only be concerned with one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
+* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
+* **Design**--consider how you would organize the design's layers.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 যদি আপনার JSON গোছানো থাকে, আপনি দেখবেন বেশির ভাগ সময় এটা স্বাভাবিকতই আপনার UI এর কম্পোনেন্ট এর গঠন বিন্যাসের সাথে মিলে যাবে। এর কারণ UI এবং ডেটা মডেলগুলো সাধারণত একই information architecture ব্যবহার করে, অর্থাৎ একই আকারে বিন্যস্ত হয়। আপনার UI কে এমন ভাবে কম্পোনেন্ট এ ভাগ করুন যেন প্রতিটি কম্পোনেন্ট আপনার ডেটা মডেলের একটি অংশের সাথে মিলে যায়। 
 
@@ -228,10 +234,17 @@ UI interactive করার জন্য আপনাকে ব্যবহা�
 
 আমরা একে একে আরেকবার বুঝে নেইঃ
 
+<<<<<<< HEAD
 1. পণ্যের আসল তালিকা  **props হিসেবে চলে আসে, সুতরাং এটা state না।** 
 2. খুঁজার জন্য ব্যবহারকারী যে ইনপুট দিবেন সেটা state হবার কথা, কারণ এটা সময়ের সাথে সাথে বদলে যাবে এবং কোন কিছু থেকে এটা compute করা সম্ভব না।
 3. চেকবক্সের ভ্যালুটাও একটা state কারণ এটা সময়ের সাথে সাথে বদলাবে এবং কোনভাবে compute করা সম্ভব না।
 4. পণ্য বাছাই করা তালিকাটি **state না** কারণ চেকবক্সের ভ্যালু এবং পণ্যের তালিকা থেকে সার্চ টেক্সট বাছাই করার মাধ্যমে তা **compute করা সম্ভব**। 
+=======
+1. The original list of products is **passed in as props, so it's not state.**
+2. The search text seems to be state since it changes over time and can't be computed from anything.
+3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
+4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 অর্থাৎ, শুধুমাত্র সার্চ টেক্সট এবং চেকবক্সের ভ্যালু এই দুইটাই state! কী সুন্দরমত হয়ে গেল!
 
@@ -265,6 +278,7 @@ Props এবং state আলাদা বটে, তবে এরা একই �
 
 এখন তাদের জন্য আমাদের পরিকল্পনা ঝালাই করে নিই। 
 
+<<<<<<< HEAD
 1. **state ব্যবহার করে এমন কম্পোনেন্টগুলো চিহ্নিত করুন**
     * `ProductTable`কে ওই state(সার্চ টেক্সট এবং চেকবক্স) ব্যবহার করে পণ্যের তালিকা বাছাই করতে হবে। 
     * `SearchBar` কে ওই state(সার্চ টেক্সট এবং চেকবক্স) দেখাতে হবে। 
@@ -272,23 +286,32 @@ Props এবং state আলাদা বটে, তবে এরা একই �
 3. **State কোথায় থাকবে সেটা সিদ্ধান্ত নিন**: আমরা বাছাই করা text এবং checked state ভ্যালুগুলো  `FilterableProductTable` -তে রাখব।
 
 সুতরাং state ভ্যালুগুলো থাকবে `FilterableProductTable` এর মধ্যে।
+=======
+1. **Identify components that use state:**
+    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value).
+    * `SearchBar` needs to display that state (search text and checkbox value).
+2. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
+3. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+
+So the state values will live in `FilterableProductTable`.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 কম্পোনেন্টে [`useState()` Hook.](/reference/react/useState) ব্যবহার করে state যুক্ত করুন। Hook হচ্ছে বিশেষ ফাংশন যা আপনাকে Reac† এর "মায়ায় হারাতে" বাধ্য করবে। `FilterableProductTable` এর একদম উপরে দুটো state variable যুক্ত করুন এবং তাদের প্রাথমিক state ঠিক করে দিন। 
 
 ```js
 function FilterableProductTable({ products }) {
   const [filterText, setFilterText] = useState('');
-  const [inStockOnly, setInStockOnly] = useState(false);  
+  const [inStockOnly, setInStockOnly] = useState(false);
 ```
 
 Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as props:
 
 ```js
 <div>
-  <SearchBar 
-    filterText={filterText} 
+  <SearchBar
+    filterText={filterText}
     inStockOnly={inStockOnly} />
-  <ProductTable 
+  <ProductTable
     products={products}
     filterText={filterText}
     inStockOnly={inStockOnly} />
@@ -308,10 +331,10 @@ function FilterableProductTable({ products }) {
 
   return (
     <div>
-      <SearchBar 
-        filterText={filterText} 
+      <SearchBar
+        filterText={filterText}
         inStockOnly={inStockOnly} />
-      <ProductTable 
+      <ProductTable
         products={products}
         filterText={filterText}
         inStockOnly={inStockOnly} />
@@ -389,13 +412,13 @@ function ProductTable({ products, filterText, inStockOnly }) {
 function SearchBar({ filterText, inStockOnly }) {
   return (
     <form>
-      <input 
-        type="text" 
-        value={filterText} 
+      <input
+        type="text"
+        value={filterText}
         placeholder="Search..."/>
       <label>
-        <input 
-          type="checkbox" 
+        <input
+          type="checkbox"
           checked={inStockOnly} />
         {' '}
         Only show products in stock
@@ -451,9 +474,9 @@ td {
 function SearchBar({ filterText, inStockOnly }) {
   return (
     <form>
-      <input 
-        type="text" 
-        value={filterText} 
+      <input
+        type="text"
+        value={filterText}
         placeholder="Search..."/>
 ```
 
@@ -462,7 +485,11 @@ function SearchBar({ filterText, inStockOnly }) {
 
 ## ধাপ ৫ঃ inverse data flow যুক্ত করুন {/*step-5-add-inverse-data-flow*/}
 
+<<<<<<< HEAD
 এখন hierarchy-তে props এবং state এর তথ্য সঠিকভাবে নিচের দিকে প্রবাহিত হওয়ায় আপনার অ্যাপ ঠিকঠাক দেখা যাচ্ছে। কিন্তু ব্যবহারকারীর দেওয়া তথ্যের ভিত্তিতে state পরিবর্তন করতে আপনাকে উল্টোটিকে তথ্য প্রবাহের ব্যবস্থা রাখতে হবেঃ hierarchy-র গভীরে থাকা কম্পোনেন্টগুলো দিয়ে `FilterableProductTable` এ থাকা state পরিবর্তন করবে হবে।   
+=======
+Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
 
 React makes this data flow explicit, but it requires a little more typing than two-way data binding. If you try to type or check the box in the example above, you'll see that React ignores your input. This is intentional. By writing `<input value={filterText} />`, you've set the `value` prop of the `input` to always be equal to the `filterText` state passed in from `FilterableProductTable`. Since `filterText` state is never set, the input never changes.
 
@@ -475,8 +502,8 @@ function FilterableProductTable({ products }) {
 
   return (
     <div>
-      <SearchBar 
-        filterText={filterText} 
+      <SearchBar
+        filterText={filterText}
         inStockOnly={inStockOnly}
         onFilterTextChange={setFilterText}
         onInStockOnlyChange={setInStockOnly} />
@@ -519,13 +546,13 @@ function FilterableProductTable({ products }) {
 
   return (
     <div>
-      <SearchBar 
-        filterText={filterText} 
-        inStockOnly={inStockOnly} 
-        onFilterTextChange={setFilterText} 
+      <SearchBar
+        filterText={filterText}
+        inStockOnly={inStockOnly}
+        onFilterTextChange={setFilterText}
         onInStockOnlyChange={setInStockOnly} />
-      <ProductTable 
-        products={products} 
+      <ProductTable
+        products={products}
         filterText={filterText}
         inStockOnly={inStockOnly} />
     </div>
@@ -607,14 +634,14 @@ function SearchBar({
 }) {
   return (
     <form>
-      <input 
-        type="text" 
-        value={filterText} placeholder="Search..." 
+      <input
+        type="text"
+        value={filterText} placeholder="Search..."
         onChange={(e) => onFilterTextChange(e.target.value)} />
       <label>
-        <input 
-          type="checkbox" 
-          checked={inStockOnly} 
+        <input
+          type="checkbox"
+          checked={inStockOnly}
           onChange={(e) => onInStockOnlyChange(e.target.checked)} />
         {' '}
         Only show products in stock
