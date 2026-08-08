@@ -412,7 +412,7 @@ function Form() {
 
   function handleSubmit() {
     setSubmitted(true);
-  }  
+  }
 
   // ...
 }
@@ -430,7 +430,7 @@ function Form() {
     // ✅ ভালো: Event-specific logic event handler থেকে কল করা হয়
     post('/api/register');
     showNotification('Successfully registered!', theme);
-  }  
+  }
 
   // ...
 }
@@ -882,7 +882,11 @@ const options2 = { serverUrl: 'https://localhost:1234', roomId: 'music' };
 console.log(Object.is(options1, options2)); // false
 ```
 
+<<<<<<< HEAD
 **Object এবং function dependency আপনার Effect কে আপনার প্রয়োজনের চেয়ে বেশি ঘন ঘন পুনরায় সিঙ্ক্রোনাইজ করতে পারে।**
+=======
+**Object and function dependencies can make your Effect re-synchronize more often than you need.**
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 এই কারণেই, যখনই সম্ভব, আপনার Effect এর dependency হিসাবে object এবং function এড়ানোর চেষ্টা করা উচিত। পরিবর্তে, তাদের component এর বাইরে, Effect এর ভিতরে সরানোর চেষ্টা করুন, অথবা তাদের থেকে primitive value extract করুন।
 

@@ -34,7 +34,7 @@ const ref = useRef(0);
 `useRef` এমন একটি অবজেক্ট রিটার্ন করেঃ
 
 ```js
-{ 
+{
   current: 0 // The value you passed to useRef
 }
 ```
