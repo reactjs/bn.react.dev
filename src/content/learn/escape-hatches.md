@@ -227,7 +227,11 @@ function Form() {
 }
 ```
 
+<<<<<<< HEAD
 কিন্তু, বাইরের সিস্টেমের সাথে সিঙ্ক্রোনাইজ করতে আপনার Effect *লাগবেই*।
+=======
+However, you *do* need Effects to synchronize with external systems.
+>>>>>>> 6be2b020a0cabf2fd6dbff5c42c399b8ac323bca
 
 <LearnMore path="/learn/you-might-not-need-an-effect">
 
@@ -382,7 +386,7 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );
@@ -515,7 +519,7 @@ export default function App() {
       <hr />
       <ChatRoom
         roomId={roomId}
-        theme={isDark ? 'dark' : 'light'} 
+        theme={isDark ? 'dark' : 'light'}
       />
     </>
   );
