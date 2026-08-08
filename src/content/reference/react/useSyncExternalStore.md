@@ -4,7 +4,7 @@ title: useSyncExternalStore
 
 <Intro>
 
-`useSyncExternalStore` is a React Hook that lets you subscribe to an external store.
+`useSyncExternalStore` একটি রিয়েক্ট হুক যা আপনাকে একটি এক্সটার্নাল স্টোরে সাবস্ক্রাইব করতে দেয়।
 
 ```js
 const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
@@ -16,11 +16,11 @@ const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)` {/*usesyncexternalstore*/}
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+একটি এক্সটার্নাল ডেটা স্টোর থেকে কোনো ভ্যালু রিড করতে আপনার কম্পোনেন্টের টপ লেভেলে `useSyncExternalStore` কল করুন।
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -32,36 +32,36 @@ function TodosApp() {
 }
 ```
 
-It returns the snapshot of the data in the store. You need to pass two functions as arguments:
+এটি স্টোরে থাকা ডেটার স্ন্যাপশট (snapshot) রিটার্ন করে। আপনাকে এর আর্গুমেন্ট হিসেবে দুটি ফাংশন পাস করতে হবে:
 
-1. The `subscribe` function should subscribe to the store and return a function that unsubscribes.
-2. The `getSnapshot` function should read a snapshot of the data from the store.
+1. `subscribe` ফাংশনটি স্টোরে সাবস্ক্রাইব করবে এবং এমন একটি ফাংশন রিটার্ন করবে যা সাবস্ক্রিপশনটি আনসাবস্ক্রাইব করে।
+2. `getSnapshot` ফাংশনটি স্টোর থেকে ডেটার স্ন্যাপশট রিড করবে।
 
-[See more examples below.](#usage)
+[নিচে আরও উদাহরণ দেখুন।](#usage)
 
-#### Parameters {/*parameters*/}
+#### প্যারামিটারস {/*parameters*/}
 
-* `subscribe`: A function that takes a single `callback` argument and subscribes it to the store. When the store changes, it should invoke the provided `callback`, which will cause React to re-call `getSnapshot` and (if needed) re-render the component. The `subscribe` function should return a function that cleans up the subscription.
+* `subscribe`: একটি ফাংশন যা একটিমাত্র `callback` আর্গুমেন্ট নেয় এবং এটিকে স্টোরটিতে সাবস্ক্রাইব করে। যখন স্টোরে কোনো পরিবর্তন হয়, তখন এটিকে প্রদানকৃত `callback` ফাংশনটিকে ইনভোক বা কল করতে হবে, যার ফলে রিয়েক্ট `getSnapshot` কে পুনরায় কল করবে এবং (প্রয়োজন হলে) কম্পোনেন্টটিকে রি-রেন্ডার করবে। `subscribe` ফাংশনটিকে এমন একটি ফাংশন রিটার্ন করতে হবে যা এই সাবস্ক্রিপশনটিকে ক্লিন আপ (clean up) করে দেয়।
 
-* `getSnapshot`: A function that returns a snapshot of the data in the store that's needed by the component. While the store has not changed, repeated calls to `getSnapshot` must return the same value. If the store changes and the returned value is different (as compared by [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is)), React re-renders the component.
+* `getSnapshot`: একটি ফাংশন যা স্টোরে থাকা ডেটার একটি স্ন্যাপশট রিটার্ন করে যা কম্পোনেন্টের জন্য প্রয়োজন। যতদিন স্টোরে কোনো পরিবর্তন না আসে, ততদিন `getSnapshot` কে বারবার কল করলেও এটি একই ভ্যালু রিটার্ন করবে। যদি স্টোরটি পরিবর্তিত হয় এবং রিটার্নকৃত ভ্যালুটি ভিন্ন হয় (যা [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) দিয়ে তুলনা করে দেখা হয়), তখন রিয়েক্ট কম্পোনেন্টটিকে রি-রেন্ডার করে।
 
-* **optional** `getServerSnapshot`: A function that returns the initial snapshot of the data in the store. It will be used only during server rendering and during hydration of server-rendered content on the client. The server snapshot must be the same between the client and the server, and is usually serialized and passed from the server to the client. If you omit this argument, rendering the component on the server will throw an error.
+* **optional** `getServerSnapshot`: একটি ফাংশন যা স্টোরে থাকা ডেটার ইনিশিয়াল স্ন্যাপশট রিটার্ন করে। এটি শুধুমাত্র সার্ভার রেন্ডারিংয়ের সময় এবং ক্লায়েন্টে সার্ভার-রেন্ডার করা কনটেন্টের হাইড্রেশনের (hydration) সময় ব্যবহৃত হয়। সার্ভার স্ন্যাপশটটি অবশ্যই ক্লায়েন্ট এবং সার্ভারের মধ্যে একই হতে হবে, এবং এটি সাধারণত সিরিয়ালাইজ (serialize) করে সার্ভার থেকে ক্লায়েন্টে পাস করা হয়। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তবে সার্ভারে কম্পোনেন্টটি রেন্ডার করার সময় একটি error থ্রো (throw) হবে।
 
-#### Returns {/*returns*/}
+#### রিটার্নস {/*returns*/}
 
-The current snapshot of the store which you can use in your rendering logic.
+স্টোরের বর্তমান স্ন্যাপশট যা আপনি আপনার রেন্ডারিং লজিকে ব্যবহার করতে পারবেন।
 
-#### Caveats {/*caveats*/}
+#### লক্ষ্যনীয় {/*caveats*/}
 
-* The store snapshot returned by `getSnapshot` must be immutable. If the underlying store has mutable data, return a new immutable snapshot if the data has changed. Otherwise, return a cached last snapshot.
+* `getSnapshot` দ্বারা রিটার্নকৃত স্টোর স্ন্যাপশট অবশ্যই ইমিউটেবল (immutable) হতে হবে। আন্ডারলায়িং স্টোরটিতে মিউটেবল (mutable) ডেটা থাকলে, ডেটা পরিবর্তিত হওয়ার পর একটি নতুন ইমিউটেবল স্ন্যাপশট রিটার্ন করুন। নাহলে, ক্যাশ (cache) করা সর্বশেষ স্ন্যাপশটটি রিটার্ন করুন।
 
-* If a different `subscribe` function is passed during a re-render, React will re-subscribe to the store using the newly passed `subscribe` function. You can prevent this by declaring `subscribe` outside the component.
+* যদি কোনো রি-রেন্ডারের সময় সম্পূর্ণ ভিন্ন একটি `subscribe` ফাংশন পাস করা হয়, তাহলে রিয়েক্ট নতুন পাস করা `subscribe` ফাংশনটি ব্যবহার করে স্টোরে রি-সাবস্ক্রাইব করবে। আপনি `subscribe` ফাংশনটি কম্পোনেন্টের বাইরে ডিক্লেয়ার করে এটি এড়াতে পারেন।
 
-* If the store is mutated during a [non-blocking Transition update](/reference/react/useTransition), React will fall back to performing that update as blocking. Specifically, for every Transition update, React will call `getSnapshot` a second time just before applying changes to the DOM. If it returns a different value than when it was called originally, React will restart the update from scratch, this time applying it as a blocking update, to ensure that every component on screen is reflecting the same version of the store.
+* যদি কোনো [নন-ব্লকিং ট্রানজিশন আপডেটের (non-blocking Transition update)](/reference/react/useTransition) সময় স্টোরটি মিউটেট (mutate) হয়, রিয়েক্ট তখন ফলব্যাক হিসেবে এই আপডেটটি ব্লকিং (blocking) হিসেবে সম্পন্ন করবে। নির্দিষ্ট করে বললে, প্রতিটি ট্রানজিশন আপডেটের ক্ষেত্রে, DOM-এ পরিবর্তন অ্যাপ্লাই করার ঠিক আগে রিয়েক্ট `getSnapshot` কে দ্বিতীয়বারের মতো কল করবে। যদি এটি প্রথমবার কল করার সময়ের চেয়ে ভিন্ন কোনো ভ্যালু রিটার্ন করে, তবে রিয়েক্ট আপডেটটি একদম শুরু থেকে আবার রিস্টার্ট করবে, এবার এটিকে ব্লকিং আপডেট হিসেবে অ্যাপ্লাই করবে, যাতে নিশ্চিত হওয়া যায় যে স্ক্রিনের প্রতিটা কম্পোনেন্ট স্টোরের একই সংস্করণ প্রতিফলিত করছে।
 
-* It's not recommended to _suspend_ a render based on a store value returned by `useSyncExternalStore`. The reason is that mutations to the external store cannot be marked as [non-blocking Transition updates](/reference/react/useTransition), so they will trigger the nearest [`Suspense` fallback](/reference/react/Suspense), replacing already-rendered content on screen with a loading spinner, which typically makes a poor UX.
+* `useSyncExternalStore` থেকে রিটার্ন করা কোনো স্টোর ভ্যালুর ওপর ভিত্তি করে কোনো রেন্ডার _সাসপেন্ড (suspend)_ করা রিকমেন্ডেড নয়। এর কারণ হলো এক্সটার্নাল স্টোরে হওয়া মিউটেশনগুলোকে [নন-ব্লকিং ট্রানজিশন আপডেট](/reference/react/useTransition) হিসেবে মার্ক করা যায় না, তাই এগুলো নিকটবর্তী [`Suspense` ফলব্যাক](/reference/react/Suspense) কে ট্রিগার করবে, যা স্ক্রিনে ইতিমধ্যে রেন্ডার করা কনটেন্টকে একটি লোডিং স্পিনার দিয়ে রিপ্লেস করে ফেলবে, যা সাধারণত একটি দুর্বল ইউজার এক্সপেরিয়েন্স তৈরি করে।
 
-  For example, the following are discouraged:
+  উদাহরণস্বরূপ, নিচে দেখানো কাজগুলো নিরুৎসাহিত করা হয়:
 
   ```js
   const LazyProductDetailPage = lazy(() => import('./ProductDetailPage.js'));
@@ -79,16 +79,16 @@ The current snapshot of the store which you can use in your rendering logic.
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Subscribing to an external store {/*subscribing-to-an-external-store*/}
+### এক্সটার্নাল স্টোরে সাবস্ক্রাইব করা {/*subscribing-to-an-external-store*/}
 
-Most of your React components will only read data from their [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) and [context.](/reference/react/useContext) However, sometimes a component needs to read some data from some store outside of React that changes over time. This includes:
+আপনার বেশিরভাগ রিয়েক্ট কম্পোনেন্ট শুধুমাত্র তাদের [props,](/learn/passing-props-to-a-component) [state,](/reference/react/useState) এবং [context](/reference/react/useContext) থেকে ডেটা রিড করবে। তবে, মাঝে মাঝে এমন কোনো রিয়েক্ট কম্পোনেন্টের প্রয়োজন হতে পারে রিয়েক্টের বাইরে কোনো এক্সটার্নাল স্টোর থেকে ডেটা রিড করার — যা সময়ের সাথে সাথে পরিবর্তিত হয়। এর মধ্যে রয়েছে:
 
-* Third-party state management libraries that hold state outside of React.
-* Browser APIs that expose a mutable value and events to subscribe to its changes.
+* থার্ড-পার্টি স্টেট ম্যানেজমেন্ট লাইব্রেরি যা রিয়েক্টের বাইরে স্টেট ধরে রাখে।
+* ব্রাউজার API যা মিউটেবল ভ্যালু প্রকাশ করে এবং এর পরিবর্তনে সাবস্ক্রাইব করার জন্য ইভেন্ট সরবরাহ করে।
 
-Call `useSyncExternalStore` at the top level of your component to read a value from an external data store.
+একটি এক্সটার্নাল ডেটা স্টোর থেকে ভ্যালু রিড করতে আপনার কম্পোনেন্টের টপ লেভেলে `useSyncExternalStore` কল করুন।
 
 ```js [[1, 5, "todosStore.subscribe"], [2, 5, "todosStore.getSnapshot"], [3, 5, "todos", 0]]
 import { useSyncExternalStore } from 'react';
@@ -100,14 +100,14 @@ function TodosApp() {
 }
 ```
 
-It returns the <CodeStep step={3}>snapshot</CodeStep> of the data in the store. You need to pass two functions as arguments:
+এটি স্টোরে থাকা ডেটার <CodeStep step={3}>স্ন্যাপশট (snapshot)</CodeStep> রিটার্ন করে। আপনাকে এর আর্গুমেন্ট হিসেবে দুটি ফাংশন পাস করতে হবে:
 
-1. The <CodeStep step={1}>`subscribe` function</CodeStep> should subscribe to the store and return a function that unsubscribes.
-2. The <CodeStep step={2}>`getSnapshot` function</CodeStep> should read a snapshot of the data from the store.
+1. <CodeStep step={1}>`subscribe` ফাংশনটি</CodeStep> স্টোরে সাবস্ক্রাইব করবে এবং এমন একটি ফাংশন রিটার্ন করবে যা এই সাবস্ক্রিপশনটি আনসাবস্ক্রাইব করে।
+2. <CodeStep step={2}>`getSnapshot` ফাংশনটি</CodeStep> স্টোর থেকে ডেটার স্ন্যাপশট রিড করবে।
 
-React will use these functions to keep your component subscribed to the store and re-render it on changes.
+রিয়েক্ট এই ফাংশনগুলি ব্যবহার করবে আপনার কম্পোনেন্টটিকে স্টোরে সাবস্ক্রাইব করে রাখার জন্য এবং কোনো পরিবর্তন এলে সেটিকে রি-রেন্ডার করার জন্য।
 
-For example, in the sandbox below, `todosStore` is implemented as an external store that stores data outside of React. The `TodosApp` component connects to that external store with the `useSyncExternalStore` Hook. 
+উদাহরণস্বরূপ, নিচের স্যান্ডবক্সে, `todosStore` কে এমন একটি এক্সটার্নাল স্টোর হিসেবে ইমপ্লিমেন্ট করা হয়েছে যা রিয়েক্টের বাইরে ডেটা স্টোর করে। `TodosApp` কম্পোনেন্টটি ঐ এক্সটার্নাল স্টোরের সাথে `useSyncExternalStore` হুক দিয়ে সংযুক্ত।
 
 <Sandpack>
 
@@ -169,17 +169,17 @@ function emitChange() {
 
 <Note>
 
-When possible, we recommend using built-in React state with [`useState`](/reference/react/useState) and [`useReducer`](/reference/react/useReducer) instead. The `useSyncExternalStore` API is mostly useful if you need to integrate with existing non-React code.
+যখন সম্ভব হবে, আমরা এর বদলে রিয়েক্টের বিল্ট-ইন স্টেট [`useState`](/reference/react/useState) এবং [`useReducer`](/reference/react/useReducer) ব্যবহারের পরামর্শ দিই। `useSyncExternalStore` API বেশিরভাগ তখনই উপকারী যখন আপনাকে বিদ্যমান নন-রিয়েক্ট কোডের সাথে ইন্টিগ্রেট করতে হবে।
 
 </Note>
 
 ---
 
-### Subscribing to a browser API {/*subscribing-to-a-browser-api*/}
+### একটি ব্রাউজার API তে সাবস্ক্রাইব করা {/*subscribing-to-a-browser-api*/}
 
-Another reason to add `useSyncExternalStore` is when you want to subscribe to some value exposed by the browser that changes over time. For example, suppose that you want your component to display whether the network connection is active. The browser exposes this information via a property called [`navigator.onLine`.](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine)
+`useSyncExternalStore` যোগ করার আরও একটি কারণ হলো যখন আপনি ব্রাউজার কর্তৃক সরবরাহকৃত এমন কোনো ভ্যালুতে সাবস্ক্রাইব করতে চান যা সময়ের সাথে সাথে পরিবর্তিত হয়। উদাহরণস্বরূপ, ধরুন আপনি আপনার কম্পোনেন্টে ডিসপ্লে করতে চান যে নেটওয়ার্ক কানেকশনটি অ্যাক্টিভ আছে কি না। ব্রাউজার এই তথ্যটি [`navigator.onLine`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) নামের একটি প্রপার্টির মাধ্যমে প্রদান করে।
 
-This value can change without React's knowledge, so you should read it with `useSyncExternalStore`.
+এই ভ্যালুটি রিয়েক্টের অগোচরে পরিবর্তিত হতে পারে, তাই আপনার উচিত `useSyncExternalStore` এর মাধ্যমে এটি রিড করা।
 
 ```js
 import { useSyncExternalStore } from 'react';
@@ -190,7 +190,7 @@ function ChatIndicator() {
 }
 ```
 
-To implement the `getSnapshot` function, read the current value from the browser API:
+`getSnapshot` ফাংশনটিকে ইমপ্লিমেন্ট করার জন্য ব্রাউজার API থেকে বর্তমান ভ্যালুটি রিড করুন:
 
 ```js
 function getSnapshot() {
@@ -198,7 +198,7 @@ function getSnapshot() {
 }
 ```
 
-Next, you need to implement the `subscribe` function. For example, when `navigator.onLine` changes, the browser fires the [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) and [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) events on the `window` object. You need to subscribe the `callback` argument to the corresponding events, and then return a function that cleans up the subscriptions:
+এরপরে, আপনাকে `subscribe` ফাংশনটি ইমপ্লিমেন্ট করতে হবে। উদাহরণস্বরূপ, যখন `navigator.onLine` পরিবর্তিত হয়, তখন ব্রাউজার `window` অবজেক্টের ওপর [`online`](https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event) এবং [`offline`](https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event) ইভেন্টগুলো ফায়ার (fire) করে। আপনাকে ঐ নির্দিষ্ট ইভেন্টগুলোর কারেসপন্ডিং `callback` আর্গুমেন্টটিকে সাবস্ক্রাইব করতে হবে, এবং এরপর একটি ফাংশন রিটার্ন করতে হবে যা এই সাবস্ক্রিপশনগুলোকে ক্লিন আপ (clean up) করবে:
 
 ```js
 function subscribe(callback) {
@@ -211,7 +211,7 @@ function subscribe(callback) {
 }
 ```
 
-Now React knows how to read the value from the external `navigator.onLine` API and how to subscribe to its changes. Disconnect your device from the network and notice that the component re-renders in response:
+এখন রিয়েক্ট জানে কীভাবে এক্সটার্নাল `navigator.onLine` API থেকে ভ্যালুটি রিড করতে হবে এবং কীভাবে এর পরিবর্তনগুলোতে সাবস্ক্রাইব করতে হবে। আপনার ডিভাইসটিকে নেটওয়ার্ক থেকে ডিসকানেক্ট করুন এবং খেয়াল করুন কীভাবে কম্পোনেন্টটি রেসপন্সে রি-রেন্ডার হয়:
 
 <Sandpack>
 
@@ -241,11 +241,11 @@ function subscribe(callback) {
 
 ---
 
-### Extracting the logic to a custom Hook {/*extracting-the-logic-to-a-custom-hook*/}
+### কোনো কাস্টম হুকে লজিক এক্সট্র্যাক্ট করা {/*extracting-the-logic-to-a-custom-hook*/}
 
-Usually you won't write `useSyncExternalStore` directly in your components. Instead, you'll typically call it from your own custom Hook. This lets you use the same external store from different components.
+সাধারণত আপনি আপনার কম্পোনেন্টে সরাসরি `useSyncExternalStore` লিখবেন না। এর পরিবর্তে, আপনার নিজস্ব কাস্টম হুক থেকে এটি কল করাটাই সচরাচর ব্যবহৃত হয়। এটি আপনাকে বিভিন্ন কম্পোনেন্টে একই এক্সটার্নাল স্টোর ব্যবহার করতে দেয়। 
 
-For example, this custom `useOnlineStatus` Hook tracks whether the network is online:
+উদাহরণস্বরূপ, এই কাস্টম `useOnlineStatus` হুকটি ট্র্যাক করে যে নেটওয়ার্কটি অনলাইনে আছে কি না:
 
 ```js {3,6}
 import { useSyncExternalStore } from 'react';
@@ -264,7 +264,7 @@ function subscribe(callback) {
 }
 ```
 
-Now different components can call `useOnlineStatus` without repeating the underlying implementation:
+এখন বিভিন্ন কম্পোনেন্ট কোনো ভেতরের ইমপ্লিমেন্টেশনের পুনরাবৃত্তি ছাড়াই `useOnlineStatus` কে কল করতে পারবে:
 
 <Sandpack>
 
@@ -326,14 +326,14 @@ function subscribe(callback) {
 
 ---
 
-### Adding support for server rendering {/*adding-support-for-server-rendering*/}
+### সার্ভার রেন্ডারিংয়ের সাপোর্ট যুক্ত করা {/*adding-support-for-server-rendering*/}
 
-If your React app uses [server rendering,](/reference/react-dom/server) your React components will also run outside the browser environment to generate the initial HTML. This creates a few challenges when connecting to an external store:
+যদি আপনার রিয়েক্ট অ্যাপ্লিকেশনটি [সার্ভার রেন্ডারিং](/reference/react-dom/server) ব্যবহার করে, তবে আপনার রিয়েক্ট কম্পোনেন্ট ব্রাউজার এনভায়রনমেন্টের বাইরেও রান করবে যাতে ইনিশিয়াল (প্রাথমিক) HTML তৈরি করা যায়। এক্সটার্নাল স্টোরের সাথে সংযুক্ত থাকতে এটি বেশ কয়েকটি চ্যালেঞ্জ তৈরি করে:
 
-- If you're connecting to a browser-only API, it won't work because it does not exist on the server.
-- If you're connecting to a third-party data store, you'll need its data to match between the server and client.
+- আপনি যদি কোনো ব্রাউজার-অনলি API এর সাথে কানেক্ট করতে চান, তবে সেটি কাজ করবে না কারণ সার্ভারে এর কোনো অস্তিত্ব নেই।
+- যদি আপনি কোনো থার্ড-পার্টি ডেটা স্টোরের সাথে কানেক্ট করেন, আপনাকে লক্ষ্য রাখতে হবে যেন এর ডেটা সার্ভার এবং ক্লায়েন্টের মধ্যে মিলে যায় (match)।
 
-To solve these issues, pass a `getServerSnapshot` function as the third argument to `useSyncExternalStore`:
+এই সমস্যাগুলোর সমাধান করতে, `useSyncExternalStore`-এর তৃতীয় আর্গুমেন্ট হিসেবে একটি `getServerSnapshot` ফাংশন পাস করুন:
 
 ```js {4,12-14}
 import { useSyncExternalStore } from 'react';
@@ -356,26 +356,26 @@ function subscribe(callback) {
 }
 ```
 
-The `getServerSnapshot` function is similar to `getSnapshot`, but it runs only in two situations:
+`getServerSnapshot` ফাংশনটি `getSnapshot` এর মতোই, কিন্তু এটি শুধু দুটি পরিস্থিতিতে রান করে:
 
-- It runs on the server when generating the HTML.
-- It runs on the client during [hydration](/reference/react-dom/client/hydrateRoot), i.e. when React takes the server HTML and makes it interactive.
+- এটি HTML জেনারেট করার সময় সার্ভারে রান করে।
+- এটি [হাইড্রেশনের (hydration)](/reference/react-dom/client/hydrateRoot) সময় ক্লায়েন্টে রান করে, অর্থাৎ যখন রিয়েক্ট সার্ভারের HTML কে ইন্টারঅ্যাক্টিভ করে তোলে।
 
-This lets you provide the initial snapshot value which will be used before the app becomes interactive. If there is no meaningful initial value for the server rendering, omit this argument to [force rendering on the client.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
+এটি আপনাকে ইনিশিয়াল স্ন্যাপশট ভ্যালু প্রদান করার সুযোগ দেয় যা অ্যাপটি পুরোপুরি ইন্টারঅ্যাক্টিভ হওয়ার আগে ব্যবহৃত হবে। সার্ভার রেন্ডারিংয়ের জন্য যদি কোনো অর্থপূর্ণ ইনিশিয়াল ভ্যালু না থাকে, তবে এই আর্গুমেন্টটি বাদ দিন যাতে করে শুধুমাত্র [ক্লায়েন্টে রেন্ডার করতে বাধ্য করা যায়।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
 
 <Note>
 
-Make sure that `getServerSnapshot` returns the same exact data on the initial client render as it returned on the server. For example, if `getServerSnapshot` returned some prepopulated store content on the server, you need to transfer this content to the client. One way to do this is to emit a `<script>` tag during server rendering that sets a global like `window.MY_STORE_DATA`, and read from that global on the client in `getServerSnapshot`. Your external store should provide instructions on how to do that.
+নিশ্চিত করুন যে `getServerSnapshot` ইনিশিয়াল ক্লায়েন্ট রেন্ডারের সময় হুবহু একই ডেটা রিটার্ন করে যা এটি সার্ভারে রিটার্ন করেছিল। উদাহরণস্বরূপ, যদি `getServerSnapshot` সার্ভারে আগে থেকে পপুলেট (populate) করা কিছু স্টোর কনটেন্ট রিটার্ন করে থাকে, তবে আপনাকে এই কনটেন্ট ক্লায়েন্টে ট্রান্সফার করতে হবে। এটি করার একটি উপায় হলো সার্ভার রেন্ডারিংয়ের সময় একটি `<script>` ট্যাগ এমিট করা যা `window.MY_STORE_DATA` এর মতো কোনো গ্লোবাল সেট করবে, এবং ক্লায়েন্টের `getServerSnapshot` এ ওই গ্লোবালটি রিড করা। আপনার এক্সটার্নাল স্টোরটির সাধারণত এটি কীভাবে করতে হবে সেই বিষয়ে নির্দেশনা দেওয়া উচিত।
 
 </Note>
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
+## ট্রাবলশুটিং {/*troubleshooting*/}
 
-### I'm getting an error: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
+### আমি একটি এরর পাচ্ছি: "The result of `getSnapshot` should be cached" {/*im-getting-an-error-the-result-of-getsnapshot-should-be-cached*/}
 
-This error means your `getSnapshot` function returns a new object every time it's called, for example:
+এই এররটির মানে হলো আপনার `getSnapshot` ফাংশনটি প্রতিবার কল করার সময় একটি নতুন অবজেক্ট রিটার্ন করছে, উদাহরণস্বরূপ:
 
 ```js {2-5}
 function getSnapshot() {
@@ -386,9 +386,9 @@ function getSnapshot() {
 }
 ```
 
-React will re-render the component if `getSnapshot` return value is different from the last time. This is why, if you always return a different value, you will enter an infinite loop and get this error.
+যদি `getSnapshot` এর রিটার্ন ভ্যালু আগের বারের চেয়ে ভিন্ন হয় তবে রিয়েক্ট কম্পোনেন্টটিকে রি-রেন্ডার করবে। এই কারণে, যদি আপনি সবসময় একটি ভিন্ন ভ্যালু রিটার্ন করেন, তবে আপনি একটি ইনফিনাইট লুপে প্রবেশ করবেন এবং এই এররটি পাবেন।
 
-Your `getSnapshot` object should only return a different object if something has actually changed. If your store contains immutable data, you can return that data directly:
+আপনার `getSnapshot` অবজেক্টটির উচিত কেবল তখনই একটি ভিন্ন অবজেক্ট রিটার্ন করা যখন আসলেই কোনো কিছু পরিবর্তন হয়েছে। যদি আপনার স্টোরে ইমিউটেবল ডেটা থাকে, তবে আপনি সরাসরি সেই ডেটাটিকেই রিটার্ন করতে পারেন:
 
 ```js {2-3}
 function getSnapshot() {
@@ -397,13 +397,13 @@ function getSnapshot() {
 }
 ```
 
-If your store data is mutable, your `getSnapshot` function should return an immutable snapshot of it. This means it *does* need to create new objects, but it shouldn't do this for every single call. Instead, it should store the last calculated snapshot, and return the same snapshot as the last time if the data in the store has not changed. How you determine whether mutable data has changed depends on your mutable store.
+যদি আপনার স্টোরের ডেটা মিউটেবল (mutable) হয়, তবে আপনার `getSnapshot` ফাংশনটির উচিত সেটার একটি ইমিউটেবল স্ন্যাপশট রিটার্ন করা। এর মানে হলো এটিকে নতুন অবজেক্ট তৈরি *করতেই* হবে, তবে প্রতিবার কল করার জন্যই এটি করা উচিত নয়। এর পরিবর্তে, এটিকে সর্বশেষ ক্যালকুলেট করা স্ন্যাপশটটি স্টোর করে রাখা উচিত, এবং স্টোরের ডেটায় যদি কোনো পরিবর্তন না এসে থাকে তবে গতবার যে স্ন্যাপশটটি রিটার্ন করেছিল সেটাই পুনরায় রিটার্ন করা উচিত। মিউটেবল ডেটা পরিবর্তন হয়েছে কি না সেটা কীভাবে নির্ধারণ করবেন তা নির্ভর করে আপনার মিউটেবল স্টোরটির উপর।
 
 ---
 
-### My `subscribe` function gets called after every re-render {/*my-subscribe-function-gets-called-after-every-re-render*/}
+### আমার `subscribe` ফাংশনটি প্রতিটি রি-রেন্ডারের পরে কল হচ্ছে {/*my-subscribe-function-gets-called-after-every-re-render*/}
 
-This `subscribe` function is defined *inside* a component so it is different on every re-render:
+নিচের `subscribe` ফাংশনটি একটি কম্পোনেন্টের *ভেতরে* ডিক্লেয়ার করা হয়েছে তাই এটি প্রতিটি রি-রেন্ডারের সময়ই ভিন্ন:
 
 ```js {2-5}
 function ChatIndicator() {
@@ -418,7 +418,7 @@ function ChatIndicator() {
 }
 ```
   
-React will resubscribe to your store if you pass a different `subscribe` function between re-renders. If this causes performance issues and you'd like to avoid resubscribing, move the `subscribe` function outside:
+আপনি যদি রি-রেন্ডারের সময় একটি ভিন্ন `subscribe` ফাংশন পাস করেন তবে রিয়েক্ট আপনার স্টোরে পুনরায় সাবস্ক্রাইব করবে। এটি যদি পারফরম্যান্সে সমস্যা তৈরি করে এবং আপনি এই পুনরায় সাবস্ক্রাইব হওয়া এড়াতে চান, তবে `subscribe` ফাংশনটিকে কম্পোনেন্টের বাইরে নিয়ে যান:
 
 ```js {1-4}
 // ✅ Always the same function, so React won't need to resubscribe
@@ -432,7 +432,7 @@ function ChatIndicator() {
 }
 ```
 
-Alternatively, wrap `subscribe` into [`useCallback`](/reference/react/useCallback) to only resubscribe when some argument changes:
+বিকল্প হিসেবে, `subscribe` কে [`useCallback`](/reference/react/useCallback) এর ভেতরে র‍্যাপ (wrap) করতে পারেন যাতে এটি শুধুমাত্র তখনই রি-সাবস্ক্রাইব করে যখন কোনো আর্গুমেন্ট পরিবর্তন হয়:
 
 ```js {2-5}
 function ChatIndicator({ userId }) {
