@@ -90,8 +90,13 @@ React `root`-এ `<App />` দেখাবে, এবং এর মধ্যক�
 
 * আপনি যদি একি রুটে একাধিকবার  `render` কল করেন, তাহলে আপনার পাঠানো সর্বশেষ JSX দেখানোর খাতিরে React প্রয়োজনমত DOM আপডেট করে ফেলবে। React আগেরবার রেন্ডার হওয়া ট্রি এর সাথে ["মিলিয়ে দেখবে"](/learn/preserving-and-resetting-state) এবং সিদ্ধান্ত নিবে DOM এর কোণ অংশগুলো পুনর্ব্যবহার করা যায় আর কোনগুলো আবার বানাতে হবে। একই রুটে আবার `render` কল করা রুট কম্পোনেন্টে [`set` function](/reference/react/useState#setstate) কল করার মতঃ React অপ্রয়োজনীয় DOM আপডেট এড়ানোর চেষ্টা করে।
 
+<<<<<<< HEAD
 * যদিও rendering শুরু হওয়ার পর synchronous, `root.render(...)` synchronous নয়। এর মানে হল `root.render()` এর পরের কোড ওই নির্দিষ্ট render এর কোন effects (`useLayoutEffect`, `useEffect`) fire হওয়ার আগেই রান হতে পারে। এটা সাধারণত ঠিক আছে এবং খুব কমই adjustment প্রয়োজন হয়। বিরল ক্ষেত্রে যেখানে effect timing গুরুত্বপূর্ণ, আপনি `root.render(...)` কে [`flushSync`](https://react.dev/reference/react-dom/client/flushSync) দিয়ে wrap করতে পারেন যাতে initial render সম্পূর্ণভাবে synchronously রান হয়।
   
+=======
+* Although rendering is synchronous once it starts, `root.render(...)` is not. This means code after `root.render()` may run before any effects (`useLayoutEffect`, `useEffect`) of that specific render are fired. This is usually fine and rarely needs adjustment. In rare cases where effect timing matters, you can wrap `root.render(...)` in [`flushSync`](https://react.dev/reference/react-dom/flushSync) to ensure the initial render runs fully synchronously.
+
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
   ```js
   const root = createRoot(document.getElementById('root'));
   root.render(<App />);
@@ -113,7 +118,11 @@ root.unmount();
 
 এটা সে ক্ষেত্রে সবচেয়ে কাজে লাগে যদি অন্য কোন কোডের কারণে DOM থেকে আপনার React রুটের DOM নোড (বা ট্রিতে এর কোন পূর্বসূরী) মুছে যায়। উদাহরণস্বরূপ, ধরেন একটা jQuery ট্যাব প্যানেল আছে যা DOM থেকে অচল ট্যাবগুলোকে ফেলে দেয়। যদি একটা ট্যাব ফেলে দেওয়া হয়, তাহলে এই ট্যাবের মধ্যে থাকা যাবতীয় সব কিছু(ভিতরকার React রুটগুলো সহ) DOM থেকে মুছে যায়। সেক্ষেত্রে, `root.unmount` কল করার মাধ্যমে আপনার React কে বলতে হবে মুছে যাওয়া রুটের কনটেন্ট ম্যানেজ করা "বন্ধ" করতে। না হলে, মুছে যাওয়া রুটের ভেতরকার কম্পোনেন্ট সাবস্ক্রিপশনের মত global resource মুছবে না এবং সেগুলো ফ্রি হবে না।
 
+<<<<<<< HEAD
 `root.unmount` কল করলে রুটের সব কম্পোনেন্ট আনমাউন্ট হবে এবং রুট DOM নোড থেকে React "detach" হয়ে যাবে। একই সাথে ট্রিতে কোন ইভেন্ট হ্যান্ডলার বা স্টেট থাকলে সেটাও মুছে যাবে। 
+=======
+Calling `root.unmount` will unmount all the components in the root and "detach" React from the root DOM node, including removing any event handlers or state in the tree.
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 
 #### প্যারামিটার {/*root-unmount-parameters*/}
@@ -197,7 +206,11 @@ function Counter() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 **যদি আপনার অ্যাপটি সম্পূর্ণরূপে React দিয়ে বানানো হয়ে থাকে, আপনার আর কোন রুট তৈরির বা আবার [`root.render`](#root-render) কল করার প্রয়োজন হবার কথা না** 
+=======
+**If your app is fully built with React, you shouldn't need to create any more roots, or to call [`root.render`](#root-render) again.**
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
 এর পর থেকে, React আপনার পুরো অ্যাপের DOM পরিচালনা করবে। আরো কম্পোনেন্ট যুক্ত করবার জন্য [`App` কম্পোনেন্টে তাদের nest করুন।](/learn/importing-and-exporting-components) যখন আপনার UI আপডেটের প্রয়োজন হবে, আপনার প্রতিটি কম্পোনেন্ট [স্টেট ব্যবহার করে](/reference/react/useState) সেটা করতে পারবে। যখন আপনার DOM নোডের বাইরে অতিরিক্ত কোন কনটেন্ট যেমন একটা মোডাল বা টুলটিপ দেখানোর প্রয়োজন হবে তখন, [একটা পোর্টাল ব্যবহার করে সেটা রেন্ডার করুন।](/reference/react-dom/createPortal)
 
@@ -249,11 +262,11 @@ import { createRoot } from 'react-dom/client';
 import { Comments, Navigation } from './Components.js';
 
 const navDomNode = document.getElementById('navigation');
-const navRoot = createRoot(navDomNode); 
+const navRoot = createRoot(navDomNode);
 navRoot.render(<Navigation />);
 
 const commentDomNode = document.getElementById('comments');
-const commentRoot = createRoot(commentDomNode); 
+const commentRoot = createRoot(commentDomNode);
 commentRoot.render(<Comments />);
 ```
 
@@ -303,7 +316,7 @@ nav ul li { display: inline-block; margin-right: 20px; }
 
 ```js
 const domNode = document.createElement('div');
-const root = createRoot(domNode); 
+const root = createRoot(domNode);
 root.render(<Comment />);
 document.body.appendChild(domNode); // আপনি ডকুমেন্টের যেকোন জায়গায় এটা যোগ করতে পারেন
 ```
@@ -507,8 +520,13 @@ Warning: You passed a second argument to root.render(...) but it only accepts on
 // 🚩 ভুলঃ root.render শুধুমাত্র একটি argument নেয়।
 root.render(App, {onUncaughtError});
 
+<<<<<<< HEAD
 // ✅ সঠিকঃ options createRoot এ দিন।
 const root = createRoot(container, {onUncaughtError}); 
+=======
+// ✅ Correct: pass options to createRoot.
+const root = createRoot(container, {onUncaughtError});
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 root.render(<App />);
 ```
 
