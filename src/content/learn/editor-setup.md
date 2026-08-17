@@ -31,7 +31,11 @@ React কমিউনিটিতে ব্যবহৃত অন্য জন�
 
 ### লিন্টিং {/*linting*/}
 
+<<<<<<< HEAD
 কোড লিন্টার আপনি কোড লিখার সাথে সাথে আপনাকে বিভিন্ন সমস্যা ধরতে এবং তা তাড়াতাড়ি সমাধান করতে সাহায্য করে। [ESLint](https://eslint.org/) জাভাস্ক্রিপ্টের একটি জনপ্রিয়, ওপেন-সোর্স লিন্টার। 
+=======
+Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript.
+>>>>>>> 383a1e9239c8c084a16a19daa4fc2a7ad04e2a3a
 
 * [React এর জন্য প্রস্তাবিত কনফিগারেশন সহ ESLint ইন্সটল করুন](https://www.npmjs.com/package/eslint-config-react-app) (নিশ্চিত করুন আপনার [Node ইন্সটল করা রয়েছে!](https://nodejs.org/en/download/current/))
 * [অফিশিয়াল এক্সটেনশনের সাহায্যে VSCode এ ESLint সংযুক্ত করুন](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)

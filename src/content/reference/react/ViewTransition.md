@@ -81,7 +81,7 @@ After the finished Promise of the `startViewTransition` is resolved, React will 
 
 #### Caveats {/*caveats*/}
 
-- Only use `name` for [shared element transitions](#animating-a-shared-element). For all other animations, React automatically generates a unique name to prevent unexpected animations. 
+- Only use `name` for [shared element transitions](#animating-a-shared-element). For all other animations, React automatically generates a unique name to prevent unexpected animations.
 - By default, `setState` updates immediately and does not activate `<ViewTransition>`, only updates wrapped in a [Transition](/reference/react/useTransition), [`<Suspense>`](/reference/react/Suspense), or `useDeferredValue` activate ViewTransition.
 - `<ViewTransition>` creates an image that can be moved around, scaled and cross-faded. Unlike Layout Animations you may have seen in React Native or Motion, this means that not every individual Element inside of it animates its position. This can lead to better performance and a more continuous feeling, smooth animation compared to animating every individual piece. However, it can also lose continuity in things that should be moving by themselves. So you might have to add more `<ViewTransition>` boundaries manually as a result.
 - Currently, `<ViewTransition>` only works in the DOM. We're working on adding support for React Native and other platforms.
@@ -156,7 +156,7 @@ For example, you can define a ViewTransition as:
     /* apply slide-in for Transition Type `forward` */
     "forward": 'slide-in',
     /* otherwise use the browser default animation */
-    "default": 'auto'      
+    "default": 'auto'
   }}
   /* use the browser default for exit animations*/
   exit="auto"
@@ -449,7 +449,7 @@ button:hover {
 
 #### Only top-level ViewTransitions animate on exit/enter {/*only-top-level-viewtransition-animates-on-exit-enter*/}
 
-`<ViewTransition>` only activates exit/enter if it is placed _before_ any DOM nodes. 
+`<ViewTransition>` only activates exit/enter if it is placed _before_ any DOM nodes.
 
 If there's a `<div>` above `<ViewTransition>`, no exit/enter animations trigger:
 
@@ -1264,7 +1264,7 @@ It's important to properly use keys to preserve identity when reordering lists. 
 
 ### Animating from Suspense content {/*animating-from-suspense-content*/}
 
-Like any Transition, React waits for data and new CSS (`<link rel="stylesheet" precedence="...">`) before running the animation. In addition to this, ViewTransitions also wait up to 500ms for new fonts to load before starting the animation to avoid them flickering in later. For the same reason, an image wrapped in ViewTransition will wait for the image to load.
+Like any Transition, React waits for data and new CSS (`<link rel="stylesheet" precedence="...">`) before running the animation. In addition to this, ViewTransitions also wait up to 500ms for new fonts to load before starting the animation to avoid them flickering in later. For the same reason, an image wrapped in ViewTransition will wait for the image to load. See examples of [waiting for a font](/reference/react/Suspense#waiting-for-a-font-to-load) and [waiting for an image](/reference/react/Suspense#waiting-for-an-image-to-load) on the Suspense page.
 
 If it's inside a new Suspense boundary instance, then the fallback is shown first. After the Suspense boundary fully loads, it triggers the `<ViewTransition>` to animate the reveal to the content.
 
@@ -2336,7 +2336,7 @@ Each callback receives an `instance` with `.old` and `.new` properties represent
 </ViewTransition>
 ```
 
-This allows you to combine CSS-driven animations and JavaScript-driven animations. 
+This allows you to combine CSS-driven animations and JavaScript-driven animations.
 
 In the following example, the default cross-fade is handled by CSS, and the slide animations are driven by JavaScript in the `onEnter` and `onExit` animations:
 
@@ -2564,7 +2564,7 @@ This allows the browser to cancel the animation when the View Transition is inte
 
 ### Animating transition types with JavaScript {/*animating-transition-types-with-javascript*/}
 
-You can use `types` passed to `ViewTransition` events to conditionally apply different animations based on how the Transition was triggered. 
+You can use `types` passed to `ViewTransition` events to conditionally apply different animations based on how the Transition was triggered.
 
 ```js {3}
  <ViewTransition
