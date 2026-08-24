@@ -274,7 +274,13 @@ export default function App() {
 
 ---
 
+<<<<<<< HEAD
 ### ক্লায়েন্ট এবং সার্ভারে ভিন্ন কনটেন্ট পরিচালনা করতে হবে যেভাবে {/*handling-different-client-and-server-content*/}
+=======
+{/* TODO: Remove this subsection when browser is available in Stable. */}
+
+### Handling different client and server content {/*handling-different-client-and-server-content*/}
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
 
 আপনি যদি ইচ্ছাকৃতভাবে সার্ভার এবং ক্লায়েন্টে ভিন্ন কিছু রেন্ডার করতে চান, আপনি দুই পাসে রেন্ডারিং চালাতে পারেন। ক্লায়েন্টের যেসব কম্পোনেন্ট কিছুটা ভিন্ন ভাবে রেন্ডার করবে, তারা `isClient` এর মত একটি [state variable](/reference/react/useState) রিড করতে পারে, যেটা আপনি একটা [Effect](/reference/react/useEffect) এ `true` সেট করে দিতে পারেনঃ
 
@@ -318,6 +324,10 @@ export default function App() {
 </Sandpack>
 
 এই ভাবে প্রাথমিক রেন্ডার পাস সার্ভারের মত একই কনটেন্ট রেন্ডার করবে, অমিল এড়িয়ে গিয়ে, কিন্তু hydration এর ঠিক পর সিংক্রোনাসভাবে অতিরিক্ত একটি পাস হবে।
+
+Use this approach when you want the client-rendered content to be different from the initial server-rendered HTML.
+
+<Canary>If a component should render only in the browser, call [`use(browser())`](/reference/react/use#use-browser) instead of waiting for an Effect.</Canary>
 
 <Pitfall>
 
