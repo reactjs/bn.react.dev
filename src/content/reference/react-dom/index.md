@@ -30,6 +30,12 @@ The `react-dom` প্যাকেজে যেসব মেথড রয়েছ�
 * [`preinit`](/reference/react-dom/preinit) আপনাকে একটি external script fetch এবং evaluate করতে বা stylesheet fetch এবং insert করতে দেয়।
 * [`preinitModule`](/reference/react-dom/preinitModule) আপনাকে একটি ESM module fetch এবং evaluate করতে দেয়।
 
+## Server Rendering APIs {/*server-rendering-apis*/}
+
+This API controls how components render on the server:
+
+* <CanaryBadge /> [`browser`](/reference/react-dom/browser) lets you mark a component as browser-only during server rendering.
+
 ---
 
 ## Entry points {/*entry-points*/}
