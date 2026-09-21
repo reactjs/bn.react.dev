@@ -64,7 +64,11 @@ function App() {
 
 <Note>
 
+<<<<<<< HEAD
 React 19 থেকে শুরু করে, আপনি `<SomeContext>` কে একটি provider হিসেবে render করতে পারেন। 
+=======
+Starting in React 19, you can render `<SomeContext>` as a provider.
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
 
 React এর পুরনো ভার্সনে, `<SomeContext.Provider>` ব্যবহার করুন।
 
