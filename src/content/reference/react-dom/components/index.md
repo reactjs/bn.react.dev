@@ -36,6 +36,7 @@ React সকল প্রকার ব্রাউজার বিল্ট-ই�
 
 এই বিল্ট-ইন ব্রাউজার কম্পোনেন্টগুলি আপনাকে বাহ্যিক রিসোর্স লোড করতে অথবা ডকুমেন্টে মেটাডেটা দিয়ে মার্ক করতে দেয়:
 
+* [`<img>`](/reference/react-dom/components/img)
 * [`<link>`](/reference/react-dom/components/link)
 * [`<meta>`](/reference/react-dom/components/meta)
 * [`<script>`](/reference/react-dom/components/script)
@@ -91,7 +92,7 @@ React সকল বিল্ট-ইন ব্রাউজার HTML কম্�
 * [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html)
 * [`<i>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)
 * [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe)
-* [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+* [`<img>`](/reference/react-dom/components/img)
 * [`<input>`](/reference/react-dom/components/input)
 * [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins)
 * [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd)
@@ -205,7 +206,7 @@ root.render(<App />);
 export class MyElement extends HTMLElement {
   constructor() {
     super();
-    // The value here will be overwritten by React 
+    // The value here will be overwritten by React
     // when initialized as an element
     this.value = undefined;
   }
