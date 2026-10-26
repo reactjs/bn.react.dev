@@ -27,23 +27,13 @@ title: কম্পোনেন্টকে বিশুদ্ধ রাখা
 
 এই গণিতের সূত্রটিই ধরুনঃ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-<<<<<<< HEAD
-যদি <Math><MathI>x</MathI> = 2</Math> হয়, তাহলে <Math><MathI>y</MathI> = 4</Math> হবে। সবসময়। 
+যদি <Math><MathI>x</MathI> = 2</Math> হয়, তাহলে <Math><MathI>y</MathI> = 4</Math> হবে। সবসময়।
 
-যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <Math><MathI>y</MathI> = 6</Math> হবে। সবসময়। 
+যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <Math><MathI>y</MathI> = 6</Math> হবে। সবসময়।
 
 যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <MathI>y</MathI> কখনো কখনো <Math>9</Math> অথবা <Math>–1</Math> অথবা <Math>2.5</Math> হবেনা, দিনের কোন সময় বা স্টক মার্কেটের অবস্থার উপর নির্ভর করে।
 
-যদি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এবং <Math><MathI>x</MathI> = 3</Math> হয়, <MathI>y</MathI> তাহলে _সবসময়_ <Math>6</Math> হবে। 
-=======
-If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always.
-
-If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always.
-
-If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market.
-
-If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+যদি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এবং <Math><MathI>x</MathI> = 3</Math> হয়, <MathI>y</MathI> তাহলে _সবসময়_ <Math>6</Math> হবে।
 
 আমরা যদি এটিকে একটি জাভাস্ক্রিপ্ট ফাংশনে রুপ দেই, তাহলে এটি এমন দেখাবেঃ
 
@@ -85,19 +75,11 @@ export default function App() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-আপনি যখন `Recipe` তে `drinkers={2}` পাস করবেন, এটি JSX রিটার্ন করবে যাতে `2 cups of water` থাকবে। সবসময়। 
-=======
-When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+আপনি যখন `Recipe` তে `drinkers={2}` পাস করবেন, এটি JSX রিটার্ন করবে যাতে `2 cups of water` থাকবে। সবসময়।
 
 যদি আপনি `drinkers={4}` পাস করেন, এটি JSX রিটার্ন করবে যাতে `4 cups of water` থাকবে। সবসময়।
 
-<<<<<<< HEAD
 ঠিক একটি গণিতের সূত্রের মত।
-=======
-Just like a math formula.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 আপনি আপনার কম্পোনেন্টকে একটি রেসিপি হিসেবে চিন্তা করতে পারেনঃ যদি আপনি এগুলো অনুসরণ করেন এবং রান্নার সময়ে নতুন কোন উপাদান না আনেন তাহলে আপনি সবসময় একই খাবার পাবেন। এই "খাবার" হল JSX যা আপনার কম্পোনেন্ট React কে [রেন্ডার](/learn/render-and-commit) করার জন্য পরিবেশন করে।
 
