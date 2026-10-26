@@ -36,7 +36,7 @@ const ThemeContext = createContext('light');
 
 #### রিটার্ন {/*returns*/}
 
-`createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে। 
+`createContext` একটি কনটেক্সট অবজেক্ট রিটার্ন করে।
 
 **কনটেক্সট অবজেক্ট নিজে কোন তথ্য ধারণ করে না।** এটা _সেই_ কনটেক্সটকে রিপ্রেজেন্ট করে যেটা অন্যান্য কম্পোনেন্টগুলো read বা provide করে। সাধারণত, কনটেক্সট ভ্যালু নির্দিষ্ট করতে আপনি উপরের কম্পোনেন্টে [`SomeContext`](#provider) ব্যবহার করবেন, এবং এটাকে read করতে নিচের কম্পোনেন্টগুলোতে [`useContext(SomeContext)`](/reference/react/useContext) কল করবেন। কনটেক্সট অবজেক্টের কিছু প্রপার্টি আছেঃ
 
@@ -64,11 +64,7 @@ function App() {
 
 <Note>
 
-<<<<<<< HEAD
-React 19 থেকে শুরু করে, আপনি `<SomeContext>` কে একটি provider হিসেবে render করতে পারেন। 
-=======
-Starting in React 19, you can render `<SomeContext>` as a provider.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+React 19 থেকে শুরু করে, আপনি `<SomeContext>` কে একটি provider হিসেবে render করতে পারেন।
 
 React এর পুরনো ভার্সনে, `<SomeContext.Provider>` ব্যবহার করুন।
 
