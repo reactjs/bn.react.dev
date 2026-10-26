@@ -4,13 +4,9 @@ title: <Fragment> (<>...</>)
 
 <Intro>
 
-<<<<<<< HEAD
 `<Fragment>`, যেটা বেশিরভাগ সময় `<>...</>` সিনট্যাক্স ব্যবহার করে প্রকাশ করা হয়, আপনাকে একটা wrapper নোড ছাড়াই এলিমেন্ট গ্রুপ করার সুবিধা দেবে।
-=======
-`<Fragment>`, often used via `<>...</>` syntax, lets you group elements without a wrapper node.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
-Fragments can also accept refs, which enable interacting with underlying DOM nodes without adding wrapper elements.
+Fragment-এ ref-ও দেওয়া যায়। এর সাহায্যে কোনো wrapper এলিমেন্ট যোগ না করেই ভেতরের DOM নোডগুলোর সাথে কাজ করা যায়।
 
 ```js
 <>
@@ -33,51 +29,14 @@ Fragments can also accept refs, which enable interacting with underlying DOM nod
 
 #### Props {/*props*/}
 
-<<<<<<< HEAD
-- **অপশনাল** `key`: যেসব ফ্র্যাগমেন্ট স্পষ্টভাবে `<Fragment>` সিনট্যাক্স দিয়ে ডিক্লেয়ার করা হয় তাদের [keys](/learn/rendering-lists#keeping-list-items-in-order-with-key) থাকতে পারে।
-- <CanaryBadge />  **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
-
-### <CanaryBadge /> FragmentInstance {/*fragmentinstance*/}
-
-When you pass a ref to a fragment, React provides a `FragmentInstance` object with methods for interacting with the DOM nodes wrapped by the fragment:
-
-**Event handling methods:**
-- `addEventListener(type, listener, options?)`: Adds an event listener to all first-level DOM children of the Fragment.
-- `removeEventListener(type, listener, options?)`: Removes an event listener from all first-level DOM children of the Fragment.
-- `dispatchEvent(event)`: Dispatches an event to a virtual child of the Fragment to call any added listeners and can bubble to the DOM parent.
-
-**Layout methods:**
-- `compareDocumentPosition(otherNode)`: Compares the document position of the Fragment with another node.
-  - If the Fragment has children, the native `compareDocumentPosition` value is returned. 
-  - Empty Fragments will attempt to compare positioning within the React tree and include `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
-  - Elements that have a different relationship in the React tree and DOM tree due to portaling or other insertions are `Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC`.
-- `getClientRects()`: Returns a flat array of `DOMRect` objects representing the bounding rectangles of all children.
-- `getRootNode()`: Returns the root node containing the Fragment's parent DOM node.
-
-**Focus management methods:**
-- `focus(options?)`: Focuses the first focusable DOM node in the Fragment. Focus is attempted on nested children depth-first.
-- `focusLast(options?)`: Focuses the last focusable DOM node in the Fragment. Focus is attempted on nested children depth-first.
-- `blur()`: Removes focus if `document.activeElement` is within the Fragment.
-
-**Observer methods:**
-- `observeUsing(observer)`: Starts observing the Fragment's DOM children with an IntersectionObserver or ResizeObserver.
-- `unobserveUsing(observer)`: Stops observing the Fragment's DOM children with the specified observer.
-=======
-- **optional** `key`: Fragments declared with the explicit `<Fragment>` syntax may have [keys.](/learn/rendering-lists#keeping-list-items-in-order-with-key)
-- **optional** `ref`: A ref object (e.g. from [`useRef`](/reference/react/useRef)) or [callback function](/reference/react-dom/components/common#ref-callback). React provides a `FragmentInstance` as the ref value that implements methods for interacting with the DOM nodes wrapped by the Fragment.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+- **অপশনাল** `key`: যেসব Fragment স্পষ্টভাবে `<Fragment>` সিনট্যাক্স দিয়ে ডিক্লেয়ার করা হয়, তাদের [key](/learn/rendering-lists#keeping-list-items-in-order-with-key) থাকতে পারে।
+- **অপশনাল** `ref`: একটি ref অবজেক্ট (যেমন [`useRef`](/reference/react/useRef) থেকে পাওয়া) অথবা [callback ফাংশন](/reference/react-dom/components/common#ref-callback)। React ref-এর মান হিসেবে একটি `FragmentInstance` দেয়, যার মেথডগুলো দিয়ে Fragment-এর মধ্যে থাকা DOM নোডগুলোর সাথে কাজ করা যায়।
 
 #### সতর্কতা {/*caveats*/}
 
-<<<<<<< HEAD
 - আপনি যদি একটা ফ্র্যাগমেন্টে `key` পাস করতে চান, আপনি `<>...</>` সিনট্যাক্স ব্যবহার করতে পারবেন না। আপনাকে স্পষ্টভাবে `'react'` থেকে `Fragment` ইমপোর্ট করতে হবে এবং `<Fragment key={yourKey}>...</Fragment>` রেন্ডার করতে হবে।
 
 - যখন আপনি `<><Child /></>` থেকে `[<Child />]` রেন্ডারিং এ চলে যান বা ফিরে আসেন, অথবা `<><Child /></>` থেকে `<Child />` রেন্ডারিং এ যান এবং ফিরে আসেন React [state রিসেট](/learn/preserving-and-resetting-state) করে না। এটা শুধুমাত্র এক স্তর গভীরে কাজ করেঃ উদাহরণস্বরূপ, `<><><Child /></></>` থেকে `<Child />` এ গেলে state রিসেট হয়। সুনির্দিষ্ট semantics দেখুন [এখানে।](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
-=======
-* If you want to pass `key` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment key={yourKey}>...</Fragment>`.
-
-* React does not [reset state](/learn/preserving-and-resetting-state) when you go from rendering `<><Child /></>` to `[<Child />]` or back, or when you go from rendering `<><Child /></>` to `<Child />` and back. This only works a single level deep: for example, going from `<><><Child /></></>` to `<Child />` resets the state. See the precise semantics [here.](https://gist.github.com/clemmy/b3ef00f9507909429d8aa0d3ee4f986b)
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 * If you want to pass `ref` to a Fragment, you can't use the `<>...</>` syntax. You have to explicitly import `Fragment` from `'react'` and render `<Fragment ref={yourRef}>...</Fragment>`.
 
