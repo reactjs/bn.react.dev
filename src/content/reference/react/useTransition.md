@@ -738,6 +738,10 @@ export default function ContactTab() {
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
 .pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
 ```
 
 </Sandpack>
@@ -893,6 +897,10 @@ export default function ContactTab() {
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
 .pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
 ```
 
 </Sandpack>
@@ -1561,7 +1569,11 @@ main {
 
 ### ব্যবহারকারীদের কাছে ত্রুটি সীমানা ব্যবহার করে ত্রুটি প্রদর্শন করা {/*displaying-an-error-to-users-with-error-boundary*/}
 
+<<<<<<< HEAD
 যদি `startTransition` এ পাস করা কোনো ফাংশন কোনো ত্রুটি দেখায়, তাহলে আপনি আপনার ব্যবহারকারীকে সেই ত্রুটির বার্তাটি প্রদর্শন করতে পারেন একটি [এরর বাউন্ডারির](/reference/react/Component#catching-rendering-errors-with-an-error-boundary) মাধ্যমে। এরর বাউন্ডারি ব্যবহার করতে, যে কম্পোনেন্টে আপনি `useTransition` কল করছেন তাকে একটি এরর বাউন্ডারির মধ্যে মোড়ান। একবার `startTransition` এ পাস করা ফাংশনে ত্রুটি ঘটলে, এরর বাউন্ডারির জন্য নির্ধারিত ফলব্যাক প্রদর্শিত হবে।
+=======
+If a function passed to `startTransition` throws an error or returns a rejected Promise, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
+>>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 <Sandpack>
 
@@ -1732,7 +1744,15 @@ This is a JavaScript limitation due to React losing the scope of the async conte
 
 ### আমি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে চাই {/*i-want-to-call-usetransition-from-outside-a-component*/}
 
+<<<<<<< HEAD
 আপনি একটি কম্পোনেন্টের বাইরে থেকে `useTransition` কল করতে পারবেন না কারণ এটি একটি Hook। এই ক্ষেত্রে, এর পরিবর্তে standalone [`startTransition`](/reference/react/startTransition) পদ্ধতি ব্যবহার করুন। এটি একইভাবে কাজ করে, কিন্তু এটি `isPending` ইন্ডিকেটর প্রদান করে না।
+=======
+You can't call `useTransition` outside a component because it's a Hook. In this
+case, the standalone [`startTransition`](/reference/react/startTransition)
+function can mark state updates as Transitions. It does not provide the
+`isPending` flag. Because the standalone function is not associated with a
+component, an Error Boundary cannot handle errors from its Transition.
+>>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 ---
 
