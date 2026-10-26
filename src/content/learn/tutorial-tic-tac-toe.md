@@ -283,9 +283,9 @@ CodeSandbox-এ আপনি তিনটি প্রধান section দে�
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন   
-2. _Code Editor_ যেখানে আপনি যে file-টি select করেছেন সেটির source code দেখতে পাবেন 
-3. _Browser_ section যেখানে আপনি যে code-টি লিখেছেন সেটি browser-এ কেমন দেখাবে তা দেখতে পাবেন 
+1. _Files_ section যেখানে আপনি files-এর list যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি folder দেখতে পাবেন
+2. _Code Editor_ যেখানে আপনি যে file-টি select করেছেন সেটির source code দেখতে পাবেন
+3. _Browser_ section যেখানে আপনি যে code-টি লিখেছেন সেটি browser-এ কেমন দেখাবে তা দেখতে পাবেন
 
 Files section-এ `App.js` file-টি selected থাকা উচিত | _Code editor_-এ এই ফাইলটির content হলো:
 
@@ -299,11 +299,11 @@ The _browser_ section should be displaying a square with an X in it like this:
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
-এখন starter code-এ উপস্থিত file-গুলোকে দেখে নেওয়া যাক।     
+এখন starter code-এ উপস্থিত file-গুলোকে দেখে নেওয়া যাক।
 
 #### `App.js` {/*appjs*/}
 
-`App.js` file-এ উপস্থিত code একটি _component_ তৈরী করে| React-এ component হলো পুনরায় ব্যবহারযোগ্য code যা user  interface-এর একটি অংশকে নির্দেশ করে| আপনার Application-এর UI elements-গুলোকে render, manage, এবং update করতে components ব্যবহার করা হয়| Component-টির মধ্যে কি হচ্ছে বুঝতে component-টির এক এক করে প্রতিটি লাইন দেখে নেওয়া যাক:  
+`App.js` file-এ উপস্থিত code একটি _component_ তৈরী করে| React-এ component হলো পুনরায় ব্যবহারযোগ্য code যা user  interface-এর একটি অংশকে নির্দেশ করে| আপনার Application-এর UI elements-গুলোকে render, manage, এবং update করতে components ব্যবহার করা হয়| Component-টির মধ্যে কি হচ্ছে বুঝতে component-টির এক এক করে প্রতিটি লাইন দেখে নেওয়া যাক:
 
 ```js {1}
 export default function Square() {
