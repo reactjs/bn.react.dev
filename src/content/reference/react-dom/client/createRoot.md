@@ -75,7 +75,7 @@ React `root`-এ `<App />` দেখাবে, এবং এর মধ্যক�
 
 #### প্যারামিটার {/*root-render-parameters*/}
 
-* `reactNode`: আপনি দেখাতে চান এমন একটি *React নোড*। এটা সাধারণত `<App />` এর মত এক টুকরো JSX হবে।, কিন্তু আপনি [`createElement()`](/reference/react/createElement) দিয়ে তৈরী করা একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null` বা  `undefined` ও পাস করতে পারেন। 
+* `reactNode`: আপনি দেখাতে চান এমন একটি *React নোড*। এটা সাধারণত `<App />` এর মত এক টুকরো JSX হবে।, কিন্তু আপনি [`createElement()`](/reference/react/createElement) দিয়ে তৈরী করা একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null` বা  `undefined` ও পাস করতে পারেন।
 
 
 #### রিটার্ন {/*root-render-returns*/}
@@ -84,19 +84,14 @@ React `root`-এ `<App />` দেখাবে, এবং এর মধ্যক�
 
 #### সতর্কতা {/*root-render-caveats*/}
 
-* আপনি যখন প্রথম বারের মত `root.render` কল করবেন, React এর রুটের ভিতরে কম্পোনেন্ট রেন্ডার করবার আগে থাকা সব HTML কনটেন্ট মুছে ফেলবে। 
+* আপনি যখন প্রথম বারের মত `root.render` কল করবেন, React এর রুটের ভিতরে কম্পোনেন্ট রেন্ডার করবার আগে থাকা সব HTML কনটেন্ট মুছে ফেলবে।
 
 * যদি আপনার রুটের DOM নোডে এমন HTML থাকে যা React সার্ভারে তৈরি করেছে বা বিল্ডের সময় তৈরি করেছে, তাহলে বরং [`hydrateRoot()`](/reference/react-dom/client/hydrateRoot) ব্যবহার করুন, যা বিদ্যমান HTML এ ইভেন্ট হ্যান্ডলারগুলো যুক্ত করে দেয়।
 
 * আপনি যদি একি রুটে একাধিকবার  `render` কল করেন, তাহলে আপনার পাঠানো সর্বশেষ JSX দেখানোর খাতিরে React প্রয়োজনমত DOM আপডেট করে ফেলবে। React আগেরবার রেন্ডার হওয়া ট্রি এর সাথে ["মিলিয়ে দেখবে"](/learn/preserving-and-resetting-state) এবং সিদ্ধান্ত নিবে DOM এর কোণ অংশগুলো পুনর্ব্যবহার করা যায় আর কোনগুলো আবার বানাতে হবে। একই রুটে আবার `render` কল করা রুট কম্পোনেন্টে [`set` function](/reference/react/useState#setstate) কল করার মতঃ React অপ্রয়োজনীয় DOM আপডেট এড়ানোর চেষ্টা করে।
 
-<<<<<<< HEAD
-* যদিও rendering শুরু হওয়ার পর synchronous, `root.render(...)` synchronous নয়। এর মানে হল `root.render()` এর পরের কোড ওই নির্দিষ্ট render এর কোন effects (`useLayoutEffect`, `useEffect`) fire হওয়ার আগেই রান হতে পারে। এটা সাধারণত ঠিক আছে এবং খুব কমই adjustment প্রয়োজন হয়। বিরল ক্ষেত্রে যেখানে effect timing গুরুত্বপূর্ণ, আপনি `root.render(...)` কে [`flushSync`](https://react.dev/reference/react-dom/client/flushSync) দিয়ে wrap করতে পারেন যাতে initial render সম্পূর্ণভাবে synchronously রান হয়।
-  
-=======
-* Although rendering is synchronous once it starts, `root.render(...)` is not. This means code after `root.render()` may run before any effects (`useLayoutEffect`, `useEffect`) of that specific render are fired. This is usually fine and rarely needs adjustment. In rare cases where effect timing matters, you can wrap `root.render(...)` in [`flushSync`](https://react.dev/reference/react-dom/flushSync) to ensure the initial render runs fully synchronously.
+* যদিও rendering শুরু হওয়ার পর synchronous, `root.render(...)` synchronous নয়। এর মানে হল `root.render()` এর পরের কোড ওই নির্দিষ্ট render এর কোন effects (`useLayoutEffect`, `useEffect`) fire হওয়ার আগেই রান হতে পারে। এটা সাধারণত ঠিক আছে এবং খুব কমই adjustment প্রয়োজন হয়। বিরল ক্ষেত্রে যেখানে effect timing গুরুত্বপূর্ণ, আপনি `root.render(...)` কে [`flushSync`](/reference/react-dom/flushSync) দিয়ে wrap করতে পারেন যাতে initial render সম্পূর্ণভাবে synchronously রান হয়।
 
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
   ```js
   const root = createRoot(document.getElementById('root'));
   root.render(<App />);
@@ -118,11 +113,7 @@ root.unmount();
 
 এটা সে ক্ষেত্রে সবচেয়ে কাজে লাগে যদি অন্য কোন কোডের কারণে DOM থেকে আপনার React রুটের DOM নোড (বা ট্রিতে এর কোন পূর্বসূরী) মুছে যায়। উদাহরণস্বরূপ, ধরেন একটা jQuery ট্যাব প্যানেল আছে যা DOM থেকে অচল ট্যাবগুলোকে ফেলে দেয়। যদি একটা ট্যাব ফেলে দেওয়া হয়, তাহলে এই ট্যাবের মধ্যে থাকা যাবতীয় সব কিছু(ভিতরকার React রুটগুলো সহ) DOM থেকে মুছে যায়। সেক্ষেত্রে, `root.unmount` কল করার মাধ্যমে আপনার React কে বলতে হবে মুছে যাওয়া রুটের কনটেন্ট ম্যানেজ করা "বন্ধ" করতে। না হলে, মুছে যাওয়া রুটের ভেতরকার কম্পোনেন্ট সাবস্ক্রিপশনের মত global resource মুছবে না এবং সেগুলো ফ্রি হবে না।
 
-<<<<<<< HEAD
-`root.unmount` কল করলে রুটের সব কম্পোনেন্ট আনমাউন্ট হবে এবং রুট DOM নোড থেকে React "detach" হয়ে যাবে। একই সাথে ট্রিতে কোন ইভেন্ট হ্যান্ডলার বা স্টেট থাকলে সেটাও মুছে যাবে। 
-=======
-Calling `root.unmount` will unmount all the components in the root and "detach" React from the root DOM node, including removing any event handlers or state in the tree.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+`root.unmount` কল করলে রুটের সব কম্পোনেন্ট আনমাউন্ট হবে এবং রুট DOM নোড থেকে React "detach" হয়ে যাবে। একই সাথে ট্রিতে কোন ইভেন্ট হ্যান্ডলার বা স্টেট থাকলে সেটাও মুছে যাবে।
 
 
 #### প্যারামিটার {/*root-unmount-parameters*/}
@@ -138,7 +129,7 @@ Calling `root.unmount` will unmount all the components in the root and "detach" 
 
 * `root.unmount` কল করলে ট্রি-এর সকল কম্পোনেন্ট আনমাউন্ট হবে এবং React কে রুট DOM নোড থেকে "বিচ্ছিন" করবে।
 
-* একবার `root.unmount` কল করা হলে একই রুটে `root.render` আর কল করা যাবে না। আনমাউন্ট করা রুটে `root.render` কলের চেষ্টা করা হলে "Cannot update an unmounted root" এরর দেখাবে। যদিও, আপনি একই DOM নোডে নতুন রুট তৈরী করতে পারেন যখন সেই নোডে আগের রুট আনমাউন্ট করা হয়ে গেছে। 
+* একবার `root.unmount` কল করা হলে একই রুটে `root.render` আর কল করা যাবে না। আনমাউন্ট করা রুটে `root.render` কলের চেষ্টা করা হলে "Cannot update an unmounted root" এরর দেখাবে। যদিও, আপনি একই DOM নোডে নতুন রুট তৈরী করতে পারেন যখন সেই নোডে আগের রুট আনমাউন্ট করা হয়ে গেছে।
 
 ---
 
@@ -206,11 +197,7 @@ function Counter() {
 
 </Sandpack>
 
-<<<<<<< HEAD
-**যদি আপনার অ্যাপটি সম্পূর্ণরূপে React দিয়ে বানানো হয়ে থাকে, আপনার আর কোন রুট তৈরির বা আবার [`root.render`](#root-render) কল করার প্রয়োজন হবার কথা না** 
-=======
-**If your app is fully built with React, you shouldn't need to create any more roots, or to call [`root.render`](#root-render) again.**
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+**যদি আপনার অ্যাপটি সম্পূর্ণরূপে React দিয়ে বানানো হয়ে থাকে, আপনার আর কোন রুট তৈরির বা আবার [`root.render`](#root-render) কল করার প্রয়োজন হবার কথা না**
 
 এর পর থেকে, React আপনার পুরো অ্যাপের DOM পরিচালনা করবে। আরো কম্পোনেন্ট যুক্ত করবার জন্য [`App` কম্পোনেন্টে তাদের nest করুন।](/learn/importing-and-exporting-components) যখন আপনার UI আপডেটের প্রয়োজন হবে, আপনার প্রতিটি কম্পোনেন্ট [স্টেট ব্যবহার করে](/reference/react/useState) সেটা করতে পারবে। যখন আপনার DOM নোডের বাইরে অতিরিক্ত কোন কনটেন্ট যেমন একটা মোডাল বা টুলটিপ দেখানোর প্রয়োজন হবে তখন, [একটা পোর্টাল ব্যবহার করে সেটা রেন্ডার করুন।](/reference/react-dom/createPortal)
 
@@ -327,7 +314,7 @@ DOM নোড থেকে React ট্রি সরাতে এবং এর �
 root.unmount();
 ```
 
-এইটা সাধারণত সবচেয়ে কাজে লাগে যদি অ্যাপের ভিতরে থাকা আপনার React কম্পোনেন্টগুলো ভিন্ন কোন ফ্রেমওয়ার্কে লেখা থাকে। 
+এইটা সাধারণত সবচেয়ে কাজে লাগে যদি অ্যাপের ভিতরে থাকা আপনার React কম্পোনেন্টগুলো ভিন্ন কোন ফ্রেমওয়ার্কে লেখা থাকে।
 
 ---
 
@@ -520,13 +507,8 @@ Warning: You passed a second argument to root.render(...) but it only accepts on
 // 🚩 ভুলঃ root.render শুধুমাত্র একটি argument নেয়।
 root.render(App, {onUncaughtError});
 
-<<<<<<< HEAD
 // ✅ সঠিকঃ options createRoot এ দিন।
-const root = createRoot(container, {onUncaughtError}); 
-=======
-// ✅ Correct: pass options to createRoot.
 const root = createRoot(container, {onUncaughtError});
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 root.render(<App />);
 ```
 
@@ -548,7 +530,7 @@ root.render(<App />);
 উদাহরণস্বরূপ, যদি `domNode` `null` হয়, এর অর্থ [`getElementById`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById)`null` রিটার্ন করেছে। এটা হবে যদি আপনার কল করার সময়ে ডকুমেন্টে ওই ID এর কোন নোড না থাকে। এর কিছু কারণ হতে পারে এমনঃ
 
 1. হতে পারে আপনার যেই ID খুজছেন সেটা আপনার HTML এ ব্যবহার করা ID থেকে আলাদা। টাইপিং এ ভুল হয়েছে কি নিশ্চিত হন!
-2. হয়ত আপনার বান্ডলের `<script>` ট্যাগ HTML-এ *এর পরে* কোন DOM নোড "দেখতে" পারছে না। 
+2. হয়ত আপনার বান্ডলের `<script>` ট্যাগ HTML-এ *এর পরে* কোন DOM নোড "দেখতে" পারছে না।
 
 এই এরর পাবার আরেকটি কমন কারণ হল `createRoot(domNode)` এর বদলে `createRoot(<App />)` লেখা।
 
