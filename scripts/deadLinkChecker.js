@@ -47,7 +47,7 @@ function getMarkdownFiles() {
     path.posix.join(baseDir, '**/*.md'),
     path.posix.join(baseDir, '**/*.mdx'),
   ];
-  return globby.sync(patterns);
+  return globby.sync(patterns).map((filePath) => path.normalize(filePath));
 }
 
 function extractAnchorsFromContent(content) {
