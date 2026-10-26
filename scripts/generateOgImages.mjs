@@ -34,6 +34,19 @@ const bold = fs.readFileSync(
 const medium = fs.readFileSync(
   path.join(ROOT, 'public', 'fonts', 'Optimistic_Display_W_Md.ttf')
 );
+const bengaliFontPath = path.join(
+  ROOT,
+  'public',
+  'fonts',
+  'NotoSansBengali-Bold.ttf'
+);
+const bengali = fs.readFileSync(bengaliFontPath);
+const bengaliFont = opentype.parse(
+  bengali.buffer.slice(
+    bengali.byteOffset,
+    bengali.byteOffset + bengali.byteLength
+  )
+);
 
 // Title area width: card width minus the horizontal padding (80px per side).
 const TITLE_MAX_WIDTH = 1200 - 80 * 2;
@@ -153,7 +166,8 @@ function card(title, pagePath) {
 }
 
 async function renderCard(title, pagePath) {
-  const svg = await satori(card(title, pagePath), {
+  const hasBengali = /[\u0980-\u09ff]/.test(title);
+  let svg = await satori(card(hasBengali ? '' : title, pagePath), {
     width: 1200,
     height: 630,
     fonts: [
@@ -171,7 +185,73 @@ async function renderCard(title, pagePath) {
       },
     ],
   });
-  return new Resvg(svg, {fitTo: {mode: 'width', value: 1200}}).render().asPng();
+  if (hasBengali) {
+    // Keep text as SVG text so resvg can shape Bengali conjuncts. Satori's
+    // glyph-by-glyph paths cannot perform the shaping required by this script.
+    let size = 72;
+    let lines;
+    do {
+      lines = [];
+      let line = '';
+      for (const word of title.trim().split(/\s+/)) {
+        const next = line ? `${line} ${word}` : word;
+        const width = [...next].reduce((total, char) => {
+          const font = bengaliFont.charToGlyphIndex(char)
+            ? bengaliFont
+            : boldFont;
+          const glyph = font.charToGlyph(char);
+          return total + ((glyph.advanceWidth || 0) * size) / font.unitsPerEm;
+        }, 0);
+        if (line && width > TITLE_MAX_WIDTH) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = next;
+        }
+      }
+      lines.push(line);
+      if (lines.length <= 3 || size === 48) break;
+      size -= 4;
+    } while (true);
+    const escape = (text) =>
+      text.replace(
+        /[&<>"']/g,
+        (char) =>
+          ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&apos;',
+          }[char])
+      );
+    const lineHeight = size * 1.5;
+    const firstBaseline = 335 - ((lines.length - 1) * lineHeight) / 2;
+    const text = lines
+      .map(
+        (line, index) =>
+          `<text x="80" y="${firstBaseline + index * lineHeight}">${escape(
+            line
+          )}</text>`
+      )
+      .join('');
+    svg = svg.replace(
+      '</svg>',
+      `<g font-family="Noto Sans Bengali" font-weight="700" font-size="${size}" fill="#f6f7f9">${text}</g></svg>`
+    );
+  }
+  return new Resvg(svg, {
+    fitTo: {mode: 'width', value: 1200},
+    font: {
+      fontFiles: [
+        bengaliFontPath,
+        path.join(ROOT, 'public', 'fonts', 'Optimistic_Display_W_Bd.ttf'),
+      ],
+      loadSystemFonts: false,
+    },
+  })
+    .render()
+    .asPng();
 }
 
 function collectSidebarTitles() {
