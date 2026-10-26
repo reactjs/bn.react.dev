@@ -4,7 +4,7 @@ title: <Suspense>
 
 <Intro>
 
-`<Suspense>` তার children এর লোডিং শেষ না হওয়া পর্যন্ত একটি fallback প্রদর্শন করে। 
+`<Suspense>` তার children এর লোডিং শেষ না হওয়া পর্যন্ত একটি fallback প্রদর্শন করে।
 
 
 ```js
@@ -23,64 +23,47 @@ title: <Suspense>
 
 ### `<Suspense>` {/*suspense*/}
 
-<<<<<<< HEAD
 #### প্রপ্স {/*props*/}
 * `children`: আপনি যেই প্রকৃত UI রেন্ডার করতে চাইছেন। `children` যদি রেন্ডারিং এর সময় থেমে যায় তাহলে Suspense boundary `fallback` রেন্ডার করবে।
-* `fallback`: এটি হচ্ছে, প্রকৃত UI পুরোপুরি লোড না হলে তার স্থানে রেন্ডার হওয়া একটি বিকল্প UI। যেকোনো বৈধ React নোডই গৃহীত হয়, যদিও কার্যত, একটি fallback হলো একটি হালকা placeholder view, যেমন একটি লোডিং স্পিনার বা স্কেলেটন। Suspense স্বয়ংক্রিয় ভাবে `fallback` এ পরিবর্তিত হয়ে যাবে যখন `children` থেমে যাবে এবং আবার `children` এ ফিরে আসবে যখন ডেটা তৈরি হয়ে যাবে। রেন্ডারিং এর সময় যদি `fallback` থেমে যায়, এটি তার নিকটতম প্যারেন্ট Suspense boundary সক্রিয় করবে। 
-=======
-#### Props {/*props*/}
-* `children`: The actual UI you intend to render. If `children` suspends while rendering, the Suspense boundary will switch to rendering `fallback`.
-* `fallback`: An alternate UI to render in place of the actual UI if it has not finished loading. Any valid React node is accepted, though in practice, a fallback is a lightweight placeholder view, such as a loading spinner or skeleton. Suspense will automatically switch to `fallback` when `children` suspends, and back to `children` when the data is ready. If `fallback` suspends while rendering, it will activate the closest parent Suspense boundary.
-* <ExperimentalBadge /> **optional** `defer`: A boolean. When `true`, React may show the `fallback` first and render or stream `children` later, even when nothing in them suspends. Use it for content that is expensive to render. Defaults to `false`.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* `fallback`: এটি হচ্ছে, প্রকৃত UI পুরোপুরি লোড না হলে তার স্থানে রেন্ডার হওয়া একটি বিকল্প UI। যেকোনো বৈধ React নোডই গৃহীত হয়, যদিও কার্যত, একটি fallback হলো একটি হালকা placeholder view, যেমন একটি লোডিং স্পিনার বা স্কেলেটন। Suspense স্বয়ংক্রিয় ভাবে `fallback` এ পরিবর্তিত হয়ে যাবে যখন `children` থেমে যাবে এবং আবার `children` এ ফিরে আসবে যখন ডেটা তৈরি হয়ে যাবে। রেন্ডারিং এর সময় যদি `fallback` থেমে যায়, এটি তার নিকটতম প্যারেন্ট Suspense boundary সক্রিয় করবে।
+* <ExperimentalBadge /> **অপশনাল** `defer`: একটি boolean। `true` হলে React প্রথমে `fallback` দেখিয়ে পরে `children` রেন্ডার বা stream করতে পারে, এমনকি তাদের কোনো কিছু suspend না করলেও। রেন্ডার করতে বেশি কাজ লাগে এমন কনটেন্টের জন্য এটি ব্যবহার করুন। ডিফল্ট মান `false`।
 
 #### সতর্কতা {/*caveats*/}
 
-<<<<<<< HEAD
-- React প্রথমবার মাউন্ট হওয়ার আগে থেমে যাওয়া রেন্ডারগুলোর জন্য কোনও state সংরক্ষণ করে না। কম্পোনেন্ট লোড হলে, React থেমে যাওয়া ট্রি পুনরায় শূন্য থেকে রেন্ডার করার চেষ্টা করবে।
-- Suspense যদি ট্রির জন্য কন্টেন্ট দেখাতে থাকে, কিন্তু পরে আবার থেমে যায়, তবে `fallback` আবার দেখানো হবে যদিনা এর আপডেটের কারণ [`startTransition`](/reference/react/startTransition) বা [`useDeferredValue`](/reference/react/useDeferredValue) দ্বারা সৃষ্টি হয়ে থাকে।  
-- যদি React পুনরায় থেমে যাওয়ার কারণে আগে দেখানো কন্টেন্ট লুকানোর প্রয়োজন হয়, তবে এটি কন্টেন্ট ট্রির [layout Effects](/reference/react/useLayoutEffect) কে পরিষ্কার করবে। কন্টেন্ট যখন আবার দেখানোর জন্য প্রস্তুত হয়ে যায়, রিয়েক্ট আবার layout Effects চালাবে। এটি নিশ্চিত করে যে, DOM layout পরিমাপ করা ইফেক্টগুলো কন্টেন্ট লুকায়িত অবস্থায় এটা করার চেষ্টা করে না। 
-- React এ রয়েছে *Streaming Server Rendering* এবং *Selective Hydration* এর মত অন্তর্নিহিত অপটিমাইজেশন যা Suspense এর সাথে সমন্বিত। আরো জানার জন্য পড়ুন [একটি গঠনমূলক সারমর্ম](https://github.com/reactwg/react-18/discussions/37) এবং দেখুন [একটি টেকনিকাল আলোচনা](https://www.youtube.com/watch?v=pj5N-Khihgc)
+- Effect বা event handler-এর ভেতরে ডেটা fetch করা হলে Suspense তা শনাক্ত করে না। এটি শুধু [নিচে দেওয়া ক্ষেত্রগুলোতে সক্রিয় হয়।](#what-activates-a-suspense-boundary)
+- প্রথমবার মাউন্ট হওয়ার আগেই suspend হয়ে যাওয়া রেন্ডারের কোনো state React সংরক্ষণ করে না। কম্পোনেন্ট লোড হলে React সেই ট্রি শুরু থেকে আবার রেন্ডার করার চেষ্টা করে।
+- Suspense কোনো ট্রির কনটেন্ট দেখানোর পরে সেটি আবার suspend হলে `fallback` আবার দেখানো হবে, যদি না সংশ্লিষ্ট আপডেটটি [`startTransition`](/reference/react/startTransition) বা [`useDeferredValue`](/reference/react/useDeferredValue) দিয়ে করা হয়ে থাকে।
+- React সর্বশেষ কনটেন্ট প্রকাশের সময় থেকে প্রতি 300 মিলিসেকেন্ডে সর্বোচ্চ একবার suspend হওয়া কনটেন্ট প্রকাশ করে। এই সময়ের মধ্যে প্রস্তুত হওয়া বাউন্ডারিগুলো একটির পর একটি না দেখিয়ে [একসাথে প্রকাশ করা হয়।](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr)
+- আবার suspend হওয়ার কারণে আগে দেখানো কনটেন্ট লুকাতে হলে, React কনটেন্ট ট্রির [layout Effect](/reference/react/useLayoutEffect)-গুলোর cleanup চালায়। কনটেন্ট আবার দেখানোর জন্য প্রস্তুত হলে React layout Effect-গুলো পুনরায় চালায়। এতে DOM layout মাপার Effect-গুলো কনটেন্ট লুকানো অবস্থায় তা মাপার চেষ্টা করে না।
+- React-এর *Streaming Server Rendering* এবং *Selective Hydration*-এর মতো অভ্যন্তরীণ অপটিমাইজেশনগুলো Suspense-এর সাথে সমন্বিত। আরও জানতে [আর্কিটেকচারের সারমর্ম](https://github.com/reactwg/react-18/discussions/37) পড়ুন এবং [টেকনিক্যাল আলোচনা](https://www.youtube.com/watch?v=pj5N-Khihgc) দেখুন।
 
 ---
 
-## ব্যবহারবিধি {/*usage*/}
-=======
-- Suspense does not detect when data is fetched inside an Effect or event handler. It only activates in the [cases listed below.](#what-activates-a-suspense-boundary)
-- React does not preserve any state for renders that got suspended before they were able to mount for the first time. When the component has loaded, React will retry rendering the suspended tree from scratch.
-- If Suspense was displaying content for the tree, but then it suspended again, the `fallback` will be shown again unless the update causing it was caused by [`startTransition`](/reference/react/startTransition) or [`useDeferredValue`](/reference/react/useDeferredValue).
-- React reveals suspended content at most once every 300ms, measured from the last reveal. Boundaries that become ready within that window are [revealed together](/blog/2025/10/01/react-19-2#batching-suspense-boundaries-for-ssr) rather than one at a time.
-- If React needs to hide the already visible content because it suspended again, it will clean up [layout Effects](/reference/react/useLayoutEffect) in the content tree. When the content is ready to be shown again, React will fire the layout Effects again. This ensures that Effects measuring the DOM layout don't try to do this while the content is hidden.
-- React includes under-the-hood optimizations like *Streaming Server Rendering* and *Selective Hydration* that are integrated with Suspense. Read [an architectural overview](https://github.com/reactwg/react-18/discussions/37) and watch [a technical talk](https://www.youtube.com/watch?v=pj5N-Khihgc) to learn more.
+### কী কী কারণে একটি Suspense বাউন্ডারি সক্রিয় হয় {/*what-activates-a-suspense-boundary*/}
 
----
+একটি Suspense বাউন্ডারি তার কনটেন্ট প্রস্তুত হওয়া পর্যন্ত সেটি প্রকাশের জন্য অপেক্ষা করে। নিচের যেকোনো কারণে বাউন্ডারির কনটেন্ট প্রকাশ আটকে থাকতে পারে:
 
-### What activates a Suspense boundary {/*what-activates-a-suspense-boundary*/}
-
-A Suspense boundary waits for its content to be ready before revealing it. Any of the following keeps a boundary from revealing its content:
-
-- Lazy-loading component code with [`lazy`](/reference/react/lazy).
-- Reading a Promise with [`use`](/reference/react/use), including data streamed from [Server Components](/reference/rsc/server-components) or loaded through a [Suspense-enabled framework](#suspense-enabled-frameworks).
-- Loading a stylesheet rendered with [`<link rel="stylesheet">` and a `precedence` prop.](/reference/react-dom/components/link#special-rendering-behavior) React blocks the boundary until the stylesheet loads, up to a timeout. [See an example below.](#waiting-for-a-stylesheet-to-load)
-- Waiting for a large boundary's HTML to arrive during streaming server rendering. Sending HTML takes time, so a boundary with enough content activates even when nothing in it suspends. React reveals the content as the HTML arrives.
-- Loading fonts. Suspense doesn't wait for fonts by default, but when a [`<ViewTransition>`](/reference/react/ViewTransition) animates a boundary's reveal, React waits up to 500 ms for new fonts to load so text doesn't flash with a fallback font. [See an example below.](#waiting-for-a-font-to-load)
-- Loading images. Suspense doesn't wait for images by default, but when a [`<ViewTransition>`](/reference/react/ViewTransition) animates a boundary's reveal, React waits up to 500 ms for visible images to load before starting the animation. Setting `loading="lazy"` or adding an `onLoad` handler opts a specific image out. [See an example below.](#waiting-for-an-image-to-load)
-- <ExperimentalBadge /> Performing CPU-bound render work inside a [`<Suspense defer>`](#props) boundary.
+- [`lazy`](/reference/react/lazy) দিয়ে কম্পোনেন্টের কোড লোড করা।
+- [`use`](/reference/react/use) দিয়ে একটি Promise পড়া। এর মধ্যে [Server Component](/reference/rsc/server-components) থেকে stream করা ডেটা বা [Suspense সমর্থিত ফ্রেমওয়ার্ক](#suspense-enabled-frameworks) দিয়ে লোড করা ডেটাও রয়েছে।
+- [`<link rel="stylesheet">` এবং `precedence` prop দিয়ে রেন্ডার করা stylesheet](/reference/react-dom/components/link#special-rendering-behavior) লোড করা। একটি নির্দিষ্ট সময়সীমা পর্যন্ত, stylesheet লোড না হওয়া অবধি React বাউন্ডারির কনটেন্ট প্রকাশ আটকে রাখে। [নিচের উদাহরণ দেখুন।](#waiting-for-a-stylesheet-to-load)
+- Streaming server rendering-এর সময় বড় কোনো বাউন্ডারির HTML এসে পৌঁছানোর জন্য অপেক্ষা করা। HTML পাঠাতে সময় লাগে, তাই যথেষ্ট পরিমাণ কনটেন্ট থাকলে তার ভেতরে কিছু suspend না হলেও বাউন্ডারি সক্রিয় হয়। HTML পৌঁছানোর সাথে সাথে React কনটেন্ট প্রকাশ করে।
+- ফন্ট লোড করা। সাধারণভাবে Suspense ফন্টের জন্য অপেক্ষা করে না। তবে [`<ViewTransition>`](/reference/react/ViewTransition) দিয়ে বাউন্ডারির কনটেন্ট প্রকাশের অ্যানিমেশন চালালে, React নতুন ফন্ট লোড হওয়ার জন্য সর্বোচ্চ 500 মিলিসেকেন্ড অপেক্ষা করে, যেন টেক্সট হঠাৎ fallback ফন্টে দেখা না যায়। [নিচের উদাহরণ দেখুন।](#waiting-for-a-font-to-load)
+- ছবি লোড করা। সাধারণভাবে Suspense ছবির জন্য অপেক্ষা করে না। তবে [`<ViewTransition>`](/reference/react/ViewTransition) দিয়ে বাউন্ডারির কনটেন্ট প্রকাশের অ্যানিমেশন চালালে, অ্যানিমেশন শুরুর আগে React দৃশ্যমান ছবিগুলো লোড হওয়ার জন্য সর্বোচ্চ 500 মিলিসেকেন্ড অপেক্ষা করে। কোনো ছবিতে `loading="lazy"` বা `onLoad` handler দিলে সেই ছবির জন্য অপেক্ষা করা হয় না। [নিচের উদাহরণ দেখুন।](#waiting-for-an-image-to-load)
+- <ExperimentalBadge /> [`<Suspense defer>`](#props) বাউন্ডারির ভেতরে CPU-নির্ভর রেন্ডারিংয়ের কাজ করা।
 
 <Note>
 
-#### Suspense-enabled frameworks {/*suspense-enabled-frameworks*/}
+#### Suspense সমর্থিত ফ্রেমওয়ার্ক {/*suspense-enabled-frameworks*/}
 
-A *Suspense-enabled framework* gives you a way to read data in your component in a way that activates the closest Suspense boundary. The exact way you load your data depends on your framework, and you'll find the details in its documentation. Under the hood, a Suspense-enabled framework maintains a cache of Promises and calls [`use`](/reference/react/use) to suspend on a Promise.
+একটি *Suspense সমর্থিত ফ্রেমওয়ার্ক* আপনাকে কম্পোনেন্টে এমনভাবে ডেটা পড়তে দেয়, যাতে সবচেয়ে কাছের Suspense বাউন্ডারি সক্রিয় হয়। ডেটা লোড করার সুনির্দিষ্ট পদ্ধতি আপনার ফ্রেমওয়ার্কের উপর নির্ভর করে; বিস্তারিত তার ডকুমেন্টেশনে পাবেন। ভেতরে ভেতরে এ ধরনের ফ্রেমওয়ার্ক Promise-এর একটি cache রাখে এবং কোনো Promise-এর জন্য রেন্ডারিং suspend করতে [`use`](/reference/react/use) কল করে।
 
-Without a framework, you can read a Promise with `use` directly, as long as the Promise is [cached so the same instance is reused across renders.](/reference/react/use#caching-promises-for-client-components)
+ফ্রেমওয়ার্ক ছাড়াও সরাসরি `use` দিয়ে Promise পড়তে পারেন, যদি Promise-টি [cache করা থাকে, যাতে প্রতিবার রেন্ডারে একই instance পুনরায় ব্যবহার করা হয়।](/reference/react/use#caching-promises-for-client-components)
 
 </Note>
 
 ---
 
-## Usage {/*usage*/}
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+## ব্যবহারবিধি {/*usage*/}
 
 ### কন্টেন্ট লোড হওয়ার সময় একটি fallback দেখানো {/*displaying-a-fallback-while-content-is-loading*/}
 
@@ -247,19 +230,8 @@ async function getAlbums() {
 
 </Sandpack>
 
-By contrast, code that fetches data outside of `use`, such as inside an Effect, does not activate the boundary:
+অন্যদিকে, `use` ছাড়া অন্য কোনোভাবে—যেমন Effect-এর ভেতরে—ডেটা fetch করলে বাউন্ডারিটি সক্রিয় হয় না:
 
-<<<<<<< HEAD
-**শুধুমাত্র Suspense-enabled ডেটা উৎসগুলো Suspense কম্পোনেন্টকে সক্রিয় করতে পারবে।** এদের মধ্যে রয়েছেঃ
- 
-- Suspense-enabled ফ্রেমওয়ার্কের সাহায্যে ডেটা নিয়ে আসা যেমন, [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming#streaming-with-suspense)
-- [`lazy`](/reference/react/lazy) দিয়ে lazy-loading component code
-- [`use`](/reference/react/use) ব্যবহার করে একটি cached Promise এর মান read করা
-
-উপরের `Albums` কম্পোনেন্টে আপনি ঠিক কিভাবে ডেটা লোড করবেন তা আপনার ফ্রেমওয়ার্ক এর উপর নির্ভর করে। আপনি যদি Suspense-enabled ফ্রেমওয়ার্ক ব্যাবহার করেন তাহলে আপনি এর ডেটা নিয়ে আসার ডকুমেন্টেশনে বিস্তারিত তথ্য পাবেন। 
-
-মতানুযায়ী নির্ধারিত ফ্রেমওয়ার্ক ছাড়া Suspense-enabled ডেটা নিয়ে আসা এখনো সমর্থিত নয়। Suspense-enabled ডেটা উৎস সংযোজনের জন্য প্রয়োজনীয় বিবরণগুলো অস্থিতিশীল এবং নথিভুক্ত নয়। Suspense দিয়ে ডেটা উৎসগুলোর সংযোজনের জন্য একটি অফিসিয়াল API পরবর্তী React সংস্করণে প্রকাশিত হবে। 
-=======
 <Sandpack>
 
 ```js src/App.js hidden
@@ -301,7 +273,6 @@ export default function ArtistPage({ artist }) {
     </>
   );
 }
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 function Loading() {
   return <h2>🌀 Loading...</h2>;
@@ -533,9 +504,9 @@ export async function flushReadableStreamToFrame(readable, frame) {
 </Suspense>
 ```
 
-তারপরে, সবগুলো দেখনোর জন্য প্রস্তুত হয়ে গেলে, তাদের সবাইকে একসাথে দেখা যাবে। 
+তারপরে, সবগুলো দেখনোর জন্য প্রস্তুত হয়ে গেলে, তাদের সবাইকে একসাথে দেখা যাবে।
 
-নিচের উদাহরণে, `Biography` এবং `Albums` উভয়ই কিছু ডেটা নিয়ে আসে। তবে, তারা একটি একক Suspense boundary এর মধ্যে গ্রুপ করে থাকায় সবসময় এই কম্পোনেন্টগুলি একই সময়ে "পপ ইন" করে। 
+নিচের উদাহরণে, `Biography` এবং `Albums` উভয়ই কিছু ডেটা নিয়ে আসে। তবে, তারা একটি একক Suspense boundary এর মধ্যে গ্রুপ করে থাকায় সবসময় এই কম্পোনেন্টগুলি একই সময়ে "পপ ইন" করে।
 
 <Sandpack>
 
@@ -778,14 +749,14 @@ function Details({ artistId }) {
 </Suspense>
 ```
 
-এই পরিবর্তনের ফলে `Biography` প্রদর্শনে `Albums` এর লোডের জন্য অপেক্ষা করার প্রয়োজন নেই। 
+এই পরিবর্তনের ফলে `Biography` প্রদর্শনে `Albums` এর লোডের জন্য অপেক্ষা করার প্রয়োজন নেই।
 
 ক্রমটি হবে এরকমঃ
 
-১। যদি `Biography` এখনো লোড না হয়ে থাকে, কন্টেন্ট এর সম্পূর্ণ জায়গাজুড়ে `BigSpinner` দেখানো হয়। 
+১। যদি `Biography` এখনো লোড না হয়ে থাকে, কন্টেন্ট এর সম্পূর্ণ জায়গাজুড়ে `BigSpinner` দেখানো হয়।
 ২। `Biography` লোড করা শেষ হলে `BigSpinner` দ্বারা কন্টেন্ট প্রতিস্থাপিত হয়।
-৩। যদি এখনো `Albums` লোড না হয়ে থাকে, `AlbumsGlimmer` এর স্থানে `Albums` এবং এর প্যারেন্ট `Panel` দেখানো হয়। 
-৪। সব শেষে, `Albums` এর লোডিং শেষ হলে এটি `AlbumsGlimmer` কে প্রতিস্থাপন করে। 
+৩। যদি এখনো `Albums` লোড না হয়ে থাকে, `AlbumsGlimmer` এর স্থানে `Albums` এবং এর প্যারেন্ট `Panel` দেখানো হয়।
+৪। সব শেষে, `Albums` এর লোডিং শেষ হলে এটি `AlbumsGlimmer` কে প্রতিস্থাপন করে।
 
 <Sandpack>
 
@@ -1021,7 +992,7 @@ async function getAlbums() {
 
 </Sandpack>
 
-Suspense boundary এর মাধ্যমে আপনি আপনার UI এর কোন অংশগুলো সবসময় একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং state এর একটি অনুক্রমিক সিকোয়েন্সে আরো কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় Suspense boundaries যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর এর কোন প্রভাব পড়বে না। 
+Suspense boundary এর মাধ্যমে আপনি আপনার UI এর কোন অংশগুলো সবসময় একই সময়ে "পপ ইন" করা হবে এবং কোন অংশগুলি লোডিং state এর একটি অনুক্রমিক সিকোয়েন্সে আরো কন্টেন্ট প্রকাশ করবে তা সমন্বিত করতে পারেন। আপনি ট্রির যে কোন জায়গায় Suspense boundaries যোগ করতে পারেন, সরাতে পারেন বা মুছতে পারেন কিন্তু অ্যাপ্লিকেশনের অন্যান্য অংশের আচরণের উপর এর কোন প্রভাব পড়বে না।
 
 প্রত্যেকটি কম্পোনেন্টের সাথে একটি করে Suspense boundary যোগ করবেন না। Suspense boundary গুলো লোডিং ক্রমের চেয়ে ক্ষুদ্র হওয়া উচিৎ নয় যা ব্যহারকারীকে দেখাবেন। যদি আপনি একজন ডিজাইনার সঙ্গে কাজ করেন, তবে তাদেরকে জিজ্ঞাসা করুন যে লোডিং state গুলো কোথায় রাখা উচিত--সম্ভবতঃ তারা আগেই তা তাদের ডিজাইন ওয়্যারফ্রেমে অন্তর্ভুক্ত করেছেন।
 
@@ -1176,11 +1147,7 @@ input { margin: 10px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
 একটি প্রচলিত বিকল্প UI প্যাটার্ন হলো তালিকা আপডেটকে *বিলম্বিত করা(defer)* এবং নতুন ফলাফল তৈরি হওয়া পর্যন্ত আগের ফলাফলগুলো দেখানো। [`useDeferredValue`](/reference/react/useDeferredValue) হুকটি আপনাকে query করার একটি deferred ভার্সন পাঠানোর সুবিধা দেয়ঃ
-=======
-A common alternative UI pattern is to *defer* updating the list and to keep showing the previous results until the new results are ready. The [`useDeferredValue`](/reference/react/useDeferredValue) Hook lets you pass a deferred version of the query down:
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 ```js {3,11}
 export default function App() {
@@ -1374,7 +1341,7 @@ Deferred values এবং [transitions](#preventing-already-revealed-content-fro
 
 ### প্রকাশ করে ফেলা কন্টেন্টগুলো লুকাতে না দেয়া {/*preventing-already-revealed-content-from-hiding*/}
 
-যখন একটি কম্পোনেন্ট থেমে যায় তখন সবচেয়ে কাছের প্যরেন্ট Suspense boundary এটির পরিবর্তে fallback দেখায়। এমন যদি হয় যে এটি আগে থেকেই কিছু কন্টেন্ট দেখাচ্ছিল, তবে এটি ব্যবহারকারীর জন্য একটি অস্বাভাবিক অভিজ্ঞতা সৃষ্টি করতে পারে। এই বাটনটি প্রেস করে দেখুনঃ 
+যখন একটি কম্পোনেন্ট থেমে যায় তখন সবচেয়ে কাছের প্যরেন্ট Suspense boundary এটির পরিবর্তে fallback দেখায়। এমন যদি হয় যে এটি আগে থেকেই কিছু কন্টেন্ট দেখাচ্ছিল, তবে এটি ব্যবহারকারীর জন্য একটি অস্বাভাবিক অভিজ্ঞতা সৃষ্টি করতে পারে। এই বাটনটি প্রেস করে দেখুনঃ
 
 <Sandpack>
 
@@ -2295,24 +2262,15 @@ main {
 
 ### নেভিগেশনে Suspense boundary গুলো রিসেট করা {/*resetting-suspense-boundaries-on-navigation*/}
 
-<<<<<<< HEAD
-একটি ট্রান্সিশনের সময় React ইতিমধ্যে প্রকাশিত কন্টেন্ট লুকানো থেকে বিরত থাকবে। তবে, আপনি যদি ভিন্ন কোনো প্যরামিটার বিশিষ্ট রাউটে নেভিগেট করেন, আপনি হয়ত React কে বলতে চান যে এটি *ভিন্ন* কন্টেন্ট। আপনি এটি একটি `key` দিয়ে বুঝাতে পারেনঃ
-=======
-During a Transition, React avoids hiding already revealed content. However, when you navigate to *different* content, such as another user's profile, you'll want the boundary to show the fallback instead of the previous content. You can express this with a `key`:
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+Transition চলাকালে React আগে প্রকাশিত কনটেন্ট লুকানো এড়িয়ে চলে। তবে অন্য কোনো ব্যবহারকারীর প্রোফাইলের মতো *ভিন্ন* কনটেন্টে নেভিগেট করলে, আগের কনটেন্টের বদলে বাউন্ডারির fallback দেখানো প্রয়োজন। একটি `key` দিয়ে আপনি এই পার্থক্যটি বোঝাতে পারেন:
 
 ```js
 <ProfilePage key={queryParams.id} />
 ```
 
-<<<<<<< HEAD
-ধরুন, আপনি একজন ব্যবহারকারীর প্রোফাইল পেজের মধ্যেই নেভিগেট করছেন এবং কিছু একটা থেমে গেল। যদি সেই আপডেটটি একটি ট্রান্সিশনের মধ্যে থাকে, তবে এটি ইতিমধ্যেই প্রকাশিত কন্টেন্টের জন্য fallback কে ট্রিগার করবে না। এরকমটাই প্রত্যাশিত।
+আলাদা `key` থাকলে React প্রোফাইলগুলোকে ভিন্ন কনটেন্ট হিসেবে বিবেচনা করে এবং নেভিগেশনের সময় Suspense বাউন্ডারি রিসেট করে। বাউন্ডারিতে বা তার উপরের কোনো কম্পোনেন্টে `key` দেওয়া যায়। Suspense-এর সাথে সমন্বিত রাউটারগুলোর এটি স্বয়ংক্রিয়ভাবে করার কথা।
 
-যাইহোক, এখন আবার মনে করুন আপনি দুটি ভিন্ন ব্যবহারকারীর প্রোফাইলের মধ্যে নেভিগেট করছেন। এই ক্ষেত্রে fallback টি দেখানো যুক্তিসই। উদাহরণস্বরূপ, একজন ব্যবহারকারীর টাইমলাই আরেকজন ব্যবহারকারীর টাইমলাইন থেকে *আলাদা কন্টেন্ট*। একটি `key` নির্দিষ্ট করে দেয়ার মাধ্যমে আপনি নিশ্চিত করেন যে, React ভিন্ন ভিন্ন ব্যবহারকারীর প্রোফাইলকে ভিন্ন ভিন্ন কম্পোনেন্ট হিসাবে বিবেচনা করে এবং নেভিগেশনের সময় Suspense boundary গুলো রিসেট করে। Suspense-integrated রাউটারগুলো এটি স্বয়ংক্রিয়ভাবেই করবে।
-=======
-With a different `key`, React treats the profiles as different content and resets the Suspense boundary during navigation. The `key` can go on the boundary itself or on a component above it. Suspense-integrated routers should do this automatically.
-
-In the example below, opening the profile page loads the first profile. Pressing "Bob" navigates to a different profile, and the `key` resets the boundary, so the fallback shows instead of the previous user's bio. Try removing the `key`: the previous bio stays visible while the next one loads:
+নিচের উদাহরণে, প্রোফাইল পেইজ খুললে প্রথম প্রোফাইলটি লোড হয়। "Bob" চাপলে অন্য প্রোফাইলে নেভিগেট করা হয় এবং `key` বাউন্ডারিটি রিসেট করে। তাই আগের ব্যবহারকারীর পরিচিতির বদলে fallback দেখানো হয়। `key` সরিয়ে দেখুন: পরের পরিচিতি লোড হওয়ার সময় আগেরটি দেখা যেতে থাকে:
 
 <Sandpack>
 
@@ -2396,7 +2354,6 @@ button {
 ```
 
 </Sandpack>
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 ---
 
@@ -2425,14 +2382,11 @@ function Chat() {
 
 ---
 
-<<<<<<< HEAD
-## সমস্যার সমাধান করা {/*troubleshooting*/}
-=======
-### Providing a fallback for browser-only content {/*providing-a-fallback-for-browser-only-content*/}
+### শুধু ব্রাউজারে রেন্ডার করা কনটেন্টের জন্য fallback দেখানো {/*providing-a-fallback-for-browser-only-content*/}
 
-A Suspense boundary can provide a fallback for a browser-only component. Wrap the component in `<Suspense>` and call [`use(browser())`](/reference/react/use#use-browser) inside it.
+একটি Suspense বাউন্ডারি শুধু ব্রাউজারে রেন্ডার করা কম্পোনেন্টের জন্য fallback দেখাতে পারে। কম্পোনেন্টটিকে `<Suspense>` দিয়ে ঘিরে তার ভেতরে [`use(browser())`](/reference/react/use#use-browser) কল করুন।
 
-Click **Reload** to see the loading fallback in the initial HTML. After hydration, React displays the draft loaded from `localStorage`.
+প্রাথমিক HTML-এ লোডিং fallback দেখতে **Reload** চাপুন। hydration-এর পরে React `localStorage` থেকে লোড করা খসড়া দেখায়।
 
 <Sandpack>
 
@@ -2576,17 +2530,17 @@ iframe {
 
 </Sandpack>
 
-During server rendering, React includes the Suspense boundary's fallback in the HTML. In the browser, React replaces the fallback with the saved draft.
+সার্ভার রেন্ডারিংয়ের সময় React HTML-এ Suspense বাউন্ডারির fallback যুক্ত করে। ব্রাউজারে React সেই fallback-এর বদলে সংরক্ষিত খসড়াটি দেখায়।
 
 ---
 
-### Waiting for a stylesheet to load {/*waiting-for-a-stylesheet-to-load*/}
+### stylesheet লোড হওয়ার জন্য অপেক্ষা করা {/*waiting-for-a-stylesheet-to-load*/}
 
-A stylesheet rendered with [`<link rel="stylesheet">` and a `precedence` prop](/reference/react-dom/components/link#special-rendering-behavior) blocks the Suspense boundary until the stylesheet loads, up to a timeout, so the content doesn't appear unstyled.
+[`<link rel="stylesheet">` এবং `precedence` prop দিয়ে রেন্ডার করা stylesheet](/reference/react-dom/components/link#special-rendering-behavior) লোড না হওয়া পর্যন্ত, একটি নির্দিষ্ট সময়সীমার মধ্যে, Suspense বাউন্ডারির কনটেন্ট প্রকাশ আটকে থাকে। এতে কনটেন্ট স্টাইল ছাড়া দেখা যায় না।
 
-In the example below, the `Card` component renders a stylesheet with `precedence`. Press "Show card": React shows the fallback until the stylesheet has loaded, and then reveals the card with its styles applied.
+নিচের উদাহরণে `Card` কম্পোনেন্ট `precedence`-সহ একটি stylesheet রেন্ডার করে। "Show card" চাপুন: stylesheet লোড না হওয়া পর্যন্ত React fallback দেখায়, তারপর স্টাইল প্রয়োগ করা কার্ডটি প্রকাশ করে।
 
-For comparison, the second button performs the same update without React, in a separate document. Nothing waits for the stylesheet, so the card's text appears in a fallback font first and then switches:
+তুলনার জন্য, দ্বিতীয় বাটনটি React ছাড়াই আলাদা document-এ একই আপডেট করে। stylesheet-এর জন্য অপেক্ষা করা হয় না বলে কার্ডের টেক্সট প্রথমে fallback ফন্টে দেখা যায়, পরে ফন্ট বদলে যায়:
 
 <Sandpack>
 
@@ -2707,9 +2661,9 @@ hr {
 
 ---
 
-### Animating from Suspense content {/*animating-from-suspense-content*/}
+### Suspense কনটেন্ট থেকে অ্যানিমেশন চালানো {/*animating-from-suspense-content*/}
 
-Suspense composes with [`<ViewTransition>`](/reference/react/ViewTransition) to animate the swap from the fallback to the content. Wrap the boundary in a `<ViewTransition>`, and React treats the swap as an update, cross-fading between the fallback and the content by default:
+fallback থেকে কনটেন্টে পরিবর্তনের অ্যানিমেশন চালাতে Suspense-এর সাথে [`<ViewTransition>`](/reference/react/ViewTransition) ব্যবহার করা যায়। বাউন্ডারিটিকে `<ViewTransition>` দিয়ে ঘিরে দিলে React এই পরিবর্তনকে একটি আপডেট হিসেবে বিবেচনা করে। ডিফল্টভাবে fallback ধীরে মিলিয়ে গিয়ে কনটেন্ট ফুটে ওঠে:
 
 <Sandpack>
 
@@ -2937,21 +2891,21 @@ button:hover {
 
 <Note>
 
-Where you place the `<ViewTransition>` relative to the boundary determines whether the fallback and content cross-fade as one update or animate as separate exit and enter animations. You can also [customize the animation](/reference/react/ViewTransition#customizing-animations) with View Transition classes.
+বাউন্ডারির তুলনায় `<ViewTransition>` কোথায় রাখছেন, তার উপর নির্ভর করে fallback ও কনটেন্ট একটি আপডেট হিসেবে cross-fade করবে, নাকি আলাদা প্রস্থান ও প্রবেশের অ্যানিমেশন দেখাবে। View Transition class দিয়ে [অ্যানিমেশন পরিবর্তনও করতে পারেন।](/reference/react/ViewTransition#customizing-animations)
 
-[Learn more about animating from Suspense content.](/reference/react/ViewTransition#animating-from-suspense-content)
+[Suspense কনটেন্ট থেকে অ্যানিমেশন চালানো সম্পর্কে আরও জানুন।](/reference/react/ViewTransition#animating-from-suspense-content)
 
 </Note>
 
 ---
 
-### Waiting for a font to load {/*waiting-for-a-font-to-load*/}
+### ফন্ট লোড হওয়ার জন্য অপেক্ষা করা {/*waiting-for-a-font-to-load*/}
 
-When a [`<ViewTransition>`](/reference/react/ViewTransition) animates a Suspense boundary's reveal, React waits up to 500 ms for new fonts the content introduces so the text doesn't flash with a fallback font. This only happens during a `<ViewTransition>` update.
+[`<ViewTransition>`](/reference/react/ViewTransition) দিয়ে Suspense বাউন্ডারির কনটেন্ট প্রকাশের অ্যানিমেশন চালালে, কনটেন্টে ব্যবহৃত নতুন ফন্ট লোড হওয়ার জন্য React সর্বোচ্চ 500 মিলিসেকেন্ড অপেক্ষা করে। এতে টেক্সট হঠাৎ fallback ফন্টে দেখা যায় না। এটি শুধু `<ViewTransition>` আপডেটের সময় ঘটে।
 
-In the example below, the Suspense boundary is wrapped in a `<ViewTransition>`, and the `Quote` component suspends while its data loads. Rendering the quote loads a stylesheet that introduces the font. React keeps the fallback visible while the stylesheet and font load. If the font loads within the 500 ms limit, the quote appears already in its font.
+নিচের উদাহরণে Suspense বাউন্ডারিটিকে `<ViewTransition>` দিয়ে ঘেরা হয়েছে, আর ডেটা লোড হওয়ার সময় `Quote` কম্পোনেন্ট suspend করে। উদ্ধৃতিটি রেন্ডার করার সময় একটি stylesheet লোড হয়, যা ফন্টটি যোগ করে। stylesheet ও ফন্ট লোড হওয়ার সময় React fallback দেখিয়ে রাখে। ফন্টটি 500 মিলিসেকেন্ডের মধ্যে লোড হলে, উদ্ধৃতিটি শুরু থেকেই সেই ফন্টে দেখা যায়।
 
-For comparison, the second button performs the same update without React. Nothing waits for the font, so the text appears in a fallback font first and then switches:
+তুলনার জন্য, দ্বিতীয় বাটনটি React ছাড়াই একই আপডেট করে। ফন্টের জন্য অপেক্ষা করা হয় না বলে টেক্সট প্রথমে fallback ফন্টে দেখা যায়, পরে ফন্ট বদলে যায়:
 
 <Sandpack>
 
@@ -3110,11 +3064,11 @@ hr {
 
 ---
 
-### Waiting for an image to load {/*waiting-for-an-image-to-load*/}
+### ছবি লোড হওয়ার জন্য অপেক্ষা করা {/*waiting-for-an-image-to-load*/}
 
-When a Suspense boundary reveals content inside a [`<ViewTransition>`](/reference/react/ViewTransition), React waits up to 500 ms for visible images to load before starting the animation. Setting `loading="lazy"` or adding an `onLoad` handler opts an image out.
+[`<ViewTransition>`](/reference/react/ViewTransition)-এর ভেতরে কোনো Suspense বাউন্ডারি কনটেন্ট প্রকাশ করলে, অ্যানিমেশন শুরুর আগে React দৃশ্যমান ছবিগুলো লোড হওয়ার জন্য সর্বোচ্চ 500 মিলিসেকেন্ড অপেক্ষা করে। কোনো ছবিতে `loading="lazy"` বা `onLoad` handler দিলে সেই ছবির জন্য অপেক্ষা করা হয় না।
 
-Compare the same boundary inside and outside a `<ViewTransition>`. Inside, React keeps the profile skeleton visible for up to 500 ms while the image loads, so the card can be revealed with its image already in place. Outside, Suspense stops showing the skeleton as soon as the Promise resolves. If the image is still loading, the card appears first and the image pops in afterward:
+একই বাউন্ডারি `<ViewTransition>`-এর ভেতরে ও বাইরে রেখে তুলনা করুন। ভেতরে থাকলে, ছবি লোড হওয়ার সময় React সর্বোচ্চ 500 মিলিসেকেন্ড প্রোফাইলের skeleton দেখিয়ে রাখে, যাতে ছবিসহ কার্ডটি প্রকাশ করা যায়। বাইরে থাকলে, Promise resolve হওয়া মাত্রই Suspense skeleton দেখানো বন্ধ করে। ছবি তখনও লোড হতে থাকলে, প্রথমে কার্ড দেখা যায়, পরে হঠাৎ ছবিটি দেখা দেয়:
 
 <Sandpack>
 
@@ -3241,11 +3195,11 @@ hr {
 
 ---
 
-### Coordinating fonts, images, and stylesheets {/*coordinating-fonts-images-and-stylesheets*/}
+### ফন্ট, ছবি ও stylesheet-এর লোডিং সমন্বয় করা {/*coordinating-fonts-images-and-stylesheets*/}
 
-A Suspense boundary can wait for data, stylesheets, fonts, and images at once. Waiting for fonts and images only happens during a [`<ViewTransition>`](/reference/react/ViewTransition) update. In the example below, the `ProfileCard` component suspends while its data loads, and renders a stylesheet with `precedence`, text in a new font, and a portrait. React keeps the skeleton visible while the data and the stylesheet load. The `<ViewTransition>` reveal then waits for the font and the image, so the card appears complete.
+একটি Suspense বাউন্ডারি একইসাথে ডেটা, stylesheet, ফন্ট ও ছবির জন্য অপেক্ষা করতে পারে। ফন্ট ও ছবির জন্য অপেক্ষা করা হয় শুধু [`<ViewTransition>`](/reference/react/ViewTransition) আপডেটের সময়। নিচের উদাহরণে, ডেটা লোড হওয়ার সময় `ProfileCard` কম্পোনেন্ট suspend করে। এটি `precedence`-সহ একটি stylesheet, নতুন ফন্টের টেক্সট এবং একটি প্রতিকৃতি রেন্ডার করে। ডেটা ও stylesheet লোড হওয়ার সময় React skeleton দেখিয়ে রাখে। তারপর `<ViewTransition>` দিয়ে কনটেন্ট প্রকাশের আগে ফন্ট ও ছবির জন্য অপেক্ষা করা হয়, যাতে কার্ডটি সম্পূর্ণ অবস্থায় দেখা যায়।
 
-For comparison, the version without React loads the same data and shows every resource arriving on its own schedule:
+তুলনার জন্য, React ছাড়া সংস্করণটি একই ডেটা লোড করে এবং প্রতিটি resource যখন পৌঁছায় তখনই দেখায়:
 
 <Sandpack>
 
@@ -3475,8 +3429,7 @@ hr {
 
 ---
 
-## Troubleshooting {/*troubleshooting*/}
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+## সমস্যার সমাধান করা {/*troubleshooting*/}
 
 ### কিভাবে আমি একটি আপডেটের সময় fallback দ্বারা UI প্রতিস্থাপিত হওয়াকে রোধ করবো? {/*preventing-unwanted-fallbacks*/}
 
