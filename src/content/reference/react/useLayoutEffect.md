@@ -47,11 +47,7 @@ function Tooltip() {
 
 #### প্যারামিটারস {/*parameters*/}
 
-<<<<<<< HEAD
-* `setup`: যা আপনার Effect এর লজিক সহ ফাংশন। আপনার এই setup ফাংশন প্রয়োজনে একটি *cleanup* ফাংশন রিটার্ন করতে পারে। আপনার [কম্পোনেন্ট DOM-এ যোগ করার আগে](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), React আপনার setup ফাংশন চালাবে। প্রতিটি রি-রেন্ডার করার পর যেখানে ডিপেন্ডেন্সিগুলি পরিবর্তিত হয়েছে, React প্রথমে পুরোনো মানগুলির সাথে cleanup ফাংশন চালাবে (যদি আপনি তা প্রদান করেন), এবং তারপর নতুন মানগুলির সাথে setup ফাংশন চালাবে। DOM থেকে আপনার কম্পোনেন্ট সরানোর আগে, React আপনার cleanup ফাংশন চালাবে।
-=======
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. After your [component commits](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom) to the DOM and before the browser repaints the screen, React will run your setup function. After every commit with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* `setup`: আপনার Effect-এর লজিকসহ ফাংশন। এই ফাংশন প্রয়োজনে একটি *cleanup* ফাংশন রিটার্ন করতে পারে। আপনার [কম্পোনেন্ট DOM-এ কমিট হওয়ার পরে](/learn/render-and-commit#step-3-react-commits-changes-to-the-dom), কিন্তু ব্রাউজার স্ক্রিন পুনরায় আঁকার আগে, React আপনার setup ফাংশন চালাবে। ডিপেন্ডেন্সি পরিবর্তিত হয়েছে এমন প্রতিটি কমিটের পরে, React প্রথমে পুরোনো মান দিয়ে cleanup ফাংশন চালাবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন মান দিয়ে setup ফাংশন চালাবে। DOM থেকে আপনার কম্পোনেন্ট সরানোর আগে React আপনার cleanup ফাংশন চালাবে।
 
 * **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিঅ্যাক্টিভ ভ্যালুর তালিকা। রিঅ্যাক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিঅ্যাক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে উল্লেখ করা আছে। ডিপেন্ডেন্সিগুলির তালিকায় অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং এটি `[dep1, dep2, dep3]` এর মতো ইনলাইনে থাকতে হবে। React প্রতিটি ডিপেন্ডেন্সিকে এর পূর্ববর্তী মানের সাথে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) কোম্পারিসন অ্যালগরিদম ব্যবহার করে তুলনা করবে। আপনি যদি এই আর্গুমেন্টটি বাদ দেন, তবে কম্পোনেন্টের প্রতিটি রি-রেন্ডার করার পর আপনার Effect পুনরায় চালু হবে।
 
@@ -738,13 +734,9 @@ export default function TooltipContainer({ children, x, y, contentRef }) {
 
 - `useLayoutEffect` এর পরিবর্তে [`useEffect`](/reference/react/useEffect) ব্যবহার করুন। এটি React-কে বলে পেইন্ট ব্লক না করে যে এটি প্রাথমিক রেন্ডার ফলাফল প্রদর্শন করতে পারে (কারণ আসল HTML আপনার Effect রান করার আগে দৃশ্যমান হয়ে যাবে)।
 
-<<<<<<< HEAD
-- বিকল্পভাবে, [আপনার কম্পোনেন্টকে ক্লায়েন্ট-অনলি হিসেবে বিবেচিত করুন।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content) এটি React-কে বলে যে সার্ভার রেন্ডারিংয়ের সময় এটি এর কন্টেন্টকে সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি পর্যন্ত একটি লোডিং ফলব্যাক (উদাহরণস্বরূপ, একটি স্পিনার বা একটি গ্লিমার) দিয়ে বদল করবে ।
-=======
-- Alternatively, call [`use(browser())`](/reference/react/use#use-browser) to mark the component as browser-only. React will replace its content up to the closest [`<Suspense>`](/reference/react/Suspense) boundary with a loading fallback (for example, a spinner or a glimmer) during server rendering.
+- বিকল্পভাবে, কম্পোনেন্টটিকে শুধু ব্রাউজারে রেন্ডার করার জন্য [`use(browser())`](/reference/react/use#use-browser) কল করুন। সার্ভার রেন্ডারিংয়ের সময় React কম্পোনেন্টটির কনটেন্ট থেকে সবচেয়ে কাছের [`<Suspense>`](/reference/react/Suspense) বাউন্ডারি পর্যন্ত অংশ একটি লোডিং fallback (যেমন স্পিনার বা ঝিলমিল placeholder) দিয়ে প্রতিস্থাপন করবে।
 
-- Alternatively, [mark your component as client-only.](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) This tells React to replace its content up to the closest `<Suspense>` boundary with a loading fallback during server rendering.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+- আরেকটি বিকল্প হলো [কম্পোনেন্টটিকে client-only হিসেবে চিহ্নিত করা।](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-client-only-content) এতে সার্ভার রেন্ডারিংয়ের সময় React তার কনটেন্ট থেকে সবচেয়ে কাছের `<Suspense>` বাউন্ডারি পর্যন্ত অংশ একটি লোডিং fallback দিয়ে প্রতিস্থাপন করে।
 
 - বিকল্পভাবে, আপনি হাইড্রেশনের পরে শুধুমাত্র `useLayoutEffect` সহ একটি কম্পোনেন্ট রেন্ডার করতে পারেন। একটি বুলিয়ান `isMounted` স্টেট রাখুন যা শুরুতে `false` দিয়ে আরম্ভ করা হয় এবং এটিকে একটি `useEffect` কলের ভিতরে `true` তে সেট করুন। আপনার রেন্ডারিং লজিকটি তখন এইরকম হতে পারে: `return isMounted ? <RealContent /> : <FallbackContent />`। সার্ভার এবং হাইড্রেশনের সময়, ব্যবহারকারী `FallbackContent` দেখবে যা `useLayoutEffect` কল করবে না। তারপর React এটিকে `RealContent` দিয়ে বদলে দিবে যা শুধুমাত্র ক্লায়েন্টে রান করবে এবং `useLayoutEffect` কল করতে পারে।
 
