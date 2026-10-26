@@ -11,9 +11,9 @@ title: "State: কম্পোনেন্ট এর মেমোরি"
 <YouWillLearn>
 
 * [`useState`](/reference/react/useState) দিয়ে কিভাবে একটি state ভ্যারিয়েবল তৈরি করা যায়
-* `useState` হুক কোন দুইটি ভ্যারিয়েবল রিটার্ন করে 
+* `useState` হুক কোন দুইটি ভ্যারিয়েবল রিটার্ন করে
 * কিভাবে একাধিক state ভ্যারিয়েবল তৈরি করতে হয়
-* state কে কেন লোকাল বলা হয় 
+* state কে কেন লোকাল বলা হয়
 
 </YouWillLearn>
 
@@ -333,7 +333,7 @@ button {
 
 ### আপনার প্রথম হুকের সাথে পরিচয় {/*meet-your-first-hook*/}
 
-React এ, `useState`, এবং অন্য যেকোনো ফাংশন যার শুরু "`use`" দিয়ে তাদেরকে হুক বলা হয়। 
+React এ, `useState`, এবং অন্য যেকোনো ফাংশন যার শুরু "`use`" দিয়ে তাদেরকে হুক বলা হয়।
 
 *Hooks* এক ধরনের স্পেশাল ফাংশন যা শুধু React এর [রেন্ডারিং](/learn/render-and-commit#step-1-trigger-a-render) এর সময় কাজ করে (রেন্ডারিং নিয়ে পরের পাতায় আমরা আরো বিস্তারিত জানব)। এরা রিয়েক্ট এর বিভিন্ন ফিচারকে "আঁকরে ধরতে" সাহায্য করে।
 
@@ -360,11 +360,7 @@ const [index, setIndex] = useState(0);
 
 </Note>
 
-<<<<<<< HEAD
-`useState` এর একমাত্র আর্গুমেন্ট হচ্ছে আপনার state ভ্যারিয়েবলের **initial value**। এই উদাহরণে, `index` এর initial value `useState(0)` দিয়ে `0` তে সেট করা। 
-=======
-The only argument to `useState` is the **initial value** of your state variable. In this example, the `index`'s initial value is set to `0` with `useState(0)`.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+`useState` এর একমাত্র আর্গুমেন্ট হচ্ছে আপনার state ভ্যারিয়েবলের **initial value**। এই উদাহরণে, `index` এর initial value `useState(0)` দিয়ে `0` তে সেট করা।
 
 প্রতিবার যখন আপনার কম্পোনেন্ট রেন্ডার হয়, `useState` আপনাকে দুটি মান সহ একটি অ্যারে দেয়ঃ
 
@@ -1449,11 +1445,7 @@ export default function FeedbackForm() {
 
 `useState` কলটির দ্বিতীয় উদাহরণটি `if` কন্ডিশনের পরে সরিয়ে নিয়ে যান এবং লক্ষ্য করুন কীভাবে এটি আবার ভেঙে যায়।
 
-<<<<<<< HEAD
 যদি আপনার লিন্টার [React-এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), তাহলে এরকম ভুল করলে আপনি একটি লিন্ট এরর দেখতে পাবেন। যদি আপনি লোকালি এই ভুল কোড চেষ্টা করে কোনো এরর না দেখেন, তাহলে আপনার প্রজেক্টের জন্য লিন্টিং সেট আপ করা প্রয়োজন।
-=======
-If your linter is [configured for React](/learn/editor-setup#linting), you should see a lint error when you make a mistake like this. If you don't see an error when you try the faulty code locally, you need to set up linting for your project.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 </Solution>
 
