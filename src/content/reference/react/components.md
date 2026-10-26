@@ -12,20 +12,12 @@ React কিছু বিল্ট-ইন কম্পোনেন্ট উন�
 
 ## বিল্ট-ইন কম্পোনেন্ট {/*built-in-components*/}
 
-<<<<<<< HEAD
 * [`<Fragment>`](/reference/react/Fragment), যাকে `<>...</>` হিসেবেও লেখা হয়, আপনাকে একাধিক JSX নোড এক সাথে গ্রুপ করতে দেয়।
-* [`<Profiler>`](/reference/react/Profiler) আপনাকে প্রোগ্রামের মাধ্যমে একটি React ট্রি-এর রেন্ডারিং পারফরম্যান্স পরিমাপ করতে দেয়। 
+* [`<Profiler>`](/reference/react/Profiler) আপনাকে প্রোগ্রামের মাধ্যমে একটি React ট্রি-এর রেন্ডারিং পারফরম্যান্স পরিমাপ করতে দেয়।
 * [`<Suspense>`](/reference/react/Suspense) চাইল্ড কম্পোনেন্ট লোড হবার সময় ফলব্যাক দেখাতে আপনাকে সাহায্য করে।
-* [`<StrictMode>`](/reference/react/StrictMode) কিছু অতিরিক্ত develop-only চেক সক্রিয় করে দেয় যা আপনাকে আগে থেকেই বিভিন্ন বাগ চিনতে সাহায্য করে।
-* [`<Activity>`](/reference/react/Activity) এটি আপনাকে এর চাইল্ড এলিমেন্টগুলোর (children) ইউজার ইন্টারফেস (UI) এবং ইন্টারনাল স্টেট (internal state) লুকিয়ে রাখা এবং পুনরায় ফিরিয়ে আনার সুবিধা দেয়।.
-=======
-* [`<Fragment>`](/reference/react/Fragment), alternatively written as `<>...</>`, lets you group multiple JSX nodes together.
-* [`<Profiler>`](/reference/react/Profiler) lets you measure rendering performance of a React tree programmatically.
-* [`<Suspense>`](/reference/react/Suspense) lets you display a fallback while the child components are loading.
-* [`<StrictMode>`](/reference/react/StrictMode) enables extra development-only checks that help you find bugs early.
-* [`<Activity>`](/reference/react/Activity) lets you hide and restore the UI and internal state of its children.
-* [`<ViewTransition>`](/reference/react/ViewTransition) lets you animate a component tree with Transitions and Suspense.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* [`<StrictMode>`](/reference/react/StrictMode) কিছু অতিরিক্ত development-only চেক সক্রিয় করে দেয় যা আপনাকে আগে থেকেই বিভিন্ন বাগ চিনতে সাহায্য করে।
+* [`<Activity>`](/reference/react/Activity) এটি আপনাকে এর চাইল্ড এলিমেন্টগুলোর (children) ইউজার ইন্টারফেস (UI) এবং ইন্টারনাল স্টেট (internal state) লুকিয়ে রাখা এবং পুনরায় ফিরিয়ে আনার সুবিধা দেয়।
+* [`<ViewTransition>`](/reference/react/ViewTransition) দিয়ে Transition এবং Suspense-এর সাথে একটি কম্পোনেন্ট ট্রিতে অ্যানিমেশন যোগ করতে পারেন।
 
 ---
 
