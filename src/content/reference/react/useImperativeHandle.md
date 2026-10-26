@@ -42,15 +42,11 @@ function MyInput({ ref }) {
 
 * `createHandle`: একটা ফাংশন যা কোন আর্গুমেন্ট নেয় না এবং আপনি যে ref হ্যান্ডল উন্মুক্ত করতে চান সেটা রিটার্ন করে। ওই ref হ্যান্ডলের যেকোন টাইপ থাকতে পারে। সাধারণত আপনি একটা অবজেক্ট রিটার্ন করবেন যেটার সাথে সেই মেথডগুলো থাকবে যেগুলো আপনি উন্মুক্ত করতে চান।
 
-* **optional** `dependencies`: `createHandle` কোডের মধ্যে রেফারেন্স দেওয়া আছে এমন সকল reactive ভ্যালুর তালিকা। Reactive ভ্যালুর মধ্যে রয়েছে আপনার কম্পোনেন্টে সরাসরি declared সকল props, state এবং সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা দেখবে যে সকল reactive ভ্যালু সঠিক ভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত হয়েছে কি না। ডিপেন্ডেন্সির তালিকায় সব সময় ধ্রুব সংখ্যক আইটেম থাকবে এবং inline এ লেখা থাকবে এমন ভাবে, `[dep1, dep2, dep3]`। React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে সকল ডিপেন্ডেন্সি তার আগের মানের সাথে তুলনা করবে। যদি কোন ডিপেন্ডেন্সির পরিবর্তনের কারণে পুনরায় রেন্ডার হয়ে থাকে, অথবা আপনি যদি এই আর্গুমেন্টটি মুছে ফেলে থাকেন, তবে আপনার `createHandle` ফাংশন re-execute হবে, এবং নতুন করে তৈরী হওয়া হ্যান্ডেল ref এ এসাইন হয়ে যাবে। 
+* **optional** `dependencies`: `createHandle` কোডের মধ্যে রেফারেন্স দেওয়া আছে এমন সকল reactive ভ্যালুর তালিকা। Reactive ভ্যালুর মধ্যে রয়েছে আপনার কম্পোনেন্টে সরাসরি declared সকল props, state এবং সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা দেখবে যে সকল reactive ভ্যালু সঠিক ভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত হয়েছে কি না। ডিপেন্ডেন্সির তালিকায় সব সময় ধ্রুব সংখ্যক আইটেম থাকবে এবং inline এ লেখা থাকবে এমন ভাবে, `[dep1, dep2, dep3]`। React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে সকল ডিপেন্ডেন্সি তার আগের মানের সাথে তুলনা করবে। যদি কোন ডিপেন্ডেন্সির পরিবর্তনের কারণে পুনরায় রেন্ডার হয়ে থাকে, অথবা আপনি যদি এই আর্গুমেন্টটি মুছে ফেলে থাকেন, তবে আপনার `createHandle` ফাংশন re-execute হবে, এবং নতুন করে তৈরী হওয়া হ্যান্ডেল ref এ এসাইন হয়ে যাবে।
 
 <Note>
 
-<<<<<<< HEAD
 React 19 থেকে শুরু করে, [`ref` একটি prop হিসেবে উপলব্ধ।](/blog/2024/12/05/react-19#ref-as-a-prop) React 18 এবং তার আগের ভার্শনে, [`forwardRef`](/reference/react/forwardRef) থেকে `ref` পাওয়া প্রয়োজন ছিল।
-=======
-Starting with React 19, [`ref` is available as a prop.](/blog/2024/12/05/react-19#ref-as-a-prop) In React 18 and earlier, it was necessary to get the `ref` from [`forwardRef`.](/reference/react/forwardRef)
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 </Note>
 
@@ -90,7 +86,7 @@ function MyInput({ ref }) {
 
 উপরের কোডে লক্ষ্য করুন, `ref` আর `<input>` এ পাস করা হচ্ছে না।
 
-উদাহরণস্বরূপ, ধরা যাক আপনি পুরো `<input>` ডম নোড উন্মুক্ত করতে চান না, কিন্তু আপনি এর দুটি মেথড উন্মুক্ত করতে চানঃ `focus` এবং `scrollIntoView`। এটা ্করতে হলে, প্রকৃত ব্রাউজার DOM আলাদা একটি ref এ রাখুন। তারপর প্যারেন্ট কম্পোনেন্ট যেই মেথডগুলো কল করবে বলে আপনি চান, সেগুলো সহ একটি হ্যান্ডেল উন্মুক্ত করতে `useImperativeHandle` ব্যবহার করুণঃ 
+উদাহরণস্বরূপ, ধরা যাক আপনি পুরো `<input>` ডম নোড উন্মুক্ত করতে চান না, কিন্তু আপনি এর দুটি মেথড উন্মুক্ত করতে চানঃ `focus` এবং `scrollIntoView`। এটা ্করতে হলে, প্রকৃত ব্রাউজার DOM আলাদা একটি ref এ রাখুন। তারপর প্যারেন্ট কম্পোনেন্ট যেই মেথডগুলো কল করবে বলে আপনি চান, সেগুলো সহ একটি হ্যান্ডেল উন্মুক্ত করতে `useImperativeHandle` ব্যবহার করুণঃ
 
 ```js {7-14}
 import { useRef, useImperativeHandle } from 'react';
