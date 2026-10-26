@@ -51,7 +51,7 @@ function TabContainer() {
 
 * `startTransition` এমন কোন পন্থা দেয় না যেটা দিয়ে বুঝা বুঝা যাবে কোন transition পেন্ডীং আছে কি না। যখন transition চলছে সে সময়ে পেন্ডীঙ ইনডিকেটর দেখাবার জন্য আপনার বরং [`useTransition`](/reference/react/useTransition) এর দরকার পড়বে।
 
-* আপনি একটি আপডেট একটি transition এ wrap করতে পারবেন কেবল যদি আপনার ওই state এর `set` ফাংশনে এক্সেস করার অনুমতি থাকে। যদি আপনি কোন prop বা কাস্টম হুকের রেসপন্স হিসেবে একটি transition শুরু করতে চান, বরং [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করুন। 
+* আপনি একটি আপডেট একটি transition এ wrap করতে পারবেন কেবল যদি আপনার ওই state এর `set` ফাংশনে এক্সেস করার অনুমতি থাকে। যদি আপনি কোন prop বা কাস্টম হুকের রেসপন্স হিসেবে একটি transition শুরু করতে চান, বরং [`useDeferredValue`](/reference/react/useDeferredValue) ব্যবহার করুন।
 
 * আপনি `startTransition` এ যে ফাংশন পাস করবেন সেটা তৎক্ষণাৎ কল হয়, এবং এটা এক্সিকিউট হবার সময়ে চলমান সকল state update কে Transition হিসেবে চিহ্নিত করে। আপনি যদি `setTimeout` এর মধ্যে state update করার চেষ্টা করেন, তাহলে সেগুলো Transition হিসেবে চিহ্নিত হবে না।
 
@@ -92,11 +92,7 @@ Transition এর সাথে, একতা re-render এর মধ্যে �
 
 <Note>
 
-<<<<<<< HEAD
-`startTransition` এর সাথে খুব মিল আছে [`useTransition`](/reference/react/useTransition) এর, শুধু এই বিষয়টা ব্যতীত যে এটা কোন transition চলছে কি না ট্র্যাক করবার জন্য `isPending` ফ্ল্যাগ দেয় না। `useTransition` যদি না থাকে তখন আপনি  `startTransition` কল দিতে পারেন। উদাহরণস্বরূপ, `startTransition` component এর বাইরে কাজ করে, যেমন সেটা হতে পারে একটা ডেটা লাইব্রেরি থেকে।
-=======
-`startTransition` is very similar to [`useTransition`](/reference/react/useTransition), except that it does not provide the `isPending` flag to track whether a Transition is ongoing. The standalone function is also not associated with a component, so if the function passed to it throws an error or returns a rejected Promise, React reports the error with [`reportError`](https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError). You can call `startTransition` when `useTransition` is not available. For example, `startTransition` works outside components, such as from a data library.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+`startTransition` অনেকটা [`useTransition`](/reference/react/useTransition)-এর মতো, তবে কোনো Transition চলছে কি না তা ট্র্যাক করার জন্য এটি `isPending` ফ্ল্যাগ দেয় না। এই স্বতন্ত্র ফাংশনটি কোনো কম্পোনেন্টের সাথেও যুক্ত নয়। তাই এতে পাস করা ফাংশন কোনো error throw করলে বা rejected Promise রিটার্ন করলে, React [`reportError`](https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError) দিয়ে সেই error রিপোর্ট করে। যেখানে `useTransition` ব্যবহার করা যায় না, সেখানে আপনি `startTransition` কল করতে পারেন। যেমন, এটি কম্পোনেন্টের বাইরেও কাজ করে—কোনো ডেটা লাইব্রেরি থেকেও কল করা যায়।
 
 [Transition এর ব্যাপারে শিখুন এবং উদাহরণ দেখুন `useTransition` পেইজে।](/reference/react/useTransition)
 
