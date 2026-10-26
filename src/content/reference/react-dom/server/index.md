@@ -12,15 +12,10 @@ title: Server React DOM API
 
 [Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) সহ এনভায়রনমেন্ট গুলোতে (যার মধ্যে রয়েছে ব্রাউজার, Deno এবং কিছু আধুনিক Edge runtime) কেবল এই মেথডগুলো পাওয়া যাবেঃ
 
-<<<<<<< HEAD
-* [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) একটা React ট্রিকে একটা [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) এ রেন্ডার করে।
-* [`resume`](/reference/react-dom/server/renderToPipeableStream) resumes [`prerender`](/reference/react-dom/static/prerender) to a [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream).
-=======
-These methods are only available in the environments with [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API), which includes browsers, Deno, and some modern edge runtimes:
+এই মেথডগুলো শুধু [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) সমর্থন করে এমন পরিবেশে পাওয়া যায়। এর মধ্যে ব্রাউজার, Deno এবং কিছু আধুনিক edge runtime রয়েছে:
 
-* [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) renders a React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
-* [`resume`](/reference/react-dom/server/resume) resumes [`prerender`](/reference/react-dom/static/prerender) to a [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream).
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* [`renderToReadableStream`](/reference/react-dom/server/renderToReadableStream) একটি React ট্রিকে [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)-এ রেন্ডার করে।
+* [`resume`](/reference/react-dom/server/resume) [`prerender`](/reference/react-dom/static/prerender)-এর কাজ পুনরায় শুরু করে একটি [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)-এ।
 
 
 <Note>
@@ -32,15 +27,10 @@ Node.js also includes these methods for compatibility, but they are not recommen
 
 ## Node.js Stream জন্য Server API {/*server-apis-for-nodejs-streams*/}
 
-[Node.js Streams](https://nodejs.org/api/stream.html) সহ এনভায়রনমেন্ট গুলোতে কেবল এই মেথডগুলো পাওয়া যাবেঃ 
+[Node.js Streams](https://nodejs.org/api/stream.html) সহ এনভায়রনমেন্ট গুলোতে কেবল এই মেথডগুলো পাওয়া যাবেঃ
 
-<<<<<<< HEAD
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটা React ট্রি কে একটা pipeable [Node.js Stream](https://nodejs.org/api/stream.html) এ রেন্ডার করে।
-* [`resumeToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) resumes [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
-=======
-* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) renders a React tree to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
-* [`resumeToPipeableStream`](/reference/react-dom/server/resumeToPipeableStream) resumes [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream) to a pipeable [Node.js Stream.](https://nodejs.org/api/stream.html)
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) একটি React ট্রিকে pipe করা যায় এমন [Node.js Stream](https://nodejs.org/api/stream.html)-এ রেন্ডার করে।
+* [`resumeToPipeableStream`](/reference/react-dom/server/resumeToPipeableStream) [`prerenderToNodeStream`](/reference/react-dom/static/prerenderToNodeStream)-এর কাজ পুনরায় শুরু করে pipe করা যায় এমন একটি [Node.js Stream](https://nodejs.org/api/stream.html)-এ।
 
 ---
 
