@@ -44,15 +44,9 @@ function useCSS(rule) {
 
 #### প্যারামিটার {/*parameters*/}
 
-<<<<<<< HEAD
 * `setup`: যেই ফাংশনে আপনার Effect এর লজিক আছে। আপনার সেটআপ ফাংশন একটি *cleanup* ফাংশন optionally রিটার্ন করতে পারে। আপনার কম্পোনেন্ট DOM এ যুক্ত হবার সময়, কিন্তু কোন লেআউট effect fire করার আগে, React আপনার সেটআপ ফাংশন রান করবে। পরিবর্তিত ডিপেন্ডেন্সির সাথে যতবার রি-রেন্ডার হবে, React প্রথমে আপনার পুরনো ভ্যালুগুলো ব্যবহার করে cleanup ফাংশন রান করবে (যদি আপনি দিয়ে থাকেন), তারপর নতুন ভ্যালুগুলো ব্যবহার করে সেটআপ ফাংশন রান করবে। আপনার কম্পোনেন্ট DOM থেকে সরিয়ে ফেলবার আগে, React আপনার cleanup ফাংশন রান করবে।
- 
-* **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিয়াক্টিভ ভ্যালুর তালিকা। রিয়াক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার  [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিয়াক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত করা আছে। ডিপেন্ডেন্সির তালিকাতে অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং `[dep1, dep2, dep3]` এর মত ইনলাইনে থাকতে হবে।  React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithn ব্যবহার করে প্রতিটা ডিপেন্ডেন্সি এবং এর আগের ভ্যালু তুলনা করবে।আপনি যদি ডিপেন্ডেন্সি চিহ্নিত করে না দেন, আপনার Effect কম্পোনেন্টের প্রতিটি re-render এ re-run হবে।
-=======
-* `setup`: The function with your Effect's logic. Your setup function may also optionally return a *cleanup* function. When your component is added to the DOM, but before any layout Effects fire, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. When your component is removed from the DOM, React will run your cleanup function.
 
-* **optional** `dependencies`: The list of all reactive values referenced inside of the `setup` code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is [configured for React](/learn/editor-setup#linting), it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like `[dep1, dep2, dep3]`. React will compare each dependency with its previous value using the [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison algorithm. If you don't specify the dependencies at all, your Effect will re-run after every re-render of the component.
->>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
+* **optional** `dependencies`: `setup` কোডের মধ্যে রেফারেন্স করা সকল রিয়াক্টিভ ভ্যালুর তালিকা। রিয়াক্টিভ ভ্যালুর মধ্যে রয়েছে props, state এবং আপনার কম্পোনেন্ট বডির মধ্যে সরাসরি ডিক্লেয়ার হওয়া সকল ভ্যারিয়েবল এবং ফাংশন। যদি আপনার লিন্টার  [React এর জন্য কনফিগার করা থাকে](/learn/editor-setup#linting), এটা নিশ্চিত করবে যে প্রতিটা রিয়াক্টিভ ভ্যালু সঠিকভাবে ডিপেন্ডেন্সি হিসেবে চিহ্নিত করা আছে। ডিপেন্ডেন্সির তালিকাতে অবশ্যই আইটেমের সংখ্যা ধ্রুবক হতে হবে এবং `[dep1, dep2, dep3]` এর মত ইনলাইনে থাকতে হবে।  React [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) ব্যবহার করে প্রতিটা ডিপেন্ডেন্সি এবং এর আগের ভ্যালু তুলনা করবে। আপনি যদি ডিপেন্ডেন্সি চিহ্নিত করে না দেন, আপনার Effect কম্পোনেন্টের প্রতিটি re-render এ re-run হবে।
 
 #### রিটার্ন {/*returns*/}
 
@@ -71,7 +65,7 @@ function useCSS(rule) {
 
 ### CSS-in-JS লাইব্রেরিতে dynamic styles injection {/*injecting-dynamic-styles-from-css-in-js-libraries*/}
 
-প্রথাগতভাবে, আপনি React কম্পোনেন্ট plain CSS ব্যবহার করেই স্টাইল করবেন। 
+প্রথাগতভাবে, আপনি React কম্পোনেন্ট plain CSS ব্যবহার করেই স্টাইল করবেন।
 
 ```js
 // আপনার JS ফাইলেঃ
@@ -89,10 +83,10 @@ function useCSS(rule) {
 
 আপনি যদি CSS-in-JS ব্যবহার করেন, আমরা উপরের দুটি পদ্ধতির সমন্বয় ব্যবহার করতে উপদেশ দেব (স্ট্যাটিক স্টাইলের জন্য CSS ফাইল, ডাইনামিক স্টাইলের জন্য ইনলাইন স্টাইল।) **আমরা দুটি কারণে রানটাইম `<style>` ট্যাগ ইনজেকশন এড়িয়ে চলতে বলবঃ**
 
-1. রানটাইম ইনজেকশনের ক্ষেত্রে স্টাইলগুলোকে বার বার হিসেব করতে বাধ্য হয় ব্রাউজার। 
-2. React লাইফসাইকেলের ভুল একটা সময়ে যদি রানটাইম ইনজেকশন হয় তাহলে সেটা খুবই ধীরগতির হতে পারে। 
+1. রানটাইম ইনজেকশনের ক্ষেত্রে স্টাইলগুলোকে বার বার হিসেব করতে বাধ্য হয় ব্রাউজার।
+2. React লাইফসাইকেলের ভুল একটা সময়ে যদি রানটাইম ইনজেকশন হয় তাহলে সেটা খুবই ধীরগতির হতে পারে।
 
-প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে। 
+প্রথম সমস্যাটা সমাধানযোগ্য নয়, কিন্তু `useInsertionEffect` আপনাকে দ্বিতীয় সমস্যাটা সমাধানে সাহায্য করবে।
 
 কোন লেআউট Effect fire করার আগে স্টাইল ইনসার্ট করার জন্য `useInsertionEffect` কল করুনঃ
 
@@ -139,7 +133,7 @@ function useCSS(rule) {
 
 #### Rendering বা useLayoutEffect এর সময় স্টাইল ইঞ্জেক্ট করবার চেয়ে এটা কীভাবে আরো ভাল? {/*how-is-this-better-than-injecting-styles-during-rendering-or-uselayouteffect*/}
 
-আপনি যদি রেন্ডারিং এর সময় স্টাইল ইনসার্ট করেন যখন React একটি [নন-ব্লকিং আপডেট,](/reference/react/useTransition#perform-non-blocking-updates-with-actions) প্রসেস করছে, ব্রাউজার একটি কম্পোনেন্ট ট্রি রেন্ডার করতে করতে প্রতিটা ফ্রেমে স্টাইলগুলো আবার হিসেব করে, যেটা **অত্যন্ত ধীরগতির হতে পারে।** 
+আপনি যদি রেন্ডারিং এর সময় স্টাইল ইনসার্ট করেন যখন React একটি [নন-ব্লকিং আপডেট,](/reference/react/useTransition#perform-non-blocking-updates-with-actions) প্রসেস করছে, ব্রাউজার একটি কম্পোনেন্ট ট্রি রেন্ডার করতে করতে প্রতিটা ফ্রেমে স্টাইলগুলো আবার হিসেব করে, যেটা **অত্যন্ত ধীরগতির হতে পারে।**
 
 [`useLayoutEffect`](/reference/react/useLayoutEffect) বা [`useEffect`](/reference/react/useEffect) এর সময় স্টাইল ইনসার্ট করার চেয়ে `useInsertionEffect` ভাল, কারণ এটা নিশ্চিত করে যে যতক্ষণে আপনার কম্পোনেন্টে অন্যান্য Effect রান করছে, ততক্ষণে সকল `<style>` ট্যাগ ইনসার্ট করা হয়ে গেছে। অন্যথায়, পুরনো স্টাইলের কারণে সাধারণ Effect এ লেআউটের হিসেব ভুল হবে।
 
