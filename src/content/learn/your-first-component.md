@@ -357,9 +357,9 @@ img { height: 180px; }
 
 </Solution>
 
-#### Spot the mistake {/*spot-the-mistake*/}
+#### ভুলটি খুঁজে বের করুন {/*spot-the-mistake*/}
 
-Something's wrong with how the `Profile` component is declared and used. Can you spot the mistake? (Try to remember how React distinguishes components from the regular HTML tags!)
+`Profile` কম্পোনেন্ট লেখা ও ব্যবহার করার মধ্যে একটি ভুল আছে। ধরতে পারবেন? React কীভাবে সাধারণ HTML ট্যাগ থেকে কম্পোনেন্ট আলাদা করে, তা মনে করার চেষ্টা করুন!
 
 <Sandpack>
 
@@ -393,9 +393,9 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Solution>
 
-React component names must start with a capital letter.
+React কম্পোনেন্টের নাম বড় হাতের অক্ষর দিয়ে শুরু হতে হবে।
 
-Change `function profile()` to `function Profile()`, and then change every `<profile />` to `<Profile />`:
+`function profile()` বদলে `function Profile()` করুন। তারপর প্রতিটি `<profile />` বদলে `<Profile />` করুন:
 
 <Sandpack>
 
@@ -429,9 +429,9 @@ img { margin: 0 10px 10px 0; }
 
 </Solution>
 
-#### Your own component {/*your-own-component*/}
+#### নিজের কম্পোনেন্ট {/*your-own-component*/}
 
-Write a component from scratch. You can give it any valid name and return any markup. If you're out of ideas, you can write a `Congratulations` component that shows `<h1>Good job!</h1>`. Don't forget to export it!
+শুরু থেকে নিজে একটি কম্পোনেন্ট লিখুন। যেকোনো বৈধ নাম দিতে পারেন এবং যেকোনো মার্কআপ রিটার্ন করতে পারেন। কী লিখবেন ভেবে না পেলে, `<h1>Good job!</h1>` দেখায় এমন একটি `Congratulations` কম্পোনেন্ট লিখতে পারেন। এক্সপোর্ট করতে ভুলবেন না!
 
 <Sandpack>
 
