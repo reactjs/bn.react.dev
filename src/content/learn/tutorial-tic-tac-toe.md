@@ -427,7 +427,7 @@ export default function Board() {
 }
 ```
 
-At this point your code should look something like this:
+এ পর্যায়ে আপনার কোড অনেকটা এমন হওয়ার কথা:
 
 <Sandpack>
 
@@ -504,7 +504,7 @@ body {
 
 <Note>
 
-Psssst... That's a lot to type! It's okay to copy and paste code from this page. However, if you're up for a little challenge, we recommend only copying code that you've manually typed at least once yourself.
+এত কোড টাইপ করতে হবে! চাইলে এই পেইজ থেকে কোড কপি-পেস্ট করতে পারেন। তবে একটু চ্যালেঞ্জ নিতে চাইলে, আগে অন্তত একবার নিজে হাতে টাইপ করেছেন এমন কোডই শুধু কপি করার পরামর্শ দিচ্ছি।
 
 </Note>
 
