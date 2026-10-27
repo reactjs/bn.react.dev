@@ -1170,9 +1170,9 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 </ConsoleBlock>
 
-Why didn't this problem happen earlier?
+আগে এই সমস্যা হয়নি কেন?
 
-When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are *calling* that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't *want* to call `handleClick` until the user clicks!
+যখন `onSquareClick={handleClick}` লিখছিলেন, তখন `handleClick` ফাংশনটিকে prop হিসেবে পাঠাচ্ছিলেন, কল করছিলেন না! এখন ফাংশনটি সঙ্গে সঙ্গেই *কল* করছেন—`handleClick(0)`-এর বন্ধনীগুলো খেয়াল করুন—তাই এটি সময়ের আগেই চলছে। ব্যবহারকারী ক্লিক করার আগে আপনি `handleClick` কল করতে *চান না*!
 
 You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
 
