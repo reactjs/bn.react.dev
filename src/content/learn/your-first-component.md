@@ -76,19 +76,19 @@ img { height: 200px; }
 
 </Sandpack>
 
-And here's how to build a component:
+এবার ধাপে ধাপে কম্পোনেন্ট বানানো যাক:
 
-### Step 1: Export the component {/*step-1-export-the-component*/}
+### ধাপ ১: কম্পোনেন্ট এক্সপোর্ট করুন {/*step-1-export-the-component*/}
 
-The `export default` prefix is a [standard JavaScript syntax](https://developer.mozilla.org/docs/web/javascript/reference/statements/export) (not specific to React). It lets you mark the main function in a file so that you can later import it from other files. (More on importing in [Importing and Exporting Components](/learn/importing-and-exporting-components)!)
+ফাংশনের আগে লেখা `export default` জাভাস্ক্রিপ্টের [সাধারণ সিনট্যাক্স](https://developer.mozilla.org/docs/web/javascript/reference/statements/export), শুধু React-এর কিছু নয়। এটি দিয়ে ফাইলের প্রধান ফাংশন চিহ্নিত করা হয়, যাতে পরে অন্য ফাইল থেকে ইম্পোর্ট করতে পারেন। ইম্পোর্ট নিয়ে [কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা](/learn/importing-and-exporting-components) পেইজে আরও জানবেন।
 
-### Step 2: Define the function {/*step-2-define-the-function*/}
+### ধাপ ২: ফাংশন লিখুন {/*step-2-define-the-function*/}
 
-With `function Profile() { }` you define a JavaScript function with the name `Profile`.
+`function Profile() { }` দিয়ে `Profile` নামের একটি জাভাস্ক্রিপ্ট ফাংশন তৈরি করছেন।
 
 <Pitfall>
 
-React components are regular JavaScript functions, but **their names must start with a capital letter** or they won't work!
+React কম্পোনেন্ট সাধারণ জাভাস্ক্রিপ্ট ফাংশন হলেও **নামের প্রথম অক্ষর অবশ্যই বড় হাতের হতে হবে**। নইলে কাজ করবে না!
 
 </Pitfall>
 
