@@ -2254,11 +2254,11 @@ body {
 
 এখন গেমে দেওয়া চালগুলোর তালিকা এবং developer tools-এর console-এ একটি error দেখার কথা। "key" error-এর অর্থ নিয়ে আলোচনা করা যাক।
 
-### Picking a key {/*picking-a-key*/}
+### key বেছে নেওয়া {/*picking-a-key*/}
 
-When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
+তালিকা রেন্ডার করলে React প্রতিটি রেন্ডার করা আইটেম সম্পর্কে কিছু তথ্য রাখে। তালিকা আপডেট করলে কী বদলেছে তা নির্ধারণ করতে হয়। আপনি আইটেম যোগ, বাদ, পুনর্বিন্যাস বা আপডেট করে থাকতে পারেন।
 
-Imagine transitioning from
+ধরুন, এই তালিকা থেকে
 
 ```html
 <li>Alexa: 7 tasks left</li>
