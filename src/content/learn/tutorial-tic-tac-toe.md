@@ -735,7 +735,7 @@ function Square({ value }) {
 
 React-এর `useState` নামের একটি বিশেষ ফাংশন আছে, যা কম্পোনেন্ট থেকে কল করে কোনো কিছু মনে রাখা যায়। `Square`-এর বর্তমান মান state-এ রাখা যাক এবং `Square`-এ ক্লিক করলে সেটি বদলানো যাক।
 
-Import `useState` at the top of the file. Remove the `value` prop from the `Square` component. Instead, add a new line at the start of the `Square` that calls `useState`. Have it return a state variable called `value`:
+ফাইলের শুরুতে `useState` ইমপোর্ট করুন। `Square` কম্পোনেন্ট থেকে `value` prop সরিয়ে দিন। তার বদলে `Square`-এর শুরুতে নতুন একটি লাইনে `useState` কল করুন। এর রিটার্ন করা state ভ্যারিয়েবলের নাম দিন `value`:
 
 ```js {1,3,4}
 import { useState } from 'react';
@@ -747,7 +747,7 @@ function Square() {
     //...
 ```
 
-`value` stores the value and `setValue` is a function that can be used to change the value. The `null` passed to `useState` is used as the initial value for this state variable, so `value` here starts off equal to `null`.
+`value` মানটি ধরে রাখে এবং `setValue` হলো সেই মান পরিবর্তনের ফাংশন। `useState`-এ পাস করা `null` এই state ভ্যারিয়েবলের প্রাথমিক মান হিসেবে ব্যবহৃত হয়। তাই এখানে `value` শুরুতে `null` থাকে।
 
 Since the `Square` component no longer accepts props anymore, you'll remove the `value` prop from all nine of the Square components created by the Board component:
 
