@@ -217,20 +217,20 @@ function Profile() {
 
 [React-ভিত্তিক ফ্রেমওয়ার্কগুলো](/learn/creating-a-react-app) আরও এক ধাপ এগিয়ে যায়। ফাঁকা HTML ফাইল দিয়ে শুরু করে শুধু জাভাস্ক্রিপ্টের মাধ্যমে পেইজ পরিচালনার দায়িত্ব React-কে দেওয়ার বদলে, তারা আপনার React কম্পোনেন্ট থেকে HTML-ও তৈরি করে দেয়। ফলে জাভাস্ক্রিপ্ট লোড হওয়ার আগেই অ্যাপে কিছু কনটেন্ট দেখা যায়।
 
-Still, many websites only use React to [add interactivity to existing HTML pages.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) They have many root components instead of a single one for the entire page. You can use as much—or as little—React as you need.
+তবে অনেক ওয়েবসাইট শুধু [বিদ্যমান HTML পেইজে ইন্টারঅ্যাক্টিভিটি যোগ করতে](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) React ব্যবহার করে। পুরো পেইজের জন্য একটির বদলে সেখানে একাধিক রুট কম্পোনেন্ট থাকে। প্রয়োজনমতো অল্প বা বেশি React ব্যবহার করতে পারেন।
 
 </DeepDive>
 
 <Recap>
 
-You've just gotten your first taste of React! Let's recap some key points.
+React-এর সাথে প্রথম পরিচয় হলো! গুরুত্বপূর্ণ বিষয়গুলো আবার দেখে নেওয়া যাক।
 
-* React lets you create components, **reusable UI elements for your app.**
-* In a React app, every piece of UI is a component.
-* React components are regular JavaScript functions except:
+* React দিয়ে কম্পোনেন্ট বানানো যায়—**অ্যাপের UI-এর এমন অংশ, যা বারবার ব্যবহার করতে পারেন।**
+* React অ্যাপে UI-এর প্রতিটি অংশ একটি কম্পোনেন্ট।
+* React কম্পোনেন্ট সাধারণ জাভাস্ক্রিপ্ট ফাংশন, তবে:
 
-  1. Their names always begin with a capital letter.
-  2. They return JSX markup.
+  1. নাম সবসময় বড় হাতের অক্ষর দিয়ে শুরু হয়।
+  2. JSX মার্কআপ রিটার্ন করে।
 
 </Recap>
 
