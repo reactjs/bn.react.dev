@@ -1726,11 +1726,11 @@ body {
 
 শেষ অনুশীলন হিসেবে, গেমের আগের চালগুলোতে ফিরে যাওয়ার ব্যবস্থা করা যাক।
 
-### Storing a history of moves {/*storing-a-history-of-moves*/}
+### চালের ইতিহাস সংরক্ষণ করা {/*storing-a-history-of-moves*/}
 
-If you mutated the `squares` array, implementing time travel would be very difficult.
+`squares` অ্যারে mutate করলে সময় ভ্রমণ তৈরি করা খুব কঠিন হতো।
 
-However, you used `slice()` to create a new copy of the `squares` array after every move, and treated it as immutable. This will allow you to store every past version of the `squares` array, and navigate between the turns that have already happened.
+তবে প্রতিটি চালের পরে `slice()` দিয়ে `squares`-এর নতুন কপি তৈরি করেছেন এবং সেটিকে immutable হিসেবে বিবেচনা করেছেন। ফলে `squares`-এর প্রতিটি আগের সংস্করণ সংরক্ষণ করতে এবং আগের চালগুলোর মধ্যে যাতায়াত করতে পারবেন।
 
 You'll store the past `squares` arrays in another array called `history`, which you'll store as a new state variable. The `history` array represents all board states, from the first to the last move, and has a shape like this:
 
