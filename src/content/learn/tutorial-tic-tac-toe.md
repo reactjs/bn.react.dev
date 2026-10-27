@@ -1521,9 +1521,9 @@ body {
 
 </Sandpack>
 
-### Declaring a winner {/*declaring-a-winner*/}
+### বিজয়ী ঘোষণা করা {/*declaring-a-winner*/}
 
-Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
+এখন খেলোয়াড়রা পালাক্রমে চাল দিতে পারেন। কেউ জিতলে এবং আর কোনো চাল দেওয়া না গেলে তা দেখাতে হবে। এজন্য `calculateWinner` নামের একটি সহায়ক ফাংশন যোগ করবেন। এটি নয়টি ঘরের অ্যারে নিয়ে বিজয়ী পরীক্ষা করে প্রয়োজনমতো `'X'`, `'O'` বা `null` রিটার্ন করবে। ফাংশনটি নিয়ে খুব বেশি ভাবার দরকার নেই; এটি React-এর বিশেষ কিছু নয়:
 
 ```js src/App.js
 export default function Board() {
@@ -1553,7 +1553,7 @@ function calculateWinner(squares) {
 
 <Note>
 
-It does not matter whether you define `calculateWinner` before or after the `Board`. Let's put it at the end so that you don't have to scroll past it every time you edit your components.
+`calculateWinner`, `Board`-এর আগে নাকি পরে সংজ্ঞায়িত করছেন, তাতে কিছু যায় আসে না। শেষে রাখা যাক, যাতে প্রতিবার কম্পোনেন্ট সম্পাদনা করতে গিয়ে এটি পেরিয়ে স্ক্রল করতে না হয়।
 
 </Note>
 
