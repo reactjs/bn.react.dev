@@ -621,9 +621,9 @@ export default function Board() {
 
 এখন আবার সংখ্যার একটি গ্রিড দেখতে পাবেন:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![১ থেকে ৯ পর্যন্ত সংখ্যা লেখা টিক-ট্যাক-টো বোর্ড](../images/tutorial/number-filled-board.png)
 
-Your updated code should look like this:
+আপনার আপডেট করা কোড এমন হওয়ার কথা:
 
 <Sandpack>
 
@@ -702,9 +702,9 @@ body {
 
 </Sandpack>
 
-### Making an interactive component {/*making-an-interactive-component*/}
+### একটি ইন্টারঅ্যাক্টিভ কম্পোনেন্ট তৈরি করা {/*making-an-interactive-component*/}
 
-Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
+ক্লিক করলে `Square` কম্পোনেন্টটিতে একটি `X` বসানো যাক। `Square`-এর ভেতরে `handleClick` নামের একটি ফাংশন ডিক্লেয়ার করুন। তারপর `Square` থেকে রিটার্ন করা বাটনের JSX এলিমেন্টের props-এ `onClick` যোগ করুন:
 
 ```js {2-4,9}
 function Square({ value }) {
