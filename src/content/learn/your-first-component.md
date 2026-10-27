@@ -118,9 +118,9 @@ return (
 
 </Pitfall>
 
-## Using a component {/*using-a-component*/}
+## কম্পোনেন্ট ব্যবহার করা {/*using-a-component*/}
 
-Now that you've defined your `Profile` component, you can nest it inside other components. For example, you can export a `Gallery` component that uses multiple `Profile` components:
+`Profile` কম্পোনেন্ট লেখা হয়েছে। এখন অন্য কম্পোনেন্টের ভেতরে এটি রাখতে পারেন। যেমন, একাধিক `Profile` ব্যবহার করে একটি `Gallery` কম্পোনেন্ট এক্সপোর্ট করতে পারেন:
 
 <Sandpack>
 
@@ -152,14 +152,14 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-### What the browser sees {/*what-the-browser-sees*/}
+### ব্রাউজার কী দেখে {/*what-the-browser-sees*/}
 
-Notice the difference in casing:
+নামের প্রথম অক্ষরের পার্থক্য খেয়াল করুন:
 
-* `<section>` is lowercase, so React knows we refer to an HTML tag.
-* `<Profile />` starts with a capital `P`, so React knows that we want to use our component called `Profile`.
+* `<section>` ছোট হাতের অক্ষরে লেখা, তাই React বোঝে এটি HTML ট্যাগ।
+* `<Profile />` বড় হাতের `P` দিয়ে শুরু, তাই React বোঝে আমরা নিজের তৈরি `Profile` কম্পোনেন্ট ব্যবহার করতে চাই।
 
-And `Profile` contains even more HTML: `<img />`. In the end, this is what the browser sees:
+আর `Profile`-এর ভেতরেও HTML আছে: `<img />`। সব মিলিয়ে ব্রাউজার যা দেখে তা হলো:
 
 ```html
 <section>
