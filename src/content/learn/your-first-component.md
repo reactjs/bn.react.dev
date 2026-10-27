@@ -290,13 +290,13 @@ img { height: 181px; }
 
 </Solution>
 
-#### Fix the return statement {/*fix-the-return-statement*/}
+#### return statement ঠিক করুন {/*fix-the-return-statement*/}
 
-Something isn't right about this `return` statement. Can you fix it?
+এই `return` statement-এ কিছু একটা ভুল আছে। ঠিক করতে পারবেন?
 
 <Hint>
 
-You may get an "Unexpected token" error while trying to fix this. In that case, check that the semicolon appears *after* the closing parenthesis. Leaving a semicolon inside `return ( )` will cause an error.
+ঠিক করতে গিয়ে "Unexpected token" error পেতে পারেন। সেক্ষেত্রে সেমিকোলনটি বন্ধনী শেষ হওয়ার *পরে* আছে কি না দেখুন। `return ( )`-এর ভেতরে সেমিকোলন রাখলে error হবে।
 
 </Hint>
 
@@ -318,7 +318,7 @@ img { height: 180px; }
 
 <Solution>
 
-You can fix this component by moving the return statement to one line like so:
+`return` statement এক লাইনে এনে এভাবে কম্পোনেন্টটি ঠিক করতে পারেন:
 
 <Sandpack>
 
@@ -334,7 +334,7 @@ img { height: 180px; }
 
 </Sandpack>
 
-Or by wrapping the returned JSX markup in parentheses that open right after `return`:
+অথবা রিটার্ন করা JSX মার্কআপ বন্ধনী দিয়ে ঘিরে দিন। বন্ধনী শুরু হবে `return`-এর ঠিক পরে:
 
 <Sandpack>
 
