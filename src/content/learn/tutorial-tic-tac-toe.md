@@ -1326,11 +1326,11 @@ state এখন `Board`-এ থাকায়, প্যারেন্ট `Board`
 1. `handleClick` আর্গুমেন্টটি (`0`) ব্যবহার করে `squares` অ্যারের প্রথম এলিমেন্ট `null` থেকে `X` করে।
 1. `Board`-এর `squares` state আপডেট হয়, তাই `Board` ও তার সব চাইল্ড আবার রেন্ডার হয়। এতে `0` ইনডেক্সের `Square`-এর `value` prop `null` থেকে `X` হয়ে যায়।
 
-In the end the user sees that the upper left square has changed from empty to having an `X` after clicking it.
+শেষ পর্যন্ত ব্যবহারকারী দেখেন, ক্লিক করার পরে উপরের বাঁ দিকের ফাঁকা ঘরটিতে `X` বসেছে।
 
 <Note>
 
-The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. You could give any name to the `Square`'s `onSquareClick` prop or `Board`'s `handleClick` function, and the code would work the same. In React, it's conventional to use `onSomething` names for props which represent events and `handleSomething` for the function definitions which handle those events.
+DOM-এর `<button>` একটি বিল্ট-ইন কম্পোনেন্ট হওয়ায় এর `onClick` অ্যাট্রিবিউটের React-এ বিশেষ অর্থ আছে। `Square`-এর মতো নিজস্ব কম্পোনেন্টের ক্ষেত্রে নাম আপনার ইচ্ছাধীন। `Square`-এর `onSquareClick` prop বা `Board`-এর `handleClick` ফাংশনের যেকোনো নাম দিলেও কোড একইভাবে কাজ করবে। React-এ ইভেন্ট বোঝানো prop-এর জন্য `onSomething` এবং সেই ইভেন্ট সামলানো ফাংশনের জন্য `handleSomething` ধরনের নাম ব্যবহার করার প্রচলন আছে।
 
 </Note>
 
