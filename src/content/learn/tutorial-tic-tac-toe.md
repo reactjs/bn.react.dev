@@ -1067,9 +1067,9 @@ body {
 
 </Sandpack>
 
-Each Square will now receive a `value` prop that will either be `'X'`, `'O'`, or `null` for empty squares.
+এখন প্রতিটি `Square` একটি `value` prop পাবে, যার মান হবে `'X'`, `'O'` অথবা ফাঁকা ঘরের জন্য `null`।
 
-Next, you need to change what happens when a `Square` is clicked. The `Board` component now maintains which squares are filled. You'll need to create a way for the `Square` to update the `Board`'s state. Since state is private to a component that defines it, you cannot update the `Board`'s state directly from `Square`.
+এরপর `Square`-এ ক্লিক করলে কী ঘটবে তা বদলাতে হবে। কোন ঘরগুলো পূর্ণ, সেটি এখন `Board` রাখে। তাই `Square` থেকে `Board`-এর state আপডেট করার ব্যবস্থা লাগবে। state সেটি ডিক্লেয়ার করা কম্পোনেন্টের নিজস্ব হওয়ায়, `Square` থেকে সরাসরি `Board`-এর state আপডেট করা যায় না।
 
 Instead, you'll pass down a function from the `Board` component to the `Square` component, and you'll have `Square` call that function when a square is clicked. You'll start with the function that the `Square` component will call when it is clicked. You'll call that function `onSquareClick`:
 
