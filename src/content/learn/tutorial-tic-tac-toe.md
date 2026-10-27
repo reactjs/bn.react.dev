@@ -524,7 +524,7 @@ export default function Board() {
 }
 ```
 
-Then you'll update the Board component to render that `Square` component using JSX syntax:
+তারপর JSX সিনট্যাক্স দিয়ে সেই `Square` কম্পোনেন্ট রেন্ডার করার জন্য `Board` কম্পোনেন্টটি আপডেট করুন:
 
 ```js {5-19}
 // ...
@@ -551,7 +551,7 @@ export default function Board() {
 }
 ```
 
-Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter.
+খেয়াল করুন, ব্রাউজারের `div`-এর বিপরীতে আপনার নিজস্ব `Board` এবং `Square` কম্পোনেন্টের নাম বড় হাতের অক্ষর দিয়ে শুরু হতে হবে।
 
 Let's take a look:
 
