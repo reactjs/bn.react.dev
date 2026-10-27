@@ -579,9 +579,9 @@ function Square({ value }) {
 
 ওহ, আপনি তো এটি চাননি:
 
-![value-filled board](../images/tutorial/board-filled-with-value.png)
+![প্রতিটি ঘরে value লেখা বোর্ড](../images/tutorial/board-filled-with-value.png)
 
-You wanted to render the JavaScript variable called `value` from your component, not the word "value". To "escape into JavaScript" from JSX, you need curly braces. Add curly braces around `value` in JSX like so:
+আপনি কম্পোনেন্টের `value` নামের জাভাস্ক্রিপ্ট ভ্যারিয়েবলটি রেন্ডার করতে চেয়েছিলেন, "value" শব্দটি নয়। JSX থেকে জাভাস্ক্রিপ্ট ব্যবহার করতে কার্লি ব্রেস লাগে। JSX-এ `value`-এর চারপাশে এভাবে কার্লি ব্রেস যোগ করুন:
 
 ```js {2}
 function Square({ value }) {
@@ -589,7 +589,7 @@ function Square({ value }) {
 }
 ```
 
-For now, you should see an empty board:
+আপাতত একটি ফাঁকা বোর্ড দেখার কথা:
 
 ![empty board](../images/tutorial/empty-board.png)
 
