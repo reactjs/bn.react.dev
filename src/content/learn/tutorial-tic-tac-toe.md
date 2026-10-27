@@ -1375,7 +1375,7 @@ function Board() {
 }
 ```
 
-Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. You'll update the `Board`'s `handleClick` function to flip the value of `xIsNext`:
+প্রতিবার কোনো খেলোয়াড় চাল দিলে `xIsNext` boolean-এর মান উল্টে পরের খেলোয়াড় নির্ধারণ করা হবে এবং গেমের state সংরক্ষণ করা হবে। `xIsNext`-এর মান উল্টাতে `Board`-এর `handleClick` আপডেট করুন:
 
 ```js {7,8,9,10,11,13}
 export default function Board() {
@@ -1399,7 +1399,7 @@ export default function Board() {
 }
 ```
 
-Now, as you click on different squares, they will alternate between `X` and `O`, as they should!
+এখন বিভিন্ন ঘরে ক্লিক করলে প্রত্যাশামতো পালাক্রমে `X` ও `O` বসবে!
 
 But wait, there's a problem. Try clicking on the same square multiple times:
 
