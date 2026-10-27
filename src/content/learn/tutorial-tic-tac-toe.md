@@ -1828,7 +1828,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-Now replace the `setSquares` and `setXIsNext` calls in `handleClick` in the `Board` component with a single call to your new `onPlay` function so the `Game` component can update the `Board` when the user clicks a square:
+এখন `Board`-এর `handleClick`-এ `setSquares` ও `setXIsNext` কলের বদলে শুধু নতুন `onPlay` ফাংশনটি কল করুন। এতে ব্যবহারকারী ঘরে ক্লিক করলে `Game`, `Board` আপডেট করতে পারবে:
 
 ```js {12}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1848,7 +1848,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-The `Board` component is fully controlled by the props passed to it by the `Game` component. You need to implement the `handlePlay` function in the `Game` component to get the game working again.
+`Board` এখন `Game` থেকে পাওয়া props দিয়ে পুরোপুরি নিয়ন্ত্রিত। গেম আবার চালু করতে `Game`-এর `handlePlay` ফাংশনটি ইমপ্লিমেন্ট করতে হবে।
 
 What should `handlePlay` do when called? Remember that Board used to call `setSquares` with an updated array; now it passes the updated `squares` array to `onPlay`.
 
