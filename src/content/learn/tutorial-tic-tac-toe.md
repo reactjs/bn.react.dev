@@ -1334,11 +1334,11 @@ DOM-এর `<button>` একটি বিল্ট-ইন কম্পোনে�
 
 </Note>
 
-### Why immutability is important {/*why-immutability-is-important*/}
+### ইমিউটেবিলিটি কেন গুরুত্বপূর্ণ {/*why-immutability-is-important*/}
 
-Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
+খেয়াল করুন, `handleClick`-এ বিদ্যমান `squares` অ্যারে না বদলে `.slice()` কল করে একটি কপি তৈরি করছেন। এর কারণ বুঝতে ইমিউটেবিলিটি কী এবং কেন এটি শেখা গুরুত্বপূর্ণ, তা আলোচনা করতে হবে।
 
-There are generally two approaches to changing data. The first approach is to _mutate_ the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
+ডেটা পরিবর্তনের সাধারণত দুটি উপায় আছে। প্রথমটি হলো সরাসরি মান বদলে ডেটা *mutate* করা। দ্বিতীয়টি হলো প্রয়োজনীয় পরিবর্তনসহ নতুন কপি দিয়ে পুরোনো ডেটা প্রতিস্থাপন করা। `squares` অ্যারে mutate করলে তা এমন হবে:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
