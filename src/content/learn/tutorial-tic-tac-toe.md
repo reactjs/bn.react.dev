@@ -508,11 +508,11 @@ body {
 
 </Note>
 
-### Passing data through props {/*passing-data-through-props*/}
+### props দিয়ে ডেটা পাঠানো {/*passing-data-through-props*/}
 
-Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
+এরপর আপনি চাইবেন, ব্যবহারকারী কোনো ঘরে ক্লিক করলে সেটির মান ফাঁকা থেকে "X" হয়ে যাক। বোর্ডটি এখন যেভাবে তৈরি করেছেন, তাতে ঘর আপডেটের কোড নয়বার কপি-পেস্ট করতে হবে—প্রতিটি ঘরের জন্য একবার! React-এর কম্পোনেন্ট কাঠামো আপনাকে পুনর্ব্যবহারযোগ্য কম্পোনেন্ট তৈরি করতে দেয়, যাতে এমন অগোছালো ও পুনরাবৃত্ত কোড এড়ানো যায়।
 
-First, you are going to copy the line defining your first square (`<button className="square">1</button>`) from your `Board` component into a new `Square` component:
+প্রথমে, `Board` কম্পোনেন্ট থেকে প্রথম ঘরটি সংজ্ঞায়িত করা লাইনটি (`<button className="square">1</button>`) কপি করে নতুন একটি `Square` কম্পোনেন্টে রাখুন:
 
 ```js {1-3}
 function Square() {
