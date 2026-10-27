@@ -415,11 +415,11 @@ export default function Square() {
 }
 ```
 
-The CSS defined in `styles.css` styles the divs with the `className` of `board-row`. Now that you've grouped your components into rows with the styled `div`s you have your tic-tac-toe board:
+`styles.css`-এ সংজ্ঞায়িত CSS, `board-row` `className`-যুক্ত div-গুলোতে স্টাইল প্রয়োগ করে। স্টাইল করা `div` দিয়ে কম্পোনেন্টগুলোকে সারিতে সাজানোর ফলে এখন আপনার টিক-ট্যাক-টো বোর্ড তৈরি হয়েছে:
 
-![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
+![১ থেকে ৯ পর্যন্ত সংখ্যা লেখা টিক-ট্যাক-টো বোর্ড](../images/tutorial/number-filled-board.png)
 
-But you now have a problem. Your component named `Square`, really isn't a square anymore. Let's fix that by changing the name to `Board`:
+তবে এখন একটি সমস্যা হয়েছে। আপনার `Square` নামের কম্পোনেন্টটি আসলে আর একটি ঘর নয়। নামটি `Board` করে সমস্যাটি ঠিক করা যাক:
 
 ```js {1}
 export default function Board() {
