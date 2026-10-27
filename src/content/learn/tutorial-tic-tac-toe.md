@@ -803,7 +803,7 @@ function Square() {
 
 প্রতিটি `Square`-এর নিজস্ব state আছে: একেকটি ঘরে রাখা `value` অন্য ঘরগুলোর মান থেকে সম্পূর্ণ স্বাধীন। কোনো কম্পোনেন্টে `set` ফাংশন কল করলে React তার ভেতরের চাইল্ড কম্পোনেন্টগুলোও স্বয়ংক্রিয়ভাবে আপডেট করে।
 
-After you've made the above changes, your code will look like this:
+উপরের পরিবর্তনগুলোর পরে কোড এমন হবে:
 
 <Sandpack>
 
@@ -899,7 +899,7 @@ body {
 
 ### React Developer Tools {/*react-developer-tools*/}
 
-React Developer Tools let you check the props and the state of your React components. It is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension.
+React Developer Tools দিয়ে আপনার React কম্পোনেন্টের props ও state পরীক্ষা করতে পারেন। এটি [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) এবং [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)-এর ব্রাউজার এক্সটেনশন হিসেবে পাওয়া যায়।
 
 After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
 
