@@ -1346,7 +1346,7 @@ squares[0] = 'X';
 // Now `squares` is ["X", null, null, null, null, null, null, null, null];
 ```
 
-And here is what it would look like if you changed data without mutating the `squares` array:
+আর `squares` অ্যারে mutate না করে ডেটা বদলালে এমন হবে:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
@@ -1354,7 +1354,7 @@ const nextSquares = ['X', null, null, null, null, null, null, null, null];
 // Now `squares` is unchanged, but `nextSquares` first element is 'X' rather than `null`
 ```
 
-The result is the same but by not mutating (changing the underlying data) directly, you gain several benefits.
+ফলাফল একই, তবে সরাসরি মূল ডেটা পরিবর্তন না করায় বেশ কিছু সুবিধা পাওয়া যায়।
 
 Immutability makes complex features much easier to implement. Later in this tutorial, you will implement a "time travel" feature that lets you review the game's history and "jump back" to past moves. This functionality isn't specific to games--an ability to undo and redo certain actions is a common requirement for apps. Avoiding direct data mutation lets you keep previous versions of the data intact, and reuse them later.
 
