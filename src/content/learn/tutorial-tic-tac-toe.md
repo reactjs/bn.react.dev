@@ -723,11 +723,11 @@ function Square({ value }) {
 }
 ```
 
-If you click on a square now, you should see a log saying `"clicked!"` in the _Console_ tab at the bottom of the _Browser_ section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
+এখন কোনো ঘরে ক্লিক করলে CodeSandbox-এর _Browser_ সেকশনের নিচে _Console_ ট্যাবে `"clicked!"` লেখা একটি লগ দেখার কথা। একাধিকবার ক্লিক করলে আবার `"clicked!"` লগ হবে। একই বার্তার পুনরাবৃত্ত লগ কনসোলে নতুন লাইন তৈরি করে না। তার বদলে প্রথম `"clicked!"` লগের পাশে একটি সংখ্যা বাড়তে দেখবেন।
 
 <Note>
 
-If you are following this tutorial using your local development environment, you need to open your browser's Console. For example, if you use the Chrome browser, you can view the Console with the keyboard shortcut **Shift + Ctrl + J** (on Windows/Linux) or **Option + ⌘ + J** (on macOS).
+নিজের লোকাল ডেভেলপমেন্ট পরিবেশে এই টিউটোরিয়াল অনুসরণ করলে ব্রাউজারের Console খুলতে হবে। যেমন, Chrome-এ **Shift + Ctrl + J** (Windows/Linux) বা **Option + ⌘ + J** (macOS) কিবোর্ড শর্টকাট দিয়ে Console দেখতে পারেন।
 
 </Note>
 
