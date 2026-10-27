@@ -1156,13 +1156,13 @@ export default function Board() {
 }
 ```
 
-Next, you will need to pass that `i` to `handleClick`. You could try to set the `onSquareClick` prop of square to be `handleClick(0)` directly in the JSX like this, but it won't work:
+এরপর ওই `i` মানটি `handleClick`-এ পাস করতে হবে। JSX-এ সরাসরি এভাবে `onSquareClick` prop-এর মান `handleClick(0)` দেওয়ার চেষ্টা করতে পারেন, তবে এটি কাজ করবে না:
 
 ```jsx
 <Square value={squares[0]} onSquareClick={handleClick(0)} />
 ```
 
-Here is why this doesn't work. The `handleClick(0)` call will be a part of rendering the board component. Because `handleClick(0)` alters the state of the board component by calling `setSquares`, your entire board component will be re-rendered again. But this runs `handleClick(0)` again, leading to an infinite loop:
+কেন কাজ করবে না দেখা যাক। বোর্ড রেন্ডার করার সময়ই `handleClick(0)` কলটি চলবে। এটি `setSquares` কল করে বোর্ডের state বদলায় বলে পুরো বোর্ড আবার রেন্ডার হবে। কিন্তু তখন আবার `handleClick(0)` চলবে, ফলে একটি অসীম লুপ তৈরি হবে:
 
 <ConsoleBlock level="error">
 
