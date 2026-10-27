@@ -2022,9 +2022,9 @@ body {
 
 টিক-ট্যাক-টো গেমের ইতিহাস সংরক্ষণ করছেন বলে এখন খেলোয়াড়কে আগের চালগুলোর তালিকা দেখাতে পারেন।
 
-React elements like `<button>` are regular JavaScript objects; you can pass them around in your application. To render multiple items in React, you can use an array of React elements.
+`<button>`-এর মতো React এলিমেন্ট সাধারণ জাভাস্ক্রিপ্ট অবজেক্ট; অ্যাপ্লিকেশনের বিভিন্ন জায়গায় এগুলো পাস করতে পারেন। React-এ একাধিক আইটেম রেন্ডার করতে React এলিমেন্টের অ্যারে ব্যবহার করতে পারেন।
 
-You already have an array of `history` moves in state, so now you need to transform it to an array of React elements. In JavaScript, to transform one array into another, you can use the [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+চালের `history` অ্যারে ইতিমধ্যে state-এ আছে। এখন সেটিকে React এলিমেন্টের অ্যারেতে রূপান্তর করতে হবে। জাভাস্ক্রিপ্টে একটি অ্যারেকে অন্যটিতে রূপান্তর করতে [অ্যারের `map` মেথড](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ব্যবহার করা যায়:
 
 ```jsx
 [1, 2, 3].map((x) => x * 2) // [2, 4, 6]
