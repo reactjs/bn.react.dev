@@ -1796,7 +1796,7 @@ export default function Game() {
   // ...
 ```
 
-Next, create a `handlePlay` function inside the `Game` component that will be called by the `Board` component to update the game. Pass `xIsNext`, `currentSquares` and `handlePlay` as props to the `Board` component:
+এরপর `Game`-এ `handlePlay` ফাংশন তৈরি করুন, যা গেম আপডেট করতে `Board` কল করবে। `xIsNext`, `currentSquares` এবং `handlePlay`, props হিসেবে `Board`-এ পাঠান:
 
 ```js {6-8,13}
 export default function Game() {
@@ -1817,7 +1817,7 @@ export default function Game() {
 }
 ```
 
-Let's make the `Board` component fully controlled by the props it receives. Change the `Board` component to take three props: `xIsNext`, `squares`, and a new `onPlay` function that `Board` can call with the updated squares array when a player makes a move. Next, remove the first two lines of the `Board` function that call `useState`:
+`Board`-কে পুরোপুরি তার পাওয়া props দিয়ে নিয়ন্ত্রণ করা যাক। এটিকে তিনটি prop নিতে দিন: `xIsNext`, `squares` এবং নতুন `onPlay` ফাংশন। খেলোয়াড় চাল দিলে `Board` আপডেট করা ঘরের অ্যারে দিয়ে `onPlay` কল করবে। তারপর `Board`-এর শুরুতে `useState` কল করা দুটি লাইন সরান:
 
 ```js {1}
 function Board({ xIsNext, squares, onPlay }) {
