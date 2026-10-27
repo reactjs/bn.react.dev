@@ -1128,9 +1128,9 @@ export default function Board() {
 }
 ```
 
-The `handleClick` function creates a copy of the `squares` array (`nextSquares`) with the JavaScript `slice()` Array method. Then, `handleClick` updates the `nextSquares` array to add `X` to the first (`[0]` index) square.
+`handleClick` জাভাস্ক্রিপ্ট অ্যারের `slice()` মেথড দিয়ে `squares`-এর একটি কপি (`nextSquares`) তৈরি করে। তারপর `nextSquares` আপডেট করে প্রথম ঘরে (`[0]` ইনডেক্সে) `X` যোগ করে।
 
-Calling the `setSquares` function lets React know the state of the component has changed. This will trigger a re-render of the components that use the `squares` state (`Board`) as well as its child components (the `Square` components that make up the board).
+`setSquares` কল করলে React জানতে পারে কম্পোনেন্টের state বদলেছে। এতে `squares` state ব্যবহার করা কম্পোনেন্ট (`Board`) এবং তার চাইল্ড কম্পোনেন্টগুলো (বোর্ডের `Square`-গুলো) আবার রেন্ডার হয়।
 
 <Note>
 
