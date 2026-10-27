@@ -1360,11 +1360,11 @@ const nextSquares = ['X', null, null, null, null, null, null, null, null];
 
 ইমিউটেবিলিটির আরেকটি সুবিধাও আছে। ডিফল্টভাবে প্যারেন্টের state বদলালে সব চাইল্ড কম্পোনেন্ট স্বয়ংক্রিয়ভাবে আবার রেন্ডার হয়, এমনকি পরিবর্তনের প্রভাব না পড়া চাইল্ডগুলোও। রি-রেন্ডার নিজে সাধারণত ব্যবহারকারীর চোখে পড়ে না (তাই সবসময় এটি এড়ানোর চেষ্টা করার দরকার নেই!)। তবে পারফরম্যান্সের জন্য ট্রির প্রভাবিত হয়নি এমন অংশের রি-রেন্ডার এড়াতে চাইতে পারেন। ইমিউটেবিলিটি থাকলে ডেটা বদলেছে কি না তুলনা করা কম্পোনেন্টের জন্য খুব সহজ হয়। React কখন কোনো কম্পোনেন্ট আবার রেন্ডার করবে তা কীভাবে ঠিক করে, সে বিষয়ে [ `memo` API রেফারেন্সে](/reference/react/memo) আরও জানতে পারেন।
 
-### Taking turns {/*taking-turns*/}
+### পালাক্রমে চাল দেওয়া {/*taking-turns*/}
 
-It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
+এবার গেমের একটি বড় সমস্যা ঠিক করার সময়: বোর্ডে "O" বসানো যাচ্ছে না।
 
-You'll set the first move to be "X" by default. Let's keep track of this by adding another piece of state to the Board component:
+ডিফল্টভাবে প্রথম চালটি হবে "X"। এটি মনে রাখতে `Board`-এ আরেকটি state যোগ করা যাক:
 
 ```js {2}
 function Board() {
