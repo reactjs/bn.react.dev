@@ -1095,7 +1095,7 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
-Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component:
+এখন `onSquareClick` prop-কে `Board`-এর একটি ফাংশনের সাথে যুক্ত করবেন, যার নাম হবে `handleClick`। এজন্য প্রথম `Square` কম্পোনেন্টের `onSquareClick` prop-এ একটি ফাংশন পাস করুন:
 
 ```js {7}
 export default function Board() {
@@ -1110,7 +1110,7 @@ export default function Board() {
 }
 ```
 
-Lastly, you will define the `handleClick` function inside the Board component to update the `squares` array holding your board's state:
+সবশেষে বোর্ডের state রাখা `squares` অ্যারে আপডেট করতে `Board`-এর ভেতরে `handleClick` ফাংশনটি সংজ্ঞায়িত করুন:
 
 ```js {4-8}
 export default function Board() {
