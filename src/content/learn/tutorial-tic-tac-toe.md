@@ -918,11 +918,11 @@ React Developer Tools দিয়ে আপনার React কম্পোনে�
 
 এতক্ষণে আপনার টিক-ট্যাক-টো গেমের মৌলিক অংশগুলো তৈরি হয়েছে। গেমটি সম্পূর্ণ করতে এখন বোর্ডে পালাক্রমে "X" ও "O" বসাতে হবে এবং বিজয়ী নির্ধারণের ব্যবস্থা করতে হবে।
 
-### Lifting state up {/*lifting-state-up*/}
+### state উপরে তুলে নেওয়া {/*lifting-state-up*/}
 
-Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
+এখন প্রতিটি `Square` কম্পোনেন্ট গেমের state-এর একটি অংশ রাখে। টিক-ট্যাক-টো গেমে বিজয়ী নির্ধারণ করতে `Board`-কে কোনোভাবে নয়টি `Square` কম্পোনেন্টের প্রতিটির state জানতে হবে।
 
-How would you approach that? At first, you might guess that the `Board` needs to "ask" each `Square` for that `Square`'s state. Although this approach is technically possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game's state in the parent `Board` component instead of in each `Square`. The `Board` component can tell each `Square` what to display by passing a prop, like you did when you passed a number to each Square.
+এটি কীভাবে করবেন? প্রথমে মনে হতে পারে, `Board` প্রতিটি `Square`-কে তার state জিজ্ঞেস করবে। React-এ এটি সম্ভব হলেও আমরা নিরুৎসাহিত করি, কারণ এতে কোড বোঝা ও রিফ্যাক্টর করা কঠিন হয় এবং বাগের ঝুঁকি বাড়ে। সবচেয়ে ভালো উপায় হলো প্রতিটি `Square`-এ না রেখে প্যারেন্ট `Board` কম্পোনেন্টে গেমের state রাখা। আগে প্রতিটি ঘরে সংখ্যা পাঠানোর মতোই, `Board` prop পাস করে প্রতিটি `Square`-কে বলতে পারে কী দেখাতে হবে।
 
 **To collect data from multiple children, or to have two child components communicate with each other, declare the shared state in their parent component instead. The parent component can pass that state back down to the children via props. This keeps the child components in sync with each other and with their parent.**
 
