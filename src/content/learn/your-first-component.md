@@ -170,15 +170,15 @@ img { margin: 0 10px 10px 0; height: 90px; }
 </section>
 ```
 
-### Nesting and organizing components {/*nesting-and-organizing-components*/}
+### কম্পোনেন্ট সাজানো এবং একটির ভেতরে আরেকটি রাখা {/*nesting-and-organizing-components*/}
 
-Components are regular JavaScript functions, so you can keep multiple components in the same file. This is convenient when components are relatively small or tightly related to each other. If this file gets crowded, you can always move `Profile` to a separate file. You will learn how to do this shortly on the [page about imports.](/learn/importing-and-exporting-components)
+কম্পোনেন্ট সাধারণ জাভাস্ক্রিপ্ট ফাংশন, তাই একই ফাইলে একাধিক কম্পোনেন্ট রাখতে পারেন। কম্পোনেন্টগুলো ছোট হলে বা একে অন্যের সাথে ঘনিষ্ঠভাবে সম্পর্কিত হলে এটি সুবিধাজনক। ফাইলে ভিড় বেড়ে গেলে `Profile` আলাদা ফাইলে সরিয়ে নিতে পারেন। কীভাবে করবেন তা শিগগিরই [ইম্পোর্টের পেইজে](/learn/importing-and-exporting-components) শিখবেন।
 
-Because the `Profile` components are rendered inside `Gallery`—even several times!—we can say that `Gallery` is a **parent component,** rendering each `Profile` as a "child". This is part of the magic of React: you can define a component once, and then use it in as many places and as many times as you like.
+`Profile` কম্পোনেন্টগুলো `Gallery`-র ভেতরে রেন্ডার হয়, এমনকি একাধিকবারও! তাই `Gallery`-কে **প্যারেন্ট কম্পোনেন্ট** বলা যায়, যা প্রতিটি `Profile`-কে চাইল্ড হিসেবে রেন্ডার করে। React-এর মজার বিষয়ই এটি: একবার কম্পোনেন্ট লিখে যত জায়গায়, যতবার খুশি ব্যবহার করতে পারেন।
 
 <Pitfall>
 
-Components can render other components, but **you must never nest their definitions:**
+কম্পোনেন্ট অন্য কম্পোনেন্ট রেন্ডার করতে পারে, কিন্তু **একটি কম্পোনেন্টের ফাংশনের ভেতরে আরেকটি কম্পোনেন্টের ফাংশন কখনো লিখবেন না:**
 
 ```js {2-5}
 export default function Gallery() {
@@ -190,7 +190,7 @@ export default function Gallery() {
 }
 ```
 
-The snippet above is [very slow and causes bugs.](/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state) Instead, define every component at the top level:
+উপরের কোড [খুব ধীর এবং বাগ তৈরি করে।](/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state) তার বদলে প্রতিটি কম্পোনেন্ট টপ লেভেলে লিখুন:
 
 ```js {5-8}
 export default function Gallery() {
