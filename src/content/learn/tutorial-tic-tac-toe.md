@@ -1850,9 +1850,9 @@ function Board({ xIsNext, squares, onPlay }) {
 
 `Board` এখন `Game` থেকে পাওয়া props দিয়ে পুরোপুরি নিয়ন্ত্রিত। গেম আবার চালু করতে `Game`-এর `handlePlay` ফাংশনটি ইমপ্লিমেন্ট করতে হবে।
 
-What should `handlePlay` do when called? Remember that Board used to call `setSquares` with an updated array; now it passes the updated `squares` array to `onPlay`.
+`handlePlay` কল হলে কী করবে? মনে করুন, আগে `Board` আপডেট করা অ্যারে দিয়ে `setSquares` কল করত; এখন আপডেট করা `squares` অ্যারে `onPlay`-এ পাঠায়।
 
-The `handlePlay` function needs to update `Game`'s state to trigger a re-render, but you don't have a `setSquares` function that you can call any more--you're now using the `history` state variable to store this information. You'll want to update `history` by appending the updated `squares` array as a new history entry. You also want to toggle `xIsNext`, just as Board used to do:
+রি-রেন্ডার ঘটাতে `handlePlay`-কে `Game`-এর state আপডেট করতে হবে। তবে এখন আর `setSquares` নেই—এই তথ্য রাখতে `history` state ব্যবহার করছেন। আপডেট করা `squares` অ্যারেটি নতুন এন্ট্রি হিসেবে শেষে যোগ করে `history` আপডেট করবেন। আগে `Board` যেমন করত, তেমনি `xIsNext`-এর মানও উল্টাবেন:
 
 ```js {4-5}
 export default function Game() {
