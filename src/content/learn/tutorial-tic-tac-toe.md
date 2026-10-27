@@ -924,9 +924,9 @@ React Developer Tools দিয়ে আপনার React কম্পোনে�
 
 এটি কীভাবে করবেন? প্রথমে মনে হতে পারে, `Board` প্রতিটি `Square`-কে তার state জিজ্ঞেস করবে। React-এ এটি সম্ভব হলেও আমরা নিরুৎসাহিত করি, কারণ এতে কোড বোঝা ও রিফ্যাক্টর করা কঠিন হয় এবং বাগের ঝুঁকি বাড়ে। সবচেয়ে ভালো উপায় হলো প্রতিটি `Square`-এ না রেখে প্যারেন্ট `Board` কম্পোনেন্টে গেমের state রাখা। আগে প্রতিটি ঘরে সংখ্যা পাঠানোর মতোই, `Board` prop পাস করে প্রতিটি `Square`-কে বলতে পারে কী দেখাতে হবে।
 
-**To collect data from multiple children, or to have two child components communicate with each other, declare the shared state in their parent component instead. The parent component can pass that state back down to the children via props. This keeps the child components in sync with each other and with their parent.**
+**একাধিক চাইল্ড থেকে ডেটা সংগ্রহ করতে বা দুটি চাইল্ড কম্পোনেন্টের মধ্যে যোগাযোগ করাতে, তাদের ভাগ করা state প্যারেন্ট কম্পোনেন্টে ডিক্লেয়ার করুন। প্যারেন্ট সেই state props দিয়ে চাইল্ডদের কাছে পাঠাতে পারে। এতে চাইল্ড কম্পোনেন্টগুলো নিজেদের মধ্যে এবং প্যারেন্টের সাথে সিঙ্কে থাকে।**
 
-Lifting state into a parent component is common when React components are refactored.
+React কম্পোনেন্ট রিফ্যাক্টর করার সময় প্যারেন্ট কম্পোনেন্টে state তুলে নেওয়া খুবই সাধারণ ব্যাপার।
 
 Let's take this opportunity to try it out. Edit the `Board` component so that it declares a state variable named `squares` that defaults to an array of 9 nulls corresponding to the 9 squares:
 
