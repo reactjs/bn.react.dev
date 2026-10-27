@@ -4,7 +4,7 @@ title: UI এর বর্ণনা
 
 <Intro>
 
-React একটা জাভাস্ক্রিপ্ট লাইব্রেরি যার কাজ user interfaces (UI) রেন্ডার করা। UI বিভিন্ন ক্ষুদ্র একক যেমন বাটন, টেক্সট বা ছবির মাধ্যমে গড়ে ওঠে। React আপনাকে সুযোগ দেয় সেগুলোকে reusable, nestable *কম্পোনেন্টে* একত্রিত করার। ওয়েবসাইট হোক বা ফোনের অ্যাপ, যা কিছু আপনি স্ক্রিনে দেখতে পান, সব কিছুই কম্পোনেন্টে ভেঙে ফেলা সম্ভব। এই অধ্যায়ে, আপনি React কম্পোনেন্ট বানানো, পরিবর্তন করা এবং লজিকের উপর ভিত্তি করে প্রদর্শন করা শিখবেন। 
+React একটা জাভাস্ক্রিপ্ট লাইব্রেরি যার কাজ user interfaces (UI) রেন্ডার করা। UI বিভিন্ন ক্ষুদ্র একক যেমন বাটন, টেক্সট বা ছবির মাধ্যমে গড়ে ওঠে। React আপনাকে সুযোগ দেয় সেগুলোকে reusable, nestable *কম্পোনেন্টে* একত্রিত করার। ওয়েবসাইট হোক বা ফোনের অ্যাপ, যা কিছু আপনি স্ক্রিনে দেখতে পান, সব কিছুই কম্পোনেন্টে ভেঙে ফেলা সম্ভব। এই অধ্যায়ে, আপনি React কম্পোনেন্ট বানানো, পরিবর্তন করা এবং লজিকের উপর ভিত্তি করে প্রদর্শন করা শিখবেন।
 
 </Intro>
 
@@ -32,7 +32,7 @@ React অ্যাপ্লিকেশনগুলো UI এর পৃথক �
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -58,7 +58,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <LearnMore path="/learn/your-first-component">
 
-কীভাবে React কম্পোনেন্ট ডিক্লেয়ার এবং ব্যবহার করবেন তা জানতে পড়ুন **[আপনার প্রথম কম্পোনেন্ট।](/learn/your-first-component)** 
+কীভাবে React কম্পোনেন্ট ডিক্লেয়ার এবং ব্যবহার করবেন তা জানতে পড়ুন **[আপনার প্রথম কম্পোনেন্ট।](/learn/your-first-component)**
 
 </LearnMore>
 
@@ -98,7 +98,7 @@ export default function Gallery() {
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -131,7 +131,7 @@ export default function TodoList() {
     // This doesn't quite work!
     <h1>Hedy Lamarr's Todos</h1>
     <img
-      src="https://i.imgur.com/yXOvdOSs.jpg"
+      src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
       alt="Hedy Lamarr"
       class="photo"
     >
@@ -160,7 +160,7 @@ export default function TodoList() {
     <>
       <h1>Hedy Lamarr's Todos</h1>
       <img
-        src="https://i.imgur.com/yXOvdOSs.jpg"
+        src="https://react.dev/images/docs/scientists/yXOvdOSs.jpg"
         alt="Hedy Lamarr"
         className="photo"
       />
@@ -182,7 +182,7 @@ img { height: 90px; }
 
 <LearnMore path="/learn/writing-markup-with-jsx">
 
-কীভাবে সঠিকভাবে JSX লিখবেন জানার জন্য পড়ুন **[JSX দিয়ে মার্কাপ লেখা।](/learn/writing-markup-with-jsx)** 
+কীভাবে সঠিকভাবে JSX লিখবেন জানার জন্য পড়ুন **[JSX দিয়ে মার্কাপ লেখা।](/learn/writing-markup-with-jsx)**
 
 </LearnMore>
 
@@ -207,7 +207,7 @@ export default function TodoList() {
       <h1>{person.name}'s Todos</h1>
       <img
         className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
+        src="https://react.dev/images/docs/scientists/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
@@ -282,7 +282,7 @@ function Card({ children }) {
 ```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -435,7 +435,7 @@ export const people = [{
 ```js src/utils.js
 export function getImageUrl(person) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     's.jpg'
   );

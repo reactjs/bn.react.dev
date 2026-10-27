@@ -669,7 +669,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন। 
+পরবর্তী ধাপে, আপনি prop পাঠানো মুছে ফেলবেন।
 
 ### ধাপ ৩: ট্রি এর যেকোনো জায়গায় context ব্যবহার করুন {/*step-3-use-context-anywhere-in-the-tree*/}
 
@@ -801,7 +801,7 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
-        }); 
+        });
       }}>Add</button>
     </>
   );
@@ -1025,7 +1025,7 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
-        }); 
+        });
       }}>Add</button>
     </>
   );
@@ -1244,7 +1244,7 @@ export default function AddTask() {
           type: 'added',
           id: nextId++,
           text: text,
-        }); 
+        });
       }}>Add</button>
     </>
   );

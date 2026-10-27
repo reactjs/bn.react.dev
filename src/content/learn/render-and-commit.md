@@ -54,7 +54,7 @@ root.render(<Image />);
 export default function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -103,7 +103,7 @@ export default function Gallery() {
 function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -124,8 +124,8 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **প্রাথমিক রেন্ডারের সময়,** React `<section>`, `<h1>`, এবং তিনটি `<img>` ট্যাগের জন্য [DOM নোডগুলো তৈরি করবে](https://developer.mozilla.org/docs/Web/API/Document/createElement)। 
-* **রি-রেন্ডারের সময়,** React পূর্ববর্তী রেন্ডার আর বর্তমান রেন্ডারের মধ্যবর্তী পরিবর্তন ক্যালকুলেট করবে। কিন্তু কমিট ধাপের আগ পর্যন্ত React এই তথ্য দিয়ে কিছুই করবে না।
+* **প্রাথমিক রেন্ডারের সময়,** React `<section>`, `<h1>`, এবং তিনটি `<img>` ট্যাগের জন্য [DOM নোডগুলো তৈরি করবে](https://developer.mozilla.org/docs/Web/API/Document/createElement)।
+* **রি-রেন্ডারের সময়,** React আগের রেন্ডারের পর থেকে এই নোডগুলোর কোন কোন প্রপার্টি পরিবর্তিত হয়েছে, আদৌ হয়েছে কি না, তা ক্যালকুলেট করবে। কিন্তু কমিট ধাপের আগ পর্যন্ত React এই তথ্য দিয়ে কিছুই করবে না।
 
 <Pitfall>
 
@@ -150,7 +150,7 @@ img { margin: 0 10px 10px 0; }
 
 কম্পোনেন্টগুলো রেন্ডার(কল) করার পর React DOM-কে পরিবর্তন করবে।
 
-* **প্রাথমিক রেন্ডারের জন্য,** [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API ব্যবহার করে React সমস্ত DOM নোডগুলো স্ক্রীনে দেখাবে। 
+* **প্রাথমিক রেন্ডারের জন্য,** [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API ব্যবহার করে React সমস্ত DOM নোডগুলো স্ক্রীনে দেখাবে।
 * **রি-রেন্ডারের জন্য,** DOM-কে সাম্প্রতিক রেন্ডারিং আউটপুটের সাথে মেলানোর জন্য React রেন্ডারিং-ধাপে ক্যালকুলেট করা পরিবর্তনগুলো ন্যূনতম দরকারি অপারেশনে সম্পন্ন করবে।
 
 **React শুধুমাত্র পাশাপাশি দুটি রেন্ডারের মধ্যে পার্থক্য থাকলেই DOM নোডগুলো উপডেট করে।** উদাহরণস্বরূপ, এখানে একটি কম্পোনেন্ট দেওয়া হলো যা প্রতি সেকেন্ডে নতুন props নিয়ে রি-রেন্ডার হয়। লক্ষ্য করুন কীভাবে `<input>` এ কিছু টেক্সট লিখে তার `value` পরিবর্তন করলেও রি-রেন্ডারে তা হারিয়ে যায় নাঃ

@@ -4,7 +4,7 @@ title: কম্পোনেন্ট ইম্পোর্ট এবং এক�
 
 <Intro>
 
-কম্পোনেন্ট ব্যাবহারের যাদু রয়েছে এদের পুনঃব্যবহারযোগ্যতার মধ্যেঃ আপনি এমন কম্পোনেন্ট তৈরি করতে পারেন যা অন্যান্য কম্পোনেন্ট এর সমন্বয়ে গঠিত। কিন্তু আপনি যখন কম্পোনেন্ট এর ভিতর কম্পোনেন্ট নেস্ট করা শুরু করবেন, তখন সেগুলিকে নিজস্ব ফাইল এ বিভক্ত করা ই শ্রেয়। এতে করে আপনার ফাইল গুলোকে সহজে স্ক্যান এবং অন্যান্য স্থানে পুনঃব্যবহার করতে পারবেন। 
+কম্পোনেন্ট ব্যাবহারের যাদু রয়েছে এদের পুনঃব্যবহারযোগ্যতার মধ্যেঃ আপনি এমন কম্পোনেন্ট তৈরি করতে পারেন যা অন্যান্য কম্পোনেন্ট এর সমন্বয়ে গঠিত। কিন্তু আপনি যখন কম্পোনেন্ট এর ভিতর কম্পোনেন্ট নেস্ট করা শুরু করবেন, তখন সেগুলিকে নিজস্ব ফাইল এ বিভক্ত করা ই শ্রেয়। এতে করে আপনার ফাইল গুলোকে সহজে স্ক্যান এবং অন্যান্য স্থানে পুনঃব্যবহার করতে পারবেন।
 
 </Intro>
 
@@ -28,7 +28,7 @@ title: কম্পোনেন্ট ইম্পোর্ট এবং এক�
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
+      src="https://react.dev/images/docs/scientists/MK3eW3As.jpg"
       alt="Katherine Johnson"
     />
   );
@@ -80,7 +80,7 @@ export default function App() {
 function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -109,7 +109,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 - `Gallery.js`:
      - এখানে `Profile` কম্পোনেন্ট একটি ফাংশন যা একই ফাইলের মধ্যে ব্যবহার করা হয় এবং এটি এক্সপোর্ট করা হয় নি।
      - `Gallery` কম্পোনেন্টটি **ডিফল্ট এক্সপোর্ট** হিসেবে এক্সপোর্ট করা হয়েছে।
-     
+
 - `App.js`:
      - `Gallery` কম্পোনেন্টটি **ডিফল্ট ইম্পোর্ট** হিসেবে `Gallery.js` থেকে ইম্পোর্ট করা হয়েছে।
      - রুট `App` কম্পোনেন্টটি **ডিফল্ট এক্সপোর্ট** হিসেবে এক্সপোর্ট করা হয়েছে।
@@ -118,7 +118,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 হয়তো আপনি এমন ইম্পোর্ট দেখেছেন যেখানে `.js` ফাইল এক্সটেনশন ব্যবহার করা হয় নি যেমনঃ
 
-```js 
+```js
 import Gallery from './Gallery';
 ```
 
@@ -198,7 +198,7 @@ export default function App() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -262,7 +262,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Hint>
 
-আপনার কম্পোনেন্ট টি যেখানে ব্যবহার করা হয়েছে সেখানে সেটি ইম্পোর্ট করতে ভুলবেন না। `Gallery` ও তো `Profile` কে ব্যবহার করছে, তাই না? 
+আপনার কম্পোনেন্ট টি যেখানে ব্যবহার করা হয়েছে সেখানে সেটি ইম্পোর্ট করতে ভুলবেন না। `Gallery` ও তো `Profile` কে ব্যবহার করছে, তাই না?
 
 </Hint>
 
@@ -286,7 +286,7 @@ export default function App() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -317,7 +317,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Solution>
 
-নেমড এক্সপোর্ট ব্যাবহার করে সমাধানঃ 
+নেমড এক্সপোর্ট ব্যাবহার করে সমাধানঃ
 
 <Sandpack>
 
@@ -354,7 +354,7 @@ export default function Gallery() {
 export function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );
@@ -367,7 +367,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-ডিফল্ট এক্সপোর্ট ব্যাবহার করে সমাধানঃ 
+ডিফল্ট এক্সপোর্ট ব্যাবহার করে সমাধানঃ
 
 <Sandpack>
 
@@ -404,7 +404,7 @@ export default function Gallery() {
 export default function Profile() {
   return (
     <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
+      src="https://react.dev/images/docs/scientists/QIrZWGIs.jpg"
       alt="Alan L. Hart"
     />
   );

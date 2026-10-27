@@ -36,7 +36,7 @@ import { hydrate } from 'react-dom';
 hydrate(reactNode, domNode);
 ```
 
-React `domNode` DOM নোডে থাকা HTML এর সাথে যুক্ত হবে, এবং এর ভেতরের DOM ম্যানেজ করার দায়িত্ব গ্রহণ করবে। সম্পূর্ণরূপে React দিয়ে তৈরি একটি অ্যাপে সাধারণত এর রুট component এর সাথে `hydrate` কল একবারই থাকবে। 
+React `domNode` DOM নোডে থাকা HTML এর সাথে যুক্ত হবে, এবং এর ভেতরের DOM ম্যানেজ করার দায়িত্ব গ্রহণ করবে। সম্পূর্ণরূপে React দিয়ে তৈরি একটি অ্যাপে সাধারণত এর রুট component এর সাথে `hydrate` কল একবারই থাকবে।
 
 [নিচে আরো উদাহরণ দেখুন।](#usage)
 

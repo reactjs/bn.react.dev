@@ -177,7 +177,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 | "`5` দিয়ে প্রতিস্থাপন" | `0` (অব্যবহৃত) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
-চূড়ান্ত ফলাফল হিসাবে React `6` সঞ্চয় করে এবং `useState` এ রিটার্ন করে।
+React চূড়ান্ত ফলাফল হিসেবে `6` সংরক্ষণ করে এবং `useState` থেকে সেটি রিটার্ন করে।
 
 <Note>
 
@@ -305,7 +305,7 @@ export default function RequestTracker() {
         Completed: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Buy
       </button>
     </>
   );
@@ -349,7 +349,7 @@ export default function RequestTracker() {
         Completed: {completed}
       </h3>
       <button onClick={handleClick}>
-        Buy     
+        Buy
       </button>
     </>
   );

@@ -27,13 +27,13 @@ title: কম্পোনেন্টকে বিশুদ্ধ রাখা
 
 এই গণিতের সূত্রটিই ধরুনঃ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-যদি <Math><MathI>x</MathI> = 2</Math> হয়, তাহলে <Math><MathI>y</MathI> = 4</Math> হবে। সবসময়। 
+যদি <Math><MathI>x</MathI> = 2</Math> হয়, তাহলে <Math><MathI>y</MathI> = 4</Math> হবে। সবসময়।
 
-যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <Math><MathI>y</MathI> = 6</Math> হবে। সবসময়। 
+যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <Math><MathI>y</MathI> = 6</Math> হবে। সবসময়।
 
 যদি <Math><MathI>x</MathI> = 3</Math> হয়, তাহলে <MathI>y</MathI> কখনো কখনো <Math>9</Math> অথবা <Math>–1</Math> অথবা <Math>2.5</Math> হবেনা, দিনের কোন সময় বা স্টক মার্কেটের অবস্থার উপর নির্ভর করে।
 
-যদি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এবং <Math><MathI>x</MathI> = 3</Math> হয়, <MathI>y</MathI> তাহলে _সবসময়_ <Math>6</Math> হবে। 
+যদি <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> এবং <Math><MathI>x</MathI> = 3</Math> হয়, <MathI>y</MathI> তাহলে _সবসময়_ <Math>6</Math> হবে।
 
 আমরা যদি এটিকে একটি জাভাস্ক্রিপ্ট ফাংশনে রুপ দেই, তাহলে এটি এমন দেখাবেঃ
 
@@ -52,7 +52,7 @@ React এই ধারণার উপর ভিত্তি করেই তৈ
 ```js src/App.js
 function Recipe({ drinkers }) {
   return (
-    <ol>    
+    <ol>
       <li>Boil {drinkers} cups of water.</li>
       <li>Add {drinkers} spoons of tea and {0.5 * drinkers} spoons of spice.</li>
       <li>Add {0.5 * drinkers} cups of milk to boil and sugar to taste.</li>
@@ -75,7 +75,7 @@ export default function App() {
 
 </Sandpack>
 
-আপনি যখন `Recipe` তে `drinkers={2}` পাস করবেন, এটি JSX রিটার্ন করবে যাতে `2 cups of water` থাকবে। সবসময়। 
+আপনি যখন `Recipe` তে `drinkers={2}` পাস করবেন, এটি JSX রিটার্ন করবে যাতে `2 cups of water` থাকবে। সবসময়।
 
 যদি আপনি `drinkers={4}` পাস করেন, এটি JSX রিটার্ন করবে যাতে `4 cups of water` থাকবে। সবসময়।
 
@@ -217,7 +217,7 @@ Every new React feature we're building takes advantage of purity. From data fetc
 
 * A component must be pure, meaning:
   * **It minds its own business.** It should not change any objects or variables that existed before rendering.
-  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. 
+  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX.
 * Rendering can happen at any time, so components should not depend on each others' rendering sequence.
 * You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
 * Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
@@ -226,7 +226,7 @@ Every new React feature we're building takes advantage of purity. From data fetc
 </Recap>
 
 
-  
+
 <Challenges>
 
 #### Fix a broken clock {/*fix-a-broken-clock*/}
@@ -451,7 +451,7 @@ export default function App() {
 ```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'
@@ -549,7 +549,7 @@ export default function App() {
 ```js src/utils.js hidden
 export function getImageUrl(person, size = 's') {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     person.imageId +
     size +
     '.jpg'

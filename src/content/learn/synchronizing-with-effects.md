@@ -10,9 +10,9 @@ title: 'Effects দিয়ে Synchronizing'
 
 <YouWillLearn>
 
-- Effects কী  
-- Effects কীভাবে events থেকে আলাদা 
-- কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লেয়ার করবেন 
+- Effects কী
+- Effects কীভাবে events থেকে আলাদা
+- কীভাবে আপনার কম্পোনেন্টে Effect ডিক্লেয়ার করবেন
 - কীভাবে অকারণে কোন Effect রি-রানিং এড়াবেন
 - কেনো ডেভেলপমেন্টের সময় Effects দুইবার রান হয় এবং সেগুলো কীভাবে ঠিক করবেন
 
@@ -43,7 +43,7 @@ Effects সম্পর্কে শুরুর আগে, আপনার র�
 
 ## কীভাবে একটি Effect লিখবেন {/*how-to-write-an-effect*/}
 
-একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ 
+একটি Effect লিখতে, এই তিনটি ধাপ অনুসরণ করুনঃ
 
 1. **Effect ডিক্লেয়ার করুন** By default, আপনার Effect প্রত্যেক [commit](/learn/render-and-commit) এর পর রান করবে।
 2. **Effect এর dependency গুলো specify করুন** বেশিরভাগ Effects প্রত্যেকবার রেন্ডার হওয়ার পরে re-run হওয়ার থেকে *যখন প্রয়োজন* তখন re-run হওয়া উচিত। উদাহরণস্বরূপ, একটি fade-in animation কেবল তখনি ট্রিগার করা উচিত যখন কোন একটি component দৃশ্যমান হয়। কোন chat room এর সাথে সংযোগ স্থাপন এবং বিচ্ছিন্ন তখনই ঘটে যখন component টি দৃশ্যমান এবং অদৃশ্যমান হয়ে যায় বা যখন chat room টি পরিবর্তন হয়। আপনি কীভাবে *dependencies* specify করার মাধ্যমে এটি কন্ট্রোল করতে পারবেন তা শিখতে পারবেন।
@@ -135,7 +135,7 @@ video { width: 250px; }
 
 এই কোডটি সঠিক না হওয়ার কারণ হলো এটি রেন্ডারিং এর সময় DOM node এর সাথে কিছু একটা করার চেষ্টা করে। React এ, [রেন্ডারিং JSX এর pure calculation হওয়া উচিত](/learn/keeping-components-pure) এবং DOM কে modify করে এমন কোন side effects থাকা উচিত নয়।
 
-উপরন্তু, যখন `VideoPlayer` কে প্রথমবারের জন্য call করা হয়, এটির DOM তখন exist করে না! `play()` বা `pause()` করার জন্য এখানে কোন DOM node নাই, কারণ React জানে না কী DOM তৈরি হবে যতক্ষণ না আপনি JSX রিটার্ন করেন। 
+উপরন্তু, যখন `VideoPlayer` কে প্রথমবারের জন্য call করা হয়, এটির DOM তখন exist করে না! `play()` বা `pause()` করার জন্য এখানে কোন DOM node নাই, কারণ React জানে না কী DOM তৈরি হবে যতক্ষণ না আপনি JSX রিটার্ন করেন।
 
 এখানে সমাধানটি হলো **রেন্ডারিং calculation এর বাইরে সরানোর জন্য `useEffect` এর দ্বারা side effect টি wrap করে রাখা:**
 
@@ -205,7 +205,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-এই উদাহরণে, আপনি যে "external system" React state এর সাথে synchronize করেছেন তা হলো ব্রাউজার মিডিয়া API। আপনি legacy non-React code (যেমন jQuery plugins) থেকে declarative React component এ wrap করতে  অনুরূপ পদ্ধতি ব্যবহার করতে পারেন। 
+এই উদাহরণে, আপনি যে "external system" React state এর সাথে synchronize করেছেন তা হলো ব্রাউজার মিডিয়া API। আপনি legacy non-React code (যেমন jQuery plugins) থেকে declarative React component এ wrap করতে  অনুরূপ পদ্ধতি ব্যবহার করতে পারেন।
 
 মনে রাখবেন যে কোন ভিডিও প্লেয়ার কন্ট্রোল করা প্রাক্টিকালি আরও জটিল। `play()` কল fail হতে পারে, user built-in ব্রাউজার control গুলো ব্যবহার করে play বা pause করতে পারে, এবং আরও অনেক কিছু। এই উদাহরণটি খুবই সহজ এবং অসম্পূর্ণ।
 
@@ -230,7 +230,7 @@ Effect গুলো সাধারণত আপনার component গুলো
 
 By default,  Effect গুলো *প্রত্যেক* রেন্ডারের পরে run হয়। অনেক সময়, এটি **আপনি চান না:**
 
-- কখনো কখনো, এটি slow কাজ করে। একটি external system এর সাথে Synchroniz করা সর্বদা তাৎক্ষণিক হয় না, সুতরাং আপনি এটি প্রয়োজন না হলে এটি এড়িয়ে যেতে চাইতে পারেন। উদাহরণস্বরূপ, আপনি প্রতি keystoke এ চ্যাট সার্ভারের সাথে পুনরায় সংযোগ স্থাপন করতে চান না। 
+- কখনো কখনো, এটি slow কাজ করে। একটি external system এর সাথে Synchroniz করা সর্বদা তাৎক্ষণিক হয় না, সুতরাং আপনি এটি প্রয়োজন না হলে এটি এড়িয়ে যেতে চাইতে পারেন। উদাহরণস্বরূপ, আপনি প্রতি keystoke এ চ্যাট সার্ভারের সাথে পুনরায় সংযোগ স্থাপন করতে চান না।
 - কখনো কখনো, এটি ভুল।  উদাহরণস্বরূপ, আপনি প্রতিটি keystroke এ কোন component ফেড-ইন animation ট্রিগার করতে চান না। component টি প্রথমবারের মত appear হলে animation টি কেবল একবার play হওয়া উচিত।
 
 সমস্যাটি প্রদর্শনের করতে, এখানে কয়েকটি `console.log` কল এবং একটি টেক্সট ইনপুট সহ পূর্ববর্তী উদাহরণটি যেটি parent component এর স্টেটকে update করে । খেয়াল করুন কীভাবে typing এর ফলে Effect টি re-run হয়:
@@ -397,7 +397,7 @@ video { width: 250px; }
 
 </Sandpack>
 
-dependency array তে একাধিক dependency থাকতে পারে। যদি *সবগুলো* dependency এর value গুলো previous render এর মতই থাকে কেবল তখনই React Effect টি re-runn করবে না। React dependency value গুলোকে তুলনা করতে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে। বিস্তারিত জানতে [`useEffect` reference](/reference/react/useEffect#reference) দেখুন। 
+dependency array তে একাধিক dependency থাকতে পারে। যদি *সবগুলো* dependency এর value গুলো previous render এর মতই থাকে কেবল তখনই React Effect টি re-runn করবে না। React dependency value গুলোকে তুলনা করতে [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is) comparison ব্যবহার করে। বিস্তারিত জানতে [`useEffect` reference](/reference/react/useEffect#reference) দেখুন।
 
 **লক্ষ্য করুন যে আপনি আপনার dependency গুলো "choose" করতে পারছেন না।** আপনি যে dependency গুলো specify করেছেন তা যদি আপনি Effect এর মধ্যে যে কোড রেখেছেন তার উপর base করে React এর expectation এর সাথে না মিলে তাহলে আপনি একটি lint error পাবেন। এটি আপনার কোডে অনেক bug খুঁজে পাতে সাহায্য করে । যদি আপনি কিছু কোড re-run করতে না চান, [*Effect কোড edit করুন* যাতে ঐ  dependency-র "প্রয়োজন" না হয়।](/learn/lifecycle-of-reactive-effects#what-to-do-when-you-dont-want-to-re-synchronize)
 
@@ -602,7 +602,7 @@ React ইচ্ছাকৃতভাবে আপনার কম্পোনে
 #### Effects রান করা এড়াতে refs ব্যবহার করবেন না {/*dont-use-refs-to-prevent-effects-from-firing*/}
 
 ডেভেলপমেন্টে Effects দুইবার fire হওয়া থেকে বিরত রাখার একটি সাধারণ ভুল হলো Effect কে একবারের বেশি run হওয়া থেকে বিরত রাখতে ref ব্যবহার করা। উদাহরণস্বরূপ, আপনি উপরের bug টি useRef দিয়ে "ফিক্স" করতে পারেন।
-  
+
 ```js {1,3-4}
   const connectionRef = useRef(null);
   useEffect(() => {
@@ -615,11 +615,11 @@ React ইচ্ছাকৃতভাবে আপনার কম্পোনে
 ```
 
 এটি করার ফলে আপনি development এ শুধুমাত্র একবার `"✅ Connecting..."` দেখতে পাবেন, কিন্তু এটি bug টি fix করে না।
-  
+
 যখন ইউজার navigate করে চলে যায়, connection তখনও বন্ধ হয়না এবং যখন তারা আবার ফিরে আসে, একটি নতুন connection তৈরি হয়। User যখন app জুড়ে navigate করে, connection গুলো জমতে থাকবে, ঠিক যেমনটি এই "fix" এর আগে জমতে থাকতো।
 
 Bug টি fix করতে, শুধুমাত্র Effect কে একবার run করানোই যথেষ্ট নয়। Effect কে re-mounting এর পর কাজ করতে হবে, যার মানে হলো connection কে উপরের solution এর মতো clean up করতে হবে।
-  
+
 কমন pattern গুলো কীভাবে handle করতে হয় তার জন্য নিচের উদাহরণগুলো দেখুন।
 
 </Pitfall>
@@ -635,7 +635,7 @@ useEffect(() => {
 }, [zoomLevel]);
 ```
 
-মনে রাখবেন যে এই ক্ষেত্রে কোন cleanup এর প্রয়োজন নেই। development এ, React দু'বার Effect কল করে, কিন্তু এটি কোন সমস্যা নয় কারণ একই value সহ `setZoomLevel` কে দু'বার কল করলে কিছুই হবে না। এটি কিছুটা স্লো হতে পারে, তবে ব্যাপার না কারণ এটি production এ অযথা রিমাউন্ট করবে না। 
+মনে রাখবেন যে এই ক্ষেত্রে কোন cleanup এর প্রয়োজন নেই। development এ, React দু'বার Effect কল করে, কিন্তু এটি কোন সমস্যা নয় কারণ একই value সহ `setZoomLevel` কে দু'বার কল করলে কিছুই হবে না। এটি কিছুটা স্লো হতে পারে, তবে ব্যাপার না কারণ এটি production এ অযথা রিমাউন্ট করবে না।
 
 কিছু API আপনাকে পরপর দুবার কল করার allow নাও দিতে পারে। উদাহরণস্বরূপ, বিল্ট-ইন [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement) ইলিমেন্টটি [`showModal`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) ম্যাথোড থ্রো করে যদি আপনি এটিকে দুবার কল করেন। cleanup function টি ইমপ্লিমেন্ট করুন এবং ডায়লগটি close করুন:
 
