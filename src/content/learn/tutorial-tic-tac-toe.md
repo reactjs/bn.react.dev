@@ -2489,7 +2489,7 @@ export default function Game() {
 }
 ```
 
-Next, update the `jumpTo` function inside `Game` to update that `currentMove`. You'll also set `xIsNext` to `true` if the number that you're changing `currentMove` to is even.
+এরপর `Game`-এর `jumpTo` দিয়ে `currentMove` আপডেট করুন। নতুন `currentMove` জোড় সংখ্যা হলে `xIsNext`-ও `true` করবেন।
 
 ```js {4-5}
 export default function Game() {
@@ -2502,7 +2502,7 @@ export default function Game() {
 }
 ```
 
-You will now make two changes to the `Game`'s `handlePlay` function which is called when you click on a square.
+ঘরে ক্লিক হলে কল হওয়া `Game`-এর `handlePlay`-এ এখন দুটি পরিবর্তন করবেন।
 
 - If you "go back in time" and then make a new move from that point, you only want to keep the history up to that point. Instead of adding `nextSquares` after all items (`...` spread syntax) in `history`, you'll add it after all items in `history.slice(0, currentMove + 1)` so that you're only keeping that portion of the old history.
 - Each time a move is made, you need to update `currentMove` to point to the latest history entry.
