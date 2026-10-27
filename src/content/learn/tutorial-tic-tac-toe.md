@@ -2287,9 +2287,9 @@ key প্রতিটি কম্পোনেন্টের পরিচয় �
 
 `key` React-এর একটি বিশেষ ও সংরক্ষিত প্রপার্টি। এলিমেন্ট তৈরি করার সময় React `key` আলাদা করে রিটার্ন করা এলিমেন্টে সরাসরি রাখে। `key`-কে prop হিসেবে পাঠানো মনে হলেও React নিজে এটি দিয়ে কোন কম্পোনেন্ট আপডেট করবে ঠিক করে। প্যারেন্ট কী `key` দিয়েছে তা কোনো কম্পোনেন্ট জানতে পারে না।
 
-**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
+**গতিশীল তালিকা তৈরি করলে উপযুক্ত key দেওয়া জোরালোভাবে সুপারিশ করা হয়।** উপযুক্ত key না থাকলে, সেটি পাওয়ার জন্য ডেটার গঠন বদলানোর কথা ভাবতে পারেন।
 
-If no key is specified, React will report an error and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the error but has the same problems as array indices and is not recommended in most cases.
+key না দিলে React error দেখায় এবং ডিফল্টভাবে অ্যারের ইনডেক্স key হিসেবে নেয়। তালিকার ক্রম বদলানো বা আইটেম যোগ-বিয়োগ করার সময় ইনডেক্স key হিসেবে ব্যবহার করলে সমস্যা হয়। স্পষ্টভাবে `key={i}` দিলে error চুপ হয়ে যায়, তবে একই সমস্যা থেকে যায়; তাই বেশিরভাগ ক্ষেত্রে এটি সুপারিশ করা হয় না।
 
 Keys do not need to be globally unique; they only need to be unique between components and their siblings.
 
