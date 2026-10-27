@@ -1407,7 +1407,7 @@ export default function Board() {
 
 `X`-এর জায়গায় `O` বসে যাচ্ছে! এতে গেমে মজার মোড় যোগ হতে পারে, তবে আপাতত মূল নিয়মেই থাকব।
 
-When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+কোনো ঘরে `X` বা `O` বসানোর আগে সেটিতে ইতিমধ্যে `X` বা `O` আছে কি না পরীক্ষা করছেন না। *আগেই return করে* এটি ঠিক করতে পারেন। ঘরটি পূর্ণ কি না পরীক্ষা করুন। পূর্ণ থাকলে `handleClick`-এ বোর্ডের state আপডেট করার আগেই `return` করুন।
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1419,7 +1419,7 @@ function handleClick(i) {
 }
 ```
 
-Now you can only add `X`'s or `O`'s to empty squares! Here is what your code should look like at this point:
+এখন শুধু ফাঁকা ঘরেই `X` বা `O` বসানো যাবে! এ পর্যায়ে কোড এমন হওয়ার কথা:
 
 <Sandpack>
 
