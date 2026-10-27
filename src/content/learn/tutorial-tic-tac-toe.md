@@ -1071,7 +1071,7 @@ body {
 
 এরপর `Square`-এ ক্লিক করলে কী ঘটবে তা বদলাতে হবে। কোন ঘরগুলো পূর্ণ, সেটি এখন `Board` রাখে। তাই `Square` থেকে `Board`-এর state আপডেট করার ব্যবস্থা লাগবে। state সেটি ডিক্লেয়ার করা কম্পোনেন্টের নিজস্ব হওয়ায়, `Square` থেকে সরাসরি `Board`-এর state আপডেট করা যায় না।
 
-Instead, you'll pass down a function from the `Board` component to the `Square` component, and you'll have `Square` call that function when a square is clicked. You'll start with the function that the `Square` component will call when it is clicked. You'll call that function `onSquareClick`:
+তার বদলে `Board` থেকে `Square`-এ একটি ফাংশন পাঠাবেন, আর ঘরে ক্লিক হলে `Square` সেটি কল করবে। প্রথমে `Square`-এ ক্লিক হলে যে ফাংশন কল হবে, সেটি দিয়ে শুরু করা যাক। এর নাম দিন `onSquareClick`:
 
 ```js {3}
 function Square({ value }) {
@@ -1083,7 +1083,7 @@ function Square({ value }) {
 }
 ```
 
-Next, you'll add the `onSquareClick` function to the `Square` component's props:
+এরপর `Square` কম্পোনেন্টের props-এ `onSquareClick` ফাংশনটি যোগ করুন:
 
 ```js {1}
 function Square({ value, onSquareClick }) {
