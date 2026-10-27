@@ -1174,9 +1174,9 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 যখন `onSquareClick={handleClick}` লিখছিলেন, তখন `handleClick` ফাংশনটিকে prop হিসেবে পাঠাচ্ছিলেন, কল করছিলেন না! এখন ফাংশনটি সঙ্গে সঙ্গেই *কল* করছেন—`handleClick(0)`-এর বন্ধনীগুলো খেয়াল করুন—তাই এটি সময়ের আগেই চলছে। ব্যবহারকারী ক্লিক করার আগে আপনি `handleClick` কল করতে *চান না*!
 
-You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
+`handleClick(0)` কল করে এমন `handleFirstSquareClick`, `handleClick(1)` কল করে এমন `handleSecondSquareClick` ইত্যাদি ফাংশন তৈরি করে সমস্যাটি মেটাতে পারেন। এগুলো কল না করে prop হিসেবে পাঠাবেন, যেমন `onSquareClick={handleFirstSquareClick}`। এতে অসীম লুপ বন্ধ হবে।
 
-However, defining nine different functions and giving each of them a name is too verbose. Instead, let's do this:
+তবে নয়টি আলাদা ফাংশন সংজ্ঞায়িত করে প্রতিটির নাম দেওয়া বেশ দীর্ঘ ব্যাপার। তার বদলে এভাবে করা যাক:
 
 ```js {6}
 export default function Board() {
