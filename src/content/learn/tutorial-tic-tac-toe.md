@@ -2273,7 +2273,7 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+সংখ্যা বদলানো ছাড়াও একজন মানুষ এটি পড়ে বুঝবেন, Alexa ও Ben-এর ক্রম অদলবদল করেছেন এবং তাদের মাঝে Claudia-কে যোগ করেছেন। কিন্তু React একটি কম্পিউটার প্রোগ্রাম; আপনার উদ্দেশ্য জানে না। তাই প্রতিটি আইটেমকে একই স্তরের অন্য আইটেম থেকে আলাদা করতে একটি *key* প্রপার্টি দিতে হয়। ডেটা ডেটাবেজ থেকে এলে Alexa, Ben ও Claudia-র ডেটাবেজ ID key হিসেবে ব্যবহার করা যেত।
 
 ```js {1}
 <li key={user.id}>
@@ -2281,7 +2281,7 @@ In addition to the updated counts, a human reading this would probably say that 
 </li>
 ```
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved.
+তালিকা আবার রেন্ডার হলে React প্রতিটি আইটেমের key নিয়ে আগের তালিকায় মিলে যাওয়া key খোঁজে। নতুন তালিকায় আগে ছিল না এমন key থাকলে React কম্পোনেন্ট তৈরি করে। আগের তালিকার কোনো key নতুনটিতে না থাকলে পুরোনো কম্পোনেন্ট সরিয়ে দেয়। দুটি key মিলে গেলে সংশ্লিষ্ট কম্পোনেন্টটি সরিয়ে সঠিক জায়গায় রাখে।
 
 Keys tell React about the identity of each component, which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
 
