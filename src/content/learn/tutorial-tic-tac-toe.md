@@ -553,11 +553,11 @@ export default function Board() {
 
 খেয়াল করুন, ব্রাউজারের `div`-এর বিপরীতে আপনার নিজস্ব `Board` এবং `Square` কম্পোনেন্টের নাম বড় হাতের অক্ষর দিয়ে শুরু হতে হবে।
 
-Let's take a look:
+এবার ফলাফল দেখা যাক:
 
-![one-filled board](../images/tutorial/board-filled-with-ones.png)
+![প্রতিটি ঘরে ১ লেখা বোর্ড](../images/tutorial/board-filled-with-ones.png)
 
-Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use *props* to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
+ওহ! আগের সংখ্যাযুক্ত ঘরগুলো আর নেই। এখন প্রতিটি ঘরেই "1" দেখা যাচ্ছে। এটি ঠিক করতে *props* ব্যবহার করে প্যারেন্ট কম্পোনেন্ট (`Board`) থেকে তার চাইল্ড (`Square`)-এ প্রতিটি ঘরের জন্য নির্ধারিত মান পাঠাবেন।
 
 Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
 
