@@ -1401,11 +1401,11 @@ export default function Board() {
 
 এখন বিভিন্ন ঘরে ক্লিক করলে প্রত্যাশামতো পালাক্রমে `X` ও `O` বসবে!
 
-But wait, there's a problem. Try clicking on the same square multiple times:
+তবে একটু দাঁড়ান, একটি সমস্যা আছে। একই ঘরে কয়েকবার ক্লিক করে দেখুন:
 
-![O overwriting an X](../images/tutorial/o-replaces-x.gif)
+![X-এর জায়গায় O বসে যাচ্ছে](../images/tutorial/o-replaces-x.gif)
 
-The `X` is overwritten by an `O`! While this would add a very interesting twist to the game, we're going to stick to the original rules for now.
+`X`-এর জায়গায় `O` বসে যাচ্ছে! এতে গেমে মজার মোড় যোগ হতে পারে, তবে আপাতত মূল নিয়মেই থাকব।
 
 When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
 
