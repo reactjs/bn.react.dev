@@ -907,16 +907,16 @@ React Developer Tools দিয়ে আপনার React কম্পোনে�
 
 তারপর preview পেইজে ব্রাউজারের DevTools খুলে *Components* ট্যাবটি খুঁজুন:
 
-![components tab](../images/tutorial/components-tab.png)
+![Components ট্যাব](../images/tutorial/components-tab.png)
 
-To inspect a particular component on the screen, use the button in the top left corner of the Components tab:
+স্ক্রিনের নির্দিষ্ট কোনো কম্পোনেন্ট পরীক্ষা করতে Components ট্যাবের উপরের বাঁ কোণের বাটনটি ব্যবহার করুন:
 
-![inspecting with devtools](../images/tutorial/devtools-inspect.gif)
+![DevTools দিয়ে কম্পোনেন্ট পরীক্ষা করা](../images/tutorial/devtools-inspect.gif)
 
 
-## Completing the game {/*completing-the-game*/}
+## গেমটি সম্পূর্ণ করা {/*completing-the-game*/}
 
-By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
+এতক্ষণে আপনার টিক-ট্যাক-টো গেমের মৌলিক অংশগুলো তৈরি হয়েছে। গেমটি সম্পূর্ণ করতে এখন বোর্ডে পালাক্রমে "X" ও "O" বসাতে হবে এবং বিজয়ী নির্ধারণের ব্যবস্থা করতে হবে।
 
 ### Lifting state up {/*lifting-state-up*/}
 
