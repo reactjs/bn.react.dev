@@ -981,11 +981,11 @@ function Square({value}) {
 }
 ```
 
-At this point you should see an empty tic-tac-toe board:
+এ পর্যায়ে একটি ফাঁকা টিক-ট্যাক-টো বোর্ড দেখার কথা:
 
-![empty board](../images/tutorial/empty-board.png)
+![ফাঁকা বোর্ড](../images/tutorial/empty-board.png)
 
-And your code should look like this:
+আপনার কোড এমন হওয়ার কথা:
 
 <Sandpack>
 
