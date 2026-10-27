@@ -366,7 +366,7 @@ export default function Square() {
 
 </ConsoleBlock>
 
-React কম্পোনেন্টগুলিকে অবশ্যই একটি একক JSX এলিমেন্ট ফেরত দিতে হবে, একাধিক পাশাপাশি JSX এলিমেন্ট (যেমন দুটি বাটন) নয়। এটি ঠিক করতে আপনি *Fragments* (`<>` এবং `</>`) ব্যবহার করতে পারেন একাধিক পাশাপাশি JSX এলিমেন্ট মোড়ানোর জন্য, যেমন:
+React কম্পোনেন্ট থেকে পাশাপাশি একাধিক JSX এলিমেন্টের (যেমন দুটি বাটন) বদলে একটি JSX এলিমেন্ট রিটার্ন করতে হয়। এটি ঠিক করতে *Fragment* (`<>` ও `</>`) দিয়ে একাধিক এলিমেন্ট একসাথে ঘিরে রাখতে পারেন:
 
 ```js {3-6}
 export default function Square() {
@@ -381,9 +381,9 @@ export default function Square() {
 
 এখন আপনি দেখবেন:
 
-![two x-filled squares](../images/tutorial/two-x-filled-squares.png)
+![X লেখা দুটি ঘর](../images/tutorial/two-x-filled-squares.png)
 
-দারুণ! এখন আপনাকে শুধু কয়েকবার কপি-পেস্ট করতে হবে নয়টি স্কোয়ার যোগ করার জন্য এবং...
+ভালো! এবার আরও কয়েকবার কপি-পেস্ট করে নয়টি ঘর যোগ করুন, তারপর...
 
 ![nine x-filled squares in a line](../images/tutorial/nine-x-filled-squares.png)
 
