@@ -1732,7 +1732,7 @@ body {
 
 তবে প্রতিটি চালের পরে `slice()` দিয়ে `squares`-এর নতুন কপি তৈরি করেছেন এবং সেটিকে immutable হিসেবে বিবেচনা করেছেন। ফলে `squares`-এর প্রতিটি আগের সংস্করণ সংরক্ষণ করতে এবং আগের চালগুলোর মধ্যে যাতায়াত করতে পারবেন।
 
-You'll store the past `squares` arrays in another array called `history`, which you'll store as a new state variable. The `history` array represents all board states, from the first to the last move, and has a shape like this:
+আগের `squares` অ্যারেগুলো `history` নামের আরেকটি অ্যারেতে রাখবেন, যা নতুন একটি state ভ্যারিয়েবলে সংরক্ষিত হবে। `history` প্রথম থেকে শেষ চাল পর্যন্ত বোর্ডের সব অবস্থা নির্দেশ করে। এর গঠন এমন:
 
 ```jsx
 [
@@ -1746,9 +1746,9 @@ You'll store the past `squares` arrays in another array called `history`, which 
 ]
 ```
 
-### Lifting state up, again {/*lifting-state-up-again*/}
+### আবারও state উপরে তুলে নেওয়া {/*lifting-state-up-again*/}
 
-You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
+এবার আগের চালগুলোর তালিকা দেখাতে `Game` নামের নতুন একটি টপ-লেভেল কম্পোনেন্ট লিখবেন। পুরো গেমের ইতিহাস রাখা `history` state সেখানেই থাকবে।
 
 Placing the `history` state into the `Game` component will let you remove the `squares` state from its child `Board` component. Just like you "lifted state up" from the `Square` component into the `Board` component, you will now lift it up from the `Board` into the top-level `Game` component. This gives the `Game` component full control over the `Board`'s data and lets it instruct the `Board` to render previous turns from the `history`.
 
