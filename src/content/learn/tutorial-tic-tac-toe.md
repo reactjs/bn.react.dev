@@ -1356,9 +1356,9 @@ const nextSquares = ['X', null, null, null, null, null, null, null, null];
 
 ফলাফল একই, তবে সরাসরি মূল ডেটা পরিবর্তন না করায় বেশ কিছু সুবিধা পাওয়া যায়।
 
-Immutability makes complex features much easier to implement. Later in this tutorial, you will implement a "time travel" feature that lets you review the game's history and "jump back" to past moves. This functionality isn't specific to games--an ability to undo and redo certain actions is a common requirement for apps. Avoiding direct data mutation lets you keep previous versions of the data intact, and reuse them later.
+ইমিউটেবিলিটি জটিল ফিচার তৈরি সহজ করে। এই টিউটোরিয়ালের পরের অংশে "সময় ভ্রমণ" ফিচার যোগ করবেন, যাতে গেমের ইতিহাস দেখে আগের চালে ফিরে যাওয়া যায়। এটি শুধু গেমের বিষয় নয়—কোনো কাজ undo বা redo করার সুবিধা অ্যাপেও প্রায়ই লাগে। সরাসরি ডেটা mutate না করলে আগের সংস্করণগুলো অক্ষত রাখা এবং পরে আবার ব্যবহার করা যায়।
 
-There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
+ইমিউটেবিলিটির আরেকটি সুবিধাও আছে। ডিফল্টভাবে প্যারেন্টের state বদলালে সব চাইল্ড কম্পোনেন্ট স্বয়ংক্রিয়ভাবে আবার রেন্ডার হয়, এমনকি পরিবর্তনের প্রভাব না পড়া চাইল্ডগুলোও। রি-রেন্ডার নিজে সাধারণত ব্যবহারকারীর চোখে পড়ে না (তাই সবসময় এটি এড়ানোর চেষ্টা করার দরকার নেই!)। তবে পারফরম্যান্সের জন্য ট্রির প্রভাবিত হয়নি এমন অংশের রি-রেন্ডার এড়াতে চাইতে পারেন। ইমিউটেবিলিটি থাকলে ডেটা বদলেছে কি না তুলনা করা কম্পোনেন্টের জন্য খুব সহজ হয়। React কখন কোনো কম্পোনেন্ট আবার রেন্ডার করবে তা কীভাবে ঠিক করে, সে বিষয়ে [ `memo` API রেফারেন্সে](/reference/react/memo) আরও জানতে পারেন।
 
 ### Taking turns {/*taking-turns*/}
 
