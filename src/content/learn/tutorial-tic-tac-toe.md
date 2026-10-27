@@ -2297,7 +2297,7 @@ key পুরো অ্যাপজুড়ে অনন্য হতে হবে
 
 এই গেমের ইতিহাসে প্রতিটি চালের নিজস্ব ID আছে: চালের ক্রমিক সংখ্যা। চালগুলোর ক্রম বদলানো, মুছে ফেলা বা মাঝখানে ঢোকানো হবে না, তাই চালের ইনডেক্স key হিসেবে ব্যবহার করা নিরাপদ।
 
-In the `Game` function, you can add the key as `<li key={move}>`, and if you reload the rendered game, React's "key" error should disappear:
+`Game`-এ `<li key={move}>` দিয়ে key যোগ করুন। রেন্ডার করা গেম reload করলে React-এর "key" error চলে যাওয়ার কথা:
 
 ```js {4}
 const moves = history.map((squares, move) => {
@@ -2477,7 +2477,7 @@ body {
 
 </Sandpack>
 
-Before you can implement `jumpTo`, you need the `Game` component to keep track of which step the user is currently viewing. To do this, define a new state variable called `currentMove`, defaulting to `0`:
+`jumpTo` ইমপ্লিমেন্ট করার আগে ব্যবহারকারী এখন কোন চাল দেখছেন তা `Game`-কে মনে রাখতে হবে। এজন্য `currentMove` নামের নতুন state ভ্যারিয়েবল ডিক্লেয়ার করুন, যার ডিফল্ট মান `0`:
 
 ```js {4}
 export default function Game() {
