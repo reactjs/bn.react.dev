@@ -2504,8 +2504,8 @@ export default function Game() {
 
 ঘরে ক্লিক হলে কল হওয়া `Game`-এর `handlePlay`-এ এখন দুটি পরিবর্তন করবেন।
 
-- If you "go back in time" and then make a new move from that point, you only want to keep the history up to that point. Instead of adding `nextSquares` after all items (`...` spread syntax) in `history`, you'll add it after all items in `history.slice(0, currentMove + 1)` so that you're only keeping that portion of the old history.
-- Each time a move is made, you need to update `currentMove` to point to the latest history entry.
+- আগের চালে ফিরে সেখান থেকে নতুন চাল দিলে শুধু সেই পর্যন্ত ইতিহাস রাখতে চান। `history`-র সব আইটেমের (`...` spread syntax) পরে `nextSquares` না বসিয়ে, `history.slice(0, currentMove + 1)`-এর সব আইটেমের পরে বসান। এতে পুরোনো ইতিহাসের শুধু প্রয়োজনীয় অংশ থাকে।
+- প্রতিটি নতুন চালের পরে `currentMove` আপডেট করে সর্বশেষ history এন্ট্রি নির্দেশ করতে হবে।
 
 ```js {2-4}
 function handlePlay(nextSquares) {
@@ -2516,7 +2516,7 @@ function handlePlay(nextSquares) {
 }
 ```
 
-Finally, you will modify the `Game` component to render the currently selected move, instead of always rendering the final move:
+সবশেষে, সবসময় শেষ চাল না দেখিয়ে বর্তমানে নির্বাচিত চাল রেন্ডার করতে `Game` বদলান:
 
 ```js {5}
 export default function Game() {
