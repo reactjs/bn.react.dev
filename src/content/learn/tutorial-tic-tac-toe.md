@@ -797,11 +797,11 @@ function Square() {
 }
 ```
 
-By calling this `set` function from an `onClick` handler, you're telling React to re-render that `Square` whenever its `<button>` is clicked. After the update, the `Square`'s `value` will be `'X'`, so you'll see the "X" on the game board. Click on any Square, and "X" should show up:
+`onClick` handler থেকে এই `set` ফাংশন কল করে আপনি React-কে বলছেন, `<button>`-এ ক্লিক হলে সেই `Square` আবার রেন্ডার করতে। আপডেটের পরে `Square`-এর `value` হবে `'X'`, তাই গেম বোর্ডে "X" দেখবেন। যেকোনো ঘরে ক্লিক করলে সেখানে "X" দেখা যাওয়ার কথা:
 
-![adding xes to board](../images/tutorial/tictac-adding-x-s.gif)
+![বোর্ডে X যোগ করা](../images/tutorial/tictac-adding-x-s.gif)
 
-Each Square has its own state: the `value` stored in each Square is completely independent of the others. When you call a `set` function in a component, React automatically updates the child components inside too.
+প্রতিটি `Square`-এর নিজস্ব state আছে: একেকটি ঘরে রাখা `value` অন্য ঘরগুলোর মান থেকে সম্পূর্ণ স্বাধীন। কোনো কম্পোনেন্টে `set` ফাংশন কল করলে React তার ভেতরের চাইল্ড কম্পোনেন্টগুলোও স্বয়ংক্রিয়ভাবে আপডেট করে।
 
 After you've made the above changes, your code will look like this:
 
