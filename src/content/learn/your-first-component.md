@@ -1,24 +1,24 @@
 ---
-title: Your First Component
+title: আপনার প্রথম কম্পোনেন্ট
 ---
 
 <Intro>
 
-*Components* are one of the core concepts of React. They are the foundation upon which you build user interfaces (UI), which makes them the perfect place to start your React journey!
+*কম্পোনেন্ট* React-এর মূল ধারণাগুলোর একটি। কম্পোনেন্ট দিয়েই user interface (UI) তৈরি হয়, তাই React শেখা শুরু করার জন্য এটি দারুণ একটি জায়গা!
 
 </Intro>
 
 <YouWillLearn>
 
-* What a component is
-* What role components play in a React application
-* How to write your first React component
+* কম্পোনেন্ট কী
+* React অ্যাপে কম্পোনেন্টের ভূমিকা কী
+* কীভাবে আপনার প্রথম React কম্পোনেন্ট লিখবেন
 
 </YouWillLearn>
 
-## Components: UI building blocks {/*components-ui-building-blocks*/}
+## কম্পোনেন্ট: UI তৈরির একেকটি অংশ {/*components-ui-building-blocks*/}
 
-On the Web, HTML lets us create rich structured documents with its built-in set of tags like `<h1>` and `<li>`:
+ওয়েবে HTML-এর `<h1>`, `<li>`-এর মতো বিল্ট-ইন ট্যাগ দিয়ে সাজানো-গোছানো document তৈরি করা যায়:
 
 ```html
 <article>
@@ -31,7 +31,7 @@ On the Web, HTML lets us create rich structured documents with its built-in set 
 </article>
 ```
 
-This markup represents this article `<article>`, its heading `<h1>`, and an (abbreviated) table of contents as an ordered list `<ol>`. Markup like this, combined with CSS for style, and JavaScript for interactivity, lies behind every sidebar, avatar, modal, dropdown—every piece of UI you see on the Web.
+এই মার্কআপে লেখাটিকে `<article>`, শিরোনামকে `<h1>` এবং সংক্ষিপ্ত সূচিপত্রকে একটি ক্রমিক তালিকা `<ol>` দিয়ে দেখানো হয়েছে। এমন মার্কআপের সাথে ডিজাইনের জন্য CSS আর ব্যবহারকারীর কাজের প্রতিক্রিয়া দেখানোর জন্য জাভাস্ক্রিপ্ট যোগ হয়। ওয়েবে দেখা প্রতিটি sidebar, avatar, modal, dropdown—UI-এর প্রতিটি অংশের পেছনেই এগুলো থাকে।
 
 React lets you combine your markup, CSS, and JavaScript into custom "components", **reusable UI elements for your app.** The table of contents code you saw above could be turned into a `<TableOfContents />` component you could render on every page. Under the hood, it still uses the same HTML tags like `<article>`, `<h1>`, etc.
 
