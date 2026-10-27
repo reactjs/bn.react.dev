@@ -1591,7 +1591,7 @@ export default function Board() {
 }
 ```
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So _you_ are the real winner here. Here is what the code should look like:
+অভিনন্দন! আপনার টিক-ট্যাক-টো গেম এখন কাজ করছে। সেই সাথে React-এর মৌলিক বিষয়গুলোও শিখে ফেলেছেন। তাই আসল বিজয়ী *আপনিই*। এখন কোড এমন হওয়ার কথা:
 
 <Sandpack>
 
@@ -1722,9 +1722,9 @@ body {
 
 </Sandpack>
 
-## Adding time travel {/*adding-time-travel*/}
+## সময় ভ্রমণ যোগ করা {/*adding-time-travel*/}
 
-As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
+শেষ অনুশীলন হিসেবে, গেমের আগের চালগুলোতে ফিরে যাওয়ার ব্যবস্থা করা যাক।
 
 ### Storing a history of moves {/*storing-a-history-of-moves*/}
 
