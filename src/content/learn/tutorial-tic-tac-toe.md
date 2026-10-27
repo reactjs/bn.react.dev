@@ -2250,9 +2250,9 @@ body {
 
 `map`-এ পাস করা ফাংশনের ভেতরে `history` অ্যারে ঘুরে দেখার সময় `squares` আর্গুমেন্টটি `history`-র প্রতিটি এলিমেন্ট পায়, আর `move` আর্গুমেন্টটি প্রতিটি ইনডেক্স পায়: `0`, `1`, `2`, …। সাধারণত অ্যারের আসল এলিমেন্ট প্রয়োজন হলেও, চালের তালিকা দেখাতে শুধু ইনডেক্সই লাগবে।
 
-For each move in the tic-tac-toe game's history, you create a list item `<li>` which contains a button `<button>`. The button has an `onClick` handler which calls a function called `jumpTo` (that you haven't implemented yet).
+গেমের ইতিহাসের প্রতিটি চালের জন্য একটি `<li>` তালিকা-আইটেম তৈরি করছেন, যার ভেতরে `<button>` আছে। বাটনের `onClick` handler, `jumpTo` নামের ফাংশন কল করে, যা এখনও ইমপ্লিমেন্ট করেননি।
 
-For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
+এখন গেমে দেওয়া চালগুলোর তালিকা এবং developer tools-এর console-এ একটি error দেখার কথা। "key" error-এর অর্থ নিয়ে আলোচনা করা যাক।
 
 ### Picking a key {/*picking-a-key*/}
 
