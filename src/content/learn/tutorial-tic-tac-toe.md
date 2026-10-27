@@ -2265,7 +2265,7 @@ body {
 <li>Ben: 5 tasks left</li>
 ```
 
-to
+এই তালিকায় পরিবর্তন করছেন:
 
 ```html
 <li>Ben: 9 tasks left</li>
@@ -2916,4 +2916,4 @@ body {
 1. কেউ জিতলে জয়ের তিনটি ঘর হাইলাইট করুন। কেউ না জিতলে গেম ড্র হওয়ার বার্তা দেখান।
 1. চালের ইতিহাসে প্রতিটি চালের অবস্থান (row, col) আকারে দেখান।
 
-Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+এই টিউটোরিয়ালে এলিমেন্ট, কম্পোনেন্ট, props ও state-সহ React-এর বিভিন্ন ধারণা ব্যবহার করেছেন। গেম তৈরিতে এগুলো কীভাবে কাজ করে তা দেখেছেন। এবার অ্যাপের UI তৈরিতে একই ধারণাগুলো কীভাবে কাজে লাগে, তা জানতে [React-এ চিন্তা করা](/learn/thinking-in-react) পড়ুন।
