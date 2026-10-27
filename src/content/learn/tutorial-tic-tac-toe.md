@@ -2080,7 +2080,7 @@ export default function Game() {
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
 </ConsoleBlock>
 
-You'll fix this error in the next section.
+পরের অংশে এই error ঠিক করবেন।
 
 <Sandpack>
 
@@ -2248,7 +2248,7 @@ body {
 
 </Sandpack>
 
-As you iterate through the `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+`map`-এ পাস করা ফাংশনের ভেতরে `history` অ্যারে ঘুরে দেখার সময় `squares` আর্গুমেন্টটি `history`-র প্রতিটি এলিমেন্ট পায়, আর `move` আর্গুমেন্টটি প্রতিটি ইনডেক্স পায়: `0`, `1`, `2`, …। সাধারণত অ্যারের আসল এলিমেন্ট প্রয়োজন হলেও, চালের তালিকা দেখাতে শুধু ইনডেক্সই লাগবে।
 
 For each move in the tic-tac-toe game's history, you create a list item `<li>` which contains a button `<button>`. The button has an `onClick` handler which calls a function called `jumpTo` (that you haven't implemented yet).
 
