@@ -1225,7 +1225,7 @@ export default function Board() {
 
 তবে এবার state পরিচালনার সব কাজ `Board` কম্পোনেন্ট করছে!
 
-This is what your code should look like:
+এখন কোড এমন হওয়ার কথা:
 
 <Sandpack>
 
@@ -1318,7 +1318,7 @@ body {
 
 </Sandpack>
 
-Now that your state handling is in the `Board` component, the parent `Board` component passes props to the child `Square` components so that they can be displayed correctly. When clicking on a `Square`, the child `Square` component now asks the parent `Board` component to update the state of the board. When the `Board`'s state changes, both the `Board` component and every child `Square` re-renders automatically. Keeping the state of all squares in the `Board` component will allow it to determine the winner in the future.
+state এখন `Board`-এ থাকায়, প্যারেন্ট `Board` চাইল্ড `Square`-গুলোকে props পাঠায়, যাতে তারা সঠিক মান দেখাতে পারে। কোনো `Square`-এ ক্লিক হলে সেই চাইল্ড প্যারেন্ট `Board`-কে বোর্ডের state আপডেট করতে বলে। `Board`-এর state বদলালে `Board` এবং প্রতিটি চাইল্ড `Square` স্বয়ংক্রিয়ভাবে আবার রেন্ডার হয়। সব ঘরের state `Board`-এ রাখায় পরে সেটি বিজয়ী নির্ধারণ করতে পারবে।
 
 Let's recap what happens when a user clicks the top left square on your board to add an `X` to it:
 
