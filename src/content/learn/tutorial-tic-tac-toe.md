@@ -2291,11 +2291,11 @@ key প্রতিটি কম্পোনেন্টের পরিচয় �
 
 key না দিলে React error দেখায় এবং ডিফল্টভাবে অ্যারের ইনডেক্স key হিসেবে নেয়। তালিকার ক্রম বদলানো বা আইটেম যোগ-বিয়োগ করার সময় ইনডেক্স key হিসেবে ব্যবহার করলে সমস্যা হয়। স্পষ্টভাবে `key={i}` দিলে error চুপ হয়ে যায়, তবে একই সমস্যা থেকে যায়; তাই বেশিরভাগ ক্ষেত্রে এটি সুপারিশ করা হয় না।
 
-Keys do not need to be globally unique; they only need to be unique between components and their siblings.
+key পুরো অ্যাপজুড়ে অনন্য হতে হবে না; শুধু একই স্তরের কম্পোনেন্টগুলোর মধ্যে অনন্য হলেই চলে।
 
-### Implementing time travel {/*implementing-time-travel*/}
+### সময় ভ্রমণ ইমপ্লিমেন্ট করা {/*implementing-time-travel*/}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+এই গেমের ইতিহাসে প্রতিটি চালের নিজস্ব ID আছে: চালের ক্রমিক সংখ্যা। চালগুলোর ক্রম বদলানো, মুছে ফেলা বা মাঝখানে ঢোকানো হবে না, তাই চালের ইনডেক্স key হিসেবে ব্যবহার করা নিরাপদ।
 
 In the `Game` function, you can add the key as `<li key={move}>`, and if you reload the rendered game, React's "key" error should disappear:
 
