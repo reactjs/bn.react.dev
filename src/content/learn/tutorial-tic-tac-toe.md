@@ -2908,12 +2908,12 @@ body {
 
 </Sandpack>
 
-If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game, listed in order of increasing difficulty:
+বাড়তি সময় থাকলে বা React-এর নতুন দক্ষতাগুলো অনুশীলন করতে চাইলে গেমে নিচের উন্নতিগুলো করতে পারেন। সহজ থেকে কঠিন ক্রমে সাজানো হয়েছে:
 
-1. For the current move only, show "You are at move #..." instead of a button.
-1. Rewrite `Board` to use two loops to make the squares instead of hardcoding them.
-1. Add a toggle button that lets you sort the moves in either ascending or descending order.
-1. When someone wins, highlight the three squares that caused the win (and when no one wins, display a message about the result being a draw).
-1. Display the location for each move in the format (row, col) in the move history list.
+1. শুধু বর্তমান চালের জন্য বাটনের বদলে "You are at move #..." দেখান।
+1. `Board`-এ প্রতিটি ঘর সরাসরি না লিখে দুটি লুপ দিয়ে ঘরগুলো তৈরি করুন।
+1. চালগুলো ঊর্ধ্বক্রম বা অধঃক্রমে সাজানোর জন্য একটি toggle বাটন যোগ করুন।
+1. কেউ জিতলে জয়ের তিনটি ঘর হাইলাইট করুন। কেউ না জিতলে গেম ড্র হওয়ার বার্তা দেখান।
+1. চালের ইতিহাসে প্রতিটি চালের অবস্থান (row, col) আকারে দেখান।
 
 Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
