@@ -2030,7 +2030,7 @@ body {
 [1, 2, 3].map((x) => x * 2) // [2, 4, 6]
 ```
 
-You'll use `map` to transform your `history` of moves into React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves. Let's `map` over the `history` in the Game component:
+`map` দিয়ে চালের `history`-কে স্ক্রিনে বাটন দেখানো React এলিমেন্টে রূপান্তর করবেন। এই বাটনের তালিকা দিয়ে আগের চালে ফিরে যাওয়া যাবে। `Game`-এ `history`-র উপর `map` চালানো যাক:
 
 ```js {11-13,15-27,35}
 export default function Game() {
@@ -2074,7 +2074,7 @@ export default function Game() {
 }
 ```
 
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says:
+নিচে কোডটি কেমন হবে দেখতে পারেন। খেয়াল করুন, developer tools-এর console-এ এমন একটি error দেখার কথা:
 
 <ConsoleBlock level="warning">
 Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
