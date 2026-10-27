@@ -1219,11 +1219,11 @@ export default function Board() {
 };
 ```
 
-Now you can again add X's to any square on the board by clicking on them:
+এখন আবার বোর্ডের যেকোনো ঘরে ক্লিক করে X বসাতে পারেন:
 
-![filling the board with X](../images/tutorial/tictac-adding-x-s.gif)
+![বোর্ডে X বসানো](../images/tutorial/tictac-adding-x-s.gif)
 
-But this time all the state management is handled by the `Board` component!
+তবে এবার state পরিচালনার সব কাজ `Board` কম্পোনেন্ট করছে!
 
 This is what your code should look like:
 
