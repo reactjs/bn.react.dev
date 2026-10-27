@@ -1750,9 +1750,9 @@ body {
 
 এবার আগের চালগুলোর তালিকা দেখাতে `Game` নামের নতুন একটি টপ-লেভেল কম্পোনেন্ট লিখবেন। পুরো গেমের ইতিহাস রাখা `history` state সেখানেই থাকবে।
 
-Placing the `history` state into the `Game` component will let you remove the `squares` state from its child `Board` component. Just like you "lifted state up" from the `Square` component into the `Board` component, you will now lift it up from the `Board` into the top-level `Game` component. This gives the `Game` component full control over the `Board`'s data and lets it instruct the `Board` to render previous turns from the `history`.
+`history`, `Game`-এ রাখলে চাইল্ড `Board` থেকে `squares` state সরাতে পারবেন। আগে যেমন `Square` থেকে `Board`-এ state তুলে নিয়েছিলেন, এবার `Board` থেকে টপ-লেভেল `Game`-এ তুলবেন। এতে `Game` বোর্ডের ডেটা পুরোপুরি নিয়ন্ত্রণ করতে পারবে এবং `history` থেকে আগের চাল রেন্ডার করতে `Board`-কে নির্দেশ দিতে পারবে।
 
-First, add a `Game` component with `export default`. Have it render the `Board` component and some markup:
+প্রথমে `export default`-সহ একটি `Game` কম্পোনেন্ট যোগ করুন। সেটি দিয়ে `Board` এবং কিছু মার্কআপ রেন্ডার করুন:
 
 ```js {1,5-16}
 function Board() {
