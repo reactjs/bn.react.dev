@@ -1134,11 +1134,11 @@ export default function Board() {
 
 <Note>
 
-JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+জাভাস্ক্রিপ্ট [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) সমর্থন করে। অর্থাৎ, ভেতরের কোনো ফাংশন (যেমন `handleClick`) বাইরের ফাংশনে (যেমন `Board`) সংজ্ঞায়িত ভ্যারিয়েবল ও ফাংশন ব্যবহার করতে পারে। `handleClick`, `squares` state পড়তে এবং `setSquares` মেথড কল করতে পারে, কারণ দুটোই `Board` ফাংশনের ভেতরে সংজ্ঞায়িত।
 
 </Note>
 
-Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
+এখন বোর্ডে X বসাতে পারেন, তবে শুধু উপরের বাঁ দিকের ঘরে। `handleClick`-এ শুধু ওই ঘরের ইনডেক্স (`0`) আপডেট করার কথা সরাসরি লেখা আছে। যেকোনো ঘর আপডেট করার জন্য `handleClick` বদলানো যাক। আপডেট করতে চাওয়া ঘরের ইনডেক্স নিতে `i` নামের একটি আর্গুমেন্ট যোগ করুন:
 
 ```js {4,6}
 export default function Board() {
