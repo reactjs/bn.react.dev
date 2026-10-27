@@ -1320,11 +1320,11 @@ body {
 
 state এখন `Board`-এ থাকায়, প্যারেন্ট `Board` চাইল্ড `Square`-গুলোকে props পাঠায়, যাতে তারা সঠিক মান দেখাতে পারে। কোনো `Square`-এ ক্লিক হলে সেই চাইল্ড প্যারেন্ট `Board`-কে বোর্ডের state আপডেট করতে বলে। `Board`-এর state বদলালে `Board` এবং প্রতিটি চাইল্ড `Square` স্বয়ংক্রিয়ভাবে আবার রেন্ডার হয়। সব ঘরের state `Board`-এ রাখায় পরে সেটি বিজয়ী নির্ধারণ করতে পারবে।
 
-Let's recap what happens when a user clicks the top left square on your board to add an `X` to it:
+উপরের বাঁ দিকের ঘরে `X` বসাতে ক্লিক করলে কী ঘটে, আবার দেখা যাক:
 
-1. Clicking on the upper left square runs the function that the `button` received as its `onClick` prop from the `Square`. The `Square` component received that function as its `onSquareClick` prop from the `Board`. The `Board` component defined that function directly in the JSX. It calls `handleClick` with an argument of `0`.
-1. `handleClick` uses the argument (`0`) to update the first element of the `squares` array from `null` to `X`.
-1. The `squares` state of the `Board` component was updated, so the `Board` and all of its children re-render. This causes the `value` prop of the `Square` component with index `0` to change from `null` to `X`.
+1. উপরের বাঁ দিকের ঘরে ক্লিক করলে `button`, `Square` থেকে `onClick` prop হিসেবে পাওয়া ফাংশনটি চালায়। `Square` সেটি `Board` থেকে `onSquareClick` prop হিসেবে পেয়েছিল। `Board` JSX-এর মধ্যেই ফাংশনটি সংজ্ঞায়িত করেছে। এটি `0` আর্গুমেন্ট দিয়ে `handleClick` কল করে।
+1. `handleClick` আর্গুমেন্টটি (`0`) ব্যবহার করে `squares` অ্যারের প্রথম এলিমেন্ট `null` থেকে `X` করে।
+1. `Board`-এর `squares` state আপডেট হয়, তাই `Board` ও তার সব চাইল্ড আবার রেন্ডার হয়। এতে `0` ইনডেক্সের `Square`-এর `value` prop `null` থেকে `X` হয়ে যায়।
 
 In the end the user sees that the upper left square has changed from empty to having an `X` after clicking it.
 
