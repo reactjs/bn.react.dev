@@ -1557,7 +1557,7 @@ function calculateWinner(squares) {
 
 </Note>
 
-You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has an `X` or an `O`. We'd like to return early in both cases:
+কেউ জিতেছেন কি না পরীক্ষা করতে `Board`-এর `handleClick`-এ `calculateWinner(squares)` কল করুন। ব্যবহারকারী ইতিমধ্যে `X` বা `O` বসানো ঘরে ক্লিক করেছেন কি না পরীক্ষার সাথেই এটি করতে পারেন। দুই ক্ষেত্রেই আগে return করতে চাই:
 
 ```js {2}
 function handleClick(i) {
@@ -1569,7 +1569,7 @@ function handleClick(i) {
 }
 ```
 
-To let the players know when the game is over, you can display text such as "Winner: X" or "Winner: O". To do that you'll add a `status` section to the `Board` component. The status will display the winner if the game is over and if the game is ongoing you'll display which player's turn is next:
+গেম শেষ হলে খেলোয়াড়দের জানাতে "Winner: X" বা "Winner: O"-এর মতো টেক্সট দেখাতে পারেন। এজন্য `Board`-এ একটি `status` অংশ যোগ করুন। গেম শেষ হলে এটি বিজয়ী দেখাবে, আর গেম চলতে থাকলে পরের চাল কার তা দেখাবে:
 
 ```js {3-9,13}
 export default function Board() {
