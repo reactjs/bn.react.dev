@@ -946,7 +946,7 @@ export default function Board() {
 ['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
 ```
 
-Now your `Board` component needs to pass the `value` prop down to each `Square` that it renders:
+এখন `Board`-এর রেন্ডার করা প্রতিটি `Square`-এ `value` prop পাঠাতে হবে:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -973,7 +973,7 @@ export default function Board() {
 }
 ```
 
-Next, you'll edit the `Square` component to receive the `value` prop from the Board component. This will require removing the Square component's own stateful tracking of `value` and the button's `onClick` prop:
+এরপর `Board` থেকে `value` prop গ্রহণ করার জন্য `Square` বদলান। এজন্য `Square`-এর নিজস্ব state-এ `value` রাখার ব্যবস্থা এবং বাটনের `onClick` prop সরাতে হবে:
 
 ```js {1,2}
 function Square({value}) {
