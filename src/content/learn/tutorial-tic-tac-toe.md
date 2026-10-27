@@ -591,9 +591,9 @@ function Square({ value }) {
 
 আপাতত একটি ফাঁকা বোর্ড দেখার কথা:
 
-![empty board](../images/tutorial/empty-board.png)
+![ফাঁকা বোর্ড](../images/tutorial/empty-board.png)
 
-This is because the `Board` component hasn't passed the `value` prop to each `Square` component it renders yet. To fix it you'll add the `value` prop to each `Square` component rendered by the `Board` component:
+এর কারণ, `Board` কম্পোনেন্ট এখনও তার রেন্ডার করা প্রতিটি `Square` কম্পোনেন্টে `value` prop পাস করেনি। এটি ঠিক করতে `Board`-এর রেন্ডার করা প্রতিটি `Square` কম্পোনেন্টে `value` prop যোগ করুন:
 
 ```js {5-7,10-12,15-17}
 export default function Board() {
@@ -619,7 +619,7 @@ export default function Board() {
 }
 ```
 
-Now you should see a grid of numbers again:
+এখন আবার সংখ্যার একটি গ্রিড দেখতে পাবেন:
 
 ![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
 
