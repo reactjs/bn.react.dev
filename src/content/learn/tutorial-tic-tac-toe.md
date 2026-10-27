@@ -1773,9 +1773,9 @@ export default function Game() {
 }
 ```
 
-Note that you are removing the `export default` keywords before the `function Board() {` declaration and adding them before the `function Game() {` declaration. This tells your `index.js` file to use the `Game` component as the top-level component instead of your `Board` component. The additional `div`s returned by the `Game` component are making room for the game information you'll add to the board later.
+খেয়াল করুন, `function Board() {`-এর আগে থেকে `export default` সরিয়ে `function Game() {`-এর আগে যোগ করছেন। এতে `index.js` টপ-লেভেল কম্পোনেন্ট হিসেবে `Board`-এর বদলে `Game` ব্যবহার করবে। `Game` থেকে রিটার্ন করা অতিরিক্ত `div`-গুলোতে পরে গেমের তথ্য রাখবেন।
 
-Add some state to the `Game` component to track which player is next and the history of moves:
+পরের খেলোয়াড় কে এবং চালের ইতিহাস কী, তা রাখতে `Game`-এ state যোগ করুন:
 
 ```js {2-3}
 export default function Game() {
