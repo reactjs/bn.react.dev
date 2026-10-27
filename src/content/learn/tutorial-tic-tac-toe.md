@@ -1869,7 +1869,7 @@ export default function Game() {
 
 যেমন, `history` যদি `[[null,null,null], ["X",null,null]]` এবং `nextSquares` যদি `["X",null,"O"]` হয়, তবে নতুন `[...history, nextSquares]` অ্যারে হবে `[[null,null,null], ["X",null,null], ["X",null,"O"]]`।
 
-At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
+এ পর্যায়ে state `Game`-এ সরিয়েছেন, আর রিফ্যাক্টর করার আগের মতোই UI পুরোপুরি কাজ করার কথা। কোড এখন এমন হবে:
 
 <Sandpack>
 
@@ -2018,9 +2018,9 @@ body {
 
 </Sandpack>
 
-### Showing the past moves {/*showing-the-past-moves*/}
+### আগের চালগুলো দেখানো {/*showing-the-past-moves*/}
 
-Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
+টিক-ট্যাক-টো গেমের ইতিহাস সংরক্ষণ করছেন বলে এখন খেলোয়াড়কে আগের চালগুলোর তালিকা দেখাতে পারেন।
 
 React elements like `<button>` are regular JavaScript objects; you can pass them around in your application. To render multiple items in React, you can use an array of React elements.
 
