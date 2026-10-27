@@ -731,9 +731,9 @@ function Square({ value }) {
 
 </Note>
 
-As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use *state*.
+পরের ধাপে আপনি চান, `Square` কম্পোনেন্টটি মনে রাখুক যে এতে ক্লিক করা হয়েছে এবং একটি "X" চিহ্ন দেখাক। কোনো কিছু মনে রাখতে কম্পোনেন্ট *state* ব্যবহার করে।
 
-React provides a special function called `useState` that you can call from your component to let it "remember" things. Let's store the current value of the `Square` in state, and change it when the `Square` is clicked.
+React-এর `useState` নামের একটি বিশেষ ফাংশন আছে, যা কম্পোনেন্ট থেকে কল করে কোনো কিছু মনে রাখা যায়। `Square`-এর বর্তমান মান state-এ রাখা যাক এবং `Square`-এ ক্লিক করলে সেটি বদলানো যাক।
 
 Import `useState` at the top of the file. Remove the `value` prop from the `Square` component. Instead, add a new line at the start of the `Square` that calls `useState`. Have it return a state variable called `value`:
 
