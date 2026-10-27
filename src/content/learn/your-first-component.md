@@ -238,9 +238,9 @@ React-এর সাথে প্রথম পরিচয় হলো! গুর�
 
 <Challenges>
 
-#### Export the component {/*export-the-component*/}
+#### কম্পোনেন্ট এক্সপোর্ট করুন {/*export-the-component*/}
 
-This sandbox doesn't work because the root component is not exported:
+রুট কম্পোনেন্ট এক্সপোর্ট করা হয়নি বলে এই sandbox কাজ করছে না:
 
 <Sandpack>
 
@@ -261,11 +261,11 @@ img { height: 181px; }
 
 </Sandpack>
 
-Try to fix it yourself before looking at the solution!
+সমাধান দেখার আগে নিজে ঠিক করার চেষ্টা করুন!
 
 <Solution>
 
-Add `export default` before the function definition like so:
+ফাংশনের আগে এভাবে `export default` যোগ করুন:
 
 <Sandpack>
 
@@ -286,7 +286,7 @@ img { height: 181px; }
 
 </Sandpack>
 
-You might be wondering why writing `export` alone is not enough to fix this example. You can learn the difference between `export` and `export default` in [Importing and Exporting Components.](/learn/importing-and-exporting-components)
+ভাবতে পারেন, শুধু `export` লিখলে উদাহরণটি ঠিক হয় না কেন। `export` ও `export default`-এর পার্থক্য [কম্পোনেন্ট ইম্পোর্ট এবং এক্সপোর্ট করা](/learn/importing-and-exporting-components) পেইজে জানতে পারবেন।
 
 </Solution>
 
