@@ -749,7 +749,7 @@ function Square() {
 
 `value` মানটি ধরে রাখে এবং `setValue` হলো সেই মান পরিবর্তনের ফাংশন। `useState`-এ পাস করা `null` এই state ভ্যারিয়েবলের প্রাথমিক মান হিসেবে ব্যবহৃত হয়। তাই এখানে `value` শুরুতে `null` থাকে।
 
-Since the `Square` component no longer accepts props anymore, you'll remove the `value` prop from all nine of the Square components created by the Board component:
+`Square` কম্পোনেন্ট আর props গ্রহণ করে না। তাই `Board` কম্পোনেন্টের তৈরি নয়টি `Square` কম্পোনেন্ট থেকেই `value` prop সরিয়ে দিন:
 
 ```js {6-8,11-13,16-18}
 // ...
@@ -776,7 +776,7 @@ export default function Board() {
 }
 ```
 
-Now you'll change `Square` to display an "X" when clicked. Replace the `console.log("clicked!");` event handler with `setValue('X');`. Now your `Square` component looks like this:
+এবার ক্লিক করলে "X" দেখানোর জন্য `Square` বদলাবেন। event handler-এর `console.log("clicked!");`-এর বদলে `setValue('X');` লিখুন। এখন `Square` কম্পোনেন্টটি এমন হবে:
 
 ```js {5}
 function Square() {
