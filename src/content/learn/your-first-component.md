@@ -33,9 +33,9 @@ title: আপনার প্রথম কম্পোনেন্ট
 
 এই মার্কআপে লেখাটিকে `<article>`, শিরোনামকে `<h1>` এবং সংক্ষিপ্ত সূচিপত্রকে একটি ক্রমিক তালিকা `<ol>` দিয়ে দেখানো হয়েছে। এমন মার্কআপের সাথে ডিজাইনের জন্য CSS আর ব্যবহারকারীর কাজের প্রতিক্রিয়া দেখানোর জন্য জাভাস্ক্রিপ্ট যোগ হয়। ওয়েবে দেখা প্রতিটি sidebar, avatar, modal, dropdown—UI-এর প্রতিটি অংশের পেছনেই এগুলো থাকে।
 
-React lets you combine your markup, CSS, and JavaScript into custom "components", **reusable UI elements for your app.** The table of contents code you saw above could be turned into a `<TableOfContents />` component you could render on every page. Under the hood, it still uses the same HTML tags like `<article>`, `<h1>`, etc.
+React-এ মার্কআপ, CSS আর জাভাস্ক্রিপ্ট একসাথে মিলিয়ে নিজের কম্পোনেন্ট বানাতে পারেন—**আপনার অ্যাপের UI-এর এমন অংশ, যা বারবার ব্যবহার করা যায়।** উপরের সূচিপত্রের কোড দিয়ে একটি `<TableOfContents />` কম্পোনেন্ট বানিয়ে প্রতিটি পেইজে রেন্ডার করতে পারেন। ভেতরে এটি তখনও `<article>`, `<h1>`-এর মতো একই HTML ট্যাগ ব্যবহার করে।
 
-Just like with HTML tags, you can compose, order and nest components to design whole pages. For example, the documentation page you're reading is made out of React components:
+HTML ট্যাগের মতোই কম্পোনেন্টগুলো সাজিয়ে, একত্রে ব্যবহার করে এবং একটির ভেতরে আরেকটি রেখে পুরো পেইজ ডিজাইন করতে পারেন। যেমন, আপনি যে ডকুমেন্টেশন পেইজটি পড়ছেন, সেটিও React কম্পোনেন্ট দিয়ে তৈরি:
 
 ```js
 <PageLayout>
@@ -51,11 +51,11 @@ Just like with HTML tags, you can compose, order and nest components to design w
 </PageLayout>
 ```
 
-As your project grows, you will notice that many of your designs can be composed by reusing components you already wrote, speeding up your development. Our table of contents above could be added to any screen with `<TableOfContents />`! You can even jumpstart your project with the thousands of components shared by the React open source community like [Chakra UI](https://chakra-ui.com/) and [Material UI.](https://material-ui.com/)
+প্রজেক্ট বড় হলে দেখবেন, আগে লেখা কম্পোনেন্ট আবার ব্যবহার করেই অনেক ডিজাইন তৈরি করা যায়। এতে কাজও দ্রুত এগোয়। উপরের সূচিপত্রটি যেকোনো স্ক্রিনে শুধু `<TableOfContents />` লিখেই যোগ করা যায়! চাইলে React ওপেন সোর্স কমিউনিটির শেয়ার করা হাজারো কম্পোনেন্ট দিয়েও প্রজেক্ট শুরু করতে পারেন, যেমন [Chakra UI](https://chakra-ui.com/) ও [Material UI।](https://material-ui.com/)
 
-## Defining a component {/*defining-a-component*/}
+## কম্পোনেন্ট লেখা {/*defining-a-component*/}
 
-Traditionally when creating web pages, web developers marked up their content and then added interaction by sprinkling on some JavaScript. This worked great when interaction was a nice-to-have on the web. Now it is expected for many sites and all apps. React puts interactivity first while still using the same technology: **a React component is a JavaScript function that you can _sprinkle with markup_.** Here's what that looks like (you can edit the example below):
+আগে ওয়েব ডেভেলপাররা প্রথমে কনটেন্টের মার্কআপ লিখতেন, তারপর প্রয়োজনমতো জাভাস্ক্রিপ্ট যোগ করে ইন্টারঅ্যাক্টিভ করতেন। ওয়েবে ইন্টারঅ্যাক্টিভিটি বাড়তি সুবিধা হিসেবে থাকলে এই পদ্ধতি ভালোই কাজ করত। এখন অনেক ওয়েবসাইটে এবং সব অ্যাপেই ইন্টারঅ্যাক্টিভিটি প্রত্যাশিত। একই প্রযুক্তি ব্যবহার করেও React ইন্টারঅ্যাক্টিভিটিকে শুরু থেকেই গুরুত্ব দেয়: **একটি React কম্পোনেন্ট হলো জাভাস্ক্রিপ্ট ফাংশন, যার মধ্যে _মার্কআপ যোগ করতে পারেন_।** দেখতে কেমন হয় নিচে দেখুন (উদাহরণটি বদলেও দেখতে পারেন):
 
 <Sandpack>
 
