@@ -569,7 +569,7 @@ function Square({ value }) {
 
 `function Square({ value })` নির্দেশ করে যে `Square` কম্পোনেন্টে `value` নামের একটি prop পাস করা যায়।
 
-Now you want to display that `value` instead of `1` inside every square. Try doing it like this:
+এখন প্রতিটি ঘরের ভেতরে `1`-এর বদলে সেই `value` দেখাতে চান। এভাবে চেষ্টা করুন:
 
 ```js {2}
 function Square({ value }) {
@@ -577,7 +577,7 @@ function Square({ value }) {
 }
 ```
 
-Oops, this is not what you wanted:
+ওহ, আপনি তো এটি চাননি:
 
 ![value-filled board](../images/tutorial/board-filled-with-value.png)
 
