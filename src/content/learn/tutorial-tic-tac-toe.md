@@ -2283,9 +2283,9 @@ to
 
 তালিকা আবার রেন্ডার হলে React প্রতিটি আইটেমের key নিয়ে আগের তালিকায় মিলে যাওয়া key খোঁজে। নতুন তালিকায় আগে ছিল না এমন key থাকলে React কম্পোনেন্ট তৈরি করে। আগের তালিকার কোনো key নতুনটিতে না থাকলে পুরোনো কম্পোনেন্ট সরিয়ে দেয়। দুটি key মিলে গেলে সংশ্লিষ্ট কম্পোনেন্টটি সরিয়ে সঠিক জায়গায় রাখে।
 
-Keys tell React about the identity of each component, which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+key প্রতিটি কম্পোনেন্টের পরিচয় জানায়, তাই React রি-রেন্ডারের মাঝেও state ধরে রাখতে পারে। কোনো কম্পোনেন্টের key বদলালে সেটি ধ্বংস হয় এবং নতুন state নিয়ে আবার তৈরি হয়।
 
-`key` is a special and reserved property in React. When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it is passed as props, React automatically uses `key` to decide which components to update. There's no way for a component to ask what `key` its parent specified.
+`key` React-এর একটি বিশেষ ও সংরক্ষিত প্রপার্টি। এলিমেন্ট তৈরি করার সময় React `key` আলাদা করে রিটার্ন করা এলিমেন্টে সরাসরি রাখে। `key`-কে prop হিসেবে পাঠানো মনে হলেও React নিজে এটি দিয়ে কোন কম্পোনেন্ট আপডেট করবে ঠিক করে। প্যারেন্ট কী `key` দিয়েছে তা কোনো কম্পোনেন্ট জানতে পারে না।
 
 **It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
 
