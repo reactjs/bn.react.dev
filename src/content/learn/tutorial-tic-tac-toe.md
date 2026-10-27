@@ -2728,14 +2728,14 @@ export default function Game() {
 
 এখন আর `xIsNext` state ডিক্লেয়ার করা বা `setXIsNext` কল করার দরকার নেই। কম্পোনেন্ট লিখতে ভুল করলেও `xIsNext` ও `currentMove`-এর মধ্যে অমিল হওয়ার সুযোগ নেই।
 
-### Wrapping up {/*wrapping-up*/}
+### সমাপ্তি {/*wrapping-up*/}
 
-Congratulations! You've created a tic-tac-toe game that:
+অভিনন্দন! আপনি এমন একটি টিক-ট্যাক-টো গেম তৈরি করেছেন, যা:
 
-- Lets you play tic-tac-toe,
-- Indicates when a player has won the game,
-- Stores a game's history as a game progresses,
-- Allows players to review a game's history and see previous versions of a game's board.
+- টিক-ট্যাক-টো খেলতে দেয়,
+- কোনো খেলোয়াড় জিতলে তা জানায়,
+- খেলার অগ্রগতির সাথে ইতিহাস সংরক্ষণ করে,
+- খেলোয়াড়দের ইতিহাস দেখতে ও বোর্ডের আগের অবস্থায় ফিরে যেতে দেয়।
 
 Nice work! We hope you now feel like you have a decent grasp of how React works.
 
