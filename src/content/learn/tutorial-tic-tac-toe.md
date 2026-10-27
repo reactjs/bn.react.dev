@@ -2704,7 +2704,7 @@ body {
 
 কোড খেয়াল করলে দেখবেন, `currentMove` জোড় হলে `xIsNext === true` এবং বিজোড় হলে `xIsNext === false`। অর্থাৎ `currentMove` জানা থাকলেই `xIsNext`-এর মান বের করা যায়।
 
-There's no reason for you to store both of these in state. In fact, always try to avoid redundant state. Simplifying what you store in state reduces bugs and makes your code easier to understand. Change `Game` so that it doesn't store `xIsNext` as a separate state variable and instead figures it out based on the `currentMove`:
+দুটিই state-এ রাখার কারণ নেই। আসলে অপ্রয়োজনীয় পুনরাবৃত্ত state সবসময় এড়ানোর চেষ্টা করুন। state সহজ রাখলে বাগ কমে ও কোড বোঝা সহজ হয়। `Game`-এ আলাদা `xIsNext` state না রেখে `currentMove` থেকে মান বের করুন:
 
 ```js {4,11,15}
 export default function Game() {
@@ -2726,7 +2726,7 @@ export default function Game() {
 }
 ```
 
-You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
+এখন আর `xIsNext` state ডিক্লেয়ার করা বা `setXIsNext` কল করার দরকার নেই। কম্পোনেন্ট লিখতে ভুল করলেও `xIsNext` ও `currentMove`-এর মধ্যে অমিল হওয়ার সুযোগ নেই।
 
 ### Wrapping up {/*wrapping-up*/}
 
