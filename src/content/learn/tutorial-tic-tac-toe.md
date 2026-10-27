@@ -273,21 +273,21 @@ body {
 
 </Note>
 
-## Overview {/*overview*/}
+## সংক্ষিপ্ত বিবরণ {/*overview*/}
 
 আপনার সেটাপ সম্পূর্ণ হয়েছে, চলুন React সম্পর্কে ধারণা লাভ করি!
 
-### Starter Code পরিদর্শন {/*inspecting-the-starter-code*/}
+### প্রাথমিক কোড দেখা {/*inspecting-the-starter-code*/}
 
 CodeSandbox-এ আপনি তিনটি প্রধান সেকশন দেখতে পাবেন:
 
-![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
+![প্রাথমিক কোডসহ CodeSandbox](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. _Files_ section যেখানে আপনি ফাইলের তালিকা যেমন, `App.js`, `index.js`, `styles.css` এবং `Piblic` নাম একটি ফোল্ডার দেখতে পাবেন   
-2. _Code Editor_ যেখানে আপনি যে ফাইলটি নির্বাচন করেছেন সেটির সোর্স কোড দেখতে পাবেন 
-3. _Browser_ সেকশন যেখানে আপনি যে কোডটি লিখেছেন সেটি ব্রাউজারে কেমন দেখাবে তা দেখতে পাবেন 
+1. _Files_ সেকশনে `App.js`, `index.js`, `styles.css`-এর মতো ফাইল এবং `public` নামের ফোল্ডার দেখতে পাবেন।
+2. _Code Editor_-এ নির্বাচিত ফাইলের সোর্স কোড দেখতে পাবেন।
+3. _Browser_ সেকশনে আপনার লেখা কোড ব্রাউজারে কেমন দেখায় তা দেখতে পাবেন।
 
-Files সেকশনে `App.js` ফাইলটি নির্বাচিত থাকা উচিত | _Code editor_-এ এই ফাইলটির কন্টেন্ট হলো:
+Files সেকশনে `App.js` ফাইলটি নির্বাচিত থাকার কথা। _Code Editor_-এ এর কনটেন্ট হলো:
 
 ```jsx
 export default function Square() {
