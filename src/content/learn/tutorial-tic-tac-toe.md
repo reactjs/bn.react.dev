@@ -928,7 +928,7 @@ React Developer Tools দিয়ে আপনার React কম্পোনে�
 
 React কম্পোনেন্ট রিফ্যাক্টর করার সময় প্যারেন্ট কম্পোনেন্টে state তুলে নেওয়া খুবই সাধারণ ব্যাপার।
 
-Let's take this opportunity to try it out. Edit the `Board` component so that it declares a state variable named `squares` that defaults to an array of 9 nulls corresponding to the 9 squares:
+এবার সেটি চেষ্টা করে দেখা যাক। `Board` কম্পোনেন্টে `squares` নামের একটি state ভ্যারিয়েবল ডিক্লেয়ার করুন। এর ডিফল্ট মান হবে নয়টি `null`-এর অ্যারে, যা নয়টি ঘরকে নির্দেশ করবে:
 
 ```js {3}
 // ...
@@ -940,7 +940,7 @@ export default function Board() {
 }
 ```
 
-`Array(9).fill(null)` creates an array with nine elements and sets each of them to `null`. The `useState()` call around it declares a `squares` state variable that's initially set to that array. Each entry in the array corresponds to the value of a square. When you fill the board in later, the `squares` array will look like this:
+`Array(9).fill(null)` নয়টি এলিমেন্টের অ্যারে তৈরি করে প্রতিটির মান `null` করে। একে ঘিরে থাকা `useState()` কলটি `squares` state ভ্যারিয়েবল ডিক্লেয়ার করে, যার প্রাথমিক মান ওই অ্যারে। অ্যারের প্রতিটি এন্ট্রি একটি ঘরের মান নির্দেশ করে। পরে বোর্ডে ঘর পূরণ করলে `squares` অ্যারে এমন দেখাবে:
 
 ```jsx
 ['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
