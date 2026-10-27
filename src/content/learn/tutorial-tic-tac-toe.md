@@ -2529,7 +2529,7 @@ export default function Game() {
 }
 ```
 
-If you click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
+ইতিহাসের কোনো ধাপে ক্লিক করলে বোর্ড সঙ্গে সঙ্গে আপডেট হয়ে সেই চালের পরের অবস্থা দেখানোর কথা।
 
 <Sandpack>
 
@@ -2700,9 +2700,9 @@ body {
 
 </Sandpack>
 
-### Final cleanup {/*final-cleanup*/}
+### শেষবারের মতো গুছিয়ে নেওয়া {/*final-cleanup*/}
 
-If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
+কোড খেয়াল করলে দেখবেন, `currentMove` জোড় হলে `xIsNext === true` এবং বিজোড় হলে `xIsNext === false`। অর্থাৎ `currentMove` জানা থাকলেই `xIsNext`-এর মান বের করা যায়।
 
 There's no reason for you to store both of these in state. In fact, always try to avoid redundant state. Simplifying what you store in state reduces bugs and makes your code easier to understand. Change `Game` so that it doesn't store `xIsNext` as a separate state variable and instead figures it out based on the `currentMove`:
 
