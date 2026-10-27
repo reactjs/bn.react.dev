@@ -559,7 +559,7 @@ export default function Board() {
 
 ওহ! আগের সংখ্যাযুক্ত ঘরগুলো আর নেই। এখন প্রতিটি ঘরেই "1" দেখা যাচ্ছে। এটি ঠিক করতে *props* ব্যবহার করে প্যারেন্ট কম্পোনেন্ট (`Board`) থেকে তার চাইল্ড (`Square`)-এ প্রতিটি ঘরের জন্য নির্ধারিত মান পাঠাবেন।
 
-Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
+`Board` থেকে পাঠানো `value` prop পড়ার জন্য `Square` কম্পোনেন্টটি আপডেট করুন:
 
 ```js {1}
 function Square({ value }) {
@@ -567,7 +567,7 @@ function Square({ value }) {
 }
 ```
 
-`function Square({ value })` indicates the Square component can be passed a prop called `value`.
+`function Square({ value })` নির্দেশ করে যে `Square` কম্পোনেন্টে `value` নামের একটি prop পাস করা যায়।
 
 Now you want to display that `value` instead of `1` inside every square. Try doing it like this:
 
