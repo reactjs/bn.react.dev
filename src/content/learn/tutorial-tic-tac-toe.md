@@ -2737,9 +2737,9 @@ export default function Game() {
 - খেলার অগ্রগতির সাথে ইতিহাস সংরক্ষণ করে,
 - খেলোয়াড়দের ইতিহাস দেখতে ও বোর্ডের আগের অবস্থায় ফিরে যেতে দেয়।
 
-Nice work! We hope you now feel like you have a decent grasp of how React works.
+চমৎকার! আশা করি React কীভাবে কাজ করে সে বিষয়ে এখন ভালো ধারণা পেয়েছেন।
 
-Check out the final result here:
+চূড়ান্ত ফলাফল এখানে দেখুন:
 
 <Sandpack>
 
