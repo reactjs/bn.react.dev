@@ -901,11 +901,11 @@ body {
 
 React Developer Tools দিয়ে আপনার React কম্পোনেন্টের props ও state পরীক্ষা করতে পারেন। এটি [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/) এবং [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)-এর ব্রাউজার এক্সটেনশন হিসেবে পাওয়া যায়।
 
-After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
+ইনস্টল করার পরে React ব্যবহার করা সাইটে ব্রাউজারের Developer Tools-এ নতুন একটি *Components* ট্যাব দেখা যাবে। CodeSandbox-এ অনুসরণ করলে প্রথমে sandbox-এর preview নতুন ট্যাবে খুলতে হবে:
 
-![opening in new tab](../images/tutorial/sandbox-new-tab.png)
+![নতুন ট্যাবে preview খোলা](../images/tutorial/sandbox-new-tab.png)
 
-Then, on the preview page, open your browser's DevTools and find the *Components* tab:
+তারপর preview পেইজে ব্রাউজারের DevTools খুলে *Components* ট্যাবটি খুঁজুন:
 
 ![components tab](../images/tutorial/components-tab.png)
 
