@@ -1190,9 +1190,9 @@ export default function Board() {
 }
 ```
 
-Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an *arrow function,* which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
+নতুন `() =>` সিনট্যাক্স খেয়াল করুন। এখানে `() => handleClick(0)` একটি *arrow function*, যা ফাংশন সংজ্ঞায়িত করার সংক্ষিপ্ত উপায়। ঘরে ক্লিক হলে `=>` তীরচিহ্নের পরের কোড চলে এবং `handleClick(0)` কল হয়।
 
-Now you need to update the other eight squares to call `handleClick` from the arrow functions you pass. Make sure that the argument for each call of the `handleClick` corresponds to the index of the correct square:
+এবার বাকি আটটি ঘরেও পাস করা arrow function থেকে `handleClick` কল করার ব্যবস্থা করুন। প্রতিটি কলের আর্গুমেন্ট যেন সংশ্লিষ্ট ঘরের ইনডেক্স হয়, তা নিশ্চিত করুন:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
