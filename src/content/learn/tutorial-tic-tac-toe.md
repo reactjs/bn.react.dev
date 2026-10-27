@@ -1865,9 +1865,9 @@ export default function Game() {
 }
 ```
 
-Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
+এখানে `[...history, nextSquares]` নতুন একটি অ্যারে তৈরি করে। এতে প্রথমে `history`-র সব এলিমেন্ট এবং শেষে `nextSquares` থাকে। (`...history`-এর [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-কে "`history`-র সব এলিমেন্ট বের করে দেওয়া" হিসেবে ভাবতে পারেন।)
 
-For example, if `history` is `[[null,null,null], ["X",null,null]]` and `nextSquares` is `["X",null,"O"]`, then the new `[...history, nextSquares]` array will be `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
+যেমন, `history` যদি `[[null,null,null], ["X",null,null]]` এবং `nextSquares` যদি `["X",null,"O"]` হয়, তবে নতুন `[...history, nextSquares]` অ্যারে হবে `[[null,null,null], ["X",null,null], ["X",null,"O"]]`।
 
 At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
 
