@@ -92,17 +92,17 @@ React কম্পোনেন্ট সাধারণ জাভাস্ক্
 
 </Pitfall>
 
-### Step 3: Add markup {/*step-3-add-markup*/}
+### ধাপ ৩: মার্কআপ যোগ করুন {/*step-3-add-markup*/}
 
-The component returns an `<img />` tag with `src` and `alt` attributes. `<img />` is written like HTML, but it is actually JavaScript under the hood! This syntax is called [JSX](/learn/writing-markup-with-jsx), and it lets you embed markup inside JavaScript.
+কম্পোনেন্টটি `src` ও `alt` attribute-সহ একটি `<img />` ট্যাগ রিটার্ন করে। `<img />` দেখতে HTML-এর মতো হলেও ভেতরে এটি আসলে জাভাস্ক্রিপ্ট! এই সিনট্যাক্সের নাম [JSX](/learn/writing-markup-with-jsx)। এর সাহায্যে জাভাস্ক্রিপ্টের ভেতর মার্কআপ লেখা যায়।
 
-Return statements can be written all on one line, as in this component:
+এই কম্পোনেন্টের মতো পুরো `return` statement এক লাইনেও লিখতে পারেন:
 
 ```js
 return <img src="https://react.dev/images/docs/scientists/MK3eW3As.jpg" alt="Katherine Johnson" />;
 ```
 
-But if your markup isn't all on the same line as the `return` keyword, you must wrap it in a pair of parentheses:
+তবে মার্কআপ যদি `return` কীওয়ার্ডের একই লাইনে না থাকে, তাহলে সেটিকে এক জোড়া বন্ধনীর মধ্যে রাখতে হবে:
 
 ```js
 return (
@@ -114,7 +114,7 @@ return (
 
 <Pitfall>
 
-Without parentheses, any code on the lines after `return` [will be ignored](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)!
+বন্ধনী না দিলে `return`-এর পরের লাইনগুলোর কোড [উপেক্ষা করা হবে](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)!
 
 </Pitfall>
 
