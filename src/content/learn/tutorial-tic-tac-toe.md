@@ -1784,9 +1784,9 @@ export default function Game() {
   // ...
 ```
 
-Notice how `[Array(9).fill(null)]` is an array with a single item, which itself is an array of 9 `null`s.
+খেয়াল করুন, `[Array(9).fill(null)]` একটি মাত্র এলিমেন্টের অ্যারে; সেই এলিমেন্টটিই আবার নয়টি `null`-এর অ্যারে।
 
-To render the squares for the current move, you'll want to read the last squares array from the `history`. You don't need `useState` for this--you already have enough information to calculate it during rendering:
+বর্তমান চালের ঘরগুলো রেন্ডার করতে `history` থেকে শেষ `squares` অ্যারেটি পড়তে হবে। এজন্য `useState` লাগে না—রেন্ডার করার সময় হিসাব করার মতো যথেষ্ট তথ্য ইতিমধ্যে আছে:
 
 ```js {4}
 export default function Game() {
