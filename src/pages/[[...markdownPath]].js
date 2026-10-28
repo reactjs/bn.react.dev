@@ -150,7 +150,7 @@ export async function getStaticPaths() {
         const res = resolve(dir, subdir);
         return (await stat(res)).isDirectory()
           ? getFiles(res)
-          : res.slice(rootDir.length + 1);
+          : res.slice(rootDir.length + 1).replace(/\\/g, '/');
       })
     );
     return (

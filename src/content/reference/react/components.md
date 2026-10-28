@@ -13,10 +13,11 @@ React কিছু বিল্ট-ইন কম্পোনেন্ট উন�
 ## বিল্ট-ইন কম্পোনেন্ট {/*built-in-components*/}
 
 * [`<Fragment>`](/reference/react/Fragment), যাকে `<>...</>` হিসেবেও লেখা হয়, আপনাকে একাধিক JSX নোড এক সাথে গ্রুপ করতে দেয়।
-* [`<Profiler>`](/reference/react/Profiler) আপনাকে প্রোগ্রামের মাধ্যমে একটি React ট্রি-এর রেন্ডারিং পারফরম্যান্স পরিমাপ করতে দেয়। 
+* [`<Profiler>`](/reference/react/Profiler) আপনাকে প্রোগ্রামের মাধ্যমে একটি React ট্রি-এর রেন্ডারিং পারফরম্যান্স পরিমাপ করতে দেয়।
 * [`<Suspense>`](/reference/react/Suspense) চাইল্ড কম্পোনেন্ট লোড হবার সময় ফলব্যাক দেখাতে আপনাকে সাহায্য করে।
-* [`<StrictMode>`](/reference/react/StrictMode) কিছু অতিরিক্ত develop-only চেক সক্রিয় করে দেয় যা আপনাকে আগে থেকেই বিভিন্ন বাগ চিনতে সাহায্য করে।
-* [`<Activity>`](/reference/react/Activity) এটি আপনাকে এর চাইল্ড এলিমেন্টগুলোর (children) ইউজার ইন্টারফেস (UI) এবং ইন্টারনাল স্টেট (internal state) লুকিয়ে রাখা এবং পুনরায় ফিরিয়ে আনার সুবিধা দেয়।.
+* [`<StrictMode>`](/reference/react/StrictMode) কিছু অতিরিক্ত development-only চেক সক্রিয় করে দেয় যা আপনাকে আগে থেকেই বিভিন্ন বাগ চিনতে সাহায্য করে।
+* [`<Activity>`](/reference/react/Activity) এটি আপনাকে এর চাইল্ড এলিমেন্টগুলোর (children) ইউজার ইন্টারফেস (UI) এবং ইন্টারনাল স্টেট (internal state) লুকিয়ে রাখা এবং পুনরায় ফিরিয়ে আনার সুবিধা দেয়।
+* [`<ViewTransition>`](/reference/react/ViewTransition) দিয়ে Transition এবং Suspense-এর সাথে একটি কম্পোনেন্ট ট্রিতে অ্যানিমেশন যোগ করতে পারেন।
 
 ---
 

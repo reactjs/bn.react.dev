@@ -117,7 +117,7 @@ const MyInput = forwardRef(function MyInput(props, ref) {
 });
 ```
 
-এইটা প্যারেন্ট `Form` কম্পোনেন্টকে `MyInput` এর কারণে এক্সপোজ হওয়া <CodeStep step={2}>`<input>` DOM নোড</CodeStep> এক্সেসের সুযোগ দেয়।  
+এইটা প্যারেন্ট `Form` কম্পোনেন্টকে `MyInput` এর কারণে এক্সপোজ হওয়া <CodeStep step={2}>`<input>` DOM নোড</CodeStep> এক্সেসের সুযোগ দেয়।
 
 ```js [[1, 2, "ref"], [1, 10, "ref", 41], [2, 5, "ref.current"]]
 function Form() {
@@ -335,7 +335,7 @@ const FormField = forwardRef(function FormField({ label, isRequired }, ref) {
         ref={ref}
         label={label}
         value={value}
-        onChange={e => setValue(e.target.value)} 
+        onChange={e => setValue(e.target.value)}
       />
       {(isRequired && value === '') &&
         <i>Required</i>

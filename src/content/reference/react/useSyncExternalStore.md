@@ -411,13 +411,13 @@ function ChatIndicator() {
   function subscribe() {
     // ...
   }
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...
 }
 ```
-  
+
 আপনি যদি রি-রেন্ডারের সময় একটি ভিন্ন `subscribe` ফাংশন পাস করেন তবে রিয়েক্ট আপনার স্টোরে পুনরায় সাবস্ক্রাইব করবে। এটি যদি পারফরম্যান্সে সমস্যা তৈরি করে এবং আপনি এই পুনরায় সাবস্ক্রাইব হওয়া এড়াতে চান, তবে `subscribe` ফাংশনটিকে কম্পোনেন্টের বাইরে নিয়ে যান:
 
 ```js {1-4}
@@ -440,7 +440,7 @@ function ChatIndicator({ userId }) {
   const subscribe = useCallback(() => {
     // ...
   }, [userId]);
-  
+
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
 
   // ...

@@ -10,7 +10,7 @@ title: State Logic কে একটি Reducer এ স্থানান্ত�
 
 <YouWillLearn>
 
-- reducer function বলতে কী বুঝায় 
+- reducer function বলতে কী বুঝায়
 - কিভাবে `useState` কে গুছিয়ে `useReducer` এ পরিণত করা যায়
 - কখন reducer ব্যবহার করতে হয়
 - কীভাবে একে ভালভাবে লিখতে হয়
@@ -224,9 +224,9 @@ function handleDeleteTask(taskId) {
 
 - ইউজার যখন "Add" প্রেস করে তখন call করা হয় `handleAddTask(text)`।
 - ইউজার যখন "Save" প্রেস করে কিংবা কোনো task কে toggle (বা edit) করে তখন call করা হয় `handleChangeTask(task)`।
-- ইউজার যখন "Delete" প্রেস করে তখন call করা হয় `handleDeleteTask(taskId)`। 
+- ইউজার যখন "Delete" প্রেস করে তখন call করা হয় `handleDeleteTask(taskId)`।
 
-Reducer দিয়ে state ম্যানেজ করা, state সেট করা থেকে কিছুটা ভিন্ন জিনিস। React কে state সেট করার মাধ্যমে "কী করতে হবে" না বলে, আপনি আপনার event handler গুলো থেকে "action" গুলোকে dispatch করার মাধ্যমে ঠিক করে দেন "ইউজার এইমাত্র কী করলো"। (আর state update logic অন্য আরেক জায়গায় থাকবে!) তাই একটি event handler এর মাধ্যমে "`tasks` সেট করার" পরিবর্তে, আপনি "একটি task add/change/delete করার" action(কাজ) dispatch করবেন। আর এই পদ্ধতিটি ইউজারের আকাঙ্ক্ষাকে বেশি বর্ণনা করে। 
+Reducer দিয়ে state ম্যানেজ করা, state সেট করা থেকে কিছুটা ভিন্ন জিনিস। React কে state সেট করার মাধ্যমে "কী করতে হবে" না বলে, আপনি আপনার event handler গুলো থেকে "action" গুলোকে dispatch করার মাধ্যমে ঠিক করে দেন "ইউজার এইমাত্র কী করলো"। (আর state update logic অন্য আরেক জায়গায় থাকবে!) তাই একটি event handler এর মাধ্যমে "`tasks` সেট করার" পরিবর্তে, আপনি "একটি task add/change/delete করার" action(কাজ) dispatch করবেন। আর এই পদ্ধতিটি ইউজারের আকাঙ্ক্ষাকে বেশি বর্ণনা করে।
 
 ```js
 function handleAddTask(text) {
@@ -294,7 +294,7 @@ function yourReducer(state, action) {
 }
 ```
 
-আপনি reducer থেকে যা return করবেন, React সেটিকে state হিসেবে সেট করে দিবে। 
+আপনি reducer থেকে যা return করবেন, React সেটিকে state হিসেবে সেট করে দিবে।
 
 এই উদাহরণে, state সেট করার লজিককে event handlers থেকে একটি reducer function এ সরাতে, আপনারঃ
 

@@ -52,7 +52,7 @@ stream.pipe(response);
 
 #### সতর্কতা {/*caveats*/}
 
-* এই মেথডটি কোন আউটপুট রিটার্ন করবার আগে সকল [Suspense boundary](/reference/react/Suspense) এর সম্পূর্ণ হবার জন্য অপেক্ষা করবে। 
+* এই মেথডটি কোন আউটপুট রিটার্ন করবার আগে সকল [Suspense boundary](/reference/react/Suspense) এর সম্পূর্ণ হবার জন্য অপেক্ষা করবে।
 
 * React 18 নাগাদ, এই মেথডটি এর সকল আউটপুট বাফার করে, তাই এটা আসলে streaming এর সুবিধা দিতে পারে না। এ কারণেই, এর বদলে  [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করার জন্য আপনাকে পরামর্শ দেওয়া হচ্ছে।
 

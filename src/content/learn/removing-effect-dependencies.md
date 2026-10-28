@@ -412,7 +412,7 @@ function Form() {
 
   function handleSubmit() {
     setSubmitted(true);
-  }  
+  }
 
   // ...
 }
@@ -430,7 +430,7 @@ function Form() {
     // ✅ ভালো: Event-specific logic event handler থেকে কল করা হয়
     post('/api/register');
     showNotification('Successfully registered!', theme);
-  }  
+  }
 
   // ...
 }

@@ -45,7 +45,7 @@ React `<App />` দেখাবে `domNode` এর মধ্যে, এবং �
 
 #### প্যারামিটার {/*parameters*/}
 
-* `reactNode`: একটা *React নোড* যেটা আপনি দেখাতে চান। এটা সাধারণত `<App />` এর মত JSX এর একটি অংশ হবে, কিন্তু আপনি চাইলে [`createElement()`](/reference/react/createElement) দিয়ে তৈরি একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null`, বা `undefined` পাস করতে পারেন। 
+* `reactNode`: একটা *React নোড* যেটা আপনি দেখাতে চান। এটা সাধারণত `<App />` এর মত JSX এর একটি অংশ হবে, কিন্তু আপনি চাইলে [`createElement()`](/reference/react/createElement) দিয়ে তৈরি একটি React এলিমেন্ট, একটি স্ট্রিং, একটি সংখ্যা, `null`, বা `undefined` পাস করতে পারেন।
 
 * `domNode`: একটি [DOM এলিমেন্ট।](https://developer.mozilla.org/en-US/docs/Web/API/Element) React এই DOM এলিমেন্টের মধ্যে আপনার পাস করা `reactNode` দেখাবে। এই মুহুর্ত থেকে শুরু করে, React `domNode` এর ভেতরের DOM ম্যানেজ করবে এবং যখন আপনার React ট্রি বদলাবে সেই হিসেবে আপডেট করবে।
 

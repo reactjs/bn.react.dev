@@ -46,20 +46,25 @@ Client-side এ, server-generated HTML কে ইন্টার‍্যাক�
 
 #### প্যারামিটারস {/*parameters*/}
 
-* `reactNode`: একটি React নোড যেটিকে আপনি HTML এ রেন্ডার করতে চান। উদাহরণস্বরূপ, `<App />` এর মতো একটি JSX element । এটা প্রত্যাশিত যে, এটি পুরো ডকুমেন্ট কে ধারণ করবে, তাই `App` কম্পোনেন্টটির `<html>` ট্যাগ রেন্ডার করার কথা। 
+* `reactNode`: একটি React নোড যেটিকে আপনি HTML এ রেন্ডার করতে চান। উদাহরণস্বরূপ, `<App />` এর মতো একটি JSX element । এটা প্রত্যাশিত যে, এটি পুরো ডকুমেন্ট কে ধারণ করবে, তাই `App` কম্পোনেন্টটির `<html>` ট্যাগ রেন্ডার করার কথা।
 
 * **optional** `options`: একটি object যাতে streaming options থাকবে।
   * **optional** `bootstrapScriptContent`: যদি প্রদান করা হয়, তাহলে এই string টি একটি inline `<script>` tag এ থাকবে।
   * **optional** `bootstrapScripts`: page এ emit করার জন্য `<script>` tag এর string URL গুলোর একটি array। [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করে এমন `<script>` include করতে এটি ব্যবহার করুন। যদি আপনি client এ একেবারেই React রান করতে না চান তাহলে এটি বাদ দিন।
   * **optional** `bootstrapModules`: `bootstrapScripts` এর মতো, কিন্তু এর পরিবর্তে [`<script type="module">`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) emit করে।
+  * **অপশনাল** `formState`: একটি [Server Function](/reference/rsc/server-functions) দিয়ে পরিচালিত ফর্ম জমা দেওয়ার ফলে পাওয়া state। `permalink`-সহ [`useActionState`](/reference/react/useActionState) ব্যবহার করে এমন ফর্ম জমা দেওয়ার প্রতিক্রিয়ায় পেইজটি রেন্ডার করা হলে, ফলস্বরূপ পাওয়া form state পাস করুন। React hydration-এর জন্য এটি HTML-এ যুক্ত করবে। ক্লায়েন্টে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters)-এও একই মান পাস করতে হবে। সাধারণত আপনার ফ্রেমওয়ার্ক এই মান পাস করে দেয়।
   * **optional** `identifierPrefix`: React এ [`useId`](/reference/react/useId) দ্বারা তৈরি ID এর জন্য ব্যবহৃত একটি string prefix। একই page এ একাধিক root ব্যবহার করার সময় conflict এড়াতে কাজে আসে। [`hydrateRoot`](/reference/react-dom/client/hydrateRoot#parameters) এ পাস করা prefix এর অনুরূপ হতে হবে।
+  * **অপশনাল** `importMap`: `imports` এবং `scopes` প্রপার্টিসহ একটি [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) অবজেক্ট। React যেকোনো module script-এর আগে এটিকে inline `<script type="importmap">` ট্যাগ হিসেবে যুক্ত করে, যাতে `<script type="module">` ট্যাগগুলো (যেমন `bootstrapModules` থেকে আসা ট্যাগ) bare module specifier ব্যবহার করতে পারে। <CanaryBadge /> `nonce` দেওয়া থাকলে import map script-এও সেটি প্রয়োগ করা হয়।
+  * **অপশনাল** `maxHeadersLength`: `onHeaders`-এ পাস করা header content-এর সর্বোচ্চ মোট দৈর্ঘ্য, UTF-16 code unit-এ মাপা হয়। ডিফল্ট মান 2000। সীমায় পৌঁছালে React header-এ আর resource hint যোগ করে না।
   * **optional** `namespaceURI`: stream এর জন্য root [namespace URI](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#important_namespace_uris) এর একটি string । ডিফল্টভাবে এটি regular HTML । SVG এর জন্য `'http://www.w3.org/2000/svg'` অথবা MathML এর জন্য `'http://www.w3.org/1998/Math/MathML'` পাস করুন।
-  * **optional** `nonce`: [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) এর জন্য script গুলোকে allow করতে একটি [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string।
+  * **optional** `nonce`: [`script-src` Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) এর জন্য script গুলোকে allow করতে একটি [`nonce`](http://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#nonce) string। script এবং style-এর জন্য আলাদা nonce ব্যবহার করতে চাইলে, `script` এবং `style` প্রপার্টিসহ একটি অবজেক্ট পাস করুন।
   * **optional** `onAllReady`: একটি callback যেটি সকল rendering কমপ্লিট হওয়ার পর ফায়ার হয়, [shell](#specifying-what-goes-into-the-shell) এবং সকল অতিরিক্ত [content](#streaming-more-content-as-it-loads) সহ। [crawler এবং static generation এর জন্য](#waiting-for-all-content-to-load-for-crawlers-and-static-generation) আপনি `onShellReady` এর পরিবর্তে এটি ব্যবহার করতে পারেন। যদি আপনি এখানে streaming শুরু করেন, তাহলে আপনি কোনো progressive loading পাবেন না। stream টিতে final HTML থাকবে।
+  * **অপশনাল** `onBrowserBailout`: [`browser()`](/reference/react-dom/browser) থেকে recover করার সময় React এই callback কল করে। তখন ব্রাউজারে প্রতিস্থাপনের জন্য একটি Suspense fallback রেখে দেওয়া হয়। callback-টি শুধু ব্রাউজারে রেন্ডার করার বিষয়টি বর্ণনা করা একটি `Error` এবং `componentStack`-সহ একটি `errorInfo` অবজেক্ট পায়। `browser`-এ কোনো কারণ পাস করা হলে, সেটি `error.cause`-এ পাওয়া যায়। ডিফল্টভাবে React কিছুই করে না। [শুধু ব্রাউজারে রেন্ডার করার বিষয়টি কীভাবে রিপোর্ট করবেন দেখুন।](/reference/react-dom/browser#reporting-browser-only-rendering-on-the-server)
   * **optional** `onError`: একটি callback যেটি যেকোনো server error হলে ফায়ার হয়, [recoverable](#recovering-from-errors-outside-the-shell) হোক বা [না হোক](#recovering-from-errors-inside-the-shell)। By default, এটি শুধু `console.error` কল করে। যদি আপনি [crash report log করার জন্য](#logging-crashes-on-the-server) এটি override করেন, তাহলে নিশ্চিত করুন যে আপনি তখনো `console.error` কল করতে পারছেন। এছাড়াও shell emit হওয়ার আগে [status code adjust করতে](#setting-the-status-code) এটি ব্যবহার করতে পারেন।
+  * **অপশনাল** `onHeaders`: preconnect এবং stylesheet, ফন্ট বা উচ্চ অগ্রাধিকারের ছবির preload-এর মতো document-এর resource hint নির্ধারণ করার পরে React এই callback কল করে। এটি একটি অবজেক্ট পায়, যার `Link` প্রপার্টিতে সংশ্লিষ্ট [`Link` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/link)-এর মান থাকে। এটি HTTP response header বা [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103) response হিসেবে পাঠাতে পারেন। পাঠানোর মতো resource hint না থাকলেও React এটি কল করে। header content-এর সীমা `maxHeadersLength` দিয়ে নির্ধারিত হয়।
   * **optional** `onShellReady`: একটি callback যেটি [initial shell](#specifying-what-goes-into-the-shell) render হওয়ার ঠিক পরেই ফায়ার হয়। আপনি এখানে [status code set করতে](#setting-the-status-code) এবং streaming শুরু করতে `pipe` কল করতে পারেন। React shell এর পর [অতিরিক্ত content stream করবে](#streaming-more-content-as-it-loads) inline `<script>` tag সহ যেগুলো HTML loading fallback গুলোকে content দিয়ে replace করে।
   * **optional** `onShellError`: একটি callback যেটি initial shell render করতে error হলে ফায়ার হয়। এটি error কে argument হিসেবে receive করে। এখনো stream থেকে কোনো byte emit হয়নি, এবং `onShellReady` বা `onAllReady` কোনোটিই call হবে না, তাই আপনি [একটি fallback HTML shell output করতে পারেন](#recovering-from-errors-inside-the-shell)।
-  * **optional** `progressiveChunkSize`: একটি chunk এ byte এর সংখ্যা। [default heuristic সম্পর্কে আরো পড়ুন।](https://github.com/facebook/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
+  * **optional** `progressiveChunkSize`: একটি chunk এ byte এর সংখ্যা। [default heuristic সম্পর্কে আরো পড়ুন।](https://github.com/react/react/blob/14c2be8dac2d5482fda8a0906a31d239df8551fc/packages/react-server/src/ReactFizzServer.js#L210-L225)
 
 
 #### রিটার্নস {/*returns*/}
@@ -284,17 +289,7 @@ Streaming এর React নিজে browser এ load হওয়ার জন�
 
 <Note>
 
-**শুধুমাত্র Suspense-enabled ডাটা সোর্সগুলো Suspense component কে activate করবে।** এগুলোর মধ্যে রয়েছে:
-
-- [Relay](https://relay.dev/docs/guided-tour/rendering/loading-states/) এবং [Next.js](https://nextjs.org/docs/getting-started/react-essentials) এর মতো Suspense-enabled ফ্রেমওয়ার্ক দিয়ে ডাটা ফেচিং
-- [`lazy`](/reference/react/lazy) দিয়ে কম্পোনেন্ট কোড lazy-load করা
-- [`use`](/reference/react/use) দিয়ে Promise এর value read করা
-
-যদি ডাটা একটি Effect অথবা event handler এর ভিতরে fetch করা হয় তবে Suspense তা **ডিটেক্ট করবে না**।
-
-উপরের `Posts` component এ আপনি ঠিক কিভাবে data load করবেন তা আপনার framework এর উপর নির্ভর করে। যদি আপনি একটি Suspense-enabled framework ব্যবহার করেন, তাহলে আপনি তার data fetching documentation এ বিস্তারিত তথ্য পাবেন।
-
-Opinionated framework ব্যবহার ছাড়া Suspense-enabled ডাটা ফেচিং এখনো সাপোর্টেড না। Suspense-enabled ডাটা সোর্স implement করার requirement গুলো unstable এবং undocumented। Suspense এর সাথে ডাটা সোর্স integrate করার জন্য একটি official API রিয়েক্টের ভবিষ্যৎ ভার্সনে রিলিজ হবে।
+শুধু এমন কোনো উৎস থেকে ডেটা পড়লে রেন্ডারিং suspend হবে, যা [একটি Suspense বাউন্ডারি সক্রিয় করে](/reference/react/Suspense#what-activates-a-suspense-boundary)—যেমন [`use`](/reference/react/use) দিয়ে পড়া একটি Promise। Effect বা event handler-এর ভেতরে fetch করা ডেটা Suspense শনাক্ত করে না।
 
 </Note>
 
@@ -401,7 +396,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Something went wrong</h1>'); 
+    response.send('<h1>Something went wrong</h1>');
   },
   onError(error) {
     console.error(error);
@@ -460,7 +455,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Something went wrong</h1>'); 
+    response.send('<h1>Something went wrong</h1>');
   },
   onError(error) {
     console.error(error);
@@ -486,7 +481,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Something went wrong</h1>'); 
+    response.send('<h1>Something went wrong</h1>');
   },
   onError(error) {
     didError = true;
@@ -530,7 +525,7 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
    response.statusCode = getStatusCode();
    response.setHeader('content-type', 'text/html');
-   response.send('<h1>Something went wrong</h1>'); 
+   response.send('<h1>Something went wrong</h1>');
   },
   onError(error) {
     didError = true;
@@ -570,13 +565,13 @@ const { pipe } = renderToPipeableStream(<App />, {
   onShellError(error) {
     response.statusCode = 500;
     response.setHeader('content-type', 'text/html');
-    response.send('<h1>Something went wrong</h1>'); 
+    response.send('<h1>Something went wrong</h1>');
   },
   onAllReady() {
     if (isCrawler) {
       response.statusCode = didError ? 500 : 200;
       response.setHeader('content-type', 'text/html');
-      pipe(response);      
+      pipe(response);
     }
   },
   onError(error) {

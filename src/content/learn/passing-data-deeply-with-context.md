@@ -11,7 +11,7 @@ title: Context এর মাধ্যমে ডেটা Deeply Pass করা
 <YouWillLearn>
 
 - "Prop drilling (প্রপ ড্রিলিং)" কী
-- কিভাবে context এর ব্যবহার করে বার বার prop পাস করা এড়াবেন 
+- কিভাবে context এর ব্যবহার করে বার বার prop পাস করা এড়াবেন
 - Context ব্যবহারের সাধারণ ক্ষেত্রসমূহ
 - Context এর কিছু প্রচলিত বিকল্প
 
@@ -849,15 +849,15 @@ CSS এ, ভিন্ন ভিন্ন property যেমন `color` এবং
 1. **[প্রপস পাস করা](/learn/passing-props-to-a-component) শুরু করতে পারেন** যদি আপনার কম্পোনেন্টগুলো মামুলি না হয়ে থাকে (মানে সেটি গুরুত্ব বহন করে), তাহলে ডজন খানিক প্রপসকে ডজন খানিক কম্পোনেন্টের মধ্যে দিয়ে পাস করা অস্বাভাবিক নয়। এটি অনেক সময়সাপেক্ষ কঠিন কাজ মানে হতে পারে, কিন্তু এই পদ্ধতিতে কোন কম্পোনেন্ট কোন ডেটা ইউজ করছে সেটি খুব পরিষ্কার হয়ে যায়! যে ব্যক্তি আপনার কোড মেইন্টেইন করবে সে আপনার ডেটা-প্রবাহ প্রপসের মাধ্যমে প্রকাশ্য রাখার জন্য বেশ খুশি হবে।
 2. **কম্পোনেন্টগুলোকে এক্সট্র্যাক্ট (আলাদা) করে নিয়ে [JSX কে `children` হিসেবে পাস করতে পারেন](/learn/passing-props-to-a-component#passing-jsx-as-children)।** যদি আপনি কিছু ডেটা অনেক স্তরের মধ্যে দিয়ে মাঝের এমন অনেক কম্পোনেন্ট ভেদ করে পাস করেন (শুধুমাত্র ডেটাকে অনেক নিচে পাঠানোর উদ্দেশ্যে) যেসব কম্পোনেন্টের ঐ ডেটার প্রয়োজন নেই, প্রায়ই এর মানে এই যে আপনি মাঝের পথের কিছু কম্পোনেন্টকে আলাদা (এক্সট্র্যাক্ট) করতে ভুলে গেছেন। উদাহরণস্বরূপ, হয়তো আপনি ডেটা প্রপ যেমন `posts` এমন দৃশ্যমান কম্পোনেন্টসমূহকে পাস করেছেন যারা সে ডেটা সরাসরি ইউজ করে না, যেমন `<Layout posts={posts} />`। এর পরিবর্তে, `Layout` কে এমন করে দিন যাতে প্রপ হিসেবে `children` কে গ্রহণ করতে পারে, এবং রেন্ডার করে `<Layout><Posts posts={posts} /></Layout>`। এটা ডেটা নির্ধারণকারী কম্পোনেন্ট এবং যে কম্পোনেন্টগুলো ডেটা গ্রহণ করবে তাদের মধ্যবর্তী স্তরের সংখ্যা কমায়।
 
-এই উভয় পদ্ধতিই যদি আপনার কাছে ঠিক না মনে হয় তাহলে কনটেক্সট ব্যবহার নিয়ে ভেবে দেখতে পারেন। 
+এই উভয় পদ্ধতিই যদি আপনার কাছে ঠিক না মনে হয় তাহলে কনটেক্সট ব্যবহার নিয়ে ভেবে দেখতে পারেন।
 
 ## কনটেক্সটের ব্যবহার {/*use-cases-for-context*/}
 
-* **থিমিং:** যদি আপনার অ্যাপ ইউজারকে থিম চেঞ্জ করতে দেয় (যেমন, ডার্ক মোড), তখন আপনি আপনার অ্যাপের সবার উপরের স্তরে একটি কনটেক্সট প্রোভাইডার রাখতে পারেন, এবং কনটেক্সটটি ঐসকল কম্পোনেন্টের ভিতর ইউজ করতে পারেন যাদের বর্ণ থিমের সাথে পরিবর্তন হতে পারে। 
-* **বর্তমান একাউন্ট:** বর্তমানে কোন ইউজার লগড ইন আছে তা অনেক কম্পোনেন্টের জানা দরকার হতে পারে। এই ডেটটি কনটেক্সটি রাখলে tree এর যেকোনো স্থানে ডেটটি রিড করা সুবিধাজনক হয়ে যায়। কিছু অ্যাপ আপনাকে একই সময়ে কয়েকটি একাউন্ট ব্যবহার করতে দেয় (যেমন, আরেক ইউজার হয়ে কমেন্ট করতে দেয়া)। ঐসকল ক্ষেত্রে, UI এর একটি অংশ, ভিন্ন current account ভ্যালুর একটি নেস্টেড প্রোভাইডার দিয়ে wrap করাটা সহজ হতে পারে।
+* **থিমিং:** যদি আপনার অ্যাপ ইউজারকে থিম চেঞ্জ করতে দেয় (যেমন, ডার্ক মোড), তখন আপনি আপনার অ্যাপের সবার উপরের স্তরে একটি কনটেক্সট প্রোভাইডার রাখতে পারেন, এবং কনটেক্সটটি ঐসকল কম্পোনেন্টের ভিতর ইউজ করতে পারেন যাদের বর্ণ থিমের সাথে পরিবর্তন হতে পারে।
+* **বর্তমান একাউন্ট:** বর্তমানে কোন ইউজার লগড ইন আছে তা অনেক কম্পোনেন্টের জানা দরকার হতে পারে। এই ডেটা কনটেক্সটে রাখলে tree এর যেকোনো স্থানে ডেটা রিড করা সুবিধাজনক হয়ে যায়। কিছু অ্যাপ আপনাকে একই সময়ে কয়েকটি একাউন্ট ব্যবহার করতে দেয় (যেমন, আরেক ইউজার হয়ে কমেন্ট করতে দেয়া)। ঐসকল ক্ষেত্রে, UI এর একটি অংশ, ভিন্ন current account ভ্যালুর একটি নেস্টেড প্রোভাইডার দিয়ে wrap করাটা সহজ হতে পারে।
 * **রাউটিং:** অধিকাংশ রাউটিং করার পদ্ধতিগুলো, বর্তমান রাউট মনে রাখার জন্য ভিতরে ভিতরে কনটেক্সট ইউজ করে। এভাবেই প্রত্যেকটি লিঙ্ক "জানতে পারে" যে সে active কিনা। যদি আপনি নিজেই রাউটার তৈরি করেন, আপনিও হয়তো এমনটাই করতে চাইবেন।
 * **স্টেট ম্যানেজ করা:** আপনার অ্যাপ যখন বড় হতে থাকে, আপনি এমন পর্যায়ে চলে যেতে পারেন যখন আপনার অ্যাপের সবার উপরের স্তরের খুব কাছেই অনেক স্টেট একত্র হয়ে যায়। যেগুলো নিচের অনেক দূরবর্তী কম্পোনেন্ট পরিবর্তন করার প্রয়োজন পড়তে পারে। বেশি ঝামেলা ছাড়াই, জটিল স্টেট ম্যানেজ এবং সেগুলোকে নিচের অনেক দূরবর্তী কম্পোনেন্টসের কাছে পাস করার জন্য [একটি reducer কে কনটেক্সটের সাথে ব্যবহার করা](/learn/scaling-up-with-reducer-and-context) খুবই স্বাভাবিক।
-  
+
 কনটেক্সট শুধু স্ট্যাটিক ভ্যালুর মধ্যেই সীমাবদ্ধ নয়। যদি আপনি পরবর্তী রেন্ডারে ভিন্ন ভ্যালু পাস করেন, React তখন এর নিম্নবর্তী সকল কম্পোনেন্ট যেগুলো ঐ ভ্যালু রিড করছিলো তাদেরকে আপডেট করবে! এজন্যই প্রায়ই কনটেক্সট ও স্টেট একত্রে ব্যবহার করা হয়ে থাকে।
 
 সাধারণভাবে, যদি কোনো ইনফর্মেশন tree এর বিভিন্ন অংশে দূরবর্তী কম্পোনেন্টগুলোর প্রয়োজন হয়, তাহলে কনটেক্সট তখন আপনার উপকারে আসবে এটি তার উত্তম লক্ষণ।
@@ -963,27 +963,27 @@ export const places = [{
   description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
   imageId: 'K9HVAGH'
 }, {
-  id: 1, 
+  id: 1,
   name: 'Rainbow Village in Taichung, Taiwan',
   description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
   imageId: '9EAYZrt'
 }, {
-  id: 2, 
+  id: 2,
   name: 'Macromural de Pachuca, Mexico',
   description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
   imageId: 'DgXHVwu'
 }, {
-  id: 3, 
+  id: 3,
   name: 'Selarón Staircase in Rio de Janeiro, Brazil',
   description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people."',
   imageId: 'aeO3rpI'
 }, {
-  id: 4, 
+  id: 4,
   name: 'Burano, Italy',
   description: 'The houses are painted following a specific color system dating back to 16th century.',
   imageId: 'kxsph5C'
 }, {
-  id: 5, 
+  id: 5,
   name: 'Chefchaouen, Marocco',
   description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
   imageId: 'rTqKo46'
@@ -998,7 +998,7 @@ export const places = [{
 ```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1007,9 +1007,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
@@ -1102,27 +1102,27 @@ export const places = [{
   description: 'The tradition of choosing bright colors for houses began in the late 20th century.',
   imageId: 'K9HVAGH'
 }, {
-  id: 1, 
+  id: 1,
   name: 'Rainbow Village in Taichung, Taiwan',
   description: 'To save the houses from demolition, Huang Yung-Fu, a local resident, painted all 1,200 of them in 1924.',
   imageId: '9EAYZrt'
 }, {
-  id: 2, 
+  id: 2,
   name: 'Macromural de Pachuca, Mexico',
   description: 'One of the largest murals in the world covering homes in a hillside neighborhood.',
   imageId: 'DgXHVwu'
 }, {
-  id: 3, 
+  id: 3,
   name: 'Selarón Staircase in Rio de Janeiro, Brazil',
   description: 'This landmark was created by Jorge Selarón, a Chilean-born artist, as a "tribute to the Brazilian people".',
   imageId: 'aeO3rpI'
 }, {
-  id: 4, 
+  id: 4,
   name: 'Burano, Italy',
   description: 'The houses are painted following a specific color system dating back to 16th century.',
   imageId: 'kxsph5C'
 }, {
-  id: 5, 
+  id: 5,
   name: 'Chefchaouen, Marocco',
   description: 'There are a few theories on why the houses are painted blue, including that the color repels mosquitos or that it symbolizes sky and heaven.',
   imageId: 'rTqKo46'
@@ -1137,7 +1137,7 @@ export const places = [{
 ```js src/utils.js
 export function getImageUrl(place) {
   return (
-    'https://i.imgur.com/' +
+    'https://react.dev/images/docs/scientists/' +
     place.imageId +
     'l.jpg'
   );
@@ -1146,9 +1146,9 @@ export function getImageUrl(place) {
 
 ```css
 ul { list-style-type: none; padding: 0px 10px; }
-li { 
-  margin-bottom: 10px; 
-  display: grid; 
+li {
+  margin-bottom: 10px;
+  display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
   align-items: center;
