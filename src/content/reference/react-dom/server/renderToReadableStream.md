@@ -4,7 +4,7 @@ title: renderToReadableStream
 
 <Intro>
 
-`renderToReadableStream` renders a React tree to a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+`renderToReadableStream` একটি রিয়েক্ট ট্রিকে একটি [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) এ রেন্ডার করে।
 
 ```js
 const stream = await renderToReadableStream(reactNode, options?)
@@ -16,17 +16,17 @@ const stream = await renderToReadableStream(reactNode, options?)
 
 <Note>
 
-This API depends on [Web Streams.](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) For Node.js, use [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) instead.
+এই API [Web Streams](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) এর উপর নির্ভর করে। Node.js এর জন্য, এর পরিবর্তে [`renderToPipeableStream`](/reference/react-dom/server/renderToPipeableStream) ব্যবহার করুন।
 
 </Note>
 
 ---
 
-## Reference {/*reference*/}
+## রেফারেন্স {/*reference*/}
 
 ### `renderToReadableStream(reactNode, options?)` {/*rendertoreadablestream*/}
 
-Call `renderToReadableStream` to render your React tree as HTML into a [Readable Web Stream.](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+আপনার রিয়েক্ট ট্রিকে HTML হিসেবে একটি [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) এ রেন্ডার করতে `renderToReadableStream` কল করুন।
 
 ```js
 import { renderToReadableStream } from 'react-dom/server';
@@ -41,9 +41,9 @@ async function handler(request) {
 }
 ```
 
-On the client, call [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) to make the server-generated HTML interactive.
+ক্লায়েন্টে, সার্ভারে জেনারেট হওয়া HTML কে ইন্টারঅ্যাক্টিভ করতে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) কল করুন।
 
-[See more examples below.](#usage)
+[নিচে আরও উদাহরণ দেখুন।](#usage)
 
 #### Parameters {/*parameters*/}
 
