@@ -504,9 +504,9 @@ async function handler(request) {
 
 ---
 
-### Handling different errors in different ways {/*handling-different-errors-in-different-ways*/}
+### বিভিন্ন ধরনের এরর বিভিন্ন ভাবে হ্যান্ডেল করা {/*handling-different-errors-in-different-ways*/}
 
-You can [create your own `Error` subclasses](https://javascript.info/custom-errors) and use the [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) operator to check which error is thrown. For example, you can define a custom `NotFoundError` and throw it from your component. Then you can save the error in `onError` and do something different before returning the response depending on the error type:
+আপনি [নিজস্ব `Error` সাবক্লাস তৈরি করতে পারেন](https://javascript.info/custom-errors) এবং কোন এরর থ্রো হয়েছে তা যাচাই করতে [`instanceof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) অপারেটর ব্যবহার করতে পারেন। উদাহরণস্বরূপ, আপনি একটি কাস্টম `NotFoundError` ডিফাইন করে আপনার কম্পোনেন্ট থেকে সেটি থ্রো করতে পারেন। তারপর আপনি `onError` এ এররটি সেভ করে রাখতে পারেন এবং এররের টাইপের উপর নির্ভর করে রেসপন্স রিটার্ন করার আগে ভিন্ন কিছু করতে পারেন:
 
 ```js {2-3,5-15,22,28,33}
 async function handler(request) {
@@ -548,7 +548,7 @@ async function handler(request) {
 }
 ```
 
-Keep in mind that once you emit the shell and start streaming, you can't change the status code.
+মনে রাখবেন, একবার শেল এমিট করে স্ট্রিমিং শুরু করে দিলে আপনি আর স্ট্যাটাস কোড পরিবর্তন করতে পারবেন না।
 
 ---
 
