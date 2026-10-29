@@ -79,11 +79,11 @@ async function handler(request) {
 
 ---
 
-## Usage {/*usage*/}
+## ব্যবহার {/*usage*/}
 
-### Rendering a React tree as HTML to a Readable Web Stream {/*rendering-a-react-tree-as-html-to-a-readable-web-stream*/}
+### রিয়েক্ট ট্রিকে HTML হিসেবে একটি Readable Web Stream এ রেন্ডার করা {/*rendering-a-react-tree-as-html-to-a-readable-web-stream*/}
 
-Call `renderToReadableStream` to render your React tree as HTML into a [Readable Web Stream:](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+আপনার রিয়েক্ট ট্রিকে HTML হিসেবে একটি [Readable Web Stream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) এ রেন্ডার করতে `renderToReadableStream` কল করুন:
 
 ```js [[1, 4, "<App />"], [2, 5, "['/main.js']"]]
 import { renderToReadableStream } from 'react-dom/server';
@@ -98,9 +98,9 @@ async function handler(request) {
 }
 ```
 
-Along with the <CodeStep step={1}>root component</CodeStep>, you need to provide a list of <CodeStep step={2}>bootstrap `<script>` paths</CodeStep>. Your root component should return **the entire document including the root `<html>` tag.**
+<CodeStep step={1}>রুট কম্পোনেন্টের</CodeStep> সাথে, আপনাকে <CodeStep step={2}>বুটস্ট্র্যাপ `<script>` পাথগুলোর</CodeStep> একটি লিস্ট দিতে হবে। আপনার রুট কম্পোনেন্টটির **রুট `<html>` ট্যাগসহ পুরো ডকুমেন্ট রিটার্ন করা উচিত।**
 
-For example, it might look like this:
+উদাহরণস্বরূপ, এটি দেখতে এরকম হতে পারে:
 
 ```js [[1, 1, "App"]]
 export default function App() {
@@ -120,7 +120,7 @@ export default function App() {
 }
 ```
 
-React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) and your <CodeStep step={2}>bootstrap `<script>` tags</CodeStep> into the resulting HTML stream:
+রিয়েক্ট [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>বুটস্ট্র্যাপ `<script>` ট্যাগগুলো</CodeStep> ফলাফলস্বরূপ পাওয়া HTML স্ট্রিমে ইনজেক্ট করবে:
 
 ```html [[2, 5, "/main.js"]]
 <!DOCTYPE html>
@@ -130,7 +130,7 @@ React will inject the [doctype](https://developer.mozilla.org/en-US/docs/Glossar
 <script src="/main.js" async=""></script>
 ```
 
-On the client, your bootstrap script should [hydrate the entire `document` with a call to `hydrateRoot`:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
+ক্লায়েন্টে, আপনার বুটস্ট্র্যাপ স্ক্রিপ্টের উচিত [`hydrateRoot` কল করে পুরো `document` হাইড্রেট করা:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
@@ -139,15 +139,15 @@ import App from './App.js';
 hydrateRoot(document, <App />);
 ```
 
-This will attach event listeners to the server-generated HTML and make it interactive.
+এটি সার্ভারে জেনারেট হওয়া HTML এ ইভেন্ট লিসেনার যুক্ত করবে এবং এটিকে ইন্টারঅ্যাক্টিভ করে তুলবে।
 
 <DeepDive>
 
-#### Reading CSS and JS asset paths from the build output {/*reading-css-and-js-asset-paths-from-the-build-output*/}
+#### বিল্ড আউটপুট থেকে CSS এবং JS অ্যাসেট পাথ রিড করা {/*reading-css-and-js-asset-paths-from-the-build-output*/}
 
-The final asset URLs (like JavaScript and CSS files) are often hashed after the build. For example, instead of `styles.css` you might end up with `styles.123456.css`. Hashing static asset filenames guarantees that every distinct build of the same asset will have a different filename. This is useful because it lets you safely enable long-term caching for static assets: a file with a certain name would never change content.
+চূড়ান্ত অ্যাসেট URL গুলো (যেমন JavaScript এবং CSS ফাইল) প্রায়ই বিল্ডের পরে হ্যাশ করা হয়। উদাহরণস্বরূপ, `styles.css` এর পরিবর্তে আপনি হয়তো `styles.123456.css` পাবেন। স্ট্যাটিক অ্যাসেটের ফাইলনেম হ্যাশ করা নিশ্চিত করে যে একই অ্যাসেটের প্রতিটি আলাদা বিল্ডের ফাইলনেম আলাদা হবে। এটি উপকারী কারণ এটি আপনাকে স্ট্যাটিক অ্যাসেটের জন্য নিরাপদে লং-টার্ম ক্যাশিং (long-term caching) চালু করতে দেয়: একটি নির্দিষ্ট নামের ফাইলের কনটেন্ট কখনো পরিবর্তন হবে না।
 
-However, if you don't know the asset URLs until after the build, there's no way for you to put them in the source code. For example, hardcoding `"/styles.css"` into JSX like earlier wouldn't work. To keep them out of your source code, your root component can read the real filenames from a map passed as a prop:
+তবে, বিল্ড হওয়ার আগ পর্যন্ত যদি আপনি অ্যাসেট URL গুলো না জানেন, তাহলে সেগুলো সোর্স কোডে রাখার কোনো উপায় নেই। উদাহরণস্বরূপ, আগের মতো JSX এ `"/styles.css"` হার্ডকোড করা কাজ করবে না। এগুলোকে আপনার সোর্স কোডের বাইরে রাখতে, আপনার রুট কম্পোনেন্ট একটি প্রপ হিসেবে পাস করা ম্যাপ থেকে আসল ফাইলনেমগুলো রিড করতে পারে:
 
 ```js {1,6}
 export default function App({ assetMap }) {
@@ -163,7 +163,7 @@ export default function App({ assetMap }) {
 }
 ```
 
-On the server, render `<App assetMap={assetMap} />` and pass your `assetMap` with the asset URLs:
+সার্ভারে, `<App assetMap={assetMap} />` রেন্ডার করুন এবং অ্যাসেট URL গুলোসহ আপনার `assetMap` পাস করুন:
 
 ```js {1-5,8,9}
 // You'd need to get this JSON from your build tooling, e.g. read it from the build output.
@@ -182,7 +182,7 @@ async function handler(request) {
 }
 ```
 
-Since your server is now rendering `<App assetMap={assetMap} />`, you need to render it with `assetMap` on the client too to avoid hydration errors. You can serialize and pass `assetMap` to the client like this:
+যেহেতু আপনার সার্ভার এখন `<App assetMap={assetMap} />` রেন্ডার করছে, তাই হাইড্রেশন এরর এড়াতে আপনাকে ক্লায়েন্টেও `assetMap` সহ এটি রেন্ডার করতে হবে। আপনি এভাবে `assetMap` সিরিয়ালাইজ (serialize) করে ক্লায়েন্টে পাস করতে পারেন:
 
 ```js {9-10}
 // You'd need to get this JSON from your build tooling.
@@ -203,7 +203,7 @@ async function handler(request) {
 }
 ```
 
-In the example above, the `bootstrapScriptContent` option adds an extra inline `<script>` tag that sets the global `window.assetMap` variable on the client. This lets the client code read the same `assetMap`:
+উপরের উদাহরণে, `bootstrapScriptContent` অপশনটি একটি অতিরিক্ত ইনলাইন `<script>` ট্যাগ যোগ করে যেটি ক্লায়েন্টে গ্লোবাল `window.assetMap` ভ্যারিয়েবল সেট করে। এটি ক্লায়েন্ট কোডকে একই `assetMap` রিড করতে দেয়:
 
 ```js {4}
 import { hydrateRoot } from 'react-dom/client';
@@ -212,7 +212,7 @@ import App from './App.js';
 hydrateRoot(document, <App assetMap={window.assetMap} />);
 ```
 
-Both client and server render `App` with the same `assetMap` prop, so there are no hydration errors.
+ক্লায়েন্ট এবং সার্ভার উভয়ই একই `assetMap` প্রপসহ `App` রেন্ডার করে, তাই কোনো হাইড্রেশন এরর হবে না।
 
 </DeepDive>
 
