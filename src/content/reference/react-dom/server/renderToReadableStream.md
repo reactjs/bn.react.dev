@@ -218,9 +218,9 @@ hydrateRoot(document, <App assetMap={window.assetMap} />);
 
 ---
 
-### Streaming more content as it loads {/*streaming-more-content-as-it-loads*/}
+### লোড হতে হতে আরও কনটেন্ট স্ট্রিম করা {/*streaming-more-content-as-it-loads*/}
 
-Streaming allows the user to start seeing the content even before all the data has loaded on the server. For example, consider a profile page that shows a cover, a sidebar with friends and photos, and a list of posts:
+স্ট্রিমিং ইউজারকে সার্ভারে সব ডেটা লোড হওয়ার আগেই কনটেন্ট দেখা শুরু করতে দেয়। উদাহরণস্বরূপ, একটি প্রোফাইল পেজের কথা ভাবুন যেটি একটি কভার, ফ্রেন্ড এবং ফটোসহ একটি সাইডবার, এবং পোস্টের একটি লিস্ট দেখায়:
 
 ```js
 function ProfilePage() {
@@ -237,7 +237,7 @@ function ProfilePage() {
 }
 ```
 
-Imagine that loading data for `<Posts />` takes some time. Ideally, you'd want to show the rest of the profile page content to the user without waiting for the posts. To do this, [wrap `Posts` in a `<Suspense>` boundary:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
+ধরুন `<Posts />` এর জন্য ডেটা লোড হতে কিছুটা সময় লাগে। আদর্শভাবে, আপনি পোস্টগুলোর জন্য অপেক্ষা না করেই ইউজারকে প্রোফাইল পেজের বাকি কনটেন্ট দেখাতে চাইবেন। এটি করতে, [`Posts` কে একটি `<Suspense>` বাউন্ডারিতে র‍্যাপ করুন:](/reference/react/Suspense#displaying-a-fallback-while-content-is-loading)
 
 ```js {9,11}
 function ProfilePage() {
@@ -256,9 +256,9 @@ function ProfilePage() {
 }
 ```
 
-This tells React to start streaming the HTML before `Posts` loads its data. React will send the HTML for the loading fallback (`PostsGlimmer`) first, and then, when `Posts` finishes loading its data, React will send the remaining HTML along with an inline `<script>` tag that replaces the loading fallback with that HTML. From the user's perspective, the page will first appear with the `PostsGlimmer`, later replaced by the `Posts`.
+এটি রিয়েক্টকে `Posts` তার ডেটা লোড করার আগেই HTML স্ট্রিমিং শুরু করতে বলে। রিয়েক্ট প্রথমে লোডিং ফলব্যাক (`PostsGlimmer`) এর HTML পাঠাবে, এবং তারপর, যখন `Posts` তার ডেটা লোড করা শেষ করবে, রিয়েক্ট বাকি HTML টি একটি ইনলাইন `<script>` ট্যাগসহ পাঠাবে যেটি লোডিং ফলব্যাককে সেই HTML দিয়ে রিপ্লেস করবে। ইউজারের দৃষ্টিকোণ থেকে, পেজটি প্রথমে `PostsGlimmer` সহ দেখা যাবে, পরে সেটি `Posts` দিয়ে রিপ্লেস হবে।
 
-You can further [nest `<Suspense>` boundaries](/reference/react/Suspense#revealing-nested-content-as-it-loads) to create a more granular loading sequence:
+আরও গ্রানুলার (granular) লোডিং সিকোয়েন্স তৈরি করতে আপনি [`<Suspense>` বাউন্ডারিগুলোকে আরও নেস্ট](/reference/react/Suspense#revealing-nested-content-as-it-loads) করতে পারেন:
 
 ```js {5,13}
 function ProfilePage() {
@@ -280,15 +280,15 @@ function ProfilePage() {
 ```
 
 
-In this example, React can start streaming the page even earlier. Only `ProfileLayout` and `ProfileCover` must finish rendering first because they are not wrapped in any `<Suspense>` boundary. However, if `Sidebar`, `Friends`, or `Photos` need to load some data, React will send the HTML for the `BigSpinner` fallback instead. Then, as more data becomes available, more content will continue to be revealed until all of it becomes visible.
+এই উদাহরণে, রিয়েক্ট পেজটির স্ট্রিমিং আরও আগে শুরু করতে পারে। শুধুমাত্র `ProfileLayout` এবং `ProfileCover` কে প্রথমে রেন্ডারিং শেষ করতে হবে কারণ এগুলো কোনো `<Suspense>` বাউন্ডারিতে র‍্যাপ করা নেই। তবে, যদি `Sidebar`, `Friends`, অথবা `Photos` এর কোনো ডেটা লোড করার প্রয়োজন হয়, রিয়েক্ট তার পরিবর্তে `BigSpinner` ফলব্যাকের HTML পাঠাবে। তারপর, যত বেশি ডেটা পাওয়া যাবে, তত বেশি কনটেন্ট প্রকাশিত হতে থাকবে যতক্ষণ না সবকিছু দৃশ্যমান হয়।
 
-Streaming does not need to wait for React itself to load in the browser, or for your app to become interactive. The HTML content from the server will get progressively revealed before any of the `<script>` tags load.
+স্ট্রিমিংয়ের জন্য ব্রাউজারে রিয়েক্ট নিজে লোড হওয়া পর্যন্ত, অথবা আপনার অ্যাপ ইন্টারঅ্যাক্টিভ হওয়া পর্যন্ত অপেক্ষা করার প্রয়োজন নেই। সার্ভার থেকে আসা HTML কনটেন্ট কোনো `<script>` ট্যাগ লোড হওয়ার আগেই ধাপে ধাপে প্রকাশিত হতে থাকবে।
 
-[Read more about how streaming HTML works.](https://github.com/reactwg/react-18/discussions/37)
+[HTML স্ট্রিমিং কীভাবে কাজ করে সে সম্পর্কে আরও পড়ুন।](https://github.com/reactwg/react-18/discussions/37)
 
 <Note>
 
-Only data read from a source that [activates a Suspense boundary](/reference/react/Suspense#what-activates-a-suspense-boundary), such as a Promise read with [`use`](/reference/react/use), will suspend during rendering. Suspense does not detect data fetched inside an Effect or event handler.
+শুধুমাত্র এমন কোনো সোর্স থেকে রিড করা ডেটা রেন্ডারিংয়ের সময় সাসপেন্ড (suspend) করবে যেটি [একটি Suspense বাউন্ডারিকে অ্যাক্টিভেট করে](/reference/react/Suspense#what-activates-a-suspense-boundary), যেমন [`use`](/reference/react/use) দিয়ে রিড করা একটি Promise। কোনো Effect বা ইভেন্ট হ্যান্ডলারের ভেতরে ফেচ করা ডেটা Suspense শনাক্ত করতে পারে না।
 
 </Note>
 
