@@ -345,9 +345,9 @@ async function handler(request) {
 
 ---
 
-### Logging crashes on the server {/*logging-crashes-on-the-server*/}
+### সার্ভারে ক্র্যাশ লগ করা {/*logging-crashes-on-the-server*/}
 
-By default, all errors on the server are logged to console. You can override this behavior to log crash reports:
+স্বাভাবিকভাবে, সার্ভারের সকল এরর কনসোলে লগ হয়। ক্র্যাশ রিপোর্ট লগ করতে আপনি এই আচরণ ওভাররাইড করতে পারেন:
 
 ```js {4-7}
 async function handler(request) {
@@ -364,7 +364,7 @@ async function handler(request) {
 }
 ```
 
-If you provide a custom `onError` implementation, don't forget to also log errors to the console like above.
+যদি আপনি একটি কাস্টম `onError` ইমপ্লিমেন্টেশন দেন, তাহলে উপরের মতো কনসোলেও এরর লগ করতে ভুলবেন না।
 
 ---
 
