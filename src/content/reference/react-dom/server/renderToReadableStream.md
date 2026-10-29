@@ -552,13 +552,13 @@ async function handler(request) {
 
 ---
 
-### Waiting for all content to load for crawlers and static generation {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
+### ক্রলার এবং স্ট্যাটিক জেনারেশনের জন্য সব কনটেন্ট লোড হওয়া পর্যন্ত অপেক্ষা করা {/*waiting-for-all-content-to-load-for-crawlers-and-static-generation*/}
 
-Streaming offers a better user experience because the user can see the content as it becomes available.
+স্ট্রিমিং একটি ভালো ইউজার এক্সপেরিয়েন্স দেয় কারণ ইউজার কনটেন্ট প্রস্তুত হওয়ার সাথে সাথেই তা দেখতে পারে।
 
-However, when a crawler visits your page, or if you're generating the pages at the build time, you might want to let all of the content load first and then produce the final HTML output instead of revealing it progressively.
+তবে, যখন কোনো ক্রলার (crawler) আপনার পেজ ভিজিট করে, অথবা আপনি যদি বিল্ড টাইমে পেজগুলো জেনারেট করেন, তখন আপনি হয়তো ধাপে ধাপে দেখানোর বদলে আগে সব কনটেন্ট লোড হতে দিয়ে তারপর চূড়ান্ত HTML আউটপুট তৈরি করতে চাইবেন।
 
-You can wait for all the content to load by awaiting the `stream.allReady` Promise:
+`stream.allReady` Promise টি await করার মাধ্যমে আপনি সব কনটেন্ট লোড হওয়া পর্যন্ত অপেক্ষা করতে পারেন:
 
 ```js {12-15}
 async function handler(request) {
@@ -589,7 +589,7 @@ async function handler(request) {
 }
 ```
 
-A regular visitor will get a stream of progressively loaded content. A crawler will receive the final HTML output after all the data loads. However, this also means that the crawler will have to wait for *all* data, some of which might be slow to load or error. Depending on your app, you could choose to send the shell to the crawlers too.
+একজন সাধারণ ভিজিটর ধাপে ধাপে (progressively) লোড হওয়া কনটেন্টের একটি স্ট্রিম পাবে। একটি ক্রলার সব ডেটা লোড হওয়ার পর চূড়ান্ত HTML আউটপুট পাবে। তবে, এর মানে এটাও যে ক্রলারকে *সব* ডেটার জন্য অপেক্ষা করতে হবে, যার কিছু হয়তো লোড হতে ধীর হতে পারে অথবা এরর হতে পারে। আপনার অ্যাপের ধরন অনুযায়ী, আপনি চাইলে ক্রলারদের কাছেও শুধু শেলটি পাঠাতে পারেন।
 
 ---
 
