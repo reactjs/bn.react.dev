@@ -442,11 +442,11 @@ function ProfilePage() {
 
 ---
 
-### Setting the status code {/*setting-the-status-code*/}
+### স্ট্যাটাস কোড সেট করা {/*setting-the-status-code*/}
 
-Streaming introduces a tradeoff. You want to start streaming the page as early as possible so that the user can see the content sooner. However, once you start streaming, you can no longer set the response status code.
+স্ট্রিমিং একটি ট্রেডঅফ (tradeoff) নিয়ে আসে। আপনি যত তাড়াতাড়ি সম্ভব পেজ স্ট্রিমিং শুরু করতে চান যাতে ইউজার তাড়াতাড়ি কনটেন্ট দেখতে পায়। তবে, একবার স্ট্রিমিং শুরু করলে, আপনি আর রেসপন্স স্ট্যাটাস কোড সেট করতে পারবেন না।
 
-By [dividing your app](#specifying-what-goes-into-the-shell) into the shell (above all `<Suspense>` boundaries) and the rest of the content, you've already solved a part of this problem. If the shell errors, your `catch` block will run which lets you set the error status code. Otherwise, you know that the app may recover on the client, so you can send "OK".
+আপনার অ্যাপকে শেল (সকল `<Suspense>` বাউন্ডারির উপরের অংশ) এবং বাকি কনটেন্টে [ভাগ করে](#specifying-what-goes-into-the-shell), আপনি ইতিমধ্যে এই সমস্যার একটি অংশ সমাধান করে ফেলেছেন। যদি শেলে এরর হয়, তাহলে আপনার `catch` ব্লকটি রান করবে যা আপনাকে এরর স্ট্যাটাস কোড সেট করতে দেয়। অন্যথায়, আপনি জানেন যে অ্যাপটি ক্লায়েন্টে রিকভার করতে পারে, তাই আপনি "OK" পাঠাতে পারেন।
 
 ```js {11}
 async function handler(request) {
@@ -471,9 +471,9 @@ async function handler(request) {
 }
 ```
 
-If a component *outside* the shell (i.e. inside a `<Suspense>` boundary) throws an error, React will not stop rendering. This means that the `onError` callback will fire, but your code will continue running without getting into the `catch` block. This is because React will try to recover from that error on the client, [as described above.](#recovering-from-errors-outside-the-shell)
+যদি শেলের *বাইরের* (অর্থাৎ কোনো `<Suspense>` বাউন্ডারির ভেতরে থাকা) কোনো কম্পোনেন্ট একটি এরর থ্রো করে, রিয়েক্ট রেন্ডারিং থামাবে না। এর মানে হলো `onError` কলব্যাক ফায়ার হবে, কিন্তু আপনার কোড `catch` ব্লকে না গিয়েই রান হতে থাকবে। এর কারণ হলো রিয়েক্ট ক্লায়েন্টে ওই এরর থেকে রিকভার করার চেষ্টা করবে, [উপরে যেমন ব্যাখ্যা করা হয়েছে।](#recovering-from-errors-outside-the-shell)
 
-However, if you'd like, you can use the fact that something has errored to set the status code:
+তবে চাইলে, কোনো কিছুতে এরর হয়েছে—এই তথ্যটি ব্যবহার করে আপনি স্ট্যাটাস কোড সেট করতে পারেন:
 
 ```js {3,7,13}
 async function handler(request) {
@@ -500,7 +500,7 @@ async function handler(request) {
 }
 ```
 
-This will only catch errors outside the shell that happened while generating the initial shell content, so it's not exhaustive. If knowing whether an error occurred for some content is critical, you can move it up into the shell.
+এটি শুধুমাত্র প্রাথমিক শেল কনটেন্ট তৈরি হওয়ার সময় শেলের বাইরে ঘটে যাওয়া এররগুলোই ধরবে, তাই এটি পূর্ণাঙ্গ (exhaustive) নয়। যদি কোনো নির্দিষ্ট কনটেন্টে এরর হয়েছে কি না জানা অত্যন্ত গুরুত্বপূর্ণ হয়, তাহলে আপনি সেই কনটেন্টকে শেলের ভেতরে নিয়ে আসতে পারেন।
 
 ---
 
