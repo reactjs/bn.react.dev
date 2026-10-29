@@ -413,9 +413,9 @@ async function handler(request) {
 
 ---
 
-### Recovering from errors outside the shell {/*recovering-from-errors-outside-the-shell*/}
+### শেলের বাইরের এরর থেকে রিকভার করা {/*recovering-from-errors-outside-the-shell*/}
 
-In this example, the `<Posts />` component is wrapped in `<Suspense>` so it is *not* a part of the shell:
+এই উদাহরণে, `<Posts />` কম্পোনেন্টটি `<Suspense>` এ র‍্যাপ করা আছে তাই এটি শেলের *অংশ নয়*:
 
 ```js {6}
 function ProfilePage() {
@@ -430,15 +430,15 @@ function ProfilePage() {
 }
 ```
 
-If an error happens in the `Posts` component or somewhere inside it, React will [try to recover from it:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
+যদি `Posts` কম্পোনেন্টে বা এর ভেতরে কোথাও কোনো এরর ঘটে, রিয়েক্ট [এর থেকে রিকভার করার চেষ্টা করবে:](/reference/react/Suspense#providing-a-fallback-for-server-errors-and-server-only-content)
 
-1. It will emit the loading fallback for the closest `<Suspense>` boundary (`PostsGlimmer`) into the HTML.
-2. It will "give up" on trying to render the `Posts` content on the server anymore.
-3. When the JavaScript code loads on the client, React will *retry* rendering `Posts` on the client.
+1. এটি নিকটতম `<Suspense>` বাউন্ডারির (`PostsGlimmer`) লোডিং ফলব্যাকটি HTML এ এমিট করবে।
+2. এটি সার্ভারে আর `Posts` কনটেন্ট রেন্ডার করার চেষ্টা থেকে "হাল ছেড়ে দেবে"।
+3. যখন JavaScript কোড ক্লায়েন্টে লোড হবে, রিয়েক্ট ক্লায়েন্টে `Posts` রেন্ডার করার জন্য *পুনরায় চেষ্টা করবে*।
 
-If retrying rendering `Posts` on the client *also* fails, React will throw the error on the client. As with all the errors thrown during rendering, the [closest parent error boundary](/reference/react/Component#static-getderivedstatefromerror) determines how to present the error to the user. In practice, this means that the user will see a loading indicator until it is certain that the error is not recoverable.
+যদি ক্লায়েন্টে `Posts` রেন্ডার করার পুনরায় চেষ্টা *এবারও* ব্যর্থ হয়, রিয়েক্ট ক্লায়েন্টে এররটি থ্রো করবে। রেন্ডারিংয়ের সময় থ্রো হওয়া সব এররের মতোই, [নিকটতম প্যারেন্ট এরর বাউন্ডারি](/reference/react/Component#static-getderivedstatefromerror) নির্ধারণ করে যে এররটি ইউজারের কাছে কীভাবে উপস্থাপন করা হবে। বাস্তবে, এর মানে হলো যতক্ষণ না নিশ্চিত হওয়া যায় যে এররটি রিকভারযোগ্য নয়, ততক্ষণ ইউজার একটি লোডিং ইন্ডিকেটর দেখতে পাবে।
 
-If retrying rendering `Posts` on the client succeeds, the loading fallback from the server will be replaced with the client rendering output. The user will not know that there was a server error. However, the server `onError` callback and the client [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) callbacks will fire so that you can get notified about the error.
+যদি ক্লায়েন্টে `Posts` রেন্ডার করার পুনরায় চেষ্টা সফল হয়, তাহলে সার্ভার থেকে আসা লোডিং ফলব্যাকটি ক্লায়েন্টে রেন্ডার করা আউটপুট দিয়ে রিপ্লেস হয়ে যাবে। ইউজার জানতেও পারবে না যে সার্ভারে কোনো এরর হয়েছিল। তবে, সার্ভারের `onError` কলব্যাক এবং ক্লায়েন্টের [`onRecoverableError`](/reference/react-dom/client/hydrateRoot#hydrateroot) কলব্যাক ফায়ার হবে যাতে আপনি এররটি সম্পর্কে নোটিফাইড হতে পারেন।
 
 ---
 
