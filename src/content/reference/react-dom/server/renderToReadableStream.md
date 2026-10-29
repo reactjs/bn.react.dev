@@ -98,7 +98,7 @@ async function handler(request) {
 }
 ```
 
-<CodeStep step={1}>রুট কম্পোনেন্টের</CodeStep> সাথে, আপনাকে <CodeStep step={2}>বুটস্ট্র্যাপ `<script>` পাথগুলোর</CodeStep> একটি লিস্ট দিতে হবে। আপনার রুট কম্পোনেন্টটির **রুট `<html>` ট্যাগসহ পুরো ডকুমেন্ট রিটার্ন করা উচিত।**
+<CodeStep step={1}>রুট কম্পোনেন্টের</CodeStep> সাথে, আপনাকে <CodeStep step={2}>বুটস্ট্র‍্যাপ `<script>` পাথগুলোর</CodeStep> একটি লিস্ট দিতে হবে। আপনার রুট কম্পোনেন্টটির **রুট `<html>` ট্যাগসহ পুরো ডকুমেন্ট রিটার্ন করা উচিত।**
 
 উদাহরণস্বরূপ, এটি দেখতে এরকম হতে পারে:
 
@@ -120,7 +120,7 @@ export default function App() {
 }
 ```
 
-রিয়েক্ট [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>বুটস্ট্র্যাপ `<script>` ট্যাগগুলো</CodeStep> ফলাফলস্বরূপ পাওয়া HTML স্ট্রিমে ইনজেক্ট করবে:
+রিয়েক্ট [doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) এবং আপনার <CodeStep step={2}>বুটস্ট্র‍্যাপ `<script>` ট্যাগগুলো</CodeStep> ফলাফলস্বরূপ পাওয়া HTML স্ট্রিমে ইনজেক্ট করবে:
 
 ```html [[2, 5, "/main.js"]]
 <!DOCTYPE html>
@@ -130,7 +130,7 @@ export default function App() {
 <script src="/main.js" async=""></script>
 ```
 
-ক্লায়েন্টে, আপনার বুটস্ট্র্যাপ স্ক্রিপ্টের উচিত [`hydrateRoot` কল করে পুরো `document` হাইড্রেট করা:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
+ক্লায়েন্টে, আপনার বুটস্ট্র‍্যাপ স্ক্রিপ্টের উচিত [`hydrateRoot` কল করে পুরো `document` হাইড্রেট করা:](/reference/react-dom/client/hydrateRoot#hydrating-an-entire-document)
 
 ```js [[1, 4, "<App />"]]
 import { hydrateRoot } from 'react-dom/client';
