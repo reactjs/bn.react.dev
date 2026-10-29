@@ -368,9 +368,9 @@ async function handler(request) {
 
 ---
 
-### Recovering from errors inside the shell {/*recovering-from-errors-inside-the-shell*/}
+### শেলের ভেতরের এরর থেকে রিকভার করা {/*recovering-from-errors-inside-the-shell*/}
 
-In this example, the shell contains `ProfileLayout`, `ProfileCover`, and `PostsGlimmer`:
+এই উদাহরণে, শেলে `ProfileLayout`, `ProfileCover`, এবং `PostsGlimmer` রয়েছে:
 
 ```js {3-5,7-8}
 function ProfilePage() {
@@ -385,7 +385,7 @@ function ProfilePage() {
 }
 ```
 
-If an error occurs while rendering those components, React won't have any meaningful HTML to send to the client. Wrap your `renderToReadableStream` call in a `try...catch` to send a fallback HTML that doesn't rely on server rendering as the last resort:
+যদি এই কম্পোনেন্টগুলো রেন্ডার করার সময় কোনো এরর হয়, রিয়েক্টের কাছে ক্লায়েন্টে পাঠানোর জন্য কোনো বোধগম্য HTML থাকবে না। শেষ অবলম্বন হিসেবে সার্ভার রেন্ডারিংয়ের উপর নির্ভর করে না এমন একটি ফলব্যাক HTML পাঠাতে আপনার `renderToReadableStream` কলটিকে একটি `try...catch` এ র‍্যাপ করুন:
 
 ```js {2,13-18}
 async function handler(request) {
@@ -409,7 +409,7 @@ async function handler(request) {
 }
 ```
 
-If there is an error while generating the shell, both `onError` and your `catch` block will fire. Use `onError` for error reporting and use the `catch` block to send the fallback HTML document. Your fallback HTML does not have to be an error page. Instead, you may include an alternative shell that renders your app on the client only.
+যদি শেল জেনারেট করার সময় কোনো এরর হয়, তাহলে `onError` এবং আপনার `catch` ব্লক উভয়ই ফায়ার করবে। এরর রিপোর্টিংয়ের জন্য `onError` ব্যবহার করুন এবং ফলব্যাক HTML ডকুমেন্ট পাঠানোর জন্য `catch` ব্লক ব্যবহার করুন। আপনার ফলব্যাক HTML যে একটি এরর পেজই হতে হবে এমন নয়। বরং, আপনি একটি বিকল্প শেল যুক্ত করতে পারেন যেটি শুধু ক্লায়েন্টে আপনার অ্যাপ রেন্ডার করে।
 
 ---
 
