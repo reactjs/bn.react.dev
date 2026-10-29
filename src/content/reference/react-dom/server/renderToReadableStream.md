@@ -294,9 +294,9 @@ function ProfilePage() {
 
 ---
 
-### Specifying what goes into the shell {/*specifying-what-goes-into-the-shell*/}
+### শেলে কী যাবে তা নির্দিষ্ট করা {/*specifying-what-goes-into-the-shell*/}
 
-The part of your app outside of any `<Suspense>` boundaries is called *the shell:*
+আপনার অ্যাপের যে অংশটি কোনো `<Suspense>` বাউন্ডারির বাইরে থাকে সেটিকে বলা হয় *শেল (shell):*
 
 ```js {3-5,13,14}
 function ProfilePage() {
@@ -317,7 +317,7 @@ function ProfilePage() {
 }
 ```
 
-It determines the earliest loading state that the user may see:
+এটা ঠিক করে দেয় যে ইউজার সবার আগে কোন লোডিং স্টেটটি দেখতে পারে:
 
 ```js {3-5,13
 <ProfileLayout>
@@ -326,9 +326,9 @@ It determines the earliest loading state that the user may see:
 </ProfileLayout>
 ```
 
-If you wrap the whole app into a `<Suspense>` boundary at the root, the shell will only contain that spinner. However, that's not a pleasant user experience because seeing a big spinner on the screen can feel slower and more annoying than waiting a bit more and seeing the real layout. This is why usually you'll want to place the `<Suspense>` boundaries so that the shell feels *minimal but complete*--like a skeleton of the entire page layout.
+যদি আপনি রুটে পুরো অ্যাপটিকে একটি `<Suspense>` বাউন্ডারিতে র‍্যাপ করেন, তাহলে শেলে শুধু সেই স্পিনারটি থাকবে। তবে, এটি একটি ভালো ইউজার এক্সপেরিয়েন্স নয় কারণ একটু বেশি অপেক্ষা করে আসল লেআউট দেখার চেয়ে স্ক্রিনে একটি বড় স্পিনার দেখা বেশি ধীর এবং বিরক্তিকর মনে হতে পারে। এই কারণেই সাধারণত আপনি `<Suspense>` বাউন্ডারিগুলো এমনভাবে রাখতে চাইবেন যাতে শেলটি *ন্যূনতম কিন্তু সম্পূর্ণ* মনে হয়--পুরো পেজ লেআউটের একটি স্কেলেটনের মতো।
 
-The async call to `renderToReadableStream` will resolve to a `stream` as soon as the entire shell has been rendered. Usually, you'll start streaming then by creating and returning a response with that `stream`:
+পুরো শেল রেন্ডার হওয়ার সাথে সাথেই `renderToReadableStream` এর async কলটি একটি `stream` এ রিজলভ হবে। সাধারণত, আপনি তখনই সেই `stream` দিয়ে একটি রেসপন্স তৈরি করে রিটার্ন করার মাধ্যমে স্ট্রিমিং শুরু করবেন:
 
 ```js {5}
 async function handler(request) {
@@ -341,7 +341,7 @@ async function handler(request) {
 }
 ```
 
-By the time the `stream` is returned, components in nested `<Suspense>` boundaries might still be loading data.
+`stream` টি রিটার্ন হওয়ার সময়ে, নেস্টেড `<Suspense>` বাউন্ডারির কম্পোনেন্টগুলো তখনও ডেটা লোড করতে থাকতে পারে।
 
 ---
 
