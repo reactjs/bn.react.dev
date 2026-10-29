@@ -593,9 +593,9 @@ async function handler(request) {
 
 ---
 
-### Aborting server rendering {/*aborting-server-rendering*/}
+### সার্ভার রেন্ডারিং বাতিল করা {/*aborting-server-rendering*/}
 
-You can force the server rendering to "give up" after a timeout:
+একটি নির্দিষ্ট সময় (timeout) পরে আপনি সার্ভার রেন্ডারিংকে জোর করে "হাল ছেড়ে দিতে" বাধ্য করতে পারেন:
 
 ```js {3,4-6,9}
 async function handler(request) {
@@ -617,4 +617,4 @@ async function handler(request) {
     // ...
 ```
 
-React will flush the remaining loading fallbacks as HTML, and will attempt to render the rest on the client.
+রিয়েক্ট বাকি লোডিং ফলব্যাকগুলোকে HTML হিসেবে ফ্লাশ (flush) করবে, এবং বাকিটা ক্লায়েন্টে রেন্ডার করার চেষ্টা করবে।
