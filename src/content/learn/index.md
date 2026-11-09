@@ -338,7 +338,11 @@ function MyButton() {
 }
 ```
 
+<<<<<<< HEAD
 React আপনার কম্পোনেন্ট ফাংশনকে আবার কল করবে। এবার, `count` হবে `1`। পরবর্তীতে এটা হবে `2` এবং এভাবে বাড়তে থাকবে।
+=======
+Calling `setCount` tells React to call your component function again. This is called a *re-render*. This time, `count` will be `1`. Then it will be `2`. And so on.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 আপনি যদি একই component একাধিকবার render করেন তবে প্রতিটি তার নিজস্ব state পাবে। প্রতিটি button এ আলাদাভাবে ক্লিক করুন:
 
