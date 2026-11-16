@@ -1366,7 +1366,11 @@ function MyApp() {
 
 আপনি যদি `value` উল্লেখ করতে ভুলে যান, তাহলে এটি `value={undefined}` এরকম কিছু পাস করে।
 
+<<<<<<< HEAD
 আপনি হয়ত ভুল করে একটি ভিন্ন প্রপ নাম ব্যবহার করতে পারেন:
+=======
+You may have also used a different prop name by mistake:
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 ```js {1,2}
 // 🚩 Doesn't work: prop should be called "value"
