@@ -536,7 +536,7 @@ root.render(<App />);
 ```
 
 ```js
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createConnection } from './chat.js';
 
 const serverUrl = 'https://localhost:1234';
@@ -1227,7 +1227,11 @@ li {
 
 </Sandpack>
 
+<<<<<<< HEAD
 এখন স্ট্রিক্ট মোডে প্রাথমিক মাউন্টে, রেফ কলব্যাকগুলি সব সেটআপ, ক্লিনআপ এবং আবার সেটআপ হয়:
+=======
+Now on initial mount in StrictMode, the ref callbacks are all setup, cleaned up, and setup again:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```
 ...
