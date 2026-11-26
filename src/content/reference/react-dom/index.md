@@ -14,8 +14,14 @@ The `react-dom` প্যাকেজে যেসব মেথড রয়েছ�
 
 এই API গুলো আপনার কম্পোনেন্ট থেকে ইমপোর্ট করা যেতে পারে। এগুলো ব্যবহার হয় না বললেই চলেঃ
 
+<<<<<<< HEAD
 * [`createPortal`](/reference/react-dom/createPortal) আপনাকে DOM ট্রি এর অন্য একটি অংশে চাইল্ড কম্পোনেন্ট রেন্ডার করতে দেয়।
 * [`flushSync`](/reference/react-dom/flushSync) আপনাকে সুযোগ দেয় React কে একটি state আপডেট flush করতে বাধ্য করতে এবং একি সাথে DOM আপডেট করতে।
+=======
+* [`createPortal`](/reference/react-dom/createPortal) lets you render child components in a different part of the DOM tree.
+* [`flushSync`](/reference/react-dom/flushSync) lets you force React to flush a state update and update the DOM synchronously.
+* [`requestFormReset`](/reference/react-dom/requestFormReset) lets you request a form reset when handling submissions with custom Actions or Transitions.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 ## Resource Preloading APIs {/*resource-preloading-apis*/}
 
@@ -51,9 +57,18 @@ This API controls how components render on the server:
 
 এই API গুলো React 19 এ সরিয়ে ফেলা হয়েছে:
 
+<<<<<<< HEAD
 * [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): [বিকল্প সমাধান](https://18.react.dev/reference/react-dom/findDOMNode#alternatives) দেখুন।
 * [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): এর পরিবর্তে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করুন।
 * [`render`](https://18.react.dev/reference/react-dom/render): এর পরিবর্তে [`createRoot`](/reference/react-dom/client/createRoot) ব্যবহার করুন।
 * [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode): এর পরিবর্তে [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) ব্যবহার করুন।
 * [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
 * [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
+=======
+* [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): see [alternatives](https://18.react.dev/reference/react-dom/findDOMNode#alternatives).
+* [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): use [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) instead.
+* [`render`](https://18.react.dev/reference/react-dom/render): use [`createRoot`](/reference/react-dom/client/createRoot) instead.
+* [`unmountComponentAtNode`](https://18.react.dev/reference/react-dom/unmountComponentAtNode): use [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) instead.
+* [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+* [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
