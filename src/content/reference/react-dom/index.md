@@ -51,9 +51,18 @@ This API controls how components render on the server:
 
 এই API গুলো React 19 এ সরিয়ে ফেলা হয়েছে:
 
+<<<<<<< HEAD
 * [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): [বিকল্প সমাধান](https://18.react.dev/reference/react-dom/findDOMNode#alternatives) দেখুন।
 * [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): এর পরিবর্তে [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) ব্যবহার করুন।
 * [`render`](https://18.react.dev/reference/react-dom/render): এর পরিবর্তে [`createRoot`](/reference/react-dom/client/createRoot) ব্যবহার করুন।
 * [`unmountComponentAtNode`](/reference/react-dom/unmountComponentAtNode): এর পরিবর্তে [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) ব্যবহার করুন।
 * [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
 * [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): এর পরিবর্তে [`react-dom/server`](/reference/react-dom/server) API গুলো ব্যবহার করুন।
+=======
+* [`findDOMNode`](https://18.react.dev/reference/react-dom/findDOMNode): see [alternatives](https://18.react.dev/reference/react-dom/findDOMNode#alternatives).
+* [`hydrate`](https://18.react.dev/reference/react-dom/hydrate): use [`hydrateRoot`](/reference/react-dom/client/hydrateRoot) instead.
+* [`render`](https://18.react.dev/reference/react-dom/render): use [`createRoot`](/reference/react-dom/client/createRoot) instead.
+* [`unmountComponentAtNode`](https://18.react.dev/reference/react-dom/unmountComponentAtNode): use [`root.unmount()`](/reference/react-dom/client/createRoot#root-unmount) instead.
+* [`renderToNodeStream`](https://18.react.dev/reference/react-dom/server/renderToNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+* [`renderToStaticNodeStream`](https://18.react.dev/reference/react-dom/server/renderToStaticNodeStream): use [`react-dom/server`](/reference/react-dom/server) APIs instead.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
